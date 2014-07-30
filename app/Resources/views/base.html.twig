@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>Inck - {% block title %}{% endblock %}</title>
+        <meta name="description" content="{% block description %}{% endblock %}" />
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="wrapper">
+            {% block navbar %}{% endblock %}
+            {% block header %}{% endblock %}
+            {% include('base/messages.html') %}
+            {% block content %}{% endblock %}
+            {% block footer %}{% endblock %}
+        </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
