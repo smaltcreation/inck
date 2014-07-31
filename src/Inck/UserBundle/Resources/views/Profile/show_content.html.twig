@@ -1,0 +1,31 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="fos_user_user_show">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Informations</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <i class="fa fa-user"></i> {{ user.username }}<br>
+                            <i class="fa fa-envelope"></i> {{ user.email }}
+                            {% if user.phone is defined and user.phone is not empty %}<br><i class="fa fa-phone"></i> {{ user.phone }}{% endif %}
+                            {% if user.website is defined and user.website is not empty %}<br><a href="{{ user.website }}"><i class="fa fa-globe"></i> Site Web</a>{% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default">
+                        <i class="fa fa-pencil-square-o"></i> Éditer mon profil
+                    </a>
+                    <a href="{{ path('fos_user_change_password') }}" class="btn btn-default">
+                        <i class="fa fa-lock"></i> Modifier mon mot de passe
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

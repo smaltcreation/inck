@@ -16,8 +16,20 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            /* Extern bundles */
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new Avocode\FormExtensionsBundle\AvocodeFormExtensionsBundle(),
+            new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            /* Our bundles */
+            new Inck\UserBundle\InckUserBundle(),
+            new Inck\CoreBundle\InckCoreBundle(),
+            new Inck\ArticleBundle\InckArticleBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

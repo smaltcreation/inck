@@ -1,0 +1,67 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" id="fos_user_profile_edit" class="fos_user_profile_edit">
+    {{ form_start(form) }}
+
+    {% if form_errors(form) %}
+        <div class="alert alert-danger" role="alert">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-6 form-group">
+            {{ form_label(form.lastname, 'Nom :') }}
+            {{ form_errors(form.lastname) }}
+            {{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="col-md-6 form-group">
+            {{ form_label(form.firstname, 'Prénom :') }}
+            {{ form_errors(form.firstname) }}
+            {{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            {{ form_label(form.school, 'Ecole :') }}
+            {{ form_errors(form.school) }}
+            {{ form_widget(form.school, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="col-md-6 form-group">
+            {{ form_label(form.birthdate, 'Date de naissance :') }}
+            {{ form_errors(form.birthdate) }}
+            {{ form_widget(form.birthdate, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    <h3>Coordonnées</h3>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            {{ form_label(form.address, 'Adresse :') }}
+            {{ form_errors(form.address) }}
+            {{ form_widget(form.address, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="col-md-6 form-group">
+            {{ form_label(form.zipcode, 'Code postal :') }}
+            {{ form_errors(form.zipcode) }}
+            {{ form_widget(form.zipcode, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            {{ form_label(form.city, 'Ville :') }}
+            {{ form_errors(form.city) }}
+            {{ form_widget(form.city, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="col-md-6 form-group">
+            {{ form_label(form.country, 'Pays :') }}
+            {{ form_errors(form.country) }}
+            {{ form_widget(form.country, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+    <input class="btn btn-success" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    <div class="hidden">
+        {{ form_rest(form) }}
+    </div>
+    {{ form_end(form) }}
+</form>

@@ -1,0 +1,17 @@
+{% extends "InckUserBundle::layout.html.twig" %}
+{% block title %}Nouveau mot de passe{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Nouveau mot de passe</h1>
+            <p><a href="{{ path('fos_user_security_login') }}" class="btn btn-danger"><i class="fa fa-times"></i> Annuler</a></p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+    </div>
+{% endblock content %}

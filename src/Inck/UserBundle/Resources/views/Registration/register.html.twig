@@ -1,0 +1,21 @@
+{% extends "InckUserBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}M'enregistrer{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>M'enregistrer</h1>
+            <p>
+                <a href="{{ path('home') }}" class="btn btn-default"><i class="fa fa-backward"></i> Retourner à l'accueil</a>
+                <input form="fos_user_registration_register" class="btn btn-success" type="submit" value="{{ 'registration.submit'|trans }}" />
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,11 @@
+services:
+    inck_user.registration.form.type:
+        class: Inck\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: inck_user_registration }
+    inck_user.profile.form.type:
+        class: Inck\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: inck_user_profile }

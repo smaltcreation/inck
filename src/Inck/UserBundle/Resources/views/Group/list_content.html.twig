@@ -1,0 +1,28 @@
+<div class="fos_user_group_list">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Liste des groupes</div>
+
+        {% if groups is not empty %}
+            <!-- List group -->
+            <ul class="list-group">
+                {% for group in groups %}
+                    <li class="list-group-item">
+                        <a href="{{ path('fos_user_group_show', {'groupName': group.getName()} ) }}">{{ group.getName() }}</a>
+                        <span class="pull-right">
+                            <div class="btn-group btn-group-xs">
+                                <a href="{{ path('fos_user_group_show', {'groupName': group.getName()} ) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                <a href="{{ path('fos_user_group_edit', {'groupName': group.getName()} ) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                <a href="{{ path('fos_user_group_delete', {'groupName': group.getName()} ) }}" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                            </div>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="panel-body">
+                <p>Il n'éxiste aucun groupe pour le moment.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,44 @@
+{% extends "InckUserBundle::layout.html.twig" %}
+{% block title %}Confirmation d'activation{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</h1>
+            {% if app.session is not empty %}
+                {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+                {% if targetUrl is not empty %}<p><a class="btn btn-default" href="{{ targetUrl }}"><i class="fa fa-backward"></i> {{ 'registration.back'|trans }}</a></p>{% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Changer mon mot de passe</h3>
+                <p>
+                    Vous vous connectez pour la première avec un mot de passe que nous vous avons donné ? Nous vous recommandons de changer le mot de passe que celui qui vous a été donné pour des raisons de sécurité.
+                </p>
+                <a class="btn btn-warning" href="{{ path('fos_user_change_password') }}"><i class="fa fa-lock"></i> Changer mon mot de passe</a>
+            </div>
+            <div class="col-sm-4">
+                <h3>Accèder à mon profil</h3>
+                <p>
+                    Vous y trouverez toutes vos transactions, les évènements auxquels vous participez ou que vous avez participé ainsi que les tickets que vous avez pu acheter auprès de notre association.
+                </p>
+                <a class="btn btn-primary" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a>
+            </div>
+            <div class="col-sm-4">
+                <h3>Voir nos produits et nos événements en toute simplicité</h3>
+                <p>
+                    Vous pouvez voir toutes nos offres et tous les évènements associés à notre association. Plus rien ne vous échappera.
+                </p>
+                <a class="btn btn-info" href="{{ path('home') }}"><i class="fa fa-beer"></i> Voir nos produits</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

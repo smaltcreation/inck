@@ -1,0 +1,18 @@
+{% extends "InckUserBundle::layout.html.twig" %}
+{% block title %}Vérification de l'addresse email{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Vérification de l'addresse email</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    </div>
+{% endblock content %}

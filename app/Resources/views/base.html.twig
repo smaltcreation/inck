@@ -2,20 +2,39 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
         <title>Inck - {% block title %}{% endblock %}</title>
-        <meta name="description" content="{% block description %}{% endblock %}">
-        {% block stylesheets %}{% endblock %}
+        {% block description %}{% endblock %}
+
+        {% block stylesheets %}
+            {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/main.css'
+                'css/bootstrap.css'
+                'bundles/inckcore/css/button.css'
+                'bundles/inckcore/css/global.css'
+            %}
+                <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+                <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+            {% endstylesheets %}
+            {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+        {% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     </head>
     <body>
         <div class="wrapper">
             {% block navbar %}{% endblock %}
             {% block header %}{% endblock %}
-            {% include('base/messages.html') %}
+            {% include('base/messages.html.twig') %}
             {% block content %}{% endblock %}
             {% block footer %}{% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
+
+        {% block javascripts %}
+            {% javascripts filter='yui_js' output='js/compiled/main.js'
+                'js/jquery.js'
+                'js/bootstrap.js'
+            %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
     </body>
 </html>

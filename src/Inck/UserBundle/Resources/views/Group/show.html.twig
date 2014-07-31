@@ -1,0 +1,20 @@
+{% extends "InckUserBundle::layout.html.twig" %}
+{% block title %}Groupe: {{ group.getName() }}{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Groupe: {{ group.getName() }}</h1>
+            <p>
+                <a href="{#{ path('inck_user_admin') }#}" class="btn btn-default"><i class="fa fa-backward"></i> Retourner à l'administration</a>
+                <a href="{{ path('fos_user_group_edit', {'groupName': group.getName()} ) }}" class="btn btn-warning"><i class="fa fa-edit"></i> Editer le groupe</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include "InckUserBundle:Group:show_content.html.twig" %}
+    </div>
+{% endblock content %}

@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      ~
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -36,7 +36,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ InckCoreBundle, InckArticleBundle, InckUserBundle ]
     #java: /usr/bin/java
     filters:
         less:
@@ -87,3 +87,18 @@ knp_menu:
         template: BraincraftedBootstrapBundle:Menu:bootstrap.html.twig
     templating: false
     default_renderer: twig
+
+# FOSUserBundle Configuration
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Inck\UserBundle\Entity\User
+    registration:
+        form:
+            type: inck_user_registration
+
+# OrnicarGravatar Configuration
+ornicar_gravatar:
+    rating: g
+    size: 80
+    default: mm

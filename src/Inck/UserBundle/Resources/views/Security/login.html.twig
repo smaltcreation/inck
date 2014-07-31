@@ -1,0 +1,76 @@
+{% extends "::base.html.twig" %}
+{% block title %}Se connecter{% endblock %}
+{% block description %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" media="all" href="#">
+{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Inck</h1>
+            <p>Écrire et diffuser devient à la portée de tous</p>
+            <p><a class="btn btn-default btn-lg" role="button"><i class="fa fa-rocket"></i> En savoir plus</a></p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">{{ error|trans }}</div>
+        {% endif %}
+
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="username">{{ 'security.login.username'|trans }}</label>
+                                <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="password">{{ 'security.login.password'|trans }}</label>
+                                <input class="form-control" type="password" id="password" name="_password" required="required" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                                <a href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">Mot de passe oublié</a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <input class="btn btn-success" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-default">{{ 'layout.register'|trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <p>
+                        <img class="img-circle img-responsive login logo" src="#">
+                        <h3>Lire, voter et partager !</h3>
+                        <span class="login description">Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager. N'hésitez plus et laissez-vous porter par les flots de l'expression libre et culturelle !
+                    </span>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block footer %}{% endblock %}

@@ -1,0 +1,25 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_group_edit', {'groupName': group_name} ) }}" {{ form_enctype(form) }} method="POST" class="fos_user_group_edit">
+    {{ form_start(form) }}
+        {% if form_errors(form) %}
+            <div class="alert alert-danger" role="alert">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.name, 'Nom du groupe : *') }}
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+        </div>
+        <div>
+            <input class="btn btn-success" type="submit" value="{{ 'group.edit.submit'|trans }}" />
+        </div>
+        <div class="hidden">
+            {{ form_rest(form) }}
+        </div>
+    {{ form_end(form) }}
+</form>

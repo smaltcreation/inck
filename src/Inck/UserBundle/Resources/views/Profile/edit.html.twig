@@ -1,0 +1,21 @@
+{% extends "InckUserBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Editer mon profile{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Editer mon profil</h1>
+            <p>
+                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default"><i class="fa fa-backward"></i> Retourner à mon profil</a>
+                <input form="fos_user_profile_edit" class="btn btn-success" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+    </div>
+{% endblock content %}

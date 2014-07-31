@@ -1,0 +1,44 @@
+{% extends 'InckCoreBundle::layout.html.twig' %}
+
+{% block title %}L'opinon libre{% endblock %}
+{% block description %}<meta name="description" content="Inck est un lieu sans préjugés où nous aimons partager ce que nous pensons. Envoyez tous vos articles et faites vous récompenser pour leur qualité !">{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/main.css'
+        'bundles/inckcore/css/Default/index.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>L'expression libre et culturelle</h1>
+                    <p>
+                        Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et le divertissement,
+                        vous êtes le moteur contribuant à la diversité des pensées et au partage de la connaissance. Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !<br>
+                        <span>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <a class="btn btn-danger btn-xs" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                                <a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a>
+                            {% else %}
+                                <a class="btn btn-success" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                <a class="btn btn-default" href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"></i> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                            {% endif %}
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {#% include 'InckCoreBundle:Default:index_content.html.twig' %#}
+    </div>
+{% endblock %}

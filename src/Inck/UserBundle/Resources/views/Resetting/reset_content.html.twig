@@ -1,0 +1,29 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+    {% if form_errors(form) or form_errors(form.plainPassword.first) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-6 form-group">
+            {{ form_label(form.plainPassword.first, 'Nouveau mot de passe : *') }}
+            {{ form_errors(form.plainPassword.first) }}
+            {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="col-md-6 form-group">
+            {{ form_label(form.plainPassword.second, 'Retaper le mot de passe : *') }}
+            {{ form_errors(form.plainPassword.second) }}
+            {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    {{ form_rest(form) }}
+    <div>
+        <input class="btn btn-success" type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+    </div>
+</form>

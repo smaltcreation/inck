@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="fos_user_profile_edit" class="fos_user_registration_register">
+    {{ form_start(form) }}
+
+    {% if form_errors(form) %}
+        <div class="alert alert-danger" role="alert">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+
+    <div class="visible">
+        {{ form_rest(form) }}
+    </div>
+    <input class="btn btn-success" type="submit" value="{{ 'registration.submit'|trans }}" />
+
+    {{ form_end(form) }}
+</form>

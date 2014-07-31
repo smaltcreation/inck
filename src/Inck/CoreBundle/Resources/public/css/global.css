@@ -1,0 +1,81 @@
+/* Fonts */
+@font-face
+{
+    font-family: Gravity;
+    src: url(fonts/gravity/Gravity-Light.ttf);
+}
+
+@font-face
+{
+    font-family: Gravity;
+    src: url(fonts/gravity/Gravity-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face
+{
+    font-family: Gravity;
+    src: url(fonts/gravity/Gravity-Light-Italic.ttf);
+    font-style: italic;
+}
+
+/* html & body */
+body {
+    color: #4f4f4f;
+    background-color: #f0f3ec;
+}
+
+/* Callout */
+.callout {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.callout-left {
+    border-left: 3px solid #d78b7d;
+    text-align: left;
+}
+
+.callout-right {
+    border-right: 3px solid #d78b7d;
+    text-align: right;
+}
+
+/* Popover static */
+.popover-static {
+    position: relative;
+    display: block;
+    width: 80%;
+    margin: 20px;
+    max-width: none;
+}
+
+.popover-static-right {
+    float: left;
+}
+
+.popover-static-left {
+    float: right;
+}
+
+/* Bootstrap override */
+.jumbotron {
+    background-color: #62868d;
+    color: #dfdfdf;
+    font-family: Gravity, "Helvetica Neue", Helvetica,Arial, sans-serif;
+}
+
+.jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron h4 {
+    color: #f9f9f9;
+    font-family: Gravity, "Helvetica Neue", Helvetica,Arial, sans-serif;
+}
+
+.jumbotron .btn {
+    font-family: "Helvetica Neue", Helvetica,Arial, sans-serif;
+}
+
+.well {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+

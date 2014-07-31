@@ -1,0 +1,17 @@
+{% extends "InckUserBundle::layout.html.twig" %}
+{% block title %}Créer un nouveau groupe{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Créer un nouveau groupe</h1>
+            <p><a href="{#{ path('inck_user_admin') }#}" class="btn btn-default"><i class="fa fa-backward"></i> Retourner à l'administration</a></p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include "InckUserBundle:Group:new_content.html.twig" %}
+    </div>
+{% endblock content %}
