@@ -1,7 +1,7 @@
-inck_article:
-    resource: "@InckArticleBundle/Controller/"
-    type:     annotation
-    prefix:   /
+#inck_article:
+#    resource: "@InckArticleBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
 
 inck_core:
     resource: "@InckCoreBundle/Controller/"
