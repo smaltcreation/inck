@@ -63,6 +63,13 @@ class Article
     private $postedAt;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="published", type="boolean")
+     */
+    private $published;
+
+    /**
      * @var \DateTime
      *
      * @Assert\DateTime()
@@ -73,9 +80,11 @@ class Article
     /**
      * @var boolean
      *
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ORM\Column(name="approved", type="boolean")
+     * Lorsqu'un article est acheté, il est approuvé mais non publié
+     * Lorsqu'un article est refusé (désapprouvé) $approved = false
      */
-    private $enabled;
+    private $approved;
 
     /**
      * @var boolean
@@ -232,6 +241,29 @@ class Article
     }
 
     /**
+     * Set published
+     *
+     * @param boolean $published
+     * @return Article
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
      * Set publishedAt
      *
      * @param \DateTime $publishedAt
@@ -255,26 +287,26 @@ class Article
     }
 
     /**
-     * Set enabled
+     * Set approved
      *
-     * @param boolean $enabled
+     * @param boolean $approved
      * @return Article
      */
-    public function setEnabled($enabled)
+    public function setApproved($approved)
     {
-        $this->enabled = $enabled;
+        $this->approved = $approved;
 
         return $this;
     }
 
     /**
-     * Get enabled
+     * Get approved
      *
      * @return boolean 
      */
-    public function getEnabled()
+    public function getApproved()
     {
-        return $this->enabled;
+        return $this->approved;
     }
 
     /**

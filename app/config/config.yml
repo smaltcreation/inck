@@ -36,7 +36,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ InckCoreBundle, InckArticleBundle, InckUserBundle ]
+    bundles:        [ InckCoreBundle, InckArticleBundle, InckUserBundle, FOSUserBundle, AvocodeFormExtensionsBundle ]
     #java: /usr/bin/java
     filters:
         less:
@@ -96,6 +96,9 @@ fos_user:
     registration:
         form:
             type: inck_user_registration
+    profile:
+          form:
+              type: inck_user_profile
 
 # OrnicarGravatar Configuration
 ornicar_gravatar:

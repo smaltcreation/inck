@@ -12,4 +12,41 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    /**
+     * countArticlesByPublication
+     *
+     * Compte les articles d'un auteur en fonction de certains types :
+     *
+     * PUBLICATION :
+     * var boolean $published
+     *
+     * CATEGORIES :
+     * var string array() $categories
+     */
+    public function countArticles($published = null, $categories = null)
+    {
+        $query = $this
+            ->createQueryBuilder('u')
+            ->select('COUNT(u.articles)');
+
+        /* PUBLICATION: boolean $published */
+        if($published !== null) {
+            $query
+                ->join('u.articles', 'a')
+                ->andWhere($query->expr()->in('a.published', $published == true ? 1 : 0));
+        }
+
+        /* CATEGORIES: string array() $categories */
+        if($categories !== null) {
+            $query->join('u.articles', 'a');
+            $query->join('a.categories', 'c');
+            foreach($categories as $name) {
+                $query->andWhere($query->expr()->in('c.name', $name));
+            }
+
+        }
+
+        $query->getQuery();
+        return (int) $query->getSingleScalarResult();
+    }
 }

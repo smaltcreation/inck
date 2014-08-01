@@ -20,8 +20,10 @@
                     <h1>L'expression libre et culturelle</h1>
                     <p>
                         Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et le divertissement,
-                        vous êtes le moteur contribuant à la diversité des pensées et au partage de la connaissance. Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !<br>
-                        <span>
+                        vous êtes le moteur contribuant à la diversité des pensées et au partage de la connaissance. Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !
+                    </p>
+                    <p>
+                        <span class="block">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                 <a class="btn btn-danger btn-xs" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                                 <a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a>

@@ -1,0 +1,42 @@
+.jumbotron {
+    margin-bottom: 100px;
+}
+
+.login .logo {
+    transition: ease 0.3s;
+    float: left;
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #e3e3e3;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+}
+
+.login .logo:hover  {
+    transform: scale(1.10);
+    -webkit-transform: scale(1.10);
+}
+
+.login .description {
+    text-align: justify;
+    font-size: 16px;
+    color: #696969;
+}
+
+.login h3 {
+    margin-top: 0;
+    color: #696969;
+}
+
+.login .well {
+    margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+    .jumbotron {
+        margin-bottom: 50px;
+    }
+}

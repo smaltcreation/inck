@@ -1,3 +1,8 @@
+inck_user:
+    resource: "@InckUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 inck_article:
     resource: "@InckArticleBundle/Controller/"
     type:     annotation

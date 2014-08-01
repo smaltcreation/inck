@@ -1,9 +1,14 @@
-{% extends "::base.html.twig" %}
+{% extends "InckUserBundle::layout.html.twig" %}
 {% block title %}Se connecter{% endblock %}
-{% block description %}{% endblock %}
+{% block description %}<meta name="description" content="Connectez-vous à Inck et partagez-nous vos articles les plus somptueux !">{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" media="all" href="#">
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/main.css'
+        'bundles/inckuser/css/Security/login.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
 {% endblock %}
 
 {% trans_default_domain 'FOSUserBundle' %}
@@ -11,15 +16,15 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Inck</h1>
-            <p>Écrire et diffuser devient à la portée de tous</p>
+            <h1>Me connecter à Inck</h1>
+            <p>Écrire et diffuser devient à la portée de tous !</p>
             <p><a class="btn btn-default btn-lg" role="button"><i class="fa fa-rocket"></i> En savoir plus</a></p>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container login">
         {% if error %}
             <div class="alert alert-danger" role="alert">{{ error|trans }}</div>
         {% endif %}
@@ -58,15 +63,14 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-sm-5 col-sm-offset-1">
                     <p>
-                        <img class="img-circle img-responsive login logo" src="#">
+                        <img class="img-circle img-responsive logo" src="#">
                         <h3>Lire, voter et partager !</h3>
-                        <span class="login description">Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager. N'hésitez plus et laissez-vous porter par les flots de l'expression libre et culturelle !
-                    </span>
+                        <span class="description">Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager. N'hésitez plus et laissez-vous porter par les flots de l'expression libre et culturelle !</span>
                     </p>
+                    <p><a class="btn btn-default" role="button" href="{{ path('home') }}"><i class="fa fa-home"></i> Liste des articles</a></p>
                 </div>
             </div>
         </form>

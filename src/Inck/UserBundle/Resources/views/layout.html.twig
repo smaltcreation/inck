@@ -1,3 +1,10 @@
 {% extends "::base.html.twig" %}
 
-{% block navbar %}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='yui_js' output='js/compiled/main.js'
+        '@InckUserBundle/Resources/public/js/layout.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

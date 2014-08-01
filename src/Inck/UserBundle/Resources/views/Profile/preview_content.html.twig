@@ -1,0 +1,41 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="col-xs-3">
+        <img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-thumbnail img-responsive" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/>
+    </div>
+
+    <div class="col-xs-9">
+        <div class="biography">
+            <h3>Biographie de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h3>
+            {% if user.biography %}
+                <p>{{ user.biography }}</p>
+            {% else %}
+                <p>
+                    <span class="no-biography">Cet utilisateur n'a pas encore compléter son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie :</span><br>
+                    Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell.
+                    Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix. Le langage B de Thompson étant trop limité pour les besoins du nouveau système, Ritchie est amené à créer sur les mêmes bases le langage C. Par la suite, avec l'aide de Brian Kernighan, il promeut le langage et rédige notamment le livre de référence The C Programming Language2,3.
+                    Il reçoit conjointement avec Ken Thompson le prix Turing de l'ACM en 1983 pour leur travail sur le système Unix.
+                </p>
+            {% endif %}
+        </div>
+        <p>
+            <a href="#" class="btn btn-primary btn-sm">
+                <i class="fa fa-thumb-tack"></i> S'abonner à {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}
+            </a>
+            <button type="button" class="btn btn-default btn-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="
+                <strong>Utilisateur :</strong> {{ user.username }}</br>
+                {% if user.firstName %}<strong>Prénom :</strong> {{ user.firstName }}</br>{% endif %}
+                {% if user.LastName %}<strong>Nom :</strong> {{ user.lastName }}</br>{% endif %}
+                {% if user.birthday %}<strong>Date de naissance :</strong> {{ user.birthday|date("d/m/Y") }}</br>{% endif %}
+                {% if user.occupation %}<strong>Occupation :</strong> {{ user.occupation }}</br>{% endif %}
+                {% if user.city %}<strong>Ville :</strong> {{ user.city }}</br>{% endif %}
+                {% if user.country %}<strong>Pays :</strong> {{ user.country }}{% endif %}
+            ">
+                <i class="fa fa-info-circle"></i> Voir plus d'informations
+            </button>
+        </p>
+    </div>
+</div>
+
+{% include('InckUserBundle:Profile:card.html.twig') %}

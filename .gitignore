@@ -7,11 +7,13 @@
 # Parameters
 /app/config/parameters.yml
 /app/config/parameters.ini
+/app/config/parameters.yml.dist
 
 # Managed by Composer
 /app/bootstrap.php.cache
 /bin/
 /vendor/
+/components
 
 # Assets and user uploads
 /web/bundles/
@@ -22,3 +24,4 @@
 
 # Composer PHAR
 /composer.phar
+/composer.lock

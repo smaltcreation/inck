@@ -15,6 +15,10 @@
                 <link href="{{ asset_url }}" rel="stylesheet" media="screen">
             {% endstylesheets %}
             {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+            {% include 'AvocodeFormExtensionsBundle::stylesheets.html.twig' %}
+            {% if form is defined %}
+                {{ afe_form_stylesheet(form) }}
+            {% endif %}
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
@@ -35,6 +39,10 @@
             %}
                 <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
+            {% include 'AvocodeFormExtensionsBundle::javascripts.html.twig' %}
+            {% if form is defined %}
+                {{ afe_form_javascript(form) }}
+            {% endif %}
         {% endblock %}
     </body>
 </html>

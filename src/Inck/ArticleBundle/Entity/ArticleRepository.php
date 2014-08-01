@@ -12,4 +12,95 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
+    /**
+     * superQuery
+     *
+     * Récupère tous les articles en fonction de différents types :
+     *
+     * TYPE
+     * Brouillons -> as_draft
+     * Publiés -> published
+     * En modération -> in_moderation
+     * En validation (modérés mais non publiés ou approuvés/désapprouvés) -> in_validation
+     * Désapprouvés -> disapproved
+     *
+     * AUTHOR
+     * var InckUserBundle:User
+     *
+     * CATEGORIES
+     * var string array()
+     */
+    public function superQuery($type, $author = null, $categories = null)
+    {
+        $query = $this->createQueryBuilder('a');
+
+        /* TYPE: string $type */
+        if($type !== null) {
+            switch($type) {
+                case 'as_draft':
+                    $query
+                        ->andWhere('a.asDraft = :asDraft')
+                        ->setParameter('asDraft', true)
+                        ->andWhere('a.postedAt IS NULL')
+                        ->orderBy('a.createdAt', 'DESC');
+                    break;
+
+                case 'published':
+                    $query
+                        ->andWhere('a.published = :published')
+                        ->setParameter('published', true)
+                        ->orderBy('a.publishedAt', 'DESC');
+                    break;
+
+                case 'in_moderation':
+                    $query
+                        ->andWhere('a.published = :published')
+                        ->setParameter('published', false)
+                        ->andWhere('a.asDraft = :asDraft')
+                        ->setParameter('asDraft', false)
+                        ->andWhere('a.postedAt >= DATE_SUB(CURRENT_TIMESTAMP(), 1, \'DAY\')')
+                        ->orderBy('a.postedAt', 'DESC');
+                    break;
+
+                case 'in_validation':
+                    $query
+                        ->andWhere('a.approved IS :approved')
+                        ->setParameter('approved', NULL)
+                        ->andWhere('a.asDraft = :asDraft')
+                        ->setParameter('asDraft', false)
+                        ->andWhere('a.postedAt >= DATE_SUB(CURRENT_TIMESTAMP(), 2, \'DAY\')')
+                        ->orderBy('a.postedAt', 'DESC');
+                    break;
+
+                case 'disapproved':
+                    $query
+                        ->andWhere('a.approved = :approved')
+                        ->setParameter('approved', false)
+                        ->orderBy('a.postedAt', 'DESC');
+                    break;
+
+                default:
+                    throw new \Exception("Type d'article demandé invalide.");
+                    break;
+            }
+        }
+
+        /* AUTHOR: User $author */
+        if($author !== null) {
+            $query
+                ->andWhere('a.author = :author')
+                ->setParameter('author', $author);
+        }
+
+        /* CATEGORIES: string array() $categories */
+        if($categories !== null) {
+            $query->join('a.categories', 'c');
+            foreach($categories as $name) {
+                $query->andWhere($query->expr()->in('c.name', $name));
+            }
+
+        }
+
+        return $query->getQuery()->getResult();
+    }
 }
