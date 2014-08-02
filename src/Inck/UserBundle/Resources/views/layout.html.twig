@@ -2,7 +2,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts filter='yui_js' output='js/compiled/main.js'
+    {% javascripts filter='yui_js' output='js/compiled/user/layout.js'
         '@InckUserBundle/Resources/public/js/layout.js'
     %}
         <script src="{{ asset_url }}"></script>

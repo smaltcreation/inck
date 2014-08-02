@@ -5,7 +5,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/main.css'
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/core/default/index.css'
         'bundles/inckcore/css/Default/index.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">

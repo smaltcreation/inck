@@ -79,6 +79,7 @@ swiftmailer:
 
 # BraincrafterBootstrap Configuration
 braincrafted_bootstrap:
+    jquery_path: %kernel.root_dir%/../web/components/jquery/jquery.min.js
     less_filter: less
 
 # KNP Configuration

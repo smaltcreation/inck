@@ -1,0 +1,30 @@
+{% extends 'InckCoreBundle::layout.html.twig' %}
+
+{% block title %}Écrire un article{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/form/form.css'
+        'css/select-bootstrap.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Écrire un article</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {{ form(form) }}
+    </div>
+{% endblock %}

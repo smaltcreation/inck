@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Avocode\FormExtensionsBundle\AvocodeFormExtensionsBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             /* Our bundles */
             new Inck\UserBundle\InckUserBundle(),
             new Inck\CoreBundle\InckCoreBundle(),

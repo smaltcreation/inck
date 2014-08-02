@@ -3,6 +3,7 @@
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
+!app/update
 
 # Parameters
 /app/config/parameters.yml
@@ -13,11 +14,11 @@
 /app/bootstrap.php.cache
 /bin/
 /vendor/
-/components
 
 # Assets and user uploads
 /web/bundles/
 /web/uploads/
+/web/components/
 
 # PHPUnit
 /app/phpunit.xml
@@ -25,3 +26,6 @@
 # Composer PHAR
 /composer.phar
 /composer.lock
+
+# PhpStorm
+/.idea/

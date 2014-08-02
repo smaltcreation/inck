@@ -6,19 +6,6 @@
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "jquery/jquery",
-                "version": "1.10.2",
-                "dist": {
-                    "url": "http://code.jquery.com/jquery-1.10.2.js",
-                    "type": "file"
-                }
-            }
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.5.*",
@@ -33,7 +20,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "braincrafted/bootstrap-bundle": "~2.0",
         "twbs/bootstrap": "3.0.*",
-        "jquery/jquery":  "1.10.*",
+        "components/jquery": "1.11.*",
+        "components/jqueryui": "1.11.*",
+        "components/font-awesome": "4.1.*",
         "knplabs/knp-menu": "2.0.*@dev",
         "knplabs/knp-menu-bundle": "2.0.*@dev",
         "friendsofsymfony/user-bundle": "~2.0@dev",
@@ -41,7 +30,8 @@
         "jms/security-extra-bundle": "dev-master",
         "avocode/form-extensions-bundle": "dev-master",
         "ornicar/gravatar-bundle" : "dev-master",
-        "egeloen/ckeditor-bundle": "~2.0"
+        "egeloen/ckeditor-bundle": "~2.0",
+        "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -56,7 +46,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -64,11 +55,13 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install"
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "component-dir": "web/components"
     },
     "extra": {
         "symfony-app-dir": "app",

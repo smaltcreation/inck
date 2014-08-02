@@ -2,7 +2,9 @@
 
 namespace Inck\ArticleBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Inck\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -336,18 +338,18 @@ class Article
      */
     public function __construct()
     {
-        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->tags = new ArrayCollection();
+        $this->votes = new ArrayCollection();
     }
 
     /**
      * Set author
      *
-     * @param \Inck\UserBundle\Entity\User $author
+     * @param User $author
      * @return Article
      */
-    public function setAuthor(\Inck\UserBundle\Entity\User $author = null)
+    public function setAuthor(User $author = null)
     {
         $this->author = $author;
 
@@ -357,7 +359,7 @@ class Article
     /**
      * Get author
      *
-     * @return \Inck\UserBundle\Entity\User 
+     * @return User
      */
     public function getAuthor()
     {
@@ -367,10 +369,10 @@ class Article
     /**
      * Add categories
      *
-     * @param \Inck\ArticleBundle\Entity\Category $categories
+     * @param Category $categories
      * @return Article
      */
-    public function addCategory(\Inck\ArticleBundle\Entity\Category $categories)
+    public function addCategory(Category $categories)
     {
         $this->categories[] = $categories;
 
@@ -380,9 +382,9 @@ class Article
     /**
      * Remove categories
      *
-     * @param \Inck\ArticleBundle\Entity\Category $categories
+     * @param Category $categories
      */
-    public function removeCategory(\Inck\ArticleBundle\Entity\Category $categories)
+    public function removeCategory(Category $categories)
     {
         $this->categories->removeElement($categories);
     }
@@ -398,26 +400,39 @@ class Article
     }
 
     /**
-     * Add tags
+     * Add tag
      *
-     * @param \Inck\ArticleBundle\Entity\Tag $tags
+     * @param Tag $tag
      * @return Article
      */
-    public function addTag(\Inck\ArticleBundle\Entity\Tag $tags)
+    public function addTag(Tag $tag)
     {
-        $this->tags[] = $tags;
+        $this->tags[] = $tag;
 
         return $this;
     }
 
     /**
-     * Remove tags
+     * Remove tag
      *
-     * @param \Inck\ArticleBundle\Entity\Tag $tags
+     * @param Tag $tag
      */
-    public function removeTag(\Inck\ArticleBundle\Entity\Tag $tags)
+    public function removeTag(Tag $tag)
     {
-        $this->tags->removeElement($tags);
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Set tags
+     *
+     * @param ArrayCollection $tags
+     * @return Article
+     */
+    public function setTags(ArrayCollection $tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
     }
 
     /**
@@ -433,10 +448,10 @@ class Article
     /**
      * Add votes
      *
-     * @param \Inck\ArticleBundle\Entity\Vote $votes
+     * @param Vote $votes
      * @return Article
      */
-    public function addVote(\Inck\ArticleBundle\Entity\Vote $votes)
+    public function addVote(Vote $votes)
     {
         $this->votes[] = $votes;
 
@@ -446,9 +461,9 @@ class Article
     /**
      * Remove votes
      *
-     * @param \Inck\ArticleBundle\Entity\Vote $votes
+     * @param Vote $votes
      */
-    public function removeVote(\Inck\ArticleBundle\Entity\Vote $votes)
+    public function removeVote(Vote $votes)
     {
         $this->votes->removeElement($votes);
     }
