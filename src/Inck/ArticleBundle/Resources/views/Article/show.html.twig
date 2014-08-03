@@ -1,0 +1,21 @@
+{% extends 'InckCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{ article.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {{ dump(article) }}
+    </div>
+{% endblock %}

@@ -77,7 +77,7 @@ class Article
      * @var \DateTime
      *
      * @Assert\DateTime()
-     * @ORM\Column(name="publishedAt", type="datetime")
+     * @ORM\Column(name="publishedAt", type="datetime", nullable=true)
      */
     private $publishedAt;
 

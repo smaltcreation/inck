@@ -2,15 +2,6 @@
 
 {% block title %}Écrire un article{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/form.css'
-        'css/select-bootstrap.css'
-    %}
-    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
-    {% endstylesheets %}
-{% endblock %}
-
 {% block header %}
     <div class="jumbotron">
         <div class="container">
