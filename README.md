@@ -13,7 +13,7 @@ Bonnes pratiques
 * Avoir un code propre
 * Commenter
 * Compléter l'UML
-* Adapter ses balises HTML5 (<nav>, <article>)
+* Adapter ses balises HTML5 (\<nav>, \<article>)
 * Avoir des titres de pages, des descriptions et un contenu variés de qualité
 * Suivre les nouvelles normes des microdata http://schema.org/docs/gs.html
 * Être parfait au niveau code pour le référencement
