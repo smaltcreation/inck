@@ -1,0 +1,6 @@
+services:
+    inck_article.type.tags_selector:
+        class: Inck\ArticleBundle\Form\Type\TagsSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: inck_articlebundle_tags_selector }

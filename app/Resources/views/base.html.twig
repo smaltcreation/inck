@@ -15,6 +15,7 @@
                 <link href="{{ asset_url }}" rel="stylesheet" media="screen">
             {% endstylesheets %}
             {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+
             {% include 'AvocodeFormExtensionsBundle::stylesheets.html.twig' %}
             {% if form is defined %}
                 {{ afe_form_stylesheet(form) }}
@@ -42,7 +43,6 @@
             {% endjavascripts %}
 
             {% include 'AvocodeFormExtensionsBundle::javascripts.html.twig' %}
-
             {% if form is defined %}
                 {{ afe_form_javascript(form) }}
             {% endif %}

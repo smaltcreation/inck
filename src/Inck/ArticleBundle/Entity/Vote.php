@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Vote
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Inck\ArticleBundle\Entity\VoteRepository")
  */
 class Vote
 {

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Tag
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Inck\ArticleBundle\Entity\TagRepository")
  */
 class Tag
 {

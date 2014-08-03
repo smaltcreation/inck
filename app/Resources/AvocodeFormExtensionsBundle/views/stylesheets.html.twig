@@ -1,0 +1,11 @@
+{% block avocode_form_stylesheets %}
+
+    {% stylesheets filter='cssrewrite,?yui_css' output='assetic/css/compiled/avocodeformextensions/form-extensions.min.css'
+        'bundles/avocodeformextensions/datepicker/css/datepicker.css'
+        'bundles/avocodeformextensions/daterangepicker/css/daterangepicker.css'
+        'components/select2/select2.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all" />
+    {% endstylesheets %}
+
+{% endblock avocode_form_stylesheets %}

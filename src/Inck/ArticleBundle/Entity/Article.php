@@ -2,6 +2,7 @@
 
 namespace Inck\ArticleBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Inck\UserBundle\Entity\User;
@@ -12,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Inck\ArticleBundle\Entity\ArticleRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Article
 {
@@ -60,7 +62,7 @@ class Article
      * @var \DateTime
      *
      * @Assert\DateTime()
-     * @ORM\Column(name="postedAt", type="datetime")
+     * @ORM\Column(name="postedAt", type="datetime", nullable=true)
      */
     private $postedAt;
 
@@ -102,11 +104,13 @@ class Article
 
     /**
      * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Category", cascade={"persist"})
+     * @Assert\Count(min="1", max="3")
      */
     private $categories;
 
     /**
      * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Tag", cascade={"persist"})
+     * @Assert\Count(min="1", max="10")
      */
     private $tags;
 
@@ -116,6 +120,14 @@ class Article
      */
     private $votes;
 
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new DateTime();
+    }
 
     /**
      * Get id

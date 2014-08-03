@@ -1,0 +1,100 @@
+<?php
+
+namespace Inck\ArticleBundle\Form\DataTransformer;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Form\DataTransformerInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use Inck\ArticleBundle\Entity\Tag;
+
+class TagsToNamesTransformer implements DataTransformerInterface
+{
+    /**
+     * @var ObjectManager
+     */
+    private $om;
+
+    /**
+     * @param ObjectManager $om
+     */
+    public function __construct(ObjectManager $om)
+    {
+        $this->om = $om;
+    }
+
+    /**
+     * Transforms an ArrayCollection (tags) to a string (names).
+     *
+     * @param  ArrayCollection|null $tags
+     * @return string
+     */
+    public function transform($tags)
+    {
+        if (!$tags) {
+            return "";
+        }
+
+        // Récupération des noms
+        $names = array();
+
+        foreach($tags as $tag)
+        {
+            $names[] = $tag->getName();
+        }
+
+        return implode(',', $names);
+    }
+
+    /**
+     * Transforms a string (names) to an ArrayCollection (tags).
+     *
+     * @param  string $names
+     * @return ArrayCollection|null
+     */
+    public function reverseTransform($names)
+    {
+        if (!$names) {
+            return new ArrayCollection();
+        }
+
+        $names = explode(',', $names);
+
+        // Récupération des tags existants
+        $tags = $this->om
+            ->getRepository('InckArticleBundle:Tag')
+            ->findWhereNameIn($names)
+        ;
+
+        // Recherche de nouveaux tags
+        $newNames = array();
+
+        foreach($names as $name)
+        {
+            $isNew = true;
+
+            foreach($tags as $tag)
+            {
+                if($name === $tag->getName())
+                {
+                    $isNew = false;
+                    break;
+                }
+            }
+
+            if($isNew)
+            {
+                $newNames[] = $name;
+            }
+        }
+
+        // Création des nouveaux tags
+        foreach($newNames as $newName)
+        {
+            $tag = new Tag();
+            $tag->setName($newName);
+            $tags[] = $tag;
+        }
+
+        return $tags;
+    }
+}
