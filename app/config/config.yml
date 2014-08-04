@@ -106,3 +106,21 @@ ornicar_gravatar:
     rating: g
     size: 80
     default: mm
+
+# AvocodeFormExtensionsBundle Configuration
+avocode_form_extensions:
+    upload_manager:        vich_uploader
+
+# VichUploaderBundle Configuration
+vich_uploader:
+    db_driver: orm
+    gaufrette: false
+    storage:   vich_uploader.storage.file_system
+    mappings:
+        article_image:
+            uri_prefix:           /article/image
+            upload_destination:   %kernel.root_dir%/../web/article/image
+            namer:                vich_uploader.namer_uniqid
+            inject_on_load:       true
+            delete_on_remove:     true
+            delete_on_update:     true

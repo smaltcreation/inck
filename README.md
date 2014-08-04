@@ -18,7 +18,7 @@ Bonnes pratiques
 * Suivre les nouvelles normes des microdata http://schema.org/docs/gs.html
 * Être parfait au niveau code pour le référencement
 
-## Assetic
+### Assetic
 
 Afin de rester cohérent, voici la norme à respecter pour la compression des ressources : le fichier final (paramètre
 __output__) doit être placé dans un dossier _type/compiled/bundle/directory_, et doit être nommé _view_.
@@ -47,7 +47,7 @@ Configurer le projet
 
 La configuration suivante vous permet d'acceder au projet via les adresse suivantes : **inck.dev** et **inck.prod**.
 
-## Étape 1
+### Étape 1
 
 Créez un fichier __/etc/apache2/sites-available/inck.conf__ :
 
@@ -101,14 +101,14 @@ Créez un fichier __/etc/apache2/sites-available/inck.conf__ :
 
 Adaptez le chemins vers Inck si vous avez placé le projet dans un autre dossier.
 
-## Étape 2
+### Étape 2
 
 Activez ce fichier de configuration :
 
     a2ensite inck
     service apache2 reload
 
-## Étape 3
+### Étape 3
 
 Redirigez les noms de domaine vers votre machine. Dans le fichier __/etc/hosts__, ajoutez ces lignes :
 
@@ -120,3 +120,11 @@ Mettre à jour le projet
 
 Après avoir mis à jour _(pull)_ votre version locale du projet, vous pouvez executer la commande `sh app/update` afin
 de supprimer le cache et de mettre à jour les vendors, la base de données et les ressources.
+
+Données générées avec DoctrineDataFixture :
+
+1. _InckArticleBundle:Category_ : 10 catégories
+2. _InckArticleBundle:Tag_ : 50 tags
+3. _InckUserBundle:User_ : 5 utilisateurs, 1 ayant le rôle "ROLE_SUPER_ADMIN" avec pour username "admin", et 4 ayant
+seulement le rôle "ROLE_USER" avec pour username "user1", "user2", "user3" et "user4". Pour chaque utilisateur, le
+mot de passe est identique a l'username.

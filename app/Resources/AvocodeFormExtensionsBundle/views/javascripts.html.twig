@@ -1,12 +1,39 @@
 {% block avocode_form_javascripts %}
 
+    {% javascripts filter='?yui_js' output='assetic/js/compiled/avocodeformextensions/blueimp.jquery-file-upload.min.js'
+        'bundles/avocodeformextensions/blueimp-javascript-templates/js/tmpl.js'
+        'bundles/avocodeformextensions/blueimp-load-image/js/load-image.js'
+        'bundles/avocodeformextensions/blueimp-load-image/js/load-image-ios.js'
+        'bundles/avocodeformextensions/blueimp-load-image/js/load-image-orientation.js'
+        'bundles/avocodeformextensions/blueimp-load-image/js/load-image-meta.js'
+        'bundles/avocodeformextensions/blueimp-load-image/js/load-image-exif.js'
+        'bundles/avocodeformextensions/blueimp-load-image/js/load-image-exif-map.js'
+        'bundles/avocodeformextensions/blueimp-canvas-to-blob/js/canvas-to-blob.js'
+        'bundles/avocodeformextensions/blueimp-file-upload/js/jquery.iframe-transport.js'
+        'bundles/avocodeformextensions/blueimp-file-upload/js/jquery.fileupload.js'
+        'bundles/avocodeformextensions/blueimp-file-upload/js/jquery.fileupload-process.js'
+        'bundles/avocodeformextensions/blueimp-file-upload/js/jquery.fileupload-image.js'
+        'bundles/avocodeformextensions/blueimp-file-upload/js/jquery.fileupload-validate.js'
+        'bundles/avocodeformextensions/blueimp-file-upload/js/jquery.fileupload-ui.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
     {% javascripts filter='?yui_js' output='assetic/js/compiled/avocodeformextensions/form-extensions.min.js'
+        'bundles/avocodeformextensions/bootstrap-collection/js/bootstrap-collection.js'
+        'bundles/avocodeformextensions/collection-upload/js/collection-upload.js'
         'bundles/avocodeformextensions/datepicker/js/datepicker.js'
         'bundles/avocodeformextensions/daterangepicker/js/date.js'
         'bundles/avocodeformextensions/daterangepicker/js/daterangepicker.js'
+        'bundles/avocodeformextensions/double-list/js/double-list.js'
+        'bundles/avocodeformextensions/knob/js/jquery.knob.js'
+        'bundles/avocodeformextensions/minicolors/js/jquery.minicolors.js'
         'components/select2/select2.js'
+        'bundles/avocodeformextensions/single-upload/js/single-upload.js'
+        'bundles/avocodeformextensions/timepicker/js/bootstrap-timepicker.js'
+        'bundles/avocodeformextensions/elastic/js/jquery.elastic.js'
     %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
     <!-- locale -->

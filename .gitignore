@@ -19,6 +19,8 @@
 /web/bundles/
 /web/uploads/
 /web/components/
+/web/article/image/*
+!/web/article/image/.gitkeep
 
 # PHPUnit
 /app/phpunit.xml

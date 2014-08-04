@@ -4,9 +4,13 @@ namespace Inck\ArticleBundle\Entity;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Inck\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Article
@@ -14,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Inck\ArticleBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
 class Article
 {
@@ -119,6 +124,26 @@ class Article
      * @ORM\JoinColumn(nullable=true)
      */
     private $votes;
+
+    /**
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
+     *
+     * @var File $imageFile
+     */
+    protected $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string $imageName
+     */
+    protected $imageName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime $updatedAt
+     */
+    protected $updatedAt;
 
 
     /**
@@ -404,7 +429,7 @@ class Article
     /**
      * Get categories
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return Collection
      */
     public function getCategories()
     {
@@ -450,7 +475,7 @@ class Article
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return Collection
      */
     public function getTags()
     {
@@ -483,10 +508,62 @@ class Article
     /**
      * Get votes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return Collection
      */
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    /**
+     * @param File|UploadedFile $image
+     */
+    public function setImageFile(File $image)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

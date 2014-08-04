@@ -31,7 +31,8 @@
         "ornicar/gravatar-bundle" : "dev-master",
         "egeloen/ckeditor-bundle": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "ivaynberg/select2": "3.5.*"
+        "ivaynberg/select2": "3.5.*",
+        "vich/uploader-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
