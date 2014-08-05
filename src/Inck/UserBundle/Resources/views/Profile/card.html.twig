@@ -11,15 +11,13 @@
 <div class="user-card">
     <div class="well">
         <div class="socials">
-            <a class="btn btn-xs btn-twitter" href="#"><i class="fa fa-twitter "></i></a>
-            <a class="btn btn-xs btn-facebook" href="#"><i class="fa fa-facebook"></i></a>
-            <a class="btn btn-xs btn-google" href="#"><i class="fa fa-google-plus"></i></a>
-            <a class="btn btn-xs btn-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+            <a class="btn btn-xs btn-twitter btn-circle" href="#"><i class="fa fa-twitter "></i></a>
+            <a class="btn btn-xs btn-facebook btn-circle" href="#"><i class="fa fa-facebook"></i></a>
+            <a class="btn btn-xs btn-google btn-circle" href="#"><i class="fa fa-google-plus"></i></a>
+            <a class="btn btn-xs btn-linkedin btn-circle" href="#"><i class="fa fa-linkedin"></i></a>
         </div>
 
-        <p>
-            <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></a>
-        </p>
+        <p><a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></a></p>
 
         <h2><a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">A propos de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</a></h2>
 
@@ -51,13 +49,17 @@
                         </a>
 
                         <button type="button" class="btn btn-default btn-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="
-                            <strong>Utilisateur :</strong> {{ user.username }}</br>
-                            {% if user.firstName %}<strong>Prénom :</strong> {{ user.firstName }}</br>{% endif %}
-                            {% if user.LastName %}<strong>Nom :</strong> {{ user.lastName }}</br>{% endif %}
-                            {% if user.birthday %}<strong>Date de naissance :</strong> {{ user.birthday|date("d/m/Y") }}</br>{% endif %}
-                            {% if user.occupation %}<strong>Occupation :</strong> {{ user.occupation }}</br>{% endif %}
-                            {% if user.city %}<strong>Ville :</strong> {{ user.city }}</br>{% endif %}
-                            {% if user.country %}<strong>Pays :</strong> {{ user.country }}{% endif %}
+                            <i class='fa fa-circle'></i> <strong>Utilisateur :</strong> {{ user.username }}
+                            {% if user.firstname or user.lastname %}
+                                <br><i class='fa fa-user'></i> <strong>Nom :</strong>
+                                {% if user.firstname %}{{ user.firstname }}{% endif %}
+                                {% if user.lastname %}{{ user.lastname }}{% endif %}
+                            {% endif %}
+                            {% if user.school %}<br><i class='fa fa-graduation-cap'></i><strong> École fréquentée :</strong> {{ user.school }}{% endif %}
+                            {% if user.occupation %}<br><i class='fa fa-briefcase'></i> <strong>Activité/métier :</strong> {{ user.occupation }}{% endif %}
+                            {% if user.birthday %}<br><i class='fa fa-calendar'></i> <strong>Date de naissance :</strong> {{ user.birthday|date('d/m/Y') }}{% endif %}
+                            {% if user.city %}<br><i class='fa fa-building'></i> <strong>Ville :</strong> {{ user.city }}{% endif %}
+                            {% if user.country %}<br><i class='fa fa-globe'></i> <strong>Pays :</strong> {{ user.country }}{% endif %}
                         ">
                             <i class="fa fa-info-circle"></i> Voir plus d'informations
                         </button>

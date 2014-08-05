@@ -11,7 +11,7 @@ framework:
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enabled: true, api: 2.4, enable_annotations: true }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -91,15 +91,15 @@ knp_menu:
 
 # FOSUserBundle Configuration
 fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    db_driver: orm
     firewall_name: main
     user_class: Inck\UserBundle\Entity\User
-    registration:
-        form:
-            type: inck_user_registration
     profile:
           form:
               type: inck_user_profile
+    registration:
+        form:
+            type: inck_user_registration
 
 # OrnicarGravatar Configuration
 ornicar_gravatar:

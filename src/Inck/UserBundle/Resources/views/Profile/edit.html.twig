@@ -2,12 +2,21 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% block title %}Editer mon profile{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/user/profile/edit.css'
+        'bundles/inckuser/css/Registration/register.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
 {% block header %}
     <div class="jumbotron">
         <div class="container">
             <h1>Editer mon profil</h1>
             <p>
-                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default"><i class="fa fa-backward"></i> Retourner à mon profil</a>
+                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default"><i class="fa fa-user"></i> Retourner à mon profil</a>
                 <input form="fos_user_profile_edit" class="btn btn-success" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
             </p>
         </div>
@@ -16,6 +25,10 @@
 
 {% block content %}
     <div class="container">
-        {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+        {% if fosuser_form is defined and fosuser_form == 'braincrafted' %}
+            {% include "FOSUserBundle:Profile:edit_content_braincrafted.html.twig" %}
+        {% else %}
+            {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+        {% endif %}
     </div>
 {% endblock content %}

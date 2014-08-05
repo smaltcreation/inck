@@ -2,28 +2,54 @@
 
 <div class="fos_user_user_show">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-3 hidden-xs visible-sm">
+            <p><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-thumbnail avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></p>
+            <p class="text-center"><a href="https://fr.gravatar.com/" class="btn btn-primary btn-xs"><i class="fa fa-file-image-o"></i> Changer mon avatar</a></p>
+        </div>
+        <div class="col-sm-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Informations</h3>
+                    <p class="pull-right visible-xs hidden-sm hidden-md hidden-lg"><a href="https://fr.gravatar.com/"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 60, 'g', 'mm', true) }}"/></a></p>
+                    <h3 class="panel-title">Profile de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h3>
+
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-12">
-                            <i class="fa fa-user"></i> {{ user.username }}<br>
-                            <i class="fa fa-envelope"></i> {{ user.email }}
-                            {% if user.phone is defined and user.phone is not empty %}<br><i class="fa fa-phone"></i> {{ user.phone }}{% endif %}
-                            {% if user.website is defined and user.website is not empty %}<br><a href="{{ user.website }}"><i class="fa fa-globe"></i> Site Web</a>{% endif %}
+                        <div class="col-md-4">
+                            <h4>Informations</h4>
+                            <p>
+                                <i class="fa fa-circle"></i> {{ user.username }}<br>
+                                <i class="fa fa-envelope"></i> {{ user.email }}
+                                {% if user.firstname or user.lastname %}
+                                    <br><i class="fa fa-user"></i>
+                                    {% if user.firstname %}{{ user.firstname }}{% endif %}
+                                    {% if user.lastname %}{{ user.lastname }}{% endif %}
+                                {% endif %}
+                                {% if user.school %}<br><i class="fa fa-graduation-cap"></i> {{ user.school }}{% endif %}
+                                {% if user.occupation %}<br><i class="fa fa-briefcase"></i> {{ user.occupation }}{% endif %}
+                                {% if user.birthday %}<br><i class="fa fa-calendar"></i> {{ user.birthday|date('d/m/Y') }}{% endif %}
+                                {% if user.city %}<br><i class="fa fa-building"></i> {{ user.city }}{% endif %}
+                                {% if user.country %}<br><i class="fa fa-globe"></i> {{ user.country }}{% endif %}
+                            </p>
+                        </div>
+                        <div class="col-md-8">
+                            <h4>Biographie</h4>
+                            <p>
+                                {% if user.biography %}
+                                    {{ user.biography }}
+                                {% else %}
+                                    Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell.
+                                    Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix....
+                                {% endif %}
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default">
-                        <i class="fa fa-pencil-square-o"></i> Éditer mon profil
-                    </a>
-                    <a href="{{ path('fos_user_change_password') }}" class="btn btn-default">
-                        <i class="fa fa-lock"></i> Modifier mon mot de passe
-                    </a>
+                    <p>
+                        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Éditer mon profil</a>
+                        <a href="{{ path('fos_user_change_password') }}" class="btn btn-default"><i class="fa fa-lock"></i> Modifier mon mot de passe</a>
+                    </p>
                 </div>
             </div>
         </div>
