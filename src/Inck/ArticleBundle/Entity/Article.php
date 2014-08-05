@@ -133,7 +133,7 @@ class Article
     protected $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string $imageName
      */
@@ -152,6 +152,15 @@ class Article
     public function onPrePersist()
     {
         $this->createdAt = new DateTime();
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new DateTime();
     }
 
     /**
@@ -516,15 +525,11 @@ class Article
     }
 
     /**
-     * @param File|UploadedFile $image
+     * @param File|null $image
      */
-    public function setImageFile(File $image)
+    public function setImageFile($image)
     {
         $this->imageFile = $image;
-
-        if ($image) {
-            $this->updatedAt = new \DateTime('now');
-        }
     }
 
     /**

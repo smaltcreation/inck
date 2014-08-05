@@ -27,12 +27,25 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.context')->getToken()->getUser();
 
+        // Récupération de l'article en cas d'édition
         $article = ($id === 0)
             ? new Article()
             : $em->getRepository('InckArticleBundle:Article')->find($id)
         ;
 
-        if($id !== 0 && $user !== $article->getAuthor())
+        // Article inexistant
+        if(!$article)
+        {
+            $this->get('session')->getFlashBag()->add(
+                'danger',
+                "Article inexistant."
+            );
+
+            return $this->redirect($this->generateUrl('home'));
+        }
+
+        // Tentative d'édition d'un article dont on est pas l'auteur
+        else if($id !== 0 && $user !== $article->getAuthor())
         {
             $this->get('session')->getFlashBag()->add(
                 'danger',
@@ -42,14 +55,17 @@ class ArticleController extends Controller
             return $this->redirect($this->generateUrl('home'));
         }
 
+        // Création du formulaire
         $form = $this->createForm(new ArticleType(), $article);
         $form->handleRequest($request);
 
+        // Formulaire envoyé et valide
         if($form->isValid())
         {
             $article->setApproved(false);
             $article->setAuthor($user);
 
+            // On a cliqué sur le bouton "publier"
             if($form->get('actions')->get('publish')->isClicked())
             {
                 $article->setPublished(true);
@@ -57,6 +73,7 @@ class ArticleController extends Controller
                 $article->setAsDraft(false);
             }
 
+            // On a cliqué sur le bouton "brouillon"
             else
             {
                 $article->setPublished(false);
@@ -64,6 +81,7 @@ class ArticleController extends Controller
                 $article->setAsDraft(true);
             }
 
+            // Enregistrement et redirection
             $em->persist($article);
             $em->flush();
 
@@ -77,6 +95,7 @@ class ArticleController extends Controller
             )));
         }
 
+        // On retourne le formulaire pour la vue
         return array(
             'form' => $form->createView(),
         );
@@ -90,14 +109,17 @@ class ArticleController extends Controller
     {
         try
         {
+            // Récupération de l'article
             $em = $this->getDoctrine()->getManager();
             $article = $em->getRepository('InckArticleBundle:Article')->find($id);
 
+            // Article inexistant
             if(!$article)
             {
                 throw new \Exception("Article inexistant.");
             }
 
+            // Article "brouillon"
             else if($article->getAsDraft())
             {
                 $user = $this->get('security.context')->getToken()->getUser();
