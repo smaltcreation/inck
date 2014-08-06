@@ -1,20 +1,22 @@
 #!/bin/bash
 
 # Supprimer le cache
-sudo php app/console cache:clear --env=prod
-sudo php app/console cache:clear
+composer self-update
+composer update
+php app/console cache:clear --env=prod
+php app/console cache:clear
 
 # Mettre à jour les vendors
-sudo composer update
+composer update
 
 # Mettre à jour la base de données
-sudo php app/console doctrine:schema:update --force
-sudo php app/console doctrine:fixtures:load
+php app/console doctrine:schema:update --force
+php app/console doctrine:fixtures:load
 
 # Linker les bundles dans le dossier web
-sudo php app/console assets:install --symlink
+php app/console assets:install --symlink
 
 # Mettre à jour les ressources
-sudo rm -rf web/css/compiled web/js/compiled
-sudo php app/console assetic:dump --env=prod
-sudo php app/console assetic:dump
+rm -rf web/css/compiled web/js/compiled
+php app/console assetic:dump --env=prod
+php app/console assetic:dump
