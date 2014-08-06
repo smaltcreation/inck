@@ -1,0 +1,18 @@
+article .social h3 {
+    margin-top: 10px;
+}
+
+article .social a:hover {
+    text-decoration: none;
+    opacity: 0.6;
+}
+
+article .social .row-table {
+    display: table;
+}
+
+article .social .row-table .btn-vote, article .social .row-table .stats {
+    display: table-cell;
+    padding: 0 10px 0 0;
+    min-width: 80px;
+}

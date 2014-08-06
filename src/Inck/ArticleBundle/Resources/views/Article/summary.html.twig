@@ -1,0 +1,59 @@
+{% block stylesheets %}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/summary.css'
+        'bundles/inckarticle/css/Article/summary.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+<div class="summary">
+    <div class="well">
+        {% if app.request.attributes.get('_route') == 'inck_core_article_show' or app.request.attributes.get('_route') == 'inck_core_article_moderate' %}
+            <h2>Résumé de l'article</h2>
+        {% else %}
+            <h2><a href="{{ path('inck_core_article_show', { 'id': article.id }) }}">{{ article.title }}</a></h2>
+        {% endif %}
+
+        <p class="about">
+            rédigé par <a href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash;
+            {% if article.publishedAt is not null %}
+                publié le <time datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
+            {% else %}
+                créé le <time datetime="{{ article.createdAt|date('Y-m-d') }}T{{ article.createdAt|date('H:i') }}">{{ article.createdAt|date('d/m/Y à H:i') }}</time>
+            {% endif %}
+        </p>
+
+        <p>{{ article.summary }}</p>
+
+        <p>
+            {% if app.request.attributes.get('_route') != 'article_show' and app.request.attributes.get('_route') != 'article_moderate' %}
+                <a class="btn btn-success btn-readmore" href="{{ path('inck_core_article_show', { 'id': article.id }) }}"><i class="fa fa-book"></i> Lire davantage</a>
+            {% endif %}
+            {% if article.categories is not null %}
+                {% for category in article.categories %}
+                    <a href="{#{ path('inck_article_category_show', { 'name': category.name }) }#}" class="btn btn-info btn-xs category">{{ category.name }}</a>
+                {% endfor %}
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="preview">
+        <div class="white-background img-circle center-block">
+            <a href="
+            {% if app.request.attributes.get('_route') == 'inck_core_article_show' or app.request.attributes.get('_route') == 'inck_core_article_moderate' %}
+                #content
+            {% else %}
+                {{ path('inck_core_article_show', { 'id': article.id }) }}
+            {% endif %}
+            ">
+                <img class="img-circle"
+                {% if article.imageFile %}
+                    src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="Image de l'article : {{ article.title }}"
+                {% else %}
+                    src="#" alt="Image par défaut"
+                {% endif %}
+                >
+            </a>
+        </div>
+    </div>
+</div>

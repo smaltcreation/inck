@@ -1,0 +1,26 @@
+{% block stylesheets %}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/timeline.css'
+        'bundles/inckarticle/css/Article/timeline.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+<div class="articles">
+    {% for article in articles %}
+        <article id="article-{{ article.id }}" class="article">
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="summary">
+                        {% include "InckArticleBundle:Article:summary.html.twig" %}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="social">
+                        {% include "InckArticleBundle:Article:social.html.twig" %}
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+</div>
