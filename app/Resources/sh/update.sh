@@ -1,20 +1,20 @@
 #!/bin/bash
 
-# Supprimer le cache
+# Lien symbolique vers nodejs
+if [ ! -f /usr/local/bin/node ]; then
+    ln -s /usr/bin/nodejs /usr/local/bin/node
+fi
+
+# Metre à jour des vendors
 composer self-update
 composer update
-php app/console cache:clear --env=prod
-php app/console cache:clear
 
-# Mettre à jour les vendors
-composer update
+# Supprimer le cache
+php app/console cache:clear --env=prod
 
 # Mettre à jour la base de données
 php app/console doctrine:schema:update --force
 php app/console doctrine:fixtures:load
-
-# Linker les bundles dans le dossier web
-php app/console assets:install --symlink
 
 # Mettre à jour les ressources
 rm -rf web/css/compiled web/js/compiled
