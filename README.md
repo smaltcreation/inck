@@ -118,7 +118,7 @@ Redirigez les noms de domaine vers votre machine. Dans le fichier __/etc/hosts__
 Mettre à jour le projet
 -----------------------
 
-Après avoir mis à jour _(pull)_ votre version locale du projet, vous pouvez executer la commande `sh app/update` afin
+Après avoir mis à jour _(pull)_ votre version locale du projet, vous pouvez executer la commande `sudo sh app/update` afin
 de supprimer le cache et de mettre à jour les vendors, la base de données et les ressources.
 
 Données générées avec DoctrineDataFixture :
