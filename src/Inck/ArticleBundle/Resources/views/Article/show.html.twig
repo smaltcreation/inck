@@ -9,7 +9,7 @@
                 <div class="col-md-12">
                     <h1>{{ article.title }}</h1>
                     {% if app.security.getToken().getUser() == article.author %}
-                        <a href="{{ path('article_edit', { 'id': article.id } ) }}" class="btn btn-default">
+                        <a href="{{ path('inck_core_article_edit', { 'id': article.id } ) }}" class="btn btn-default">
                             Éditer
                         </a>
                     {% endif %}
@@ -25,6 +25,5 @@
             <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.title }}" class="img-responsive img-rounded">
             <br>
         {% endif %}
-        {{ dump(article) }}
     </div>
 {% endblock %}

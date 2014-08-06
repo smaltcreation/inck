@@ -41,6 +41,6 @@
 
 {% block content %}
     <div class="container">
-        {#% include 'InckCoreBundle:Default:index_content.html.twig' %#}
+        {{ render(controller('InckArticleBundle:Article:timeline')) }}
     </div>
 {% endblock %}

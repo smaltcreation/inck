@@ -10,15 +10,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
-/**
- * @Route("/article")
- */
 class ArticleController extends Controller
 {
     /**
-     * @Route("/new", name="article_new", defaults={"id" = 0})
-     * @Route("/{id}/edit", name="article_edit", requirements={"id" = "\d+"})
+     * @Route("/article/new", name="inck_core_article_new", defaults={"id" = 0})
+     * @Route("/{id}/edit", name="inck_core_article_edit", requirements={"id" = "\d+"})
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -90,7 +88,7 @@ class ArticleController extends Controller
                 'Article enregistré !'
             );
 
-            return $this->redirect($this->generateUrl('article_show', array(
+            return $this->redirect($this->generateUrl('inck_core_article_show', array(
                 'id' => $article->getId(),
             )));
         }
@@ -102,7 +100,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="article_show", requirements={"id" = "\d+"})
+     * @Route("/article/{id}", name="inck_core_article_show", requirements={"id" = "\d+"})
      * @Template()
      */
     public function showAction(Request $request, $id)
@@ -143,6 +141,33 @@ class ArticleController extends Controller
             );
 
             return $this->redirect($this->generateUrl('home'));
+        }
+    }
+
+    /**
+     * @Template()
+     */
+    public function timelineAction(Request $request)
+    {
+        try
+        {
+            $em = $this->getDoctrine()->getManager();
+            $articles = $em->getRepository('InckArticleBundle:Article')->superQuery('published');
+
+            return array(
+                'articles' => $articles,
+            );
+        }
+
+        catch(\Exception $e)
+        {
+            $this->get('session')->getFlashBag()->add(
+                'danger',
+                $e->getMessage()
+            );
+
+            $referer = $request->headers->get('referer');
+            return new RedirectResponse($referer);
         }
     }
 }
