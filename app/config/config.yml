@@ -40,8 +40,11 @@ assetic:
     #java: /usr/bin/java
     filters:
         less:
-            node: /usr/bin/nodejs
-            node_paths: [/usr/local/lib/node_modules]
+            #node: /usr/bin/nodejs
+            #node_paths: [/usr/local/lib/node_modules]
+            #Paths for Mac Users
+            node: /usr/local/bin/node
+            node_paths: [/usr/local/bin/node, /usr/local/lib/node_modules]
             apply_to: "\.less$"
         cssrewrite: ~
         #closure:
@@ -72,10 +75,12 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    encryption: "%mailer_encryption%"
+    auth_mode:  "%mailer_auth_mode%"
+    host: "%mailer_host%"
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+    spool: { type: memory }
 
 # BraincrafterBootstrap Configuration
 braincrafted_bootstrap:
