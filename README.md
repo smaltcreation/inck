@@ -115,6 +115,11 @@ Redirigez les noms de domaine vers votre machine. Dans le fichier __/etc/hosts__
     127.0.0.1	inck.dev
     127.0.0.1	inck.prod
 
+### En cas de problèmes
+
+- Activer le mod_rewrite : `sudo a2enmod rewrite`
+- Désactiver la conf par défaut d'apache : `sudo rm /etc/apache2/sites-enabled/000-default`
+
 Mettre à jour le projet
 -----------------------
 
