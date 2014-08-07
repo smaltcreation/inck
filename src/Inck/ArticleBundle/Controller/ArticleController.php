@@ -15,8 +15,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/article/new", name="inck_core_article_new", defaults={"id" = 0})
-     * @Route("/{id}/edit", name="inck_core_article_edit", requirements={"id" = "\d+"})
+     * @Route("/article/new", name="inck_article_article_new", defaults={"id" = 0})
+     * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"})
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -88,7 +88,7 @@ class ArticleController extends Controller
                 'Article enregistré !'
             );
 
-            return $this->redirect($this->generateUrl('inck_core_article_show', array(
+            return $this->redirect($this->generateUrl('inck_article_article_show', array(
                 'id' => $article->getId(),
             )));
         }
@@ -100,7 +100,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/article/{id}", name="inck_core_article_show", requirements={"id" = "\d+"})
+     * @Route("/article/{id}", name="inck_article_article_show", requirements={"id" = "\d+"})
      * @Template()
      */
     public function showAction(Request $request, $id)
@@ -147,12 +147,12 @@ class ArticleController extends Controller
     /**
      * @Template()
      */
-    public function timelineAction(Request $request)
+    public function timelineAction(Request $request, $author = null, $category = null, $tag =null, $offset = null, $limit =null)
     {
         try
         {
             $em = $this->getDoctrine()->getManager();
-            $articles = $em->getRepository('InckArticleBundle:Article')->superQuery('published');
+            $articles = $em->getRepository('InckArticleBundle:Article')->superQuery('published', $author, $category, $tag, $offset, $limit);
 
             return array(
                 'articles' => $articles,

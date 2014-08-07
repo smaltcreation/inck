@@ -1,0 +1,1 @@
+$('.btn-tooltip').tooltip();

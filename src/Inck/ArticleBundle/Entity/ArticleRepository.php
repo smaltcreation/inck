@@ -27,10 +27,13 @@ class ArticleRepository extends EntityRepository
      * AUTHOR
      * var InckUserBundle:User
      *
-     * CATEGORIES
-     * var string array()
+     * CATEGORY
+     * var int
+     *
+     * TAG
+     * var int
      */
-    public function superQuery($type, $author = null, $categories = null)
+    public function superQuery($type, $author = null, $category = null, $tag = null, $offset = null, $limit = null)
     {
         $query = $this->createQueryBuilder('a');
 
@@ -92,14 +95,18 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('author', $author);
         }
 
-        /* CATEGORIES: string array() $categories */
-        if($categories !== null) {
-            $query->join('a.categories', 'c');
-            foreach($categories as $name) {
-                $query->andWhere($query->expr()->in('c.name', $name));
-            }
-
+        /* CATEGORY: int $category */
+        if($category !== null) {
+            $query->join('a.categories', 'c')->andWhere($query->expr()->in('c.id', $category));
         }
+
+        /* TAG: int $tag */
+        if($tag !== null) {
+            $query->join('a.tags', 't')->andWhere($query->expr()->in('t.id', $tag));
+        }
+
+        /* OFFSET & LIMIT */
+        $query->setFirstResult($offset)->setMaxResults($limit);
 
         return $query->getQuery()->getResult();
     }

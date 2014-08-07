@@ -8,12 +8,3 @@
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts filter='yui_js' output='js/compiled/user/layout.js'
-        '@InckUserBundle/Resources/public/js/layout.js'
-    %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}

@@ -3,18 +3,19 @@ article .summary .well {
     padding: 100px;
 }
 
-article .summary h2 {
+article .summary h3 {
     margin-top: 0;
-    color: #50585D;
+    color: #4f4f4f;
+
 }
 
-article .summary h2 a {
-    color: #50585D;
+article .summary h3 a {
+    color: #4f4f4f;
     text-decoration: none;
     transition: color ease 0.3s;
 }
 
-article .summary h2:hover a {
+article .summary h3 a:hover {
     color: #57A3E8;
     outline: 0;
 }
@@ -31,7 +32,7 @@ article .summary .preview img {
     transition: ease 0.3s;
     height: 150px;
     width: 150px;
-    opacity: 0.7;
+    opacity: 0.5;
     border: 2px solid #e3e3e3;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
@@ -46,7 +47,7 @@ article .summary .categories {
 }
 
 article .summary .categories a {
-    margin-top: 10px;
+    margin-top: 6px;
 }
 
 article .summary .preview .white-background:hover  {

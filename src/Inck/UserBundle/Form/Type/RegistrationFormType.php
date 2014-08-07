@@ -71,7 +71,7 @@ class RegistrationFormType extends BaseType
                 'translation_domain' => 'FOSUserBundle',
                 'attr' => array('placeholder' => 'Tatooine')
             ))
-            ->add('country', 'afe_select2_country', array(
+            ->add('country', 'country', array(
                 'required'  => false,
                 'data' => 'FR',
                 'label' => 'form.country',

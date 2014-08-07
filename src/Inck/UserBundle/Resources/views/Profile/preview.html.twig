@@ -1,9 +1,7 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 
-
 {% block title %}Profil de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}{% endblock %}
 {% block description %}{% if user.biography %}<meta name="description" content="{{ user.biography|slice(1, 157) }}{% if user.biography|length > 157 %}...{% endif %}">{% endif %}{% endblock %}
-
 
 {% block header %}
     <div class="jumbotron">
@@ -23,4 +21,13 @@
         {% include('InckUserBundle:Profile:preview_content.html.twig') %}
         {#{ render(controller('InckArticleBundle:Article:timelineAction', { 'author': user })) }#}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='yui_js' output='js/compiled/user/profile/preview.js'
+        '@InckUserBundle/Resources/public/js/Profile/preview.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

@@ -13,6 +13,5 @@ article .social .row-table {
 
 article .social .row-table .btn-vote, article .social .row-table .stats {
     display: table-cell;
-    padding: 0 10px 0 0;
     min-width: 80px;
 }

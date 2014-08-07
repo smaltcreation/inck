@@ -8,7 +8,7 @@
 
 <div class="articles">
     {% for article in articles %}
-        <article id="article-{{ article.id }}" class="article">
+        <article itemscope itemtype="http://schema.org/Article" id="article-{{ article.id }}" class="article">
             <div class="row">
                 <div class="col-xs-8">
                     <div class="summary">

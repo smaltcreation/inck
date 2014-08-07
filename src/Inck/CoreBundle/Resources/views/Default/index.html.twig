@@ -25,7 +25,7 @@
                     <p>
                         <span class="block">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <a class="btn btn-danger btn-xs" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                                <a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> Écrire un article</a>
                                 <a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a>
                             {% else %}
                                 <a class="btn btn-success" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
@@ -43,4 +43,13 @@
     <div class="container">
         {{ render(controller('InckArticleBundle:Article:timeline')) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='yui_js' output='js/compiled/article/article/summary.js'
+        '@InckArticleBundle/Resources/public/js/Article/summary.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
