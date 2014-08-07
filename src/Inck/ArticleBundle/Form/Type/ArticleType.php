@@ -35,10 +35,7 @@ class ArticleType extends AbstractType
                     'placeholder'   => 'Ajoutez des tags',
                 ],
             ])
-            ->add('imageFile', 'afe_single_upload', [
-                'label'         => 'Image',
-                'deleteable'    => 'imageName',
-            ])
+            ->add('image', new ImageType(), ['label' => false])
             ->add('actions', 'form_actions', [
                 'buttons' => [
                     'publish'   => [

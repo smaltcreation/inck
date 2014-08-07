@@ -8,6 +8,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>{{ article.title }}</h1>
+                    {% if app.security.getToken().getUser() == article.author %}
+                        <a href="{{ path('inck_core_article_edit', { 'id': article.id } ) }}" class="btn btn-default">
+                            Éditer
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -16,6 +21,9 @@
 
 {% block content %}
     <div class="container">
-        {% include('InckArticleBundle:Article:show_content.html.twig') %}
+        {% if article.imageName is not null %}
+            <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.title }}" class="img-responsive img-rounded">
+            <br>
+        {% endif %}
     </div>
 {% endblock %}

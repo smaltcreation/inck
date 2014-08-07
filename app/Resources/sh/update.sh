@@ -5,6 +5,9 @@ if [ ! -f /usr/local/bin/node ]; then
     ln -s /usr/bin/nodejs /usr/local/bin/node
 fi
 
+# Configuration de git ("file mode changed")
+git config core.fileMode false
+
 # Metre à jour des vendors
 composer self-update
 composer update

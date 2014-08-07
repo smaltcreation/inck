@@ -7,10 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Inck\UserBundle\Entity\User;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Inck\ArticleBundle\Entity\Image;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Article
@@ -18,7 +16,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Inck\ArticleBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks
- * @Vich\Uploadable
  */
 class Article
 {
@@ -126,25 +123,22 @@ class Article
     private $votes;
 
     /**
-     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
-     *
-     * @var File $imageFile
+     * @ORM\OneToOne(targetEntity="Inck\ArticleBundle\Entity\Image", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=true)
+     * @var Image image
      */
-    protected $imageFile;
+    protected $image;
+
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @var string $imageName
+     * Constructor
      */
-    protected $imageName;
-
-    /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime $updatedAt
-     */
-    protected $updatedAt;
-
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+        $this->tags = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+    }
 
     /**
      * @ORM\PrePersist
@@ -152,15 +146,6 @@ class Article
     public function onPrePersist()
     {
         $this->createdAt = new DateTime();
-    }
-
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function onPreUpdate()
-    {
-        $this->updatedAt = new DateTime();
     }
 
     /**
@@ -379,15 +364,6 @@ class Article
     {
         return $this->asDraft;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->categories = new ArrayCollection();
-        $this->tags = new ArrayCollection();
-        $this->votes = new ArrayCollection();
-    }
 
     /**
      * Set author
@@ -525,50 +501,18 @@ class Article
     }
 
     /**
-     * @param File|null $image
+     * @param \Inck\ArticleBundle\Entity\Image $image
      */
-    public function setImageFile($image)
+    public function setImage($image)
     {
-        $this->imageFile = $image;
+        $this->image = $image;
     }
 
     /**
-     * @return File
+     * @return \Inck\ArticleBundle\Entity\Image
      */
-    public function getImageFile()
+    public function getImage()
     {
-        return $this->imageFile;
-    }
-
-    /**
-     * @param string $imageName
-     */
-    public function setImageName($imageName)
-    {
-        $this->imageName = $imageName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageName()
-    {
-        return $this->imageName;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
+        return $this->image;
     }
 }
