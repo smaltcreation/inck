@@ -6,7 +6,7 @@
     {% endstylesheets %}
 {% endblock %}
 
-<div class="social">
+<div class="social" data-spy="affix" data-offset-top="0">
     <div class="panel panel-default">
         <div class="panel-heading">
             {% if app.request.attributes.get('_route') == 'article_moderate' %}
