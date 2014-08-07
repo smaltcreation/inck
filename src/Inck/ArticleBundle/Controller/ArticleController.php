@@ -18,8 +18,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/new", name="inck_core_article_new", defaults={"id" = 0})
-     * @Route("/{id}/edit", name="inck_core_article_edit", requirements={"id" = "\d+"})
+     * @Route("/new", name="inck_article_article_new", defaults={"id" = 0})
+     * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"})
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -58,9 +58,18 @@ class ArticleController extends Controller
 
         // Création du formulaire
         $form = $this->createForm(new ArticleType(), $article);
-        $form->handleRequest($request);
+
+        // Suppression de l'image
+        $values = $request->request->get('inck_articlebundle_article');
+        $deleteImage = ($values['image']['file']['delete'] && $article->getImage() !== null);
+
+        if($deleteImage)
+        {
+            $article->getImage()->saveOldName();
+        }
 
         // Formulaire envoyé et valide
+        $form->handleRequest($request);
         if($form->isValid())
         {
             $article->setApproved(false);
@@ -82,6 +91,18 @@ class ArticleController extends Controller
                 $article->setAsDraft(true);
             }
 
+            // Suppression de l'image
+            if($deleteImage)
+            {
+                unlink(sprintf(
+                    "%s/%s",
+                    $this->container->getParameter('upload.article_image.upload_destination'),
+                    $article->getImage()->getOldName()
+                ));
+
+                $article->setImage(null);
+            }
+
             // Enregistrement et redirection
             $em->persist($article);
             $em->flush();
@@ -91,7 +112,7 @@ class ArticleController extends Controller
                 'Article enregistré !'
             );
 
-            return $this->redirect($this->generateUrl('inck_core_article_show', array(
+            return $this->redirect($this->generateUrl('inck_article_article_show', array(
                 'id' => $article->getId(),
             )));
         }
@@ -103,7 +124,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="inck_core_article_show", requirements={"id" = "\d+"})
+     * @Route("/{id}", name="inck_article_article_show", requirements={"id" = "\d+"})
      * @Template()
      */
     public function showAction(Request $request, $id)
@@ -150,25 +171,22 @@ class ArticleController extends Controller
     /**
      * @Template()
      */
-    public function timelineAction(Request $request)
+    public function timelineAction(Request $request, $author = null, $category = null, $tag =null, $offset = null, $limit = null)
     {
         try
         {
             $em = $this->getDoctrine()->getManager();
-            $articles = $em->getRepository('InckArticleBundle:Article')->superQuery('published');
-
+            $articles = $em->getRepository('InckArticleBundle:Article')->superQuery('published', $author, $category, $tag, $offset, $limit);
             return array(
                 'articles' => $articles,
             );
         }
-
         catch(\Exception $e)
         {
             $this->get('session')->getFlashBag()->add(
                 'danger',
                 $e->getMessage()
             );
-
             $referer = $request->headers->get('referer');
             return new RedirectResponse($referer);
         }

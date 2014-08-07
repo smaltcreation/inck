@@ -56,8 +56,8 @@
             {% endif %}
             ">
                 <img itemprop="image" class="img-circle"
-                {% if article.imageFile %}
-                    src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="Image de l'article : {{ article.title }}"
+                {% if article.image %}
+                    src="{{ vich_uploader_asset(article.image, 'file') }}" alt="Image de l'article : {{ article.title }}"
                 {% else %}
                     src="#" alt="Image par défaut"
                 {% endif %}

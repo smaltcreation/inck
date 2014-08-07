@@ -120,8 +120,8 @@ vich_uploader:
     storage:   vich_uploader.storage.file_system
     mappings:
         article_image:
-            uri_prefix:           /article/image
-            upload_destination:   %kernel.root_dir%/../web/article/image
+            uri_prefix:           %upload.article_image.uri_prefix%
+            upload_destination:   %upload.article_image.upload_destination%
             namer:                vich_uploader.namer_uniqid
             inject_on_load:       true
             delete_on_remove:     true

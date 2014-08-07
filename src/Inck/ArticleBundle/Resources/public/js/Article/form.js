@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     input.select2({
         tags: [],
-        tokenSeparators: [",", " ", ";"],
+        tokenSeparators: [",", ";"],
         minimumInputLength: 1,
         maximumSelectionSize: 10,
         initSelection : function(element, callback){

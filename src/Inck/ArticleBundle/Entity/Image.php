@@ -28,7 +28,7 @@ class Image
     private $id;
 
     /**
-     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="name")
      *
      * @var File $file
      */
@@ -37,9 +37,9 @@ class Image
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @var string $imageName
+     * @var string $name
      */
-    protected $imageName;
+    protected $name;
 
     /**
      * @var \DateTime
@@ -54,6 +54,8 @@ class Image
      * @var \DateTime $updatedAt
      */
     protected $updatedAt;
+
+    protected $oldName;
 
 
     /**
@@ -99,19 +101,19 @@ class Image
     }
 
     /**
-     * @param string $imageName
+     * @param string $name
      */
-    public function setImageName($imageName)
+    public function setName($name)
     {
-        $this->imageName = $imageName;
+        $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getImageName()
+    public function getName()
     {
-        return $this->imageName;
+        return $this->name;
     }
 
     /**
@@ -151,5 +153,15 @@ class Image
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function saveOldName()
+    {
+        $this->oldName = $this->name;
+    }
+
+    public function getOldName()
+    {
+        return $this->oldName;
     }
 }
