@@ -69,11 +69,3 @@
         </div>
     </div>
 </div>
-
-{% block javascripts %}
-    {% javascripts filter='yui_js' output='js/compiled/user/profile/card.js'
-        '@InckUserBundle/Resources/public/js/Profile/preview.js'
-    %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}

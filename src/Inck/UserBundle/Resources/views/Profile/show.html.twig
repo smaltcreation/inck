@@ -8,7 +8,7 @@
             <p>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</p>
             <p>
                 <a class="btn btn-success" href="{{ path('home') }}"><i class="fa fa-home"></i> Accueil</a>
-                <a class="btn btn-danger btn-sm" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                <a class="btn btn-default" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
             </p>
         </div>
     </div>

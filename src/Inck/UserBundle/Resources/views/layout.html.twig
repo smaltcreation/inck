@@ -1,10 +1,1 @@
 {% extends "::base.html.twig" %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/user/layout.css'
-        'bundles/inckuser/css/layout.css'
-    %}
-        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
-    {% endstylesheets %}
-{% endblock %}

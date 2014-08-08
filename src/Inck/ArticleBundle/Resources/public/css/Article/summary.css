@@ -5,18 +5,18 @@ article .summary .well {
 
 article .summary h3 {
     margin-top: 0;
-    color: #4f4f4f;
+    color: #404040;
 
 }
 
 article .summary h3 a {
-    color: #4f4f4f;
+    color: #404040;
     text-decoration: none;
     transition: color ease 0.3s;
 }
 
 article .summary h3 a:hover {
-    color: #57A3E8;
+    color: #57a3e8;
     outline: 0;
 }
 

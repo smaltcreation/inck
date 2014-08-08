@@ -22,12 +22,3 @@
         {#{ render(controller('InckArticleBundle:Article:timelineAction', { 'author': user })) }#}
     </div>
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts filter='yui_js' output='js/compiled/user/profile/preview.js'
-        '@InckUserBundle/Resources/public/js/Profile/preview.js'
-    %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}

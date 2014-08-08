@@ -33,7 +33,7 @@
                                         <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'approve' }) }#}" class="btn btn-success">
                                             <i class="fa fa-thumbs-up"></i>
                                         </a>
-                                        <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'disapprove' }) }#}" class="btn btn-warning">
+                                        <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'disapprove' }) }#}" class="btn btn-danger">
                                             <i class="fa fa-thumbs-down"></i>
                                         </a>
                                     </span>
@@ -45,10 +45,10 @@
                                             <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'approve' }) }#}" class="btn btn-success">
                                                 <i class="fa fa-thumbs-up"></i>
                                             </a>
-                                            <button class="btn btn-bla" disabled="disabled"><i class="fa fa-thumbs-down"></i></button>
+                                            <button class="btn btn-danger" disabled="disabled"><i class="fa fa-thumbs-down"></i></button>
                                         {% else  %}
                                             <button class="btn btn-success" disabled="disabled"><i class="fa fa-thumbs-up"></i></button>
-                                            <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'disapprove' }) }#}" class="btn btn-warning">
+                                            <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'disapprove' }) }#}" class="btn btn-danger">
                                                 <i class="fa fa-thumbs-down"></i>
                                             </a>
                                         {% endif %}
@@ -60,7 +60,7 @@
                             <p>
                                 <span class="btn-group btn-tooltip" data-toggle="tooltip" data-placement="right" title="Connectez-vous pour voter">
                                     <button class="btn btn-success btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-up"></i></button>
-                                    <button class="btn btn-warning btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-down"></i></button>
+                                    <button class="btn btn-danger btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-down"></i></button>
                                 </span>
                             </p>
                         {% endif %}
@@ -69,7 +69,7 @@
                         <p>
                             <span class="btn-group btn-tooltip" data-toggle="tooltip" data-placement="right" title="Connectez-vous pour voter">
                                 <button class="btn btn-success btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-up"></i></button>
-                                <button class="btn btn-warning btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-down"></i></button>
+                                <button class="btn btn-danger btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-down"></i></button>
                             </span>
                         </p>
                     {% endif %}

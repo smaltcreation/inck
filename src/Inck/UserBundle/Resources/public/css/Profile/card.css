@@ -4,17 +4,17 @@
 
 .user-card h2 {
     margin-top: 0;
-    color: #4f4f4f;
+    color: #404040;
 }
 
 .user-card h2 a {
-    color: #4f4f4f;
+    color: #404040;
     text-decoration: none;
     transition: color ease 0.3s;
 }
 
 .user-card h2:hover a {
-    color: #57A3E8;
+    color: #57a3e8;
     outline: 0;
 }
 
