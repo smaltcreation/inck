@@ -6,10 +6,11 @@
     {% endstylesheets %}
 {% endblock %}
 
-<div class="social" data-spy="affix" data-offset-top="10">
+{% set currentRoute = app.request.attributes.get('_route') %}
+<div class="social" {% if currentRoute == 'inck_article_article_moderate' or currentRoute == 'inck_article_article_show' %}data-spy="affix" data-offset-top="10"{% endif %}>
     <div class="panel panel-default">
         <div class="panel-heading">
-            {% if app.request.attributes.get('_route') == 'article_moderate' %}
+            {% if currentRoute == 'inck_article_article_moderate' %}
                 <h3>Votre avis nous est important !</h3>
             {% else %}
                 <h3>Voter et partager</h3>
@@ -17,7 +18,7 @@
         </div>
 
         <div class="panel-body">
-            {% if app.request.attributes.get('_route') == 'article_moderate' %}
+            {% if currentRoute == 'inck_article_article_moderate' %}
                 <p>
                     En votant, vous nous permettez de classer les articles par pertinance et ainsi favoriser le travail de l'auteur lors de la monétisation.
                     Voter c'est l'assurance d'un contenu de qualité et d'une participation accrue de la communauté. Après tout, ce n'est qu'un petit clique, non ?
