@@ -64,6 +64,8 @@ body {
     background-color: #62868d;
     color: #dfdfdf;
     font-family: Gravity, "Helvetica Neue", Helvetica,Arial, sans-serif;
+    padding-top: 120px;
+    padding-bottom: 60px;
 }
 
 .jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron h4 {
