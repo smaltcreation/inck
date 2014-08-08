@@ -123,6 +123,26 @@ Redirigez les noms de domaine vers votre machine. Dans le fichier __/etc/hosts__
 Mettre à jour le projet
 -----------------------
 
+### Assetic et nodejs
+
+Pour Assetic, il faut vérifier que vous possédez bien __nodejs__, __npm__ et __less__.
+Dans le cas contraire:
+
+    sudo apt-get update
+    sudo apt-get install nodejs
+    sudo apt-get install npm
+    npm install -g less
+
+Pour Assectic, certains paramètres sont requis.
+En voici un exemple type pour un système sous Linux __/app/config/parameters.yml__ :
+
+    parameters:
+    node: /usr/bin/nodejs
+    node_paths:
+        - /usr/local/lib/node_modules
+
+### Update le projet
+
 Après avoir mis à jour _(pull)_ votre version locale du projet, vous pouvez executer la commande `sudo sh app/update` afin
 de supprimer le cache et de mettre à jour les vendors, la base de données et les ressources.
 
