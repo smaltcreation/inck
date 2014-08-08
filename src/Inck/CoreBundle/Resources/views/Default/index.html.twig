@@ -44,12 +44,3 @@
         {{ render(controller('InckArticleBundle:Article:timeline')) }}
     </div>
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts filter='yui_js' output='js/compiled/article/article/summary.js'
-        '@InckArticleBundle/Resources/public/js/Article/summary.js'
-    %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
