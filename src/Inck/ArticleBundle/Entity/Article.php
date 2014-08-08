@@ -7,8 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Inck\UserBundle\Entity\User;
-use Inck\ArticleBundle\Entity\Image;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Article
@@ -16,6 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Inck\ArticleBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
 class Article
 {
@@ -61,6 +63,12 @@ class Article
     private $createdAt;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime $updatedAt
+     */
+    protected $updatedAt;
+
+    /**
      * @var \DateTime
      *
      * @Assert\DateTime()
@@ -100,6 +108,21 @@ class Article
     private $asDraft;
 
     /**
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
+     *
+     * @var File $image
+     */
+    protected $image;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string $imageName
+     */
+    protected $imageName;
+    protected $previousImageName;
+
+    /**
      * @ORM\ManyToOne(targetEntity="\Inck\UserBundle\Entity\User")
      */
     private $author;
@@ -122,13 +145,6 @@ class Article
      */
     private $votes;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Inck\ArticleBundle\Entity\Image", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\JoinColumn(nullable=true)
-     * @var Image image
-     */
-    protected $image;
-
 
     /**
      * Constructor
@@ -146,6 +162,14 @@ class Article
     public function onPrePersist()
     {
         $this->createdAt = new DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new DateTime();
     }
 
     /**
@@ -366,6 +390,35 @@ class Article
     }
 
     /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    public function savePreviousImageName()
+    {
+        $this->previousImageName = $this->imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreviousImageName()
+    {
+        return $this->previousImageName;
+    }
+
+    /**
      * Set author
      *
      * @param User $author
@@ -501,7 +554,7 @@ class Article
     }
 
     /**
-     * @param \Inck\ArticleBundle\Entity\Image $image
+     * @param File $image
      */
     public function setImage($image)
     {
@@ -509,10 +562,26 @@ class Article
     }
 
     /**
-     * @return \Inck\ArticleBundle\Entity\Image
+     * @return File
      */
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

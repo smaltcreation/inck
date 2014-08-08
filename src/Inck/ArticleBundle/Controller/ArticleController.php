@@ -61,11 +61,11 @@ class ArticleController extends Controller
 
         // Suppression de l'image
         $values = $request->request->get('inck_articlebundle_article');
-        $deleteImage = ($values['image']['file']['delete'] && $article->getImage() !== null);
+        $deleteImage = ($values['image']['delete'] && $article->getImageName());
 
         if($deleteImage)
         {
-            $article->getImage()->saveOldName();
+            $article->savePreviousImageName();
         }
 
         // Formulaire envoyé et valide
@@ -97,10 +97,10 @@ class ArticleController extends Controller
                 unlink(sprintf(
                     "%s/%s",
                     $this->container->getParameter('upload.article_image.upload_destination'),
-                    $article->getImage()->getOldName()
+                    $article->getPreviousImageName()
                 ));
 
-                $article->setImage(null);
+                $article->setImageName(null);
             }
 
             // Enregistrement et redirection
@@ -171,7 +171,7 @@ class ArticleController extends Controller
     /**
      * @Template()
      */
-    public function timelineAction(Request $request, $author = null, $category = null, $tag =null, $offset = null, $limit = null)
+    public function timelineAction(Request $request, $author = null, $category = null, $tag =null, $offset = null, $limit =null)
     {
         try
         {
