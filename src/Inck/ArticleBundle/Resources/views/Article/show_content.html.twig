@@ -6,10 +6,10 @@
     {% endstylesheets %}
 {% endblock %}
 
-<article id="article-{{ article.id }}" class="article">
+<article id="article-{{ article.id }}" class="article" itemscope itemtype ="http://schema.org/Article">
     <div class="row">
         <div class="col-xs-8">
-            <section id="summary"  itemscope itemtype ="http://schema.org/Article">
+            <section id="summary">
                 {% include "InckArticleBundle:Article:summary.html.twig" %}
             </section>
 
@@ -17,7 +17,7 @@
                 {{ article.content|raw }}
             </section>
 
-            <section id="user"  itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <section id="user"  itemprop="creator">
                 {% set user = article.author %}
                 {% include ('InckUserBundle:Profile:card.html.twig') %}
             </section>
