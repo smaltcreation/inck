@@ -4,7 +4,6 @@
     {{ parent() }}
     {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/layout.css'
         'bundles/inckcore/css/navbar.css'
-        'bundles/inckcore/css/component.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
         <style type="text/css">
@@ -18,14 +17,6 @@
 {% endblock %}
 
 {% block navbar %}
-    <!--<div class="hidden-xs hidden-sm visible-md visible-lg">
-        {#{% include('InckCoreBundle::navbar_first.html.twig') %}#}
-    </div>
-    <div class="visible-xs visible-sm hidden-md hidden-lg">
-        <div class="container">
-            {#{% include('InckCoreBundle::navbar_second.html.twig') %}#}
-        </div>
-    </div>-->
     <ul id="gn-menu" class="gn-menu-main">
         <li class="gn-trigger">
             <a class="gn-icon gn-icon-menu"><span>Menu</span></a>
@@ -56,7 +47,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts filter='yui_js' output='js/compiled/core/preview.js'
+    {% javascripts filter='yui_js' output='js/compiled/core/layout.js'
         'bundles/inckcore/js/classie.js'
         'bundles/inckcore/js/modernizr.custom.js'
         'bundles/inckcore/js/layout/lib/gnmenu.js'
