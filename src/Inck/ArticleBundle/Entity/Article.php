@@ -94,7 +94,7 @@ class Article
     /**
      * @var boolean
      *
-     * @ORM\Column(name="approved", type="boolean")
+     * @ORM\Column(name="approved", type="boolean", nullable=true)
      * Lorsqu'un article est acheté, il est approuvé mais non publié
      * Lorsqu'un article est refusé (désapprouvé) $approved = false
      */
@@ -115,7 +115,7 @@ class Article
     protected $image;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string $imageName
      */

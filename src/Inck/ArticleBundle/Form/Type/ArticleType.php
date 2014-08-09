@@ -17,7 +17,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title', 'text', ['label' => 'Titre'])
-            ->add('summary', 'text', ['label' => 'Résumé'])
+            ->add('summary', 'textarea', ['label' => 'Résumé'])
             ->add('content', 'ckeditor', ['label' => 'Contenu'])
             ->add('categories', 'afe_select2_entity', [
                 'label'     => 'Catégories',

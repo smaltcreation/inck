@@ -56,6 +56,17 @@ class ArticleController extends Controller
             return $this->redirect($this->generateUrl('home'));
         }
 
+        // Tentative d'édition d'un article qui n'est pas un brouillon
+        else if($article->getAsDraft() === false)
+        {
+            $this->get('session')->getFlashBag()->add(
+                'danger',
+                "Cet article ne peut pas être édité."
+            );
+
+            return $this->redirect($this->generateUrl('home'));
+        }
+
         // Création du formulaire
         $form = $this->createForm(new ArticleType(), $article);
 
@@ -72,22 +83,19 @@ class ArticleController extends Controller
         $form->handleRequest($request);
         if($form->isValid())
         {
-            $article->setApproved(false);
+            $article->setPublished(false);
             $article->setAuthor($user);
 
             // On a cliqué sur le bouton "publier"
             if($form->get('actions')->get('publish')->isClicked())
             {
-                $article->setPublished(true);
-                $article->setPublishedAt(new \DateTime());
+                $article->setPostedAt(new \DateTime());
                 $article->setAsDraft(false);
             }
 
             // On a cliqué sur le bouton "brouillon"
             else
             {
-                $article->setPublished(false);
-                $article->setPublishedAt(null);
                 $article->setAsDraft(true);
             }
 
