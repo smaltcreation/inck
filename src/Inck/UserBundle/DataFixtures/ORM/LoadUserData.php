@@ -11,21 +11,37 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadUserData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
 {
-    public static $max = 5;
-    private $usernames = array();
+    /**
+     * Nombre total d'utilisateurs
+     */
+    const MAX = 5;
+
+    /**
+     * Préfixe de la référence d'un utilisateur
+     */
+    const REFERENCE_PREFIX = 'user-';
+
+    /**
+     * Noms des utilisateurs
+     * @var array
+     */
+    private $usernames;
 
     /**
      * @var ContainerInterface
      */
     private $container;
 
+    /**
+     * Génère les noms des utilisateurs
+     */
     private function initialize()
     {
-        $this->usernames = array('admin');
+        $this->usernames = array(1 => 'admin');
 
-        for($i = 1; $i <= self::$max - 1; $i++)
+        for($i = 2; $i <= self::MAX; $i++)
         {
-            $this->usernames[] = 'user'.$i;
+            $this->usernames[$i] = 'user'.($i - 1);
         }
     }
 
@@ -60,23 +76,15 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
             $user->setPassword($encoder->encodePassword($username, $user->getSalt()));
 
             // Role
-            if($username === "admin")
+            if($username === 'admin')
             {
                 $user->setRoles(array(User::ROLE_SUPER_ADMIN));
             }
 
             $manager->persist($user);
-            $this->addReference('user-'.$key, $user);
+            $this->addReference(self::REFERENCE_PREFIX.$key, $user);
         }
 
         $manager->flush();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 2;
     }
 }

@@ -143,8 +143,8 @@ En voici un exemple type pour un système sous Linux __/app/config/parameters.ym
 
 ### Update le projet
 
-Après avoir mis à jour _(pull)_ votre version locale du projet, vous pouvez executer la commande `sudo sh app/update` afin
-de supprimer le cache et de mettre à jour les vendors, la base de données et les ressources.
+Après avoir mis à jour _(pull)_ votre version locale du projet, vous pouvez executer la commande `sudo sh app/update`
+afin de supprimer le cache et de mettre à jour les vendors, la base de données et les ressources.
 
 Données générées avec DoctrineDataFixture :
 
@@ -153,3 +153,5 @@ Données générées avec DoctrineDataFixture :
 3. _InckUserBundle:User_ : 5 utilisateurs, 1 ayant le rôle "ROLE_SUPER_ADMIN" avec pour username "admin", et 4 ayant
 seulement le rôle "ROLE_USER" avec pour username "user1", "user2", "user3" et "user4". Pour chaque utilisateur, le
 mot de passe est identique a l'username.
+4. _InckArticleBundle:Article_ : 100 articles, associés à des catégories, tags et auteur aléatoires. Il sont aussi en
+brouillon, en validation ou publiés de façon aléatoire.

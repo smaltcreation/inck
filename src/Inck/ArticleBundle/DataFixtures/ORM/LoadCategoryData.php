@@ -9,16 +9,32 @@ use Inck\ArticleBundle\Entity\Category;
 
 class LoadCategoryData extends AbstractFixture implements FixtureInterface
 {
-    public static $max = 20;
-    private $names = array();
+    /**
+     * Nombre total de catégories
+     */
+    const MAX = 50;
 
+    /**
+     * Préfixe de la référence d'une catégories
+     */
+    const REFERENCE_PREFIX = 'category-';
+
+    /**
+     * Noms des catégories
+     * @var array
+     */
+    private $names;
+
+    /**
+     * Génère les noms des catégories
+     */
     private function initialize()
     {
         $this->names = array();
 
-        for($i = 1; $i <= self::$max; $i++)
+        for($i = 1; $i <= self::MAX; $i++)
         {
-            $this->names[] = 'Catégorie '.$i;
+            $this->names[$i] = 'Catégorie '.$i;
         }
     }
 
@@ -33,20 +49,12 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface
         {
             $category = new Category();
             $category->setName($name);
-            $category->setDescription('Petite description...');
+            $category->setDescription('Description de la catégorie...');
 
             $manager->persist($category);
-            $this->addReference('category-'.$key, $category);
+            $this->addReference(self::REFERENCE_PREFIX.$key, $category);
         }
 
         $manager->flush();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 1;
     }
 }

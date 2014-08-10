@@ -9,16 +9,32 @@ use Inck\ArticleBundle\Entity\Tag;
 
 class LoadTagData extends AbstractFixture implements FixtureInterface
 {
-    public static $max = 50;
-    private $names = array();
+    /**
+     * Nombre total de tags
+     */
+    const MAX = 50;
 
+    /**
+     * Préfixe de la référence d'un tag
+     */
+    const REFERENCE_PREFIX = 'tag-';
+
+    /**
+     * Noms des tags
+     * @var array
+     */
+    private $names;
+
+    /**
+     * Génère les noms des tags
+     */
     private function initialize()
     {
         $this->names = array();
 
-        for($i = 1; $i <= self::$max; $i++)
+        for($i = 1; $i <= self::MAX; $i++)
         {
-            $this->names[] = 'tag'.$i;
+            $this->names[$i] = 'tag'.$i;
         }
     }
 
@@ -35,17 +51,9 @@ class LoadTagData extends AbstractFixture implements FixtureInterface
             $tag->setName($name);
 
             $manager->persist($tag);
-            $this->addReference('tag-'.$key, $tag);
+            $this->addReference(self::REFERENCE_PREFIX.$key, $tag);
         }
 
         $manager->flush();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 1;
     }
 }
