@@ -1,6 +1,7 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 
 {% block title %}{{ article.title }}{% endblock %}
+{% block description %}<meta name="description" content="{{ article.summary|slice(0, 157) }}{% if article.summary|length > 157 %}...{% endif %}">{% endblock %}
 
 {% block header %}
     <div class="jumbotron">

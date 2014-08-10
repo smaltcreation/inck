@@ -55,13 +55,13 @@
                 {{ path('inck_article_article_show', { 'id': article.id }) }}
             {% endif %}
             ">
-                <img itemprop="image" class="img-circle"
                 {% if article.image %}
-                    src="{{ vich_uploader_asset(article, 'image') }}" alt="Image de l'article : {{ article.title }}"
+                    <img itemprop="image" class="img-circle"src="{{ vich_uploader_asset(article, 'image') }}" alt="Image de l'article : {{ article.title }}">
                 {% else %}
-                    src="#" alt="Image par défaut"
+                    {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+                        <img class="img-circle" src="{{ asset_url }}" alt="Image par défaut"/>
+                    {% endimage %}
                 {% endif %}
-                >
             </a>
         </div>
     </div>

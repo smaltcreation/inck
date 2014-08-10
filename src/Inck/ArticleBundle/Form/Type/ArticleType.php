@@ -16,8 +16,19 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', ['label' => 'Titre'])
-            ->add('summary', 'textarea', ['label' => 'Résumé'])
+            ->add('title', 'text', [
+                'label' => 'Titre',
+                'attr'  => [
+                    'placeholder'   => 'Ajoutez un titre clair et succinct',
+                ],
+            ])
+            ->add('summary', 'textarea', [
+                'label' => 'Résumé',
+                'attr'  => [
+                    'placeholder'   => 'Résumez le contenu de votre article',
+                    'rows'          => 11,
+                ],
+            ])
             ->add('content', 'ckeditor', ['label' => 'Contenu'])
             ->add('categories', 'afe_select2_entity', [
                 'label'     => 'Catégories',
@@ -25,7 +36,7 @@ class ArticleType extends AbstractType
                 'property'  => 'name',
                 'multiple'  => 'multiple',
                 'configs'      => [
-                    'placeholder'           => 'Sélectionnez 1 a 3 catégories',
+                    'placeholder'           => 'Sélectionnez 1 à 3 catégories',
                     'maximumSelectionSize'  => 3,
                 ],
             ])

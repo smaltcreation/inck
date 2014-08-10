@@ -21,8 +21,8 @@
     z-index: 1000;
     margin: 0;
     padding: 0;
-    background: white;
-    color: #5f6f81;
+    background: #20525C;
+    color: #A5C1C6;
     list-style: none;
     text-transform: none;
     font-weight: 300;
@@ -42,16 +42,19 @@
 .gn-menu-main a {
     display: block;
     height: 100%;
-    color: #5f6f81;
+    color: #A5C1C6;
     text-decoration: none;
     cursor: pointer;
 }
 
+.gn-menu-main a.active,
+.gn-menu li.gn-search-item.active,
+.gn-menu li.gn-search-item.active a,
 .no-touch .gn-menu-main a:hover,
 .no-touch .gn-menu li.gn-search-item:hover,
 .no-touch .gn-menu li.gn-search-item:hover a {
-    background: #5f6f81;
-    color: white;
+    background: #A5C1C6;
+    color: #20525C;
 }
 
 .gn-menu-main > li {
@@ -102,7 +105,7 @@
     overflow: hidden;
     width: 60px;
     border-top: 1px solid #c6d0da;
-    background: white;
+    background: #52666A;
     -webkit-transform: translateX(-60px);
     -moz-transform: translateX(-60px);
     transform: translateX(-60px);
@@ -148,7 +151,7 @@ input.gn-search {
     outline: none;
     border: none;
     background: transparent;
-    color: #5f6f81;
+    color: #A5C1C6;
     font-weight: 300;
     font-family: 'Lato', Arial, sans-serif;
     cursor: pointer;
@@ -157,19 +160,19 @@ input.gn-search {
 /* placeholder */
 
 .gn-search::-webkit-input-placeholder {
-    color: #5f6f81
+    color: #A5C1C6
 }
 
 .gn-search:-moz-placeholder {
-    color: #5f6f81
+    color: #A5C1C6
 }
 
 .gn-search::-moz-placeholder {
-    color: #5f6f81
+    color: #A5C1C6
 }
 
 .gn-search:-ms-input-placeholder {
-    color: #5f6f81
+    color: #A5C1C6
 }
 
 /* hide placeholder when active in Chrome */
@@ -184,25 +187,25 @@ input.gn-search:focus {
 }
 
 .no-touch .gn-menu li.gn-search-item:hover input.gn-search {
-    color: white
+    color: #20525C
 }
 
 /* placeholder */
 
 .no-touch .gn-menu li.gn-search-item:hover .gn-search::-webkit-input-placeholder {
-    color: white
+    color: #20525C
 }
 
 .no-touch .gn-menu li.gn-search-item:hover .gn-search:-moz-placeholder {
-    color: white
+    color: #20525C
 }
 
 .no-touch .gn-menu li.gn-search-item:hover .gn-search::-moz-placeholder {
-    color: white
+    color: #20525C
 }
 
 .no-touch .gn-menu li.gn-search-item:hover .gn-search:-ms-input-placeholder {
-    color: white
+    color: #20525C
 }
 
 .gn-menu-main a.gn-icon-search {
@@ -284,20 +287,20 @@ input.gn-search:focus {
     vertical-align: -2px;
     width: 30px;
     height: 3px;
-    background: #5f6f81;
-    box-shadow: 0 3px white, 0 -6px #5f6f81, 0 -9px white, 0 -12px #5f6f81;
+    background: #A5C1C6;
+    box-shadow: 0 3px #20525C, 0 -6px #A5C1C6, 0 -9px #20525C, 0 -12px #A5C1C6;
     content: '';
 }
 
 .no-touch .gn-icon-menu:hover::before,
 .no-touch .gn-icon-menu.gn-selected:hover::before {
-    background: white;
-    box-shadow: 0 3px #5f6f81, 0 -6px white, 0 -9px #5f6f81, 0 -12px white;
+    background: #20525C;
+    box-shadow: 0 3px #A5C1C6, 0 -6px #20525C, 0 -9px #A5C1C6, 0 -12px #20525C;
 }
 
 .gn-icon-menu.gn-selected::before {
-    background: #5993cd;
-    box-shadow: 0 3px white, 0 -6px #5993cd, 0 -9px white, 0 -12px #5993cd;
+    background: #ffffff;
+    box-shadow: 0 3px #20525C, 0 -6px #ffffff, 0 -9px #20525C, 0 -12px #ffffff;
 }
 
 /* styles for opening menu */

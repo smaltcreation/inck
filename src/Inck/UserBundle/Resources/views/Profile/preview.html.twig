@@ -1,7 +1,16 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 
 {% block title %}Profil de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}{% endblock %}
-{% block description %}{% if user.biography %}<meta name="description" content="{{ user.biography|slice(1, 157) }}{% if user.biography|length > 157 %}...{% endif %}">{% endif %}{% endblock %}
+{% block description %}{% if user.biography %}<meta name="description" content="{{ user.biography|slice(0, 157) }}{% if user.biography|length > 157 %}...{% endif %}">{% endif %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/user/profile/preview.css'
+        'bundles/inckuser/css/Profile/preview.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
 
 {% block header %}
     <div class="jumbotron">
@@ -9,6 +18,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>{{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h1>
+                    <p><a href="#" class="btn btn-subscribe"><i class="fa fa-thumb-tack"></i> S'abonner à {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</a></p>
                 </div>
             </div>
         </div>
@@ -17,8 +27,13 @@
 
 
 {% block content %}
-    <div class="container">
-        {% include('InckUserBundle:Profile:preview_content.html.twig') %}
-        {#{ render(controller('InckArticleBundle:Article:timelineAction', { 'author': user })) }#}
+    <div class="container profile preview">
+        <section>
+            {% include('InckUserBundle:Profile:preview_content.html.twig') %}
+        </section>
+        <hr>
+        <section id="user-{{ user.id }}-articles" class="user-articles">
+            {{ render(controller('InckArticleBundle:Article:timeline', { 'author': user })) }}
+        </section>
     </div>
 {% endblock %}

@@ -81,3 +81,9 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
+.panel-default>.panel-heading, .panel-default>.panel-footer {
+    color: #404040;
+    background-color: #f9f9f9;
+    border-color: #ddd;
+}
+

@@ -265,44 +265,44 @@ fieldset[disabled] .btn-danger.active {
     background-color: #fff;
 }
 
-.btn-poison {
+.btn-subscribe {
     color: #fff;
     background-color: #93648D;
     border-color: #80577b;
 }
-.btn-poison:hover,
-.btn-poison:focus,
-.btn-poison:active,
-.btn-poison.active,
-.open > .dropdown-toggle.btn-poison {
+.btn-subscribe:hover,
+.btn-subscribe:focus,
+.btn-subscribe:active,
+.btn-subscribe.active,
+.open > .dropdown-toggle.btn-subscribe {
     color: #fff;
     background-color: #704c6c;
     border-color: #684764;
 }
-.btn-poison:active,
-.btn-poison.active,
-.open > .dropdown-toggle.btn-poison {
+.btn-subscribe:active,
+.btn-subscribe.active,
+.open > .dropdown-toggle.btn-subscribe {
     background-image: none;
 }
-.btn-poison.disabled,
-.btn-poison[disabled],
-fieldset[disabled] .btn-poison,
-.btn-poison.disabled:hover,
-.btn-poison[disabled]:hover,
-fieldset[disabled] .btn-poison:hover,
-.btn-poison.disabled:focus,
-.btn-poison[disabled]:focus,
-fieldset[disabled] .btn-poison:focus,
-.btn-poison.disabled:active,
-.btn-poison[disabled]:active,
-fieldset[disabled] .btn-poison:active,
-.btn-poison.disabled.active,
-.btn-poison[disabled].active,
-fieldset[disabled] .btn-poison.active {
+.btn-subscribe.disabled,
+.btn-subscribe[disabled],
+fieldset[disabled] .btn-subscribe,
+.btn-subscribe.disabled:hover,
+.btn-subscribe[disabled]:hover,
+fieldset[disabled] .btn-subscribe:hover,
+.btn-subscribe.disabled:focus,
+.btn-subscribe[disabled]:focus,
+fieldset[disabled] .btn-subscribe:focus,
+.btn-subscribe.disabled:active,
+.btn-subscribe[disabled]:active,
+fieldset[disabled] .btn-subscribe:active,
+.btn-subscribe.disabled.active,
+.btn-subscribe[disabled].active,
+fieldset[disabled] .btn-subscribe.active {
     background-color: #93648D;
     border-color: #80577b;
 }
-.btn-poison .badge {
+.btn-subscribe .badge {
     color: #93648D;
     background-color: #fff;
 }
