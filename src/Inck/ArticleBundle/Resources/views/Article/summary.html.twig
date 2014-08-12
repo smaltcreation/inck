@@ -23,7 +23,7 @@
             {% endif %}
         </p>
 
-        {% if article.image %}
+        {% if article.imageName %}
             <img itemprop="image" class="img-thumbnail visible-xs visible-sm hidden-md hidden-lg"src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
         {% endif %}
 
