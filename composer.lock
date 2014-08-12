@@ -1174,25 +1174,25 @@
         },
         {
             "name": "egeloen/json-builder",
-            "version": "1.0.1",
-            "target-dir": "Ivory/JsonBuilder",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egeloen/ivory-json-builder.git",
-                "reference": "e56c5c509baf7cb5cb2823ae6c987bafed67c7a4"
+                "reference": "0395f06db7bbb3c240667ab5f3152151051fb567"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/e56c5c509baf7cb5cb2823ae6c987bafed67c7a4",
-                "reference": "e56c5c509baf7cb5cb2823ae6c987bafed67c7a4",
+                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/0395f06db7bbb3c240667ab5f3152151051fb567",
+                "reference": "0395f06db7bbb3c240667ab5f3152151051fb567",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "php": ">=5.3.0",
                 "symfony/property-access": "~2.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "~3.7",
+                "phpunit/phpunit": "~4.0",
                 "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
@@ -1202,8 +1202,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Ivory\\JsonBuilder": ""
+                "psr-4": {
+                    "Ivory\\JsonBuilder\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1222,7 +1222,7 @@
                 "builder",
                 "json"
             ],
-            "time": "2014-06-17 13:08:16"
+            "time": "2014-08-12 00:30:56"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2868,12 +2868,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "d55316f0254532abe643b8180876feadeccce342"
+                "reference": "29d640040fad6048f211a46ac115b577f0d73fcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/d55316f0254532abe643b8180876feadeccce342",
-                "reference": "d55316f0254532abe643b8180876feadeccce342",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/29d640040fad6048f211a46ac115b577f0d73fcc",
+                "reference": "29d640040fad6048f211a46ac115b577f0d73fcc",
                 "shasum": ""
             },
             "require": {
@@ -2929,7 +2929,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2014-07-30 15:41:00"
+            "time": "2014-08-12 10:12:45"
         }
     ],
     "packages-dev": [

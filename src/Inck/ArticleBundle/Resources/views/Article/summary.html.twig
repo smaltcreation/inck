@@ -7,7 +7,7 @@
 {% endblock %}
 
 <div class="summary">
-    <div class="well">
+    <div class=" well">
         {% if app.request.attributes.get('_route') == 'inck_article_article_show' or app.request.attributes.get('_route') == 'inck_article_article_moderate' %}
             <h2>Résumé de l'article</h2>
         {% else %}
@@ -22,6 +22,10 @@
                 créé le <time itemprop="dateCreated" datetime="{{ article.createdAt|date('Y-m-d') }}T{{ article.createdAt|date('H:i') }}">{{ article.createdAt|date('d/m/Y à H:i') }}</time>
             {% endif %}
         </p>
+
+        {% if article.image %}
+            <img itemprop="image" class="img-thumbnail visible-xs visible-sm hidden-md hidden-lg"src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
+        {% endif %}
 
         <p itemprop="description">{{ article.summary }}</p>
 
@@ -46,8 +50,7 @@
 
     </div>
 
-    <div class="preview">
-        <div class="white-background img-circle center-block">
+    <div class="hidden-xs hidden-sm visible-md visible-lg preview text-center">
             <a href="
             {% if app.request.attributes.get('_route') == 'inck_article_article_show' or app.request.attributes.get('_route') == 'inck_article_article_moderate' %}
                 #content
@@ -56,14 +59,13 @@
             {% endif %}
             ">
                 {% if article.image %}
-                    <img itemprop="image" class="img-circle"src="{{ vich_uploader_asset(article, 'image') }}" alt="Image de l'article : {{ article.title }}">
+                    <img itemprop="image" class="img-circle"src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
                 {% else %}
                     {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
                         <img class="img-circle" src="{{ asset_url }}" alt="Image par défaut"/>
                     {% endimage %}
                 {% endif %}
             </a>
-        </div>
     </div>
     <meta itemprop="keywords" content="{% for tag in article.tags %}{{ tag.name }}{% if loop.last == false %},{% endif %}{% endfor %}"/>
 </div>
