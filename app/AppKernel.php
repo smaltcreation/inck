@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             /* Our bundles */
             new Inck\UserBundle\InckUserBundle(),
             new Inck\CoreBundle\InckCoreBundle(),

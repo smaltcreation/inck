@@ -21,5 +21,6 @@ php app/console doctrine:fixtures:load
 
 # Mettre à jour les ressources
 rm -rf web/css/compiled web/js/compiled
+php app/console fos:js-routing:dump
 php app/console assetic:dump --env=prod
 php app/console assetic:dump

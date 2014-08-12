@@ -22,7 +22,9 @@ $(document).ready(function(){
         query: function(query){
             if(query.term == '') return;
             $.ajax({
-                url: "/tag/autocomplete/" + query.term,
+                url: Routing.generate('inck_article_tag_autocomplete', {
+                    name: query.term
+                }),
                 dataType: 'json'
             }).done(function(data){
                 query.callback(data);

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class TagController extends Controller
 {
     /**
-     * @Route("/tag/autocomplete/{name}", name="tag_autocomplete")
+     * @Route("/tag/autocomplete/{name}", name="inck_article_tag_autocomplete", options={"expose"=true})
      */
     public function autocomplete($name)
     {
