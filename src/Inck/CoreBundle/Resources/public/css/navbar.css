@@ -332,3 +332,8 @@ input.gn-search:focus {
         width: 130%
     }
 }
+
+/* Additional */
+li.navbar-right {
+    float: right;
+}

@@ -54,4 +54,104 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel-group" id="accordion">
+                {% if articlesAsDraft is defined %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#asDraft">
+                                    Mes brouillons
+                                    <span class="badge pull-right">{{ articlesAsDraft|length }}</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="asDraft" class="panel-collapse collapse in">
+                            {% if articlesAsDraft|length > 0 %}
+                                <ul class="list-group">
+                                    {% for article in articlesAsDraft %}
+                                        <li class="list-group-item"><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="panel-body">
+                                    Vous n'avez pas d'articles en tant que brouillon
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#moderated">
+                                    Mes articles en modération
+                                    <span class="badge pull-right">{{ articlesModerated|length }}</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="moderated" class="panel-collapse collapse">
+                            {% if articlesModerated|length > 0 %}
+                                <ul class="list-group">
+                                    {% for article in articlesModerated %}
+                                        <li class="list-group-item"><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="panel-body">
+                                    Vous n'avez pas d'articles en modération
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#published">
+                                    Mes articles publiés
+                                    <span class="badge pull-right">{{ articlesPublished|length }}</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="published" class="panel-collapse collapse">
+                            {% if articlesPublished|length > 0 %}
+                                <ul class="list-group">
+                                    {% for article in articlesPublished %}
+                                        <li class="list-group-item"><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="panel-body">
+                                    Vous n'avez pas d'articles publiés
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#refused">
+                                    Mes articles refusés
+                                    <span class="badge pull-right">{{ articlesDisapproved|length }}</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="refused" class="panel-collapse collapse">
+                            {% if articlesDisapproved|length > 0 %}
+                                <ul class="list-group">
+                                    {% for article in articlesDisapproved %}
+                                        <li class="list-group-item"><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="panel-body">
+                                    Vous n'avez pas d'articles refusés
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>

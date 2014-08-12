@@ -32,9 +32,11 @@
         </li>
         <li><a class="{% if currentRoute == 'home' %}active{% endif %}" href={{ path('home') }}><i class="fa fa-home"></i> Inck</a></li>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+            <li class="navbar-right"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+            <li class="navbar-right"><a class="{% if currentRoute == 'fos_user_profile_show' %}active{% endif %}" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a></li>
         {% else %}
-            <li><a class="{% if currentRoute == 'fos_user_security_login' %}active{% endif %}" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+            <li class="navbar-right"><a class="{% if currentRoute == 'fos_user_security_login' %}active{% endif %}" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+            <li class="navbar-right"><a class="{% if currentRoute == 'fos_user_registration_register' %}active{% endif %}" href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"></i> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a></li>
         {% endif %}
     </ul>
 {% endblock %}

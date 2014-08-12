@@ -87,3 +87,9 @@ body {
     border-color: #ddd;
 }
 
+@media screen and (max-width: 768px) {
+    .jumbotron {
+        padding-top: 80px;
+        padding-bottom: 20px;
+    }
+}
