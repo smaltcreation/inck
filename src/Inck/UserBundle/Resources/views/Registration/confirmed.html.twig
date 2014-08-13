@@ -1,6 +1,15 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 {% block title %}Confirmation d'activation{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/user/registration/register_confirmed.css'
+        'bundles/inckuser/css/Registration/register_confirmed.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block header %}
@@ -18,27 +27,30 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
-                <h3>Changer mon mot de passe</h3>
+            <div class="col-md-4">
+                <h3>Voir tous nos articles</h3>
                 <p>
-                    Vous vous connectez pour la première avec un mot de passe que nous vous avons donné ? Nous vous recommandons de changer le mot de passe que celui qui vous a été donné pour des raisons de sécurité.
+                    Accédez à l'ensemble des articles écrits par notre communauté.
                 </p>
-                <a class="btn btn-warning" href="{{ path('fos_user_change_password') }}"><i class="fa fa-lock"></i> Changer mon mot de passe</a>
+                <a class="btn btn-primary" href="{{ path('home') }}"><i class="fa fa-home"></i> Voir nos articles</a>
             </div>
-            <div class="col-sm-4">
-                <h3>Accèder à mon profil</h3>
+
+            <div class="col-md-4">
+                <h3>Accéder à mon profil</h3>
                 <p>
-                    Vous y trouverez toutes vos transactions, les évènements auxquels vous participez ou que vous avez participé ainsi que les tickets que vous avez pu acheter auprès de notre association.
+                    Vous y trouverez toutes les informations vous concernant ainsi que vos statistiques.
                 </p>
                 <a class="btn btn-primary" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a>
             </div>
-            <div class="col-sm-4">
-                <h3>Voir nos produits et nos événements en toute simplicité</h3>
-                <p>
-                    Vous pouvez voir toutes nos offres et tous les évènements associés à notre association. Plus rien ne vous échappera.
+             <div class=".col-md-4">
+                <h3>Presse, entreprise?</h3>
+                <p>Avec Inck, vous pouvez publier et acquérir les droits des articles écrits par les membres de la communauté sur votre site ou journal via un système de vente aux enchères.
                 </p>
-                <a class="btn btn-info" href="{{ path('home') }}"><i class="fa fa-beer"></i> Voir nos produits</a>
+                <a class="btn btn-success" href="{{ path('fos_user_change_password') }}"><i class="fa fa-university"></i> Mon entreprise</a>
             </div>
+        </div>
+        <div class="last_article" itemscope itemtype ="http://schema.org/Article">
+        {{ render(controller('InckArticleBundle:Article:timeline', {'limit' : 1})) }}
         </div>
     </div>
 {% endblock content %}

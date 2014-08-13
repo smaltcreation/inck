@@ -1,0 +1,9 @@
+.last_article{
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 768px) {
+    .last_article{
+        margin-top: 25px;
+    }
+}
