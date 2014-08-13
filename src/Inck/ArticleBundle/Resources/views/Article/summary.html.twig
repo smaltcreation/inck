@@ -6,51 +6,51 @@
     {% endstylesheets %}
 {% endblock %}
 
-<div class="summary">
-    <div class=" well">
-        {% if app.request.attributes.get('_route') == 'inck_article_article_show' or app.request.attributes.get('_route') == 'inck_article_article_moderate' %}
-            <h2>Résumé de l'article</h2>
-        {% else %}
-            <h3 itemprop="name"><a href="{{ path('inck_article_article_show', { 'id': article.id }) }}">{{ article.title }}</a></h3>
-        {% endif %}
-
-        <p class="about">
-            rédigé par <a itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash;
-            {% if article.publishedAt is not null %}
-                publié le <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
+{% block content %}
+    <div class="summary">
+        <div class=" well">
+            {% if app.request.attributes.get('_route') == 'inck_article_article_show' or app.request.attributes.get('_route') == 'inck_article_article_moderate' %}
+                <h2>Résumé de l'article</h2>
             {% else %}
-                créé le <time itemprop="dateCreated" datetime="{{ article.createdAt|date('Y-m-d') }}T{{ article.createdAt|date('H:i') }}">{{ article.createdAt|date('d/m/Y à H:i') }}</time>
+                <h3 itemprop="name"><a href="{{ path('inck_article_article_show', { 'id': article.id }) }}">{{ article.title }}</a></h3>
             {% endif %}
-        </p>
 
-        {% if article.imageName %}
-            <img itemprop="image" class="img-thumbnail visible-xs visible-sm hidden-md hidden-lg"src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
-        {% endif %}
+            <p class="about">
+                rédigé par <a itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash;
+                {% if article.publishedAt is not null %}
+                    publié le <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
+                {% else %}
+                    créé le <time itemprop="dateCreated" datetime="{{ article.createdAt|date('Y-m-d') }}T{{ article.createdAt|date('H:i') }}">{{ article.createdAt|date('d/m/Y à H:i') }}</time>
+                {% endif %}
+            </p>
 
-        <p itemprop="description">{{ article.summary }}</p>
-
-        <div class="row">
-            {% if app.request.attributes.get('_route') != 'inck_article_article_show' and app.request.attributes.get('_route') != 'article_moderate' %}
-            <div class="col-sm-5 col-md-4 col-lg-3">
-                <p>
-                    <a itemprop="url" class="btn btn-success btn-readmore" href="{{ path('inck_article_article_show', { 'id': article.id }) }}"><i class="fa fa-book"></i> Lire davantage</a>
-                </p>
-            </div>
+            {% if article.imageName %}
+                <img itemprop="image" class="img-thumbnail visible-xs visible-sm hidden-md hidden-lg"src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
             {% endif %}
-            <div class="col-sm-7 col-md-8 col-lg-9">
-                <p class="categories">
-                    {% if article.categories is not null %}
-                        {% for category in article.categories %}
-                            <a itemprop="genre" href="{#{ path('inck_article_category_show', { 'name': category.name }) }#}" class="btn btn-primary btn-xs category">{{ category.name }}</a>
-                        {% endfor %}
-                    {% endif %}
-                </p>
+
+            <p itemprop="description">{{ article.summary }}</p>
+
+            <div class="row">
+                {% if app.request.attributes.get('_route') != 'inck_article_article_show' and app.request.attributes.get('_route') != 'article_moderate' %}
+                <div class="col-sm-5 col-md-4 col-lg-3">
+                    <p>
+                        <a itemprop="url" class="btn btn-success btn-readmore" href="{{ path('inck_article_article_show', { 'id': article.id }) }}"><i class="fa fa-book"></i> Lire davantage</a>
+                    </p>
+                </div>
+                {% endif %}
+                <div class="col-sm-7 col-md-8 col-lg-9">
+                    <p class="categories">
+                        {% if article.categories is not null %}
+                            {% for category in article.categories %}
+                                <a itemprop="genre" href="{#{ path('inck_article_category_show', { 'name': category.name }) }#}" class="btn btn-primary btn-xs category">{{ category.name }}</a>
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                </div>
             </div>
         </div>
 
-    </div>
-
-    <div class="hidden-xs hidden-sm visible-md visible-lg preview text-center">
+        <div class="hidden-xs hidden-sm visible-md visible-lg preview text-center">
             <a href="
             {% if app.request.attributes.get('_route') == 'inck_article_article_show' or app.request.attributes.get('_route') == 'inck_article_article_moderate' %}
                 #content
@@ -66,6 +66,7 @@
                     {% endimage %}
                 {% endif %}
             </a>
+        </div>
+        <meta itemprop="keywords" content="{% for tag in article.tags %}{{ tag.name }}{% if loop.last == false %},{% endif %}{% endfor %}"/>
     </div>
-    <meta itemprop="keywords" content="{% for tag in article.tags %}{{ tag.name }}{% if loop.last == false %},{% endif %}{% endfor %}"/>
-</div>
+{% endblock %}

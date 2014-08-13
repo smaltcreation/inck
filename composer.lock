@@ -47,12 +47,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony2admingenerator/AvocodeFormExtensionsBundle.git",
-                "reference": "b8c19e678aabc5fa4ca0d8b73f2e3a4c14acfe7b"
+                "reference": "b418e5cfc2e635c3d50601f1eb6c48af0fe06e48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony2admingenerator/AvocodeFormExtensionsBundle/zipball/b8c19e678aabc5fa4ca0d8b73f2e3a4c14acfe7b",
-                "reference": "b8c19e678aabc5fa4ca0d8b73f2e3a4c14acfe7b",
+                "url": "https://api.github.com/repos/symfony2admingenerator/AvocodeFormExtensionsBundle/zipball/b418e5cfc2e635c3d50601f1eb6c48af0fe06e48",
+                "reference": "b418e5cfc2e635c3d50601f1eb6c48af0fe06e48",
                 "shasum": ""
             },
             "require": {
@@ -92,7 +92,7 @@
                 }
             ],
             "description": "Add additional form types to symfony2",
-            "time": "2014-08-12 19:19:55"
+            "time": "2014-08-13 12:20:26"
         },
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -2925,12 +2925,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "28bb9b1a78b377c752c696b33e49786482a8327e"
+                "reference": "9c3ac19724170b1adf19dad48caf30ab3d9bd5cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/28bb9b1a78b377c752c696b33e49786482a8327e",
-                "reference": "28bb9b1a78b377c752c696b33e49786482a8327e",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/9c3ac19724170b1adf19dad48caf30ab3d9bd5cb",
+                "reference": "9c3ac19724170b1adf19dad48caf30ab3d9bd5cb",
                 "shasum": ""
             },
             "require": {
@@ -2986,7 +2986,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2014-08-12 13:20:18"
+            "time": "2014-08-13 11:58:43"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

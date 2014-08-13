@@ -1,7 +1,36 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 
+{% use 'InckArticleBundle:Article:summary.html.twig' with
+    stylesheets as stylesheets_summary,
+    content as content_summary
+%}
+
+{% use 'InckArticleBundle:Article:social.html.twig' with
+    stylesheets as stylesheets_social,
+    content as content_social,
+    javascripts as javascripts_social
+%}
+
+{% set user = article.author %}
+{% use 'InckUserBundle:Profile:card.html.twig' with
+    stylesheets as stylesheets_card,
+    content as content_card
+%}
+
 {% block title %}{{ article.title }}{% endblock %}
 {% block description %}<meta name="description" content="{{ article.summary|slice(0, 157) }}{% if article.summary|length > 157 %}...{% endif %}">{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/show.css'
+        'bundles/inckarticle/css/Article/show_content.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+    {{ block('stylesheets_social') }}
+    {{ block('stylesheets_summary') }}
+    {{ block('stylesheets_card') }}
+{% endblock %}
 
 {% block header %}
     <div class="jumbotron">
@@ -22,6 +51,33 @@
 
 {% block content %}
     <div class="container">
-        {% include('InckArticleBundle:Article:show_content.html.twig') %}
+        <article id="article-{{ article.id }}" class="article" itemscope itemtype ="http://schema.org/Article">
+            <div class="row">
+                <div class="col-xs-8">
+                    <section id="summary">
+                        {{ block('content_summary') }}
+                    </section>
+
+                    <section id="content" itemprop="articleBody">
+                        {{ article.content|raw }}
+                    </section>
+
+                    <section id="user" itemprop="creator">
+                        {#{% include 'InckUserBundle:Profile:card.html.twig' with { user: article.author } %}#}
+                        {{ block('content_card') }}
+                    </section>
+                </div>
+                <div class="col-xs-4">
+                    <section itemprop="additionalType" itemscope itemtype="http://schema.org/Action">
+                        {{ block('content_social') }}
+                    </section>
+                </div>
+            </div>
+        </article>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ block('javascripts_social') }}
 {% endblock %}

@@ -11,7 +11,8 @@ article .social .row-table {
     display: table;
 }
 
-article .social .row-table .btn-vote, article .social .row-table .stats {
+article .social .row-table .votes,
+article .social .row-table .stats {
     display: table-cell;
     min-width: 80px;
 }

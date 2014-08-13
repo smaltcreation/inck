@@ -2,121 +2,101 @@
     {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/social.css'
         'bundles/inckarticle/css/Article/social.css'
     %}
-        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
 {% endblock %}
 
-{% set currentRoute = app.request.attributes.get('_route') %}
-<div class="social">
-    <div {% if currentRoute == 'inck_article_article_moderate' or currentRoute == 'inck_article_article_show' %}class="affix" data-spy="affix" data-offset-top="0"{% endif %}>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                {% if currentRoute == 'inck_article_article_moderate' %}
-                    <h3>Votre avis nous est important !</h3>
-                {% else %}
-                    <h3>Voter et partager</h3>
-                {% endif %}
-            </div>
-
-            <div class="panel-body">
-                {% if currentRoute == 'inck_article_article_moderate' %}
-                    <p>
-                        En votant, vous nous permettez de classer les articles par pertinance et ainsi favoriser le travail de l'auteur lors de la monétisation.
-                        Voter c'est l'assurance d'un contenu de qualité et d'une participation accrue de la communauté. Après tout, ce n'est qu'un petit clique, non ?
-                    </p>
-                {% endif %}
-                <div class="row-table">
-                    <div class="btn-vote">
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            {% if vote is defined %}
-                                {% if vote is null%}
-                                    <p>
-                                        <span class="btn-group">
-                                            <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'approve' }) }#}" class="btn btn-success">
-                                                <i class="fa fa-thumbs-up"></i>
-                                            </a>
-                                            <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'disapprove' }) }#}" class="btn btn-danger">
-                                                <i class="fa fa-thumbs-down"></i>
-                                            </a>
-                                        </span>
-                                    </p>
-                                {% else %}
-                                    <p>
-                                        <span class="btn-group">
-                                            {% if vote.up == 0 %}
-                                                <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'approve' }) }#}" class="btn btn-success">
-                                                    <i class="fa fa-thumbs-up"></i>
-                                                </a>
-                                                <button class="btn btn-danger" disabled="disabled"><i class="fa fa-thumbs-down"></i></button>
-                                            {% else  %}
-                                                <button class="btn btn-success" disabled="disabled"><i class="fa fa-thumbs-up"></i></button>
-                                                <a href="{#{ path('article_vote', { 'id': article.id, 'vote': 'disapprove' }) }#}" class="btn btn-danger">
-                                                    <i class="fa fa-thumbs-down"></i>
-                                                </a>
-                                            {% endif %}
-                                        </span>
-                                    </p>
-                                {% endif %}
-                            {% else %}
-                                <!-- DELETE WHEN VOTES ARE READY TO GO -->
-                                <p>
-                                    <span class="btn-group btn-tooltip" data-toggle="tooltip" data-placement="right" title="Connectez-vous pour voter">
-                                        <button class="btn btn-success btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-up"></i></button>
-                                        <button class="btn btn-danger btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-down"></i></button>
-                                    </span>
-                                </p>
-                            {% endif %}
-
-                        {% else %}
-                            <p>
-                                <span class="btn-group btn-tooltip" data-toggle="tooltip" data-placement="right" title="Connectez-vous pour voter">
-                                    <button class="btn btn-success btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-up"></i></button>
-                                    <button class="btn btn-danger btn-tooltip" disabled="disabled"><i class="fa fa-thumbs-down"></i></button>
-                                </span>
-                            </p>
-                        {% endif %}
-                    </div>
-                    <p>
-                        <a href="#" class="btn btn-link btn-xs hidden-xs hidden-sm visible-md visible-lg"><i class="fa fa-bar-chart-o"></i> Statistiques</a>
-                        <a href="#" class="btn btn-link btn-lg visible-xs visible-sm hidden-md hidden-lg"><i class="fa fa-bar-chart-o"></i></a>
-                    </p>
-                </div>
-                <div class="score">
-                    {% if article.scoreTotal is defined and article.scoreTotal > 0 %}
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: {{ article.scoreUp / article.scoreTotal * 100 }}%;"></div>
-                            <div class="number">
-                                <div class="up">{{ article.scoreUp }} <i class="fa fa-thumbs-up"></i></div>
-                                <div class="down">{{ article.scoreDown }} <i class="fa fa-thumbs-down"></i></div>
-                            </div>
-                        </div>
+{% block content %}
+    {% set currentRoute = app.request.attributes.get('_route') %}
+    <div class="social">
+        <div {% if currentRoute == 'inck_article_article_moderate' or currentRoute == 'inck_article_article_show' %}class="affix" data-spy="affix" data-offset-top="0"{% endif %}>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {% if currentRoute == 'inck_article_article_moderate' %}
+                        <h3>Votre avis nous est important !</h3>
                     {% else %}
-                        <div class="no-progress">
-                            <p>Cet article n'a pas de vote, soyez le premier !</p>
-                        </div>
+                        <h3>Voter et partager</h3>
                     {% endif %}
                 </div>
-            </div>
 
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-12">
-                        {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id %}
-                        <a class="btn btn-default btn-xs" href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a class="btn btn-default btn-xs" href="https://plus.google.com/share?url={{ currentUrl }}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a class="btn btn-default btn-xs" href="https://twitter.com/share?text={{ article.title|url_encode }}&amp;hashtags={% for category in article.categories %}{{ category.name }}{% if not loop.last %},{% endif %}{% endfor %}&amp;url={{ currentUrl }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a class="btn btn-default btn-xs" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=235');return false;">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
+                <div class="panel-body">
+                    {% if currentRoute == 'inck_article_article_moderate' %}
+                        <p>
+                            En votant, vous nous permettez de classer les articles par pertinance et ainsi favoriser le travail de l'auteur lors de la monétisation.
+                            Voter c'est l'assurance d'un contenu de qualité et d'une participation accrue de la communauté. Après tout, ce n'est qu'un petit clique, non ?
+                        </p>
+                    {% endif %}
+                    <div class="row-table">
+                        <div class="votes">
+                            <p>
+                                <span class="btn-group">
+                                    <button class="btn btn-success vote-up" {% if vote is defined and vote is not null and vote.up %}disabled="disabled"{% endif %}>
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </button>
+                                    <button class="btn btn-danger vote-down" {% if vote is defined and vote is not null and not vote.up %}disabled="disabled"{% endif %}>
+                                        <i class="fa fa-thumbs-down"></i>
+                                    </button>
+                                </span>
+                            </p>
+                        </div>
+                        <p>
+                            <a href="#" class="btn btn-link btn-xs hidden-xs hidden-sm visible-md visible-lg"><i class="fa fa-bar-chart-o"></i> Statistiques</a>
+                            <a href="#" class="btn btn-link btn-lg visible-xs visible-sm hidden-md hidden-lg"><i class="fa fa-bar-chart-o"></i></a>
+                        </p>
+                    </div>
+                    <div class="score">
+                        {% if article.scoreTotal is defined and article.scoreTotal > 0 %}
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{ article.scoreUp / article.scoreTotal * 100 }}%;"></div>
+                                <div class="number">
+                                    <div class="up">{{ article.scoreUp }} <i class="fa fa-thumbs-up"></i></div>
+                                    <div class="down">{{ article.scoreDown }} <i class="fa fa-thumbs-down"></i></div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="no-progress">
+                                <p>Cet article n'a pas de vote, soyez le premier !</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id %}
+                            <a class="btn btn-default btn-xs" href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a class="btn btn-default btn-xs" href="https://plus.google.com/share?url={{ currentUrl }}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                            <a class="btn btn-default btn-xs" href="https://twitter.com/share?text={{ article.title|url_encode }}&amp;hashtags={% for category in article.categories %}{{ category.name }}{% if not loop.last %},{% endif %}{% endfor %}&amp;url={{ currentUrl }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a class="btn btn-default btn-xs" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=235');return false;">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+{% endblock %}
+
+{% block javascripts %}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/connected.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% else %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/disconnected.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
+{% endblock %}

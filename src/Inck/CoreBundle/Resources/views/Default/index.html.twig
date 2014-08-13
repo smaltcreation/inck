@@ -7,6 +7,7 @@
     {{ parent() }}
     {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/core/default/index.css'
         'bundles/inckcore/css/Default/index.css'
+        'bundles/inckarticle/css/Article/timeline.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}

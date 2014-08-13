@@ -8,57 +8,59 @@
     {% endstylesheets %}
 {% endblock %}
 
-<div class="user-card">
-    <div class="well">
-        <div class="socials">
-            <a class="btn btn-xs btn-twitter btn-circle" href="#"><i class="fa fa-twitter "></i></a>
-            <a class="btn btn-xs btn-facebook btn-circle" href="#"><i class="fa fa-facebook"></i></a>
-            <a class="btn btn-xs btn-google btn-circle" href="#"><i class="fa fa-google-plus"></i></a>
-            <a class="btn btn-xs btn-linkedin btn-circle" href="#"><i class="fa fa-linkedin"></i></a>
-        </div>
+{% block content %}
+    <div class="user-card">
+        <div class="well">
+            <div class="socials">
+                <a class="btn btn-xs btn-twitter btn-circle" href="#"><i class="fa fa-twitter "></i></a>
+                <a class="btn btn-xs btn-facebook btn-circle" href="#"><i class="fa fa-facebook"></i></a>
+                <a class="btn btn-xs btn-google btn-circle" href="#"><i class="fa fa-google-plus"></i></a>
+                <a class="btn btn-xs btn-linkedin btn-circle" href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
 
-        <p><a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></a></p>
+            <p><a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></a></p>
 
-        <h2><a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">A propos de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</a></h2>
+            <h2><a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">A propos de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</a></h2>
 
-        <div class="biography">
-            {% if user.biography %}
-                <p>{{ user.biography|slice(0, 297) }}{% if user.biography|length > 297 %}...{% endif %}</p>
-            {% else %}
-                {% set noBiography = "Cet utilisateur n'a pas encore compléter son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie : Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell. Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix. Le langage B de Thompson étant trop limité pour les besoins du nouveau système, Ritchie est amené à créer sur les mêmes bases le langage C. Par la suite, avec l'aide de Brian Kernighan, il promeut le langage et rédige notamment le livre de référence The C Programming Language2,3. Il reçoit conjointement avec Ken Thompson le prix Turing de l'ACM en 1983 pour leur travail sur le système Unix." %}
-                <p>{{ noBiography|slice(0, 297) }}{% if noBiography|length > 297 %}...{% endif %}</p>
-            {% endif %}
-        </div>
+            <div class="biography">
+                {% if user.biography %}
+                    <p>{{ user.biography|slice(0, 297) }}{% if user.biography|length > 297 %}...{% endif %}</p>
+                {% else %}
+                    {% set noBiography = "Cet utilisateur n'a pas encore compléter son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie : Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell. Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix. Le langage B de Thompson étant trop limité pour les besoins du nouveau système, Ritchie est amené à créer sur les mêmes bases le langage C. Par la suite, avec l'aide de Brian Kernighan, il promeut le langage et rédige notamment le livre de référence The C Programming Language2,3. Il reçoit conjointement avec Ken Thompson le prix Turing de l'ACM en 1983 pour leur travail sur le système Unix." %}
+                    <p>{{ noBiography|slice(0, 297) }}{% if noBiography|length > 297 %}...{% endif %}</p>
+                {% endif %}
+            </div>
 
-        <div class="row">
-            <div class="col-md-7 col-lg-9">
-                <p>
-                    {% if user.articles is defined and user.articles|length > 0 %}
-                        <a class="btn btn-success btn-sm" href="#">
-                            <i class="fa fa-book"></i> Voir tous ses articles
-                        </a>
-                    {% endif %}
+            <div class="row">
+                <div class="col-md-7 col-lg-9">
+                    <p>
+                        {% if user.articles is defined and user.articles|length > 0 %}
+                            <a class="btn btn-success btn-sm" href="#">
+                                <i class="fa fa-book"></i> Voir tous ses articles
+                            </a>
+                        {% endif %}
 
-                    <div class="block">
-                        <a href="#" class="btn btn-subscribe btn-sm"><i class="fa fa-thumb-tack"></i> S'abonner à {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</a>
-                        <button type="button" class="btn btn-default btn-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="
-                            <i class='fa fa-circle'></i> <strong>Utilisateur :</strong> {{ user.username }}
-                            {% if user.firstname or user.lastname %}
-                                <br><i class='fa fa-user'></i> <strong>Nom :</strong>
-                                {% if user.firstname %}{{ user.firstname }}{% endif %}
-                                {% if user.lastname %}{{ user.lastname }}{% endif %}
-                            {% endif %}
-                            {% if user.school %}<br><i class='fa fa-graduation-cap'></i><strong> École fréquentée :</strong> {{ user.school }}{% endif %}
-                            {% if user.occupation %}<br><i class='fa fa-briefcase'></i> <strong>Activité/métier :</strong> {{ user.occupation }}{% endif %}
-                            {% if user.birthday %}<br><i class='fa fa-calendar'></i> <strong>Date de naissance :</strong> {{ user.birthday|date('d/m/Y') }}{% endif %}
-                            {% if user.city %}<br><i class='fa fa-building'></i> <strong>Ville :</strong> {{ user.city }}{% endif %}
-                            {% if user.country %}<br><i class='fa fa-globe'></i> <strong>Pays :</strong> {{ user.country }}{% endif %}
-                        ">
-                            <i class="fa fa-info-circle"></i> Voir plus d'informations
-                        </button>
-                    </div>
-                </p>
+                        <div class="block">
+                            <a href="#" class="btn btn-subscribe btn-sm"><i class="fa fa-thumb-tack"></i> S'abonner à {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</a>
+                            <button type="button" class="btn btn-default btn-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="
+                                <i class='fa fa-circle'></i> <strong>Utilisateur :</strong> {{ user.username }}
+                                {% if user.firstname or user.lastname %}
+                                    <br><i class='fa fa-user'></i> <strong>Nom :</strong>
+                                    {% if user.firstname %}{{ user.firstname }}{% endif %}
+                                    {% if user.lastname %}{{ user.lastname }}{% endif %}
+                                {% endif %}
+                                {% if user.school %}<br><i class='fa fa-graduation-cap'></i><strong> École fréquentée :</strong> {{ user.school }}{% endif %}
+                                {% if user.occupation %}<br><i class='fa fa-briefcase'></i> <strong>Activité/métier :</strong> {{ user.occupation }}{% endif %}
+                                {% if user.birthday %}<br><i class='fa fa-calendar'></i> <strong>Date de naissance :</strong> {{ user.birthday|date('d/m/Y') }}{% endif %}
+                                {% if user.city %}<br><i class='fa fa-building'></i> <strong>Ville :</strong> {{ user.city }}{% endif %}
+                                {% if user.country %}<br><i class='fa fa-globe'></i> <strong>Pays :</strong> {{ user.country }}{% endif %}
+                            ">
+                                <i class="fa fa-info-circle"></i> Voir plus d'informations
+                            </button>
+                        </div>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+{% endblock %}
