@@ -46,13 +46,13 @@
             "target-dir": "Avocode/FormExtensionsBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony2admingenerator/FormExtensions.git",
-                "reference": "2fcf56659be55586c125eb06d57d3f2991096415"
+                "url": "https://github.com/symfony2admingenerator/AvocodeFormExtensionsBundle.git",
+                "reference": "b8c19e678aabc5fa4ca0d8b73f2e3a4c14acfe7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony2admingenerator/FormExtensions/zipball/2fcf56659be55586c125eb06d57d3f2991096415",
-                "reference": "2fcf56659be55586c125eb06d57d3f2991096415",
+                "url": "https://api.github.com/repos/symfony2admingenerator/AvocodeFormExtensionsBundle/zipball/b8c19e678aabc5fa4ca0d8b73f2e3a4c14acfe7b",
+                "reference": "b8c19e678aabc5fa4ca0d8b73f2e3a4c14acfe7b",
                 "shasum": ""
             },
             "require": {
@@ -92,7 +92,7 @@
                 }
             ],
             "description": "Add additional form types to symfony2",
-            "time": "2014-07-28 21:43:41"
+            "time": "2014-08-12 19:19:55"
         },
         {
             "name": "braincrafted/bootstrap-bundle",
