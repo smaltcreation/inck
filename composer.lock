@@ -299,16 +299,16 @@
         },
         {
             "name": "components/jqueryui",
-            "version": "1.11.0",
+            "version": "1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/jqueryui.git",
-                "reference": "a024ef6de51ccd4bc0cfeea470cde113d33a59a8"
+                "reference": "39890e8599bdd79c423ea21b967195106800b87d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/jqueryui/zipball/a024ef6de51ccd4bc0cfeea470cde113d33a59a8",
-                "reference": "a024ef6de51ccd4bc0cfeea470cde113d33a59a8",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/39890e8599bdd79c423ea21b967195106800b87d",
+                "reference": "39890e8599bdd79c423ea21b967195106800b87d",
                 "shasum": ""
             },
             "require": {
@@ -359,12 +359,6 @@
                     "homepage": "http://krisborchers.com"
                 },
                 {
-                    "name": "Corey Frang",
-                    "email": "gnarf37@gmail.com",
-                    "homepage": "http://gnarf.net",
-                    "role": "Developer"
-                },
-                {
                     "name": "Mike Sherov",
                     "email": "mike.sherov@gmail.com",
                     "homepage": "http://mike.sherov.com"
@@ -373,10 +367,15 @@
                     "name": "TJ VanToll",
                     "email": "tj.vantoll@gmail.com",
                     "homepage": "http://tjvantoll.com"
+                },
+                {
+                    "name": "Corey Frang",
+                    "email": "gnarf37@gmail.com",
+                    "homepage": "http://gnarf.net"
                 }
             ],
             "description": "jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library. Whether you're building highly interactive web applications or you just need to add a date picker to a form control, jQuery UI is the perfect choice.",
-            "time": "2014-07-19 12:11:30"
+            "time": "2014-08-13 21:01:50"
         },
         {
             "name": "doctrine/annotations",

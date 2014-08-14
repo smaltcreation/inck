@@ -4,14 +4,13 @@
     <div class="row">
         <div class="col-sm-3 hidden-xs visible-sm">
             <p><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-thumbnail avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></p>
-            <p class="text-center"><a href="https://fr.gravatar.com/" class="btn btn-primary btn-xs"><i class="fa fa-file-image-o"></i> Changer mon avatar</a></p>
+            <p class="text-center"><a href="https://fr.gravatar.com/" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><i class="fa fa-file-image-o"></i> Changer mon avatar</a></p>
         </div>
         <div class="col-sm-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <p class="pull-right visible-xs hidden-sm hidden-md hidden-lg"><a href="https://fr.gravatar.com/"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 60, 'g', 'mm', true) }}"/></a></p>
+                    <p class="pull-right visible-xs hidden-sm hidden-md hidden-lg btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><a href="https://fr.gravatar.com/"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 60, 'g', 'mm', true) }}"/></a></p>
                     <h3 class="panel-title">Profil de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h3>
-
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -55,11 +54,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-
-        </div>
-        <div class="col-md-6">
-            <div class="panel-group" id="accordion">
+        <div class="col-md-9">
+            <div class="panel-group articles" id="accordion">
                 {% if articlesAsDraft is defined %}
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -72,7 +68,6 @@
                         </div>
                         <div id="asDraft" class="panel-collapse collapse in">
                             {% if articlesAsDraft|length > 0 %}
-                                {% for article in articlesAsDraft %}
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -83,11 +78,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {% for article in articlesAsDraft %}
                                         <tr>
-                                            <td><span class="label label-warning"><i class="fa fa-file-text-o"></i></span></td>
+                                            <td><span class="label label-warning btn-tooltip" data-toggle="tooltip" data-placement="left" title="Brouillon"><i class="fa fa-file-text-o"></i></span></td>
                                             <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="pull-right btn btn-primary btn-xs" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Apperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a>
+                                                    <a href="{{ path('inck_article_article_edit', {'id' : article.id }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Éditer" data-container="body"><i class="fa fa-edit"></i></a>
+                                                    <a href="{#{ path('inck_article_article_publish', {'id' : article.id }) }#}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body"><i class="fa fa-send"></i></a>
+                                                    <a href="{#{ path('inck_article_article_delete', {'id' : article.id }) }#}" class="btn btn-danger btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" title="Supprimer" data-container="body"><i class="fa fa-times"></i></a>
+                                                </div>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -124,21 +127,25 @@
                                         {% if article.asDraft %}
                                             {% set status = 'warning' %}
                                             {% set icon = 'file-text-o' %}
+                                            {% set tooltip = 'Brouillon' %}
                                         {% elseif article.published %}
                                             {% set status = 'success' %}
                                             {% set icon = 'check' %}
+                                            {% set tooltip = 'Publié' %}
                                         {% elseif article.approved == false %}
                                             {% set status = 'danger' %}
                                             {% set icon = 'times' %}
+                                            {% set tooltip = 'Désapprouvé' %}
                                         {% else %}
                                             {% set status = 'primary' %}
                                             {% set icon = 'refresh' %}
+                                            {% set tooltip = 'En cours' %}
                                         {% endif %}
                                         <tr>
-                                            <td><span class="label label-{{ status }}"><i class="fa fa-{{ icon }}"></i></span></td>
+                                            <td><span class="label label-{{ status }} btn-tooltip" data-toggle="tooltip" data-placement="left" title={{ tooltip }}><i class="fa fa-{{ icon }}"></i></span></td>
                                             <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="pull-right btn btn-primary btn-xs" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Apperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -173,10 +180,10 @@
                                     <tbody>
                                         {% for article in articlesPublished %}
                                             <tr>
-                                                <td><span class="label label-success"><i class="fa fa-check"></i></span></td>
+                                                <td><span class="label label-success btn-tooltip" data-toggle="tooltip" data-placement="left" title="Publié"><i class="fa fa-check"></i></span></td>
                                                 <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                                 <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                                <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="pull-right btn btn-primary btn-xs" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                                <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Apperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
