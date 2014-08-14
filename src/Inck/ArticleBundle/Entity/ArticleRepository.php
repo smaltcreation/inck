@@ -55,6 +55,14 @@ class ArticleRepository extends EntityRepository
                         ->orderBy('a.publishedAt', 'DESC');
                     break;
 
+                case 'posted':
+                    $query
+                        ->andWhere($query->expr()->andx(
+                            $query->expr()->isNotNull('a.postedAt')
+                        ))
+                        ->orderBy('a.postedAt', 'DESC');
+                    break;
+
                 case 'in_moderation':
                     $query
                         ->andWhere('a.published = :published')

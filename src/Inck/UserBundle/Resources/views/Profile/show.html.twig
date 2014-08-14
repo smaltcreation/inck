@@ -19,3 +19,12 @@
         {% include "FOSUserBundle:Profile:show_content.html.twig" %}
     </div>
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='yui_js' output='js/compiled/user/profile/show.js'
+        'bundles/inckuser/js/Profile/show.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

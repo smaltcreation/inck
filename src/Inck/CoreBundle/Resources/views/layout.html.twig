@@ -4,6 +4,7 @@
     {{ parent() }}
     {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/layout.css'
         'bundles/inckcore/css/navbar.css'
+        'bundles/inckcore/css/footer.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -43,11 +44,36 @@
 
 
 {% block footer %}
-    <div id="footer">
-        <div class="container">
-            <p class="muted credit">Proudly made by Wassim Dhif for Inck - Smalt Creation SAS</p>
+    <footer id="footer">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-xs-4">
+                    <h4>À propos de Inck</h4>
+                    <ul>
+                        <li><a href="#">L'équipe</a></li>
+                        <li><a href="#">Smalt Création</a></li>
+                        <li><a href="#">Conditions générales d'utilisation</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-4">
+                    <h4>Articles populaires</h4>
+                    <ul>
+                        <li><a href="#">Article 1 : Priumsquam</a></li>
+                        <li><a href="#">Article 2 : Tellus est patefacta</a></li>
+                        <li><a href="#">Article 3 : Saturno rege</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-4">
+                    <h4>Presses partenaires</h4>
+                    <ul>
+                        <li><a href="#">Presse Citron</a></li>
+                        <li><a href="#">Presse Citron</a></li>
+                        <li><a href="#">Les cahiers du cinéma</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
+    </footer>
 {% endblock %}
 
 {% block javascripts %}

@@ -1,0 +1,24 @@
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+#wrapper {
+    min-height:100%;
+    position:relative;
+}
+
+#content {
+    padding-bottom:350px;   /* Height of the footer element */
+}
+
+footer {
+    width:100%;
+    height: 300px;
+    background-image: url("../images/footer_background.png");
+    position:absolute;
+    bottom:0;
+    left:0;
+    padding-top: 100px;
+}

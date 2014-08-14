@@ -178,6 +178,51 @@ class ArticleController extends Controller
     }
 
     /**
+     * @Route("/{id}/modal", name="inck_article_article_show_modal", requirements={"id" = "\d+"})
+     * @Template("InckArticleBundle:Article:show_modal.html.twig")
+     */
+    public function showModalAction(Request $request, $id)
+    {
+        try
+        {
+            // Récupération de l'article
+            $em = $this->getDoctrine()->getManager();
+            $article = $em->getRepository('InckArticleBundle:Article')->find($id);
+
+            // Article inexistant
+            if(!$article)
+            {
+                throw new \Exception("Article inexistant.");
+            }
+
+            // Article "brouillon"
+            else if($article->getAsDraft())
+            {
+                $user = $this->get('security.context')->getToken()->getUser();
+
+                if($user !== $article->getAuthor())
+                {
+                    throw new \Exception("Article indisponible.");
+                }
+            }
+
+            return array(
+                'article' => $article,
+            );
+        }
+
+        catch(\Exception $e)
+        {
+            $this->get('session')->getFlashBag()->add(
+                'danger',
+                $e->getMessage()
+            );
+
+            return $this->redirect($this->generateUrl('home'));
+        }
+    }
+
+    /**
      * @Template()
      */
     public function timelineAction(Request $request, $author = null, $category = null, $tag =null, $offset = null, $limit =null)

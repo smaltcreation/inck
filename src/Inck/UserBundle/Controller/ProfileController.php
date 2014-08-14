@@ -22,10 +22,9 @@ class ProfileController extends BaseController
         $repository = $em->getRepository('InckArticleBundle:Article');
 
         $articlesAsDraft = $repository->superQuery('as_draft', $user);
-        $articlesModerated = $repository->superQuery('in_moderation', $user);
         $articlesPublished = $repository->superQuery('published', $user);
-        $articlesDisapproved = $repository->superQuery('disapproved', $user);
+        $articlesPosted = $repository->superQuery('posted', $user);
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user, 'articlesAsDraft' => $articlesAsDraft, 'articlesModerated' => $articlesModerated, 'articlesPublished' => $articlesPublished, 'articlesDisapproved' => $articlesDisapproved));
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user, 'articlesAsDraft' => $articlesAsDraft, 'articlesPublished' => $articlesPublished, 'articlesPosted' => $articlesPosted));
     }
 }

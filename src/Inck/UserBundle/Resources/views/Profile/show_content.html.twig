@@ -10,7 +10,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <p class="pull-right visible-xs hidden-sm hidden-md hidden-lg"><a href="https://fr.gravatar.com/"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 60, 'g', 'mm', true) }}"/></a></p>
-                    <h3 class="panel-title">Profile de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h3>
+                    <h3 class="panel-title">Profil de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h3>
 
                 </div>
                 <div class="panel-body">
@@ -55,7 +55,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
             <div class="panel-group" id="accordion">
                 {% if articlesAsDraft is defined %}
                     <div class="panel panel-default">
@@ -69,11 +72,26 @@
                         </div>
                         <div id="asDraft" class="panel-collapse collapse in">
                             {% if articlesAsDraft|length > 0 %}
-                                <ul class="list-group">
-                                    {% for article in articlesAsDraft %}
-                                        <li class="list-group-item"><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title }}</a></li>
+                                {% for article in articlesAsDraft %}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Titre</th>
+                                            <th>Posté le</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="label label-warning"><i class="fa fa-file-text-o"></i></span></td>
+                                            <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
+                                            <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
+                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="pull-right btn btn-primary btn-xs" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                        </tr>
                                     {% endfor %}
-                                </ul>
+                                    </tbody>
+                                </table>
                             {% else %}
                                 <div class="panel-body">
                                     Vous n'avez pas d'articles en tant que brouillon
@@ -84,22 +102,50 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#moderated">
-                                    Mes articles en modération
-                                    <span class="badge pull-right">{{ articlesModerated|length }}</span>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#posted">
+                                    Tous mes articles envoyés
+                                    <span class="badge pull-right">{{ articlesPosted|length }}</span>
                                 </a>
                             </h4>
                         </div>
-                        <div id="moderated" class="panel-collapse collapse">
-                            {% if articlesModerated|length > 0 %}
-                                <ul class="list-group">
-                                    {% for article in articlesModerated %}
-                                        <li class="list-group-item"><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title }}</a></li>
+                        <div id="posted" class="panel-collapse collapse">
+                            {% if articlesPosted|length > 0 %}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Titre</th>
+                                            <th>Posté le</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for article in articlesPosted %}
+                                        {% if article.asDraft %}
+                                            {% set status = 'warning' %}
+                                            {% set icon = 'file-text-o' %}
+                                        {% elseif article.published %}
+                                            {% set status = 'success' %}
+                                            {% set icon = 'check' %}
+                                        {% elseif article.approved == false %}
+                                            {% set status = 'danger' %}
+                                            {% set icon = 'times' %}
+                                        {% else %}
+                                            {% set status = 'primary' %}
+                                            {% set icon = 'refresh' %}
+                                        {% endif %}
+                                        <tr>
+                                            <td><span class="label label-{{ status }}"><i class="fa fa-{{ icon }}"></i></span></td>
+                                            <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
+                                            <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
+                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="pull-right btn btn-primary btn-xs" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                        </tr>
                                     {% endfor %}
-                                </ul>
+                                    </tbody>
+                                </table>
                             {% else %}
                                 <div class="panel-body">
-                                    Vous n'avez pas d'articles en modération
+                                    Vous n'avez posté aucun article
                                 </div>
                             {% endif %}
                         </div>
@@ -115,37 +161,29 @@
                         </div>
                         <div id="published" class="panel-collapse collapse">
                             {% if articlesPublished|length > 0 %}
-                                <ul class="list-group">
-                                    {% for article in articlesPublished %}
-                                        <li class="list-group-item"><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title }}</a></li>
-                                    {% endfor %}
-                                </ul>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Titre</th>
+                                            <th>Posté le</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for article in articlesPublished %}
+                                            <tr>
+                                                <td><span class="label label-success"><i class="fa fa-check"></i></span></td>
+                                                <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
+                                                <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
+                                                <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="pull-right btn btn-primary btn-xs" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             {% else %}
                                 <div class="panel-body">
                                     Vous n'avez pas d'articles publiés
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#refused">
-                                    Mes articles refusés
-                                    <span class="badge pull-right">{{ articlesDisapproved|length }}</span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="refused" class="panel-collapse collapse">
-                            {% if articlesDisapproved|length > 0 %}
-                                <ul class="list-group">
-                                    {% for article in articlesDisapproved %}
-                                        <li class="list-group-item"><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            {% else %}
-                                <div class="panel-body">
-                                    Vous n'avez pas d'articles refusés
                                 </div>
                             {% endif %}
                         </div>
