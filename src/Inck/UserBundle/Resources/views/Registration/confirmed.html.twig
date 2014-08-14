@@ -4,7 +4,10 @@
 {% block stylesheets %}
     {{ parent() }}
     {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/user/registration/register_confirmed.css'
-        'bundles/inckuser/css/Registration/register_confirmed.css'
+        'bundles/inckuser/css/Registration/confirmed.css'
+        'bundles/inckarticle/css/Article/timeline.css'
+        'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/social.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -28,29 +31,41 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h3>Voir tous nos articles</h3>
-                <p>
-                    Accédez à l'ensemble des articles écrits par notre communauté.
-                </p>
-                <a class="btn btn-primary" href="{{ path('home') }}"><i class="fa fa-home"></i> Voir nos articles</a>
-            </div>
-
-            <div class="col-md-4">
                 <h3>Accéder à mon profil</h3>
-                <p>
-                    Vous y trouverez toutes les informations vous concernant ainsi que vos statistiques.
-                </p>
-                <a class="btn btn-primary" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a>
+                <p>Vous y trouverez toutes les informations vous concernant ainsi que vos statistiques. Vous pourrez y consulter vos articles, vos brouillons et votre fil d'actualité.</p>
+                <p><a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a></p>
             </div>
-             <div class=".col-md-4">
+            <div class="col-md-4">
+                <h3>Envie de partager vos idées ?</h3>
+                <p>Lorsque vous partagez sur Inck en écrivant un article, vous contribuez au développement de l'expression libre et culturelle. Lire, s'instruire, partager, ici tout est possible !</p>
+                <p><a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> Écrire un article</a></p>
+            </div>
+             <div class="col-md-4">
                 <h3>Presse, entreprise?</h3>
-                <p>Avec Inck, vous pouvez publier et acquérir les droits des articles écrits par les membres de la communauté sur votre site ou journal via un système de vente aux enchères.
-                </p>
-                <a class="btn btn-success" href="{{ path('fos_user_change_password') }}"><i class="fa fa-university"></i> Mon entreprise</a>
+                <p>Avec Inck, vous pouvez publier et acquérir les droits des articles écrits par les membres de la communauté sur votre site ou journal via un système de vente aux enchères.</p>
+                <p><a class="btn btn-primary" href="{{ path('fos_user_change_password') }}"><i class="fa fa-university"></i> Mon entreprise</a></p>
             </div>
         </div>
-        <div class="last_article" itemscope itemtype ="http://schema.org/Article">
-        {{ render(controller('InckArticleBundle:Article:timeline', {'limit' : 1})) }}
+
+        <div class="last-article" itemscope itemtype ="http://schema.org/Article">
+            {{ render(controller('InckArticleBundle:Article:timeline', {'limit' : 1})) }}
         </div>
     </div>
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/connected.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% else %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/disconnected.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
+{% endblock %}
