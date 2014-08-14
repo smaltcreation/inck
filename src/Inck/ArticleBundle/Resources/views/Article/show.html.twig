@@ -1,35 +1,18 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 
-{% use 'InckArticleBundle:Article:summary.html.twig' with
-    stylesheets as stylesheets_summary,
-    content as content_summary
-%}
-
-{% use 'InckArticleBundle:Article:social.html.twig' with
-    stylesheets as stylesheets_social,
-    content as content_social,
-    javascripts as javascripts_social
-%}
-
-{% set user = article.author %}
-{% use 'InckUserBundle:Profile:card.html.twig' with
-    stylesheets as stylesheets_card,
-    content as content_card
-%}
-
 {% block title %}{{ article.title }}{% endblock %}
 {% block description %}<meta name="description" content="{{ article.summary|slice(0, 157) }}{% if article.summary|length > 157 %}...{% endif %}">{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/show.css'
-        'bundles/inckarticle/css/Article/show_content.css'
+        'bundles/inckarticle/css/Article/show.css'
+        'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/social.css'
+        'bundles/inckuser/css/Profile/card.css'
     %}
-    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
-    {{ block('stylesheets_social') }}
-    {{ block('stylesheets_summary') }}
-    {{ block('stylesheets_card') }}
 {% endblock %}
 
 {% block header %}
@@ -54,22 +37,21 @@
         <article id="article-{{ article.id }}" class="article" itemscope itemtype ="http://schema.org/Article">
             <div class="row">
                 <div class="col-xs-8">
-                    <section id="summary">
-                        {{ block('content_summary') }}
+                    <section id="article-summary">
+                        {% include('InckArticleBundle:Article:summary.html.twig') %}
                     </section>
 
-                    <section id="content" itemprop="articleBody">
+                    <section id="article-content" itemprop="articleBody">
                         {{ article.content|raw }}
                     </section>
 
-                    <section id="user" itemprop="creator">
-                        {#{% include 'InckUserBundle:Profile:card.html.twig' with { user: article.author } %}#}
-                        {{ block('content_card') }}
+                    <section id="article-user" itemprop="creator">
+                        {% include 'InckUserBundle:Profile:card.html.twig' with { user: article.author } %}
                     </section>
                 </div>
                 <div class="col-xs-4">
-                    <section itemprop="additionalType" itemscope itemtype="http://schema.org/Action">
-                        {{ block('content_social') }}
+                    <section id="article-social" itemprop="additionalType" itemscope itemtype="http://schema.org/Action">
+                        {% include('InckArticleBundle:Article:social.html.twig') %}
                     </section>
                 </div>
             </div>
@@ -79,5 +61,17 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ block('javascripts_social') }}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/connected.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% else %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/disconnected.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
 {% endblock %}

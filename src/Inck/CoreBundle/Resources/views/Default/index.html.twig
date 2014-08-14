@@ -8,6 +8,8 @@
     {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/core/default/index.css'
         'bundles/inckcore/css/Default/index.css'
         'bundles/inckarticle/css/Article/timeline.css'
+        'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/social.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -46,4 +48,21 @@
     <div class="container">
         {{ render(controller('InckArticleBundle:Article:timeline')) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/connected.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% else %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/disconnected.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
 {% endblock %}
