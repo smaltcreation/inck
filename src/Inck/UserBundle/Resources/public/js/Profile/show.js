@@ -1,5 +1,5 @@
 $('[data-target="modal"]').click(function(e) {
-    event.preventDefault();
+    e.preventDefault();
     var url = $(this).attr("href");
     if (url.indexOf("#") == 0) {
         $(url).modal('open');
