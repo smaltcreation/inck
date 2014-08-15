@@ -3,6 +3,7 @@
 namespace Inck\ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Inck\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -44,7 +45,7 @@ class Vote
     private $article;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Inck\UserBundle\Entity\User", inversedBy="votes")
+     * @ORM\ManyToOne(targetEntity="Inck\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=true)
      */
     private $user;
@@ -109,10 +110,10 @@ class Vote
     /**
      * Set article
      *
-     * @param \Inck\ArticleBundle\Entity\Article $article
+     * @param Article $article
      * @return Vote
      */
-    public function setArticle(\Inck\ArticleBundle\Entity\Article $article)
+    public function setArticle(Article $article)
     {
         $this->article = $article;
 
@@ -122,7 +123,7 @@ class Vote
     /**
      * Get article
      *
-     * @return \Inck\ArticleBundle\Entity\Article 
+     * @return Article
      */
     public function getArticle()
     {
@@ -133,10 +134,10 @@ class Vote
     /**
      * Set user
      *
-     * @param \Inck\UserBundle\Entity\User $user
+     * @param User $user
      * @return Vote
      */
-    public function setUser(\Inck\UserBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -146,7 +147,7 @@ class Vote
     /**
      * Get user
      *
-     * @return \Inck\UserBundle\Entity\User 
+     * @return User
      */
     public function getUser()
     {

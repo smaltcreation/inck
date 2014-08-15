@@ -3,12 +3,12 @@
 namespace Inck\ArticleBundle\Controller;
 
 use Inck\ArticleBundle\Entity\Article;
+use Inck\ArticleBundle\Entity\Vote;
 use Inck\ArticleBundle\Form\Type\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -141,7 +141,7 @@ class ArticleController extends Controller
         {
             // Récupération de l'article
             $em = $this->getDoctrine()->getManager();
-            /** @var Article $article */
+            /** @var $article Article */
             $article = $em->getRepository('InckArticleBundle:Article')->find($id);
 
             // Article inexistant
@@ -187,6 +187,7 @@ class ArticleController extends Controller
         {
             // Récupération de l'article
             $em = $this->getDoctrine()->getManager();
+            /** @var $article Article */
             $article = $em->getRepository('InckArticleBundle:Article')->find($id);
 
             // Article inexistant
@@ -223,6 +224,46 @@ class ArticleController extends Controller
     }
 
     /**
+     * @var $article Article
+     * @Template()
+     * @return array
+     */
+    public function socialAction($article)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $score = array(
+            'up'    => 0,
+            'down'  => 0,
+            'total' => 0,
+        );
+
+        if ($this->get('security.context')->isGranted('ROLE_USER'))
+        {
+            /** @var $vote Vote|null */
+            $vote = $em->getRepository('InckArticleBundle:Vote')->getByArticleAndUser($article, $this->getUser());
+
+            /** @var $vote Vote */
+            foreach($article->getVotes() as $vote)
+            {
+                $score[($vote->getUp()) ? 'up' : 'down']++;
+                $score['total']++;
+            }
+        }
+
+        else
+        {
+            $vote = null;
+        }
+
+        return array(
+            'article'   => $article,
+            'vote'      => $vote,
+            'score'     => $score,
+        );
+    }
+
+    /**
      * @Template()
      */
     public function timelineAction(Request $request, $author = null, $category = null, $tag =null, $offset = null, $limit =null)
@@ -244,16 +285,5 @@ class ArticleController extends Controller
             $referer = $request->headers->get('referer');
             return new RedirectResponse($referer);
         }
-    }
-
-    /**
-     * @Route("/article/{id}/vote/{up}", name="inck_article_article_vote", requirements={"id" = "\d+", "up" = "0|1"}, options={"expose"=true})
-     */
-    public function save($id, $up)
-    {
-        // Renvoie des données
-        return new JsonResponse(array(
-            'test'   => true,
-        ));
     }
 }

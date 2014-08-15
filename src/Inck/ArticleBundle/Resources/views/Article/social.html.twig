@@ -21,10 +21,12 @@
                     <div class="votes">
                         <p>
                             <span class="btn-group">
-                                <button class="btn btn-success vote-up" {% if vote is defined and vote is not null and vote.up %}disabled="disabled"{% endif %}>
+                                {% set votedUp = vote is not null and vote.up %}
+                                <button class="btn btn-success vote-up {% if votedUp %}voted{% endif %}">
                                     <i class="fa fa-thumbs-up"></i>
                                 </button>
-                                <button class="btn btn-danger vote-down" {% if vote is defined and vote is not null and not vote.up %}disabled="disabled"{% endif %}>
+                                {% set votedDown = vote is not null and not vote.up %}
+                                <button class="btn btn-danger vote-down {% if votedDown %}voted{% endif %}">
                                     <i class="fa fa-thumbs-down"></i>
                                 </button>
                             </span>
@@ -36,19 +38,20 @@
                     </p>
                 </div>
                 <div class="score">
-                    {% if article.scoreTotal is defined and article.scoreTotal > 0 %}
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: {{ article.scoreUp / article.scoreTotal * 100 }}%;"></div>
-                            <div class="number">
-                                <div class="up">{{ article.scoreUp }} <i class="fa fa-thumbs-up"></i></div>
-                                <div class="down">{{ article.scoreDown }} <i class="fa fa-thumbs-down"></i></div>
-                            </div>
+                    {% set displayProgress = score.total > 0 %}
+                    <div class="progress {% if not displayProgress %}hidden{% endif %}" data-score-total="{{ score.total }}">
+                        {% set widthUp = score.total == 0 ? 0 : score.up / score.total * 100 %}
+                        <div class="progress-bar progress-bar-success score-up" style="width: {{ widthUp }}%;" data-score-up="{{ score.up }}">
+                            <span>{{ score.up }}</span> <i class="fa fa-thumbs-up"></i>
                         </div>
-                    {% else %}
-                        <div class="no-progress">
-                            <p>Cet article n'a pas de vote, soyez le premier !</p>
+                        {% set widthDown = score.total == 0 ? 0 : score.down / score.total * 100 %}
+                        <div class="progress-bar progress-bar-danger score-down" style="width: {{ widthDown }}%;" data-score-down="{{ score.down }}">
+                            <span>{{ score.down }}</span> <i class="fa fa-thumbs-down"></i>
                         </div>
-                    {% endif %}
+                    </div>
+                    <div class="no-progress {% if displayProgress %}hidden{% endif %}">
+                        <p>Personne n'a encore voté, soyez le premier !</p>
+                    </div>
                 </div>
             </div>
 

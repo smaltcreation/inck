@@ -3,6 +3,7 @@
 namespace Inck\ArticleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Inck\UserBundle\Entity\User;
 
 /**
  * VoteRepository
@@ -12,6 +13,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class VoteRepository extends EntityRepository
 {
+    /**
+     * @param $article Article
+     * @param $up bool
+     * @return int
+     */
     public function countByArticle($article, $up)
     {
         $query = $this
@@ -25,5 +31,25 @@ class VoteRepository extends EntityRepository
         ;
 
         return (int) $query->getSingleScalarResult();
+    }
+
+    /**
+     * @param $article Article
+     * @param $user User
+     * @return mixed Vote|null
+     */
+    public function getByArticleAndUser($article, $user)
+    {
+        $query = $this
+            ->createQueryBuilder('v')
+            ->select('v')
+            ->where('v.article = :article')
+            ->setParameter('article', $article)
+            ->andWhere('v.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+        ;
+
+        return $query->getOneOrNullResult();
     }
 }

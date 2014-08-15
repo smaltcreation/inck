@@ -16,3 +16,17 @@ article .social .row-table .stats {
     display: table-cell;
     min-width: 80px;
 }
+
+article .social .votes button.voted,
+article .social .votes button:hover {
+    color: #8DCDC1;
+}
+
+article .social .votes button.voted,
+article .social .votes button:hover {
+    text-shadow: 0 0 20px black;
+}
+
+article .social .score .progress {
+    transition: width 1s linear;
+}

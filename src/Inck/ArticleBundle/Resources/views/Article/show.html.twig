@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-xs-4">
                     <section id="article-social" itemprop="additionalType" itemscope itemtype="http://schema.org/Action">
-                        {% include('InckArticleBundle:Article:social.html.twig') %}
+                        {{ render(controller('InckArticleBundle:Article:social', { article: article })) }}
                     </section>
                 </div>
             </div>
