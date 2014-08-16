@@ -238,22 +238,16 @@ class ArticleController extends Controller
             'total' => 0,
         );
 
-        if ($this->get('security.context')->isGranted('ROLE_USER'))
-        {
-            /** @var $vote Vote|null */
-            $vote = $em->getRepository('InckArticleBundle:Vote')->getByArticleAndUser($article, $this->getUser());
+        /** @var $vote Vote|null */
+        $vote = ($this->get('security.context')->isGranted('ROLE_USER'))
+            ? $em->getRepository('InckArticleBundle:Vote')->getByArticleAndUser($article, $this->getUser())
+            : null;
 
-            /** @var $vote Vote */
-            foreach($article->getVotes() as $vote)
-            {
-                $score[($vote->getUp()) ? 'up' : 'down']++;
-                $score['total']++;
-            }
-        }
-
-        else
+        /** @var $v Vote */
+        foreach($article->getVotes() as $v)
         {
-            $vote = null;
+            $score[($v->getUp()) ? 'up' : 'down']++;
+            $score['total']++;
         }
 
         return array(
@@ -266,7 +260,7 @@ class ArticleController extends Controller
     /**
      * @Template()
      */
-    public function timelineAction(Request $request, $author = null, $category = null, $tag =null, $offset = null, $limit =null)
+    public function timelineAction(Request $request, $author = null, $category = null, $tag = null, $offset = null, $limit = 10)
     {
         try
         {

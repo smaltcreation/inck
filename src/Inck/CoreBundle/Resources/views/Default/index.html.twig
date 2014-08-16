@@ -52,17 +52,17 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {#{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}#}
-        {#{% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'#}
-            {#'bundles/inckarticle/js/Article/social/connected.js'#}
-        {#%}#}
-        {#<script src="{{ asset_url }}"></script>#}
-        {#{% endjavascripts %}#}
-    {#{% else %}#}
-        {#{% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'#}
-            {#'bundles/inckarticle/js/Article/social/disconnected.js'#}
-        {#%}#}
-        {#<script src="{{ asset_url }}"></script>#}
-        {#{% endjavascripts %}#}
-    {#{% endif %}#}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/connected.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% else %}
+        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
+            'bundles/inckarticle/js/Article/social/disconnected.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
 {% endblock %}

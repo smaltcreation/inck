@@ -14,10 +14,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-//        $em = $this->getDoctrine()->getManager();
-//        $articles = $em->getRepository('InckArticleBundle:Article')->findBy(array('published' => true), array('published_at' => 'DESC'));
-//
-//        return array('articles' => $articles);
         return array();
     }
 }
