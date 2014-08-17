@@ -53,14 +53,8 @@
 {% block javascripts %}
     {{ parent() }}
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
-            'bundles/inckarticle/js/Article/social/connected.js'
-        %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% else %}
-        {% javascripts filter='yui_js' output='js/compiled/article/article/connected.js'
-            'bundles/inckarticle/js/Article/social/disconnected.js'
+        {% javascripts filter='yui_js' output='js/compiled/article/article/social.js'
+            'bundles/inckarticle/js/Article/social.js'
         %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}

@@ -21,14 +21,23 @@
                     <div class="votes">
                         <p>
                             <span class="btn-group">
-                                {% set votedUp = vote is not null and vote.up %}
-                                <button class="btn btn-success vote-up {% if votedUp %}voted{% endif %}">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </button>
-                                {% set votedDown = vote is not null and not vote.up %}
-                                <button class="btn btn-danger vote-down {% if votedDown %}voted{% endif %}">
-                                    <i class="fa fa-thumbs-down"></i>
-                                </button>
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    {% set votedUp = vote is not null and vote.up %}
+                                    <button class="btn btn-success vote-up {% if votedUp %}voted{% endif %}">
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </button>
+                                    {% set votedDown = vote is not null and not vote.up %}
+                                    <button class="btn btn-danger vote-down {% if votedDown %}voted{% endif %}">
+                                        <i class="fa fa-thumbs-down"></i>
+                                    </button>
+                                {% else %}
+                                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-success">
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </a>
+                                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-danger">
+                                        <i class="fa fa-thumbs-down"></i>
+                                    </a>
+                                {% endif %}
                             </span>
                         </p>
                     </div>
