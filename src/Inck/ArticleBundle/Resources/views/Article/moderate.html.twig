@@ -1,0 +1,49 @@
+{% extends 'InckArticleBundle::layout.html.twig' %}
+
+{% block title %}Modérer les articles{% endblock %}
+
+{% block description %}
+    {% if app.request.attributes.get('_route') == 'inck_article_article_new' %}
+        <meta name="description" content="@todo écrire la description">
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/form.css'
+        'bundles/inckarticle/css/Article/moderate.css'
+        'bundles/inckarticle/css/Article/timeline.css'
+        'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/social.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Modérer les articles</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {{ render(controller('InckArticleBundle:Article:timeline'), { 'type': 'in_moderation' }) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='yui_js' output='js/compiled/article/article/moderate.js'
+        'bundles/inckarticle/js/Article/moderate.js'
+        'bundles/inckarticle/js/Article/social.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

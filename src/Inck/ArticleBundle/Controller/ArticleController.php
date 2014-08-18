@@ -260,12 +260,12 @@ class ArticleController extends Controller
     /**
      * @Template()
      */
-    public function timelineAction(Request $request, $author = null, $category = null, $tag = null, $offset = null, $limit = 10)
+    public function timelineAction(Request $request, $type = 'published', $author = null, $category = null, $tag = null, $offset = null, $limit = 10)
     {
         try
         {
             $em = $this->getDoctrine()->getManager();
-            $articles = $em->getRepository('InckArticleBundle:Article')->superQuery('published', $author, $category, $tag, $offset, $limit);
+            $articles = $em->getRepository('InckArticleBundle:Article')->superQuery($type, $author, $category, $tag, $offset, $limit);
             return array(
                 'articles' => $articles,
             );
@@ -279,5 +279,14 @@ class ArticleController extends Controller
             $referer = $request->headers->get('referer');
             return new RedirectResponse($referer);
         }
+    }
+
+    /**
+     * @Route("/moderate", name="inck_article_article_moderate")
+     * @Template()
+     */
+    public function moderateAction()
+    {
+        return array();
     }
 }
