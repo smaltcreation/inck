@@ -48,9 +48,13 @@
                     <section id="article-user" itemprop="creator">
                         {% include 'InckUserBundle:Profile:card.html.twig' with { user: article.author } %}
                     </section>
+
+                    <section id="article-comments">
+                        <div id="disqus_thread"></div>
+                    </section>
                 </div>
                 <div class="col-xs-4">
-                    <section id="article-social" itemprop="additionalType" itemscope itemtype="http://schema.org/Action">
+                    <section id="article-social" class="affix" data-spy="affix" data-offset-top="0" data-clampedwidth=".col-xs-4" itemprop="additionalType" itemscope itemtype="http://schema.org/Action">
                         {{ render(controller('InckArticleBundle:Article:social', { article: article })) }}
                     </section>
                 </div>
@@ -61,11 +65,23 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {% if app.environment == 'dev' %}
+        <script type="text/javascript">
+            var disqus_shortname = 'inckdev';
+        </script>
+    {% elseif app.environment == 'prod'%}
+        <script type="text/javascript">
+            var disqus_shortname = 'inckprod';
+        </script>
+    {% endif %}
+
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='yui_js' output='js/compiled/article/article/social.js'
+        {% javascripts filter='yui_js' output='js/compiled/article/article/show.js'
+            'bundles/inckarticle/js/Article/disqus.js'
             'bundles/inckarticle/js/Article/social.js'
         %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endif %}
+    <noscript>Merci d'activer JavaScript pour voir <a href="http://disqus.com/?ref_noscript">les commentaires propulsés par Disqus.</a></noscript>
 {% endblock %}

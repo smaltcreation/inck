@@ -1,6 +1,7 @@
 {% set currentRoute = app.request.attributes.get('_route') %}
+
 <div class="social">
-    <div {% if currentRoute == 'inck_article_article_moderate' or currentRoute == 'inck_article_article_show' %}class="affix" data-spy="affix" data-offset-top="0"{% endif %}>
+    <div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 {% if currentRoute == 'inck_article_article_moderate' %}
@@ -20,7 +21,7 @@
                 <div class="row-table">
                     <div class="votes">
                         <p>
-                            <span class="btn-group">
+                            <span class="btn-group{% if app.user is empty %} btn-tooltip{% endif %}" data-toggle="tooltip" data-placement="right" title="Connectez-vous pour voter">
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                     {% set votedUp = vote is not null and vote.up %}
                                     <button class="btn btn-success vote-up {% if votedUp %}voted{% endif %}">

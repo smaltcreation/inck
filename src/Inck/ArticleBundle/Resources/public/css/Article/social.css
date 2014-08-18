@@ -17,14 +17,11 @@ article .social .row-table .stats {
     min-width: 80px;
 }
 
-article .social .votes button.voted,
-article .social .votes button:hover {
-    color: #8DCDC1;
-}
-
-article .social .votes button.voted,
-article .social .votes button:hover {
-    text-shadow: 0 0 20px black;
+article .social .votes button.voted{
+    opacity: .30;
+    filter: alpha(opacity=30);
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 article .social .score .progress {

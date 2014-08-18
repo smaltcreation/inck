@@ -106,4 +106,24 @@ $(document).ready(function(){
         progressUp.attr('data-score-up', scoreUp);
         progressDown.attr('data-score-down', scoreDown);
     }
+
+    /*
+     * Clamped-width.
+     * Usage:
+     *  <div data-clampedwidth=".myParent">This long content will force clamped width</div>
+     *
+     * Author: LV
+     */
+    $('[data-clampedwidth]').each(function () {
+        var elem = $(this);
+        //elem.attr('data-offset-bottom', $('article').height());
+        var parentPanel = elem.data('clampedwidth');
+        var resizeFn = function () {
+            var sideBarNavWidth = $(parentPanel).width() - parseInt(elem.css('paddingLeft')) - parseInt(elem.css('paddingRight')) - parseInt(elem.css('marginLeft')) - parseInt(elem.css('marginRight')) - parseInt(elem.css('borderLeftWidth')) - parseInt(elem.css('borderRightWidth'));
+            elem.css('width', sideBarNavWidth);
+        };
+
+        resizeFn();
+        $(window).resize(resizeFn);
+    });
 });

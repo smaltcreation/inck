@@ -1,10 +1,1 @@
 {% extends 'InckCoreBundle::layout.html.twig' %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts filter='yui_js' output='js/compiled/core/layout.js'
-        'bundles/inckarticle/js/layout.js'
-    %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
