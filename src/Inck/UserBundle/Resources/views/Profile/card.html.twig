@@ -43,6 +43,7 @@
                     {% if user.city %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-building"></i> <strong>Ville :</strong> ' ~ user.city %}{% endif %}
                     {% if user.country %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-globe"></i> <strong>Pays :</strong> ' ~ user.country %}{% endif %}
 
+                    <a href="#" class="btn btn-subscribe btn-sm"><i class="fa fa-thumb-tack"></i> S'abonner à {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</a>
                     <button type="button" class="btn btn-default btn-popover btn-sm" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
                         <i class="fa fa-info-circle"></i> Voir plus d'informations
                     </button>

@@ -18,10 +18,9 @@ article .social .row-table .stats {
 }
 
 article .social .votes button.voted{
-    opacity: .30;
-    filter: alpha(opacity=30);
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    -webkit-transition: ease 0.3s;-moz-transition: ease 0.3s;-ms-transition: ease 0.3s;-o-transition: ease 0.3s;transition: ease 0.3s;
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
 }
 
 article .social .score .progress {

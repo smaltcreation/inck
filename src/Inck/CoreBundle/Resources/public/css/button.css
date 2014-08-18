@@ -55,11 +55,55 @@
 }
 
 
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn-default.voted,
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+    background-image: none;
+}
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn-default .badge {
+    color: #fff;
+    background-color: #333;
+}
+
 .btn-primary {
     color: #404040;
     background-color: #e3ddca;
     border-color: #d8d2c0;
 }
+.btn-primary.voted,
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -102,6 +146,7 @@ fieldset[disabled] .btn-primary.active {
     background-color: #d3e397;
     border-color: #c3d38a;
 }
+.btn-success.voted,
 .btn-success:hover,
 .btn-success:focus,
 .btn-success:active,
@@ -144,6 +189,7 @@ fieldset[disabled] .btn-success.active {
     background-color: #c3e4e1;
     border-color: #badad7;
 }
+.btn-info.voted,
 .btn-info:hover,
 .btn-info:focus,
 .btn-info:active,
@@ -186,6 +232,7 @@ fieldset[disabled] .btn-info.active {
     background-color: #ffc65d;
     border-color: #f7c05a;
 }
+.btn-warning.voted,
 .btn-warning:hover,
 .btn-warning:focus,
 .btn-warning:active,
@@ -228,6 +275,7 @@ fieldset[disabled] .btn-warning.active {
     background-color: #f15645;
     border-color: #dc4f3f;
 }
+.btn-danger.voted,
 .btn-danger:hover,
 .btn-danger:focus,
 .btn-danger:active,
@@ -270,6 +318,7 @@ fieldset[disabled] .btn-danger.active {
     background-color: #93648D;
     border-color: #80577b;
 }
+.btn-subscribe.voted,
 .btn-subscribe:hover,
 .btn-subscribe:focus,
 .btn-subscribe:active,
@@ -312,6 +361,7 @@ fieldset[disabled] .btn-subscribe.active {
     background-color: #003399;
     border-color: #002d88;
 }
+.btn-important.voted,
 .btn-important:hover,
 .btn-important:focus,
 .btn-important:active,
