@@ -19,8 +19,11 @@ article .social .row-table .stats {
 
 article .social .votes button.voted{
     -webkit-transition: ease 0.3s;-moz-transition: ease 0.3s;-ms-transition: ease 0.3s;-o-transition: ease 0.3s;transition: ease 0.3s;
-    transform: scale(0.9);
-    -webkit-transform: scale(0.9);
+    text-shadow: 0 0 20px black;
+}
+
+article .social .votes button.voted i{
+    transform: scale(1.5);
 }
 
 article .social .score .progress {
