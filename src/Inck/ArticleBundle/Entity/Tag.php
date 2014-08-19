@@ -110,15 +110,15 @@ class Tag
         $slug = preg_replace('#[^\\pL\d]+#u', '-', $slug);
 
         // trim
-        $slug = trim($text, '-');
+        $slug = trim($slug, '-');
 
         // transliterate
         if (function_exists('iconv')) {
-            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $slug);
+            $slug = iconv('utf-8', 'us-ascii//TRANSLIT', $slug);
         }
 
         // lowercase
-        $slug = strtolower($text);
+        $slug = strtolower($slug);
 
         // remove unwanted characters
         $slug = preg_replace('#[^-\w]+#', '', $slug);
