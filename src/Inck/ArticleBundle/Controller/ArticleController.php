@@ -2,8 +2,12 @@
 
 namespace Inck\ArticleBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Inck\ArticleBundle\Entity\Article;
+use Inck\ArticleBundle\Entity\Category;
+use Inck\ArticleBundle\Entity\Tag;
 use Inck\ArticleBundle\Entity\Vote;
+use Inck\ArticleBundle\Form\Type\ArticleFilterType;
 use Inck\ArticleBundle\Form\Type\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -135,12 +139,14 @@ class ArticleController extends Controller
      * @Route("/{id}", name="inck_article_article_show", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function showAction(Request $request, $id)
+    public function showAction($id)
     {
         try
         {
-            // Récupération de l'article
             $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+
+            // Récupération de l'article
             /** @var $article Article */
             $article = $em->getRepository('InckArticleBundle:Article')->find($id);
 
@@ -150,15 +156,11 @@ class ArticleController extends Controller
                 throw new \Exception("Article inexistant.");
             }
 
-            // Article "brouillon"
-            else if($article->getAsDraft())
+            // Article "brouillon" ou en modération
+            else if($article->getAsDraft() && $user !== $article->getAuthor()
+                || !$user && !$article->getPublished())
             {
-                $user = $this->get('security.context')->getToken()->getUser();
-
-                if($user !== $article->getAuthor())
-                {
-                    throw new \Exception("Article indisponible.");
-                }
+                throw new \Exception("Article indisponible.");
             }
 
             return array(
@@ -199,9 +201,7 @@ class ArticleController extends Controller
             // Article "brouillon"
             else if($article->getAsDraft())
             {
-                $user = $this->get('security.context')->getToken()->getUser();
-
-                if($user !== $article->getAuthor())
+                if($this->getUser() !== $article->getAuthor())
                 {
                     throw new \Exception("Article indisponible.");
                 }
@@ -283,10 +283,49 @@ class ArticleController extends Controller
 
     /**
      * @Route("/moderate", name="inck_article_article_moderate")
+     * @Secure(roles="ROLE_USER")
      * @Template()
      */
-    public function moderateAction()
+    public function moderateAction(Request $request)
     {
-        return array();
+        $form = $this->createForm(new ArticleFilterType());
+        $form->handleRequest($request);
+
+        $categories = null;
+        $tags       = null;
+
+        // Si on a sélectionné des filtres
+        if($form->isValid())
+        {
+            $data = $form->getData();
+
+            if(count($data['categories']) !== 0)
+            {
+                $categories = array();
+
+                /** @var $category Category */
+                foreach($data['categories'] as $category)
+                {
+                    $categories[] = $category->getId();
+                }
+            }
+
+            if(count($data['tags']) !== 0)
+            {
+                $tags = array();
+
+                /** @var $tag Tag */
+                foreach($data['tags'] as $tag)
+                {
+                    $tags[] = $tag->getId();
+                }
+            }
+        }
+
+        return array(
+            'form'          => $form->createView(),
+            'categories'    => $categories,
+            'tags'          => $tags,
+        );
     }
 }

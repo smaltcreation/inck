@@ -34,7 +34,13 @@
 
 {% block content %}
     <div class="container">
-        {{ render(controller('InckArticleBundle:Article:timeline'), { 'type': 'in_moderation' }) }}
+        <div id="filters-row" class="row">
+            <div class="col-md-12">
+                <h1>Filtrer les articles</h1>
+                {{ form(form) }}
+            </div>
+        </div>
+        {{ render(controller('InckArticleBundle:Article:timeline', { 'type': 'in_moderation', 'category': categories, 'tag': tags })) }}
     </div>
 {% endblock %}
 
