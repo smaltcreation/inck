@@ -19,7 +19,7 @@
                 </p>
             {% endif %}
         </div>
-        <p itemscope itemtype="http://schema.org/Website">
+        <p itemscope itemtype="http://schema.org/Webpage">
             {% set popoverContent = '<i class="fa fa-circle"></i> <strong>Utilisateur :</strong> ' ~ user.username %}
             {% if user.firstname or user.lastname %}
                 {% set popoverContent = popoverContent ~ '<br><i class="fa fa-user"></i> <strong>Nom : </strong>' %}
@@ -32,7 +32,7 @@
             {% if user.city %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-building"></i> <strong>Ville :</strong> ' ~ user.city %}{% endif %}
             {% if user.country %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-globe"></i> <strong>Pays :</strong> ' ~ user.country %}{% endif %}
 
-            <button  itemprop="url" type="button" class="btn btn-default btn-popover btn-sm" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
+            <button type="button" class="btn btn-default btn-popover btn-sm" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
                 <i class="fa fa-info-circle"></i> Voir plus d'informations
             </button>
         </p>
