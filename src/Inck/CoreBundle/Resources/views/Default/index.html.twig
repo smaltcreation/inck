@@ -19,10 +19,10 @@
     <div class="jumbotron">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12"  itemscope itemtype="http://schema.org/Website" >
                     <h1>L'expression libre et culturelle</h1>
                     <p>
-                        <span class="hidden-xs hidden-sm visible-md visible-lg">Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et le divertissement,
+                        <span itemprop="description" class="hidden-xs hidden-sm visible-md visible-lg">Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et le divertissement,
                         vous êtes le moteur contribuant à la diversité des pensées et au partage de la connaissance.
                         Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !</span>
                         <span class="visible-xs visible-sm hidden-md hidden-lg">Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !</span>
@@ -33,8 +33,8 @@
                                 <a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> Écrire un article</a>
                                 <a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a>
                             {% else %}
-                                <a class="btn btn-success" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                                <a class="btn btn-default" href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"></i> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                                <a itemprop="url" class="btn btn-success" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                <a itemprop="url" class="btn btn-default" href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"></i> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
                             {% endif %}
                         </span>
                     </p>

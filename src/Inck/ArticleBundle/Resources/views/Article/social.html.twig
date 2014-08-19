@@ -19,7 +19,7 @@
                     </p>
                 {% endif %}
                 <div class="row-table">
-                    <div class="votes">
+                    <div class="votes" itemscope itemtype="http://schema.org/Action">
                         <p>
                             <span {% if app.user %}class="btn-group"{% else %}class="btn-group btn-tooltip" data-toggle="tooltip" data-placement="right" title="Connectez-vous pour voter"{% endif %}>
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -42,8 +42,8 @@
                             </span>
                         </p>
                     </div>
-                    <p>
-                        <a href="#" class="btn btn-link btn-xs hidden-xs hidden-sm visible-md visible-lg"><i class="fa fa-bar-chart-o"></i> Statistiques</a>
+                    <p itemscope itemtype="http://schema.org/Website">
+                        <a itemprop="url" href="#" class="btn btn-link btn-xs hidden-xs hidden-sm visible-md visible-lg"><i class="fa fa-bar-chart-o"></i> Statistiques</a>
                         <a href="#" class="btn btn-link btn-lg visible-xs visible-sm hidden-md hidden-lg"><i class="fa fa-bar-chart-o"></i></a>
                     </p>
                 </div>
