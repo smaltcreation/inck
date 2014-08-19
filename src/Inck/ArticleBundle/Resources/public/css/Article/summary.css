@@ -21,13 +21,18 @@ article .summary h3 a:hover {
 }
 
 article .summary .preview img {
-    -webkit-transition: ease 0.3s;-moz-transition: ease 0.3s;-ms-transition: ease 0.3s;-o-transition: ease 0.3s;transition: ease 0.3s;
-    margin-top: -120px;
     height: 200px;
     width: 200px;
+    margin-top: -120px;
     border: 2px solid #e3e3e3;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+    -webkit-transition: ease 0.3s;-moz-transition: ease 0.3s;-ms-transition: ease 0.3s;-o-transition: ease 0.3s;transition: ease 0.3s;
+}
+
+article .summary .preview img:hover  {
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
 }
 
 article .summary .btn-readmore {
@@ -40,11 +45,6 @@ article .summary .categories {
 
 article .summary .categories a {
     margin-top: 6px;
-}
-
-article .summary .preview img:hover  {
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
 }
 
 article .summary .about {
