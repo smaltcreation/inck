@@ -1,0 +1,45 @@
+{% extends 'InckArticleBundle::layout.html.twig' %}
+
+{% block title %}{{ tag.name }}{% endblock %}
+{% block description %}<meta name="description" content="{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %} dans {{ tag.name }}">{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/tag/show.css'
+        'bundles/inckarticle/css/Article/timeline.css'
+        'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/social.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{ tag.name }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
+                    <p><a href="{#{ path('inck_notif_subscribtion_tag_new', { 'id': article.id } ) }#}" class="btn btn-subscribe"><i class="fa fa-thumb-tack"></i> S'abonner au tag</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {{ render(controller('InckArticleBundle:Article:timeline', {'tag': tag.id})) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% javascripts filter='yui_js' output='js/compiled/article/tag/show.js'
+            'bundles/inckarticle/js/Article/social.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
+{% endblock %}

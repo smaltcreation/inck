@@ -1,0 +1,46 @@
+{% extends 'InckArticleBundle::layout.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+{% block description %}<meta name="description" content="{{ category.description|slice(0, 157) }}{% if category.description|length > 157 %}...{% endif %}">{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/category/show.css'
+        'bundles/inckarticle/css/Article/timeline.css'
+        'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/social.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{ category.name }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
+                    <p>{{ category.description }}</p>
+                    <p><a href="{#{ path('inck_notif_subscribtion_category_new', { 'id': article.id } ) }#}" class="btn btn-subscribe"><i class="fa fa-thumb-tack"></i> S'abonner à la catégorie</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {{ render(controller('InckArticleBundle:Article:timeline', {'category': category.id})) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% javascripts filter='yui_js' output='js/compiled/article/category/show.js'
+            'bundles/inckarticle/js/Article/social.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
+{% endblock %}

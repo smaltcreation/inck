@@ -118,4 +118,36 @@ class ArticleRepository extends EntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    public function countByCategory($category, $published = false)
+    {
+        $query = $this->createQueryBuilder('a');
+
+        $query->select('COUNT(a)')
+            ->join('a.categories', 'c')
+            ->where(
+                $query->expr()->in('c.id', $category)
+            )
+            ->andWhere('a.published = :published')
+            ->setParameter('published', $published)
+        ;
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countByTag($tag, $published = false)
+    {
+        $query = $this->createQueryBuilder('a');
+
+        $query->select('COUNT(a)')
+            ->join('a.tags', 't')
+            ->where(
+                $query->expr()->in('t.id', $tag)
+            )
+            ->andWhere('a.published = :published')
+            ->setParameter('published', $published)
+        ;
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
 }

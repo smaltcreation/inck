@@ -29,6 +29,13 @@ class Tag
      */
     private $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $slug;
+
 
     public function __toString()
     {
@@ -54,6 +61,7 @@ class Tag
     public function setName($name)
     {
         $this->name = $name;
+        $this->setSlug($this->name);
 
         return $this;
     }
@@ -66,5 +74,59 @@ class Tag
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return string
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $this->__toSlug();
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Rewrite string to slug
+     *
+     * @return string
+     */
+    public function __toSlug()
+    {
+        $slug = $this->name;
+
+        // replace non letter or digits by -
+        $slug = preg_replace('#[^\\pL\d]+#u', '-', $slug);
+
+        // trim
+        $slug = trim($text, '-');
+
+        // transliterate
+        if (function_exists('iconv')) {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $slug);
+        }
+
+        // lowercase
+        $slug = strtolower($text);
+
+        // remove unwanted characters
+        $slug = preg_replace('#[^-\w]+#', '', $slug);
+
+        if (empty($slug)) {
+            return 'n-a';
+        }
+
+        return $slug;
     }
 }

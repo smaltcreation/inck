@@ -61,7 +61,7 @@ body {
 
 /* Bootstrap override */
 /* Jumbotron */
-.jumbotron {
+.jumbotron, .jumbotron h1 .small, .jumbotron h2 .small, .jumbotron h3 .small, .jumbotron h4 .small {
     background-color: #62868d;
     color: #dfdfdf;
     font-family: Gravity, "Helvetica Neue", Helvetica,Arial, sans-serif;

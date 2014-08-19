@@ -7,9 +7,17 @@
             <h3 itemprop="name"><a href="{{ path('inck_article_article_show', { 'id': article.id }) }}">{{ article.title }}</a></h3>
         {% endif %}
 
+
+
         <p class="about">
             rédigé par <a itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash;
             publié le <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
+        </p>
+
+        <p>
+            {% for tag in article.tags %}
+                <a itemprop="keyword" href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs tag">{{ tag.name }}</a>
+            {% endfor %}
         </p>
 
         {% if article.imageName %}
@@ -31,7 +39,7 @@
             <div class="col-sm-7 col-md-8 col-lg-9">
                 <p class="categories">
                     {% for category in article.categories %}
-                        <a itemprop="genre" href="{#{ path('inck_article_category_show', { 'name': category.name }) }#}" class="btn btn-primary btn-xs category">{{ category.name }}</a>
+                        <a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-primary btn-xs category">{{ category.name }}</a>
                     {% endfor %}
                 </p>
             </div>
@@ -55,6 +63,4 @@
             {% endif %}
         </a>
     </div>
-
-    <meta itemprop="keywords" content="{% for tag in article.tags %}{{ tag.name }}{% if loop.last == false %},{% endif %}{% endfor %}"/>
 </div>

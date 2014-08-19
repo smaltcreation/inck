@@ -76,12 +76,19 @@
     {% endif %}
 
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='yui_js' output='js/compiled/article/article/show.js'
-            'bundles/inckarticle/js/Article/disqus.js'
+        {% javascripts filter='yui_js' output='js/compiled/article/article/social.js'
             'bundles/inckarticle/js/Article/social.js'
         %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endif %}
+
+    {% javascripts filter='yui_js' output='js/compiled/article/article/show.js'
+        'bundles/inckarticle/js/Article/disqus.js'
+        'bundles/inckarticle/js/Article/affix.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
     <noscript>Merci d'activer JavaScript pour voir <a href="http://disqus.com/?ref_noscript">les commentaires propulsés par Disqus.</a></noscript>
 {% endblock %}
