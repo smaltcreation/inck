@@ -1,6 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="registration" itemscope itemtype="http://schema.org/Website">
+<div class="registration" itemscope itemtype="http://schema.org/Webpage">
     <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="fos_user_registration_register" class="fos_user_registration_register">
         {% if form_errors(form) %}
             <div class="alert alert-danger">
@@ -84,7 +84,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         {% image '@InckUserBundle/Resources/public/images/Map-drop@2x.png' %}
-                            <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
+                            <img itemprop="image" class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
                         {% endimage %}
                         <h2>Coordonnées</h2>
                         <p class="description"  itemprop="description">
