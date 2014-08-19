@@ -23,7 +23,7 @@
                             <a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>Rechercher</span></a>
                         </li>
                         <li><a class="gn-icon gn-icon-article{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}">Écrire un article</a></li>
-                        <li><a class="gn-icon gn-icon-archive{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{#{ path('inck_article_article_moderate') }#}">Modérer un article</a></li>
+                        <li><a class="gn-icon gn-icon-archive{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}">Modérer les articles</a></li>
                         <li><a class="gn-icon glyphicon-list-alt{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{#{ path('inck_article_category_list') }#}">Catégories</a></li>
                         <li><a class="gn-icon gn-icon-cog{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{#{ path('inck_core_default_about') }#}">À Propos</a></li>
                         <li><a class="gn-icon glyphicon-euro{% if currentRoute == 'inck_bid_registration_register' %} active{% endif %}" href="{#{ path('inck_bid_registration_register') }#}">Presses</a></li>
@@ -44,51 +44,36 @@
 
 
 {% block footer %}
-    <div id="footer" class="columns">
-        <div class="container colcont">
+    <footer id="footer">
+        <div class="container text-center">
             <div class="row">
                 <div class="col-xs-4">
-                    <ul class="nodot">
-                        <li>
-                            <a href="#">Lien 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Lien 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Lien 3</a>
-                        </li>
+                    <h4>À propos de Inck</h4>
+                    <ul>
+                        <li><a href="#">L'équipe</a></li>
+                        <li><a href="#">Smalt Création</a></li>
+                        <li><a href="#">Conditions générales d'utilisation</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-4">
-                    <ul class="nodot">
-                        <li>
-                            <a href="#">Lien 4</a>
-                        </li>
-                        <li>
-                            <a href="#">Lien 5</a>
-                        </li>
-                        <li>
-                            <a href="#">Lien 6</a>
-                        </li>
+                    <h4>Articles populaires</h4>
+                    <ul>
+                        <li><a href="#">Article 1 : Priumsquam</a></li>
+                        <li><a href="#">Article 2 : Tellus est patefacta</a></li>
+                        <li><a href="#">Article 3 : Saturno rege</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-4">
-                    <ul class="nodot">
-                        <li>
-                            <a href="#">Lien 7</a>
-                        </li>
-                        <li>
-                            <a href="#">Lien 8</a>
-                        </li>
-                        <li>
-                            <a href="#">Lien 9</a>
-                        </li>
+                    <h4>Presses partenaires</h4>
+                    <ul>
+                        <li><a href="#">Presse Citron</a></li>
+                        <li><a href="#">Presse Citron</a></li>
+                        <li><a href="#">Les cahiers du cinéma</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
+    </footer>
 {% endblock %}
 
 {% block javascripts %}
