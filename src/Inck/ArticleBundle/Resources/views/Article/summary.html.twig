@@ -16,7 +16,7 @@
 
         <p>
             {% for tag in article.tags %}
-                <a itemprop="keyword" href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs tag">{{ tag.name }}</a>
+                <a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs tag">{{ tag.name }}</a>
             {% endfor %}
         </p>
 
@@ -24,7 +24,7 @@
             <img itemprop="image" class="img-thumbnail visible-xs visible-sm hidden-md hidden-lg"src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
         {% endif %}
 
-        <p itemprop="description">
+        <p itemprop="description about">
             {{ article.summary }}
         </p>
 
@@ -64,3 +64,5 @@
         </a>
     </div>
 </div>
+
+<meta itemprop="keywords" content="{% for tag in article.tags %}{{ tag.name }}{% if loop.last == false %},{% endif %}{% endfor %}"/>
