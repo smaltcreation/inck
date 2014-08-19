@@ -34,11 +34,30 @@
 
 {% block content %}
     <div class="container">
-        <div id="filters-row" class="row">
-            <div class="col-md-12">
-                <h1>Filtrer les articles</h1>
-                {{ form(form) }}
-            </div>
+        <div id="filters-row">
+            <form {{ form_enctype(form) }} method="POST">
+                {% if form_errors(form) %}
+                    <div class="alert alert-danger">
+                        {{ form_errors(form) }}
+                    </div>
+                {% endif %}
+
+                <section id="moderation-filters">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {{ form_row(form.categories) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.tags) }}
+                        </div>
+                    </div>
+                    {{ form_row(form.actions) }}
+                </section>
+
+                <div class="hidden">
+                    {{form_rest(form)}}
+                </div>
+            </form>
         </div>
         {{ render(controller('InckArticleBundle:Article:timeline', { 'type': 'in_moderation', 'category': categories, 'tag': tags })) }}
     </div>
