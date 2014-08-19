@@ -5,6 +5,7 @@ $(document).ready(function(){
         tags: [],
         tokenSeparators: [",", ";"],
         minimumInputLength: 1,
+        width: 'container',
         initSelection : function(element, callback){
             var tags = input.val().split(',');
             var data = [];

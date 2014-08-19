@@ -76,7 +76,10 @@ class RegistrationFormType extends BaseType
                 'data' => 'FR',
                 'label' => 'form.country',
                 'translation_domain' => 'FOSUserBundle',
-                'attr' => array('placeholder' => 'Tunisie')
+                'attr' => array('placeholder' => 'Tunisie'),
+                'configs'      => [
+                    'width' => 'container',
+                ],
             ))
             ->add('school', 'text', array(
                 'required'  => false,

@@ -24,6 +24,7 @@ class ArticleFilterType extends AbstractType
                 'required'  => false,
                 'configs'      => [
                     'placeholder'           => 'Filtrer par catégories',
+                    'width'                 => 'container',
                 ],
             ])
             ->add('tags', 'inck_articlebundle_tags_selector', [

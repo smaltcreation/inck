@@ -38,6 +38,7 @@ class ArticleType extends AbstractType
                 'configs'      => [
                     'placeholder'           => 'Sélectionnez 1 à 3 catégories',
                     'maximumSelectionSize'  => 3,
+                    'width'                 => 'container',
                 ],
             ])
             ->add('tags', 'inck_articlebundle_tags_selector', [

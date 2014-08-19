@@ -6,6 +6,7 @@ $(document).ready(function(){
         tokenSeparators: [",", ";"],
         minimumInputLength: 1,
         maximumSelectionSize: 10,
+        width: 'container',
         initSelection : function(element, callback){
             var tags = input.val().split(',');
             var data = [];
