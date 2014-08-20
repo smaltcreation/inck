@@ -38,7 +38,12 @@
             <div class="row">
                 <div class="col-xs-8">
                     <section id="article-summary">
-                        {% include('InckArticleBundle:Article:summary.html.twig') %}
+                        <div class="summary hidden-xs hidden-sm visible-md visible-lg">
+                            {% include "InckArticleBundle:Article:summary.html.twig" %}
+                        </div>
+                        <div class="summary visible-xs visible-sm hidden-md hidden-lg">
+                            {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
+                        </div>
                     </section>
 
                     <section id="article-content" itemprop="articleBody">

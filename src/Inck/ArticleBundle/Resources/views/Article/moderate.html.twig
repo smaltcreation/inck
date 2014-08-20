@@ -10,7 +10,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/form.css'
+    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/moderate.css'
         'bundles/inckarticle/css/Article/moderate.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
@@ -24,8 +24,32 @@
     <div class="jumbotron">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-7">
                     <h1>Modérer les articles</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum magna vehicula vulputate dapibus. Maecenas tempus nisi tellus, sit amet faucibus elit vulputate vitae.</p>
+                </div>
+                <div class="col-md-5">
+                    <form {{ form_enctype(form) }} method="POST">
+                        {% if form_errors(form) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-xs-7">
+                                {{ form_row(form.categories) }}
+                            </div>
+                            <div class="col-xs-5">
+                                {{ form_row(form.tags) }}
+                            </div>
+                        </div>
+
+                        {{ form_row(form.actions) }}
+                        <div class="hidden">
+                            {{form_rest(form)}}
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -34,31 +58,6 @@
 
 {% block content %}
     <div class="container">
-        <div id="filters-row">
-            <form {{ form_enctype(form) }} method="POST">
-                {% if form_errors(form) %}
-                    <div class="alert alert-danger">
-                        {{ form_errors(form) }}
-                    </div>
-                {% endif %}
-
-                <section id="moderation-filters">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            {{ form_row(form.categories) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.tags) }}
-                        </div>
-                    </div>
-                    {{ form_row(form.actions) }}
-                </section>
-
-                <div class="hidden">
-                    {{form_rest(form)}}
-                </div>
-            </form>
-        </div>
         {{ render(controller('InckArticleBundle:Article:timeline', { 'type': 'in_moderation', 'category': categories, 'tag': tags })) }}
     </div>
 {% endblock %}

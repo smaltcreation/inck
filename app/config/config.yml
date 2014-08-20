@@ -83,6 +83,9 @@ swiftmailer:
 braincrafted_bootstrap:
     jquery_path: %kernel.root_dir%/../web/components/jquery/jquery.min.js
     less_filter: less
+    auto_configure:
+        knp_paginator: false
+        knp_menu: false
 
 # KNP Configuration
 knp_menu:
@@ -90,6 +93,15 @@ knp_menu:
         template: BraincraftedBootstrapBundle:Menu:bootstrap.html.twig
     templating: false
     default_renderer: twig
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: BraincraftedBootstrapBundle:Pagination:bootstrap.html.twig
 
 # FOSUserBundle Configuration
 fos_user:

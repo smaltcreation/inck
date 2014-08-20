@@ -35,10 +35,6 @@ article .summary .preview img:hover  {
     -webkit-transform: scale(1.05);
 }
 
-article .summary .btn-readmore {
-    margin-right: 20px;
-}
-
 article .summary .categories {
     display: inline-block;
 }

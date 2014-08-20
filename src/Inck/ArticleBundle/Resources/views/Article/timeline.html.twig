@@ -3,8 +3,11 @@
         <article itemscope itemtype="http://schema.org/Article" id="article-{{ article.id }}" class="article">
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="summary">
+                    <div class="summary hidden-xs hidden-sm visible-md visible-lg">
                         {% include "InckArticleBundle:Article:summary.html.twig" %}
+                    </div>
+                    <div class="summary visible-xs visible-sm hidden-md hidden-lg">
+                        {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
                     </div>
                 </div>
                 <div class="col-xs-4">
