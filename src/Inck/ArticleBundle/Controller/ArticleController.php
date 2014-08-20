@@ -75,13 +75,13 @@ class ArticleController extends Controller
         $form = $this->createForm(new ArticleType(), $article);
 
         // Suppression de l'image
-        $values = $request->request->get('inck_articlebundle_article');
-        $deleteImage = ($values['image']['delete'] && $article->getImageName());
-
-        if($deleteImage)
-        {
-            $article->savePreviousImageName();
-        }
+//        $values = $request->request->get('inck_articlebundle_article');
+//        $deleteImage = ($values['image']['delete'] && $article->getImageName());
+//
+//        if($deleteImage)
+//        {
+//            $article->savePreviousImageName();
+//        }
 
         // Formulaire envoyé et valide
         $form->handleRequest($request);
@@ -104,16 +104,16 @@ class ArticleController extends Controller
             }
 
             // Suppression de l'image
-            if($deleteImage)
-            {
-                unlink(sprintf(
-                    "%s/%s",
-                    $this->container->getParameter('upload.article_image.upload_destination'),
-                    $article->getPreviousImageName()
-                ));
-
-                $article->setImageName(null);
-            }
+//            if($deleteImage)
+//            {
+//                unlink(sprintf(
+//                    "%s/%s",
+//                    $this->container->getParameter('upload.article_image.upload_destination'),
+//                    $article->getPreviousImageName()
+//                ));
+//
+//                $article->setImageName(null);
+//            }
 
             // Enregistrement et redirection
             $em->persist($article);
@@ -183,7 +183,7 @@ class ArticleController extends Controller
      * @Route("/{id}/modal", name="inck_article_article_show_modal", requirements={"id" = "\d+"})
      * @Template("InckArticleBundle:Article:show_modal.html.twig")
      */
-    public function showModalAction(Request $request, $id)
+    public function showModalAction($id)
     {
         try
         {

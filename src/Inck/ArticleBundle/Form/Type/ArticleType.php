@@ -49,7 +49,7 @@ class ArticleType extends AbstractType
             ])
             ->add('image', 'afe_single_upload', [
                 'label'         => 'Image',
-                'deleteable'    => 'imageName',
+//                'deleteable'    => 'imageName',
             ])
             ->add('actions', 'form_actions', [
                 'buttons' => [

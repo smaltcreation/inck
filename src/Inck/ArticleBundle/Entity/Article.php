@@ -120,7 +120,7 @@ class Article
      * @var string $imageName
      */
     protected $imageName;
-    protected $previousImageName;
+//    protected $previousImageName;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Inck\UserBundle\Entity\User")
@@ -157,19 +157,11 @@ class Article
     }
 
     /**
-     * @ORM\PrePersist
+     * @ORM\PrePersist()
      */
     public function onPrePersist()
     {
         $this->createdAt = new DateTime();
-    }
-
-    /**
-     * @ORM\PreUpdate()
-     */
-    public function onPreUpdate()
-    {
-        $this->updatedAt = new DateTime();
     }
 
     /**
@@ -405,18 +397,18 @@ class Article
         return $this->imageName;
     }
 
-    public function savePreviousImageName()
-    {
-        $this->previousImageName = $this->imageName;
-    }
+//    public function savePreviousImageName()
+//    {
+//        $this->previousImageName = $this->imageName;
+//    }
 
-    /**
-     * @return string
-     */
-    public function getPreviousImageName()
-    {
-        return $this->previousImageName;
-    }
+//    /**
+//     * @return string
+//     */
+//    public function getPreviousImageName()
+//    {
+//        return $this->previousImageName;
+//    }
 
     /**
      * Set author
@@ -559,6 +551,11 @@ class Article
     public function setImage($image)
     {
         $this->image = $image;
+
+        if ($image)
+        {
+            $this->updatedAt = new \DateTime();
+        }
     }
 
     /**
