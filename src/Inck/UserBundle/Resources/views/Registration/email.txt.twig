@@ -1,12 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Réinitialisation du mot de passe</title>
+    <style type="text/css">
+        @media only screen and (min-device-width: 601px) {
+            .content {width: 600px !important;}
+            .col425 {width: 425px!important;}
+            .col380 {width: 380px!important;}
+        }
+
+    </style>
+</head>
+
 {% trans_default_domain 'FOSUserBundle' %}
+
 {% block subject %}
-{% autoescape false %}
-{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
-{% endautoescape %}
+    {{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
 {% endblock %}
-{% block body_text %}
-{% autoescape false %}
-{{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
-{% endautoescape %}
-{% endblock %}
-{% block body_html %}{% endblock %}
+
+{% block body_html %}
+    <body yahoo>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <!--[if (gte mso 9)|(IE)]>
+                <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td>
+                <![endif]-->
+                <table bgcolor="#ffffff" class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td bgcolor="#556F76" class="header">
+
+                            <!--[if (gte mso 9)|(IE)]>
+                            <table width="425" align="left" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td>
+                            <![endif]-->
+                            <table class="col425" align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 425px;">
+                                <tr>
+                                    <td height="150">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td class="subhead" style="color: #ffffff; font-size: 38px; font-family: sans-serif; letter-spacing: 2px; text-align: center;">
+                                                    Inck
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="h1" style="color: #ffffff; font-size: 24px; line-height: 38px; text-align: center;">
+                                                    Vérification de l'adresse e-mail
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            </tr>
+                            </table>
+                            <![endif]-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="innerpadding borderbottom">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="h2" style="padding-top: 30px; color: #153643; font-family: Arial, sans-serif; font-size: 24px;">
+                                        Bonjour {{ user.username }}!<br><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bodycopy" style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
+                                        Pour valider votre compte utilisateur, merci de vous rendre sur {{ confirmationUrl }}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bodycopy" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="innerpadding borderbottom">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="innerpadding bodycopy"  style="padding-top: 20px; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="innerpadding bodycopy"  style="padding-top: 20px; padding-bottom: 40px; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;border-bottom: solid #556f76 1px;">
+                            Nous vous souhaitons une excellente journée.<br>
+                            L'équipe de Inck.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td width="260">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-bottom: 30px; padding-top:2px; color: #153643; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px;">
+                                                    Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et le divertissement, vous êtes le moteur contribuant à la diversité des pensées et au partage de la connaissance. Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="font-size: 0; line-height: 0;" width="20">
+                                        &nbsp;
+                                    </td>
+                                    <td width="260">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-bottom: 30px; padding-top: 2px; color: #153643; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px;">
+                                                    Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager.
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="footer" bgcolor="#44525f">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" class="footercopy"  style="color: #ffffff; font-family: sans-serif; font-size: 14px; padding-top: 10px;">
+                                        &reg; Inck - Une production Smalt Création<br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding: 20px 0 0 0;">
+                                        <table border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
+                                                </td>
+                                                <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </table>
+    </body>
+{%  endblock %}
+</html>
+
+
+
+

@@ -114,6 +114,15 @@ fos_user:
     registration:
         form:
             type: inck_user_registration
+        confirmation:
+            enabled: true
+    from_email:
+            address: webtesting69@gmail.com
+            sender_name: Inck
+    service:
+        mailer: fos_user.mailer.twig_swift
+    resetting:
+        email:
 
 # OrnicarGravatar Configuration
 ornicar_gravatar:
