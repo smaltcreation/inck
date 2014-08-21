@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Inck\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -92,11 +93,12 @@ class Article
     private $publishedAt;
 
     /**
+     * Lorsqu'un article est acheté, il est approuvé mais non publié
+     * Lorsqu'un article est refusé (désapprouvé) $approved = false
+     *
      * @var boolean
      *
      * @ORM\Column(name="approved", type="boolean", nullable=true)
-     * Lorsqu'un article est acheté, il est approuvé mais non publié
-     * Lorsqu'un article est refusé (désapprouvé) $approved = false
      */
     private $approved;
 
@@ -108,11 +110,16 @@ class Article
     private $asDraft;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\Inck\UserBundle\Entity\User")
+     */
+    private $author;
+
+    /**
      * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
      *
-     * @var File $image
+     * @var File $imageFile
      */
-    protected $image;
+    protected $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -120,12 +127,7 @@ class Article
      * @var string $imageName
      */
     protected $imageName;
-//    protected $previousImageName;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="\Inck\UserBundle\Entity\User")
-     */
-    private $author;
+    protected $previousImageName;
 
     /**
      * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Category", cascade={"persist"})
@@ -382,35 +384,6 @@ class Article
     }
 
     /**
-     * @param string $imageName
-     */
-    public function setImageName($imageName)
-    {
-        $this->imageName = $imageName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageName()
-    {
-        return $this->imageName;
-    }
-
-//    public function savePreviousImageName()
-//    {
-//        $this->previousImageName = $this->imageName;
-//    }
-
-//    /**
-//     * @return string
-//     */
-//    public function getPreviousImageName()
-//    {
-//        return $this->previousImageName;
-//    }
-
-    /**
      * Set author
      *
      * @param User $author
@@ -546,27 +519,6 @@ class Article
     }
 
     /**
-     * @param File $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        if ($image)
-        {
-            $this->updatedAt = new \DateTime();
-        }
-    }
-
-    /**
-     * @return File
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * @param \DateTime $updatedAt
      */
     public function setUpdatedAt($updatedAt)
@@ -580,5 +532,56 @@ class Article
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param File|UploadedFile|null $image
+     */
+    public function setImageFile($image)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->updatedAt = new \DateTime();
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return ($this->imageFile== '/home/bob/web/inck/app/../web/article/image')
+            ? null
+            : $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    public function savePreviousImageName()
+    {
+        $this->previousImageName = $this->imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreviousImageName()
+    {
+        return $this->previousImageName;
     }
 }

@@ -75,13 +75,13 @@ class ArticleController extends Controller
         $form = $this->createForm(new ArticleType(), $article);
 
         // Suppression de l'image
-//        $values = $request->request->get('inck_articlebundle_article');
-//        $deleteImage = ($values['image']['delete'] && $article->getImageName());
-//
-//        if($deleteImage)
-//        {
-//            $article->savePreviousImageName();
-//        }
+        $values = $request->request->get('inck_articlebundle_article');
+        $deleteImage = ($values['imageFile']['delete'] && $article->getImageName());
+
+        if($deleteImage)
+        {
+            $article->savePreviousImageName();
+        }
 
         // Formulaire envoyé et valide
         $form->handleRequest($request);
@@ -104,16 +104,16 @@ class ArticleController extends Controller
             }
 
             // Suppression de l'image
-//            if($deleteImage)
-//            {
-//                unlink(sprintf(
-//                    "%s/%s",
-//                    $this->container->getParameter('upload.article_image.upload_destination'),
-//                    $article->getPreviousImageName()
-//                ));
-//
-//                $article->setImageName(null);
-//            }
+            if($deleteImage)
+            {
+                unlink(sprintf(
+                    "%s/%s",
+                    $this->container->getParameter('upload.article_image.upload_destination'),
+                    $article->getPreviousImageName()
+                ));
+
+                $article->setImageName(null);
+            }
 
             // Enregistrement et redirection
             $em->persist($article);
