@@ -551,7 +551,9 @@ class Article
      */
     public function getImageFile()
     {
-        return ($this->imageFile== '/home/bob/web/inck/app/../web/article/image')
+        $end = '/web/article/image';
+
+        return (substr((string) $this->imageFile, -strlen($end)) === $end)
             ? null
             : $this->imageFile;
     }
