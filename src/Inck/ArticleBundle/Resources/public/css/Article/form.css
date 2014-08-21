@@ -6,6 +6,14 @@
     padding: 0;
 }
 
+.singleupload-buttonbar .btn, .singleupload-buttonbar .singleupload-controls-wrapper{
+    margin-top: 0;
+}
+
+.single-upload-preview {
+    padding-top: 33px !important;
+}
+
 article.new .well {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 100px;

@@ -10,15 +10,77 @@ body {
 }
 
 #content {
-    padding-bottom:350px;   /* Height of the footer element */
+    padding-bottom:700px;   /* Height of the footer element */
 }
 
 footer {
     width:100%;
-    height: 300px;
+    height: 650px;
     background-image: url("../images/footer_background.png");
+    background-repeat: no-repeat;
     position:absolute;
     bottom:0;
     left:0;
-    padding-top: 100px;
+}
+
+.carousel .item{
+    height: 200px;
+}
+
+footer #footer-parteners {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #404040;
+}
+
+#footer-links {
+    margin-top: 50px;
+    position: relative;
+    padding: 100px;
+    color: #ffffff;
+}
+
+/* Separator */
+*,
+*:after,
+*::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.container {
+    overflow: hidden;
+    /* we don't want the pseudo-elements sticking out */
+}
+
+.container svg {
+    display: block;
+}
+
+section {
+    position: relative;
+}
+
+section::before,
+section::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+}
+
+.ss-style-triangles::before{
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    -webkit-transform: translateX(-50%) rotate(45deg);
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.ss-style-triangles::before {
+    top: -50px;
+    background: #404040;
 }

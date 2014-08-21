@@ -334,6 +334,23 @@ input.gn-search:focus {
 }
 
 /* Additional */
-li.navbar-right {
-    float: right;
+.visible-sm-inline {
+    display: inline !important;
 }
+
+@media screen and (max-width: 768px) {
+    .gn-menu-main>li {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .hidden-xs-500 {
+        display: none !important;
+    }
+
+    .gn-menu-main>li.pull-right i {
+        font-size: 20px;
+    }
+}
+

@@ -17,18 +17,18 @@
                         <div class="col-md-4">
                             <h4>Informations</h4>
                             <p>
-                                <i class="fa fa-circle"></i> {{ user.username }}<br>
-                                <i class="fa fa-envelope"></i> {{ user.email }}
+                                <i class="fa fa-circle fa-fw"></i> {{ user.username }}<br>
+                                <i class="fa fa-envelope fa-fw"></i> {{ user.email }}
                                 {% if user.firstname or user.lastname %}
-                                    <br><i class="fa fa-user"></i>
+                                    <br><i class="fa fa-user  fa-fw"></i>
                                     {% if user.firstname %}{{ user.firstname }}{% endif %}
                                     {% if user.lastname %}{{ user.lastname }}{% endif %}
                                 {% endif %}
-                                {% if user.school %}<br><i class="fa fa-graduation-cap"></i> {{ user.school }}{% endif %}
-                                {% if user.occupation %}<br><i class="fa fa-briefcase"></i> {{ user.occupation }}{% endif %}
-                                {% if user.birthday %}<br><i class="fa fa-calendar"></i> {{ user.birthday|date('d/m/Y') }}{% endif %}
-                                {% if user.city %}<br><i class="fa fa-building"></i> {{ user.city }}{% endif %}
-                                {% if user.country %}<br><i class="fa fa-globe"></i> {{ user.country }}{% endif %}
+                                {% if user.school %}<br><i class="fa fa-graduation-cap fa-fw"></i> {{ user.school }}{% endif %}
+                                {% if user.occupation %}<br><i class="fa fa-briefcase fa-fw"></i> {{ user.occupation }}{% endif %}
+                                {% if user.birthday %}<br><i class="fa fa-calendar fa-fw"></i> {{ user.birthday|date('d/m/Y') }}{% endif %}
+                                {% if user.city %}<br><i class="fa fa-building fa-fw"></i> {{ user.city }}{% endif %}
+                                {% if user.country %}<br><i class="fa fa-globe fa-fw"></i> {{ user.country }}{% endif %}
                             </p>
                         </div>
                         <div class="col-md-8">
@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="panel-group articles" id="accordion">
                 {% if articlesAsDraft is defined %}
                     <div class="panel panel-default">
@@ -85,7 +85,7 @@
                                             <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Apperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a>
+                                                    <a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a>
                                                     <a href="{{ path('inck_article_article_edit', {'id' : article.id }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Éditer" data-container="body"><i class="fa fa-edit"></i></a>
                                                     <a href="{#{ path('inck_article_article_publish', {'id' : article.id }) }#}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body"><i class="fa fa-send"></i></a>
                                                     <a href="{#{ path('inck_article_article_delete', {'id' : article.id }) }#}" class="btn btn-danger btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" title="Supprimer" data-container="body"><i class="fa fa-times"></i></a>
@@ -132,20 +132,20 @@
                                             {% set status = 'success' %}
                                             {% set icon = 'check' %}
                                             {% set tooltip = 'Publié' %}
-                                        {% elseif article.approved == false %}
+                                        {% elseif article.approved == false and article.approved != null %}
                                             {% set status = 'danger' %}
                                             {% set icon = 'times' %}
                                             {% set tooltip = 'Désapprouvé' %}
                                         {% else %}
                                             {% set status = 'primary' %}
-                                            {% set icon = 'refresh' %}
-                                            {% set tooltip = 'En cours' %}
+                                            {% set icon = 'refresh fa-spin' %}
+                                            {% set tooltip = 'En attente' %}
                                         {% endif %}
                                         <tr>
-                                            <td><span class="label label-{{ status }} btn-tooltip" data-toggle="tooltip" data-placement="left" title={{ tooltip }}><i class="fa fa-{{ icon }}"></i></span></td>
+                                            <td><span class="label label-{{ status }} btn-tooltip" data-toggle="tooltip" data-placement="left" title="{{ tooltip }}"><i class="fa fa-{{ icon }}"></i></span></td>
                                             <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Apperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -183,7 +183,7 @@
                                                 <td><span class="label label-success btn-tooltip" data-toggle="tooltip" data-placement="left" title="Publié"><i class="fa fa-check"></i></span></td>
                                                 <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                                 <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                                <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Apperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                                <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>

@@ -20,17 +20,17 @@
             {% endif %}
         </div>
         <p itemscope itemtype="http://schema.org/Webpage">
-            {% set popoverContent = '<i class="fa fa-circle"></i> <strong>Utilisateur :</strong> ' ~ user.username %}
+            {% set popoverContent = '<i class="fa fa-circle fa-fw"></i> <strong>Utilisateur :</strong> ' ~ user.username %}
             {% if user.firstname or user.lastname %}
-                {% set popoverContent = popoverContent ~ '<br><i class="fa fa-user"></i> <strong>Nom : </strong>' %}
+                {% set popoverContent = popoverContent ~ '<br><i class="fa fa-user fa-fw"></i> <strong>Nom : </strong>' %}
                 {% if user.firstname %}{% set popoverContent = popoverContent ~ user.firstname %}{% endif %}
                 {% if user.lastname %}{% set popoverContent = popoverContent ~ ' ' ~ user.lastname %}{% endif %}
             {% endif %}
-            {% if user.school %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-graduation-cap"></i><strong> École fréquentée :</strong> ' ~ user.school %}{% endif %}
-            {% if user.occupation %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-briefcase"></i> <strong>Activité/métier :</strong> ' ~ user.occupation %}{% endif %}
-            {% if user.birthday %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-calendar"></i> <strong>Date de naissance :</strong> ' ~ user.birthday|date('d/m/Y') %}{% endif %}
-            {% if user.city %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-building"></i> <strong>Ville :</strong> ' ~ user.city %}{% endif %}
-            {% if user.country %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-globe"></i> <strong>Pays :</strong> ' ~ user.country %}{% endif %}
+            {% if user.school %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-graduation-cap fa-fw"></i><strong> École fréquentée :</strong> ' ~ user.school %}{% endif %}
+            {% if user.occupation %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-briefcase fa-fw"></i> <strong>Activité/métier :</strong> ' ~ user.occupation %}{% endif %}
+            {% if user.birthday %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-calendar fa-fw"></i> <strong>Date de naissance :</strong> ' ~ user.birthday|date('d/m/Y') %}{% endif %}
+            {% if user.city %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-building fa-fw"></i> <strong>Ville :</strong> ' ~ user.city %}{% endif %}
+            {% if user.country %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-globe fa-fw"></i> <strong>Pays :</strong> ' ~ user.country %}{% endif %}
 
             <button type="button" class="btn btn-default btn-popover btn-sm" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
                 <i class="fa fa-info-circle"></i> Voir plus d'informations
