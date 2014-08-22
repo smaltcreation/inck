@@ -50,6 +50,14 @@ assetic:
             jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
         yui_js:
             jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
+    assets:
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/Resources/less/bootstrap.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/bootstrap.css
 
 # Doctrine Configuration
 doctrine:
@@ -86,6 +94,8 @@ braincrafted_bootstrap:
     auto_configure:
         knp_paginator: false
         knp_menu: false
+    customize:
+        variables_file: %kernel.root_dir%/Resources/less/variables.less
 
 # KNP Configuration
 knp_menu:
