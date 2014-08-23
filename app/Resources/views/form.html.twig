@@ -1,0 +1,8 @@
+{% extends 'BraincraftedBootstrapBundle:Form:bootstrap.html.twig' %}
+
+{% block textarea_widget %}
+    {{ parent() }}
+    {% if attr.maxlength is defined %}
+        {{ badge(attr.maxlength) }}
+    {% endif %}
+{% endblock textarea_widget %}

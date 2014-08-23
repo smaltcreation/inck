@@ -95,6 +95,7 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @Assert\Length(max="255")
      * @ORM\Column(name="biography", type="text", nullable=true)
      */
     private $biography;

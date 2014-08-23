@@ -35,6 +35,7 @@ class Article
      * @var string
      *
      * @Assert\NotBlank()
+     * @Assert\Length(max="160")
      * @ORM\Column(name="title", type="string", length=160)
      */
     private $title;
@@ -43,6 +44,7 @@ class Article
      * @var string
      *
      * @Assert\NotBlank()
+     * @Assert\Length(max="255")
      * @ORM\Column(name="summary", type="text", length=255)
      */
     private $summary;

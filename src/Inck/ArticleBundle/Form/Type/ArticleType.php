@@ -23,10 +23,11 @@ class ArticleType extends AbstractType
                 ],
             ])
             ->add('summary', 'textarea', [
-                'label' => 'Résumé',
-                'attr'  => [
+                'label'         => 'Résumé',
+                'attr'          => [
                     'placeholder'   => 'Résumez le contenu de votre article',
                     'rows'          => 11,
+                    'maxlength'     => 255,
                 ],
             ])
             ->add('content', 'ckeditor', ['label' => 'Contenu'])

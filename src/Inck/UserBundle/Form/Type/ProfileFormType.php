@@ -45,7 +45,11 @@ class ProfileFormType extends BaseType
                 'required'  => false,
                 'label' => 'form.biography',
                 'translation_domain' => 'FOSUserBundle',
-                'attr' => array('placeholder' => 'Someday I will be the most powerful Jedi ever...', 'rows' => 6)
+                'attr' => [
+                    'placeholder'   => 'Someday I will be the most powerful Jedi ever...',
+                    'rows'          => 6,
+                    'maxlength'     => 255,
+                ]
             ))
             ->add('address', 'text', array(
                 'required'  => false,

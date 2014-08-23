@@ -1,0 +1,14 @@
+textarea {
+    resize: none;
+}
+
+textarea + span.badge {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    transition: opacity 1s linear;
+}
+
+textarea + span.badge:hover {
+    opacity: 0.6;
+}

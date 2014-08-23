@@ -38,7 +38,7 @@
 {% block content %}
     <div class="container">
         <article class="new">
-            <form {{ form_enctype(form) }} method="POST">
+            <form {{ form_enctype(form) }} method="POST" novalidate="novalidate">
                 {% if form_errors(form) %}
                     <div class="alert alert-danger">
                         {{ form_errors(form) }}

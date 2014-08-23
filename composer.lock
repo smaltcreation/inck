@@ -47,12 +47,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony2admingenerator/AvocodeFormExtensionsBundle.git",
-                "reference": "b418e5cfc2e635c3d50601f1eb6c48af0fe06e48"
+                "reference": "7fe4587b1be8e38331ee007f5e969f5be5e9b4b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony2admingenerator/AvocodeFormExtensionsBundle/zipball/b418e5cfc2e635c3d50601f1eb6c48af0fe06e48",
-                "reference": "b418e5cfc2e635c3d50601f1eb6c48af0fe06e48",
+                "url": "https://api.github.com/repos/symfony2admingenerator/AvocodeFormExtensionsBundle/zipball/7fe4587b1be8e38331ee007f5e969f5be5e9b4b8",
+                "reference": "7fe4587b1be8e38331ee007f5e969f5be5e9b4b8",
                 "shasum": ""
             },
             "require": {
@@ -68,7 +68,8 @@
             },
             "suggest": {
                 "cedriclombardot/admingenerator-generator-bundle": "The missing symfony2 admin generator",
-                "liip/imagine-bundle": "Apply filters on preview images"
+                "liip/imagine-bundle": "Apply filters on preview images",
+                "vich/uploader-bundle": "(>= 0.10.0) Bundle to ease file uploads with ORM entities and ODM documents"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -92,7 +93,7 @@
                 }
             ],
             "description": "Add additional form types to symfony2",
-            "time": "2014-08-13 12:20:26"
+            "time": "2014-08-22 16:05:24"
         },
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -3095,12 +3096,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "9c3ac19724170b1adf19dad48caf30ab3d9bd5cb"
+                "reference": "56c4bbedd890008a89f19ae04aa65c8d69491c61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/9c3ac19724170b1adf19dad48caf30ab3d9bd5cb",
-                "reference": "9c3ac19724170b1adf19dad48caf30ab3d9bd5cb",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/56c4bbedd890008a89f19ae04aa65c8d69491c61",
+                "reference": "56c4bbedd890008a89f19ae04aa65c8d69491c61",
                 "shasum": ""
             },
             "require": {
@@ -3156,7 +3157,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2014-08-13 11:58:43"
+            "time": "2014-08-20 11:24:16"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -3251,9 +3252,7 @@
             "time": "2014-04-28 14:01:06"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "knplabs/knp-menu": 20,
@@ -3271,7 +3270,5 @@
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
