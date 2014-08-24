@@ -11,7 +11,6 @@
 {% block stylesheets %}
     {{ parent() }}
     {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/moderate.css'
-        'bundles/inckarticle/css/Article/moderate.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
         'bundles/inckarticle/css/Article/social.css'
@@ -23,49 +22,25 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-                    <h1>Modérer les articles</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum magna vehicula vulputate dapibus. Maecenas tempus nisi tellus, sit amet faucibus elit vulputate vitae.</p>
-                </div>
-                <div class="col-md-5">
-                    <form {{ form_enctype(form) }} method="POST">
-                        {% if form_errors(form) %}
-                            <div class="alert alert-danger">
-                                {{ form_errors(form) }}
-                            </div>
-                        {% endif %}
-
-                        <div class="row">
-                            <div class="col-xs-7">
-                                {{ form_row(form.categories) }}
-                            </div>
-                            <div class="col-xs-5">
-                                {{ form_row(form.tags) }}
-                            </div>
-                        </div>
-
-                        {{ form_row(form.actions) }}
-                        <div class="hidden">
-                            {{form_rest(form)}}
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <h1>Modérer les articles</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum magna vehicula vulputate dapibus. Maecenas tempus nisi tellus, sit amet faucibus elit vulputate vitae.</p>
+            <p>
+                <span class="block">
+                    {% include 'InckArticleBundle:Article:open_filter.html.twig' %}
+                </span>
+            </p>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        {{ render(controller('InckArticleBundle:Article:timeline', { 'type': 'in_moderation', 'category': categories, 'tag': tags })) }}
-    </div>
+    {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': { 'type': 'in_moderation' } })) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     {% javascripts filter='yui_js' output='js/compiled/article/article/moderate.js'
-        'bundles/inckarticle/js/Article/moderate.js'
+        'bundles/inckarticle/js/Article/timeline.js'
         'bundles/inckarticle/js/Article/social.js'
     %}
     <script src="{{ asset_url }}"></script>

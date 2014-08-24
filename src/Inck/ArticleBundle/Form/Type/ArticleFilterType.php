@@ -16,15 +16,15 @@ class ArticleFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('categories', 'afe_select2_entity', [
+            ->add('type', 'hidden')
+            ->add('categories', 'entity', [
                 'label'     => 'Catégories',
                 'class'     => 'InckArticleBundle:Category',
                 'property'  => 'name',
                 'multiple'  => 'multiple',
                 'required'  => false,
-                'configs'      => [
+                'attr'      => [
                     'placeholder'           => 'Filtrer par catégories',
-                    'width'                 => 'container',
                 ],
             ])
             ->add('tags', 'inck_articlebundle_tags_selector', [

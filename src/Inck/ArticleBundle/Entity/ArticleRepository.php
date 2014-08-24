@@ -13,36 +13,32 @@ use Doctrine\ORM\EntityRepository;
 class ArticleRepository extends EntityRepository
 {
     /**
-     * superQuery
+     * Récupère les articles en fonction des filtres
      *
-     * Récupère tous les articles en fonction de différents types :
+     * Types disponibles :
+     * Brouillons : as_draft
+     * Publiés : published
+     * En modération : in_moderation
+     * En validation (modérés mais non publiés ou approuvés/désapprouvés) : in_validation
+     * Désapprouvés : disapproved
      *
-     * TYPE
-     * Brouillons -> as_draft
-     * Publiés -> published
-     * En modération -> in_moderation
-     * En validation (modérés mais non publiés ou approuvés/désapprouvés) -> in_validation
-     * Désapprouvés -> disapproved
-     *
-     * AUTHOR
-     * var InckUserBundle:User
-     *
-     * CATEGORY
-     * var int
-     *
-     * TAG
-     * var int
+     * @var string type
+     * @var array filters
+     * @var int offset
+     * @var int limit
      */
-    public function superQuery($type, $author = null, $category = null, $tag = null, $offset = null, $limit = null)
+    public function findByFilters($filters, $offset = null, $limit = null)
     {
         $query = $this->createQueryBuilder('a');
 
-        /* TYPE: string $type */
-        if($type !== null) {
-            switch($type) {
+        // Type d'article
+        if(isset($filters['type']))
+        {
+            switch($filters['type'])
+            {
                 case 'as_draft':
                     $query
-                        ->andWhere('a.asDraft = :asDraft')
+                        ->where('a.asDraft = :asDraft')
                         ->setParameter('asDraft', true)
                         ->andWhere('a.postedAt IS NULL')
                         ->orderBy('a.createdAt', 'DESC');
@@ -50,14 +46,14 @@ class ArticleRepository extends EntityRepository
 
                 case 'published':
                     $query
-                        ->andWhere('a.published = :published')
+                        ->where('a.published = :published')
                         ->setParameter('published', true)
                         ->orderBy('a.publishedAt', 'DESC');
                     break;
 
                 case 'posted':
                     $query
-                        ->andWhere($query->expr()->andx(
+                        ->where($query->expr()->andx(
                             $query->expr()->isNotNull('a.postedAt')
                         ))
                         ->orderBy('a.postedAt', 'DESC');
@@ -65,7 +61,7 @@ class ArticleRepository extends EntityRepository
 
                 case 'in_moderation':
                     $query
-                        ->andWhere('a.published = :published')
+                        ->where('a.published = :published')
                         ->setParameter('published', false)
                         ->andWhere('a.asDraft = :asDraft')
                         ->setParameter('asDraft', false)
@@ -75,8 +71,8 @@ class ArticleRepository extends EntityRepository
 
                 case 'in_validation':
                     $query
-                        ->andWhere('a.approved IS :approved')
-                        ->setParameter('approved', NULL)
+                        ->where('a.approved IS :approved')
+                        ->setParameter('approved', null)
                         ->andWhere('a.asDraft = :asDraft')
                         ->setParameter('asDraft', false)
                         ->andWhere('a.postedAt >= DATE_SUB(CURRENT_TIMESTAMP(), 2, \'DAY\')')
@@ -85,38 +81,57 @@ class ArticleRepository extends EntityRepository
 
                 case 'disapproved':
                     $query
-                        ->andWhere('a.approved = :approved')
+                        ->where('a.approved = :approved')
                         ->setParameter('approved', false)
                         ->orderBy('a.postedAt', 'DESC');
                     break;
 
                 default:
-                    throw new \Exception("Type d'article demandé invalide.");
+                    throw new \Exception("Type d'article invalide.");
                     break;
             }
         }
 
-        /* AUTHOR: User $author */
-        if($author !== null) {
+        // Filtres
+        if(isset($filters['authors']) && is_array($filters['authors']) && count($filters['authors']) !== 0)
+        {
             $query
-                ->andWhere('a.author = :author')
-                ->setParameter('author', $author);
+                ->andWhere('a.author IN :authors')
+                ->setParameter('authors', $filters['authors']);
         }
 
-        /* CATEGORY: int $category */
-        if($category !== null) {
-            $query->join('a.categories', 'c')->andWhere($query->expr()->in('c.id', $category));
+        if(isset($filters['categories']) && is_array($filters['categories']) && count($filters['categories']) !== 0)
+        {
+            $query
+                ->join('a.categories', 'c')
+                ->andWhere(
+                    $query->expr()->in('c.id', $filters['categories'])
+                );
         }
 
-        /* TAG: int $tag */
-        if($tag !== null) {
-            $query->join('a.tags', 't')->andWhere($query->expr()->in('t.id', $tag));
+        if(isset($filters['tags']) && is_array($filters['tags']) && count($filters['tags']) !== 0)
+        {
+            $query
+                ->join('a.tags', 't')
+                ->andWhere(
+                    $query->expr()->in('t.id', $filters['tags'])
+                );
         }
 
-        /* OFFSET & LIMIT */
-        $query->setFirstResult($offset)->setMaxResults($limit);
+        // Offset et limit
+        $query
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
 
-        return $query->getQuery()->getResult();
+        $results = $query->getQuery()->getResult();
+
+        // Tri des résultats
+        foreach($results as $result)
+        {
+
+        }
+
+        return $results;
     }
 
     public function countByCategory($category, $published = false)

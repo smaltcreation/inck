@@ -26,7 +26,14 @@ class UserController extends Controller
 
         /* S'il existe, on récupère ses articles publiés */
         $repository = $em->getRepository('InckArticleBundle:Article');
-        $articles = $repository->superQuery('published', $user);
+        $articles = $repository->findByFilters(array(
+            'filters'   => array(
+                'type'      => 'published',
+                'authors'   => array(
+                    $user,
+                ),
+            )
+        ));
 
         /* On retourne la preview du profile de l'utilisateur */
         return $this->render('InckUserBundle:Profile:preview.html.twig', array(

@@ -1,9 +1,0 @@
-.jumbotron form {
-    margin-top: 20px;
-}
-
-@media screen and (max-width: 992px) {
-    .jumbotron form {
-        margin-top: 0;
-    }
-}

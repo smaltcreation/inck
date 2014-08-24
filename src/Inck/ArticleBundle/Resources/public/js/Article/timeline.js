@@ -9,6 +9,12 @@ $(document).ready(function(){
         }
     });
 
+    // Categories filter
+    var categoriesInput = $("#inck_articlebundle_articlefilter_categories");
+    categoriesInput.select2({
+        width: 'container'
+    });
+
     // Tags filter
     var tagsInput = $("#inck_articlebundle_articlefilter_tags");
 
@@ -43,12 +49,42 @@ $(document).ready(function(){
         }
     });
 
+    // Form
+    var form = $('form[name="inck_articlebundle_articlefilter"]');
+    var timeline = $('#timeline');
+
+    // Submit filters
+    form.submit(function(e){
+        e.preventDefault();
+        timeline.find('article').slideUp('slow');
+
+        $.ajax({
+            url: Routing.generate('inck_article_article_timeline'),
+            data: {
+                filters: {
+                    type: $('#inck_articlebundle_articlefilter_type').val(),
+                    categories: categoriesInput.val(),
+                    tags: tagsInput.val()
+                }
+            },
+            method: 'POST',
+            dataType: 'html'
+        }).done(function(articles){
+            articles = $(articles);
+            articles.find('article').hide();
+            timeline.html(articles);
+            articles.find('article').slideDown();
+        });
+
+        return false;
+    });
+
     // Reset filters
     var reset = $("#inck_articlebundle_articlefilter_actions_cancel");
 
     reset.click(function(e){
         e.preventDefault();
-        var form = $(this).closest("form");
+
         form.find(".select2-offscreen").val(null).select2("data", null);
         form.submit();
     });

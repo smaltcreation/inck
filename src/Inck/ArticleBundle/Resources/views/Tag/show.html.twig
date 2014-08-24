@@ -20,7 +20,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>{{ tag.name }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
-                    <p><a href="{#{ path('inck_notif_subscribtion_tag_new', { 'id': article.id } ) }#}" class="btn btn-subscribe"><i class="fa fa-thumb-tack"></i> S'abonner au tag</a></p>
+                    <p>
+                        <span class="block">
+                            {% include 'InckArticleBundle:Article:open_filter.html.twig' %}
+                            <a href="{#{ path('inck_notif_subscribtion_tag_new', { 'id': tag.id } ) }#}" class="btn btn-subscribe">
+                                <i class="fa fa-thumb-tack"></i> S'abonner au tag
+                            </a>
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -28,18 +35,23 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        {{ render(controller('InckArticleBundle:Article:timeline', {'tag': tag.id})) }}
-    </div>
+    {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': { 'type': 'published', 'tag': [tag.id] } })) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+
+    {% javascripts filter='yui_js' output='js/compiled/article/tag/show/timeline.js'
+        'bundles/inckarticle/js/Article/timeline.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='yui_js' output='js/compiled/article/tag/show.js'
+        {% javascripts filter='yui_js' output='js/compiled/article/tag/show/social.js'
             'bundles/inckarticle/js/Article/social.js'
         %}
-            <script src="{{ asset_url }}"></script>
+        <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endif %}
 {% endblock %}

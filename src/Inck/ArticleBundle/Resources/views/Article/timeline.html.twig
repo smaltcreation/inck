@@ -1,21 +1,56 @@
-<div class="articles">
-    {% for article in articles %}
-        <article itemscope itemtype="http://schema.org/Article" id="article-{{ article.id }}" class="article">
-            <div class="row">
-                <div class="col-xs-7 col-sm-8">
-                    <div class="summary hidden-xs hidden-sm visible-md visible-lg">
-                        {% include "InckArticleBundle:Article:summary.html.twig" %}
+<div id="jumbotron-filter" class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Filtrer les articles</h2>
+                {{ form_start(form) }}
+                    {% if form_errors(form) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            {{ form_row(form.categories) }}
+                        </div>
+                        <div class="col-xs-6">
+                            {{ form_row(form.tags) }}
+                        </div>
                     </div>
-                    <div class="summary visible-xs visible-sm hidden-md hidden-lg">
-                        {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
+
+                    {{ form_row(form.actions) }}
+                    <div class="hidden">
+                        {{form_rest(form)}}
                     </div>
-                </div>
-                <div class="col-xs-5 col-sm-4">
-                    <div class="social">
-                        {{ render(controller('InckArticleBundle:Article:social', { article: article })) }}
-                    </div>
-                </div>
+                {{ form_end(form) }}
             </div>
-        </article>
-    {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="timeline" class="container">
+    <div class="articles">
+        {% if articles is not null %}
+            {% for article in articles %}
+                <article itemscope itemtype="http://schema.org/Article" id="article-{{ article.id }}" class="article">
+                    <div class="row">
+                        <div class="col-xs-7 col-sm-8">
+                            <div class="summary hidden-xs hidden-sm visible-md visible-lg">
+                                {% include "InckArticleBundle:Article:summary.html.twig" %}
+                            </div>
+                            <div class="summary visible-xs visible-sm hidden-md hidden-lg">
+                                {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
+                            </div>
+                        </div>
+                        <div class="col-xs-5 col-sm-4">
+                            <div class="social">
+                                {{ render(controller('InckArticleBundle:Article:social', { article: article })) }}
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        {% endif %}
+    </div>
 </div>

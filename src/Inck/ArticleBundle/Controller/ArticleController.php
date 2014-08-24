@@ -9,6 +9,7 @@ use Inck\ArticleBundle\Entity\Tag;
 use Inck\ArticleBundle\Entity\Vote;
 use Inck\ArticleBundle\Form\Type\ArticleFilterType;
 use Inck\ArticleBundle\Form\Type\ArticleType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -258,27 +259,37 @@ class ArticleController extends Controller
     }
 
     /**
+     * @Route("/timeline", name="inck_article_article_timeline", options={"expose"=true})
+     * @Method("POST")
      * @Template()
      */
-    public function timelineAction(Request $request, $type = 'published', $author = null, $category = null, $tag = null, $offset = null, $limit = 10)
+    public function timelineAction(Request $request, $filters = null, $offset = null, $limit = 10)
     {
-        try
+        if($filters === null)
         {
-            $em = $this->getDoctrine()->getManager();
-            $articles = $em->getRepository('InckArticleBundle:Article')->superQuery($type, $author, $category, $tag, $offset, $limit);
-            return array(
-                'articles' => $articles,
-            );
+            $filters = $request->request->get('filters');
+            $keys = ['authors', 'categories', 'tags'];
+
+            foreach($keys as $key)
+            {
+                if(!isset($filters[$key]) || !$filters[$key])
+                {
+                    $filters[$key] = array();
+                }
+            }
         }
-        catch(\Exception $e)
-        {
-            $this->get('session')->getFlashBag()->add(
-                'danger',
-                $e->getMessage()
-            );
-            $referer = $request->headers->get('referer');
-            return new RedirectResponse($referer);
-        }
+
+        $form = $this->createForm(new ArticleFilterType(), $filters);
+        $em = $this->getDoctrine()->getManager();
+
+        $articles = $em
+            ->getRepository('InckArticleBundle:Article')
+            ->findByFilters($filters, $offset, $limit);
+
+        return array(
+            'form'          => $form->createView(),
+            'articles'      => $articles,
+        );
     }
 
     /**
@@ -286,46 +297,8 @@ class ArticleController extends Controller
      * @Secure(roles="ROLE_USER")
      * @Template()
      */
-    public function moderateAction(Request $request)
+    public function moderateAction()
     {
-        $form = $this->createForm(new ArticleFilterType());
-        $form->handleRequest($request);
-
-        $categories = null;
-        $tags       = null;
-
-        // Si on a sélectionné des filtres
-        if($form->isValid())
-        {
-            $data = $form->getData();
-
-            if(count($data['categories']) !== 0)
-            {
-                $categories = array();
-
-                /** @var $category Category */
-                foreach($data['categories'] as $category)
-                {
-                    $categories[] = $category->getId();
-                }
-            }
-
-            if(count($data['tags']) !== 0)
-            {
-                $tags = array();
-
-                /** @var $tag Tag */
-                foreach($data['tags'] as $tag)
-                {
-                    $tags[] = $tag->getId();
-                }
-            }
-        }
-
-        return array(
-            'form'          => $form->createView(),
-            'categories'    => $categories,
-            'tags'          => $tags,
-        );
+        return array();
     }
 }
