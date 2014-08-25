@@ -1,8 +1,7 @@
 $(document).ready(function(){
     // Toggle filters
     $('.toggle-filter').click(function(){
-        var filters = $('#filters');
-        filters.slideToggle('slow');
+        $('#filters').slideToggle('slow');
     });
 
     // Categories filter
@@ -47,7 +46,7 @@ $(document).ready(function(){
 
     // Form
     var form = $('form[name="inck_articlebundle_articlefilter"]');
-    var timeline = $('#timeline');
+    var timeline = $('#timeline').find('div.articles:first');
 
     // Submit filters
     form.submit(function(e){
@@ -55,7 +54,7 @@ $(document).ready(function(){
         timeline.find('article').slideUp('slow');
 
         $.ajax({
-            url: Routing.generate('inck_article_article_timeline'),
+            url: Routing.generate('inck_article_article_filter'),
             data: {
                 filters: {
                     type: $('#inck_articlebundle_articlefilter_type').val(),

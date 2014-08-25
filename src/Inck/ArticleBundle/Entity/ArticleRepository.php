@@ -22,10 +22,11 @@ class ArticleRepository extends EntityRepository
      * En validation (modérés mais non publiés ou approuvés/désapprouvés) : in_validation
      * Désapprouvés : disapproved
      *
-     * @var string type
-     * @var array filters
-     * @var int offset
-     * @var int limit
+     * @param $filters
+     * @param int $offset
+     * @param int $limit
+     * @throws \Exception
+     * @return array
      */
     public function findByFilters($filters, $offset = null, $limit = null)
     {
@@ -114,7 +115,7 @@ class ArticleRepository extends EntityRepository
             $query
                 ->join('a.tags', 't')
                 ->andWhere(
-                    $query->expr()->in('t.id', $filters['tags'])
+                    $query->expr()->in('t.name', $filters['tags'])
                 );
         }
 
@@ -123,15 +124,55 @@ class ArticleRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 
-        $results = $query->getQuery()->getResult();
+        $articles = $query->getQuery()->getResult();
 
         // Tri des résultats
-        foreach($results as $result)
+        /** @var $article Article */
+        foreach($articles as $article)
         {
+            $score = 0;
 
+            if(isset($filters['categories']) && is_array($filters['categories']) && count($filters['categories']) !== 0)
+            {
+                /** @var $category Category */
+                foreach($article->getCategories() as $category)
+                {
+                    foreach($filters['categories'] as $id)
+                    {
+                        if($category->getId() === (int) $id)
+                        {
+                            $score += 2;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if(isset($filters['tags']) && is_array($filters['tags']) && count($filters['tags']) !== 0)
+            {
+                /** @var $tag Tag */
+                foreach($article->getTags() as $tag)
+                {
+                    /** @var $filter Tag */
+                    foreach($filters['tags'] as $filter)
+                    {
+                        if($tag->getId() === $filter->getId())
+                        {
+                            $score++;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $article->setSearchScore($score);
         }
 
-        return $results;
+        usort($articles, function($a, $b){
+            return ($a->getSearchScore() < $b->getSearchScore()) ? 1 : -1;
+        });
+
+        return $articles;
     }
 
     public function countByCategory($category, $published = false)

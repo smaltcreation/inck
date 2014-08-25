@@ -24,7 +24,7 @@ class ArticleFilterType extends AbstractType
                 'multiple'  => 'multiple',
                 'required'  => false,
                 'attr'      => [
-                    'placeholder'           => 'Filtrer par catégories',
+                    'placeholder'   => 'Filtrer par catégories',
                 ],
             ])
             ->add('tags', 'inck_articlebundle_tags_selector', [
@@ -36,14 +36,14 @@ class ArticleFilterType extends AbstractType
             ])
             ->add('actions', 'form_actions', [
                 'buttons' => [
-                    'filter'   => [
+                    'filter'    => [
                         'type'      => 'submit',
                         'options'   => [
                             'label' => 'Filtrer',
                             'attr'  => ['class' => 'btn-success'],
                         ],
                     ],
-                    'cancel'      => [
+                    'cancel'    => [
                         'type'      => 'reset',
                         'options'   => [
                             'label' => 'Annuler',

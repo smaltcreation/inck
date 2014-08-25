@@ -7,6 +7,7 @@ use Inck\ArticleBundle\Entity\Article;
 use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\Tag;
 use Inck\ArticleBundle\Entity\Vote;
+use Inck\ArticleBundle\Form\DataTransformer\TagsToNamesTransformer;
 use Inck\ArticleBundle\Form\Type\ArticleFilterType;
 use Inck\ArticleBundle\Form\Type\ArticleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -259,36 +260,51 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/timeline", name="inck_article_article_timeline", options={"expose"=true})
-     * @Method("POST")
      * @Template()
      */
-    public function timelineAction(Request $request, $filters = null, $offset = null, $limit = 10)
+    public function timelineAction($filters)
     {
-        if($filters === null)
-        {
-            $filters = $request->request->get('filters');
-            $keys = ['authors', 'categories', 'tags'];
-
-            foreach($keys as $key)
-            {
-                if(!isset($filters[$key]) || !$filters[$key])
-                {
-                    $filters[$key] = array();
-                }
-            }
-        }
-
         $form = $this->createForm(new ArticleFilterType(), $filters);
         $em = $this->getDoctrine()->getManager();
 
         $articles = $em
             ->getRepository('InckArticleBundle:Article')
-            ->findByFilters($filters, $offset, $limit);
+            ->findByFilters($filters, 0, 10);
 
         return array(
             'form'          => $form->createView(),
             'articles'      => $articles,
+        );
+    }
+
+    /**
+     * @Route("/filter", name="inck_article_article_filter", options={"expose"=true})
+     * @Method("POST")
+     * @Template()
+     */
+    public function filterAction(Request $request)
+    {
+        $filters = $request->request->get('filters');
+        $keys = ['authors', 'categories', 'tags'];
+        $em = $this->getDoctrine()->getManager();
+
+        foreach($keys as $key)
+        {
+            if(!isset($filters[$key]) || !$filters[$key])
+            {
+                $filters[$key] = array();
+            }
+        }
+
+        $transformer = new TagsToNamesTransformer($em);
+        $filters['tags'] = $transformer->reverseTransform($filters['tags']);
+
+        $articles = $em
+            ->getRepository('InckArticleBundle:Article')
+            ->findByFilters($filters, 0, 10);
+
+        return array(
+            'articles'  => $articles,
         );
     }
 
