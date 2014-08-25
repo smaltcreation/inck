@@ -47,7 +47,7 @@ class ArticleFilterType extends AbstractType
                         'type'      => 'reset',
                         'options'   => [
                             'label' => 'Annuler',
-                            'attr'  => ['class' => 'btn-danger'],
+                            'attr'  => ['class' => 'btn-primary'],
                         ],
                     ],
                 ],

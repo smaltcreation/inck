@@ -22,7 +22,6 @@
                     <h1>{{ tag.name }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
                     <p>
                         <span class="block">
-                            {% include 'InckArticleBundle:Article:open_filter.html.twig' %}
                             <a href="{#{ path('inck_notif_subscribtion_tag_new', { 'id': tag.id } ) }#}" class="btn btn-subscribe">
                                 <i class="fa fa-thumb-tack"></i> S'abonner au tag
                             </a>

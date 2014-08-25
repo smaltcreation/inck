@@ -29,9 +29,11 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container profile preview">
+    <div class="profile preview">
         <section>
-            {% include('InckUserBundle:Profile:preview_content.html.twig') %}
+            <div class="container">
+                {% include('InckUserBundle:Profile:preview_content.html.twig') %}
+            </div>
         </section>
         <hr>
         <section id="user-{{ user.id }}-articles" class="user-articles">

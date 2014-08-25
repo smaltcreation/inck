@@ -1,7 +1,6 @@
-#jumbotron-filter {
-    margin-top: -80px;
-    padding-top: 0;
+#filters {
     display: none;
+    padding-bottom: 30px;
 }
 
 article {

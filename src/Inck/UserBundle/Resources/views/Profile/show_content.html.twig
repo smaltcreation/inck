@@ -80,15 +80,15 @@
                                     <tbody>
                                     {% for article in articlesAsDraft %}
                                         <tr>
-                                            <td><span class="label label-warning btn-tooltip" data-toggle="tooltip" data-placement="left" title="Brouillon"><i class="fa fa-file-text-o"></i></span></td>
+                                            <td><span class="label label-warning btn-tooltip" data-toggle="tooltip" data-placement="left" data-container="body" title="Brouillon"><i class="fa fa-file-text-o"></i></span></td>
                                             <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
                                             <td>
-                                                <div class="btn-group">
-                                                    <a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a>
-                                                    <a href="{{ path('inck_article_article_edit', {'id' : article.id }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Éditer" data-container="body"><i class="fa fa-edit"></i></a>
+                                                <div class="pull-right btn-group">
+                                                    <a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a>
+                                                    <a href="{{ path('inck_article_article_edit', {'id' : article.id }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body"><i class="fa fa-edit"></i></a>
                                                     <a href="{#{ path('inck_article_article_publish', {'id' : article.id }) }#}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body"><i class="fa fa-send"></i></a>
-                                                    <a href="{#{ path('inck_article_article_delete', {'id' : article.id }) }#}" class="btn btn-danger btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" title="Supprimer" data-container="body"><i class="fa fa-times"></i></a>
+                                                    <a href="{#{ path('inck_article_article_delete', {'id' : article.id }) }#}" class="btn btn-danger btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body"><i class="fa fa-times"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -142,10 +142,10 @@
                                             {% set tooltip = 'En attente' %}
                                         {% endif %}
                                         <tr>
-                                            <td><span class="label label-{{ status }} btn-tooltip" data-toggle="tooltip" data-placement="left" title="{{ tooltip }}"><i class="fa fa-{{ icon }}"></i></span></td>
+                                            <td><span class="label label-{{ status }} btn-tooltip" data-toggle="tooltip" data-placement="left" data-container="body" title="{{ tooltip }}"><i class="fa fa-{{ icon }}"></i></span></td>
                                             <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -180,10 +180,10 @@
                                     <tbody>
                                         {% for article in articlesPublished %}
                                             <tr>
-                                                <td><span class="label label-success btn-tooltip" data-toggle="tooltip" data-placement="left" title="Publié"><i class="fa fa-check"></i></span></td>
+                                                <td><span class="label label-success btn-tooltip" data-toggle="tooltip" data-container="body" data-placement="left" title="Publié"><i class="fa fa-check"></i></span></td>
                                                 <td><a href="{{ path('inck_article_article_show', {'id' : article.id }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                                 <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                                <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                                <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>

@@ -23,7 +23,6 @@
                     <p>{{ category.description }}</p>
                     <p>
                         <span class="block">
-                            {% include 'InckArticleBundle:Article:open_filter.html.twig' %}
                             <a href="{#{ path('inck_notif_subscribtion_category_new', { 'id': category.id } ) }#}" class="btn btn-subscribe">
                                 <i class="fa fa-thumb-tack"></i> S'abonner à la catégorie
                             </a>

@@ -29,7 +29,6 @@
                     </p>
                     <p>
                         <span class="block">
-                            {% include 'InckArticleBundle:Article:open_filter.html.twig' %}
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                 <a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> Écrire un article</a>
                                 <a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a>

@@ -1,9 +1,13 @@
-<div id="jumbotron-filter" class="jumbotron">
-    <div class="container">
+<div id="timeline" class="container">
+    <p>
+        <button class="btn btn-default toggle-filter"><i class="fa fa-filter"></i> Filtrer les articles</button>
+        <span class="label label-primary">{{ articles|length }} résultat{% if articles|length > 1 %}s{% endif %}</span>
+    </p>
+    <div id="filters">
         <div class="row">
             <div class="col-md-12">
-                <h2>Filtrer les articles</h2>
-                {{ form_start(form) }}
+                <div class="well">
+                    {{ form_start(form) }}
                     {% if form_errors(form) %}
                         <div class="alert alert-danger">
                             {{ form_errors(form) }}
@@ -23,13 +27,11 @@
                     <div class="hidden">
                         {{form_rest(form)}}
                     </div>
-                {{ form_end(form) }}
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div id="timeline" class="container">
     <div class="articles">
         {% if articles is not null %}
             {% for article in articles %}

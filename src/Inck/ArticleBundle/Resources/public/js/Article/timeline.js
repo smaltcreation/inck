@@ -1,12 +1,8 @@
 $(document).ready(function(){
     // Toggle filters
     $('.toggle-filter').click(function(){
-        var jumbotron = $('#jumbotron-filter');
-        if(jumbotron.is(':visible')){
-            jumbotron.hide('slow');
-        } else {
-            jumbotron.show('slow');
-        }
+        var filters = $('#filters');
+        filters.slideToggle('slow');
     });
 
     // Categories filter
