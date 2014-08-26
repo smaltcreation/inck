@@ -317,4 +317,63 @@ class ArticleController extends Controller
     {
         return array();
     }
+
+    /**
+     * @Route("/{id}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"})
+     * @Template()
+     */
+    public function deleteAction($id)
+    {
+        try
+        {
+            $em = $this->getDoctrine()->getManager();
+            $article = $em->getRepository("InckArticleBundle:Article")->find($id);
+            $user = $this->get('security.context')->getToken()->getUser();
+
+            if(!$article)
+            {
+                throw new \Exception("Article inexistant.");
+            }
+
+            if(!$this->get('security.context')->isGranted('ROLE_USER'))
+            {
+                $this->get('session')->getFlashBag()->add(
+                    'warning',
+                    'Vous devez vous identifier.'
+                );
+                return $this->redirect($this->generateUrl('fos_user_security_login'));
+            }
+
+            if (!$this->get('security.context')->isGranted('ROLE_ADMIN'))
+            {
+                if ($user != $article->getAuthor())
+                {
+                    throw new \Exception("Cet article ne vous appartient pas.");
+                }
+                else if ($article->getAsDraft() == 0)
+                {
+                    throw new \Exception("Vous ne pouvez pas supprimer un article après sa publication.");
+                }
+            }
+
+            $em->remove($article);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Article supprimé !'
+            );
+
+            return $this->redirect($this->generateUrl('fos_user_profile_show'));
+        }
+
+        catch(\Exception $e)
+        {
+            $this->get('session')->getFlashBag()->add(
+                'danger',
+                $e->getMessage()
+            );
+            return $this->redirect($this->generateUrl('home'));
+        }
+    }
 }
