@@ -269,7 +269,7 @@ class ArticleController extends Controller
 
         $articles = $em
             ->getRepository('InckArticleBundle:Article')
-            ->findByFilters($filters, 0, 10);
+            ->findByFilters($filters);
 
         return array(
             'form'          => $form->createView(),
@@ -285,23 +285,25 @@ class ArticleController extends Controller
     public function filterAction(Request $request)
     {
         $filters = $request->request->get('filters');
-        $keys = ['authors', 'categories', 'tags'];
         $em = $this->getDoctrine()->getManager();
 
-        foreach($keys as $key)
+        // Tags
+        if(isset($filters['tags']))
         {
-            if(!isset($filters[$key]) || !$filters[$key])
+            $transformer = new TagsToNamesTransformer($em);
+            $tags = $transformer->reverseTransform($filters['tags']);
+            $filters['tags'] = array();
+
+            /** @var Tag $tag */
+            foreach($tags as $tag)
             {
-                $filters[$key] = array();
+                $filters['tags'][] = $tag->getId();
             }
         }
 
-        $transformer = new TagsToNamesTransformer($em);
-        $filters['tags'] = $transformer->reverseTransform($filters['tags']);
-
         $articles = $em
             ->getRepository('InckArticleBundle:Article')
-            ->findByFilters($filters, 0, 10);
+            ->findByFilters($filters);
 
         return array(
             'articles'  => $articles,
@@ -320,7 +322,6 @@ class ArticleController extends Controller
 
     /**
      * @Route("/{id}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"})
-     * @Template()
      */
     public function deleteAction($id)
     {

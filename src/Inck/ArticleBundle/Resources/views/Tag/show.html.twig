@@ -34,7 +34,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': { 'type': 'published', 'tag': [tag.id] } })) }}
+    {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': { 'type': 'published', 'tag': tag.id } })) }}
 {% endblock %}
 
 {% block javascripts %}

@@ -68,6 +68,9 @@ $(document).ready(function(){
             articles = $(articles);
             articles.find('article').hide();
             timeline.html(articles);
+            timeline.find('.search-score').tooltip({
+                placement: 'right'
+            });
             articles.find('article').slideDown();
         });
 

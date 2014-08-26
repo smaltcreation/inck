@@ -4,6 +4,7 @@ namespace Inck\UserBundle\Controller;
 
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Model\UserInterface;
+use Inck\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProfileController extends BaseController
@@ -13,6 +14,7 @@ class ProfileController extends BaseController
      */
     public function showAction()
     {
+        /** @var User $user */
         $user = $this->container->get('security.context')->getToken()->getUser();
 
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -23,30 +25,18 @@ class ProfileController extends BaseController
         $repository = $em->getRepository('InckArticleBundle:Article');
 
         $articlesAsDraft = $repository->findByFilters(array(
-            'filters'   => array(
-                'type'      => 'as_draft',
-                'authors'   => array(
-                    $user,
-                ),
-            ),
+            'type'      => 'as_draft',
+            'author'    => $user->getId(),
         ));
 
         $articlesPublished = $repository->findByFilters(array(
-            'filters'   => array(
-                'type'      => 'published',
-                'authors'   => array(
-                    $user,
-                ),
-            ),
+            'type'      => 'published',
+            'author'    => $user->getId(),
         ));
 
         $articlesPosted = $repository->findByFilters(array(
-            'filters'   => array(
-                'type'      => 'posted',
-                'authors'   => array(
-                    $user,
-                ),
-            ),
+            'type'      => 'posted',
+            'author'    => $user->getId(),
         ));
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user, 'articlesAsDraft' => $articlesAsDraft, 'articlesPublished' => $articlesPublished, 'articlesPosted' => $articlesPosted));

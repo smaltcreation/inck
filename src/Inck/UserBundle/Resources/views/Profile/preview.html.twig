@@ -37,7 +37,7 @@
         </section>
         <hr>
         <section id="user-{{ user.id }}-articles" class="user-articles">
-            {{ render(controller('InckArticleBundle:Article:timeline', { 'author': user })) }}
+            {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': { 'author': user.id } })) }}
         </section>
     </div>
 {% endblock %}

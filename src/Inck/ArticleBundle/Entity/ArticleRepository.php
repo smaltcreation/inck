@@ -12,6 +12,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
+    const ARTICLES_PER_PAGE = 10;
+
     /**
      * Récupère les articles en fonction des filtres
      *
@@ -23,14 +25,16 @@ class ArticleRepository extends EntityRepository
      * Désapprouvés : disapproved
      *
      * @param $filters
-     * @param int $offset
-     * @param int $limit
+     * @param int $page
      * @throws \Exception
      * @return array
      */
-    public function findByFilters($filters, $offset = null, $limit = null)
+    public function findByFilters($filters, $page = 1)
     {
-        $query = $this->createQueryBuilder('a');
+        $this->checkFilters($filters);
+        $this->convertFilters($filters);
+
+        $qb = $this->createQueryBuilder('a');
 
         // Type d'article
         if(isset($filters['type']))
@@ -38,7 +42,7 @@ class ArticleRepository extends EntityRepository
             switch($filters['type'])
             {
                 case 'as_draft':
-                    $query
+                    $qb
                         ->where('a.asDraft = :asDraft')
                         ->setParameter('asDraft', true)
                         ->andWhere('a.postedAt IS NULL')
@@ -46,22 +50,22 @@ class ArticleRepository extends EntityRepository
                     break;
 
                 case 'published':
-                    $query
+                    $qb
                         ->where('a.published = :published')
                         ->setParameter('published', true)
                         ->orderBy('a.publishedAt', 'DESC');
                     break;
 
                 case 'posted':
-                    $query
-                        ->where($query->expr()->andx(
-                            $query->expr()->isNotNull('a.postedAt')
-                        ))
+                    $qb
+                        ->where(
+                            $qb->expr()->isNotNull('a.postedAt')
+                        )
                         ->orderBy('a.postedAt', 'DESC');
                     break;
 
                 case 'in_moderation':
-                    $query
+                    $qb
                         ->where('a.published = :published')
                         ->setParameter('published', false)
                         ->andWhere('a.asDraft = :asDraft')
@@ -71,7 +75,7 @@ class ArticleRepository extends EntityRepository
                     break;
 
                 case 'in_validation':
-                    $query
+                    $qb
                         ->where('a.approved IS :approved')
                         ->setParameter('approved', null)
                         ->andWhere('a.asDraft = :asDraft')
@@ -81,7 +85,7 @@ class ArticleRepository extends EntityRepository
                     break;
 
                 case 'disapproved':
-                    $query
+                    $qb
                         ->where('a.approved = :approved')
                         ->setParameter('approved', false)
                         ->orderBy('a.postedAt', 'DESC');
@@ -93,84 +97,38 @@ class ArticleRepository extends EntityRepository
             }
         }
 
-        // Filtres
-        if(isset($filters['authors']) && is_array($filters['authors']) && count($filters['authors']) !== 0)
+        // Création des conditions pour les filtres
+        $orx = $qb->expr()->orX();
+
+        $conditions = array(
+            'authors'       => 'author',
+            'categories'    => 'categories',
+            'tags'          => 'tags',
+        );
+
+        foreach($conditions as $filter => $field)
         {
-            $query
-                ->andWhere('a.author IN :authors')
-                ->setParameter('authors', $filters['authors']);
+            if(isset($filters[$filter]))
+            {
+                $qb->join("a.$field", $field);
+
+                $orx->add(
+                    $qb
+                        ->expr()
+                        ->in("$field.id", $filters[$filter])
+                );
+            }
         }
 
-        if(isset($filters['categories']) && is_array($filters['categories']) && count($filters['categories']) !== 0)
-        {
-            $query
-                ->join('a.categories', 'c')
-                ->andWhere(
-                    $query->expr()->in('c.id', $filters['categories'])
-                );
-        }
-
-        if(isset($filters['tags']) && is_array($filters['tags']) && count($filters['tags']) !== 0)
-        {
-            $query
-                ->join('a.tags', 't')
-                ->andWhere(
-                    $query->expr()->in('t.name', $filters['tags'])
-                );
-        }
+        $qb->andWhere($orx);
 
         // Offset et limit
-        $query
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
+//        $qb
+//            ->setFirstResult(($page - 1) * self::ARTICLES_PER_PAGE)
+//            ->setMaxResults(self::ARTICLES_PER_PAGE);
 
-        $articles = $query->getQuery()->getResult();
-
-        // Tri des résultats
-        /** @var $article Article */
-        foreach($articles as $article)
-        {
-            $score = 0;
-
-            if(isset($filters['categories']) && is_array($filters['categories']) && count($filters['categories']) !== 0)
-            {
-                /** @var $category Category */
-                foreach($article->getCategories() as $category)
-                {
-                    foreach($filters['categories'] as $id)
-                    {
-                        if($category->getId() === (int) $id)
-                        {
-                            $score += 2;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if(isset($filters['tags']) && is_array($filters['tags']) && count($filters['tags']) !== 0)
-            {
-                /** @var $tag Tag */
-                foreach($article->getTags() as $tag)
-                {
-                    /** @var $filter Tag */
-                    foreach($filters['tags'] as $filter)
-                    {
-                        if($tag->getId() === $filter->getId())
-                        {
-                            $score++;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            $article->setSearchScore($score);
-        }
-
-        usort($articles, function($a, $b){
-            return ($a->getSearchScore() < $b->getSearchScore()) ? 1 : -1;
-        });
+        $articles = $qb->getQuery()->getResult();
+        $this->orderResults($filters, $articles);
 
         return $articles;
     }
@@ -205,5 +163,169 @@ class ArticleRepository extends EntityRepository
         ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Vérifie les filtres reçus
+     * @param $filters mixed
+     * @throws \Exception
+     */
+    private function checkFilters(&$filters)
+    {
+        if(!is_array($filters) || count($filters) === 0)
+        {
+            throw new \Exception("Filtres invalides");
+        }
+
+        $validFilters = array(
+            'type',
+            'authors',
+            'author',
+            'categories',
+            'category',
+            'tags',
+            'tag',
+        );
+
+        $validTypes = array(
+            'as_draft',
+            'published',
+            'posted',
+            'in_moderation',
+            'in_validation',
+            'disapproved',
+        );
+
+        foreach($filters as $filter => $data)
+        {
+            if(!in_array($filter, $validFilters))
+            {
+                throw new \Exception("Filtre $filter non géré");
+            }
+
+            switch($filter)
+            {
+                case 'type':
+                    if(!in_array($data, $validTypes))
+                    {
+                        throw new \Exception("Type $filter invalide");
+                    }
+                    break;
+
+                case 'authors':
+                case 'categories':
+                case 'tags':
+                    if(!is_array($data))
+                    {
+                        throw new \Exception("Filtre $filter invalide");
+                    }
+                    break;
+
+                case 'author':
+                case 'category':
+                case 'tag':
+                    if(!is_numeric($data))
+                    {
+                        throw new \Exception("Filtre $filter invalide");
+                    }
+                    break;
+
+                default:
+                    throw new \Exception("Filtre $filter invalide");
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Converti les filtres reçus
+     * @param $filters array
+     */
+    private function convertFilters(&$filters)
+    {
+        $conversion = array(
+            'author'    => 'authors',
+            'category'  => 'categories',
+            'tag'       => 'tags',
+        );
+
+        foreach($conversion as $from => $to)
+        {
+            if(isset($filters[$from]))
+            {
+                if(isset($filters[$to]))
+                {
+                    $filters[$to][] = $filters[$from];
+                }
+
+                else
+                {
+                    $filters[$to] = array($filters[$from]);
+                }
+
+                unset($filters[$from]);
+            }
+
+            if(isset($filters[$to]) && !is_array($filters[$to]))
+            {
+                $filters[$to] = array($filters[$to]);
+            }
+
+            if(isset($filters[$to]) && count($filters[$to]) === 0)
+            {
+                unset($filters[$to]);
+            }
+        }
+    }
+
+    private function orderResults(&$filters, &$articles)
+    {
+        $configurations = array(
+            'categories'    => array(
+                'getCategories',
+                2,
+            ),
+            'tags'    => array(
+                'getTags',
+                1,
+            ),
+        );
+
+        /** @var $article Article */
+        foreach($articles as $article)
+        {
+            $score = 0;
+
+            foreach($configurations as $filter => $configuration)
+            {
+                list($method, $add) = $configuration;
+
+                if(isset($filters[$filter]))
+                {
+                    foreach($article->$method() as $entity)
+                    {
+                        foreach($filters[$filter] as $id)
+                        {
+                            /** @var Category|Tag $entity */
+                            if($entity->getId() === (int) $id)
+                            {
+                                $score += $add;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            $article->setSearchScore($score);
+        }
+
+        usort($articles, function($a, $b){
+            /**
+             * @var Article $a
+             * @var Article $b
+             */
+            return ($a->getSearchScore() < $b->getSearchScore()) ? 1 : -1;
+        });
     }
 }
