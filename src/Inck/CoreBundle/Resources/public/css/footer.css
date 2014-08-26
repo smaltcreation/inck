@@ -16,7 +16,7 @@ body {
 footer {
     width:100%;
     height: 650px;
-    background-image: url("../images/footer_background.png");
+    background: #aececb url("../images/footer_background.png");
     background-repeat: no-repeat;
     position:absolute;
     bottom:0;
@@ -28,19 +28,23 @@ footer {
 }
 
 footer #footer-parteners {
-    width: 100%;
-    height: 200px;
     position: absolute;
     bottom: 0;
-    left: 0;
+    width: 100%;
+    height: 200px;
     background-color: #404040;
 }
 
 #footer-links {
     margin-top: 50px;
-    position: relative;
-    padding: 100px;
+    padding-top: 100px;
     color: #ffffff;
+}
+
+@media screen and (max-width: 480px) {
+    #footer-links {
+        padding-top: 50px;
+    }
 }
 
 /* Separator */
@@ -82,19 +86,5 @@ section::after {
 
 .ss-style-triangles::before {
     top: -50px;
-    background: #404040;
-}
-
-@media screen and (max-width: 525px) {
-    footer #footer-parteners {
-        width: 100%;
-        height: 200px;
-        position: relative;
-        bottom: 0;
-        left: 0;
-        background-color: #404040;
-    }
-    footer #socialText {
-        display: none;
-    }
+    background: inherit;
 }
