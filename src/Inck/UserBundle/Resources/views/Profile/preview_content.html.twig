@@ -31,6 +31,10 @@
             {% if user.birthday %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-calendar fa-fw"></i> <strong>Date de naissance :</strong> ' ~ user.birthday|date('d/m/Y') %}{% endif %}
             {% if user.city %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-building fa-fw"></i> <strong>Ville :</strong> ' ~ user.city %}{% endif %}
             {% if user.country %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-globe fa-fw"></i> <strong>Pays :</strong> ' ~ user.country %}{% endif %}
+            {% if user.twitter %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-twitter fa-fw"></i> <strong><a href="' ~ user.twitter ~ '">Twitter</a></strong>' %}{% endif %}
+            {% if user.facebook %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-facebook fa-fw"></i> <strong><a href="' ~ user.facebook ~ '">Facebook</a></strong>' %}{% endif %}
+            {% if user.googlePlus %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-google-plus fa-fw"></i> <strong><a href="' ~ user.googlePlus ~ '">Google+</a></strong>' %}{% endif %}
+            {% if user.linkedin %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-linkedin fa-fw"></i> <strong><a href="' ~ user.linkedin ~ '">Linkedin</a></strong>' %}{% endif %}
 
             <button type="button" class="btn btn-default btn-popover btn-sm" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
                 <i class="fa fa-info-circle"></i> Voir plus d'informations

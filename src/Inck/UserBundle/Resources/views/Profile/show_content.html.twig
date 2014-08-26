@@ -30,6 +30,12 @@
                                 {% if user.city %}<br><i class="fa fa-building fa-fw"></i> {{ user.city }}{% endif %}
                                 {% if user.country %}<br><i class="fa fa-globe fa-fw"></i> {{ user.country }}{% endif %}
                             </p>
+                            <p>
+                                {% if user.twitter %}<a class="btn btn-twitter btn-xs" href="{{ user.twitter }}"><i class="fa fa-twitter fa-fw"></i></a>{% endif %}
+                                {% if user.facebook %}<a class="btn btn-facebook btn-xs" href="{{ user.facebook }}"><i class="fa fa-facebook fa-fw"></i></a>{% endif %}
+                                {% if user.googlePlus %}<a class="btn btn-google btn-xs" href="{{ user.googlePlus }}"><i class="fa fa-google-plus fa-fw"></i></a>{% endif %}
+                                {% if user.linkedin %}<a class="btn btn-linkedin btn-xs" href="{{ user.linkedin }}"><i class="fa fa-linkedin fa-fw"></i></a>{% endif %}
+                            </p>
                         </div>
                         <div class="col-md-8">
                             <h4>Biographie</h4>

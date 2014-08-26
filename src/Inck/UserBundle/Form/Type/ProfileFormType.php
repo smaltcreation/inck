@@ -85,6 +85,26 @@ class ProfileFormType extends BaseType
                 'translation_domain' => 'FOSUserBundle',
                 'attr' => array('placeholder' => 'Jedi Institut')
             ))
+            ->add('facebook', 'text', array(
+                'required'  => false,
+                'label' => 'Facebook',
+                'attr' => array('placeholder' => 'https://facebook.com/')
+            ))
+            ->add('twitter', 'text', array(
+                'required'  => false,
+                'label' => 'Twitter',
+                'attr' => array('placeholder' => 'https://twitter.com/')
+            ))
+            ->add('googlePlus', 'text', array(
+                'required'  => false,
+                'label' => 'Google Plus',
+                'attr' => array('placeholder' => 'https://plus.google.com/')
+            ))
+            ->add('linkedin', 'text', array(
+                'required'  => false,
+                'label' => 'Linkedin',
+                'attr' => array('placeholder' => 'https://linkedin.com/')
+            ))
             ->add('enabled', 'checkbox', array(
                 'required'  => true,
                 'label' => false,

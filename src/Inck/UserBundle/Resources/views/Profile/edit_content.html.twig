@@ -85,12 +85,48 @@
                         {{ form_row(form.country) }}
                     </div>
                 </div>
-                <div class="hidden">
-                    {{ form_rest(form) }}
-                </div>
 
                 <button class="btn btn-success" type="submit"><i class="fa fa-refresh"></i> {{ 'profile.edit.submit'|trans }}</button>
+                <p class="btn-inline"><a href="#registration_websites" class="btn btn-default"><i class="fa fa-plus-square"></i> Ajouter mes réseaux sociaux</a></p>
             </div>
         </section>
+
+        <section id="registration_websites">
+            <div class="well">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {% image '@InckUserBundle/Resources/public/images/Facebook@2x.png' %}
+                            <img itemprop="image" class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
+                        {% endimage %}
+                        <h2>Réseaux sociaux</h2>
+                        <p class="description"  itemprop="description">
+                            Les réseaux sociaux sont un bon moyen pour vous faire connaitre et pour promouvoir vos articles.
+                            Ils seront mis en avant sur votre carte utilisateur pour chaque article que vous partagerez avec la communauté.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ form_row(form.facebook) }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form_row(form.twitter) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ form_row(form.googlePlus) }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form_row(form.linkedin) }}
+                    </div>
+                </div>
+
+                <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> {{ 'registration.submit'|trans }}</button>
+            </div>
+        </section>
+        <div class="hidden">
+            {{ form_rest(form) }}
+        </div>
     </form>
 </div>

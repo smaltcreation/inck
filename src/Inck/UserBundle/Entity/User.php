@@ -95,10 +95,66 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @Assert\Length(max="255")
-     * @ORM\Column(name="biography", type="text", nullable=true)
+     * @Assert\Length(max="500")
+     * @ORM\Column(name="biography", type="text", nullable=true, length=500)
      */
     private $biography;
+
+    /**
+     * @var string
+     *
+     * @Assert\Length(max="255")
+     * @Assert\Url()
+     * @Assert\Regex(
+     *     pattern="/https?:\/\/(www\.)?(facebook|fb)\.com\/.+/",
+     *     match=true,
+     *     message="Le nom de domaine doit être celui de Facebook"
+     * )
+     * @ORM\Column(name="facebook", type="text", nullable=true)
+     */
+    private $facebook;
+
+    /**
+     * @var string
+     *
+     * @Assert\Length(max="255")
+     * @Assert\Regex(
+     *     pattern="/https?:\/\/(www\.)?twitter\.com\/.+/",
+     *     match=true,
+     *     message="Le nom de domaine doit être celui de Twitter"
+     * )
+     * @Assert\Url()
+     * @ORM\Column(name="twitter", type="text", nullable=true)
+     */
+    private $twitter;
+
+    /**
+     * @var string
+     *
+     * @Assert\Length(max="255")
+     * @Assert\Url()
+     * @Assert\Regex(
+     *     pattern="/https?:\/\/(www\.)?plus\.google\.com\/.+/",
+     *     match=true,
+     *     message="Le nom de domaine doit être celui de Google Plus"
+     * )
+     * @ORM\Column(name="googlePlus", type="text", nullable=true)
+     */
+    private $googlePlus;
+
+    /**
+     * @var string
+     *
+     * @Assert\Length(max="255")
+     * @Assert\Url()
+     * @Assert\Regex(
+     *     pattern="/https?:\/\/(www\.)?linkedin\.com\/.+/",
+     *     match=true,
+     *     message="Le nom de domaine doit être celui de Linkedin"
+     * )
+     * @ORM\Column(name="linkedin", type="text", nullable=true)
+     */
+    private $linkedin;
 
     /**
      * @ORM\ManyToMany(targetEntity="Inck\UserBundle\Entity\Group")
@@ -378,5 +434,97 @@ class User extends BaseUser
     public function getBiography()
     {
         return $this->biography;
+    }
+
+    /**
+     * Set facebook
+     *
+     * @param string $facebook
+     * @return User
+     */
+    public function setFacebook($facebook)
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    /**
+     * Get facebook
+     *
+     * @return string 
+     */
+    public function getFacebook()
+    {
+        return $this->facebook;
+    }
+
+    /**
+     * Set twitter
+     *
+     * @param string $twitter
+     * @return User
+     */
+    public function setTwitter($twitter)
+    {
+        $this->twitter = $twitter;
+
+        return $this;
+    }
+
+    /**
+     * Get twitter
+     *
+     * @return string 
+     */
+    public function getTwitter()
+    {
+        return $this->twitter;
+    }
+
+    /**
+     * Set googlePlus
+     *
+     * @param string $googlePlus
+     * @return User
+     */
+    public function setGooglePlus($googlePlus)
+    {
+        $this->googlePlus = $googlePlus;
+
+        return $this;
+    }
+
+    /**
+     * Get googlePlus
+     *
+     * @return string 
+     */
+    public function getGooglePlus()
+    {
+        return $this->googlePlus;
+    }
+
+    /**
+     * Set linkedin
+     *
+     * @param string $linkedin
+     * @return User
+     */
+    public function setLinkedin($linkedin)
+    {
+        $this->linkedin = $linkedin;
+
+        return $this;
+    }
+
+    /**
+     * Get linkedin
+     *
+     * @return string 
+     */
+    public function getLinkedin()
+    {
+        return $this->linkedin;
     }
 }

@@ -65,7 +65,10 @@
                     </div>
                 </div>
                 <div class="col-sm-5 col-sm-offset-1">
-                    <img itemprop="image" class="img-circle img-responsive logo" src="#">
+                    {% image '@InckUserBundle/Resources/public/images/inck-logo.png' %}
+                        <img itemprop="image" class="img-circle img-responsive logo" src="{{ asset_url }}" alt="Logo de Inck">
+                    {% endimage %}
+
                     <h3>Lire, voter et partager !</h3>
                     <p itemprop="description" class="description">Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager. N'hésitez plus et laissez-vous porter par les flots de l'expression libre et culturelle !</p>
                     <p><a itemprop="url" class="btn btn-default" role="button" href="{{ path('home') }}"><i class="fa fa-home"></i> Liste des articles</a></p>
