@@ -149,11 +149,6 @@ class Article
      */
     private $votes;
 
-    /**
-     * @var int
-     */
-    private $searchScore;
-
 
     /**
      * Constructor
@@ -592,21 +587,5 @@ class Article
     public function getPreviousImageName()
     {
         return $this->previousImageName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSearchScore()
-    {
-        return $this->searchScore;
-    }
-
-    /**
-     * @param mixed $searchScore
-     */
-    public function setSearchScore($searchScore)
-    {
-        $this->searchScore = $searchScore;
     }
 }

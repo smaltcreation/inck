@@ -2,6 +2,7 @@
 
 namespace Inck\ArticleBundle\Entity;
 
+use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -31,8 +32,8 @@ class ArticleRepository extends EntityRepository
      */
     public function findByFilters($filters, $page = 1)
     {
-        $this->checkFilters($filters);
         $this->convertFilters($filters);
+        $this->checkFilters($filters);
 
         $qb = $this->createQueryBuilder('a');
 
@@ -58,8 +59,9 @@ class ArticleRepository extends EntityRepository
 
                 case 'posted':
                     $qb
-                        ->where(
-                            $qb->expr()->isNotNull('a.postedAt')
+                        ->where($qb
+                            ->expr()
+                            ->isNotNull('a.postedAt')
                         )
                         ->orderBy('a.postedAt', 'DESC');
                     break;
@@ -101,52 +103,90 @@ class ArticleRepository extends EntityRepository
         $orx = $qb->expr()->orX();
 
         $conditions = array(
-            'authors'       => 'author',
-            'categories'    => 'categories',
-            'tags'          => 'tags',
+            'authors'       => array(
+                'field' => 'author',
+                'alias' => 'u',
+            ),
+            'categories'    => array(
+                'field' => 'categories',
+                'alias' => 'c',
+            ),
+            'tags'          => array(
+                'field' => 'tags',
+                'alias' => 't',
+            ),
         );
 
-        foreach($conditions as $filter => $field)
+        $score = array();
+
+        foreach($conditions as $filter => $parameters)
         {
             if(isset($filters[$filter]))
             {
-                $qb->join("a.$field", $field);
+                $qb->join('a.'.$parameters['field'], $parameters['field']);
 
-                $orx->add(
-                    $qb
-                        ->expr()
-                        ->in("$field.id", $filters[$filter])
+                $orx->add($qb
+                    ->expr()
+                    ->in($parameters['field'].'.id', $filters[$filter])
                 );
+
+                $scoreAlias = $filter.'Score';
+                $score[] = sprintf('SELECT(%s)', $scoreAlias);
+
+                $qb
+                    ->addSelect(sprintf(
+                        '(SELECT COUNT(%s.id) FROM InckArticleBundle:Article a%s '
+                        .'JOIN a%s.%s %s WHERE a%s.id = a.id AND %s.id IN (:%sParameter)) AS %sScore',
+                        $parameters['alias'],
+                        $parameters['alias'],
+                        $parameters['alias'],
+                        $parameters['field'],
+                        $parameters['alias'],
+                        $parameters['alias'],
+                        $parameters['alias'],
+                        $parameters['alias'],
+                        $parameters['field']
+                    ))
+                    ->setParameter($parameters['alias'].'Parameter', $filters[$filter])
+                    ->addOrderBy($parameters['field'].'Score', 'DESC');
             }
         }
 
         $qb->andWhere($orx);
 
         // Offset et limit
-//        $qb
-//            ->setFirstResult(($page - 1) * self::ARTICLES_PER_PAGE)
-//            ->setMaxResults(self::ARTICLES_PER_PAGE);
+        $qb
+            ->setFirstResult(($page - 1) * self::ARTICLES_PER_PAGE)
+            ->setMaxResults(self::ARTICLES_PER_PAGE);
 
-        $articles = $qb->getQuery()->getResult();
-        $this->orderResults($filters, $articles);
+        $results = $qb->getQuery()->getResult();
 
-        return $articles;
+        foreach($results as &$result)
+        {
+            if(is_array($result) && isset($result[0]))
+            {
+                $result = $result[0];
+            }
+        }
+
+        return $results;
     }
 
     public function countByCategory($category, $published = false)
     {
-        $query = $this->createQueryBuilder('a');
+        $qb = $this->createQueryBuilder('a');
 
-        $query->select('COUNT(a)')
+        $qb->select('COUNT(a)')
             ->join('a.categories', 'c')
-            ->where(
-                $query->expr()->in('c.id', $category)
+            ->where($qb
+                ->expr()
+                ->in('c.id', $category)
             )
             ->andWhere('a.published = :published')
             ->setParameter('published', $published)
         ;
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByTag($tag, $published = false)
@@ -276,56 +316,5 @@ class ArticleRepository extends EntityRepository
                 unset($filters[$to]);
             }
         }
-    }
-
-    private function orderResults(&$filters, &$articles)
-    {
-        $configurations = array(
-            'categories'    => array(
-                'getCategories',
-                2,
-            ),
-            'tags'    => array(
-                'getTags',
-                1,
-            ),
-        );
-
-        /** @var $article Article */
-        foreach($articles as $article)
-        {
-            $score = 0;
-
-            foreach($configurations as $filter => $configuration)
-            {
-                list($method, $add) = $configuration;
-
-                if(isset($filters[$filter]))
-                {
-                    foreach($article->$method() as $entity)
-                    {
-                        foreach($filters[$filter] as $id)
-                        {
-                            /** @var Category|Tag $entity */
-                            if($entity->getId() === (int) $id)
-                            {
-                                $score += $add;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            $article->setSearchScore($score);
-        }
-
-        usort($articles, function($a, $b){
-            /**
-             * @var Article $a
-             * @var Article $b
-             */
-            return ($a->getSearchScore() < $b->getSearchScore()) ? 1 : -1;
-        });
     }
 }
