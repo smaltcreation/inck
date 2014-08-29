@@ -19,7 +19,6 @@ article .social .row-table .stats {
 
 article .social .votes button.voted{
     opacity: 0.8;
-    text-shadow: 0 0 10px black;
 }
 
 article .social .votes button.voted i{

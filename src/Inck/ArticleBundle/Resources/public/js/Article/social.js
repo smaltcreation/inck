@@ -14,10 +14,15 @@ $(document).ready(function(){
             otherButton         = buttons.not(clickedButton),
             clickedIconClass    = getIconClass(clickedButton),
             otherIconClass      = getIconClass(otherButton),
-            icon                = getButtonIcon(clickedButton);
+            icon                = getButtonIcon(clickedButton),
+            otherButtonIcon     = getButtonIcon(otherButton);
 
         buttons.prop('disabled', true);
         icon.attr('class', 'fa fa-circle-o-notch fa-spin');
+        // If you want to add style on the otherIcon
+//        if(otherButton.hasClass('voted')) {
+//            otherButtonIcon.attr('class', 'fa fa-times');
+//        }
 
         // Save the vote
         $.ajax({
@@ -33,6 +38,19 @@ $(document).ready(function(){
             var oldVote = (otherButton.hasClass('voted')) ? !up : null;
             otherButton.removeClass('voted');
             clickedButton.toggleClass('voted');
+            if(clickedButton.hasClass('voted')) {
+                icon.attr('class', 'fa fa-check');
+            }
+            else {
+                if(clickedButton.hasClass('vote-up'))
+                    icon.attr('class', 'fa fa-thumbs-up');
+                else
+                    icon.attr('class', 'fa fa-thumbs-down');
+            }
+            if(otherButton.hasClass('vote-up'))
+                otherButtonIcon.attr('class', 'fa fa-thumbs-up');
+            else
+                otherButtonIcon.attr('class', 'fa fa-thumbs-down');
             updateScore(clickedButton, up, oldVote);
         }).error(function(result){
             // Error

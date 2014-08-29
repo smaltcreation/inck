@@ -25,11 +25,19 @@
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                     {% set votedUp = vote is not null and vote.up %}
                                     <button class="btn btn-success vote-up {% if votedUp %}voted{% endif %}">
-                                        <i class="fa fa-thumbs-up"></i>
+                                        {% if votedUp %}
+                                            <i class="fa fa-check"></i>
+                                        {% else %}
+                                            <i class="fa fa-thumbs-up"></i>
+                                        {% endif %}
                                     </button>
                                     {% set votedDown = vote is not null and not vote.up %}
                                     <button class="btn btn-danger vote-down {% if votedDown %}voted{% endif %}">
+                                    {% if votedDown %}
+                                        <i class="fa fa-check"></i>
+                                    {% else %}
                                         <i class="fa fa-thumbs-down"></i>
+                                    {% endif %}
                                     </button>
                                 {% else %}
                                     <a href="{{ path('fos_user_security_login') }}" class="btn btn-success">
