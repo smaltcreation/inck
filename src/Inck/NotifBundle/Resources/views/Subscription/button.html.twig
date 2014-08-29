@@ -1,0 +1,7 @@
+<button data-entity="{{ entity }}" data-id="{{ id }}" class="btn btn-subscribe{% if subscription %} subscribed{% endif %}">
+    {% if subscription %}
+        <i class="fa fa-check"></i> <span class="btn-text">Vous êtes abonné</span>
+    {% else %}
+        <i class="fa fa-thumb-tack"></i> <span class="btn-text">S'abonner</span>
+    {% endif %}
+</button>

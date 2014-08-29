@@ -22,11 +22,7 @@
                     <h1>{{ category.name }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
                     <p>{{ category.description }}</p>
                     <p>
-                        <span class="block">
-                            <a href="{#{ path('inck_notif_subscribtion_category_new', { 'id': category.id } ) }#}" class="btn btn-subscribe">
-                                <i class="fa fa-thumb-tack"></i> S'abonner à la catégorie
-                            </a>
-                        </span>
+                        {{ render(controller('InckNotifBundle:Subscription:button', { entity: 'inck_notif.category_class', id: category.id })) }}
                     </p>
                 </div>
             </div>
@@ -48,8 +44,9 @@
     {% endjavascripts %}
 
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='yui_js' output='js/compiled/article/category/show/social.js'
+        {% javascripts filter='yui_js' output='js/compiled/article/category/authenticated.js'
             'bundles/inckarticle/js/Article/social.js'
+            'bundles/incknotif/js/Subscription/new.js'
         %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}

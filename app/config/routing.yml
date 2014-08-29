@@ -1,3 +1,7 @@
+inck_notif:
+    resource: "@InckNotifBundle/Resources/config/routing.yml"
+    prefix:   /
+
 inck_user:
     resource: "@InckUserBundle/Controller/"
     type:     annotation

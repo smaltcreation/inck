@@ -127,7 +127,7 @@ fos_user:
         confirmation:
             enabled: true
     from_email:
-            address: webtesting69@gmail.com
+            address: contact@inck.fr
             sender_name: Inck
     service:
         mailer: fos_user.mailer.twig_swift
@@ -157,3 +157,9 @@ vich_uploader:
             inject_on_load:       true
             delete_on_remove:     true
             delete_on_update:     true
+
+# InckNotifBundle Configuration
+inck_notif:
+    user_class: Inck\UserBundle\Entity\User
+    category_class: Inck\ArticleBundle\Entity\Category
+    tag_class: Inck\ArticleBundle\Entity\Tag

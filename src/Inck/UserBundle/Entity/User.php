@@ -165,6 +165,12 @@ class User extends BaseUser
      */
     protected $groups;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Inck\UserBundle\Entity\User", mappedBy="subcriber")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $subcribtions;
+
 
     public function __construct()
     {
@@ -526,5 +532,38 @@ class User extends BaseUser
     public function getLinkedin()
     {
         return $this->linkedin;
+    }
+
+    /**
+     * Add subcribtions
+     *
+     * @param \Inck\UserBundle\Entity\User $subcribtions
+     * @return User
+     */
+    public function addSubcribtion(\Inck\UserBundle\Entity\User $subcribtions)
+    {
+        $this->subcribtions[] = $subcribtions;
+
+        return $this;
+    }
+
+    /**
+     * Remove subcribtions
+     *
+     * @param \Inck\UserBundle\Entity\User $subcribtions
+     */
+    public function removeSubcribtion(\Inck\UserBundle\Entity\User $subcribtions)
+    {
+        $this->subcribtions->removeElement($subcribtions);
+    }
+
+    /**
+     * Get subcribtions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSubcribtions()
+    {
+        return $this->subcribtions;
     }
 }

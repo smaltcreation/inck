@@ -21,11 +21,7 @@
                 <div class="col-md-12">
                     <h1>{{ tag.name }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
                     <p>
-                        <span class="block">
-                            <a href="{#{ path('inck_notif_subscribtion_tag_new', { 'id': tag.id } ) }#}" class="btn btn-subscribe">
-                                <i class="fa fa-thumb-tack"></i> S'abonner au tag
-                            </a>
-                        </span>
+                        {{ render(controller('InckNotifBundle:Subscription:button', { entity: 'inck_notif.tag_class', id: tag.id })) }}
                     </p>
                 </div>
             </div>
@@ -47,8 +43,9 @@
     {% endjavascripts %}
 
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='yui_js' output='js/compiled/article/tag/show/social.js'
+        {% javascripts filter='yui_js' output='js/compiled/article/tag/show/authenticated.js'
             'bundles/inckarticle/js/Article/social.js'
+            'bundles/incknotif/js/Subscription/new.js'
         %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
