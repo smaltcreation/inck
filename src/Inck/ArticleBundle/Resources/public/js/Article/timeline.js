@@ -14,7 +14,7 @@ $(document).ready(function(){
         width: 'container'
     });
 
-    reset_categories();
+    resetCategories();
 
     // Tags filter
     var tagsInput = $("#inck_articlebundle_articlefilter_tags");
@@ -38,7 +38,7 @@ $(document).ready(function(){
         }
     });
 
-    reset_tags();
+    resetTags();
 
     // Authors filter
     var authorsInput = $("#inck_articlebundle_articlefilter_authors");
@@ -61,7 +61,7 @@ $(document).ready(function(){
         }
     });
 
-    reset_authors();
+    resetAuthors();
 
     // Form
     var form = $('form[name="inck_articlebundle_articlefilter"]');
@@ -84,6 +84,7 @@ $(document).ready(function(){
             dataType: 'html'
         }).done(function(articles){
             timeline.replaceWith(articles);
+            resetPaginator();
 
             $('#articles-total').find('span:first').text(
                 $('#timeline').find('.articles:first').attr('data-total-articles')
@@ -94,19 +95,19 @@ $(document).ready(function(){
     });
 
     // Reset filters
-    function reset_categories(){
+    function resetCategories(){
         if('category' in selectedFilters){
             categoriesInput.select2('data', [selectedFilters.category]);
         }
     }
 
-    function reset_tags(){
+    function resetTags(){
         if('tag' in selectedFilters){
             tagsInput.select2('data', [selectedFilters.tag]);
         }
     }
 
-    function reset_authors(){
+    function resetAuthors(){
         if('author' in selectedFilters){
             authorsInput.select2('data', [selectedFilters.author]);
         }
@@ -116,18 +117,56 @@ $(document).ready(function(){
 
     reset.click(function(e){
         e.preventDefault();
+
         form.find(".select2-offscreen").val(null).select2("data", null);
-        reset_categories();
-        reset_tags();
-        reset_authors();
+        resetCategories();
+        resetTags();
+        resetAuthors();
+
         form.submit();
     });
 
     // Pagination
     var nextPage = 2;
-    var totalPages = $('#timeline').find('div.articles:first').attr('data-total-pages');
+
+    function resetPaginator(){
+        $('#timeline-next-page').removeClass('hidden');
+        nextPage = 2;
+    }
 
     $('#timeline-next-page').click(function(){
+        var button = $(this);
+        var icon = button.find('i:first');
+        icon.attr('class', 'fa fa-circle-o-notch fa-spin');
 
+        $.ajax({
+            url: Routing.generate('inck_article_article_filter', {
+                page: nextPage
+            }),
+            data: {
+                filters: {
+                    categories: categoriesInput.val(),
+                    tags: tagsInput.val(),
+                    authors: authorsInput.val()
+                }
+            },
+            method: 'POST',
+            dataType: 'html'
+        }).done(function(articles){
+            nextPage++;
+            var timeline = $('#timeline');
+            var list = timeline.find('div.articles:first');
+            var totalPages = list.attr('data-total-pages');
+
+            if(nextPage > totalPages){
+                button.addClass('hidden');
+            }
+
+            $(articles).find('article').each(function(){
+                $(this).appendTo(list);
+            });
+
+            icon.attr('class', 'fa fa-plus');
+        });
     });
 });

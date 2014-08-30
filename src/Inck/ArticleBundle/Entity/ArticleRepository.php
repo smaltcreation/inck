@@ -162,6 +162,7 @@ class ArticleRepository extends EntityRepository
 
         $qb
             ->andWhere($orx)
+            ->groupBy('a.id')
             ->addOrderBy("a.$orderBy", 'DESC');
 
         if($page !== false)
