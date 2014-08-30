@@ -12,18 +12,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class VoteController extends Controller
 {
     /**
-     * @Route("/article/{id}/vote/{up}", name="inck_article_vote_new", requirements={"id" = "\d+", "up" = "0|1"}, options={"expose"=true})
+     * @Route("/vote/{up}/article/{id}", name="inck_article_vote_new", requirements={"id" = "\d+", "up" = "0|1"}, options={"expose"=true})
      * @Secure(roles="ROLE_USER")
      */
     public function save($id, $up)
     {
         try
         {
-            if(!$this->get('security.context')->getToken()->getUser())
-            {
-                throw new Exception("Vous devez être connecté pour voter.");
-            }
-
             $em = $this->getDoctrine()->getManager();
 
             // Récupération de l'article
