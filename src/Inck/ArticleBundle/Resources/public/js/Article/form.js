@@ -24,6 +24,7 @@ $(document).ready(function(){
             if(query.term == '') return;
             $.ajax({
                 url: Routing.generate('inck_article_tag_autocomplete', {
+                    mode: 'name',
                     name: query.term
                 }),
                 dataType: 'json'

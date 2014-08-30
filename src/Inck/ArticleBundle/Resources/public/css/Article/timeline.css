@@ -1,6 +1,10 @@
 #filters {
     display: none;
-    padding-bottom: 30px;
+}
+
+#filters div.action {
+    margin-top: 26px;
+    text-align: center;
 }
 
 article {

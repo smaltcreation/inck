@@ -2,7 +2,7 @@
     <p>
         <button class="btn btn-default toggle-filter"><i class="fa fa-filter"></i> Filtrer les articles</button>
         <span id="articles-total" class="label label-primary">
-            <span>{{ total }}</span> résultat{% if total > 1 %}s{% endif %}
+            <span>{{ totalArticles }}</span> résultat{% if totalArticles > 1 %}s{% endif %}
         </span>
     </p>
     <div id="filters">
@@ -25,7 +25,14 @@
                             </div>
                         </div>
 
-                        {{ form_row(form.actions) }}
+                        <div class="row">
+                            <div class="col-xs-6">
+                                {{ form_row(form.authors) }}
+                            </div>
+                            <div class="col-xs-6 action">
+                                {{ form_row(form.actions) }}
+                            </div>
+                        </div>
 
                         <div class="hidden">
                             {{form_rest(form)}}
@@ -35,5 +42,14 @@
             </div>
         </div>
     </div>
-    {% include 'InckArticleBundle:Article:filter.html.twig' with { 'articles': articles } %}
+    <script type="text/javascript">
+        var selectedFilters = '{{ selected|json_encode()|raw }}';
+    </script>
+    <br>
+    {% include 'InckArticleBundle:Article:filter.html.twig' with { 'articles': articles, 'totalArticles': totalArticles, 'totalPages': totalPages } %}
+    {% set hidden = (totalPages == 1) ? 'hidden' : '' %}
+    <button id="timeline-next-page" class="center-block btn btn-important {{ hidden }}">
+        <i class="fa fa-plus"></i>
+        Afficher plus d'articles
+    </button>
 </div>

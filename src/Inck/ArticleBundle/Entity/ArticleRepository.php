@@ -4,6 +4,7 @@ namespace Inck\ArticleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Inck\UserBundle\Entity\User;
 use Inck\UserBundle\Entity\UserRepository;
 
 /**
@@ -143,11 +144,7 @@ class ArticleRepository extends EntityRepository
                         ->in("$field.id", ":$filterName")
                 );
 
-                /**
-                 * @var CategoryRepository $repository
-                 * @var TagRepository $repository
-                 * @var UserRepository $repository
-                 */
+                /** @var CategoryRepository|TagRepository|UserRepository $repository */
                 $repository = $this
                     ->getEntityManager()
                     ->getRepository($table);
@@ -185,7 +182,7 @@ class ArticleRepository extends EntityRepository
 
             $this->formatResults($results);
 
-            return array($results, $totalArticles);
+            return array($results, $totalArticles, $totalPages);
         }
 
         else
@@ -240,6 +237,52 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
+     * Convertit les filtres reçus
+     * @param $filters array
+     */
+    private function convertFilters(&$filters)
+    {
+        // Conversion "one to many"
+        $conversion = array(
+            'author'    => 'authors',
+            'category'  => 'categories',
+            'tag'       => 'tags',
+        );
+
+        foreach($conversion as $from => $to)
+        {
+            if(isset($filters[$from]))
+            {
+                /** @var Category|Tag|User $entity */
+                $entity = $filters[$from];
+
+                if(isset($filters[$to]))
+                {
+                    $filters[$to][] = $entity->getId();
+                }
+
+                else
+                {
+                    $filters[$to] = array($entity->getId());
+                }
+
+                unset($filters[$from]);
+            }
+        }
+
+        // Conversion "string to array"
+        $conversion = array_values($conversion);
+
+        foreach($conversion as $to)
+        {
+            if(isset($filters[$to]) && is_string($filters[$to]))
+            {
+                $filters[$to] = explode(',', $filters[$to]);
+            }
+        }
+    }
+
+    /**
      * Vérifie les filtres reçus
      * @param $filters mixed
      * @throws \Exception
@@ -280,15 +323,6 @@ class ArticleRepository extends EntityRepository
                     }
                     break;
 
-                case 'author':
-                case 'category':
-                case 'tag':
-                    if(!is_numeric($data))
-                    {
-                        throw new \Exception("Filtre $filter invalide");
-                    }
-                    break;
-
                 default:
                     throw new \Exception("Filtre $filter non géré");
                     break;
@@ -297,45 +331,8 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * Convertit les filtres reçus
-     * @param $filters array
+     * @param array $results
      */
-    private function convertFilters(&$filters)
-    {
-        // Conversion
-        $conversion = array(
-            'author'    => 'authors',
-            'category'  => 'categories',
-            'tag'       => 'tags',
-        );
-
-        foreach($conversion as $from => $to)
-        {
-            if(isset($filters[$from]))
-            {
-                if(isset($filters[$to]))
-                {
-                    $filters[$to][] = $filters[$from];
-                }
-
-                else
-                {
-                    $filters[$to] = array($filters[$from]);
-                }
-
-                unset($filters[$from]);
-            }
-
-            if(isset($filters[$to]))
-            {
-                if(!is_array($filters[$to]))
-                {
-                    $filters[$to] = array($filters[$to]);
-                }
-            }
-        }
-    }
-
     private function formatResults(&$results)
     {
         foreach($results as &$result)

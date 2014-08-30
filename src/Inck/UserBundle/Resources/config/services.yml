@@ -9,3 +9,8 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: inck_user_registration }
+    inck_user.type.users_selector:
+        class: Inck\UserBundle\Form\Type\UsersSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: inck_userbundle_users_selector }

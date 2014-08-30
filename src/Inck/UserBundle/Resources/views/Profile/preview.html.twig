@@ -37,7 +37,7 @@
         </section>
         <hr>
         <section id="user-{{ user.id }}-articles" class="user-articles">
-            {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': { 'author': user.id } })) }}
+            {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': { 'author': user } })) }}
         </section>
     </div>
 {% endblock %}
@@ -45,6 +45,7 @@
 {% block javascripts %}
     {{ parent() }}
     {% javascripts filter='yui_js' output='js/compiled/user/profile/preview.js'
+        'bundles/inckarticle/js/Article/timeline.js'
         'bundles/inckarticle/js/Article/social.js'
         'bundles/incknotif/js/Subscription/new.js'
     %}

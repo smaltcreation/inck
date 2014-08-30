@@ -32,6 +32,13 @@ class ArticleFilterType extends AbstractType
                     'placeholder'   => 'Filter par tags',
                 ],
             ])
+            ->add('authors', 'inck_userbundle_users_selector', [
+                'label' => 'Auteurs',
+                'required'  => false,
+                'attr'  => [
+                    'placeholder'   => 'Filter par auteur',
+                ],
+            ])
             ->add('actions', 'form_actions', [
                 'buttons' => [
                     'filter'    => [
@@ -59,8 +66,8 @@ class ArticleFilterType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'categories'    => null,
-            'tags'          => null,
+            'categories'    => array(),
+            'tags'          => array(),
         ]);
     }
 

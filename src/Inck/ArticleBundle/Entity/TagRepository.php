@@ -20,7 +20,7 @@ class TagRepository extends EntityRepository
     {
         $query = $this
             ->createQueryBuilder('t')
-            ->select('t.name')
+            ->select('t.id', 't.name')
             ->where('t.name LIKE :name')
             ->setParameter('name', "%$name%")
             ->getQuery()

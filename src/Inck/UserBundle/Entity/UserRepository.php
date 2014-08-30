@@ -64,4 +64,37 @@ class UserRepository extends EntityRepository
 
         return sprintf('(%s) AS %s', $qb->getDQL(), $columnName);
     }
+
+    /**
+     * @param array $username
+     * @return array
+     */
+    public function getAutocompleteResults($username)
+    {
+        $query = $this
+            ->createQueryBuilder('u')
+            ->select('u.id', 'u.username')
+            ->where('u.username LIKE :username')
+            ->setParameter('username', "%$username%")
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param array $usernames
+     * @return array
+     */
+    public function findWhereUsernameIn($usernames)
+    {
+        $query = $this
+            ->createQueryBuilder('u')
+            ->where('u.username IN (:usernames)')
+            ->setParameter('usernames', $usernames)
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
 }

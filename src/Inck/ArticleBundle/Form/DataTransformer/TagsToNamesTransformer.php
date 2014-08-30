@@ -31,12 +31,13 @@ class TagsToNamesTransformer implements DataTransformerInterface
     public function transform($tags)
     {
         if (!$tags) {
-            return "";
+            return '';
         }
 
         // Récupération des noms
         $names = array();
 
+        /** @var Tag $tag */
         foreach($tags as $tag)
         {
             $names[] = $tag->getName();
@@ -48,30 +49,31 @@ class TagsToNamesTransformer implements DataTransformerInterface
     /**
      * Transforms a string (names) to an ArrayCollection (tags).
      *
-     * @param  string $names
+     * @param  string $tags
      * @return ArrayCollection|null
      */
-    public function reverseTransform($names)
+    public function reverseTransform($tags)
     {
-        if (!$names) {
+        if (!$tags) {
             return new ArrayCollection();
         }
 
-        $names = explode(',', $names);
+        $tags = explode(',', $tags);
 
         // Récupération des tags existants
         $tags = $this->om
             ->getRepository('InckArticleBundle:Tag')
-            ->findWhereNameIn($names)
+            ->findWhereNameIn($tags)
         ;
 
         // Recherche de nouveaux tags
         $newNames = array();
 
-        foreach($names as $name)
+        foreach($tags as $name)
         {
             $isNew = true;
 
+            /** @var Tag $tag */
             foreach($tags as $tag)
             {
                 if($name === $tag->getName())

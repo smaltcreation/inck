@@ -4,11 +4,12 @@ namespace Inck\ArticleBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Inck\ArticleBundle\Entity\Article;
+use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\Tag;
 use Inck\ArticleBundle\Entity\Vote;
-use Inck\ArticleBundle\Form\DataTransformer\TagsToNamesTransformer;
 use Inck\ArticleBundle\Form\Type\ArticleFilterType;
 use Inck\ArticleBundle\Form\Type\ArticleType;
+use Inck\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -270,26 +271,56 @@ class ArticleController extends Controller
      */
     public function timelineAction($filters)
     {
-        $form = $this->createForm(new ArticleFilterType(), $filters);
+        $form = $this->createForm(new ArticleFilterType());
         $em = $this->getDoctrine()->getManager();
 
-        list($articles, $total) = $em
+        list($articles, $totalArticles, $totalPages) = $em
             ->getRepository('InckArticleBundle:Article')
             ->findByFilters($filters);
 
+        // Filtres sélectionnés par défaut
+        $selectedFilters = array('category', 'tag', 'author');
+        $selected = array();
+
+        foreach($filters as $filter => $entity)
+        {
+            if(in_array($filter, $selectedFilters))
+            {
+                if($filter === 'author')
+                {
+                    /** @var User $entity */
+                    $name = $entity->getUsername();
+                }
+
+                else
+                {
+                    /** @var Category|Tag $entity */
+                    $name = $entity->getName();
+                }
+
+                $selected[$filter] = array(
+                    'id'        => $entity->getId(),
+                    'text'      => $name,
+                    'locked'    => true,
+                );
+            }
+        }
+
         return array(
             'form'          => $form->createView(),
+            'selected'      => $selected,
             'articles'      => $articles,
-            'total'         => $total,
+            'totalArticles' => $totalArticles,
+            'totalPages'    => $totalPages,
         );
     }
 
     /**
-     * @Route("/filter", name="inck_article_article_filter", options={"expose"=true})
+     * @Route("/filter/{page}", name="inck_article_article_filter", defaults={"page" = 1}, options={"expose"=true})
      * @Method("POST")
      * @Template()
      */
-    public function filterAction(Request $request)
+    public function filterAction(Request $request, $page)
     {
         /** @var $em ObjectManager */
         $em = $this->getDoctrine()->getManager();
@@ -321,31 +352,18 @@ class ArticleController extends Controller
             }
         }
 
-        // Traitement des tags
-        if(isset($filters['tags']))
-        {
-            $transformer = new TagsToNamesTransformer($em);
-            $tags = $transformer->reverseTransform($filters['tags']);
-            $filters['tags'] = array();
-
-            /** @var Tag $tag */
-            foreach($tags as $tag)
-            {
-                $filters['tags'][] = $tag->getId();
-            }
-        }
-
         // Ajout du type
         $filters['type'] = 'published';
 
         // Récupréation des articles
-        list($articles, $total) = $em
+        list($articles, $totalArticles, $totalPages) = $em
             ->getRepository('InckArticleBundle:Article')
-            ->findByFilters($filters);
+            ->findByFilters($filters, $page);
 
         return array(
-            'articles'  => $articles,
-            'total'     => $total,
+            'articles'      => $articles,
+            'totalArticles' => $totalArticles,
+            'totalPages'    => $totalPages,
         );
     }
 
@@ -367,6 +385,7 @@ class ArticleController extends Controller
         try
         {
             $em = $this->getDoctrine()->getManager();
+            /** @var Article $article */
             $article = $em->getRepository("InckArticleBundle:Article")->find($id);
             $user = $this->getUser();
 

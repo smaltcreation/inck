@@ -2,6 +2,7 @@
 
 namespace Inck\ArticleBundle\Controller;
 
+use Inck\ArticleBundle\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -10,9 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class TagController extends Controller
 {
     /**
-     * @Route("/tag/autocomplete/{name}", name="inck_article_tag_autocomplete", options={"expose"=true})
+     * @Route("/tag/autocomplete/{mode}/{name}", name="inck_article_tag_autocomplete", requirements={"mode" = "id|name"}, options={"expose"=true})
      */
-    public function autocomplete($name)
+    public function autocomplete($mode, $name)
     {
         // Récupération des tags
         $em = $this->getDoctrine()->getManager();
@@ -24,12 +25,12 @@ class TagController extends Controller
         foreach($tags as $tag)
         {
             $results[] = array(
-                'id'    => $tag['name'],
+                'id'    => $tag[$mode],
                 'text'  => $tag['name'],
             );
         }
 
-        // Renvoie des données
+        // Renvoi des données
         return new JsonResponse(array(
             'results'   => $results,
         ));
@@ -44,11 +45,12 @@ class TagController extends Controller
         try
         {
             $em = $this->getDoctrine()->getManager();
+            /** @var Tag $tag */
             $tag = $em->getRepository('InckArticleBundle:Tag')->find($id);
             $articlesLength = $em->getRepository('InckArticleBundle:Article')->countByTag($tag->getId(), true);
 
             if(!$tag) {
-                throw new \Exception("Tag inexistante.");
+                throw new \Exception("Tag inexistant.");
             }
 
             return array(

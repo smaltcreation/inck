@@ -4,13 +4,15 @@ namespace Inck\UserBundle\Controller;
 
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Model\UserInterface;
+use Inck\ArticleBundle\Entity\ArticleRepository;
 use Inck\UserBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProfileController extends BaseController
 {
     /**
-     * Show the user
+     * @Template()
      */
     public function showAction()
     {
@@ -22,23 +24,29 @@ class ProfileController extends BaseController
         }
 
         $em = $this->container->get('doctrine')->getManager();
+        /** @var ArticleRepository $repository */
         $repository = $em->getRepository('InckArticleBundle:Article');
 
         $articlesAsDraft = $repository->findByFilters(array(
             'type'      => 'as_draft',
-            'author'    => $user->getId(),
+            'author'    => $user,
         ), false);
 
         $articlesPublished = $repository->findByFilters(array(
             'type'      => 'published',
-            'author'    => $user->getId(),
+            'author'    => $user,
         ), false);
 
         $articlesPosted = $repository->findByFilters(array(
             'type'      => 'posted',
-            'author'    => $user->getId(),
+            'author'    => $user,
         ), false);
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user, 'articlesAsDraft' => $articlesAsDraft, 'articlesPublished' => $articlesPublished, 'articlesPosted' => $articlesPosted));
+        return array(
+            'user'              => $user,
+            'articlesAsDraft'   => $articlesAsDraft,
+            'articlesPublished' => $articlesPublished,
+            'articlesPosted'    => $articlesPosted,
+        );
     }
 }
