@@ -2,7 +2,6 @@
 
 namespace Inck\ArticleBundle\Form\Type;
 
-use Inck\ArticleBundle\Form\DataTransformer\TagsToNamesTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -16,7 +15,6 @@ class ArticleFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'hidden')
             ->add('categories', 'entity', [
                 'label'     => 'Catégories',
                 'class'     => 'InckArticleBundle:Category',

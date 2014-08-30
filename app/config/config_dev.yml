@@ -48,3 +48,8 @@ web_profiler_extra:
     twig:
         enabled:        true
         display_in_wdt: true
+
+fos_user:
+    registration:
+        confirmation:
+            enabled: false

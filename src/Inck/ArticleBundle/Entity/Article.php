@@ -119,7 +119,7 @@ class Article
     private $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Inck\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\Inck\UserBundle\Entity\User", inversedBy="articles")
      */
     private $author;
 
@@ -139,13 +139,13 @@ class Article
     protected $previousImageName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Category", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Category", inversedBy="articles", cascade={"persist"})
      * @Assert\Count(min="1", max="3")
      */
     private $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Tag", inversedBy="articles", cascade={"persist"})
      * @Assert\Count(min="1", max="10")
      */
     private $tags;
@@ -621,7 +621,7 @@ class Article
     /**
      * Rewrite string to slug
      *
-     * @param string $slug
+     * @internal param string $slug
      * @return string
      */
     public function __toSlug()

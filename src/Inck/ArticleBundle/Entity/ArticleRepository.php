@@ -2,8 +2,9 @@
 
 namespace Inck\ArticleBundle\Entity;
 
-use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Inck\UserBundle\Entity\UserRepository;
 
 /**
  * ArticleRepository
@@ -13,20 +14,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
-    const ARTICLES_PER_PAGE = 10;
+    const ARTICLES_PER_PAGE = 5;
 
     /**
      * Récupère les articles en fonction des filtres
      *
-     * Types disponibles :
-     * Brouillons : as_draft
-     * Publiés : published
-     * En modération : in_moderation
-     * En validation (modérés mais non publiés ou approuvés/désapprouvés) : in_validation
-     * Désapprouvés : disapproved
+     * as_draft         : brouillons
+     * published        : publiés
+     * posted           : postés
+     * in_moderation    : en modération
+     * in_validation    : en validation (modérés mais non publiés ou approuvés/désapprouvés)
+     * disapproved      : désapprouvés
      *
      * @param $filters
-     * @param int $page
+     * @param int|boolean $page
      * @throws \Exception
      * @return array
      */
@@ -36,6 +37,7 @@ class ArticleRepository extends EntityRepository
         $this->checkFilters($filters);
 
         $qb = $this->createQueryBuilder('a');
+        $orderBy = 'postedAt';
 
         // Type d'article
         if(isset($filters['type']))
@@ -46,24 +48,26 @@ class ArticleRepository extends EntityRepository
                     $qb
                         ->where('a.asDraft = :asDraft')
                         ->setParameter('asDraft', true)
-                        ->andWhere('a.postedAt IS NULL')
-                        ->orderBy('a.createdAt', 'DESC');
+                        ->andWhere('a.postedAt IS NULL');
+
+                    $orderBy = 'createdAt';
                     break;
 
                 case 'published':
                     $qb
                         ->where('a.published = :published')
-                        ->setParameter('published', true)
-                        ->orderBy('a.publishedAt', 'DESC');
+                        ->setParameter('published', true);
+
+                    $orderBy = 'publishedAt';
                     break;
 
                 case 'posted':
                     $qb
-                        ->where($qb
-                            ->expr()
-                            ->isNotNull('a.postedAt')
-                        )
-                        ->orderBy('a.postedAt', 'DESC');
+                        ->where(
+                            $qb
+                                ->expr()
+                                ->isNotNull('a.postedAt')
+                        );
                     break;
 
                 case 'in_moderation':
@@ -72,8 +76,7 @@ class ArticleRepository extends EntityRepository
                         ->setParameter('published', false)
                         ->andWhere('a.asDraft = :asDraft')
                         ->setParameter('asDraft', false)
-                        ->andWhere('a.postedAt >= DATE_SUB(CURRENT_TIMESTAMP(), 1, \'DAY\')')
-                        ->orderBy('a.postedAt', 'DESC');
+                        ->andWhere('a.postedAt >= DATE_SUB(CURRENT_TIMESTAMP(), 1, \'DAY\')');
                     break;
 
                 case 'in_validation':
@@ -82,15 +85,15 @@ class ArticleRepository extends EntityRepository
                         ->setParameter('approved', null)
                         ->andWhere('a.asDraft = :asDraft')
                         ->setParameter('asDraft', false)
-                        ->andWhere('a.postedAt >= DATE_SUB(CURRENT_TIMESTAMP(), 2, \'DAY\')')
-                        ->orderBy('a.postedAt', 'DESC');
+                        ->andWhere('a.postedAt >= DATE_SUB(CURRENT_TIMESTAMP(), 2, \'DAY\')');
                     break;
 
                 case 'disapproved':
                     $qb
                         ->where('a.approved = :approved')
-                        ->setParameter('approved', false)
-                        ->orderBy('a.postedAt', 'DESC');
+                        ->setParameter('approved', false);
+
+                    $orderBy = 'createdAt';
                     break;
 
                 default:
@@ -105,73 +108,99 @@ class ArticleRepository extends EntityRepository
         $conditions = array(
             'authors'       => array(
                 'field' => 'author',
+                'table' => 'InckUserBundle:User',
                 'alias' => 'u',
             ),
             'categories'    => array(
                 'field' => 'categories',
+                'table' => 'InckArticleBundle:Category',
                 'alias' => 'c',
             ),
             'tags'          => array(
                 'field' => 'tags',
+                'table' => 'InckArticleBundle:Tag',
                 'alias' => 't',
             ),
         );
 
-        $score = array();
-
         foreach($conditions as $filter => $parameters)
         {
+            /**
+             * @var string $field
+             * @var string $table
+             * @var string $alias
+             */
+            extract($parameters);
+
             if(isset($filters[$filter]))
             {
-                $qb->join('a.'.$parameters['field'], $parameters['field']);
+                $filterName = $field.'Filter';
+                $columnName = $alias.'Score';
 
-                $orx->add($qb
-                    ->expr()
-                    ->in($parameters['field'].'.id', $filters[$filter])
+                $orx->add(
+                    $qb
+                        ->expr()
+                        ->in("$field.id", ":$filterName")
                 );
 
-                $scoreAlias = $filter.'Score';
-                $score[] = sprintf('SELECT(%s)', $scoreAlias);
+                /**
+                 * @var CategoryRepository $repository
+                 * @var TagRepository $repository
+                 * @var UserRepository $repository
+                 */
+                $repository = $this
+                    ->getEntityManager()
+                    ->getRepository($table);
 
                 $qb
-                    ->addSelect(sprintf(
-                        '(SELECT COUNT(%s.id) FROM InckArticleBundle:Article a%s '
-                        .'JOIN a%s.%s %s WHERE a%s.id = a.id AND %s.id IN (:%sParameter)) AS %sScore',
-                        $parameters['alias'],
-                        $parameters['alias'],
-                        $parameters['alias'],
-                        $parameters['field'],
-                        $parameters['alias'],
-                        $parameters['alias'],
-                        $parameters['alias'],
-                        $parameters['alias'],
-                        $parameters['field']
-                    ))
-                    ->setParameter($parameters['alias'].'Parameter', $filters[$filter])
-                    ->addOrderBy($parameters['field'].'Score', 'DESC');
+                    ->innerJoin("a.$field", $field)
+                    ->addSelect(
+                        $repository->getScoreFilterQuery($filterName, $columnName)
+                    )
+                    ->setParameter($filterName, $filters[$filter])
+                    ->addOrderBy($columnName, 'DESC')
+                ;
             }
         }
 
-        $qb->andWhere($orx);
-
-        // Offset et limit
         $qb
-            ->setFirstResult(($page - 1) * self::ARTICLES_PER_PAGE)
-            ->setMaxResults(self::ARTICLES_PER_PAGE);
+            ->andWhere($orx)
+            ->addOrderBy("a.$orderBy", 'DESC');
 
-        $results = $qb->getQuery()->getResult();
-
-        foreach($results as &$result)
+        if($page !== false)
         {
-            if(is_array($result) && isset($result[0]))
-            {
-                $result = $result[0];
-            }
+            $paginator = new Paginator($qb);
+
+            $totalArticles = count($paginator);
+            $totalPages = ceil($totalArticles / self::ARTICLES_PER_PAGE);
+
+            $paginator
+                ->getQuery()
+                ->setFirstResult(($page - 1) * self::ARTICLES_PER_PAGE)
+                ->setMaxResults(self::ARTICLES_PER_PAGE);
+
+            $results = $paginator
+                ->getQuery()
+                ->getResult();
+
+            $this->formatResults($results);
+
+            return array($results, $totalArticles);
         }
 
-        return $results;
+        else
+        {
+            $results = $qb->getQuery()->getResult();
+            $this->formatResults($results);
+            return $results;
+        }
     }
 
+    /**
+     * @param int $category
+     * @param bool $published
+     * @return int
+     */
     public function countByCategory($category, $published = false)
     {
         $qb = $this->createQueryBuilder('a');
@@ -189,6 +218,11 @@ class ArticleRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @param int $tag
+     * @param bool $published
+     * @return int
+     */
     public function countByTag($tag, $published = false)
     {
         $query = $this->createQueryBuilder('a');
@@ -217,16 +251,6 @@ class ArticleRepository extends EntityRepository
             throw new \Exception("Filtres invalides");
         }
 
-        $validFilters = array(
-            'type',
-            'authors',
-            'author',
-            'categories',
-            'category',
-            'tags',
-            'tag',
-        );
-
         $validTypes = array(
             'as_draft',
             'published',
@@ -238,11 +262,6 @@ class ArticleRepository extends EntityRepository
 
         foreach($filters as $filter => $data)
         {
-            if(!in_array($filter, $validFilters))
-            {
-                throw new \Exception("Filtre $filter non géré");
-            }
-
             switch($filter)
             {
                 case 'type':
@@ -271,18 +290,19 @@ class ArticleRepository extends EntityRepository
                     break;
 
                 default:
-                    throw new \Exception("Filtre $filter invalide");
+                    throw new \Exception("Filtre $filter non géré");
                     break;
             }
         }
     }
 
     /**
-     * Converti les filtres reçus
+     * Convertit les filtres reçus
      * @param $filters array
      */
     private function convertFilters(&$filters)
     {
+        // Conversion
         $conversion = array(
             'author'    => 'authors',
             'category'  => 'categories',
@@ -306,14 +326,23 @@ class ArticleRepository extends EntityRepository
                 unset($filters[$from]);
             }
 
-            if(isset($filters[$to]) && !is_array($filters[$to]))
+            if(isset($filters[$to]))
             {
-                $filters[$to] = array($filters[$to]);
+                if(!is_array($filters[$to]))
+                {
+                    $filters[$to] = array($filters[$to]);
+                }
             }
+        }
+    }
 
-            if(isset($filters[$to]) && count($filters[$to]) === 0)
+    private function formatResults(&$results)
+    {
+        foreach($results as &$result)
+        {
+            if(is_array($result) && isset($result[0]))
             {
-                unset($filters[$to]);
+                $result = $result[0];
             }
         }
     }

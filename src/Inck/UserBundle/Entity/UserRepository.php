@@ -25,28 +25,43 @@ class UserRepository extends EntityRepository
      */
     public function countArticles($published = null, $categories = null)
     {
-        $query = $this
+        $qb = $this
             ->createQueryBuilder('u')
             ->select('COUNT(u.articles)');
 
         /* PUBLICATION: boolean $published */
         if($published !== null) {
-            $query
+            $qb
                 ->join('u.articles', 'a')
-                ->andWhere($query->expr()->in('a.published', $published == true ? 1 : 0));
+                ->andWhere($qb->expr()->in('a.published', $published == true ? 1 : 0));
         }
 
         /* CATEGORIES: string array() $categories */
         if($categories !== null) {
-            $query->join('u.articles', 'a');
-            $query->join('a.categories', 'c');
+            $qb->join('u.articles', 'a');
+            $qb->join('a.categories', 'c');
             foreach($categories as $name) {
-                $query->andWhere($query->expr()->in('c.name', $name));
+                $qb->andWhere($qb->expr()->in('c.name', $name));
             }
 
         }
 
-        $query->getQuery();
-        return (int) $query->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param string $filterName
+     * @param string $columnName
+     * @return string
+     */
+    public function getScoreFilterQuery($filterName, $columnName)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('COUNT(u.id)')
+            ->innerJoin('u.articles', 'ua')
+            ->where('ua.id = a.id')
+            ->andWhere("u.id IN (:$filterName)");
+
+        return sprintf('(%s) AS %s', $qb->getDQL(), $columnName);
     }
 }

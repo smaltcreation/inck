@@ -46,12 +46,11 @@ $(document).ready(function(){
 
     // Form
     var form = $('form[name="inck_articlebundle_articlefilter"]');
-    var timeline = $('#timeline').find('div.articles:first');
 
     // Submit filters
     form.submit(function(e){
         e.preventDefault();
-        timeline.find('article').slideUp('slow');
+        var timeline = $('#timeline').find('div.articles:first');
 
         $.ajax({
             url: Routing.generate('inck_article_article_filter'),
@@ -65,13 +64,11 @@ $(document).ready(function(){
             method: 'POST',
             dataType: 'html'
         }).done(function(articles){
-            articles = $(articles);
-            articles.find('article').hide();
-            timeline.html(articles);
-            timeline.find('.search-score').tooltip({
-                placement: 'right'
-            });
-            articles.find('article').slideDown();
+            timeline.replaceWith(articles);
+
+            $('#articles-total').find('span:first').text(
+                $('#timeline').find('.articles:first').attr('data-total')
+            );
         });
 
         return false;

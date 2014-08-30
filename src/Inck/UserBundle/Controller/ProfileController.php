@@ -27,17 +27,17 @@ class ProfileController extends BaseController
         $articlesAsDraft = $repository->findByFilters(array(
             'type'      => 'as_draft',
             'author'    => $user->getId(),
-        ));
+        ), false);
 
         $articlesPublished = $repository->findByFilters(array(
             'type'      => 'published',
             'author'    => $user->getId(),
-        ));
+        ), false);
 
         $articlesPosted = $repository->findByFilters(array(
             'type'      => 'posted',
             'author'    => $user->getId(),
-        ));
+        ), false);
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user, 'articlesAsDraft' => $articlesAsDraft, 'articlesPublished' => $articlesPublished, 'articlesPosted' => $articlesPosted));
     }

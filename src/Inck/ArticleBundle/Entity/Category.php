@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Category
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Inck\ArticleBundle\Entity\CategoryRepository")
  */
 class Category
 {
@@ -42,6 +42,11 @@ class Category
      * @ORM\Column(type="string")
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Article", mappedBy="categories"))
+     */
+    private $articles;
 
 
     public function __toString()
@@ -158,5 +163,21 @@ class Category
         }
 
         return $slug;
+    }
+
+    /**
+     * @param mixed $articles
+     */
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }

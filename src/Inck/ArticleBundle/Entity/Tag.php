@@ -36,6 +36,11 @@ class Tag
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Article", mappedBy="tags"))
+     */
+    private $articles;
+
 
     public function __toString()
     {
@@ -128,5 +133,21 @@ class Tag
         }
 
         return $slug;
+    }
+
+    /**
+     * @param mixed $articles
+     */
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }

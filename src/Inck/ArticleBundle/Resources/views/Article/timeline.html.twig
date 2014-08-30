@@ -1,32 +1,35 @@
 <div id="timeline" class="container">
     <p>
         <button class="btn btn-default toggle-filter"><i class="fa fa-filter"></i> Filtrer les articles</button>
-        <span class="label label-primary">{{ articles|length }} résultat{% if articles|length > 1 %}s{% endif %}</span>
+        <span id="articles-total" class="label label-primary">
+            <span>{{ total }}</span> résultat{% if total > 1 %}s{% endif %}
+        </span>
     </p>
     <div id="filters">
         <div class="row">
             <div class="col-md-12">
                 <div class="well">
                     {{ form_start(form) }}
-                    {% if form_errors(form) %}
-                        <div class="alert alert-danger">
-                            {{ form_errors(form) }}
-                        </div>
-                    {% endif %}
+                        {% if form_errors(form) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
 
-                    <div class="row">
-                        <div class="col-xs-6">
-                            {{ form_row(form.categories) }}
+                        <div class="row">
+                            <div class="col-xs-6">
+                                {{ form_row(form.categories) }}
+                            </div>
+                            <div class="col-xs-6">
+                                {{ form_row(form.tags) }}
+                            </div>
                         </div>
-                        <div class="col-xs-6">
-                            {{ form_row(form.tags) }}
-                        </div>
-                    </div>
 
-                    {{ form_row(form.actions) }}
-                    <div class="hidden">
-                        {{form_rest(form)}}
-                    </div>
+                        {{ form_row(form.actions) }}
+
+                        <div class="hidden">
+                            {{form_rest(form)}}
+                        </div>
                     {{ form_end(form) }}
                 </div>
             </div>

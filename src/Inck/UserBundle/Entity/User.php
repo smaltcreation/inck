@@ -166,6 +166,11 @@ class User extends BaseUser
     protected $groups;
 
     /**
+     * @ORM\OneToMany(targetEntity="Inck\ArticleBundle\Entity\Article", mappedBy="author")
+     */
+    protected $articles;
+
+    /**
      * @ORM\OneToMany(targetEntity="Inck\UserBundle\Entity\User", mappedBy="subcriber")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -565,5 +570,37 @@ class User extends BaseUser
     public function getSubcribtions()
     {
         return $this->subcribtions;
+    }
+
+    /**
+     * @param mixed $groups
+     */
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $articles
+     */
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }

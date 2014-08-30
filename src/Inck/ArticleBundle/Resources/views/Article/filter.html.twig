@@ -1,4 +1,4 @@
-<div class="articles">
+<div class="articles" data-total="{{ total }}">
     {% if articles is not null %}
         {% for article in articles %}
             <article itemscope itemtype="http://schema.org/Article" id="article-{{ article.id }}" class="article">

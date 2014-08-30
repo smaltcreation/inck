@@ -2,9 +2,8 @@
 
 namespace Inck\ArticleBundle\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Persistence\ObjectManager;
 use Inck\ArticleBundle\Entity\Article;
-use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\Tag;
 use Inck\ArticleBundle\Entity\Vote;
 use Inck\ArticleBundle\Form\DataTransformer\TagsToNamesTransformer;
@@ -15,8 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * @Route("/article")
@@ -32,7 +31,7 @@ class ArticleController extends Controller
     public function formAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
 
         // Récupération de l'article en cas d'édition
         $article = ($id === 0)
@@ -93,7 +92,10 @@ class ArticleController extends Controller
             $article->setAuthor($user);
 
             // On a cliqué sur le bouton "publier"
-            if($form->get('actions')->get('publish')->isClicked())
+            /** @var SubmitButton $publish */
+            $publish = $form->get('actions')->get('publish');
+
+            if($publish->isClicked())
             {
                 $article->setPostedAt(new \DateTime());
                 $article->setAsDraft(false);
@@ -128,6 +130,10 @@ class ArticleController extends Controller
 
             return $this->redirect($this->generateUrl('inck_article_article_show', array(
                 'id' => $article->getId(),
+                'slug' => $article->getSlug(),
+                'date' => ($article->getPublishedAt())
+                    ? $article->getPublishedAt()->format('Y-m-d')
+                    : $article->getPostedAt()->format('Y-m-d')
             )));
         }
 
@@ -267,13 +273,14 @@ class ArticleController extends Controller
         $form = $this->createForm(new ArticleFilterType(), $filters);
         $em = $this->getDoctrine()->getManager();
 
-        $articles = $em
+        list($articles, $total) = $em
             ->getRepository('InckArticleBundle:Article')
             ->findByFilters($filters);
 
         return array(
             'form'          => $form->createView(),
             'articles'      => $articles,
+            'total'         => $total,
         );
     }
 
@@ -284,10 +291,37 @@ class ArticleController extends Controller
      */
     public function filterAction(Request $request)
     {
-        $filters = $request->request->get('filters');
+        /** @var $em ObjectManager */
         $em = $this->getDoctrine()->getManager();
 
-        // Tags
+        // Filtres reçus
+        $filters = $request->request->get('filters');
+
+        if(!is_array($filters))
+        {
+            $filters = array();
+        }
+
+        // Suppression des filtres vides
+        foreach($filters as $key => $data)
+        {
+            if(!$data)
+            {
+                unset($filters[$key]);
+            }
+        }
+
+        // Suppression des filtres qui auraient pu être ajoutés
+        $keys = array_keys($filters);
+        foreach($keys as $key)
+        {
+            if(!in_array($key, array('categories', 'tags', 'authors')))
+            {
+                unset($filters[$key]);
+            }
+        }
+
+        // Traitement des tags
         if(isset($filters['tags']))
         {
             $transformer = new TagsToNamesTransformer($em);
@@ -301,12 +335,17 @@ class ArticleController extends Controller
             }
         }
 
-        $articles = $em
+        // Ajout du type
+        $filters['type'] = 'published';
+
+        // Récupréation des articles
+        list($articles, $total) = $em
             ->getRepository('InckArticleBundle:Article')
             ->findByFilters($filters);
 
         return array(
             'articles'  => $articles,
+            'total'     => $total,
         );
     }
 
@@ -329,7 +368,7 @@ class ArticleController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
             $article = $em->getRepository("InckArticleBundle:Article")->find($id);
-            $user = $this->get('security.context')->getToken()->getUser();
+            $user = $this->getUser();
 
             if(!$article)
             {
