@@ -1,7 +1,13 @@
-<button data-entity="{{ entity }}" data-id="{{ id }}" class="btn btn-subscribe{% if subscription %} subscribed{% endif %}">
-    {% if subscription %}
-        <i class="fa fa-check"></i> <span class="btn-text">Vous êtes abonné</span>
-    {% else %}
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <button class="btn btn-subscribe {% if subscription %} subscribed{% endif %}" data-entity="{{ entity }}" data-id="{{ id }}">
+        {% if subscription %}
+            <i class="fa fa-check"></i> <span class="btn-text">Vous êtes abonné</span>
+        {% else %}
+            <i class="fa fa-thumb-tack"></i> <span class="btn-text">S'abonner</span>
+        {% endif %}
+    </button>
+{% else %}
+    <a href="{{ path('fos_user_security_login') }}" class="btn btn-subscribe btn-tooltip" data-entity="{{ entity }}" data-id="{{ id }}" {% if not app.user %}data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connectez-vous pour vous abonner"{% endif %}>
         <i class="fa fa-thumb-tack"></i> <span class="btn-text">S'abonner</span>
-    {% endif %}
-</button>
+    </a>
+{% endif %}

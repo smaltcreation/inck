@@ -31,13 +31,15 @@ class SubscriptionController extends Controller
         );
     }
 
-    /**
-     * @Secure(roles="ROLE_USER")
-     */
     public function newAction($entity, $id)
     {
         try
         {
+            if(!$this->get('security.context')->getToken()->getUser())
+            {
+                throw new \Exception("Vous devez être connecté pour vous abonner.");
+            }
+
             $em = $this->getDoctrine()->getManager();
 
             if($class = $this->container->getParameter($entity))

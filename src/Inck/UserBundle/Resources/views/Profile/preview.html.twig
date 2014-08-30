@@ -44,12 +44,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='yui_js' output='js/compiled/user/profile/preview/authenticated.js'
-            'bundles/inckarticle/js/Article/social.js'
-            'bundles/incknotif/js/Subscription/new.js'
-        %}
-            <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endif %}
+    {% javascripts filter='yui_js' output='js/compiled/user/profile/preview.js'
+        'bundles/inckarticle/js/Article/social.js'
+        'bundles/incknotif/js/Subscription/new.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

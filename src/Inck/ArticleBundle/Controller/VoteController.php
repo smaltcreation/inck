@@ -19,6 +19,11 @@ class VoteController extends Controller
     {
         try
         {
+            if(!$this->get('security.context')->getToken()->getUser())
+            {
+                throw new Exception("Vous devez être connecté pour voter.");
+            }
+
             $em = $this->getDoctrine()->getManager();
 
             // Récupération de l'article

@@ -51,17 +51,10 @@
 {% block javascripts %}
     {{ parent() }}
 
-    {% javascripts filter='yui_js' output='js/compiled/article/article/timeline.js'
+    {% javascripts filter='yui_js' output='js/compiled/core/default/index.js'
         'bundles/inckarticle/js/Article/timeline.js'
+        'bundles/inckarticle/js/Article/social.js'
     %}
     <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='yui_js' output='js/compiled/article/article/social.js'
-            'bundles/inckarticle/js/Article/social.js'
-        %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endif %}
+    {% endjavascripts %}cripts %}
 {% endblock %}
