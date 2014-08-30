@@ -1,6 +1,12 @@
 {% set currentRoute = app.request.attributes.get('_route') %}
+{% if currentRoute == 'inck_article_article_show' %}
+    {% set articleUrl = '#content' %}
+{% else %}
+    {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'date': article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d') }) %}
+{% endif %}
+
 <div class="thumbnail">
-    <a href="{{ path('inck_article_article_show', { 'id': article.id }) }}">
+    <a href="{{ articleUrl }}">
         {% if article.imageName %}
             <img src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
         {% else %}
@@ -10,7 +16,7 @@
         {% endif %}
     </a>
     <div class="caption">
-        {% if app.request.attributes.get('_route') != 'inck_article_article_show' %}<h3><a href="{{ path('inck_article_article_show', { 'id': article.id }) }}">{{ article.title }}</a></h3>{% endif %}
+        {% if currentRoute != 'inck_article_article_show' %}<h3><a href="{{ articleUrl }}">{{ article.title }}</a></h3>{% endif %}
         <p class="about">rédigé par <a href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash;publié le <time datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time></p>
         <p class="categories tags">
             {% for category in article.categories %}
@@ -21,6 +27,6 @@
             {% endfor %}
         </p>
         <p>{{ article.summary }}</p>
-        {% if app.request.attributes.get('_route') != 'inck_article_article_show' %}<p><a href="{{ path('inck_article_article_show', { 'id': article.id }) }}" class="btn btn-success" role="button"><i class="fa fa-book"></i> Lire d'avantage</a></p>{% endif %}
+        {% if currentRoute != 'inck_article_article_show' %}<p><a href="{{ articleUrl }}" class="btn btn-success" role="button"><i class="fa fa-book"></i> Lire d'avantage</a></p>{% endif %}
     </div>
 </div>

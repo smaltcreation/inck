@@ -138,7 +138,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="inck_article_article_show", requirements={"id" = "\d+"})
+     * @Route("/{id}/{slug}/{date}", name="inck_article_article_show", requirements={"id" = "\d+"})
      * @Template()
      */
     public function showAction($id)
@@ -340,7 +340,7 @@ class ArticleController extends Controller
             {
                 $this->get('session')->getFlashBag()->add(
                     'warning',
-                    'Vous devez vous identifier.'
+                    'Vous devez vous identifier et avoir les droits nécessaires pour supprimer cet article.'
                 );
                 return $this->redirect($this->generateUrl('fos_user_security_login'));
             }
@@ -362,7 +362,7 @@ class ArticleController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'success',
-                'Article supprimé !'
+                'Article supprimé avec succès !'
             );
 
             return $this->redirect($this->generateUrl('fos_user_profile_show'));

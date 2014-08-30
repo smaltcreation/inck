@@ -1,10 +1,16 @@
 {% set currentRoute = app.request.attributes.get('_route') %}
+{% if currentRoute == 'inck_article_article_show' %}
+    {% set articleUrl = '#content' %}
+{% else %}
+    {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'date': article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d') }) %}
+{% endif %}
+
 <div class=" well">
     {% if currentRoute == 'inck_article_article_show'%}
         <h3>Résumé de l'article</h3>
     {% else %}
         <h3 itemprop="name">
-            <a href="{{ path('inck_article_article_show', { 'id': article.id }) }}">{{ article.title }}</a>
+            <a href="{{ articleUrl }}">{{ article.title }}</a>
         </h3>
     {% endif %}
     <p class="about">
@@ -31,21 +37,17 @@
         {% endfor %}
     </p>
     <p itemprop="description about">{{ article.summary }}</p>
-    <p>
-        <a itemprop="url" href="{{ path('inck_article_article_show', { 'id': article.id }) }}" class="btn btn-success" role="button">
-            <i class="fa fa-book"></i> Lire d'avantage
-        </a>
-    </p>
+    {% if currentRoute != 'inck_article_article_show'%}
+        <p>
+            <a itemprop="url" href="{{ articleUrl }}" class="btn btn-success" role="button">
+                <i class="fa fa-book"></i> Lire d'avantage
+            </a>
+        </p>
+    {% endif %}
 </div>
 
 <div class="preview text-center">
-    {% if app.request.attributes.get('_route') == 'inck_article_article_show' %}
-        {% set path = '#content' %}
-    {% else %}
-        {% set path = path('inck_article_article_show', { 'id': article.id }) %}
-    {% endif %}
-
-    <a href="{{ path }}">
+    <a href="{{ articleUrl }}">
         {% if article.imageName %}
             <img itemprop="image" class="img-circle" src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
         {% else %}

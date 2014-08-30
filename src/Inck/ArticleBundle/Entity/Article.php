@@ -112,6 +112,13 @@ class Article
     private $asDraft;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToOne(targetEntity="\Inck\UserBundle\Entity\User")
      */
     private $author;
@@ -187,6 +194,7 @@ class Article
     public function setTitle($title)
     {
         $this->title = $title;
+        $this->slug = $this->__toSlug();
 
         return $this;
     }
@@ -587,5 +595,60 @@ class Article
     public function getPreviousImageName()
     {
         return $this->previousImageName;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return string
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Rewrite string to slug
+     *
+     * @param string $slug
+     * @return string
+     */
+    public function __toSlug()
+    {
+        $slug = $this->title;
+
+        // replace non letter or digits by -
+        $slug = preg_replace('#[^\\pL\d]+#u', '-', $slug);
+
+        // trim
+        $slug = trim($slug, '-');
+
+        // transliterate
+        if (function_exists('iconv')) {
+            $slug = iconv('utf-8', 'us-ascii//TRANSLIT', $slug);
+        }
+
+        // lowercase
+        $slug = strtolower($slug);
+
+        // remove unwanted characters
+        $slug = preg_replace('#[^-\w]+#', '', $slug);
+
+        if (empty($slug)) {
+            return 'n-a';
+        }
+
+        return $slug;
     }
 }

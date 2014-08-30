@@ -61,7 +61,7 @@ class Tag
     public function setName($name)
     {
         $this->name = $name;
-        $this->setSlug($this->name);
+        $this->slug = $this->__toSlug();
 
         return $this;
     }
@@ -84,7 +84,7 @@ class Tag
      */
     public function setSlug($slug)
     {
-        $this->slug = $this->__toSlug();
+        $this->slug = $slug;
     }
 
     /**
