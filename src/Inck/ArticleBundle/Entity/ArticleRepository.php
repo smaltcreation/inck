@@ -165,6 +165,27 @@ class ArticleRepository extends EntityRepository
             ->groupBy('a.id')
             ->addOrderBy("a.$orderBy", 'DESC');
 
+        // Filtre "search"
+        if(isset($filters['search']))
+        {
+            $orx = $qb->expr()->orX();
+            $fields = array('title', 'summary', 'content');
+
+            foreach($fields as $field)
+            {
+                $orx->add(
+                    $qb
+                        ->expr()
+                        ->like("a.$field", ':search')
+                );
+            }
+
+            $qb
+                ->andWhere($orx)
+                ->setParameter('search', '%'.$filters['search'].'%');
+        }
+
+        // Retourner les résultats d'une page
         if($page !== false)
         {
             $paginator = new Paginator($qb);
@@ -186,6 +207,7 @@ class ArticleRepository extends EntityRepository
             return array($results, $totalArticles, $totalPages);
         }
 
+        // Retourner tous les résultats
         else
         {
             $results = $qb->getQuery()->getResult();
@@ -319,6 +341,13 @@ class ArticleRepository extends EntityRepository
                 case 'categories':
                 case 'tags':
                     if(!is_array($data))
+                    {
+                        throw new \Exception("Filtre $filter invalide");
+                    }
+                    break;
+
+                case 'search':
+                    if(!is_string($data))
                     {
                         throw new \Exception("Filtre $filter invalide");
                     }

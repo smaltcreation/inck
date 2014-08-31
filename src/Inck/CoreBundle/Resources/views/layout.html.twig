@@ -19,7 +19,9 @@
                 <div class="gn-scroller">
                     <ul class="gn-menu">
                         <li class="gn-search-item">
-                            <input placeholder="Recherche" type="search" class="gn-search">
+                            <form action="{{ path('inck_article_article_search') }}" method="get">
+                                <input placeholder="Recherche" type="search" class="gn-search" name="q">
+                            </form>
                             <a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>Rechercher</span></a>
                         </li>
                         <li><a class="gn-icon gn-icon-article{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}">Écrire un article</a></li>

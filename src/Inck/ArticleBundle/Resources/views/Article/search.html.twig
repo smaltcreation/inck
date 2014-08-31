@@ -1,0 +1,44 @@
+{% extends 'InckArticleBundle::layout.html.twig' %}
+
+{% block title %}
+    Rechercher un article
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/article/article/search.css'
+        'bundles/inckarticle/css/Article/timeline.css'
+        'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/social.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Rechercher un article</h1>
+                    <p>"{{ search }}"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': filters })) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/search.js'
+        'bundles/inckarticle/js/Article/timeline.js'
+        'bundles/inckarticle/js/Article/social.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

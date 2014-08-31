@@ -355,7 +355,7 @@ class ArticleController extends Controller
         // Ajout du type
         $filters['type'] = 'published';
 
-        // Récupréation des articles
+        // Récupération des articles
         list($articles, $totalArticles, $totalPages) = $em
             ->getRepository('InckArticleBundle:Article')
             ->findByFilters($filters, $page);
@@ -434,5 +434,27 @@ class ArticleController extends Controller
             );
             return $this->redirect($this->generateUrl('home'));
         }
+    }
+
+    /**
+     * @Route("/search", name="inck_article_article_search")
+     * @Method("get")
+     * @Template()
+     */
+    public function searchAction(Request $request)
+    {
+        /** @var $em ObjectManager */
+        $em = $this->getDoctrine()->getManager();
+        $search = $request->query->get('q');
+
+        $filters = array(
+            'type'      => 'published',
+            'search'    => $search,
+        );
+
+        return array(
+            'filters'   => $filters,
+            'search'    => $search,
+        );
     }
 }
