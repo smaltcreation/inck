@@ -5,7 +5,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/core/default/index.css'
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/core/default/index.css'
         'bundles/inckcore/css/Default/index.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
@@ -51,7 +51,7 @@
 {% block javascripts %}
     {{ parent() }}
 
-    {% javascripts filter='yui_js' output='js/compiled/core/default/index.js'
+    {% javascripts filter='?uglifyjs2' output='js/compiled/core/default/index.js'
         'bundles/inckarticle/js/Article/timeline.js'
         'bundles/inckarticle/js/Article/social.js'
     %}

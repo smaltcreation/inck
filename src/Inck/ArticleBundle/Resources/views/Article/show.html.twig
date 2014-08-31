@@ -5,7 +5,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/article/article/show.css'
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/article/article/show.css'
         'bundles/inckarticle/css/Article/show.css'
         'bundles/inckarticle/css/Article/summary.css'
         'bundles/inckarticle/css/Article/social.css'
@@ -80,7 +80,7 @@
         </script>
     {% endif %}
 
-    {% javascripts filter='yui_js' output='js/compiled/article/article/show.js'
+    {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/show.js'
         'bundles/inckarticle/js/Article/social.js'
         'bundles/incknotif/js/Subscription/new.js'
         'bundles/inckarticle/js/Article/disqus.js'

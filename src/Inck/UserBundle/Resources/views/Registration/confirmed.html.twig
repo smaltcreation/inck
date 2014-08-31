@@ -3,7 +3,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/user/registration/register_confirmed.css'
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/user/registration/register_confirmed.css'
         'bundles/inckuser/css/Registration/confirmed.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
@@ -57,7 +57,7 @@
 {% block javascripts %}
     {{ parent() }}
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='yui_js' output='js/compiled/article/article/social.js'
+        {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/social.js'
             'bundles/inckarticle/js/Article/social.js'
         %}
         <script src="{{ asset_url }}"></script>

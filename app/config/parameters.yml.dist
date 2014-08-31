@@ -21,7 +21,7 @@ parameters:
     use_assetic_controller: true
 
     node: /usr/local/bin/node
-    node_paths: [/usr/local/bin/node, /usr/local/lib/node_modules]
+    node_paths: [/usr/local/bin/node, /usr/local/lib/node_modules, %kernel.root_dir%/Resources/node_modules]
 
     upload.article_image.uri_prefix: /article/image
     upload.article_image.upload_destination: %kernel.root_dir%/../web/article/image

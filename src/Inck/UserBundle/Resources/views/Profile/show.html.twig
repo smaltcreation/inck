@@ -22,7 +22,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts filter='yui_js' output='js/compiled/user/profile/show.js'
+    {% javascripts filter='?uglifyjs2' output='js/compiled/user/profile/show.js'
         'bundles/inckuser/js/Profile/show.js'
     %}
         <script src="{{ asset_url }}"></script>

@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/user/registration/register.css'
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/user/registration/register.css'
         'bundles/inckuser/css/Registration/register.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">

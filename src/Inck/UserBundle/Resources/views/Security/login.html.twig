@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets filter='yui_css' filter='cssrewrite' output='css/compiled/user/security/login.css'
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/user/security/login.css'
         'bundles/inckuser/css/Security/login.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
