@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             /* Our bundles */
             new Inck\UserBundle\InckUserBundle(),
             new Inck\CoreBundle\InckCoreBundle(),

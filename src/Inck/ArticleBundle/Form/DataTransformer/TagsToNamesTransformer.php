@@ -49,27 +49,27 @@ class TagsToNamesTransformer implements DataTransformerInterface
     /**
      * Transforms a string (names) to an ArrayCollection (tags).
      *
-     * @param  string $tags
+     * @param  string $names
      * @return ArrayCollection|null
      */
-    public function reverseTransform($tags)
+    public function reverseTransform($names)
     {
-        if (!$tags) {
+        if (!$names) {
             return new ArrayCollection();
         }
 
-        $tags = explode(',', $tags);
+        $names = explode(',', $names);
 
         // Récupération des tags existants
         $tags = $this->om
             ->getRepository('InckArticleBundle:Tag')
-            ->findWhereNameIn($tags)
+            ->findWhereNameIn($names)
         ;
 
         // Recherche de nouveaux tags
         $newNames = array();
 
-        foreach($tags as $name)
+        foreach($names as $name)
         {
             $isNew = true;
 

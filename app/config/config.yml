@@ -167,3 +167,10 @@ inck_notif:
     user_class: Inck\UserBundle\Entity\User
     category_class: Inck\ArticleBundle\Entity\Category
     tag_class: Inck\ArticleBundle\Entity\Tag
+
+# AvalancheImagineBundle Configuration
+avalanche_imagine:
+    filters:
+        article_thumb:
+            type:    thumbnail
+            options: { size: [196, 196], mode: outbound, quality: 100 }

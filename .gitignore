@@ -23,6 +23,7 @@
 /web/components/
 /web/article/image/*
 !/web/article/image/.gitkeep
+web/media
 
 # PHPUnit
 /app/phpunit.xml
