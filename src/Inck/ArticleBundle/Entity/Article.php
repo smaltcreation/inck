@@ -651,4 +651,37 @@ class Article
 
         return $slug;
     }
+
+    public function getType()
+    {
+        if($this->asDraft === true && $this->postedAt === null)
+        {
+            return 'Brouillon';
+        }
+
+        else if($this->published === true)
+        {
+            return 'Publié';
+        }
+
+        else if($this->approved === false)
+        {
+            return 'Désapprouvé';
+        }
+
+        $limitDate = new DateTime();
+        $limitDate->sub(new \DateInterval('P1D'));
+
+        if(!$this->published && !$this->asDraft && $this->postedAt >= $limitDate)
+        {
+            return 'En modération';
+        }
+
+        $limitDate->sub(new \DateInterval('P1D'));
+
+        if($this->approved === null && !$this->asDraft && $this->postedAt >= $limitDate)
+        {
+            return 'En validation';
+        }
+    }
 }

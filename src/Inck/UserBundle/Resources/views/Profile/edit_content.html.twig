@@ -2,11 +2,7 @@
 
 <div class="profile">
     <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" id="fos_user_profile_edit" class="fos_user_profile_edit">
-        {% if form_errors(form) %}
-            <div class="alert alert-danger" role="alert">
-                {{ form_errors(form) }}
-            </div>
-        {% endif %}
+        {{ form_errors(form) }}
 
         <section id="registration_more">
             <div class="well">

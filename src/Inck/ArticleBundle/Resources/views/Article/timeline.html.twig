@@ -10,11 +10,7 @@
             <div class="col-md-12">
                 <div class="well">
                     {{ form_start(form) }}
-                        {% if not form.vars.valid %}
-                            <div class="alert alert-danger">
-                                {{ form_errors(form) }}
-                            </div>
-                        {% endif %}
+                        {{ form_errors(form) }}
 
                         <div class="row">
                             <div class="col-xs-6">

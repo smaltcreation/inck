@@ -25,6 +25,7 @@
         </time>
     </p>
     <p class="categories tags">
+        <span class="label label-info">{{ article.type }}</span>
         {% for category in article.categories %}
             <a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-primary btn-xs category">
                 {{ category.name }}

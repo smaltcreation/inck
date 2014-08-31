@@ -2,11 +2,7 @@
 
 <div class="registration" itemscope itemtype="http://schema.org/Webpage">
     <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="fos_user_registration_register" class="fos_user_registration_register">
-        {% if form_errors(form) %}
-            <div class="alert alert-danger">
-                {{ form_errors(form) }}
-            </div>
-        {% endif %}
+        {{ form_errors(form) }}
 
         <section id="registration_required">
             <div class="well">

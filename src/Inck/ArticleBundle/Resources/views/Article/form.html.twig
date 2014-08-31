@@ -39,12 +39,7 @@
     <div class="container">
         <article class="new">
             <form {{ form_enctype(form) }} method="POST" novalidate="novalidate">
-                {% if form_errors(form) %}
-                    <div class="alert alert-danger">
-                        {{ form_errors(form) }}
-                    </div>
-                {% endif %}
-
+                {{ form_errors(form) }}
                 <section id="article-new-header">
                     <div class="row">
                         <div class="col-sm-6">
