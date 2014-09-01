@@ -6,7 +6,7 @@
             {% if user.twitter is not null %}<a class="btn btn-xs btn-twitter btn-circle" href="{{ user.twitter }}"><i class="fa fa-twitter "></i></a>{% endif %}
             {% if user.facebook is not null %}<a class="btn btn-xs btn-facebook btn-circle" href="{{ user.facebook }}"><i class="fa fa-facebook"></i></a>{% endif %}
             {% if user.googlePlus is not null %}<a class="btn btn-xs btn-google btn-circle" href="{{ user.googlePlus }}"><i class="fa fa-google-plus"></i></a>{% endif %}
-            {% if user.linkedin is not null %}<a class="btn btn-xs btn-linkedin btn-circle" href="{{ user.linkedin }}"><i class="fa fa-linkedin"></i></a>{% endif %}
+            {% if user.linkedIn is not null %}<a class="btn btn-xs btn-linkedin btn-circle" href="{{ user.linkedIn }}"><i class="fa fa-linkedin"></i></a>{% endif %}
         </div>
 
         <p><a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></a></p>

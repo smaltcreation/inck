@@ -4,7 +4,6 @@ namespace Inck\ArticleBundle\Entity;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Inck\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\File;
@@ -442,7 +441,7 @@ class Article
     /**
      * Get categories
      *
-     * @return Collection
+     * @return ArrayCollection
      */
     public function getCategories()
     {
@@ -488,7 +487,7 @@ class Article
     /**
      * Get tags
      *
-     * @return Collection
+     * @return ArrayCollection
      */
     public function getTags()
     {
@@ -521,7 +520,7 @@ class Article
     /**
      * Get votes
      *
-     * @return Collection
+     * @return ArrayCollection
      */
     public function getVotes()
     {
@@ -652,6 +651,10 @@ class Article
         return $slug;
     }
 
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function getType()
     {
         if($this->asDraft === true && $this->postedAt === null)
@@ -683,5 +686,7 @@ class Article
         {
             return 'En validation';
         }
+
+        throw new \Exception('Type indéfini.');
     }
 }

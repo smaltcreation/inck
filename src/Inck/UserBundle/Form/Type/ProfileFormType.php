@@ -100,7 +100,7 @@ class ProfileFormType extends BaseType
                 'label' => 'Google Plus',
                 'attr' => array('placeholder' => 'https://plus.google.com/')
             ))
-            ->add('linkedin', 'text', array(
+            ->add('linkedIn', 'text', array(
                 'required'  => false,
                 'label' => 'Linkedin',
                 'attr' => array('placeholder' => 'https://linkedin.com/')

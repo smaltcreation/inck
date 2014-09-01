@@ -4,7 +4,6 @@ namespace Inck\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Inck\CoreBundle\Form\Type\ContactType;
-use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class ContactController extends Controller

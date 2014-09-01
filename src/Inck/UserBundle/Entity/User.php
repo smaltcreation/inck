@@ -2,10 +2,11 @@
 
 namespace Inck\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Inck\ArticleBundle\Entity\Article;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="fos_user")
@@ -152,13 +153,16 @@ class User extends BaseUser
      *     match=true,
      *     message="Le nom de domaine doit être celui de Linkedin"
      * )
-     * @ORM\Column(name="linkedin", type="text", nullable=true)
+     * @ORM\Column(name="linkedIn", type="text", nullable=true)
      */
-    private $linkedin;
+    private $linkedIn;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="Inck\UserBundle\Entity\Group")
-     * @ORM\JoinTable(name="fos_user_user_group",
+     * @ORM\JoinTable(
+     *      name="fos_user_user_group",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
      * )
@@ -166,22 +170,41 @@ class User extends BaseUser
     protected $groups;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Inck\ArticleBundle\Entity\Article", mappedBy="author")
      */
     protected $articles;
 
     /**
-     * @ORM\OneToMany(targetEntity="Inck\UserBundle\Entity\User", mappedBy="subscriber")
-     * @ORM\JoinColumn(nullable=true)
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="subscriptions")
      */
-    private $subcriptions;
+    private $subscribers;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="subscribers")
+     * @ORM\JoinTable(
+     *      name="subscriptions",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="subscription_user_id", referencedColumnName="id")}
+     * )
+     */
+    private $subscriptions;
+
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Article")
-     * @ORM\JoinTable(name="user_articleToBeSeen",
+     * @ORM\JoinTable(
+     *      name="user_articleToBeSeen",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")}
-     *      )
+     * )
      */
     private $articlesToBeSeen;
 
@@ -189,8 +212,11 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+
         $this->country = 'FR';
         $this->firstLogin = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->subscriptions = new ArrayCollection();
+        $this->subscribers = new ArrayCollection();
     }
 
     /**
@@ -526,29 +552,27 @@ class User extends BaseUser
     }
 
     /**
-     * Set linkedin
+     * Set linkedIn
      *
-     * @param string $linkedin
+     * @param string $linkedIn
      * @return User
      */
-    public function setLinkedin($linkedin)
+    public function setLinkedIn($linkedIn)
     {
-        $this->linkedin = $linkedin;
+        $this->linkedIn = $linkedIn;
 
         return $this;
     }
 
     /**
-     * Get linkedin
+     * Get linkedIn
      *
      * @return string 
      */
-    public function getLinkedin()
+    public function getLinkedIn()
     {
-        return $this->linkedin;
+        return $this->linkedIn;
     }
-
-    
 
     /**
      * @param mixed $groups
@@ -585,10 +609,10 @@ class User extends BaseUser
     /**
      * Add articles
      *
-     * @param \Inck\ArticleBundle\Entity\Article $articles
+     * @param Article $articles
      * @return User
      */
-    public function addArticle(\Inck\ArticleBundle\Entity\Article $articles)
+    public function addArticle(Article $articles)
     {
         $this->articles[] = $articles;
 
@@ -596,42 +620,42 @@ class User extends BaseUser
     }
 
     /**
-     * Remove articles
+     * Remove article
      *
-     * @param \Inck\ArticleBundle\Entity\Article $articles
+     * @param Article $article
      */
-    public function removeArticle(\Inck\ArticleBundle\Entity\Article $articles)
+    public function removeArticle(Article $article)
     {
-        $this->articles->removeElement($articles);
+        $this->articles->removeElement($article);
     }
 
     /**
-     * Add articlesToBeSeen
+     * Add articleToBeSeen
      *
-     * @param \Inck\ArticleBundle\Entity\Article $articlesToBeSeen
+     * @param Article $articleToBeSeen
      * @return User
      */
-    public function addArticlesToBeSeen(\Inck\ArticleBundle\Entity\Article $articlesToBeSeen)
+    public function addArticlesToBeSeen(Article $articleToBeSeen)
     {
-        $this->articlesToBeSeen[] = $articlesToBeSeen;
+        $this->articlesToBeSeen[] = $articleToBeSeen;
 
         return $this;
     }
 
     /**
-     * Remove articlesToBeSeen
+     * Remove articleToBeSeen
      *
-     * @param \Inck\ArticleBundle\Entity\Article $articlesToBeSeen
+     * @param Article $articleToBeSeen
      */
-    public function removeArticlesToBeSeen(\Inck\ArticleBundle\Entity\Article $articlesToBeSeen)
+    public function removeArticlesToBeSeen(Article $articleToBeSeen)
     {
-        $this->articlesToBeSeen->removeElement($articlesToBeSeen);
+        $this->articlesToBeSeen->removeElement($articleToBeSeen);
     }
 
     /**
      * Get articlesToBeSeen
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
     public function getArticlesToBeSeen()
     {
@@ -639,35 +663,51 @@ class User extends BaseUser
     }
 
     /**
-     * Add subcriptions
+     * Add subscriptions
      *
-     * @param \Inck\UserBundle\Entity\User $subcriptions
+     * @param User $subscription
      * @return User
      */
-    public function addSubcription(\Inck\UserBundle\Entity\User $subcriptions)
+    public function addSubscription(User $subscription)
     {
-        $this->subcriptions[] = $subcriptions;
+        $this->subscriptions[] = $subscription;
 
         return $this;
     }
 
     /**
-     * Remove subcriptions
+     * Remove subscriptions
      *
-     * @param \Inck\UserBundle\Entity\User $subcriptions
+     * @param User $subscription
      */
-    public function removeSubcription(\Inck\UserBundle\Entity\User $subcriptions)
+    public function removeSubscription(User $subscription)
     {
-        $this->subcriptions->removeElement($subcriptions);
+        $this->subscriptions->removeElement($subscription);
     }
 
     /**
-     * Get subcriptions
+     * Get subscriptions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
-    public function getSubcriptions()
+    public function getSubscriptions()
     {
-        return $this->subcriptions;
+        return $this->subscriptions;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSubscribers()
+    {
+        return $this->subscribers;
+    }
+
+    /**
+     * @param ArrayCollection $subscribers
+     */
+    public function setSubscribers($subscribers)
+    {
+        $this->subscribers = $subscribers;
     }
 }

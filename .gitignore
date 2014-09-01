@@ -5,10 +5,10 @@
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 !app/update
+!app/clean
 
 # Parameters
 /app/config/parameters.yml
-/app/config/parameters.ini
 /app/config/parameters.yml.dist
 
 # Managed by Composer
@@ -19,17 +19,12 @@
 # Assets and user uploads
 /web/fonts
 /web/bundles/
-/web/uploads/
 /web/components/
 /web/article/image/*
 !/web/article/image/.gitkeep
 web/media
 
-# PHPUnit
-/app/phpunit.xml
-
-# Composer PHAR
-/composer.phar
+# Composer
 /composer.lock
 
 # PhpStorm
