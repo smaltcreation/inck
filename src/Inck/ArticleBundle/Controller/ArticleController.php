@@ -477,7 +477,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/article/{id}/to-be-seen", name="inck_article_article_toBeSeen", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @Route("/{id}/to-be-seen", name="inck_article_article_toBeSeen", requirements={"id" = "\d+"}, options={"expose"=true})
      */
     public function toBeSeen($id)
     {
