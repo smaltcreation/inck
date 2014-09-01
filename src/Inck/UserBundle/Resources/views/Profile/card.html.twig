@@ -25,12 +25,6 @@
         <div class="row">
             <div class="col-md-7 col-lg-9">
                 <p>
-                    {% if user.articles is defined and user.articles|length > 0 %}
-                        <a class="btn btn-success btn-sm" href="#">
-                            <i class="fa fa-book"></i> Voir tous ses articles
-                        </a>
-                    {% endif %}
-
                     {% set popoverContent = '<i class="fa fa-circle fa-fw"></i> <strong>Utilisateur :</strong> ' ~ user.username %}
                     {% if user.firstname or user.lastname %}
                         {% set popoverContent = popoverContent ~ '<br><i class="fa fa-user fa-fw"></i> <strong>Nom : </strong>' %}
@@ -44,7 +38,7 @@
                     {% if user.country %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-globe fa-fw"></i> <strong>Pays :</strong> ' ~ user.country %}{% endif %}
 
                     {{ render(controller('InckNotifBundle:Subscription:button', { entity: 'inck_notif.user_class', id: user.id })) }}
-                    <button type="button" class="btn btn-default btn-popover btn-sm" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
+                    <button type="button" class="btn btn-default btn-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
                         <i class="fa fa-info-circle"></i> Voir plus d'informations
                     </button>
                 </p>

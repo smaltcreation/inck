@@ -4,20 +4,9 @@
     <div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                {% if currentRoute == 'inck_article_article_moderate' %}
-                    <h3>Votre avis nous est important !</h3>
-                {% else %}
-                    <h3>Voter et partager</h3>
-                {% endif %}
+                <h3>Voter et partager</h3>
             </div>
-
             <div class="panel-body">
-                {% if currentRoute == 'inck_article_article_moderate' %}
-                    <p>
-                        En votant, vous nous permettez de classer les articles par pertinance et ainsi favoriser le travail de l'auteur lors de la monétisation.
-                        Voter c'est l'assurance d'un contenu de qualité et d'une participation accrue de la communauté. Après tout, ce n'est qu'un petit clique, non ?
-                    </p>
-                {% endif %}
                 <div class="row-table">
                     <div class="votes" itemscope itemtype="http://schema.org/Action">
                         <p>
@@ -89,6 +78,7 @@
                         <a class="btn btn-default btn-xs" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=235');return false;">
                             <i class="fa fa-linkedin"></i>
                         </a>
+                        {{ render(controller('InckArticleBundle:Article:buttonToBeSeen', { 'article': article })) }}
                     </div>
                 </div>
             </div>

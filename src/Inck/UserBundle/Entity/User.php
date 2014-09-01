@@ -171,10 +171,19 @@ class User extends BaseUser
     protected $articles;
 
     /**
-     * @ORM\OneToMany(targetEntity="Inck\UserBundle\Entity\User", mappedBy="subcriber")
+     * @ORM\OneToMany(targetEntity="Inck\UserBundle\Entity\User", mappedBy="subscriber")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $subcribtions;
+    private $subcriptions;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Article")
+     * @ORM\JoinTable(name="user_articleToBeSeen",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")}
+     *      )
+     */
+    private $articlesToBeSeen;
 
 
     public function __construct()
@@ -539,38 +548,7 @@ class User extends BaseUser
         return $this->linkedin;
     }
 
-    /**
-     * Add subcribtions
-     *
-     * @param \Inck\UserBundle\Entity\User $subcribtions
-     * @return User
-     */
-    public function addSubcribtion(\Inck\UserBundle\Entity\User $subcribtions)
-    {
-        $this->subcribtions[] = $subcribtions;
-
-        return $this;
-    }
-
-    /**
-     * Remove subcribtions
-     *
-     * @param \Inck\UserBundle\Entity\User $subcribtions
-     */
-    public function removeSubcribtion(\Inck\UserBundle\Entity\User $subcribtions)
-    {
-        $this->subcribtions->removeElement($subcribtions);
-    }
-
-    /**
-     * Get subcribtions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSubcribtions()
-    {
-        return $this->subcribtions;
-    }
+    
 
     /**
      * @param mixed $groups
@@ -602,5 +580,94 @@ class User extends BaseUser
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * Add articles
+     *
+     * @param \Inck\ArticleBundle\Entity\Article $articles
+     * @return User
+     */
+    public function addArticle(\Inck\ArticleBundle\Entity\Article $articles)
+    {
+        $this->articles[] = $articles;
+
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \Inck\ArticleBundle\Entity\Article $articles
+     */
+    public function removeArticle(\Inck\ArticleBundle\Entity\Article $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
+
+    /**
+     * Add articlesToBeSeen
+     *
+     * @param \Inck\ArticleBundle\Entity\Article $articlesToBeSeen
+     * @return User
+     */
+    public function addArticlesToBeSeen(\Inck\ArticleBundle\Entity\Article $articlesToBeSeen)
+    {
+        $this->articlesToBeSeen[] = $articlesToBeSeen;
+
+        return $this;
+    }
+
+    /**
+     * Remove articlesToBeSeen
+     *
+     * @param \Inck\ArticleBundle\Entity\Article $articlesToBeSeen
+     */
+    public function removeArticlesToBeSeen(\Inck\ArticleBundle\Entity\Article $articlesToBeSeen)
+    {
+        $this->articlesToBeSeen->removeElement($articlesToBeSeen);
+    }
+
+    /**
+     * Get articlesToBeSeen
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticlesToBeSeen()
+    {
+        return $this->articlesToBeSeen;
+    }
+
+    /**
+     * Add subcriptions
+     *
+     * @param \Inck\UserBundle\Entity\User $subcriptions
+     * @return User
+     */
+    public function addSubcription(\Inck\UserBundle\Entity\User $subcriptions)
+    {
+        $this->subcriptions[] = $subcriptions;
+
+        return $this;
+    }
+
+    /**
+     * Remove subcriptions
+     *
+     * @param \Inck\UserBundle\Entity\User $subcriptions
+     */
+    public function removeSubcription(\Inck\UserBundle\Entity\User $subcriptions)
+    {
+        $this->subcriptions->removeElement($subcriptions);
+    }
+
+    /**
+     * Get subcriptions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSubcriptions()
+    {
+        return $this->subcriptions;
     }
 }
