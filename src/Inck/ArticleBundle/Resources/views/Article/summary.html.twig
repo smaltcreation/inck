@@ -44,6 +44,11 @@
                 <i class="fa fa-book"></i> Lire d'avantage
             </a>
         </p>
+
+        <p>
+            <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-success" role="button">
+                <i class="fa fa-file-pdf-o"></i> Lire en PDF</a>
+        </p>
     {% endif %}
 </div>
 

@@ -17,7 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle;
 
 /**
  * @Route("/article")
@@ -134,8 +134,8 @@ class ArticleController extends Controller
                 'id' => $article->getId(),
                 'slug' => $article->getSlug(),
                 'date' => ($article->getPublishedAt())
-                        ? $article->getPublishedAt()->format('Y-m-d')
-                        : $article->getPostedAt()->format('Y-m-d')
+                    ? $article->getPublishedAt()->format('Y-m-d')
+                    : $article->getPostedAt()->format('Y-m-d')
             )));
         }
 
@@ -379,28 +379,6 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/search", name="inck_article_article_search")
-     * @Method("get")
-     * @Template()
-     */
-    public function searchAction(Request $request)
-    {
-        /** @var $em ObjectManager */
-        $em = $this->getDoctrine()->getManager();
-        $search = $request->query->get('q');
-
-        $filters = array(
-            'type'      => 'published',
-            'search'    => $search,
-        );
-
-        return array(
-            'filters'   => $filters,
-            'search'    => $search,
-        );
-    }
-
-    /**
      * @Route("/{id}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"})
      */
     public function deleteAction($id)
@@ -408,6 +386,7 @@ class ArticleController extends Controller
         try
         {
             $em = $this->getDoctrine()->getManager();
+            /** @var Article $article */
             $article = $em->getRepository("InckArticleBundle:Article")->find($id);
             $user = $this->getUser();
 
@@ -459,66 +438,44 @@ class ArticleController extends Controller
     }
 
     /**
+     * @Route("/search", name="inck_article_article_search")
+     * @Method("get")
      * @Template()
      */
-    public function buttonToBeSeenAction($article)
+    public function searchAction(Request $request)
     {
-        $toBeSeen = false;
-        if($this->get('security.context')->isGranted('ROLE_USER'))
-        {
-            $user = $this->get('security.context')->getToken()->getUser();
-            $toBeSeen = $user->getArticlesToBeSeen()->contains($article);
-        }
+        /** @var $em ObjectManager */
+        $em = $this->getDoctrine()->getManager();
+        $search = $request->query->get('q');
+
+        $filters = array(
+            'type'      => 'published',
+            'search'    => $search,
+        );
 
         return array(
-            'toBeSeen' => $toBeSeen,
-            'id' => $article->getId()
+            'filters'   => $filters,
+            'search'    => $search,
         );
     }
 
     /**
-     * @Route("/{id}/to-be-seen", name="inck_article_article_toBeSeen", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @Route("/{id}/pdf", name="inck_article_article_pdf")
+     * @Template()
      */
-    public function toBeSeen($id)
+    public function pdfAction($id)
     {
-        try
-        {
-            $user = $this->getUser();
-            if(!$user)
-            {
-                throw new \Exception("Vous devez être connecté pour ajouter cet article dans votre liste \"à regarder plus tard\".");
-            }
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('InckArticleBundle:Article')->find($id);
+        $user = $this->get('security.context')->getToken()->getUser();
 
-            $em = $this->getDoctrine()->getManager();
-            $article = $em->getRepository('InckArticleBundle:Article')->find($id);
-            if(!$article)
-            {
-                throw new \Exception("Article inexistant.");
-            }
+        $html2pdf = $this->get('html2pdf')->get();
+        $html2pdf->setDefaultFont('arial');
+        $html = $this->renderView('InckArticleBundle:Article:pdf.html.twig', array('article' => $article, 'user' => $user));
+        $html2pdf->writeHTML($html);
 
-            $toBeSeen = $user->getArticlesToBeSeen()->contains($article);
-            if(!$toBeSeen)
-            {
-                $user->addArticlesToBeSeen($article);
-            }
-            else
-            {
-                $user->removeArticlesToBeSeen($article);
-            }
-
-            $em->persist($user);
-            $em->flush();
-
-            return new JsonResponse('Article ajouté avec succès', 204);
-        }
-
-        catch(\Exception $e)
-        {
-            return new JsonResponse(array(
-                'modal'   => $this->renderView('InckArticleBundle:Article:error.html.twig', array(
-                        'message'   => $e->getMessage(),
-                    )),
-            ), 400);
-        }
+        return $html2pdf->Output(
+            'article-' . $id . '.pdf');
     }
+
 }
