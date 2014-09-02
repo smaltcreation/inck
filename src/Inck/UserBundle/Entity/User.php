@@ -201,12 +201,12 @@ class User extends BaseUser
      *
      * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Article")
      * @ORM\JoinTable(
-     *      name="user_articleToBeSeen",
+     *      name="user_articleWatchLater",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")}
      * )
      */
-    private $articlesToBeSeen;
+    private $articlesWatchLater;
 
 
     public function __construct()
@@ -630,36 +630,36 @@ class User extends BaseUser
     }
 
     /**
-     * Add articleToBeSeen
+     * Add articleWatchLater
      *
-     * @param Article $articleToBeSeen
+     * @param Article $articleWatchLater
      * @return User
      */
-    public function addArticlesToBeSeen(Article $articleToBeSeen)
+    public function addArticlesWatchLater(Article $articleWatchLater)
     {
-        $this->articlesToBeSeen[] = $articleToBeSeen;
+        $this->articlesWatchLater[] = $articleWatchLater;
 
         return $this;
     }
 
     /**
-     * Remove articleToBeSeen
+     * Remove articleWatchLater
      *
-     * @param Article $articleToBeSeen
+     * @param Article $articleWatchLater
      */
-    public function removeArticlesToBeSeen(Article $articleToBeSeen)
+    public function removeArticlesWatchLater(Article $articleWatchLater)
     {
-        $this->articlesToBeSeen->removeElement($articleToBeSeen);
+        $this->articlesWatchLater->removeElement($articleWatchLater);
     }
 
     /**
-     * Get articlesToBeSeen
+     * Get articlesWatchLater
      *
      * @return ArrayCollection
      */
-    public function getArticlesToBeSeen()
+    public function getArticlesWatchLater()
     {
-        return $this->articlesToBeSeen;
+        return $this->articlesWatchLater;
     }
 
     /**

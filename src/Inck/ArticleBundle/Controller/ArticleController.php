@@ -461,25 +461,25 @@ class ArticleController extends Controller
     /**
      * @Template()
      */
-    public function buttonToBeSeenAction($article)
+    public function buttonWatchLaterAction($article)
     {
-        $toBeSeen = false;
+        $watchLater = false;
         if($this->get('security.context')->isGranted('ROLE_USER'))
         {
             $user = $this->get('security.context')->getToken()->getUser();
-            $toBeSeen = $user->getArticlesToBeSeen()->contains($article);
+            $watchLater = $user->getArticlesWatchLater()->contains($article);
         }
 
         return array(
-            'toBeSeen' => $toBeSeen,
+            'watchLater' => $watchLater,
             'id' => $article->getId()
         );
     }
 
     /**
-     * @Route("/{id}/to-be-seen", name="inck_article_article_toBeSeen", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @Route("/{id}/watch-later", name="inck_article_article_watchLater", requirements={"id" = "\d+"}, options={"expose"=true})
      */
-    public function toBeSeen($id)
+    public function watchLater($id)
     {
         try
         {
@@ -496,14 +496,14 @@ class ArticleController extends Controller
                 throw new \Exception("Article inexistant.");
             }
 
-            $toBeSeen = $user->getArticlesToBeSeen()->contains($article);
-            if(!$toBeSeen)
+            $watchLater = $user->getArticlesWatchLater()->contains($article);
+            if(!$watchLater)
             {
-                $user->addArticlesToBeSeen($article);
+                $user->addArticlesWatchLater($article);
             }
             else
             {
-                $user->removeArticlesToBeSeen($article);
+                $user->removeArticlesWatchLater($article);
             }
 
             $em->persist($user);
