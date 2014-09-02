@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('.btn-watch-later').click(function(){
+    $('#content').on('click', '.btn-watch-later', function(){
         watchLater($(this));
     });
 

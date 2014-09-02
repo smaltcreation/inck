@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    $('.vote-up').click(function(){
+    $('#content').on('click', '.vote-up', function(){
         saveVote($(this), 1);
     });
 
-    $('.vote-down').click(function(){
+    $('#content').on('click', '.vote-down', function(){
         saveVote($(this), 0);
     });
 

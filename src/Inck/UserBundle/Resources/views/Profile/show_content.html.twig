@@ -202,7 +202,13 @@
         </div>
 
         <div class="tab-pane" id="watchLater">
-
+            <div class="row">
+                {% for article in user.articlesWatchLater %}
+                    <div class="col-xs-6 col-sm-4 col-md-3">
+                        {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
