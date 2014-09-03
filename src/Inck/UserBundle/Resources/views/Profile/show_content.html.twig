@@ -202,10 +202,23 @@
         </div>
 
         <div class="tab-pane" id="watchLater">
-            <div class="row">
+            <div class="articles">
                 {% for article in user.articlesWatchLater %}
-                    <div class="col-xs-6 col-sm-4 col-md-3">
-                        {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <article id="article-{{ article.id }}" class="article">
+                                <a class="btn btn-default pull-right btn-circle" style="margin-right: -10px; margin-top: -10px"><i class="fa fa-times"></i></a>
+                                <div class="summary hidden-xs hidden-sm visible-md visible-lg">
+                                    {% include "InckArticleBundle:Article:summary.html.twig" %}
+                                </div>
+                                <div class="summary visible-xs visible-sm hidden-md hidden-lg">
+                                    {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>TODO: articles similaires</p>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
