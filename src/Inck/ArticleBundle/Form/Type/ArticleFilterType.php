@@ -45,14 +45,18 @@ class ArticleFilterType extends AbstractType
                         'type'      => 'submit',
                         'options'   => [
                             'label' => 'Filtrer',
-                            'attr'  => ['class' => 'btn-success'],
+                            'attr'  => [
+                                'class' => 'btn-success',
+                            ],
                         ],
                     ],
                     'cancel'    => [
                         'type'      => 'reset',
                         'options'   => [
                             'label' => 'Annuler',
-                            'attr'  => ['class' => 'btn-primary'],
+                            'attr'  => [
+                                'class' => 'btn-primary',
+                            ],
                         ],
                     ],
                 ],
