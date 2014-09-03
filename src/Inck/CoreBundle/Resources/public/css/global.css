@@ -82,6 +82,15 @@
     }
 }
 
-.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn, .btn-group .btn-group+.btn-group {
-    margin-left: 0;
+/* Tabs */
+.nav.nav-tabs {
+    margin-bottom: 20px;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #fff;
+}
+
+.nav-tabs > li.active > a {
+    color: #222;
 }

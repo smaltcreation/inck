@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    $('.btn-to-be-seen').click(function(){
-        toBeSeen($(this));
+    $('#content').on('click', '.btn-watch-later', function(){
+        watchLater($(this));
     });
 
-    function toBeSeen(clickedButton){
+    function watchLater(clickedButton){
         var id                  = getArticleId(clickedButton),
             clickedIconClass    = getIconClass(clickedButton),
             icon                = getButtonIcon(clickedButton),
@@ -13,14 +13,14 @@ $(document).ready(function(){
         icon.attr('class', 'fa fa-circle-o-notch fa-spin');
 
         $.ajax({
-            url: Routing.generate('inck_article_article_toBeSeen', {
+            url: Routing.generate('inck_article_article_watchLater', {
                 id: id
             }),
             dataType: 'json'
         }).done(function(){
             resetButtonState(clickedButton, clickedIconClass);
-            clickedButton.toggleClass('to-be-seen');
-            if(clickedButton.hasClass('to-be-seen')) {
+            clickedButton.toggleClass('watch-later');
+            if(clickedButton.hasClass('watch-later')) {
                 icon.attr('class', 'fa fa-check');
                 text.text('Ajouté à la liste');
             }

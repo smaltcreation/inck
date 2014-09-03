@@ -78,7 +78,7 @@
                         <a class="btn btn-default btn-xs" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedIn-share', 'width=550,height=235');return false;">
                             <i class="fa fa-linkedin"></i>
                         </a>
-                        {{ render(controller('InckArticleBundle:Article:buttonToBeSeen', { 'article': article })) }}
+                        {{ render(controller('InckArticleBundle:Article:buttonWatchLater', { 'article': article })) }}
                     </div>
                 </div>
             </div>

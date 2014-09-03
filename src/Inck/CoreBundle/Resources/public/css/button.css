@@ -6,6 +6,10 @@
     border-radius: 50%;
 }
 
+.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn, .btn-group .btn-group+.btn-group {
+    margin-left: 0;
+}
+
 .btn-facebook {
     color: #fff;
     background-color: #3b5998;

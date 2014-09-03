@@ -1,78 +1,84 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="fos_user_user_show">
-    <div class="row">
-        <div class="col-sm-3 hidden-xs visible-sm">
-            <p><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-thumbnail avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></p>
-            <p class="text-center"><a href="https://fr.gravatar.com/" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><i class="fa fa-file-image-o"></i> Changer mon avatar</a></p>
-        </div>
-        <div class="col-sm-9">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <p class="pull-right visible-xs hidden-sm hidden-md hidden-lg btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><a href="https://fr.gravatar.com/"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 60, 'g', 'mm', true) }}"/></a></p>
-                    <h3 class="panel-title">Profil de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h3>
+
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#profile" role="tab" data-toggle="tab">Profil</a></li>
+        <li><a href="#articles" role="tab" data-toggle="tab">Mes articles</a></li>
+        <li><a href="#watchLater" role="tab" data-toggle="tab">Articles à regarder plus tard</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="profile">
+            <div class="row">
+                <div class="col-sm-3 hidden-xs visible-sm">
+                    <p><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-thumbnail avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></p>
+                    <p class="text-center"><a href="https://fr.gravatar.com/" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><i class="fa fa-file-image-o"></i> Changer mon avatar</a></p>
                 </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h4>Informations</h4>
-                            <p>
-                                <i class="fa fa-circle fa-fw"></i> {{ user.username }}<br>
-                                <i class="fa fa-envelope fa-fw"></i> {{ user.email }}
-                                {% if user.firstname or user.lastname %}
-                                    <br><i class="fa fa-user  fa-fw"></i>
-                                    {% if user.firstname %}{{ user.firstname }}{% endif %}
-                                    {% if user.lastname %}{{ user.lastname }}{% endif %}
-                                {% endif %}
-                                {% if user.school %}<br><i class="fa fa-graduation-cap fa-fw"></i> {{ user.school }}{% endif %}
-                                {% if user.occupation %}<br><i class="fa fa-briefcase fa-fw"></i> {{ user.occupation }}{% endif %}
-                                {% if user.birthday %}<br><i class="fa fa-calendar fa-fw"></i> {{ user.birthday|date('d/m/Y') }}{% endif %}
-                                {% if user.city %}<br><i class="fa fa-building fa-fw"></i> {{ user.city }}{% endif %}
-                                {% if user.country %}<br><i class="fa fa-globe fa-fw"></i> {{ user.country }}{% endif %}
-                            </p>
-                            <p>
-                                {% if user.twitter %}<a class="btn btn-twitter btn-xs" href="{{ user.twitter }}"><i class="fa fa-twitter fa-fw"></i></a>{% endif %}
-                                {% if user.facebook %}<a class="btn btn-facebook btn-xs" href="{{ user.facebook }}"><i class="fa fa-facebook fa-fw"></i></a>{% endif %}
-                                {% if user.googlePlus %}<a class="btn btn-google btn-xs" href="{{ user.googlePlus }}"><i class="fa fa-google-plus fa-fw"></i></a>{% endif %}
-                                {% if user.linkedIn %}<a class="btn btn-linkedin btn-xs" href="{{ user.linkedIn }}"><i class="fa fa-linkedin fa-fw"></i></a>{% endif %}
-                            </p>
+                <div class="col-sm-9">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <p class="pull-right visible-xs hidden-sm hidden-md hidden-lg btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><a href="https://fr.gravatar.com/"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 60, 'g', 'mm', true) }}"/></a></p>
+                            <h3 class="panel-title">Profil de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h3>
                         </div>
-                        <div class="col-md-8">
-                            <h4>Biographie</h4>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4>Informations</h4>
+                                    <p>
+                                        <i class="fa fa-circle fa-fw"></i> {{ user.username }}<br>
+                                        <i class="fa fa-envelope fa-fw"></i> {{ user.email }}
+                                        {% if user.firstname or user.lastname %}
+                                            <br><i class="fa fa-user  fa-fw"></i>
+                                            {% if user.firstname %}{{ user.firstname }}{% endif %}
+                                            {% if user.lastname %}{{ user.lastname }}{% endif %}
+                                        {% endif %}
+                                        {% if user.school %}<br><i class="fa fa-graduation-cap fa-fw"></i> {{ user.school }}{% endif %}
+                                        {% if user.occupation %}<br><i class="fa fa-briefcase fa-fw"></i> {{ user.occupation }}{% endif %}
+                                        {% if user.birthday %}<br><i class="fa fa-calendar fa-fw"></i> {{ user.birthday|date('d/m/Y') }}{% endif %}
+                                        {% if user.city %}<br><i class="fa fa-building fa-fw"></i> {{ user.city }}{% endif %}
+                                        {% if user.country %}<br><i class="fa fa-globe fa-fw"></i> {{ user.country }}{% endif %}
+                                    </p>
+                                    <p>
+                                        {% if user.twitter %}<a class="btn btn-twitter btn-xs" href="{{ user.twitter }}"><i class="fa fa-twitter fa-fw"></i></a>{% endif %}
+                                        {% if user.facebook %}<a class="btn btn-facebook btn-xs" href="{{ user.facebook }}"><i class="fa fa-facebook fa-fw"></i></a>{% endif %}
+                                        {% if user.googlePlus %}<a class="btn btn-google btn-xs" href="{{ user.googlePlus }}"><i class="fa fa-google-plus fa-fw"></i></a>{% endif %}
+                                        {% if user.linkedIn %}<a class="btn btn-linkedin btn-xs" href="{{ user.linkedIn }}"><i class="fa fa-linkedin fa-fw"></i></a>{% endif %}
+                                    </p>
+                                </div>
+                                <div class="col-md-8">
+                                    <h4>Biographie</h4>
+                                    <p>
+                                        {% if user.biography %}
+                                            {{ user.biography }}
+                                        {% else %}
+                                            Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell.
+                                            Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix....
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
                             <p>
-                                {% if user.biography %}
-                                    {{ user.biography }}
-                                {% else %}
-                                    Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell.
-                                    Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix....
-                                {% endif %}
+                                <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Éditer mon profil</a>
+                                <a href="{{ path('fos_user_change_password') }}" class="btn btn-default"><i class="fa fa-lock"></i> Modifier mon mot de passe</a>
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer">
-                    <p>
-                        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Éditer mon profil</a>
-                        <a href="{{ path('fos_user_change_password') }}" class="btn btn-default"><i class="fa fa-lock"></i> Modifier mon mot de passe</a>
-                    </p>
-                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel-group articles" id="accordion">
+
+        <div class="tab-pane" id="articles">
+            <div class="row">
                 {% if articlesAsDraft is defined %}
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#asDraft">
-                                    Mes brouillons
-                                    <span class="badge pull-right">{{ articlesAsDraft|length }}</span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="asDraft" class="panel-collapse collapse in">
+                    <div class="col-md-12">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">Mes brouillons<span class="badge pull-right">{{ articlesAsDraft|length }}</span></div>
                             {% if articlesAsDraft|length > 0 %}
                                 <table class="table">
                                     <thead>
@@ -108,16 +114,11 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#posted">
-                                    Tous mes articles envoyés
-                                    <span class="badge pull-right">{{ articlesPosted|length }}</span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="posted" class="panel-collapse collapse">
+                {% endif %}
+                {% if articlesPosted is defined %}
+                    <div class="col-md-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">Mes articles envoyés<span class="badge pull-right">{{ articlesPosted|length }}</span></div>
                             {% if articlesPosted|length > 0 %}
                                 <table class="table">
                                     <thead>
@@ -151,7 +152,7 @@
                                             <td><span class="label label-{{ status }} btn-tooltip" data-toggle="tooltip" data-placement="left" data-container="body" title="{{ tooltip }}"><i class="fa fa-{{ icon }}"></i></span></td>
                                             <td><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug, 'date': article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d') }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="right" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -163,35 +164,30 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#published">
-                                    Mes articles publiés
-                                    <span class="badge pull-right">{{ articlesPublished|length }}</span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="published" class="panel-collapse collapse">
+                {% endif %}
+                {% if articlesPublished is defined %}
+                    <div class="col-md-6">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">Mes articles publiés<span class="badge pull-right">{{ articlesPublished|length }}</span></div>
                             {% if articlesPublished|length > 0 %}
                                 <table class="table">
                                     <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Titre</th>
-                                            <th>Posté le</th>
-                                            <th></th>
-                                        </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>Titre</th>
+                                        <th>Posté le</th>
+                                        <th></th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        {% for article in articlesPublished %}
-                                            <tr>
-                                                <td><span class="label label-success btn-tooltip" data-toggle="tooltip" data-container="body" data-placement="left" title="Publié"><i class="fa fa-check"></i></span></td>
-                                                <td><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug, 'date': article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d') }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
-                                                <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                                <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="left" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
-                                            </tr>
-                                        {% endfor %}
+                                    {% for article in articlesPublished %}
+                                        <tr>
+                                            <td><span class="label label-success btn-tooltip" data-toggle="tooltip" data-container="body" data-placement="left" title="Publié"><i class="fa fa-check"></i></span></td>
+                                            <td><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug, 'date': article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d') }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
+                                            <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
+                                            <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="right" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                        </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             {% else %}
@@ -202,6 +198,16 @@
                         </div>
                     </div>
                 {% endif %}
+            </div>
+        </div>
+
+        <div class="tab-pane" id="watchLater">
+            <div class="row">
+                {% for article in user.articlesWatchLater %}
+                    <div class="col-xs-6 col-sm-4 col-md-3">
+                        {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
