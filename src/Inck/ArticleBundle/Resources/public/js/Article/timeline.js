@@ -109,16 +109,17 @@ $(document).ready(function(){
                 articles.find('article').hide();
 
                 timeline.replaceWith(articles);
-                $('#timeline').find('article').each(function(index){
+                timeline = $('#timeline');
+
+                timeline.find('article').each(function(index){
                     $(this).delay(400 * index).slideDown(300);
                 });
 
                 resetPaginator();
 
-                articlesTotal.find('span:first').text(
-                    $('#timeline').find('.articles:first').attr('data-total-articles')
-                );
-
+                var totalArticles   = timeline.find('.articles:first').attr('data-total-articles');
+                var totalPages      = timeline.find('.articles:first').attr('data-total-pages');
+                articlesTotal.find('span:first').text(totalArticles);
                 articlesTotal.stop().fadeIn();
                 submitButton.add(resetButton).prop('disabled', false);
 
@@ -126,6 +127,10 @@ $(document).ready(function(){
                     submitButton.html(buttonContent);
                 } else {
                     resetButton.html(buttonContent);
+                }
+
+                if(totalPages <= 1){
+                    $('#timeline-next-page').addClass('hidden');
                 }
 
                 submitButtonClicked = true;
@@ -178,6 +183,9 @@ $(document).ready(function(){
 
     $('#timeline-next-page').click(function(){
         var button = $(this);
+        if(button.prop('disabled')) return false;
+        button.prop('disabled', true);
+
         var icon = button.find('i:first');
         icon.attr('class', 'fa fa-circle-o-notch fa-spin');
 
@@ -209,6 +217,7 @@ $(document).ready(function(){
             });
 
             icon.attr('class', 'fa fa-plus');
+            button.prop('disabled', false);
         });
     });
 });
