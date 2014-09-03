@@ -38,22 +38,32 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/user/autocomplete/{username}", name="inck_user_user_autocomplete", options={"expose"=true})
+     * @Route("/user/autocomplete/{input}", name="inck_user_user_autocomplete", options={"expose"=true})
      */
-    public function autocomplete($username)
+    public function autocomplete($input)
     {
         // Récupération des utilisateurs
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('InckUserBundle:User')->getAutocompleteResults($username) ?: array();
+        $users = $em->getRepository('InckUserBundle:User')->getAutocompleteResults($input) ?: array();
 
         // Création du tableau utilisé par Select2
         $results = array();
 
         foreach($users as $user)
         {
+            if($user['firstname'] && $user['lastname'])
+            {
+                $text = sprintf('%s %s (%s)', $user['firstname'], $user['lastname'], $user['username']);
+            }
+
+            else
+            {
+                $text = $user['username'];
+            }
+
             $results[] = array(
                 'id'    => $user['id'],
-                'text'  => $user['username'],
+                'text'  => $text,
             );
         }
 

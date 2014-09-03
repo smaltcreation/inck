@@ -66,16 +66,18 @@ class UserRepository extends EntityRepository
     }
 
     /**
-     * @param array $username
+     * @param array $input
      * @return array
      */
-    public function getAutocompleteResults($username)
+    public function getAutocompleteResults($input)
     {
         $query = $this
             ->createQueryBuilder('u')
-            ->select('u.id', 'u.username')
-            ->where('u.username LIKE :username')
-            ->setParameter('username', "%$username%")
+            ->select('u.id', 'u.username', 'u.firstname', 'u.lastname')
+            ->where('u.username LIKE :input')
+            ->orWhere('u.firstname LIKE :input')
+            ->orWhere('u.lastname LIKE :input')
+            ->setParameter('input', "%$input%")
             ->getQuery()
         ;
 

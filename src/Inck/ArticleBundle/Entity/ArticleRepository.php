@@ -104,7 +104,7 @@ class ArticleRepository extends EntityRepository
         }
 
         // Création des conditions pour les filtres
-        $orx = $qb->expr()->orX();
+        $orX = $qb->expr()->orX();
 
         $conditions = array(
             'authors'       => array(
@@ -138,7 +138,7 @@ class ArticleRepository extends EntityRepository
                 $filterName = $field.'Filter';
                 $columnName = $alias.'Score';
 
-                $orx->add(
+                $orX->add(
                     $qb
                         ->expr()
                         ->in("$field.id", ":$filterName")
@@ -161,19 +161,19 @@ class ArticleRepository extends EntityRepository
         }
 
         $qb
-            ->andWhere($orx)
+            ->andWhere($orX)
             ->groupBy('a.id')
             ->addOrderBy("a.$orderBy", 'DESC');
 
         // Filtre "search"
         if(isset($filters['search']))
         {
-            $orx = $qb->expr()->orX();
+            $orX = $qb->expr()->orX();
             $fields = array('title', 'summary', 'content');
 
             foreach($fields as $field)
             {
-                $orx->add(
+                $orX->add(
                     $qb
                         ->expr()
                         ->like("a.$field", ':search')
@@ -181,7 +181,7 @@ class ArticleRepository extends EntityRepository
             }
 
             $qb
-                ->andWhere($orx)
+                ->andWhere($orX)
                 ->setParameter('search', '%'.$filters['search'].'%');
         }
 
