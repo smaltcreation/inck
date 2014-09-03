@@ -521,4 +521,23 @@ class ArticleController extends Controller
             ), 400);
         }
     }
+
+    /**
+     * @Route("/{id}/pdf", name="inck_article_article_pdf")
+     * @Template()
+     */
+    public function pdfAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('InckArticleBundle:Article')->find($id);
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $html2pdf = $this->get('html2pdf')->get();
+        $html2pdf->setDefaultFont('arial');
+        $html = $this->renderView('InckArticleBundle:Article:pdf.html.twig', array('article' => $article, 'user' => $user));
+        $html2pdf->writeHTML($html);
+
+        return $html2pdf->Output(
+            'article-' . $id . '.pdf');
+    }
 }

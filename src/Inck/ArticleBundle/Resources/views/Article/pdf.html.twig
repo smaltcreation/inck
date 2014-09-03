@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inck - {{ article.title }}</title>
+    <style>
+        .about {
+            font-style: italic;
+        }
+        .about a {
+            text-decoration: none;
+            color: #1e618e;
+        }
+        hr {
+            color: #68858c;
+        }
+        .title {
+            color: #404040;
+        }
+    </style>
+</head>
+<body>
+{% block content %}
+    <div id="page">
+        <div class="title">
+            <h1>{{ article.title }}</h1>
+        </div>
+
+        <div class="about">
+            <p>
+                Rédigé par
+                <a href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">
+                    {{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}
+                </a>
+                publié le {{ article.publishedAt|date('d/m/Y à H:i') }}
+            </p>
+            <hr>
+        </div>
+        <div id="article-content">
+            {{ article.content|raw }}
+        </div>
+    </div>
+
+{% endblock %}
+</body>
+</html>
+
+
+
+
+
+

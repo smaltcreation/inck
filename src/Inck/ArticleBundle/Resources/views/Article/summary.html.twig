@@ -23,6 +23,9 @@
         <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">
             {{ article.publishedAt|date('d/m/Y à H:i') }}
         </time>
+        <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-default btn-circle btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" target="blank" title="Télécharger en PDF" data-container="body">
+            <i class="fa fa-file-pdf-o"></i>
+        </a>
     </p>
     <p class="categories tags">
         <span class="label label-info">{{ article.type }}</span>
@@ -44,16 +47,11 @@
                 <i class="fa fa-book"></i> Lire d'avantage
             </a>
         </p>
-
-        <p>
-            <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-success" role="button">
-                <i class="fa fa-file-pdf-o"></i> Lire en PDF</a>
-        </p>
     {% endif %}
 </div>
 
 <div class="preview text-center">
-    <a href="{{ articleUrl }}">
+    <a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn-tooltip" data-toggle="tooltip" data-placement="right" title="Aperçu" data-target="modal">
         {% if article.imageName %}
             <img itemprop="image" class="img-circle" src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
         {% else %}
