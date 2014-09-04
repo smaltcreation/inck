@@ -1,12 +1,7 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 
 {% block title %}Modérer les articles{% endblock %}
-
-{% block description %}
-    {% if app.request.attributes.get('_route') == 'inck_article_article_new' %}
-        <meta name="description" content="@todo écrire la description">
-    {% endif %}
-{% endblock %}
+{% block description %}<meta name="description" content="Modérer un article, c'est faire appel à la communauté pour mettre en avant un contenu libre et de qualité. Vous êtes donc le moteur contribuant au développement de Inck">{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -23,7 +18,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1>Modérer les articles</h1>
-            <p>Modérer un article, c'est faire appel à la selection naturelle de vos goûts pour mettre en avant ce qu'il vous plait le plus. Vous êtes donc le moteur contribuant au développement de Inck</p>
+            <p>Modérer un article, c'est faire appel à la communauté pour mettre en avant un contenu libre et de qualité. Vous êtes donc le moteur contribuant au développement de Inck</p>
         </div>
     </div>
 {% endblock %}
