@@ -1,4 +1,5 @@
-$('[data-target="modal"]').click(function(e) {
+var content = $('#content');
+content.on('click', '[data-target="modal"]', function(e) {
     e.preventDefault();
     var url = $(this).attr("href");
     if (url.indexOf("#") == 0) {
