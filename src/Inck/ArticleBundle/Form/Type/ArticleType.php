@@ -26,7 +26,7 @@ class ArticleType extends AbstractType
                 'label'         => 'Résumé',
                 'attr'          => [
                     'placeholder'   => 'Résumez le contenu de votre article',
-                    'rows'          => 11,
+                    'rows'          => 6,
                     'maxlength'     => 255,
                 ],
             ])
@@ -49,7 +49,7 @@ class ArticleType extends AbstractType
                 ],
             ])
             ->add('imageFile', 'afe_single_upload', [
-                'label'         => 'Image',
+                'label'         => 'Image de prévisualisation',
                 'deleteable'    => 'imageName',
                 'required'      => false,
             ])

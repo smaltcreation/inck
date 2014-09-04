@@ -94,3 +94,10 @@
 .nav-tabs > li.active > a {
     color: #222;
 }
+
+/* Alert */
+.alert-default {
+    background-color: #fffffe;
+    border-color: #444;
+    color: #a19570;
+}

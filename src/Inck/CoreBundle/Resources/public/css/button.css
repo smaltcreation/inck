@@ -143,3 +143,46 @@ fieldset[disabled] .btn-important.active {
     color: #003399;
     background-color: #fff;
 }
+
+.btn-inverse {
+    color: #fff;
+    background-color: #333333;
+    border-color: #222222;
+}
+.btn-inverse.voted,
+.btn-inverse:hover,
+.btn-inverse:focus,
+.btn-inverse:active,
+.btn-inverse.active,
+.open > .dropdown-toggle.btn-inverse {
+    color: #fff;
+    background-color: #444444;
+    border-color: #333333;
+}
+.btn-inverse:active,
+.btn-inverse.active,
+.open > .dropdown-toggle.btn-inverse {
+    background-image: none;
+}
+.btn-inverse.disabled,
+.btn-inverse[disabled],
+fieldset[disabled] .btn-inverse,
+.btn-inverse.disabled:hover,
+.btn-inverse[disabled]:hover,
+fieldset[disabled] .btn-inverse:hover,
+.btn-inverse.disabled:focus,
+.btn-inverse[disabled]:focus,
+fieldset[disabled] .btn-inverse:focus,
+.btn-inverse.disabled:active,
+.btn-inverse[disabled]:active,
+fieldset[disabled] .btn-inverse:active,
+.btn-inverse.disabled.active,
+.btn-inverse[disabled].active,
+fieldset[disabled] .btn-inverse.active {
+    background-color: #333333;
+    border-color: #222222;
+}
+.btn-inverse .badge {
+    color: #333333;
+    background-color: #fff;
+}

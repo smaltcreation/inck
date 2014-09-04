@@ -1,14 +1,14 @@
 <div id="timeline" class="container">
     <p>
-        <button class="btn btn-default toggle-filter"><i class="fa fa-filter"></i> Filtrer les articles</button>
+        <button class="btn btn-inverse toggle-filter"><i class="fa fa-filter"></i> Filtrer les articles</button>
         <span id="articles-total" class="label label-primary">
-            <span>{{ totalArticles }}</span> résultat(s)
+            <span>{{ totalArticles }}</span> résultat{% if totalArticles|length > 1 %}s{% endif %}
         </span>
     </p>
     <div id="filters">
         <div class="row">
             <div class="col-md-12">
-                <div class="alert alert-success">
+                <div class="alert alert-default">
                     {{ form_start(form) }}
                         {{ form_errors(form) }}
 
@@ -43,9 +43,13 @@
     </script>
     <br>
     {% include 'InckArticleBundle:Article:filter.html.twig' with { 'articles': articles, 'totalArticles': totalArticles, 'totalPages': totalPages } %}
-    {% set hidden = (totalPages == 1) ? 'hidden' : '' %}
-    <button id="timeline-next-page" class="center-block btn btn-important {{ hidden }}">
-        <i class="fa fa-plus"></i>
-        Afficher plus d'articles
-    </button>
+    <div class="row">
+        <div class="col-xs-7 col-sm-8">
+            {% set hidden = (totalPages == 1) ? 'hidden' : '' %}
+            <button id="timeline-next-page" class="btn btn-inverse btn-lg btn-block {{ hidden }}">
+                <i class="fa fa-plus"></i>
+                Afficher plus d'articles
+            </button>
+        </div>
+    </div>
 </div>

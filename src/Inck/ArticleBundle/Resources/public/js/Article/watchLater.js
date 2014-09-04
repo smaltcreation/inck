@@ -1,6 +1,12 @@
 $(document).ready(function(){
-    $('#content').on('click', '.btn-watch-later', function(){
+    var content = $('#content');
+    content.on('click', '.btn-watch-later', function(){
         watchLater($(this));
+    });
+
+    content.on('click', '.btn-unwatch-later', function(){
+        watchLater($(this));
+        $(this).closest( ".row").hide('slow');
     });
 
     function watchLater(clickedButton){
