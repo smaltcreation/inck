@@ -1,6 +1,7 @@
 $(document).ready(function(){
     // Toggle filters
-    $('.toggle-filter').click(function(){
+    var toggleFilters = $('.toggle-filter');
+    toggleFilters.click(function(){
         $('#filters').stop().slideToggle('slow');
     });
 
@@ -99,7 +100,8 @@ $(document).ready(function(){
                     filters: {
                         categories: categoriesInput.val(),
                         tags: tagsInput.val(),
-                        authors: authorsInput.val()
+                        authors: authorsInput.val(),
+                        search: $("#inck_articlebundle_articlefilter_search").val()
                     }
                 },
                 method: 'POST',
@@ -171,6 +173,7 @@ $(document).ready(function(){
 
         submitButtonClicked = false;
         form.submit();
+        toggleFilters.click();
     });
 
     // Pagination
@@ -197,7 +200,8 @@ $(document).ready(function(){
                 filters: {
                     categories: categoriesInput.val(),
                     tags: tagsInput.val(),
-                    authors: authorsInput.val()
+                    authors: authorsInput.val(),
+                    search: $("#inck_articlebundle_articlefilter_search").val()
                 }
             },
             method: 'POST',

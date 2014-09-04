@@ -180,6 +180,34 @@ class ArticleRepository extends EntityRepository
                 );
             }
 
+            $fields = array(
+                'categories'    => array(
+                    'name',
+                ),
+                'tags'          => array(
+                    'name',
+                ),
+                'author'        => array(
+                    'username',
+                    'firstname',
+                    'lastname',
+                ),
+            );
+
+            foreach($fields as $field => $columnNames)
+            {
+                $qb->innerJoin("a.$field", $field);
+
+                foreach($columnNames as $columnName)
+                {
+                    $orX->add(
+                        $qb
+                            ->expr()
+                            ->like("$field.$columnName", ':search')
+                    );
+                }
+            }
+
             $qb
                 ->andWhere($orX)
                 ->setParameter('search', '%'.$filters['search'].'%');

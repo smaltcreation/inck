@@ -272,9 +272,11 @@ class ArticleController extends Controller
      */
     public function timelineAction($filters)
     {
-        $form = $this->createForm(new ArticleFilterType());
-        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(new ArticleFilterType(), array(
+            'search'   => isset($filters['search']) ? $filters['search'] : null,
+        ));
 
+        $em = $this->getDoctrine()->getManager();
         list($articles, $totalArticles, $totalPages) = $em
             ->getRepository('InckArticleBundle:Article')
             ->findByFilters($filters);
@@ -347,7 +349,7 @@ class ArticleController extends Controller
         $keys = array_keys($filters);
         foreach($keys as $key)
         {
-            if(!in_array($key, array('categories', 'tags', 'authors')))
+            if(!in_array($key, array('categories', 'tags', 'authors', 'search')))
             {
                 unset($filters[$key]);
             }
@@ -386,7 +388,6 @@ class ArticleController extends Controller
     public function searchAction(Request $request)
     {
         /** @var $em ObjectManager */
-        $em = $this->getDoctrine()->getManager();
         $search = $request->query->get('q');
 
         $filters = array(
@@ -408,6 +409,7 @@ class ArticleController extends Controller
         try
         {
             $em = $this->getDoctrine()->getManager();
+            /** @var Article $article */
             $article = $em->getRepository("InckArticleBundle:Article")->find($id);
             $user = $this->getUser();
 
@@ -454,25 +456,29 @@ class ArticleController extends Controller
                 'danger',
                 $e->getMessage()
             );
+
             return $this->redirect($this->generateUrl('home'));
         }
     }
 
     /**
      * @Template()
+     * @param Article $article
+     * @return array
      */
     public function buttonWatchLaterAction($article)
     {
         $watchLater = false;
+
         if($this->get('security.context')->isGranted('ROLE_USER'))
         {
-            $user = $this->get('security.context')->getToken()->getUser();
+            $user = $this->getUser();
             $watchLater = $user->getArticlesWatchLater()->contains($article);
         }
 
         return array(
-            'watchLater' => $watchLater,
-            'id' => $article->getId()
+            'watchLater'    => $watchLater,
+            'id'            => $article->getId(),
         );
     }
 
@@ -516,8 +522,8 @@ class ArticleController extends Controller
         {
             return new JsonResponse(array(
                 'modal'   => $this->renderView('InckArticleBundle:Article:error.html.twig', array(
-                        'message'   => $e->getMessage(),
-                    )),
+                    'message'   => $e->getMessage(),
+                )),
             ), 400);
         }
     }
@@ -530,14 +536,13 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('InckArticleBundle:Article')->find($id);
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
 
         $html2pdf = $this->get('html2pdf')->get();
         $html2pdf->setDefaultFont('arial');
         $html = $this->renderView('InckArticleBundle:Article:pdf.html.twig', array('article' => $article, 'user' => $user));
         $html2pdf->writeHTML($html);
 
-        return $html2pdf->Output(
-            'article-' . $id . '.pdf');
+        return $html2pdf->Output('article-' . $id . '.pdf');
     }
 }

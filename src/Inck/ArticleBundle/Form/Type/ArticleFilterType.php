@@ -39,6 +39,7 @@ class ArticleFilterType extends AbstractType
                     'placeholder'   => 'Filter par auteur',
                 ],
             ])
+            ->add('search', 'hidden')
             ->add('actions', 'form_actions', [
                 'buttons' => [
                     'filter'    => [
