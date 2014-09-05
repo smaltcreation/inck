@@ -349,7 +349,7 @@ class ArticleController extends Controller
         $keys = array_keys($filters);
         foreach($keys as $key)
         {
-            if(!in_array($key, array('categories', 'tags', 'authors', 'search')))
+            if(!in_array($key, array('categories', 'tags', 'authors', 'order', 'search')))
             {
                 unset($filters[$key]);
             }

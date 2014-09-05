@@ -161,9 +161,33 @@ class ArticleRepository extends EntityRepository
         }
 
         $qb
-            ->andWhere($orX)
             ->groupBy('a.id')
-            ->addOrderBy("a.$orderBy", 'DESC');
+            ->andWhere($orX);
+
+        // Ordre
+        if(isset($filters['order']) && $filters['order'] === 'vote')
+        {
+            /** @var VoteRepository $repository */
+            $repository = $this
+                ->getEntityManager()
+                ->getRepository('InckArticleBundle:Vote');
+
+            $qb
+                ->innerJoin('a.votes', 'votes')
+                ->addSelect(
+                    $repository->getOrderFilterQuery('votesUpFilter', 'vUpOrder', 'vUp')
+                )
+                ->setParameter('votesUpFilter', true)
+                ->addOrderBy('vUpOrder', 'DESC')
+                ->addSelect(
+                    $repository->getOrderFilterQuery('votesDownFilter', 'vDownOrder', 'vDown')
+                )
+                ->setParameter('votesDownFilter', false)
+                ->addOrderBy('vDownOrder', 'ASC')
+            ;
+        }
+
+        $qb->addOrderBy("a.$orderBy", 'DESC');
 
         // Filtre "search"
         if(isset($filters['search']))
@@ -375,6 +399,7 @@ class ArticleRepository extends EntityRepository
                     break;
 
                 case 'search':
+                case 'order':
                     if(!is_string($data))
                     {
                         throw new \Exception("Filtre $filter invalide");

@@ -64,6 +64,14 @@ $(document).ready(function(){
 
     resetAuthors();
 
+    // Order filter
+    var orderInput = $("#inck_articlebundle_articlefilter_order");
+    orderInput.val('date');
+
+    orderInput.select2({
+        width: 'container'
+    });
+
     // Form
     var form = $('form[name="inck_articlebundle_articlefilter"]');
     var articlesTotal = $('#articles-total');
@@ -101,6 +109,7 @@ $(document).ready(function(){
                         categories: categoriesInput.val(),
                         tags: tagsInput.val(),
                         authors: authorsInput.val(),
+                        order: orderInput.val(),
                         search: $("#inck_articlebundle_articlefilter_search").val()
                     }
                 },
@@ -184,9 +193,11 @@ $(document).ready(function(){
         nextPage = 2;
     }
 
-    $('#timeline-next-page').click(function(){
+    $('#timeline-next-page').click(getNextPage);
+
+    function getNextPage(){
         var button = $(this);
-        if(button.prop('disabled')) return false;
+        if (button.prop('disabled')) return false;
         button.prop('disabled', true);
 
         var icon = button.find('i:first');
@@ -201,27 +212,31 @@ $(document).ready(function(){
                     categories: categoriesInput.val(),
                     tags: tagsInput.val(),
                     authors: authorsInput.val(),
+                    order: orderInput.val(),
                     search: $("#inck_articlebundle_articlefilter_search").val()
                 }
             },
             method: 'POST',
             dataType: 'html'
-        }).done(function(articles){
+        }).done(function (articles) {
             nextPage++;
+
             var timeline = $('#timeline');
             var list = timeline.find('div.articles:first');
             var totalPages = list.attr('data-total-pages');
 
-            if(nextPage > totalPages){
+            if (nextPage > totalPages) {
                 button.addClass('hidden');
             }
 
-            $(articles).find('article').each(function(){
+            $(articles).find('article').each(function () {
                 $(this).appendTo(list);
             });
 
             icon.attr('class', 'fa fa-plus');
             button.prop('disabled', false);
         });
-    });
+
+        return true;
+    }
 });

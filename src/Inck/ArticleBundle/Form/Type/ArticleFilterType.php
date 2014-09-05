@@ -26,17 +26,26 @@ class ArticleFilterType extends AbstractType
                 ],
             ])
             ->add('tags', 'inck_articlebundle_tags_selector', [
-                'label' => 'Tags',
+                'label'     => 'Tags',
                 'required'  => false,
-                'attr'  => [
+                'attr'      => [
                     'placeholder'   => 'Filter par tags',
                 ],
             ])
             ->add('authors', 'inck_userbundle_users_selector', [
-                'label' => 'Auteurs',
+                'label'     => 'Auteurs',
                 'required'  => false,
-                'attr'  => [
+                'attr'      => [
                     'placeholder'   => 'Filter par auteur',
+                ],
+            ])
+            ->add('order', 'choice', [
+                'label'         => 'Trier par',
+                'required'      => false,
+                'empty_value'   => false,
+                'choices'       => [
+                    'date'  => 'Date de publication',
+                    'vote'  => 'Popularité',
                 ],
             ])
             ->add('search', 'hidden')

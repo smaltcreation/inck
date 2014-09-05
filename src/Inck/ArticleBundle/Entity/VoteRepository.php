@@ -52,4 +52,21 @@ class VoteRepository extends EntityRepository
 
         return $query->getOneOrNullResult();
     }
+
+    /**
+     * @param string $filterName
+     * @param string $columnName
+     * @param string $join
+     * @return string
+     */
+    public function getOrderFilterQuery($filterName, $columnName, $join)
+    {
+        $qb = $this->createQueryBuilder($join)
+            ->select("COUNT($join.id)")
+            ->innerJoin("$join.article", $join.'Va')
+            ->where($join.'Va.id = a.id')
+            ->andWhere("$join.up = :$filterName");
+
+        return sprintf('(%s) AS %s', $qb->getDQL(), $columnName);
+    }
 }

@@ -58,10 +58,11 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
 
             // État
             $article->setPublished(boolval(rand(0, 1)));
+            $article->setCreatedAt(self::getRandomDate());
 
             if($article->getPublished())
             {
-                $article->getPublishedAt(new \DateTime());
+                $article->setPublishedAt(self::getRandomDate());
                 $article->setAsDraft(false);
             }
 
@@ -70,9 +71,14 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
                 $article->setAsDraft(boolval(rand(0, 1)));
             }
 
-            if(!$article->getAsDraft())
+            if($article->getAsDraft())
             {
-                $article->setPostedAt(new \DateTime());
+                $article->setUpdatedAt(self::getRandomDate());
+            }
+
+            else
+            {
+                $article->setPostedAt(self::getRandomDate());
             }
 
             // Contenu aléatoire
@@ -143,5 +149,18 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
             'Inck\ArticleBundle\DataFixtures\ORM\LoadCategoryData',
             'Inck\ArticleBundle\DataFixtures\ORM\LoadTagData',
         );
+    }
+
+    /**
+     * Génère une date aléatoire
+     * @param int $interval 31556926 secondes, c'est à dire 1 an
+     * @return \DateTime
+     */
+    public static function getRandomDate($interval = 31556926)
+    {
+        $date = new \DateTime();
+        $date->setTimestamp(rand(time() - $interval, time()));
+
+        return $date;
     }
 }

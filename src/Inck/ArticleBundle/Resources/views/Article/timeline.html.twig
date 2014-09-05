@@ -25,10 +25,12 @@
                             <div class="col-xs-6">
                                 {{ form_row(form.authors) }}
                             </div>
-                            <div class="col-xs-6 action">
-                                {{ form_row(form.actions) }}
+                            <div class="col-xs-6">
+                                {{ form_row(form.order) }}
                             </div>
                         </div>
+
+                        {{ form_row(form.actions) }}
 
                         <div class="hidden">
                             {{form_rest(form)}}
