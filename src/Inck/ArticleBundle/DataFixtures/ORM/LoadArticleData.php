@@ -69,16 +69,16 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
             else
             {
                 $article->setAsDraft(boolval(rand(0, 1)));
-            }
 
-            if($article->getAsDraft())
-            {
-                $article->setUpdatedAt(self::getRandomDate());
-            }
+                if($article->getAsDraft())
+                {
+                    $article->setUpdatedAt(self::getRandomDate());
+                }
 
-            else
-            {
-                $article->setPostedAt(self::getRandomDate());
+                else
+                {
+                    $article->setPostedAt(self::getRandomDate());
+                }
             }
 
             // Contenu aléatoire
@@ -153,10 +153,10 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
 
     /**
      * Génère une date aléatoire
-     * @param int $interval 31556926 secondes, c'est à dire 1 an
+     * @param int $interval 259200 secondes, c'est à dire 3 jours
      * @return \DateTime
      */
-    public static function getRandomDate($interval = 31556926)
+    public static function getRandomDate($interval = 259200)
     {
         $date = new \DateTime();
         $date->setTimestamp(rand(time() - $interval, time()));
