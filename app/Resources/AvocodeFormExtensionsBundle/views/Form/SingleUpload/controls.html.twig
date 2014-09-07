@@ -5,6 +5,7 @@
             <span> {{ 'afe_single_upload.button.cancel'|trans({}, 'AvocodeFormExtensions') }}</span>
         </button>
     </div>
+{#{% if form.parent.vars.value.imageName is not null %}#}
 {% if deleteable is not empty %}
     <div class="btn-wrapper">
         <button type="button" class="btn btn-danger delete" style="display: none;">

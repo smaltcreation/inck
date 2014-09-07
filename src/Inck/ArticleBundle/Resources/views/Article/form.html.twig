@@ -1,14 +1,14 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 
 {% block title %}
-    {% if app.request.attributes.get('_route') == 'inck_article_article_new' %}
+    {% if action == 'add' %}
         Écrire un article
-    {% elseif app.request.attributes.get('_route') == 'inck_article_article_edit' %}
+    {% else %}
         Éditer mon article
     {% endif %}
 {% endblock %}
 {% block description %}
-    {% if app.request.attributes.get('_route') == 'inck_article_article_new' %}
+    {% if action == 'add' %}
         <meta name="description" content="Partager un article en quelques cliques, il n'y a rien de plus simple !">
     {% endif %}
 {% endblock %}

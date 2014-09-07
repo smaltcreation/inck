@@ -150,7 +150,7 @@ class Article
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="Inck\ArticleBundle\Entity\Vote", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="Inck\ArticleBundle\Entity\Vote", mappedBy="article", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $votes;
@@ -161,9 +161,9 @@ class Article
      */
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
-        $this->tags = new ArrayCollection();
-        $this->votes = new ArrayCollection();
+        $this->categories   = new ArrayCollection();
+        $this->tags         = new ArrayCollection();
+        $this->votes        = new ArrayCollection();
     }
 
     /**

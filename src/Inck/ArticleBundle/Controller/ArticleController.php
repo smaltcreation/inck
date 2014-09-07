@@ -25,53 +25,50 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/new", name="inck_article_article_new", defaults={"id" = 0})
-     * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"})
-     * @Template()
+     * @Route("/new", name="inck_article_article_new")
      * @Secure(roles="ROLE_USER")
      */
-    public function formAction(Request $request, $id)
+    public function addAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
+        $article = new Article();
 
-        // Récupération de l'article en cas d'édition
-        $article = ($id === 0)
-            ? new Article()
-            : $em->getRepository('InckArticleBundle:Article')->find($id)
-        ;
+        // Traitement
+        return $this->forward('InckArticleBundle:Article:form', array(
+            'request'   => $request,
+            'article'   => $article,
+            'action'    => 'add',
+        ));
+    }
 
-        // Article inexistant
-        if(!$article)
+    /**
+     * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"})
+     * @Secure(roles="ROLE_USER")
+     */
+    public function editAction(Request $request, Article $article)
+    {
+        // Tentative d'édition d'un article dont on est pas l'auteur,
+        // ou tentative d'édition d'un article qui n'est pas un brouillon
+        if($this->getUser() !== $article->getAuthor() || $article->getAsDraft() === false)
         {
-            $this->get('session')->getFlashBag()->add(
-                'danger',
-                "Article inexistant."
-            );
-
-            return $this->redirect($this->generateUrl('home'));
+            throw $this->createNotFoundException("Article inexistant");
         }
 
-        // Tentative d'édition d'un article dont on est pas l'auteur
-        else if($id !== 0 && $user !== $article->getAuthor())
+        // Traitement
+        return $this->forward('InckArticleBundle:Article:form', array(
+            'request'   => $request,
+            'article'   => $article,
+            'action'    => 'edit',
+        ));
+    }
+
+    /**
+     * @Template()
+     */
+    public function formAction(Request $request, Article $article, $action)
+    {
+        if(!$article->getImageName())
         {
-            $this->get('session')->getFlashBag()->add(
-                'danger',
-                "Cet article ne vous appartient pas."
-            );
-
-            return $this->redirect($this->generateUrl('home'));
-        }
-
-        // Tentative d'édition d'un article qui n'est pas un brouillon
-        else if($article->getAsDraft() === false)
-        {
-            $this->get('session')->getFlashBag()->add(
-                'danger',
-                "Cet article ne peut pas être édité."
-            );
-
-            return $this->redirect($this->generateUrl('home'));
+            $article->setImageFile(null);
         }
 
         // Création du formulaire
@@ -88,10 +85,12 @@ class ArticleController extends Controller
 
         // Formulaire envoyé et valide
         $form->handleRequest($request);
+
         if($form->isValid())
         {
             $article->setPublished(false);
-            $article->setAuthor($user);
+            $article->setAuthor($this->getUser());
+            $article->setUpdatedAt(new \DateTime());
 
             // On a cliqué sur le bouton "publier"
             /** @var SubmitButton $publish */
@@ -122,119 +121,65 @@ class ArticleController extends Controller
             }
 
             // Enregistrement et redirection
+            $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                'Article enregistré !'
-            );
+            $this->get('session')->getFlashBag()->add('success', 'Article enregistré !');
 
             return $this->redirect($this->generateUrl('inck_article_article_show', array(
-                'id' => $article->getId(),
-                'slug' => $article->getSlug(),
-                'date' => ($article->getPublishedAt())
-                        ? $article->getPublishedAt()->format('Y-m-d')
-                        : $article->getPostedAt()->format('Y-m-d')
+                'id'        => $article->getId(),
+                'slug'      => $article->getSlug(),
+                'updatedAt' => $article->getUpdatedAt()->format('Y-m-d'),
             )));
         }
 
         // On retourne le formulaire pour la vue
         return array(
-            'form' => $form->createView(),
+            'action'    => $action,
+            'form'      => $form->createView(),
         );
     }
 
     /**
-     * @Route("/{id}/{slug}/{date}", name="inck_article_article_show", requirements={"id" = "\d+"})
+     * @Route("/{id}/{slug}/{updatedAt}", name="inck_article_article_show", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function showAction($id)
+    public function showAction(Article $article)
     {
-        try
+        $user = $this->getUser();
+
+        if($article->getAsDraft() && $user !== $article->getAuthor() || !$user && !$article->getPublished())
         {
-            $em = $this->getDoctrine()->getManager();
-            $user = $this->getUser();
-
-            // Récupération de l'article
-            /** @var $article Article */
-            $article = $em->getRepository('InckArticleBundle:Article')->find($id);
-
-            // Article inexistant
-            if(!$article)
-            {
-                throw new \Exception("Article inexistant.");
-            }
-
-            // Article "brouillon" ou en modération
-            else if($article->getAsDraft() && $user !== $article->getAuthor()
-                || !$user && !$article->getPublished())
-            {
-                throw new \Exception("Article indisponible.");
-            }
-
-            return array(
-                'article' => $article,
-            );
+            throw $this->createNotFoundException("Article inexistant");
         }
 
-        catch(\Exception $e)
-        {
-            $this->get('session')->getFlashBag()->add(
-                'danger',
-                $e->getMessage()
-            );
-
-            return $this->redirect($this->generateUrl('home'));
-        }
+        return array(
+            'article' => $article,
+        );
     }
 
     /**
      * @Route("/{id}/modal", name="inck_article_article_show_modal", requirements={"id" = "\d+"})
      * @Template("InckArticleBundle:Article:show_modal.html.twig")
+     * @Secure(roles="ROLE_USER")
      */
-    public function showModalAction($id)
+    public function showModalAction(Article $article)
     {
-        try
+        $user = $this->getUser();
+
+        if($article->getAsDraft() && $user !== $article->getAuthor() || !$user && !$article->getPublished())
         {
-            // Récupération de l'article
-            $em = $this->getDoctrine()->getManager();
-            /** @var $article Article */
-            $article = $em->getRepository('InckArticleBundle:Article')->find($id);
-
-            // Article inexistant
-            if(!$article)
-            {
-                throw new \Exception("Article inexistant.");
-            }
-
-            // Article "brouillon"
-            else if($article->getAsDraft())
-            {
-                if($this->getUser() !== $article->getAuthor())
-                {
-                    throw new \Exception("Article indisponible.");
-                }
-            }
-
-            return array(
-                'article' => $article,
-            );
+            throw $this->createNotFoundException("Article inexistant");
         }
 
-        catch(\Exception $e)
-        {
-            $this->get('session')->getFlashBag()->add(
-                'danger',
-                $e->getMessage()
-            );
-
-            return $this->redirect($this->generateUrl('home'));
-        }
+        return array(
+            'article' => $article,
+        );
     }
 
     /**
-     * @var $article Article
+     * @var Article $article
      * @Template()
      * @return array
      */
@@ -273,7 +218,7 @@ class ArticleController extends Controller
     public function timelineAction($filters)
     {
         $form = $this->createForm(new ArticleFilterType(), array(
-            'search'   => isset($filters['search']) ? $filters['search'] : null,
+            'search' => isset($filters['search']) ? $filters['search'] : null,
         ));
 
         $em = $this->getDoctrine()->getManager();
@@ -403,62 +348,26 @@ class ArticleController extends Controller
 
     /**
      * @Route("/{id}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"})
+     * @Secure(roles="ROLE_USER")
      */
-    public function deleteAction($id)
+    public function deleteAction(Article $article)
     {
-        try
+        // Si un utilisateur tente de supprimer l'article d'un autre utilisateur, ou un article publié
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN') && ($this->getUser() !== $article->getAuthor() || !$article->getAsDraft()))
         {
-            $em = $this->getDoctrine()->getManager();
-            /** @var Article $article */
-            $article = $em->getRepository("InckArticleBundle:Article")->find($id);
-            $user = $this->getUser();
-
-            if(!$article)
-            {
-                throw new \Exception("Article inexistant.");
-            }
-
-            if(!$this->get('security.context')->isGranted('ROLE_USER'))
-            {
-                $this->get('session')->getFlashBag()->add(
-                    'warning',
-                    'Vous devez vous identifier et avoir les droits nécessaires pour supprimer cet article.'
-                );
-                return $this->redirect($this->generateUrl('fos_user_security_login'));
-            }
-
-            if (!$this->get('security.context')->isGranted('ROLE_ADMIN'))
-            {
-                if ($user != $article->getAuthor())
-                {
-                    throw new \Exception("Cet article ne vous appartient pas.");
-                }
-                else if ($article->getAsDraft() == 0)
-                {
-                    throw new \Exception("Vous ne pouvez pas supprimer un article après sa publication.");
-                }
-            }
-
-            $em->remove($article);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                'Article supprimé avec succès !'
-            );
-
-            return $this->redirect($this->generateUrl('fos_user_profile_show'));
+            throw $this->createNotFoundException("Article inexistant");
         }
 
-        catch(\Exception $e)
-        {
-            $this->get('session')->getFlashBag()->add(
-                'danger',
-                $e->getMessage()
-            );
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($article);
+        $em->flush();
 
-            return $this->redirect($this->generateUrl('home'));
-        }
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            'Article supprimé avec succès !'
+        );
+
+        return $this->redirect($this->generateUrl('fos_user_profile_show'));
     }
 
     /**
@@ -468,13 +377,9 @@ class ArticleController extends Controller
      */
     public function buttonWatchLaterAction($article)
     {
-        $watchLater = false;
-
-        if($this->get('security.context')->isGranted('ROLE_USER'))
-        {
-            $user = $this->getUser();
-            $watchLater = $user->getArticlesWatchLater()->contains($article);
-        }
+        $watchLater = ($this->get('security.context')->isGranted('ROLE_USER'))
+            ? $this->getUser()->getArticlesWatchLater()->contains($article)
+            : false;
 
         return array(
             'watchLater'    => $watchLater,
@@ -485,37 +390,32 @@ class ArticleController extends Controller
     /**
      * @Route("/{id}/watch-later", name="inck_article_article_watchLater", requirements={"id" = "\d+"}, options={"expose"=true})
      */
-    public function watchLater($id)
+    public function watchLater(Article $article)
     {
         try
         {
             $user = $this->getUser();
+
             if(!$user)
             {
-                throw new \Exception("Vous devez être connecté pour ajouter cet article dans votre liste \"à regarder plus tard\".");
+                throw new \Exception('Vous devez être connecté pour ajouter cet article dans votre liste d\'articles "à regarder plus tard".');
             }
 
-            $em = $this->getDoctrine()->getManager();
-            $article = $em->getRepository('InckArticleBundle:Article')->find($id);
-            if(!$article)
-            {
-                throw new \Exception("Article inexistant.");
-            }
-
-            $watchLater = $user->getArticlesWatchLater()->contains($article);
-            if(!$watchLater)
-            {
-                $user->addArticlesWatchLater($article);
-            }
-            else
+            if($user->getArticlesWatchLater()->contains($article))
             {
                 $user->removeArticlesWatchLater($article);
             }
 
+            else
+            {
+                $user->addArticlesWatchLater($article);
+            }
+
+            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            return new JsonResponse('Article ajouté avec succès', 204);
+            return new JsonResponse(null, 204);
         }
 
         catch(\Exception $e)
@@ -532,17 +432,22 @@ class ArticleController extends Controller
      * @Route("/{id}/pdf", name="inck_article_article_pdf")
      * @Template()
      */
-    public function pdfAction($id)
+    public function pdfAction(Article $article)
     {
-        $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository('InckArticleBundle:Article')->find($id);
-        $user = $this->getUser();
-
         $html2pdf = $this->get('html2pdf')->get();
-        $html2pdf->setDefaultFont('arial');
-        $html = $this->renderView('InckArticleBundle:Article:pdf.html.twig', array('article' => $article, 'user' => $user));
-        $html2pdf->writeHTML($html);
 
-        return $html2pdf->Output('article-' . $id . '.pdf');
+        $html2pdf->setDefaultFont('arial');
+        $html2pdf->writeHTML($this->renderView(
+            'InckArticleBundle:Article:pdf.html.twig',
+            array(
+                'article'   => $article,
+                'user'      => $this->getUser()
+            )
+        ));
+
+        return $html2pdf->Output(sprintf(
+            "article-%d.pdf",
+            $article->getId()
+        ));
     }
 }

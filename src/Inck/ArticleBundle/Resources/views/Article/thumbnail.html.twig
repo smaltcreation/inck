@@ -2,7 +2,7 @@
 {% if currentRoute == 'inck_article_article_show' %}
     {% set articleUrl = '#content' %}
 {% else %}
-    {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'date': article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d') }) %}
+    {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
 {% endif %}
 
 <div class="thumbnail">
