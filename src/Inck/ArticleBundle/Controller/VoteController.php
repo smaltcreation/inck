@@ -4,8 +4,8 @@ namespace Inck\ArticleBundle\Controller;
 
 use Exception;
 use Inck\ArticleBundle\Entity\Vote;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class VoteController extends Controller

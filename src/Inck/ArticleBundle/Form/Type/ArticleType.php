@@ -30,7 +30,9 @@ class ArticleType extends AbstractType
                     'maxlength'     => 255,
                 ],
             ])
-            ->add('content', 'ckeditor', ['label' => 'Contenu'])
+            ->add('content', 'ckeditor', [
+                'label'     => 'Contenu',
+            ])
             ->add('categories', 'afe_select2_entity', [
                 'label'     => 'Catégories',
                 'class'     => 'InckArticleBundle:Category',

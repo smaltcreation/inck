@@ -10,14 +10,14 @@ use Inck\ArticleBundle\Entity\Vote;
 use Inck\ArticleBundle\Form\Type\ArticleFilterType;
 use Inck\ArticleBundle\Form\Type\ArticleType;
 use Inck\UserBundle\Entity\User;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\SubmitButton;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/article")
@@ -41,7 +41,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"})
+     * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"}, options={"expose"=true})
      * @Secure(roles="ROLE_USER")
      */
     public function editAction(Request $request, Article $article)
@@ -136,8 +136,9 @@ class ArticleController extends Controller
 
         // On retourne le formulaire pour la vue
         return array(
-            'action'    => $action,
             'form'      => $form->createView(),
+            'action'    => $action,
+            'articleId' => $article->getId(),
         );
     }
 

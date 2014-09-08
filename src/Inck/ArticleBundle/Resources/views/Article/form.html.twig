@@ -38,7 +38,7 @@
 {% block content %}
     <div class="container">
         <article class="new">
-            <form {{ form_enctype(form) }} method="POST" novalidate="novalidate">
+            <form {{ form_enctype(form) }} method="POST" novalidate="novalidate" data-article-id="{{ articleId }}">
                 {{ form_errors(form) }}
                 <section id="article-new-header">
                     <div class="row">
@@ -82,6 +82,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+
     {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/form.js'
         'bundles/inckarticle/js/Article/form.js'
     %}
