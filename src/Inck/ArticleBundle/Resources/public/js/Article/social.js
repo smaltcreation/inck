@@ -1,9 +1,11 @@
 $(document).ready(function(){
-    $('#content').on('click', '.vote-up', function(){
+    var content = $('#content');
+
+    content.on('click', '.vote-up', function(){
         saveVote($(this), 1);
     });
 
-    $('#content').on('click', '.vote-down', function(){
+    content.on('click', '.vote-down', function(){
         saveVote($(this), 0);
     });
 
@@ -47,7 +49,7 @@ $(document).ready(function(){
                 else
                     icon.attr('class', 'fa fa-thumbs-down');
             }
-            if(otherButton.hasClass('vote-up'))
+                if(otherButton.hasClass('vote-up'))
                 otherButtonIcon.attr('class', 'fa fa-thumbs-up');
             else
                 otherButtonIcon.attr('class', 'fa fa-thumbs-down');

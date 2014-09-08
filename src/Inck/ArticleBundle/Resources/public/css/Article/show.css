@@ -1,3 +1,11 @@
 article section#article-summary, article section#article-content, article section#article-user{
     margin-bottom: 50px;
 }
+
+#article-social.affix {
+    top: 80px;
+}
+
+#article-social.affix-bottom {
+    bottom: 0;
+}

@@ -18,4 +18,38 @@ $(document).ready(function(){
         resizeFn();
         $(window).resize(resizeFn);
     });
+
+    // Affix
+    var social = $('#article-social');
+    var offset = null;
+
+    social.affix({
+        offset: {
+            top: function(){
+                return $('#header').outerHeight() - 50;
+            },
+            bottom: function(){
+                return $('#footer').find('footer:first').outerHeight() + 100;
+            }
+        }
+    }).on('affix.bs.affix', function(){
+        if(offset == null){
+            offset = social.offset().left;
+        }
+    }).on('affixed.bs.affix affixed-top.bs.affix affixed-bottom.bs.affix', function(){
+        social.offset({
+            left: offset
+        });
+    });
+
+    // Resize
+    function windowResized(){
+        offset = social.offset().left;
+    }
+
+    var resizing;
+    window.onresize = function(){
+        clearTimeout(resizing);
+        resizing = setTimeout(windowResized, 100);
+    };
 });
