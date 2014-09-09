@@ -163,13 +163,12 @@ class ArticleController extends Controller
     /**
      * @Route("/{id}/modal", name="inck_article_article_show_modal", requirements={"id" = "\d+"})
      * @Template("InckArticleBundle:Article:show_modal.html.twig")
-     * @Secure(roles="ROLE_USER")
      */
     public function showModalAction(Article $article)
     {
         $user = $this->getUser();
 
-        if($article->getAsDraft() && $user !== $article->getAuthor() || !$user && !$article->getPublished())
+        if(!$user && ($article->getAsDraft() && $user !== $article->getAuthor() || !$user && !$article->getPublished()))
         {
             throw $this->createNotFoundException("Article inexistant");
         }

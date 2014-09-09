@@ -86,7 +86,7 @@ function changeType(form, result){
     if(result.valid){
         form.attr({
             'data-article-id': result.id,
-            'action': Routing.generate('inck_article_draft_edit', {
+            'action': Routing.generate('inck_article_article_edit', {
                 id: result.id
             })
         });
