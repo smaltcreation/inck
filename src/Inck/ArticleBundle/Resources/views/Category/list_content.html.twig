@@ -1,0 +1,61 @@
+
+{% set article = lastPublishedArticles[categories.0.id].0 %}
+<div class="row">
+    <div class="col-sm-6">
+        <div class="thumbnail">
+            <a href="{{ path('inck_article_category_show', { 'id': categories.0.id, 'slug': categories.0.slug }) }}">
+                {% if article.imageName %}
+                    <img src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image du dernier article : {{ article.title }}">
+                {% else %}
+                    {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+                    <img src="{{ asset_url }}" alt="Image par défaut"/>
+                    {% endimage %}
+                {% endif %}
+            </a>
+            <div class="caption">
+                <h3><a class="btn btn-primary" href="{{ path('inck_article_category_show', { 'id': categories.0.id, 'slug': categories.0.slug }) }}">{{ categories.0.name }}</a></h3>
+                <p>{{ categories.0.description }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="about">
+            {% image '@InckArticleBundle/Resources/public/images/category/Ticket@2x.png' %}
+            <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Categorie"/>
+            {% endimage %}
+            <h2>Nos catégories les plus poulaires</h2>
+            <p class="description">
+                Nous sélectionnons les catégories les plus populaires pour vous. En effet, nous trions celles-ci en fonction du nombre d'articles publiés.
+                La catégorie la plus populaire étant en ce moment <a href="{{ path('inck_article_category_show', { 'id': categories.0.id, 'slug': categories.0.slug }) }}">{{ categories.0.name }}</a> avec {{ categories.0.articles|length }} articles envoyés.
+                Bien entendu, nous aimons avoir l'avis de notre communauté et si vous ne trouvez pas une catégorie, pourquoi ne pas nous la suggérer ?
+            </p>
+            <p><a href="{{ path('inck_core_contact') }}" class="btn btn-default"><i class="fa fa-send"></i> Nous contacter</a></p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    {% for category in categories %}
+        {% if not loop.first %}
+            {% set article = lastPublishedArticles[category.id].0 %}
+            <div class="category">
+                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="thumbnail">
+                        <a href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}">
+                            {% if article.imageName %}
+                                <img src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image du dernier article : {{ article.title }}">
+                            {% else %}
+                                {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+                                    <img src="{{ asset_url }}" alt="Image par défaut"/>
+                                {% endimage %}
+                            {% endif %}
+                        </a>
+                        <div class="caption">
+                            <h3><a class="btn btn-primary btn-sm" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}">{{ category.name }}</a></h3>
+                            <p>{{ category.description|slice(0, 50) }}...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

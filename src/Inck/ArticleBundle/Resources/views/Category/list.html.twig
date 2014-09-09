@@ -1,0 +1,29 @@
+{% extends 'InckArticleBundle::layout.html.twig' %}
+
+{% block title %}Categories{% endblock %}
+{% block description %}<meta name="description" content="Trouver une categorie ou un tag n'a jamais été plus simple.">{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/article/category/list.css'
+        'bundles/inckarticle/css/Category/list.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Categories <span class="small">{{ categoriesLength }} au total</span></h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div id="categories">
+            {% include 'InckArticleBundle:Category:list_content.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

@@ -15,7 +15,7 @@ use Inck\UserBundle\Entity\UserRepository;
  */
 class ArticleRepository extends EntityRepository
 {
-    const ARTICLES_PER_PAGE = 5;
+    const ARTICLES_PER_PAGE = 10;
 
     /**
      * Récupère les articles en fonction des filtres
@@ -288,6 +288,29 @@ class ArticleRepository extends EntityRepository
         ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param int $category
+     * @param bool $published
+     * @return int
+     */
+    public function getLastOfCategory($category, $published = false)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->select('a')
+            ->join('a.categories', 'c')
+            ->where($qb
+                ->expr()
+                ->in('c.id', $category)
+            )
+            ->andWhere('a.published = :published')
+            ->setParameter('published', $published)
+            ->orderBy('a.publishedAt', 'DESC')
+        ;
+
+        return $qb->setMaxResults(1)->getQuery()->getResult();
     }
 
     /**

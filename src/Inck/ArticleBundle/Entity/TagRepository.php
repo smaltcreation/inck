@@ -60,4 +60,31 @@ class TagRepository extends EntityRepository
 
         return sprintf('(%s) AS %s', $qb->getDQL(), $columnName);
     }
+
+    /**
+     * @return int
+     */
+    public function countAll()
+    {
+        $qb = $this->createQueryBuilder('t')->select('COUNT(t)');
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return int
+     */
+    public function getPopular()
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->select('t')
+            ->addSelect('COUNT(a) AS HIDDEN nArticles')
+            ->where('a.published = :published')
+            ->setParameter('published', true)
+            ->innerJoin('t.articles', 'a')
+            ->groupBy('t.id')
+            ->orderBy("nArticles", 'DESC')
+        ;
+
+        return $qb->setMaxResults(100)->getQuery()->getResult();
+    }
 }

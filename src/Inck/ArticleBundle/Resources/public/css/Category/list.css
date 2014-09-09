@@ -1,0 +1,39 @@
+.img-inline {
+    float: left;
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    width: 100px;
+    height: 100px;
+}
+
+.description {
+    text-align: justify;
+    font-size: 16px;
+}
+
+.about {
+    padding: 100px;
+}
+
+.about h2 {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 119999px) {
+    .about {
+        padding: 50px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .about {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .about {
+        padding: 50px;
+    }
+}

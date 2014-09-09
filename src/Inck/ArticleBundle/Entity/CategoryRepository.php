@@ -27,4 +27,31 @@ class CategoryRepository extends EntityRepository
 
         return sprintf('(%s) AS %s', $qb->getDQL(), $columnName);
     }
+
+    /**
+     * @return int
+     */
+    public function countAll()
+    {
+        $qb = $this->createQueryBuilder('c')->select('COUNT(c)');
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return int
+     */
+    public function getPopular()
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c')
+            ->addSelect('COUNT(a) AS HIDDEN nArticles')
+            ->where('a.published = :published')
+            ->setParameter('published', true)
+            ->innerJoin('c.articles', 'a')
+            ->groupBy('c.id')
+            ->orderBy("nArticles", 'DESC')
+        ;
+
+        return $qb->setMaxResults(15)->getQuery()->getResult();
+    }
 }
