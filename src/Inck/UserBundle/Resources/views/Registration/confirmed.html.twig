@@ -48,8 +48,9 @@
         </div>
 
         <div class="last-article" itemscope itemtype ="http://schema.org/Article">
-            {#{{ render(controller('InckArticleBundle:Article:timeline', {'limit' : 1})) }}#}
-            {#@todo afficher le dernier article, aucune raison d'utiliser la timeline ici#}
+            <h3>Dernier article publié</h3>
+            <br>
+            {{ render(controller('InckArticleBundle:Article:last')) }}
         </div>
     </div>
 {% endblock content %}

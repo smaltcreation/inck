@@ -213,10 +213,11 @@ class User extends BaseUser
     {
         parent::__construct();
 
-        $this->country = 'FR';
-        $this->firstLogin = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
-        $this->subscriptions = new ArrayCollection();
-        $this->subscribers = new ArrayCollection();
+        $this->country          = 'FR';
+        $this->firstLogin       = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->subscriptions    = new ArrayCollection();
+        $this->subscribers      = new ArrayCollection();
+        $this->groups           = new ArrayCollection();
     }
 
     /**

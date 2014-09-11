@@ -29,10 +29,11 @@ class ArticleRepository extends EntityRepository
      *
      * @param $filters
      * @param int|boolean $page
+     * @param boolean $limit
      * @throws \Exception
      * @return array
      */
-    public function findByFilters($filters, $page = 1)
+    public function findByFilters($filters, $page = 1, $limit = false)
     {
         $this->convertFilters($filters);
         $this->checkFilters($filters);
@@ -259,13 +260,17 @@ class ArticleRepository extends EntityRepository
             return array($results, $totalArticles, $totalPages);
         }
 
-        // Retourner tous les résultats
-        else
+        // Retourner un certain nombre de résultats
+        if($limit !== false)
         {
-            $results = $qb->getQuery()->getResult();
-            $this->formatResults($results);
-            return $results;
+            $qb->setMaxResults($limit);
         }
+
+        // Retourner les résultats
+        $results = $qb->getQuery()->getResult();
+        $this->formatResults($results);
+
+        return $results;
     }
 
     /**
