@@ -1,0 +1,17 @@
+{% extends 'InckCoreBundle::layout.html.twig' %}
+
+{% block title %}À propos{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+           <h1>À propo de Inck</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include('InckCoreBundle:Default:about_content.html.twig') %}
+    </div>
+{% endblock %}
