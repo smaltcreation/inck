@@ -63,6 +63,10 @@
                     <section data-clampedwidth=".col-xs-4" itemprop="additionalType" itemscope itemtype="http://schema.org/Action">
                         {{ render(controller('InckArticleBundle:Article:social', { article: article })) }}
                     </section>
+
+                    <section data-clampedwidth=".col-xs-4">
+                        {{ render(controller('InckArticleBundle:Article:featured', { article: article })) }}
+                    </section>
                 </div>
             </div>
         </article>

@@ -165,6 +165,14 @@ class ArticleRepository extends EntityRepository
             ->groupBy('a.id')
             ->andWhere($orX);
 
+        // Filtre "not" (articles similaires)
+        if(isset($filters['not']))
+        {
+            $qb
+                ->andWhere('a.id != :not')
+                ->setParameter('not', $filters['not']);
+        }
+
         // Ordre
         if(isset($filters['order']) && $filters['order'] === 'vote')
         {
@@ -429,6 +437,13 @@ class ArticleRepository extends EntityRepository
                 case 'search':
                 case 'order':
                     if(!is_string($data))
+                    {
+                        throw new \Exception("Filtre $filter invalide");
+                    }
+                    break;
+
+                case 'not':
+                    if(!is_int($data))
                     {
                         throw new \Exception("Filtre $filter invalide");
                     }

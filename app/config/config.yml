@@ -174,3 +174,6 @@ avalanche_imagine:
         article_thumb:
             type:    thumbnail
             options: { size: [196, 196], mode: outbound, quality: 100 }
+        article_featured:
+            type:    thumbnail
+            options: { size: [350, 150], mode: outbound, quality: 100 }

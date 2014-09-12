@@ -454,7 +454,7 @@ class ArticleController extends Controller
     /**
      * @Template("InckArticleBundle:Article:filter.html.twig")
      */
-    public function lastAction(Request $request)
+    public function lastAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -468,6 +468,25 @@ class ArticleController extends Controller
             'articles'      => $articles,
             'totalArticles' => count($articles),
             'totalPages'    => count($articles),
+        );
+    }
+
+    /**
+     * @Template()
+     */
+    public function featuredAction(Article $article)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $articles = $em
+            ->getRepository('InckArticleBundle:Article')
+            ->findByFilters(array(
+                'type'  => 'published',
+                'not'   => $article->getId(),
+            ), false, 2);
+
+        return array(
+            'articles' => $articles,
         );
     }
 }

@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Articles similaires</h3>
+    </div>
+    <div class="panel-body">
+        {% for article in articles %}
+            {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
+            <a href="{{ articleUrl }}">
+                {% if article.imageName %}
+                    <img itemprop="image" class="center-block img-responsive" src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_featured') }}" alt="Image de l'article : {{ article.title }}">
+                {% endif %}
+            </a>
+            <h4>
+                <a href="{{ articleUrl }}">{{ article.title }}</a>
+            </h4>
+        {% endfor %}
+    </div>
+</div>
