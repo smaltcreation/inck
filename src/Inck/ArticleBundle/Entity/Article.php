@@ -657,7 +657,7 @@ class Article
      */
     public function getType()
     {
-        if($this->asDraft === true && $this->postedAt === null)
+        if($this->asDraft === true)
         {
             return 'Brouillon';
         }
@@ -680,13 +680,6 @@ class Article
             return 'En modération';
         }
 
-        $limitDate->sub(new \DateInterval('P1D'));
-
-        if($this->approved === null && !$this->asDraft && $this->postedAt >= $limitDate)
-        {
-            return 'En validation';
-        }
-
-        throw new \Exception('Type indéfini.');
+        return 'En validation';
     }
 }

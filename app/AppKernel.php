@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
+            new JDare\ClankBundle\JDareClankBundle(),
             /* Our bundles */
             new Inck\UserBundle\InckUserBundle(),
             new Inck\CoreBundle\InckCoreBundle(),

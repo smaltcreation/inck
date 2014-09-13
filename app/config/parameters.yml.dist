@@ -25,3 +25,6 @@ parameters:
 
     upload.article_image.uri_prefix: /article/image
     upload.article_image.upload_destination: %kernel.root_dir%/../web/article/image
+
+    clank_host: 127.0.0.1
+    clank_port: 8080

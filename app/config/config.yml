@@ -31,12 +31,15 @@ twig:
     form:
         resources:
             - ::form.html.twig
+    globals:
+        clank_host:    "%clank_host%"
+        clank_port:    "%clank_port%"
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ InckCoreBundle, InckArticleBundle, InckUserBundle, FOSUserBundle, AvocodeFormExtensionsBundle ]
+    bundles:        [ InckCoreBundle, InckArticleBundle, InckUserBundle, FOSUserBundle, AvocodeFormExtensionsBundle, JDareClankBundle ]
     #java: /usr/bin/java
     filters:
         less:
@@ -177,3 +180,9 @@ avalanche_imagine:
         article_featured:
             type:    thumbnail
             options: { size: [350, 150], mode: outbound, quality: 100 }
+
+# Clank Configuration
+clank:
+    web_socket_server:
+        port: "%clank_port%"
+        host: "%clank_host%"

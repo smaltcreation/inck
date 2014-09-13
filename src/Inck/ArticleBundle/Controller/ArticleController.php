@@ -179,11 +179,11 @@ class ArticleController extends Controller
     }
 
     /**
-     * @var Article $article
      * @Template()
+     * @param Article $article
      * @return array
      */
-    public function socialAction($article)
+    public function socialAction(Article $article)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -214,6 +214,7 @@ class ArticleController extends Controller
 
     /**
      * @Template()
+     * @return array
      */
     public function timelineAction($filters)
     {

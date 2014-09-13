@@ -36,11 +36,12 @@
 
         {% block javascripts %}
             {% javascripts filter='?uglifyjs2' output='js/compiled/base.js'
-                'bundles/fosjsrouting/js/router.js'
-                'js/fos_js_routes.js'
                 'components/jquery/jquery.min.js'
                 'components/jquery-ui/jquery-ui.min.js'
                 'js/bootstrap.js'
+                'bundles/fosjsrouting/js/router.js'
+                'js/fos_js_routes.js'
+                'bundles/incknotif/js/client.js'
                 'bundles/inckcore/js/global.js'
                 'bundles/inckcore/js/Form/textarea.js'
             %}
@@ -51,6 +52,12 @@
             {% if form is defined %}
                 {{ afe_form_javascript(form) }}
             {% endif %}
+
+            <script type="text/javascript">
+                var _CLANK_URI = "ws://{{ clank_host }}:{{ clank_port }}";
+            </script>
+
+            {{ clank_client() }}
         {% endblock %}
     </body>
 </html>

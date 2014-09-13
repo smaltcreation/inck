@@ -1,2 +1,6 @@
-parameters:
 services:
+    inck.twig.subscription_extension:
+        class: Inck\NotifBundle\Twig\SubscriptionExtension
+        arguments: [@service_container]
+        tags:
+            - { name: twig.extension }
