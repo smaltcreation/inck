@@ -4,6 +4,7 @@ $(document).ready(function(){
     });
 
     function subscribe(clickedButton){
+        return false;
         var entityName          = getEntityName(clickedButton),
             entityId            = getEntityId(clickedButton),
             clickedIconClass    = getIconClass(clickedButton),
@@ -36,18 +37,15 @@ $(document).ready(function(){
             $('#subscription-error').remove();
             var modal = $(result.responseJSON.modal);
             modal.appendTo('body').modal();
-        })
-        ;
+        });
     }
 
     function getEntityName(button){
-        return button
-            .attr('data-entity')
+        return button.attr('data-entity');
     }
 
     function getEntityId(button){
-        return button
-            .attr('data-id')
+        return button.attr('data-id');
     }
 
     function getIconClass(button){

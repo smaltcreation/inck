@@ -37,7 +37,7 @@
                     {% if user.city %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-building fa-fw"></i> <strong>Ville :</strong> ' ~ user.city %}{% endif %}
                     {% if user.country %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-globe fa-fw"></i> <strong>Pays :</strong> ' ~ user.country %}{% endif %}
 
-                    {{ render(controller('InckNotifBundle:Subscription:button', { entity: 'inck_notif.user_class', id: user.id })) }}
+                    {{ subscribe_button('inck_notif.user_class', user.id) }}
                     <button type="button" class="btn btn-default btn-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
                         <i class="fa fa-info-circle"></i> Voir plus d'informations
                     </button>

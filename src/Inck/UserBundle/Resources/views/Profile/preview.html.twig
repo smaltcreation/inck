@@ -21,8 +21,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>{{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h1>
-                    {{ render(controller('InckNotifBundle:Subscription:button', { entity: 'inck_notif.user_class', id: user.id })) }}
-                    {#{{ subscribe_button('inck_notif.user_class', user.id) }}#}
+                    {{ subscribe_button('inck_notif.user_class', user.id) }}
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@
                 <div class="col-md-12">
                     <h1>{{ tag.name }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
                     <p>
-                        {{ render(controller('InckNotifBundle:Subscription:button', { entity: 'inck_notif.tag_class', id: tag.id })) }}
+                        {{ subscribe_button('inck_notif.tag_class', tag.id) }}
                     </p>
                 </div>
             </div>
