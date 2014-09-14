@@ -1,6 +1,9 @@
 services:
-    inck.twig.subscription_extension:
+    inck_notif.twig.subscription_extension:
         class: Inck\NotifBundle\Twig\SubscriptionExtension
         arguments: [@service_container]
         tags:
             - { name: twig.extension }
+    inck_notif.rpc.subscription_service:
+        class: Inck\NotifBundle\RPC\SubscriptionService
+        arguments: [@service_container]

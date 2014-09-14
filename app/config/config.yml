@@ -186,3 +186,7 @@ clank:
     web_socket_server:
         port: "%clank_port%"
         host: "%clank_host%"
+    rpc:
+        -
+            name: "subscription"
+            service: "inck_notif.rpc.subscription_service"

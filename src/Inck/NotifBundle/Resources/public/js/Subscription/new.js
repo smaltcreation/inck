@@ -4,7 +4,6 @@ $(document).ready(function(){
     });
 
     function subscribe(clickedButton){
-        return false;
         var entityName          = getEntityName(clickedButton),
             entityId            = getEntityId(clickedButton),
             clickedIconClass    = getIconClass(clickedButton),
@@ -14,38 +13,30 @@ $(document).ready(function(){
         clickedButton.prop('disabled', true);
         icon.attr('class', 'fa fa-circle-o-notch fa-spin');
 
-        $.ajax({
-            url: Routing.generate('inck_notif_subscription_new', {
-                entity: entityName,
-                id: entityId
-            }),
-            dataType: 'json'
-        }).done(function(){
-            resetButtonState(clickedButton, clickedIconClass);
-            clickedButton.toggleClass('subscribed');
-            if(clickedButton.hasClass('subscribed')) {
-                icon.attr('class', 'fa fa-check');
-                text.text('Vous êtes abonné');
+        session.call("subscription/save", [entityName, entityId]).then(function(){
+                resetButtonState(clickedButton, clickedIconClass);
+                clickedButton.toggleClass('subscribed');
+                if(clickedButton.hasClass('subscribed')){
+                    icon.attr('class', 'fa fa-check');
+                    text.text('Vous êtes abonné');
+                } else {
+                    icon.attr('class', 'fa fa-thumb-tack');
+                    text.text('S\'abonner');
+                }
+            }, function(error, description){
+                console.log("RPC Error", error, description);
+                resetButtonState(clickedButton, clickedIconClass);
+                $('#subscription-error').remove();
             }
-            else {
-                icon.attr('class', 'fa fa-thumb-tack');
-                text.text('S\'abonner');
-            }
-        }).error(function(result){
-            // Error
-            resetButtonState(clickedButton, clickedIconClass);
-            $('#subscription-error').remove();
-            var modal = $(result.responseJSON.modal);
-            modal.appendTo('body').modal();
-        });
+        );
     }
 
     function getEntityName(button){
-        return button.attr('data-entity');
+        return button.attr('data-entity-name');
     }
 
     function getEntityId(button){
-        return button.attr('data-id');
+        return button.attr('data-entity-id');
     }
 
     function getIconClass(button){

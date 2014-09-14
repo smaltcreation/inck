@@ -41,7 +41,6 @@
                 'js/bootstrap.js'
                 'bundles/fosjsrouting/js/router.js'
                 'js/fos_js_routes.js'
-                'bundles/incknotif/js/client.js'
                 'bundles/inckcore/js/global.js'
                 'bundles/inckcore/js/Form/textarea.js'
             %}
@@ -53,11 +52,19 @@
                 {{ afe_form_javascript(form) }}
             {% endif %}
 
-            <script type="text/javascript">
-                var _CLANK_URI = "ws://{{ clank_host }}:{{ clank_port }}";
-            </script>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <script type="text/javascript">
+                    var _CLANK_URI = "ws://{{ clank_host }}:{{ clank_port }}";
+                </script>
 
-            {{ clank_client() }}
+                {{ clank_client() }}
+
+                {% javascripts filter='?uglifyjs2' output='js/compiled/base/notif.js'
+                    'bundles/incknotif/js/client.js'
+                %}
+                <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+            {% endif %}
         {% endblock %}
     </body>
 </html>
