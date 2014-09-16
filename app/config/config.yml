@@ -168,10 +168,11 @@ vich_uploader:
             delete_on_update:     true
 
 # InckNotifBundle Configuration
-inck_notif:
-    user_class:     Inck\UserBundle\Entity\UserSubscription
-    category_class: Inck\ArticleBundle\Entity\CategorySubscription
-    tag_class:      Inck\ArticleBundle\Entity\TagSubscription
+parameters:
+    inck_notif.aliases:
+        user_class:     Inck\UserBundle\Entity\UserSubscription
+        category_class: Inck\ArticleBundle\Entity\CategorySubscription
+        tag_class:      Inck\ArticleBundle\Entity\TagSubscription
 
 # AvalancheImagineBundle Configuration
 avalanche_imagine:

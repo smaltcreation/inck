@@ -9,9 +9,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * UserSubscription
+ *
  * @ORM\Table()
-
- * @ORM\Entity(repositoryClass="Inck\NotifBundle\Entity\SubscriptionRepository")
+ * @ORM\Entity()
  */
 class UserSubscription extends Subscription implements SubscriptionInterface
 {

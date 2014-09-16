@@ -3,43 +3,61 @@
 namespace Inck\NotifBundle\RPC;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Inck\NotifBundle\Entity\SubscriptionRepository;
 use Inck\NotifBundle\Model\SubscriptionInterface;
 use Ratchet\ConnectionInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class SubscriptionService
 {
-    protected $container;
+    /**
+     * @var SecurityContext $securityContext
+     */
+    private $securityContext;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var ObjectManager $em
+     */
+    private $em;
+
+    /**
+     * @var array
+     */
+    private $parameters;
+
+    /**
+     * @param SecurityContext $securityContext
+     * @param ObjectManager $em
+     * @param array $parameters
+     */
+    public function __construct(SecurityContext $securityContext, ObjectManager $em, $parameters)
     {
-        $this->container = $container;
+        $this->securityContext  = $securityContext;
+        $this->em               = $em;
+        $this->parameters       = $parameters;
     }
 
     /**
      * @param ConnectionInterface $conn
-     * @param string $entityName
-     * @param int $entityId
+     * @param $parameters
+     * @internal param string $alias
+     * @internal param int $entityId
      * @return bool
      */
-    public function save(ConnectionInterface $conn, $entityName, $entityId)
+    public function save(ConnectionInterface $conn, $parameters)
     {
-        if(!$user = $this->container->get('security.context')->getToken()->getUser()) {
+        list($alias, $entityId) = $parameters;
+
+        $user = $this->securityContext->getToken()->getUser();
+        $class = $this->aliasToClass($alias);
+
+        if(!$user || !$class) {
             return false;
         }
 
-        if(!$class = $this->container->getParameter($entityName.'_class')) {
-            return false;
-        }
+        $repository = $this->em->getRepository($class);
+        $entity = $repository->find($entityId);
 
-        /** @var ObjectManager $em */
-        $em = $this->container->get('doctrine')->getManager();
-
-        /** @var SubscriptionRepository $repository */
-        $repository = $em->getRepository($class);
-
-        if(!$entity = $repository->find($entityId)) {
+        if(!$entity) {
             return false;
         }
 
@@ -49,7 +67,7 @@ class SubscriptionService
         ));
 
         if($subscription) {
-            $em->remove($subscription);
+            $this->em->remove($subscription);
         }
 
         else {
@@ -59,11 +77,16 @@ class SubscriptionService
             $subscription->setSubscriber($user);
             $subscription->setTo($entity);
 
-            $em->persist($subscription);
+            $this->em->persist($subscription);
         }
 
-        $em->flush();
+        $this->em->flush();
 
         return true;
+    }
+
+    private function aliasToClass($alias)
+    {
+        return $this->parameters[$alias.'_class'];
     }
 }

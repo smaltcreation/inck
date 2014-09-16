@@ -1,4 +1,4 @@
-{% set data = 'data-entity-name="' ~ entityName ~ '" data-entity-id="' ~ entityId ~ '"' %}
+{% set data = 'data-entity-alias="' ~ alias ~ '" data-entity-id="' ~ id ~ '"' %}
 
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
     <button class="btn btn-subscribe {% if subscribed %}subscribed{% endif %}" {{ data|raw }}>

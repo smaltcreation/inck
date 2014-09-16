@@ -3,16 +3,48 @@
 namespace Inck\NotifBundle\Twig;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Inck\NotifBundle\Entity\SubscriptionRepository;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class SubscriptionExtension extends \Twig_Extension
 {
-    protected $container;
+    /**
+     * @var SecurityContext $securityContext
+     */
+    private $securityContext;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var ObjectManager $em
+     */
+    private $em;
+
+    /**
+     * @var array
+     */
+    private $parameters;
+
+    /**
+     * @var \Twig_Environment $environment
+     */
+    private $environment;
+
+    /**
+     * @param SecurityContext $securityContext
+     * @param ObjectManager $em
+     * @param array $parameters
+     */
+    public function __construct(SecurityContext $securityContext, ObjectManager $em, $parameters)
     {
-        $this->container = $container;
+        $this->securityContext  = $securityContext;
+        $this->em               = $em;
+        $this->parameters       = $parameters;
+    }
+
+    /**
+     * @param \Twig_Environment $environment
+     */
+    public function initRuntime(\Twig_Environment $environment)
+    {
+        $this->environment = $environment;
     }
 
     public function getName()
@@ -30,28 +62,21 @@ class SubscriptionExtension extends \Twig_Extension
     }
 
     /**
-     * @param $entityName
-     * @param $entityId
+     * @param string $alias
+     * @param mixed $entity
      * @return string
      */
-    public function subscribeButton($entityName, $entityId)
+    public function subscribeButton($alias, $entity)
     {
         $subscribed = false;
 
-        if($this->container->get('security.context')->isGranted('ROLE_USER'))
+        if($this->securityContext->isGranted('ROLE_USER'))
         {
-            $class = $this->container->getParameter($entityName.'_class');
+            $user   = $this->securityContext->getToken()->getUser();
+            $class  = $this->aliasToClass($alias);
 
-            /** @var ObjectManager $em */
-            $em = $this->container->get('doctrine')->getManager();
-
-            /** @var SubscriptionRepository $repository */
-            $repository = $em->getRepository($class);
-
-            $entity = $repository->find($entityId);
-            $user = $this->container->get('security.context')->getToken()->getUser();
-
-            $subscribed = $em
+            $subscribed = $this
+                ->em
                 ->getRepository($class)
                 ->findOneBy(array(
                     'subscriber'    => $user,
@@ -59,10 +84,15 @@ class SubscriptionExtension extends \Twig_Extension
                 ));
         }
 
-        return $this->container->get('templating')->render('InckNotifBundle:Subscription:button.html.twig', array(
+        return $this->environment->render('InckNotifBundle:Subscription:button.html.twig', array(
             'subscribed'    => $subscribed,
-            'entityName'    => $entityName,
-            'entityId'      => $entityId,
+            'alias'         => $alias,
+            'id'            => $entity->getId(),
         ));
+    }
+
+    private function aliasToClass($alias)
+    {
+        return $this->parameters[$alias.'_class'];
     }
 }

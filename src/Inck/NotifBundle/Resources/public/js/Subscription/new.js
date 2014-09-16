@@ -4,7 +4,7 @@ $(document).ready(function(){
     });
 
     function subscribe(clickedButton){
-        var entityName          = getEntityName(clickedButton),
+        var entityAlias         = getEntityAlias(clickedButton),
             entityId            = getEntityId(clickedButton),
             clickedIconClass    = getIconClass(clickedButton),
             icon                = getButtonIcon(clickedButton),
@@ -13,7 +13,7 @@ $(document).ready(function(){
         clickedButton.prop('disabled', true);
         icon.attr('class', 'fa fa-circle-o-notch fa-spin');
 
-        session.call("subscription/save", entityName, entityId).then(function(){
+        session.call("subscription/save", [entityAlias, entityId]).then(function(){
                 resetButtonState(clickedButton, clickedIconClass);
                 clickedButton.toggleClass('subscribed');
                 if(clickedButton.hasClass('subscribed')){
@@ -31,8 +31,8 @@ $(document).ready(function(){
         );
     }
 
-    function getEntityName(button){
-        return button.attr('data-entity-name');
+    function getEntityAlias(button){
+        return button.attr('data-entity-alias');
     }
 
     function getEntityId(button){
