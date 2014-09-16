@@ -3,7 +3,7 @@
 namespace Inck\NotifBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Inck\UserBundle\Entity\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * SubscriptionRepository
@@ -14,42 +14,16 @@ use Inck\UserBundle\Entity\User;
 class SubscriptionRepository extends EntityRepository
 {
     /**
-     * @param $entity string
-     * @param $id int
-     * @return int
-     */
-    public function countByEntity($entity, $id)
-    {
-        $query = $this
-            ->createQueryBuilder('s')
-            ->select('COUNT(s)')
-            ->where('s.entityName = :entity')
-            ->setParameter('entity', $entity)
-            ->andWhere('s.entityId = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-        ;
-
-        return (int) $query->getSingleScalarResult();
-    }
-
-    /**
-     * @param $entity string
-     * @param $id int
-     * @param $user User
+     * @param UserInterface $subscriber
      * @return mixed Subscription|null
      */
-    public function getByEntityAndUser($entity, $id, $user)
+    public function getOneBySubscriber($subscriber)
     {
         $query = $this
             ->createQueryBuilder('s')
             ->select('s')
-            ->where('s.entityName = :entity')
-            ->setParameter('entity', $entity)
-            ->andWhere('s.entityId = :id')
-            ->setParameter('id', $id)
-            ->andWhere('s.subscriber = :user')
-            ->setParameter('user', $user)
+            ->andWhere('s.subscriber = :subscriber')
+            ->setParameter('subscriber', $subscriber)
             ->getQuery()
         ;
 

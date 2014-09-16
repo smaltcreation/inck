@@ -83,6 +83,8 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        resolve_target_entities:
+            Symfony\Component\Security\Core\User\UserInterface: Inck\UserBundle\Entity\User
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -167,9 +169,9 @@ vich_uploader:
 
 # InckNotifBundle Configuration
 inck_notif:
-    user_class: Inck\UserBundle\Entity\User
-    category_class: Inck\ArticleBundle\Entity\Category
-    tag_class: Inck\ArticleBundle\Entity\Tag
+    user_class:     Inck\UserBundle\Entity\UserSubscription
+    category_class: Inck\ArticleBundle\Entity\CategorySubscription
+    tag_class:      Inck\ArticleBundle\Entity\TagSubscription
 
 # AvalancheImagineBundle Configuration
 avalanche_imagine:
