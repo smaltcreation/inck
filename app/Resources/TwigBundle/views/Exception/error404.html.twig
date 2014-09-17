@@ -1,0 +1,45 @@
+{% extends 'InckCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ status_code }} {{ status_text }}{% endblock %}
+
+{% block navbar %}
+    <ul id="gn-menu" class="gn-menu-main">
+    <li class="gn-trigger">
+        <a class="gn-icon gn-icon-menu"><span>Menu</span></a>
+        <nav class="gn-menu-wrapper">
+            <div class="gn-scroller">
+                <ul class="gn-menu">
+                    <li class="gn-search-item">
+                        <form action="{{ path('inck_article_article_search') }}" method="get">
+                            <input placeholder="Recherche" type="search" class="gn-search" name="q">
+                        </form>
+                        <a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>Rechercher</span></a>
+                    </li>
+                    <li><a class="gn-icon gn-icon-article{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}">Écrire un article</a></li>
+                    <li><a class="gn-icon gn-icon-archive{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}">Modérer les articles</a></li>
+                    <li><a class="gn-icon glyphicon-list-alt{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{{ path('inck_article_category_list') }}">Catégories</a></li>
+                    <li><a class="gn-icon gn-icon-cog{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{#{ path('inck_core_default_about') }#}">À Propos</a></li>
+                    <li><a class="gn-icon glyphicon-euro{% if currentRoute == 'inck_bid_registration_register' %} active{% endif %}" href="{#{ path('inck_bid_registration_register') }#}">Presses</a></li>
+                </ul>
+            </div>
+        </nav>
+    </li>
+        <li class="pull-right">
+    </li>
+    </ul>
+    {% endblock %}
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"  itemscope itemtype="http://schema.org/Website" >
+                    <h1>{{ status_code }} {{ status_text }}</h1>
+                    <blockquote>
+                        <p>On ne sait jamais, peut-être qu'on se rencontrera un jour futur?</p>
+                        <small style="color: #ffffff;">Emmett Brown de 1955 dans <cite title="Source Title">Retour vers le futur</cite></small>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

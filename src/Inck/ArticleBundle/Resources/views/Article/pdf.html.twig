@@ -28,7 +28,8 @@
         <div class="about">
             <p>
                 Rédigé par
-                <a href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">
+                {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ path('fos_user_profile_preview', { 'username': article.author.username }) %}
+                <a href="{{ currentUrl }}">
                     {{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}
                 </a>
                 publié le {{ article.publishedAt|date('d/m/Y à H:i') }}
