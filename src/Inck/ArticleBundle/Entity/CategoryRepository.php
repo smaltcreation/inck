@@ -38,7 +38,7 @@ class CategoryRepository extends EntityRepository
     }
 
     /**
-     * @return int
+     * @return array
      */
     public function getPopular()
     {

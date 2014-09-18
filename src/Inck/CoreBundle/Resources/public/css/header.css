@@ -1,0 +1,41 @@
+/* Separator */
+*,
+*:after,
+*::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#wrapper header .jumbotron .container {
+    overflow: hidden;
+    /* we don't want the pseudo-elements sticking out */
+}
+
+#wrapper header .jumbotron .container svg {
+    display: block;
+}
+
+#wrapper header .jumbotron {
+    position: relative;
+}
+
+#wrapper header .jumbotron::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+}
+
+#wrapper header .jumbotron::after {
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    -webkit-transform: translateX(-50%) rotate(45deg);
+    transform: translateX(-50%) rotate(45deg);
+}
+
+#wrapper header .jumbotron::after {
+    bottom: -30px;
+    z-index: 10;
+    background: inherit;
+}

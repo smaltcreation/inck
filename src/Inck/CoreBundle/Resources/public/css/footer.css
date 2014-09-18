@@ -16,7 +16,7 @@ body {
 footer {
     width:100%;
     height: 650px;
-    background: #aececb url("../images/footer_background.png");
+    background: url("../images/footer_background.png");
     background-repeat: repeat-x;
     position:absolute;
     bottom:0;

@@ -1,11 +1,106 @@
-article section#article-summary, article section#article-content, article section#article-user{
-    margin-bottom: 50px;
+article .category, article .tag {
+    margin-right: 3px;
+    margin-bottom: 3px;
 }
 
-#article-social.affix {
-    top: 80px;
+article .article-image-preview img.media-object {
+    height: 110px;
 }
 
-#article-social.affix-bottom {
-    bottom: 0;
+article .article-similar .description p {
+    font-size: 11px;
+}
+
+article .article-similar .well p {
+    color: #a19570;
+}
+
+article .article-similar .well {
+    padding: 10px;
+    min-height: 120px;
+}
+
+article .article-summary .callout {
+    padding: 20px;
+    min-height: 140px;
+}
+
+article .img-inline {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.jumbotron .btn-link {
+    color: #ffffff;
+}
+
+article .article-similar .article-image-preview {
+    width: 100px;
+    position: relative;
+}
+
+article .article-similar img {
+    transition: ease 0.3s;
+}
+
+article .article-similar .article-image-preview:hover img {
+    opacity: 0.2;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+article .article-similar .watchLater {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: ease 0.7s;
+}
+
+article .article-similar .article-image-preview:hover .watchLater {
+    visibility: visible;
+    opacity: 1;
+}
+
+article .article-similar .watchLater i {
+    color: #000000;
+    font-size: 20px;
+}
+
+article .article-similar .watchLater .btn-text {
+    visibility: hidden;
+    display: none;
+}
+
+article .article-similar h5 a {
+    color: #404040;
+    text-decoration: none;
+    transition: color ease 0.3s;
+}
+
+article .article-similar h5 a:hover {
+    color: #57a3e8;
+    outline: 0;
+}
+
+article .article-summary .article-image-preview img {
+    cursor: zoom-in;
+    transition: ease 0.3s;
+    border: 2px solid #e3e3e3;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+}
+
+article .article-summary .article-image-preview img:hover  {
+    transform: scale(1.10);
+    -webkit-transform: scale(1.10);
+}
+
+.article-about {
+    font-style: italic;
+    color: #62868d;
 }

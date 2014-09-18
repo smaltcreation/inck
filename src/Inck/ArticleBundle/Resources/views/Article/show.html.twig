@@ -16,57 +16,133 @@
     {% endstylesheets %}
 {% endblock %}
 
-{% block header %}
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>{{ article.title }}</h1>
-                    {% if app.security.getToken().getUser() == article.author and article.asDraft %}
-                        <a href="{{ path('inck_article_article_edit', { 'id': article.id } ) }}" class="btn btn-default">
-                            Éditer
-                        </a>
+{% block content %}
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{ article.title }}</h4>
+                </div>
+                <div class="modal-body text-center">
+                    {% if article.imageName %}
+                        <img src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
+                    {% else %}
+                        {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+                        <img src="{{ asset_url }}" alt="Image par défaut"/>
+                        {% endimage %}
                     {% endif %}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block content %}
-    <div class="container">
-        <article id="article-{{ article.id }}" class="article" itemscope itemtype ="http://schema.org/Article">
-            <div class="row">
-                <div class="col-xs-8">
-                    <section id="article-summary">
-                        <div class="summary hidden-xs hidden-sm visible-md visible-lg">
-                            {% include "InckArticleBundle:Article:summary.html.twig" %}
+    <div class="article-container">
+        <article id="article-{{ article.id }}" class="article" itemscope itemtype="http://schema.org/Article">
+            <header>
+                <div class="jumbotron">
+                    <div class="container">
+                        <div class="article-title">
+                            <h1 itemprop="name">{{ article.title }}</h1>
                         </div>
-                        <div class="summary visible-xs visible-sm hidden-md hidden-lg">
-                            {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
+                        <div class="article-categories article-tags">
+                            <p>
+                                {% for category in article.categories %}<a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-primary btn-sm category">{{ category.name }}</a>{% endfor %}
+                                {% for tag in article.tags %}<a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs tag">{{ tag.name }}</a>{% endfor %}
+                                <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-default btn-xs btn-tooltip btn-circle" data-toggle="tooltip" data-placement="top" target="blank" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
+                                {{ render(controller('InckArticleBundle:Article:buttonWatchLater', { 'article': article })) }}
+                            </p>
                         </div>
-                    </section>
-
-                    <section id="article-content" itemprop="articleBody">
-                        {{ article.content|raw }}
-                    </section>
-
-                    <section id="article-user" itemprop="creator">
-                        {% include 'InckUserBundle:Profile:card.html.twig' with { user: article.author } %}
-                    </section>
-
-                    <section id="article-comments">
-                        <div id="disqus_thread"></div>
-                    </section>
+                    </div>
                 </div>
-                <div id="article-social" class="col-xs-4">
-                    <section data-clampedwidth=".col-xs-4" itemprop="additionalType" itemscope itemtype="http://schema.org/Action">
-                        {{ render(controller('InckArticleBundle:Article:social', { article: article })) }}
-                    </section>
-
-                    <section data-clampedwidth=".col-xs-4">
-                        {{ render(controller('InckArticleBundle:Article:featured', { article: article })) }}
-                    </section>
+            </header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="article-summary">
+                            <div class="callout callout-left">
+                                <div class="article-image-preview">
+                                    <a data-toggle="modal" data-target="#imageModal">
+                                        {% if article.imageName %}
+                                            <img itemprop="image" class="img-inline img-circle" src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
+                                        {% else %}
+                                            {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+                                                <img itemprop="image" class="img-inline img-circle" src="{{ asset_url|apply_filter('article_thumb') }}" alt="Image par défaut"/>
+                                            {% endimage %}
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="description">
+                                    <p itemprop="description">{{ article.summary }}</p>
+                                    <div class="article-about">
+                                        <p class="text-right">
+                                            Rédigé par
+                                            <a itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a>
+                                            &ndash;publié le
+                                            <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <section itemprop="articleBody text">
+                                {{ article.content|raw }}
+                            </section>
+                        </div>
+                        <div class="article-author">
+                            <section>
+                                {% include 'InckUserBundle:Profile:card.html.twig' with { user: article.author } %}
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <section>
+                            <aside>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">Voter et partager</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="article-votes social">
+                                            {{ render(controller('InckArticleBundle:Article:social', { article: article })) }}
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer text-right">
+                                        {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id ~ '/' ~ article.slug ~ '/' ~ (article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d')) %}
+                                        <a class="btn btn-facebook btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="Partager sur Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                                            <i class="fa fa-fw fa-facebook"></i>
+                                        </a>
+                                        <a class="btn btn-google btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="Partager sur Google +" href="https://plus.google.com/share?url={{ currentUrl }}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                                            <i class="fa fa-fw fa-google-plus"></i>
+                                        </a>
+                                        <a class="btn btn-twitter btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="Twitter cet article" href="https://twitter.com/share?text={{ article.title|url_encode }}&amp;hashtags={% for category in article.categories %}{{ category.name }}{% if not loop.last %},{% endif %}{% endfor %}&amp;url={{ currentUrl }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                            <i class="fa fa-fw fa-twitter"></i>
+                                        </a>
+                                        <a class="btn btn-linkedin btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="Partager sur Linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedIn-share', 'width=550,height=235');return false;">
+                                            <i class="fa fa-fw fa-linkedin"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="article-similar">
+                                    {{ render(controller('InckArticleBundle:Article:featured', { article: article })) }}
+                                </div>
+                            </aside>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="article-comments">
+                            <section>
+                                <div id="disqus_thread"></div>
+                            </section>
+                        </div>
+                    </div>
                 </div>
             </div>
         </article>
@@ -75,15 +151,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% if app.environment == 'dev' %}
-        <script type="text/javascript">
-            var disqus_shortname = 'inckdev';
-        </script>
-    {% elseif app.environment == 'prod'%}
-        <script type="text/javascript">
-            var disqus_shortname = 'inckprod';
-        </script>
-    {% endif %}
+    <script type="text/javascript">var disqus_shortname = 'inck{{ app.environment }}';</script>
 
     {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/show.js'
         'bundles/inckarticle/js/Article/social.js'

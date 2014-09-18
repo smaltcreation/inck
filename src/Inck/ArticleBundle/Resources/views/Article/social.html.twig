@@ -1,87 +1,48 @@
-{% set currentRoute = app.request.attributes.get('_route') %}
-
-<div class="social">
-    <div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3>Voter et partager</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row-table">
-                    <div class="votes" itemscope itemtype="http://schema.org/Action">
-                        <p>
-                            <span {% if app.user %}class="btn-group"{% else %}class="btn-group btn-tooltip" data-toggle="tooltip" data-placement="right" title="Connectez-vous pour voter"{% endif %}>
-                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                    {% set votedUp = vote is not null and vote.up %}
-                                    <button class="btn btn-success vote-up {% if votedUp %}voted{% endif %}">
-                                        {% if votedUp %}
-                                            <i class="fa fa-check"></i>
-                                        {% else %}
-                                            <i class="fa fa-thumbs-up"></i>
-                                        {% endif %}
-                                    </button>
-                                    {% set votedDown = vote is not null and not vote.up %}
-                                    <button class="btn btn-danger vote-down {% if votedDown %}voted{% endif %}">
-                                    {% if votedDown %}
-                                        <i class="fa fa-check"></i>
-                                    {% else %}
-                                        <i class="fa fa-thumbs-down"></i>
-                                    {% endif %}
-                                    </button>
-                                {% else %}
-                                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-success">
-                                        <i class="fa fa-thumbs-up"></i>
-                                    </a>
-                                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-danger">
-                                        <i class="fa fa-thumbs-down"></i>
-                                    </a>
-                                {% endif %}
-                            </span>
-                        </p>
-                    </div>
-                    <p itemscope itemtype="http://schema.org/Webpage">
-                        <a itemprop="url" href="#" class="btn btn-link btn-xs hidden-xs hidden-sm visible-md visible-lg"><i class="fa fa-bar-chart-o"></i> Statistiques</a>
-                        <a href="#" class="btn btn-link btn-lg visible-xs visible-sm hidden-md hidden-lg"><i class="fa fa-bar-chart-o"></i></a>
-                    </p>
-                </div>
-                <div class="score">
-                    {% set displayProgress = score.total > 0 %}
-                    <div class="progress {% if not displayProgress %}hidden{% endif %}" data-score-total="{{ score.total }}">
-                        {% set widthUp = score.total == 0 ? 0 : score.up / score.total * 100 %}
-                        <div class="progress-bar progress-bar-success score-up" style="width: {{ widthUp }}%;" data-score-up="{{ score.up }}">
-                            <span>{{ score.up }}</span> <i class="fa fa-thumbs-up"></i>
-                        </div>
-                        {% set widthDown = score.total == 0 ? 0 : score.down / score.total * 100 %}
-                        <div class="progress-bar progress-bar-danger score-down" style="width: {{ widthDown }}%;" data-score-down="{{ score.down }}">
-                            <span>{{ score.down }}</span> <i class="fa fa-thumbs-down"></i>
-                        </div>
-                    </div>
-                    <div class="no-progress {% if displayProgress %}hidden{% endif %}">
-                        <p>Personne n'a encore voté, soyez le premier !</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-12">
-                        {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id ~ '/' ~ article.slug ~ '/' ~ (article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d')) %}
-                        <a class="btn btn-default btn-xs btn-tooltip" title="Partager sur Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a class="btn btn-default btn-xs btn-tooltip" title="Partager sur Google +" href="https://plus.google.com/share?url={{ currentUrl }}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a class="btn btn-default btn-xs btn-tooltip" title="Twitter cet article" href="https://twitter.com/share?text={{ article.title|url_encode }}&amp;hashtags={% for category in article.categories %}{{ category.name }}{% if not loop.last %},{% endif %}{% endfor %}&amp;url={{ currentUrl }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a class="btn btn-default btn-xs btn-tooltip" title="Partager sur Linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedIn-share', 'width=550,height=235');return false;">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                        {{ render(controller('InckArticleBundle:Article:buttonWatchLater', { 'article': article })) }}
-                    </div>
-                </div>
-            </div>
+<div class="score">
+    {% set displayProgress = score.total > 0 %}
+    <div class="progress {% if not displayProgress %}hidden{% endif %}" data-score-total="{{ score.total }}">
+        {% set widthUp = score.total == 0 ? 0 : score.up / score.total * 100 %}
+        <div class="progress-bar progress-bar-success score-up" style="width: {{ widthUp }}%;" data-score-up="{{ score.up }}">
+            <span>{{ score.up }}</span> <i class="fa fa-thumbs-up"></i>
+        </div>
+        {% set widthDown = score.total == 0 ? 0 : score.down / score.total * 100 %}
+        <div class="progress-bar progress-bar-danger score-down" style="width: {{ widthDown }}%;" data-score-down="{{ score.down }}">
+            <span>{{ score.down }}</span> <i class="fa fa-thumbs-down"></i>
         </div>
     </div>
+    <div class="no-progress {% if displayProgress %}hidden{% endif %}">
+        <p>Personne n'a encore voté, soyez le premier !</p>
+    </div>
+</div>
+
+<div class="votes" itemscope itemtype="http://schema.org/Action">
+    <p>
+        <span {% if app.user %}class="btn-group btn-group-xs"{% else %}class="btn-group btn-group-xs btn-tooltip" data-toggle="tooltip" data-placement="right" title="Connectez-vous pour voter"{% endif %}>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {% set votedUp = vote is not null and vote.up %}
+                <button class="btn btn-success vote-up {% if votedUp %}voted{% endif %}">
+                    {% if votedUp %}
+                        <i class="fa fa-check"></i>
+                    {% else %}
+                        <i class="fa fa-thumbs-up"></i>
+                    {% endif %}
+                </button>
+                {% set votedDown = vote is not null and not vote.up %}
+                <button class="btn btn-danger vote-down {% if votedDown %}voted{% endif %}">
+                {% if votedDown %}
+                    <i class="fa fa-check"></i>
+                {% else %}
+                    <i class="fa fa-thumbs-down"></i>
+                {% endif %}
+            </button>
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}" class="btn btn-success">
+                    <i class="fa fa-thumbs-up"></i>
+                </a>
+                <a href="{{ path('fos_user_security_login') }}" class="btn btn-danger">
+                    <i class="fa fa-thumbs-down"></i>
+                </a>
+            {% endif %}
+        </span>
+    </p>
 </div>

@@ -1,5 +1,5 @@
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    <a class="btn btn-link btn-watch-later btn-tooltip{% if watchLater %} watch-later{% endif %}" data-id="{{ id }}">
+    <a class="btn btn-link btn-xs btn-watch-later btn-tooltip{% if watchLater %} watch-later{% endif %}" data-id="{{ id }}" data-toggle="tooltip" data-placement="right" data-container="body" title="{% if app.user %}Regarder plus tard{% endif %}">
         {% if watchLater %}
             <i class="fa fa-check"></i> <span class="btn-text">Noté pour plus tard</span>
         {% else %}
@@ -7,7 +7,7 @@
         {% endif %}
     </a>
 {% else %}
-    <a href="{{ path('fos_user_security_login') }}" class="btn btn-link btn-watch-later btn-tooltip" data-id="{{ id }}" {% if not app.user %}data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connectez-vous pour vous ajouter cet article dans votre liste"{% endif %}>
+    <a href="{{ path('fos_user_security_login') }}" class="btn btn-link btn-xs btn-watch-later btn-tooltip" data-id="{{ id }}" data-toggle="tooltip" data-placement="right" data-container="body" title="{% if not app.user %}Connectez-vous pour vous ajouter cet article à regarder plus tard{% endif %}">
         <i class="fa fa-clock-o"></i> <span class="btn-text">À regarder plus tard</span>
     </a>
 {% endif %}

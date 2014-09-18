@@ -27,11 +27,11 @@
     </head>
     <body>
         <div id="wrapper">
-            <div id="navbar">{% block navbar %}{% endblock %}</div>
-            <div id="header">{% block header %}{% endblock %}</div>
-            <div id="messages">{% include('base/messages.html.twig') %}</div>
-            <div id="content">{% block content %}{% endblock %}</div>
-            <div id="footer">{% block footer %}{% endblock %}</div>
+            <nav id="navbar">{% block navbar %}{% endblock %}</nav>
+            <header id="header">{% block header %}{% endblock %}</header>
+            <section id="messages">{% include('base/messages.html.twig') %}</section>
+            <section id="content">{% block content %}{% endblock %}</section>
+            <footer id="footer">{% block footer %}{% endblock %}</footer>
         </div>
 
         {% block javascripts %}

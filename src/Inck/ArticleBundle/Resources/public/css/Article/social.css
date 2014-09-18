@@ -7,16 +7,6 @@ article .social a:hover {
     opacity: 0.6;
 }
 
-article .social .row-table {
-    display: table;
-}
-
-article .social .row-table .votes,
-article .social .row-table .stats {
-    display: table-cell;
-    min-width: 80px;
-}
-
 article .social .votes button.voted{
     opacity: 0.8;
 }
@@ -27,4 +17,8 @@ article .social .votes button.voted i{
 
 article .social .score .progress {
     transition: width 1s linear;
+}
+
+article .social .progress {
+    margin-bottom: 5px;
 }

@@ -2,9 +2,11 @@
 
 namespace Inck\ArticleBundle\Controller;
 
+use Inck\ArticleBundle\Entity\ArticleRepository;
+use Inck\ArticleBundle\Entity\CategoryRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CategoryController extends Controller
 {
@@ -51,12 +53,16 @@ class CategoryController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
 
+            /** @var CategoryRepository $repository */
             $repository = $em->getRepository('InckArticleBundle:Category');
             $categories = $repository->getPopular();
             $categoriesLength = $repository->countAll();
 
             $lastPublishedArticles = array();
+            /** @var ArticleRepository $repository */
             $repository = $em->getRepository('InckArticleBundle:Article');
+
+            /** @var Category $category */
             foreach($categories as $category) {
                 $lastPublishedArticles[$category->getId()] = $repository->getLastOfCategory($category->getId(), true);
             }

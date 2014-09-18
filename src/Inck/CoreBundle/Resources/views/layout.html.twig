@@ -5,6 +5,7 @@
     {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/layout.css'
         'bundles/inckcore/css/navbar.css'
         'bundles/inckcore/css/footer.css'
+        'bundles/inckcore/css/header.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -64,82 +65,78 @@
     </ul>
 {% endblock %}
 
-
 {% block footer %}
-    <footer>
-        <section id="footer-links">
-            <div class="container text-center">
-                <h2>Rejoignez-nous sur les réseaux sociaux</h2>
-                <p>Suivez-nous et soyez au courant des nouveaux articles partout où vous soyez. Un like, un tweet, ce sont les nouvelles voies pour porter l'information encore plus loin que possible !</p>
-                <div>
-                    <a href="#" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                    <a href="#" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                    <a href="#" class="btn btn-google"><i class="fa fa-google-plus"></i> Google+</a>
-                </div>
+    <section id="footer-links">
+        <div class="container text-center">
+            <h2>Rejoignez-nous sur les réseaux sociaux</h2>
+            <p>Suivez-nous et soyez au courant des nouveaux articles partout où vous soyez. Un like, un tweet, ce sont les nouvelles voies pour porter l'information encore plus loin que possible !</p>
+            <div>
+                <a href="#" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                <a href="#" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
+                <a href="#" class="btn btn-google"><i class="fa fa-google-plus"></i> Google+</a>
             </div>
-        </section>
-        <section id="footer-parteners" class="ss-style-triangles">
-            <div id="carousel-parteners" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-parteners" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-parteners" data-slide-to="1"></li>
-                    <li data-target="#carousel-parteners" data-slide-to="2"></li>
-                    <li data-target="#carousel-parteners" data-slide-to="3"></li>
-                    <li data-target="#carousel-parteners" data-slide-to="4"></li>
-                    <li data-target="#carousel-parteners" data-slide-to="5"></li>
-                </ol>
+        </div>
+    </section>
+    <section id="footer-parteners" class="ss-style-triangles">
+        <div id="carousel-parteners" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-parteners" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-parteners" data-slide-to="1"></li>
+                <li data-target="#carousel-parteners" data-slide-to="2"></li>
+                <li data-target="#carousel-parteners" data-slide-to="3"></li>
+                <li data-target="#carousel-parteners" data-slide-to="4"></li>
+                <li data-target="#carousel-parteners" data-slide-to="5"></li>
+            </ol>
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="carousel-caption">
-                            <h3>Partenaire 1</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="carousel-caption">
-                            <h3>Partenaire 2</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="carousel-caption">
-                            <h3>Partenaire 3</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="carousel-caption">
-                            <h3>Partenaire 4</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="carousel-caption">
-                            <h3>Partenaire 5</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="carousel-caption">
-                            <h3>Partenaire 6</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="carousel-caption">
+                        <h3>Partenaire 1</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
                 </div>
-
-                <!-- Controls -->
-                <a class="left carousel-control" href="#carousel-parteners" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#carousel-parteners" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
+                <div class="item">
+                    <div class="carousel-caption">
+                        <h3>Partenaire 2</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="carousel-caption">
+                        <h3>Partenaire 3</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="carousel-caption">
+                        <h3>Partenaire 4</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="carousel-caption">
+                        <h3>Partenaire 5</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="carousel-caption">
+                        <h3>Partenaire 6</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
             </div>
-        </section>
-    </footer>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-parteners" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-parteners" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
 {% endblock %}
 
 {% block javascripts %}

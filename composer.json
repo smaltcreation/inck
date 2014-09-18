@@ -22,7 +22,7 @@
         "twbs/bootstrap": "3.2.*",
         "components/jquery": "1.11.*",
         "components/jqueryui": "1.11.*",
-        "components/font-awesome": "4.1.*",
+        "components/font-awesome": "4.*",
         "knplabs/knp-menu": "2.0.*@dev",
         "knplabs/knp-menu-bundle": "2.0.*@dev",
         "knplabs/knp-paginator-bundle": "~2.4",

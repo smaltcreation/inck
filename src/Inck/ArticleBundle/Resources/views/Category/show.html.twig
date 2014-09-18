@@ -6,6 +6,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/article/category/show.css'
+        'bundles/inckarticle/css/Category/show.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
         'bundles/inckarticle/css/Article/social.css'

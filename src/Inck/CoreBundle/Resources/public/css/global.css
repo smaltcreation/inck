@@ -56,10 +56,12 @@
 /* Bootstrap override */
 /* Jumbotron */
 .jumbotron {
+    background: #62868d url("../images/noisy-texture-100x100-o5-d10-c-62868d-t0.png");
     color: #dfdfdf;
     font-family: Gravity, "Helvetica Neue", Helvetica,Arial, sans-serif;
     padding-top: 120px;
     padding-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron h4 {

@@ -12,8 +12,38 @@
                         </div>
                     </div>
                     <div class="col-xs-5 col-sm-4">
+                        {% set currentRoute = app.request.attributes.get('_route') %}
                         <div class="social">
-                            {{ render(controller('InckArticleBundle:Article:social', { article: article })) }}
+                            <div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3>Voter et partager</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>
+                                                    {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id ~ '/' ~ article.slug ~ '/' ~ (article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d')) %}
+                                                    <a class="btn btn-default btn-xs btn-tooltip" title="Partager sur Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </a>
+                                                    <a class="btn btn-default btn-xs btn-tooltip" title="Partager sur Google +" href="https://plus.google.com/share?url={{ currentUrl }}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                                                        <i class="fa fa-google-plus"></i>
+                                                    </a>
+                                                    <a class="btn btn-default btn-xs btn-tooltip" title="Twitter cet article" href="https://twitter.com/share?text={{ article.title|url_encode }}&amp;hashtags={% for category in article.categories %}{{ category.name }}{% if not loop.last %},{% endif %}{% endfor %}&amp;url={{ currentUrl }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </a>
+                                                    <a class="btn btn-default btn-xs btn-tooltip" title="Partager sur Linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedIn-share', 'width=550,height=235');return false;">
+                                                        <i class="fa fa-linkedin"></i>
+                                                    </a>
+                                                    {{ render(controller('InckArticleBundle:Article:buttonWatchLater', { 'article': article })) }}
+                                                    {{ render(controller('InckArticleBundle:Article:social', { article: article })) }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
