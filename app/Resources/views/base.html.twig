@@ -52,7 +52,7 @@
                 {{ afe_form_javascript(form) }}
             {% endif %}
 
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% if app.user is not null and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <script type="text/javascript">
                     var _CLANK_URI = "ws://{{ clank_host }}:{{ clank_port }}";
                 </script>
