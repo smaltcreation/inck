@@ -25,11 +25,11 @@
                             </form>
                             <a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>Rechercher</span></a>
                         </li>
-                        <li><a class="gn-icon gn-icon-article{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}">Écrire un article</a></li>
-                        <li><a class="gn-icon gn-icon-archive{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}">Modérer les articles</a></li>
-                        <li><a class="gn-icon glyphicon-list-alt{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{{ path('inck_article_category_list') }}">Catégories</a></li>
-                        <li><a class="gn-icon gn-icon-cog{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{{ path('inck_core_default_about') }}">À Propos</a></li>
-                        <li><a class="gn-icon glyphicon-euro{% if currentRoute == 'inck_bid_registration_register' %} active{% endif %}" href="{#{ path('inck_bid_registration_register') }#}">Presses</a></li>
+                        <li><a class="{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}"><i><span class="fa fa-pencil fa-lg fa-fw"></i>Écrire un article</a></li>
+                        <li><a class="{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}"><i><span class="fa fa-bar-chart fa-lg fa-fw"></i>Modérer les articles</a></li>
+                        <li><a class="{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{{ path('inck_article_category_list') }}"><i><span class="fa fa-tags fa-lg fa-fw"></i>Catégories</a></li>
+                        <li><a class="{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{{ path('inck_core_default_about') }}"><i><span class="fa fa-info fa-lg fa-fw"></i>À Propos</a></li>
+                        <li><a class="{% if currentRoute == 'inck_bid_registration_register' %} active{% endif %}" href="{#{ path('inck_bid_registration_register') }#}"><i><span class="fa fa-institution fa-lg fa-fw"></i>Presses</a></li>
                     </ul>
                 </div>
             </nav>

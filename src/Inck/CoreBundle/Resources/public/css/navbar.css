@@ -14,6 +14,11 @@
     src: url("fonts/ecoicons/ecoicons.eot?#iefix") format("embedded-opentype"), url("fonts/ecoicons/ecoicons.woff") format("woff"), url("fonts/ecoicons/ecoicons.ttf") format("truetype"), url("fonts/ecoicons/ecoicons.svg#ecoicons") format("svg");
 }
 
+.fa-lg{
+    margin-left: 16px;
+    margin-right:16px;
+}
+
 /* Icomoon.com */
 
 .gn-menu-main,
@@ -229,48 +234,8 @@ input.gn-search:focus {
     -webkit-font-smoothing: antialiased;
 }
 
-.gn-icon-help::before {
-    content: "\e000"
-}
-
-.gn-icon-earth::before {
-    content: "\e004"
-}
-
-.gn-icon-cog::before {
-    content: "\e006"
-}
-
 .gn-icon-search::before {
     content: "\e005"
-}
-
-.gn-icon-download::before {
-    content: "\e007"
-}
-
-.gn-icon-photoshop::before {
-    content: "\e001"
-}
-
-.gn-icon-illustrator::before {
-    content: "\e002"
-}
-
-.gn-icon-archive::before {
-    content: "\e00d"
-}
-
-.gn-icon-article::before {
-    content: "\e003"
-}
-
-.gn-icon-pictures::before {
-    content: "\e008"
-}
-
-.gn-icon-videos::before {
-    content: "\e009"
 }
 
 /* if an icon anchor has a span, hide the span */
@@ -353,4 +318,3 @@ input.gn-search:focus {
         font-size: 20px;
     }
 }
-
