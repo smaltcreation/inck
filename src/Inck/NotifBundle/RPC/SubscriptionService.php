@@ -5,14 +5,15 @@ namespace Inck\NotifBundle\RPC;
 use Doctrine\Common\Persistence\ObjectManager;
 use Inck\NotifBundle\Model\SubscriptionInterface;
 use Ratchet\ConnectionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class SubscriptionService
 {
     /**
-     * @var SecurityContext $securityContext
+     * @var Session $session
      */
-    private $securityContext;
+    private $session;
 
     /**
      * @var ObjectManager $em
@@ -25,13 +26,13 @@ class SubscriptionService
     private $parameters;
 
     /**
-     * @param SecurityContext $securityContext
+     * @param Session $session
      * @param ObjectManager $em
      * @param array $parameters
      */
-    public function __construct(SecurityContext $securityContext, ObjectManager $em, $parameters)
+    public function __construct(Session $session, ObjectManager $em, $parameters)
     {
-        $this->securityContext  = $securityContext;
+        $this->session          = $session;
         $this->em               = $em;
         $this->parameters       = $parameters;
     }
@@ -47,7 +48,9 @@ class SubscriptionService
     {
         list($alias, $entityId) = $parameters;
 
-        $user = $this->securityContext->getToken()->getUser();
+        var_dump($conn->Session);
+
+        $user = null;
         $class = $this->aliasToClass($alias);
 
         if(!$user || !$class) {

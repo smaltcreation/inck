@@ -16,6 +16,7 @@ composer update
 php app/console cache:clear --env=prod
 
 # Mettre à jour la base de données
+php app/console inck:notif:configure
 php app/console doctrine:schema:update --force
 php app/console doctrine:fixtures:load
 

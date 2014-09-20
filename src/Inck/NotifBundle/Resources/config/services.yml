@@ -1,11 +1,11 @@
 services:
     inck_notif.twig.subscription_extension:
         class: Inck\NotifBundle\Twig\SubscriptionExtension
-        arguments: ["@security.context", "@doctrine.orm.entity_manager", %inck_notif.aliases%]
+        arguments: [@security.context, @doctrine.orm.entity_manager, %inck_notif.aliases%]
         tags:
             - { name: twig.extension }
     inck_notif.rpc.subscription_service:
         class: Inck\NotifBundle\RPC\SubscriptionService
-        arguments: ["@security.context", "@doctrine.orm.entity_manager", %inck_notif.aliases%]
+        arguments: [@session, @doctrine.orm.entity_manager, %inck_notif.aliases%]
     inck_notif.topic.user_topic:
         class: Inck\NotifBundle\Topic\UserTopic

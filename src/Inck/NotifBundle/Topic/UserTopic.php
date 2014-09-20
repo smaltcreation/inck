@@ -2,7 +2,6 @@
 
 namespace Inck\NotifBundle\Topic;
 
-use Doctrine\Common\Util\Debug;
 use JDare\ClankBundle\Topic\TopicInterface;
 use Ratchet\ConnectionInterface as Conn;
 
@@ -20,7 +19,7 @@ class UserTopic implements TopicInterface
         //this will broadcast the message to ALL subscribers of this topic.
         $topic->broadcast($conn->resourceId . " has joined " . $topic->getId());
         echo "subscribe to ".$topic->getId()."\n";
-        var_dump($conn->Session);
+        var_dump($conn->Session->get('test'));
     }
 
     /**
