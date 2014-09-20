@@ -13,7 +13,9 @@ $(document).ready(function(){
         clickedButton.prop('disabled', true);
         icon.attr('class', 'fa fa-circle-o-notch fa-spin');
 
-        session.call("subscription/save", [entityAlias, entityId]).then(function(){
+        session.subscribe(entityAlias + "/" + entityId, function(uri, payload){
+                console.log("Received message", payload.msg);
+            }).then(function(){
                 resetButtonState(clickedButton, clickedIconClass);
                 clickedButton.toggleClass('subscribed');
                 if(clickedButton.hasClass('subscribed')){

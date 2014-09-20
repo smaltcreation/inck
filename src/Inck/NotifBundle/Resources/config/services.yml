@@ -7,3 +7,5 @@ services:
     inck_notif.rpc.subscription_service:
         class: Inck\NotifBundle\RPC\SubscriptionService
         arguments: ["@security.context", "@doctrine.orm.entity_manager", %inck_notif.aliases%]
+    inck_notif.topic.user_topic:
+        class: Inck\NotifBundle\Topic\UserTopic

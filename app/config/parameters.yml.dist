@@ -28,3 +28,14 @@ parameters:
 
     clank_host: 127.0.0.1
     clank_port: 8080
+
+    pdo.db_options:
+        db_table:    session
+        db_id_col:   session_id
+        db_data_col: session_value
+        db_time_col: session_time
+
+    inck_notif.aliases:
+        user_class:     Inck\UserBundle\Entity\UserSubscription
+        category_class: Inck\ArticleBundle\Entity\CategorySubscription
+        tag_class:      Inck\ArticleBundle\Entity\TagSubscription

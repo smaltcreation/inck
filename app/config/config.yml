@@ -20,9 +20,22 @@ framework:
     trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
+        handler_id:  session.handler.pdo
     fragments:       ~
     http_method_override: true
+
+services:
+    pdo:
+        class: PDO
+        arguments:
+            - "mysql:dbname=%database_name%"
+            - %database_user%
+            - %database_password%
+        calls:
+            - [setAttribute, [3, 2]] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments: [@pdo, %pdo.db_options%]
 
 # Twig Configuration
 twig:
@@ -186,6 +199,7 @@ avalanche_imagine:
 
 # Clank Configuration
 clank:
+    session_handler: session.handler.pdo
     web_socket_server:
         port: "%clank_port%"
         host: "%clank_host%"
@@ -193,3 +207,7 @@ clank:
         -
             name: "subscription"
             service: "inck_notif.rpc.subscription_service"
+    topic:
+        -
+            name: "user"
+            service: "inck_notif.topic.user_topic"
