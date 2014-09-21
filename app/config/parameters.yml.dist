@@ -26,5 +26,10 @@ parameters:
     upload.article_image.uri_prefix: /article/image
     upload.article_image.upload_destination: %kernel.root_dir%/../web/article/image
 
-    clank_host: 127.0.0.1
-    clank_port: 8080
+    inck_notif.aliases:
+        user_class:     Inck\UserBundle\Entity\UserSubscription
+        category_class: Inck\ArticleBundle\Entity\CategorySubscription
+        tag_class:      Inck\ArticleBundle\Entity\TagSubscription
+
+    inck_notif.server_host: 127.0.0.1
+    inck_notif.server_port: 8080

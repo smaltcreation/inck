@@ -1,17 +1,12 @@
-var server      = null;
-var connected   = false;
-var session     = null;
+window.server.connection = new WebSocket(window.server.uri);
 
-$(document).ready(function(){
-    server = Clank.connect(_CLANK_URI);
+window.server.call = function(method, message){
+    message.method = method;
+    message = JSON.stringify(message);
+    window.server.connection.send(message);
+};
 
-    server.on('socket/connect', function(s){
-        connected   = true;
-        session     = s;
-    });
-
-    server.on('socket/disconnect', function(){
-        connected   = false;
-        session     = null;
-    });
-});
+window.server.connection.onmessage = function(message){
+    var data = JSON.parse(message.data);
+    $(document).trigger('inck.' + data.method, data.options);
+};

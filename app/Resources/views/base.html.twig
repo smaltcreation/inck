@@ -54,10 +54,11 @@
 
             {% if app.user is not null and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <script type="text/javascript">
-                    var _CLANK_URI = "ws://{{ clank_host }}:{{ clank_port }}";
+                    window.server = {
+                        uri: 'ws://{{ notif_host }}:{{ notif_port }}',
+                        connection: null
+                    };
                 </script>
-
-                {{ clank_client() }}
 
                 {% javascripts filter='?uglifyjs2' output='js/compiled/base/notif.js'
                     'bundles/incknotif/js/client.js'
