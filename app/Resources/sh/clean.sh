@@ -6,7 +6,6 @@ php app/console doctrine:database:drop --force
 # Recréer la base de données
 php app/console doctrine:database:create
 php app/console doctrine:schema:update --force
-php app/console inck:notif:configure
 
 # Supprimer les images des articles
 find web/article/image/ -type f -not -name '.gitkeep' | xargs rm -rf
