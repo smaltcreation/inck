@@ -54,13 +54,14 @@
 
             {% if app.user is not null and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <script type="text/javascript">
-                    var _CLANK_URI = "ws://{{ clank_host }}:{{ clank_port }}";
+                    window.server = {
+                        uri: 'ws://{{ inck_ratchet_server_host }}:{{ inck_ratchet_server_port }}',
+                        connection: null
+                    };
                 </script>
 
-                {{ clank_client() }}
-
                 {% javascripts filter='?uglifyjs2' output='js/compiled/base/notif.js'
-                    'bundles/incknotif/js/client.js'
+                    'bundles/inckratchet/js/client.js'
                 %}
                 <script src="{{ asset_url }}"></script>
                 {% endjavascripts %}

@@ -1,5 +1,6 @@
-inck_notif:
-    resource: "@InckNotifBundle/Resources/config/routing.yml"
+inck_core:
+    resource: "@InckCoreBundle/Controller/"
+    type:     annotation
     prefix:   /
 
 inck_user:
@@ -9,11 +10,6 @@ inck_user:
 
 inck_article:
     resource: "@InckArticleBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-inck_core:
-    resource: "@InckCoreBundle/Controller/"
     type:     annotation
     prefix:   /
 

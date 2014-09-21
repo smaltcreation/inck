@@ -1,5 +1,0 @@
-inck_notif_subscription_new:
-    path: /subscribe/{entity}/{id}
-    defaults: { _controller: InckNotifBundle:Subscription:new }
-    requirements: {id: \d+}
-    options: {expose: true}

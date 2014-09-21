@@ -1,41 +1,35 @@
 parameters:
-    database_driver: pdo_mysql
-    database_host: 127.0.0.1
-    database_port: ~
-    database_name: inck
-    database_user: root
-    database_password: ~
+    database_driver:    pdo_mysql
+    database_host:      127.0.0.1
+    database_port:      ~
+    database_name:      inck
+    database_user:      root
+    database_password:  ~
 
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
-    mailer_encryption: ssl
-    mailer_auth_mode: login
+    mailer_transport:   smtp
+    mailer_host:        127.0.0.1
+    mailer_user:        null
+    mailer_password:    null
+    mailer_encryption:  ssl
+    mailer_auth_mode:   login
 
     locale: fr
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    debug_toolbar: true
-    debug_redirects: false
+    debug_toolbar:          true
+    debug_redirects:        false
     use_assetic_controller: true
 
     node: /usr/local/bin/node
     node_paths: [/usr/local/bin/node, /usr/local/lib/node_modules, %kernel.root_dir%/Resources/node_modules]
 
-    upload.article_image.uri_prefix: /article/image
-    upload.article_image.upload_destination: %kernel.root_dir%/../web/article/image
+    upload.article_image.uri_prefix:            /article/image
+    upload.article_image.upload_destination:    %kernel.root_dir%/../web/article/image
 
-    clank_host: 127.0.0.1
-    clank_port: 8080
+    inck_ratchet.server_host: 127.0.0.1
+    inck_ratchet.server_port: 8080
 
-    pdo.db_options:
-        db_table:    session
-        db_id_col:   session_id
-        db_data_col: session_value
-        db_time_col: session_time
-
-    inck_notif.aliases:
+    inck_subscription.aliases:
         user_class:     Inck\UserBundle\Entity\UserSubscription
         category_class: Inck\ArticleBundle\Entity\CategorySubscription
         tag_class:      Inck\ArticleBundle\Entity\TagSubscription

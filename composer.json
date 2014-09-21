@@ -38,7 +38,7 @@
         "elao/web-profiler-extra-bundle": "~2.3@dev",
         "avalanche123/imagine-bundle": "v2.1",
         "ensepar/html2pdf-bundle" : "dev-master",
-        "jdare/clank-bundle": "0.1.*"
+        "cboden/ratchet": "0.3.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
