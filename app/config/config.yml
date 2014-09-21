@@ -31,8 +31,8 @@ twig:
         resources:
             - ::form.html.twig
     globals:
-        notif_host:    "%inck_notif.server_host%"
-        notif_port:    "%inck_notif.server_port%"
+        inck_ratchet_server_host: "%inck_ratchet.server_host%"
+        inck_ratchet_server_port: "%inck_ratchet.server_port%"
 
 # Assetic Configuration
 assetic:
@@ -175,3 +175,15 @@ avalanche_imagine:
         article_featured:
             type:    thumbnail
             options: { size: [100, 100], mode: outbound, quality: 100 }
+
+# Monolog Configuration
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.log
+            channels: [!inck_ratchet]
+        soap:
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.ratchet.log
+            channels: [inck_ratchet]

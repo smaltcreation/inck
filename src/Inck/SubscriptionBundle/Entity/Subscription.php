@@ -1,6 +1,6 @@
 <?php
 
-namespace Inck\NotifBundle\Entity;
+namespace Inck\SubscriptionBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;

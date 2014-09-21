@@ -1,6 +1,6 @@
 <?php
 
-namespace Inck\NotifBundle\Twig;
+namespace Inck\SubscriptionBundle\Twig;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -84,7 +84,7 @@ class SubscriptionExtension extends \Twig_Extension
                 ));
         }
 
-        return $this->environment->render('InckNotifBundle:Subscription:button.html.twig', array(
+        return $this->environment->render('InckSubscriptionBundle:Subscription:button.html.twig', array(
             'subscribed'    => $subscribed,
             'alias'         => $alias,
             'id'            => $entity->getId(),

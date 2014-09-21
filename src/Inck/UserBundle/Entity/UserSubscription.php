@@ -3,8 +3,8 @@
 namespace Inck\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Inck\NotifBundle\Entity\Subscription;
-use Inck\NotifBundle\Model\SubscriptionInterface;
+use Inck\SubscriptionBundle\Entity\Subscription;
+use Inck\SubscriptionBundle\Model\SubscriptionInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**

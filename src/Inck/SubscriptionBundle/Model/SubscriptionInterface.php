@@ -1,6 +1,6 @@
 <?php
 
-namespace Inck\NotifBundle\Model;
+namespace Inck\SubscriptionBundle\Model;
 
 use DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Inck\NotifBundle\Command;
+namespace Inck\RatchetBundle\Command;
 
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
@@ -9,24 +9,24 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ratchet\Server\IoServer;
 
-class ServerCommand extends ContainerAwareCommand
+class StartServerCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('notif:server:start')
-            ->setDescription('Start the notification server');
+            ->setName('inck:ratchet:start')
+            ->setDescription('Start the Ratchet server');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $port = $this->getContainer()->getParameter('inck_notif.server_port');
-        $output->writeln(sprintf('Starting server on port %d...', $port));
+        $port = $this->getContainer()->getParameter('inck_ratchet.server_port');
+        $output->writeln(sprintf('Starting Ratchet server on port %d...', $port));
 
         $server = IoServer::factory(
             new HttpServer(
                 new WsServer(
-                    $this->getContainer()->get('inck_notif.server.server_service')
+                    $this->getContainer()->get('inck_ratchet.server.server_service')
                 )
             ),
             $port
