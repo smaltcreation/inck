@@ -33,3 +33,8 @@ parameters:
         user_class:     Inck\UserBundle\Entity\UserSubscription
         category_class: Inck\ArticleBundle\Entity\CategorySubscription
         tag_class:      Inck\ArticleBundle\Entity\TagSubscription
+
+    session_memcache_host: 127.0.0.1
+    session_memcache_port: 11211
+    session_memcache_prefix: sess
+    session_memcache_expire: 3600
