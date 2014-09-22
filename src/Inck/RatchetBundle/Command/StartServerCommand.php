@@ -3,6 +3,8 @@
 namespace Inck\RatchetBundle\Command;
 
 use Ratchet\Http\HttpServer;
+use Ratchet\Session\SessionProvider;
+use Ratchet\Wamp\WampServer;
 use Ratchet\WebSocket\WsServer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,7 +28,10 @@ class StartServerCommand extends ContainerAwareCommand
         $server = IoServer::factory(
             new HttpServer(
                 new WsServer(
-                    $this->getContainer()->get('inck_ratchet.server.server_service')
+                    new SessionProvider(
+                        $this->getContainer()->get('inck_ratchet.server.server_service'),
+                        $this->getContainer()->get('session.handler.memcache')
+                    )
                 )
             ),
             $port
