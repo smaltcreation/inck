@@ -27,10 +27,10 @@
                 </div>
                 <div class="modal-body text-center">
                     {% if article.imageName %}
-                        <img src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
+                        <img class="img-responsive" src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">
                     {% else %}
                         {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
-                        <img src="{{ asset_url }}" alt="Image par défaut"/>
+                        <img class="img-responsive" src="{{ asset_url }}" alt="Image par défaut"/>
                         {% endimage %}
                     {% endif %}
                 </div>

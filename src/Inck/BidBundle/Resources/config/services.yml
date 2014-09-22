@@ -1,0 +1,7 @@
+parameters:
+#    inck_bid.example.class: Inck\BidBundle\Example
+
+services:
+#    inck_bid.example:
+#        class: %inck_bid.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
