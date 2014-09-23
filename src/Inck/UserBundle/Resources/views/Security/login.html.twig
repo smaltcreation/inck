@@ -72,7 +72,9 @@
                                 <a itemprop="url" href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">Mot de passe oublié</a>
                             </div>
                         </div>
-
+                        {% for owner in hwi_oauth_resource_owners() %}
+                            <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br />
+                        {% endfor %}
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <button class="btn btn-success" type="submit"><i class="fa fa-sign-in"></i> {{ 'security.login.submit'|trans }}</button>

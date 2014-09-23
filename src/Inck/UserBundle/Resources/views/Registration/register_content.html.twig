@@ -26,6 +26,9 @@
 
                 <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> {{ 'registration.submit'|trans }}</button>
                 <p class="btn-inline"><a href="#registration_more" class="btn btn-default"><i class="fa fa-plus-square"></i> Compléter mon compte</a></p>
+                {% for owner in hwi_oauth_resource_owners() %}
+                    <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br />
+                {% endfor %}
             </div>
         </section>
 

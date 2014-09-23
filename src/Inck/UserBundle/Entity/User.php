@@ -208,6 +208,26 @@ class User extends BaseUser
      */
     private $articlesWatchLater;
 
+    /**
+     * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
+     */
+    private $facebook_id;
+
+    /**
+     * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true)
+     */
+    private $facebook_access_token;
+
+    /**
+     * @ORM\Column(name="google_id", type="string", length=255, nullable=true)
+     */
+    private $google_id;
+
+    /**
+     * @ORM\Column(name="google_access_token", type="string", length=255, nullable=true)
+     */
+    private $google_access_token;
+
 
     public function __construct()
     {
@@ -710,5 +730,127 @@ class User extends BaseUser
     public function setSubscribers($subscribers)
     {
         $this->subscribers = $subscribers;
+    }
+
+    /**
+     * Set facebook_id
+     *
+     * @param string $facebookId
+     * @return User
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebook_id = $facebookId;
+
+        return $this;
+    }
+
+    /**
+     * Get facebook_id
+     *
+     * @return string 
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set facebook_access_token
+     *
+     * @param string $facebookAccessToken
+     * @return User
+     */
+    public function setFacebookAccessToken($facebookAccessToken)
+    {
+        $this->facebook_access_token = $facebookAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get facebook_access_token
+     *
+     * @return string 
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * Set google_id
+     *
+     * @param string $googleId
+     * @return User
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->google_id = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * Get google_id
+     *
+     * @return string 
+     */
+    public function getGoogleId()
+    {
+        return $this->google_id;
+    }
+
+    /**
+     * Set google_access_token
+     *
+     * @param string $googleAccessToken
+     * @return User
+     */
+    public function setGoogleAccessToken($googleAccessToken)
+    {
+        $this->google_access_token = $googleAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get google_access_token
+     *
+     * @return string 
+     */
+    public function getGoogleAccessToken()
+    {
+        return $this->google_access_token;
+    }
+
+    /**
+     * Add groups
+     *
+     * @param \Inck\UserBundle\Entity\Group $groups
+     * @return User
+     */
+
+    /**
+     * Add subscribers
+     *
+     * @param \Inck\UserBundle\Entity\User $subscribers
+     * @return User
+     */
+    public function addSubscriber(\Inck\UserBundle\Entity\User $subscribers)
+    {
+        $this->subscribers[] = $subscribers;
+
+        return $this;
+    }
+
+    /**
+     * Remove subscribers
+     *
+     * @param \Inck\UserBundle\Entity\User $subscribers
+     */
+    public function removeSubscriber(\Inck\UserBundle\Entity\User $subscribers)
+    {
+        $this->subscribers->removeElement($subscribers);
     }
 }

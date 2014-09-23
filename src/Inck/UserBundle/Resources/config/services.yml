@@ -1,3 +1,6 @@
+parameters:
+   inck_user_provider.class: Inck\UserBundle\Security\Core\User\FOSUBUserProvider
+
 services:
     inck_user.profile.form.type:
         class: Inck\UserBundle\Form\Type\ProfileFormType
@@ -19,3 +22,7 @@ services:
         arguments: [@session, @security.context]
         tags:
             - { name: kernel.event_subscriber }
+    inck_user_provider:
+          class: "%inck_user_provider.class%"
+          #this is the place where the properties are passed to the UserProvider - see config.yml
+          arguments: [@fos_user.user_manager,{facebook: facebook_id, google: google_id, twitter: twitter_id}]

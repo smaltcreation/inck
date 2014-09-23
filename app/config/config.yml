@@ -196,3 +196,31 @@ services:
     session.handler.memcache:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcacheSessionHandler
         arguments: [ @session.memcache, { prefix: %session_memcache_prefix%, expiretime: %session_memcache_expire% } ]
+
+hwi_oauth:
+  connect:
+      account_connector: inck_user_provider
+  firewall_name: main
+  fosub:
+      username_iterations: 30
+      properties:
+          facebook: facebook_id
+          google: google_id
+          twitter: twitter_id
+  resource_owners:
+      facebook:
+          type: facebook
+          client_id: "%facebook_app_id%"
+          client_secret: "%facebook_app_secret%"
+          scope: email
+          infos_url: "https://graph.facebook.com/me?fields=name,email,picture.type(large)"
+          paths:
+              email: email
+              profilepicture: picture.data.url
+          options:
+              display: popup
+      google:
+          type: google
+          client_id: "%google_app_id%"
+          client_secret: "%google_app_secret%"
+          scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"

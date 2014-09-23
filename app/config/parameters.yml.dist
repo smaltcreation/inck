@@ -38,3 +38,8 @@ parameters:
     session_memcache_port: 11211
     session_memcache_prefix: sess
     session_memcache_expire: 3600
+
+    facebook_app_id:  putYourFacebookAppId
+    facebook_app_secret:  putYourFacebookSecretKey
+    google_app_id: putYourGoogleAppId
+    google_app_secret:  putYourGoogleSecretKey

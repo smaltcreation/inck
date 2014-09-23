@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new Inck\RatchetBundle\InckRatchetBundle(),
             new Inck\SubscriptionBundle\InckSubscriptionBundle(),
             new Inck\BidBundle\InckBidBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
