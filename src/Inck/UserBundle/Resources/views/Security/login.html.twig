@@ -18,7 +18,11 @@
         <div class="container">
             <h1>Me connecter à Inck</h1>
             <p>Écrire et diffuser devient à la portée de tous !</p>
-            <p><a class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" role="button" ><i class="fa fa-rocket"></i> En savoir plus</a></p>
+            <p>
+                <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" role="button" ><i class="fa fa-rocket"></i> En savoir plus</a>
+                <a href="./connect/facebook" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                <a href="./connect/google" class="btn btn-google" data-toggle="tooltip" data-placement="top" title="Connexion avec google"><i class="fa fa-google"></i> Google</a>
+            </p>
         </div>
     </div>
 {% endblock %}
@@ -72,9 +76,6 @@
                                 <a itemprop="url" href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">Mot de passe oublié</a>
                             </div>
                         </div>
-                        {% for owner in hwi_oauth_resource_owners() %}
-                            <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br />
-                        {% endfor %}
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <button class="btn btn-success" type="submit"><i class="fa fa-sign-in"></i> {{ 'security.login.submit'|trans }}</button>
