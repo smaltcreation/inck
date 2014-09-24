@@ -43,7 +43,7 @@ class ClientManager
     {
         $this->clients[$conn->resourceId] = new Client($conn);
         $this->logger->debug('added connection : '.$conn->resourceId);
-        $this->logger->debug('user = '.print_r($conn->Session->get('user'), true));
+        print_r($conn->Session->all());
     }
 
     /**

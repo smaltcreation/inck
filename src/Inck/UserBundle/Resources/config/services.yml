@@ -17,7 +17,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: inck_userbundle_users_selector }
-    inck_user.event_listener.password_resetting:
+    inck_user.event_listener.login:
         class: Inck\UserBundle\EventListener\LoginListener
         arguments: [@session, @security.context]
         tags:
