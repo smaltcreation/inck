@@ -2,10 +2,15 @@
 
 namespace Inck\UserBundle\EventListener;
 
+use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
 
 /**
  * Listener responsible to change the redirection at the end of the password resetting
@@ -23,27 +28,54 @@ class LoginListener implements EventSubscriberInterface
     private $securityContext;
 
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
      * @param Session $session
      * @param SecurityContext $securityContext
+     * @param Logger $logger
      */
-    public function __construct(Session $session, SecurityContext $securityContext)
+    public function __construct(Session $session, SecurityContext $securityContext, Logger $logger)
     {
         $this->session          = $session;
         $this->securityContext  = $securityContext;
+        $this->logger           = $logger;
     }
 
     /**
-     * {@inheritDoc}
+     * @return array
      */
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::SECURITY_IMPLICIT_LOGIN => 'setSession',
+            FOSUserEvents::SECURITY_IMPLICIT_LOGIN => 'onImplicitLogin',
+            SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
         );
     }
 
-    public function setSession()
+    /**
+     * @param UserEvent $event
+     */
+    public function onImplicitLogin(UserEvent $event)
     {
-        $this->session->set('user', $this->securityContext->getToken()->getUser());
+        $this->setSession($event->getUser());
+    }
+
+    /**
+     * @param InteractiveLoginEvent $event
+     */
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    {
+        $this->setSession($event->getAuthenticationToken()->getUser());
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    private function setSession(UserInterface $user)
+    {
+        $this->session->set('user', $user);
     }
 }

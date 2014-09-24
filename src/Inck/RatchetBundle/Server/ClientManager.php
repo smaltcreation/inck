@@ -42,8 +42,11 @@ class ClientManager
     public function addConnection(ConnectionInterface $conn)
     {
         $this->clients[$conn->resourceId] = new Client($conn);
-        $this->logger->debug('added connection : '.$conn->resourceId);
-        print_r($conn->Session->all());
+        $this->logger->debug(sprintf(
+            'added connection = %d, session = %s',
+            $conn->resourceId,
+            print_r($conn->Session->all(), true)
+        ));
     }
 
     /**

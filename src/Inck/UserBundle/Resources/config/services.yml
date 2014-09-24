@@ -19,7 +19,7 @@ services:
             - { name: form.type, alias: inck_userbundle_users_selector }
     inck_user.event_listener.login:
         class: Inck\UserBundle\EventListener\LoginListener
-        arguments: [@session, @security.context]
+        arguments: [@session, @security.context, @logger]
         tags:
             - { name: kernel.event_subscriber }
     inck_user_provider:
