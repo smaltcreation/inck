@@ -5,17 +5,12 @@
     <div class="jumbotron">
         <div class="container">
             <h1>Editer le groupe : {{ group_name }}</h1>
-            <p><a href="{#{ path('inck_user_admin') }#}" class="btn btn-default"><i class="fa fa-backward"></i> Retourner à l'administration</a></p>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        {% if fosuser_form is defined and fosuser_form == 'braincrafted' %}
-            {% include "InckUserBundle:Group:edit_content_braincrafted.html.twig" %}
-        {% else %}
-            {% include "InckUserBundle:Group:edit_content.html.twig" %}
-        {% endif %}
+        {% include "InckUserBundle:Group:edit_content.html.twig" %}
     </div>
 {% endblock content %}

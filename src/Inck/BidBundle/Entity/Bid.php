@@ -30,8 +30,15 @@ class Bid
 
     /**
      * @ORM\ManyToOne(targetEntity="\Inck\UserBundle\Entity\Group", inversedBy="bids")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=false)
      */
     private $group;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="bids")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
+     */
+    private $product;
 
 
     /**
@@ -88,5 +95,28 @@ class Bid
     public function getGroup()
     {
         return $this->group;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \Inck\BidBundle\Entity\Product $product
+     * @return Bid
+     */
+    public function setProduct(\Inck\BidBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Inck\BidBundle\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

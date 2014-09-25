@@ -4,6 +4,7 @@ namespace Inck\UserBundle\Entity;
 
 use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -27,7 +28,7 @@ class Group extends BaseGroup
      * @var string
      *
      * @Assert\Email()
-     * @ORM\Column(name="email", type="string")
+     * @ORM\Column(name="email", type="string", nullable=true)
      */
     protected $email;
 
@@ -111,17 +112,6 @@ class Group extends BaseGroup
     protected $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity="Group", mappedBy="parent")
-     **/
-    protected $children;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Group", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-     **/
-    protected $parent;
-
-    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Inck\BidBundle\Entity\Bid", mappedBy="group")
@@ -129,18 +119,21 @@ class Group extends BaseGroup
     protected $bids;
 
 
-    public function __construct()
+    /**
+     * Constructor
+     */
+    public function __construct($name, $roles = array())
     {
-        parent::__construct();
+        $roles[] = 'ROLE_GROUP';
+        parent::__construct($name, $roles);
 
-        $this->type             = TYPE_DEFAULT;
-        $this->credit           = 0;
-        $this->country          = 'FR';
-        $this->private          = true;
-        $this->enabled          = false;
-        $this->firstLogin       = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
-
-        $this->children         = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->type = self::TYPE_DEFAULT;
+        $this->credit = 0;
+        $this->country = 'FR';
+        $this->private = true;
+        $this->enabled = false;
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -450,62 +443,6 @@ class Group extends BaseGroup
     public function getEnabled()
     {
         return $this->enabled;
-    }
-
-    /**
-     * Add children
-     *
-     * @param \Inck\UserBundle\Entity\Group $children
-     * @return Group
-     */
-    public function addChild(\Inck\UserBundle\Entity\Group $children)
-    {
-        $this->children[] = $children;
-
-        return $this;
-    }
-
-    /**
-     * Remove children
-     *
-     * @param \Inck\UserBundle\Entity\Group $children
-     */
-    public function removeChild(\Inck\UserBundle\Entity\Group $children)
-    {
-        $this->children->removeElement($children);
-    }
-
-    /**
-     * Get children
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-
-    /**
-     * Set parent
-     *
-     * @param \Inck\UserBundle\Entity\Group $parent
-     * @return Group
-     */
-    public function setParent(\Inck\UserBundle\Entity\Group $parent = null)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * Get parent
-     *
-     * @return \Inck\UserBundle\Entity\Group 
-     */
-    public function getParent()
-    {
-        return $this->parent;
     }
 
     /**
