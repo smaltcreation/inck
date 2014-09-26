@@ -114,6 +114,15 @@ class Group extends BaseGroup
      */
     protected $bids;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Article")
+     * @ORM\JoinTable(name="fos_user_group_article",
+     *      joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id", unique=true)}
+     *      )
+     **/
+    private $articles;
+
 
     /**
      * Constructor
@@ -449,5 +458,38 @@ class Group extends BaseGroup
     public function getBids()
     {
         return $this->bids;
+    }
+
+    /**
+     * Add articles
+     *
+     * @param \Inck\ArticleBundle\Entity\Article $articles
+     * @return Group
+     */
+    public function addArticle(\Inck\ArticleBundle\Entity\Article $articles)
+    {
+        $this->articles[] = $articles;
+
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \Inck\ArticleBundle\Entity\Article $articles
+     */
+    public function removeArticle(\Inck\ArticleBundle\Entity\Article $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }
