@@ -1,0 +1,33 @@
+.group .well {
+    padding: 100px;
+}
+
+.group .img-inline {
+    float: left;
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    width: 100px;
+    height: 100px;
+}
+
+.group .description {
+    text-align: justify;
+    font-size: 16px;
+}
+
+.group h2 {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 992px) {
+    .group .well {
+        padding: 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .group .well {
+        padding: 25px;
+    }
+}

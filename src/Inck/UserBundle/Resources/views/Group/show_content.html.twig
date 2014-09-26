@@ -1,5 +1,112 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="fos_user_group_show">
-    <p>{{ 'group.show.name'|trans }} : {{ group.getName() }}</p>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#profile" role="tab" data-toggle="tab">Profil</a></li>
+        <li><a href="#articles" role="tab" data-toggle="tab">Articles acquis</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="profile">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>Vos crédits vous permettent d'acquérir les droits d'articles afin que vous puissez les diffuser librement</p>
+                            <h2 class="credits"><span class="credits-number">{{ group.credit }}</span> Crédits</h2>
+                        </div>
+                        <div class="panel-footer text-right">
+                            <a class="btn btn-default btn-xs"><i class="fa fa-info-circle"></i> Plus d'informations</a>
+                            <a class="btn btn-success"><i class="fa fa-money"></i> Acheter des crédits</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa fa-group fa-fw"></i> Informations du groupe</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p>
+                                        {% if group.name %}{{ group.name }}<br>{% endif %}
+                                        {% if group.address %}{{ group.address }}<br>{% endif %}
+                                        {% if group.zipcode %}{{ group.zipcode }}{% endif %}
+                                        {% if group.city %}{{ group.city }}<br>{% endif %}
+                                        {% if group.country %}{{ group.country }}{% endif %}
+                                    </p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p>
+                                        {% if group.type %}{{ group.type == 0 ? 'Default - Particulier' : 'Société' }}<br>{% endif %}
+                                        {% if group.website %}{{ group.website }}<br>{% endif %}
+                                        {% if group.createdAt %}Groupe créé le {{ group.createdAt|date('d/m/Y') }}<br>{% endif %}
+                                        {% if group.private %}Visibilité : {{ group.private == 0 ? 'Publique' : 'Privée'}}{% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer text-right">
+                            <a href="{{ path('fos_user_group_edit', {'groupName': group.getName()} ) }}" class="btn btn-default"><i class="fa fa-edit"></i> Editer le groupe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa fa-legal fa-fw"></i> Dernières enchères</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>Ici, vous pouvez retracer l'historique de vos enchères.</p>
+                        </div>
+
+                        <!-- Table -->
+                        {% if group.bids|length > 0 %}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Article</th>
+                                        <th>Date</th>
+                                        <th>Valeur</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for bid in group.bids %}
+                                        <tr>
+                                            <td>{{ bid.product.id }}</td>
+                                            <td>{{ bid.product.title|slice(0, 50) }}{% if bid.product.title > 50%}...{% endif %}</td>
+                                            <td>{{ bid.createdAt }}</td>
+                                            <td>{{ bid.value }} crédit{% if bid.value > 1 %}s{% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa fa-exclamation-triangle fa-fw"></i> Zone de danger</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p class="text-right">
+                                <a href="{{ path('fos_user_group_delete', {'groupName': group.getName()} ) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Supprimer le groupe</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="articles">
+
+        </div>
+    </div>
 </div>

@@ -160,6 +160,11 @@ class GroupController extends BaseController
      */
     public function deleteAction(Request $request, $groupName)
     {
+        $group = $this->findGroupBy('name', $groupName);
+
+        if(!$group)
+            throw new NotFoundHttpException('Le groupe est inexistant');
+
         /** @var $user User */
         $user = $this->container->get('security.context')->getToken()->getUser();
         if(!$user->hasRole('ROLE_SUPER_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_SUPER_ADMIN'))

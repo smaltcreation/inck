@@ -4,8 +4,11 @@ namespace Inck\UserBundle\Entity;
 
 use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity
@@ -84,13 +87,6 @@ class Group extends BaseGroup
     protected $website;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="siret", type="integer", nullable=true)
-     */
-    protected $siret;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -131,7 +127,7 @@ class Group extends BaseGroup
         $this->credit = 0;
         $this->country = 'FR';
         $this->private = true;
-        $this->enabled = false;
+        $this->enabled = true;
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -351,29 +347,6 @@ class Group extends BaseGroup
     public function getWebsite()
     {
         return $this->website;
-    }
-
-    /**
-     * Set siret
-     *
-     * @param integer $siret
-     * @return Group
-     */
-    public function setSiret($siret)
-    {
-        $this->siret = $siret;
-
-        return $this;
-    }
-
-    /**
-     * Get siret
-     *
-     * @return integer 
-     */
-    public function getSiret()
-    {
-        return $this->siret;
     }
 
     /**

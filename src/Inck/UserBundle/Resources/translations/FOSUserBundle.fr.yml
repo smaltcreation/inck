@@ -108,3 +108,6 @@ form:
     country: "Pays"
     occupation: "Activité/métier"
     biography: "Biographie"
+    website: "Site web"
+    type: "Type"
+    private: "Visibilité"

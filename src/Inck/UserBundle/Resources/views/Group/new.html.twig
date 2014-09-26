@@ -1,5 +1,15 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 {% block title %}Créer un nouveau groupe{% endblock %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/user/group/new.css'
+        'bundles/inckuser/css/Group/new.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
 
 {% block header %}
     <div class="jumbotron">

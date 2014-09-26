@@ -127,17 +127,19 @@ fos_user:
     user_class: Inck\UserBundle\Entity\User
     group:
         group_class: Inck\UserBundle\Entity\Group
+        form:
+            type: inck_user_group
     profile:
-          form:
-              type: inck_user_profile
+        form:
+            type: inck_user_profile
     registration:
         form:
             type: inck_user_registration
         confirmation:
             enabled: true
     from_email:
-            address: webtesting69@gmail.com
-            sender_name: Inck
+        address: webtesting69@gmail.com
+        sender_name: Inck
     service:
         mailer: fos_user.mailer.twig_swift
     resetting:

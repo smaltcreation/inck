@@ -12,6 +12,11 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: inck_user_registration }
+    inck_user.group.form.type:
+        class: Inck\UserBundle\Form\Type\GroupFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: inck_user_group }
     inck_user.type.users_selector:
         class: Inck\UserBundle\Form\Type\UsersSelectorType
         arguments: ["@doctrine.orm.entity_manager"]

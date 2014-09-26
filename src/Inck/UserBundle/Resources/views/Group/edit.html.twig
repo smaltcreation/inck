@@ -1,6 +1,15 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 {% block title %}Editer un groupe{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/user/group/edit.css'
+        'bundles/inckuser/css/Group/new.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
 {% block header %}
     <div class="jumbotron">
         <div class="container">
