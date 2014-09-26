@@ -3,6 +3,8 @@
 namespace Inck\ArticleBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Exception;
+use HTML2PDF_exception;
 use Inck\ArticleBundle\Entity\Article;
 use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\Tag;
@@ -17,7 +19,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/article")
@@ -27,6 +31,8 @@ class ArticleController extends Controller
     /**
      * @Route("/new", name="inck_article_article_new")
      * @Secure(roles="ROLE_USER")
+     * @param Request $request
+     * @return Response
      */
     public function addAction(Request $request)
     {
@@ -43,6 +49,9 @@ class ArticleController extends Controller
     /**
      * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"}, options={"expose"=true})
      * @Secure(roles="ROLE_USER")
+     * @param Request $request
+     * @param Article $article
+     * @return Response
      */
     public function editAction(Request $request, Article $article)
     {
@@ -63,6 +72,10 @@ class ArticleController extends Controller
 
     /**
      * @Template()
+     * @param Request $request
+     * @param Article $article
+     * @param $action
+     * @return array|RedirectResponse
      */
     public function formAction(Request $request, Article $article, $action)
     {
@@ -145,6 +158,8 @@ class ArticleController extends Controller
     /**
      * @Route("/{id}/{slug}/{updatedAt}", name="inck_article_article_show", requirements={"id" = "\d+"})
      * @Template()
+     * @param Article $article
+     * @return array
      */
     public function showAction(Article $article)
     {
@@ -163,6 +178,8 @@ class ArticleController extends Controller
     /**
      * @Route("/{id}/modal", name="inck_article_article_show_modal", requirements={"id" = "\d+"})
      * @Template("InckArticleBundle:Article:show_modal.html.twig")
+     * @param Article $article
+     * @return array
      */
     public function showModalAction(Article $article)
     {
@@ -214,6 +231,8 @@ class ArticleController extends Controller
 
     /**
      * @Template()
+     * @param $filters
+     * @throws Exception
      * @return array
      */
     public function timelineAction($filters)
@@ -268,6 +287,10 @@ class ArticleController extends Controller
      * @Route("/filter/{page}", name="inck_article_article_filter", defaults={"page" = 1}, options={"expose"=true})
      * @Method("POST")
      * @Template()
+     * @param Request $request
+     * @param $page
+     * @throws Exception
+     * @return array
      */
     public function filterAction(Request $request, $page)
     {
@@ -330,6 +353,8 @@ class ArticleController extends Controller
      * @Route("/search", name="inck_article_article_search")
      * @Method("get")
      * @Template()
+     * @param Request $request
+     * @return array
      */
     public function searchAction(Request $request)
     {
@@ -350,6 +375,8 @@ class ArticleController extends Controller
     /**
      * @Route("/{id}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"})
      * @Secure(roles="ROLE_USER")
+     * @param Article $article
+     * @return RedirectResponse
      */
     public function deleteAction(Article $article)
     {
@@ -390,6 +417,8 @@ class ArticleController extends Controller
 
     /**
      * @Route("/{id}/watch-later", name="inck_article_article_watchLater", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @param Article $article
+     * @return JsonResponse
      */
     public function watchLater(Article $article)
     {
@@ -432,6 +461,9 @@ class ArticleController extends Controller
     /**
      * @Route("/{id}/pdf", name="inck_article_article_pdf")
      * @Template()
+     * @param Article $article
+     * @throws HTML2PDF_exception
+     * @return string
      */
     public function pdfAction(Article $article)
     {
@@ -474,6 +506,9 @@ class ArticleController extends Controller
 
     /**
      * @Template()
+     * @param Article $article
+     * @throws Exception
+     * @return array
      */
     public function featuredAction(Article $article)
     {

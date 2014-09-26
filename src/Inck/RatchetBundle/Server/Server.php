@@ -35,6 +35,7 @@ class Server implements MessageComponentInterface
      */
     function onOpen(ConnectionInterface $conn)
     {
+        $this->logger->debug($conn->Session->get('user'));
         $this->clientManager->addConnection($conn);
     }
 

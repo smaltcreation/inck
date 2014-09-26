@@ -4,7 +4,6 @@ namespace Inck\RatchetBundle\Command;
 
 use Ratchet\Http\HttpServer;
 use Ratchet\Session\SessionProvider;
-use Ratchet\Wamp\WampServer;
 use Ratchet\WebSocket\WsServer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
