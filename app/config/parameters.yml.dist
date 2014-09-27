@@ -26,8 +26,9 @@ parameters:
     upload.article_image.uri_prefix:            /article/image
     upload.article_image.upload_destination:    %kernel.root_dir%/../web/article/image
 
-    inck_ratchet.server_host: 127.0.0.1
+    inck_ratchet.server_host: inck.dev
     inck_ratchet.server_port: 8080
+    inck_ratchet.server_name: main
 
     inck_subscription.aliases:
         user_class:     Inck\UserBundle\Entity\UserSubscription
@@ -36,7 +37,7 @@ parameters:
 
     session_memcache_host: 127.0.0.1
     session_memcache_port: 11211
-    session_memcache_prefix: sess
+    session_memcache_prefix: inck
     session_memcache_expire: 3600
 
     facebook_app_id:  putYourFacebookAppId

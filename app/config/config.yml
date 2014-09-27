@@ -33,6 +33,7 @@ twig:
     globals:
         inck_ratchet_server_host: "%inck_ratchet.server_host%"
         inck_ratchet_server_port: "%inck_ratchet.server_port%"
+        inck_ratchet_server_name: "%inck_ratchet.server_name%"
 
 # Assetic Configuration
 assetic:

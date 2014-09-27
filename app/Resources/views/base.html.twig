@@ -55,7 +55,7 @@
             {% if app.user is not null and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <script type="text/javascript">
                     window.server = {
-                        uri: 'ws://{{ inck_ratchet_server_host }}:{{ inck_ratchet_server_port }}',
+                        uri: 'ws://{{ inck_ratchet_server_host }}:{{ inck_ratchet_server_port }}/{{ inck_ratchet_server_name }}',
                         connection: null
                     };
                 </script>
