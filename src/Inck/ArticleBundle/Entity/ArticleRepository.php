@@ -41,7 +41,7 @@ class ArticleRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
         $orderBy = 'postedAt';
 
-        // Type d'article
+        // Type d'article : si on reçoit le filtre "type", on adapte la requête en fonction du type
         if(isset($filters['type']))
         {
             switch($filters['type'])
@@ -107,6 +107,7 @@ class ArticleRepository extends EntityRepository
         // Création des conditions pour les filtres
         $orX = $qb->expr()->orX();
 
+        // Préparation des paramètres dans le cas où on reçoit un filtre sur les auteurs, les catégories ou les tags
         $conditions = array(
             'authors'       => array(
                 'field' => 'author',
@@ -134,22 +135,27 @@ class ArticleRepository extends EntityRepository
              */
             extract($parameters);
 
+            // Si on reçoit le filtre "authors", "categories" ou "tags"
             if(isset($filters[$filter]))
             {
                 $filterName = $field.'Filter';
                 $columnName = $alias.'Score';
 
+                // On ajoute un "WHERE x IN (y)" à la requête, par exemple "WHERE author.id IN (1, 2, 3)"
                 $orX->add(
                     $qb
                         ->expr()
                         ->in("$field.id", ":$filterName")
                 );
 
+                // Pour calculer le score, on récupère le bon repository, en fonction du filtre traité
                 /** @var CategoryRepository|TagRepository|UserRepository $repository */
                 $repository = $this
                     ->getEntityManager()
                     ->getRepository($table);
 
+                // On effectue une jointure afin de calculer le score de l'article, par exemple pour le filtre "authors" :
+                // On ajoute une colonne "authorScore". La valeur est calculée par la méthode "getScoreFilterQuery" du repository
                 $qb
                     ->innerJoin("a.$field", $field)
                     ->addSelect(
@@ -165,7 +171,8 @@ class ArticleRepository extends EntityRepository
             ->groupBy('a.id')
             ->andWhere($orX);
 
-        // Filtre "not" (articles similaires)
+        // Filtre "not" (articles similaires) : ce filtre est principalement utilisé pour récupérer les articles similaires à un article,
+        // et permet de ne pas retourner l'article dont on cherche les articles similaires
         if(isset($filters['not']))
         {
             $qb
@@ -173,7 +180,7 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('not', $filters['not']);
         }
 
-        // Ordre
+        // Ordre : tri des articles par nombre de votes positifs décroissant, et par nombre de votes négatifs croissant
         if(isset($filters['order']) && $filters['order'] === 'vote')
         {
             /** @var VoteRepository $repository */
@@ -196,14 +203,17 @@ class ArticleRepository extends EntityRepository
             ;
         }
 
+        // Les articles sont toujours triés par date décroissante
         $qb->addOrderBy("a.$orderBy", 'DESC');
 
-        // Filtre "search"
+        // Filtre "search" : on recherche le terme envoyé dans les champs "title", "summary" et "content" des articles
+        // ainsi que dans les noms des catégories, des tags et des auteurs
         if(isset($filters['search']))
         {
             $orX = $qb->expr()->orX();
             $fields = array('title', 'summary', 'content');
 
+            // Ajout de la condition "WHERE x LIKE 'y'" (par exemple "WHERE title LIKE '%test%'
             foreach($fields as $field)
             {
                 $orX->add(
@@ -213,6 +223,7 @@ class ArticleRepository extends EntityRepository
                 );
             }
 
+            // Pour les auteurs, on cherche dans le pseudo, le prénom et le nom
             $fields = array(
                 'categories'    => array(
                     'name',
@@ -227,6 +238,7 @@ class ArticleRepository extends EntityRepository
                 ),
             );
 
+            // Création des jointures pour tous les champs sur les catégories, les tags et les auteurs
             foreach($fields as $field => $columnNames)
             {
                 $qb->innerJoin("a.$field", $field);
@@ -241,6 +253,7 @@ class ArticleRepository extends EntityRepository
                 }
             }
 
+            // Complétion de la requête : ajout du terme recherché
             $qb
                 ->andWhere($orX)
                 ->setParameter('search', '%'.$filters['search'].'%');
@@ -353,7 +366,8 @@ class ArticleRepository extends EntityRepository
      */
     private function convertFilters(&$filters)
     {
-        // Conversion "one to many"
+        // Conversion "one to many" : si on reçoit par exemple un filtre "author",
+        // on le convertit en un filtre "authors"
         $conversion = array(
             'author'    => 'authors',
             'category'  => 'categories',
@@ -364,6 +378,7 @@ class ArticleRepository extends EntityRepository
         {
             if(isset($filters[$from]))
             {
+                // On utilise seulement l'id de l'entité
                 /** @var Category|Tag|User $entity */
                 $entity = $filters[$from];
 
@@ -381,7 +396,8 @@ class ArticleRepository extends EntityRepository
             }
         }
 
-        // Conversion "string to array"
+        // Conversion "string to array" : si on reçoit par exemple un filtre "authors" qui contient une chaîne,
+        // on la convertit en tableau
         $conversion = array_values($conversion);
 
         foreach($conversion as $to)
@@ -405,6 +421,7 @@ class ArticleRepository extends EntityRepository
             throw new \Exception("Filtres invalides");
         }
 
+        // On vérifie chaque filtre, et les données reçues
         $validTypes = array(
             'as_draft',
             'published',
@@ -418,6 +435,7 @@ class ArticleRepository extends EntityRepository
         {
             switch($filter)
             {
+                // Si on reçoit un filtre par "type", on regarde si type reçu est valide
                 case 'type':
                     if(!in_array($data, $validTypes))
                     {
@@ -425,6 +443,7 @@ class ArticleRepository extends EntityRepository
                     }
                     break;
 
+                // Si on reçoit un filtre sur les auteurs, les catégories ou les tags, on a besoin d'un tableau
                 case 'authors':
                 case 'categories':
                 case 'tags':
@@ -434,6 +453,7 @@ class ArticleRepository extends EntityRepository
                     }
                     break;
 
+                // Si on reçoit le filtre "search" ou "order", on a besoin d'une chaîne
                 case 'search':
                 case 'order':
                     if(!is_string($data))
@@ -442,6 +462,7 @@ class ArticleRepository extends EntityRepository
                     }
                     break;
 
+                // Si on reçoit le filtre "not", on a besoin d'un id
                 case 'not':
                     if(!is_int($data))
                     {
@@ -449,6 +470,7 @@ class ArticleRepository extends EntityRepository
                     }
                     break;
 
+                // Si on reçoit autre chose, on lance une exception
                 default:
                     throw new \Exception("Filtre $filter non géré");
                     break;
@@ -457,6 +479,7 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
+     * Permet de ne revoyer que les objets (sans les colonnes ajoutées pour calculer un score de recherche)
      * @param array $results
      */
     private function formatResults(&$results)
