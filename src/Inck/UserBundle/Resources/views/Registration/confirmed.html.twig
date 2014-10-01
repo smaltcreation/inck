@@ -31,24 +31,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h3>{{ "Go to my profile"|trans }}</h3>
-                <p>{{ "You will find all the information conserning you including your statistics. You can see your articles, your drafts and your news feeds."|trans }}</p>
-                <p><a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> {{ "My profile"|trans }}</a></p>
+                <h3>Accéder à mon profil</h3>
+                <p>Vous y trouverez toutes les informations vous concernant ainsi que vos statistiques. Vous pourrez y consulter vos articles, vos brouillons et votre fil d'actualité.</p>
+                <p><a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a></p>
             </div>
             <div class="col-md-4">
-                <h3>{{ "Want to share an idea ?"|trans }}</h3>
-                <p>{{ "When you share on Inck by writing an article, you're contributing to the development of free expression and culture. Read, learn, share here everything is possible !"|trans }}</p>
-                <p><a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> {{ "Write an article"|trans }}</a></p>
+                <h3>Envie de partager vos idées ?</h3>
+                <p>Lorsque vous partagez sur Inck en écrivant un article, vous contribuez au développement de l'expression libre et culturelle. Lire, s'instruire, partager, ici tout est possible !</p>
+                <p><a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> Écrire un article</a></p>
             </div>
              <div class="col-md-4">
-                <h3>{{ "press, business?"|trans }}</h3>
-                <p>{{ "With Inck, you can publish and obtain the rights to articles written by the members of the community on your site or newspaper via the auction sales system."|trans }}</p>
-                <p><a class="btn btn-primary" href="{{ path('fos_user_change_password') }}"><i class="fa fa-university"></i> {{ "My company"|trans }}</a></p>
+                <h3>Presse, entreprise?</h3>
+                <p>Avec Inck, vous pouvez publier et acquérir les droits des articles écrits par les membres de la communauté sur votre site ou journal via un système de vente aux enchères.</p>
+                <p><a class="btn btn-primary" href="{{ path('fos_user_change_password') }}"><i class="fa fa-university"></i> Mon entreprise</a></p>
             </div>
         </div>
 
         <div class="last-article" itemscope itemtype ="http://schema.org/Article">
-            <h3>{{ "Last article published"|trans }}</h3>
+            <h3>Dernier article publié</h3>
             <br>
             {{ render(controller('InckArticleBundle:Article:last')) }}
         </div>

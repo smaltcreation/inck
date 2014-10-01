@@ -1,11 +1,11 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% block title %}{{ "Register"|trans }}{% endblock %}
+{% block title %}M'enregistrer{% endblock %}
 
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>{{ "Registration closed to the public"|trans }}</h1>
-            <a href="{{ path('fos_user_security_login') }}" class="btn btn-default"><i class="fa fa-backward"></i>{{ "Go back to login"|trans }}</a>
+            <h1>Inscriptions fermées au public</h1>
+            <a href="{{ path('fos_user_security_login') }}" class="btn btn-default"><i class="fa fa-backward"></i> Retourner au login</a>
         </div>
     </div>
 {% endblock %}

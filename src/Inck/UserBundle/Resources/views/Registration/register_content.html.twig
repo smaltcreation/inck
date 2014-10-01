@@ -6,7 +6,7 @@
 
         <section id="registration_required">
             <div class="well">
-                <h2>{{ "Required information"|trans }}</h2>
+                <h2>Informations requises</h2>
                 <div class="row">
                     <div class="col-sm-6">
                         {{ form_row(form.email) }}
@@ -25,7 +25,7 @@
                 </div>
 
                 <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> {{ 'registration.submit'|trans }}</button>
-                <p class="btn-inline"><a href="#registration_more" class="btn btn-default"><i class="fa fa-plus-square"></i> {{ "Complete my account"|trans }}</a></p>
+                <p class="btn-inline"><a href="#registration_more" class="btn btn-default"><i class="fa fa-plus-square"></i> Compléter mon compte</a></p>
             </div>
         </section>
 
@@ -36,9 +36,11 @@
                         {% image '@InckUserBundle/Resources/public/images/drop@2x.png' %}
                             <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Encre"/>
                         {% endimage %}
-                        <h2>{{ "Complete my account"|trans }}</h2>
+                        <h2>Compléter mon compte</h2>
                         <p class="description"  itemprop="description">
-                            {{ "We are interested in your profile ! Of course, we would like to know our user so that we can better target the things that you like. Even more then that when an article is published, it's always good to know a little about the author. If you're a poet, an outstanding developer or even an amateur philosopher, we are all unique, so don't hesitate to poste !"|trans }}
+                            Votre profil nous intéresse ! En effet, nous aimons connaître nos utilisateurs afin de cibler au mieux ce qu'il peut leur plaire.
+                            De plus, lorsqu'un article est posté, il est toujours agréable d'en connaître un petit peu sur l'auteur.
+                            Que vous soyez un grand poète, un développeur hors-pair ou un philosophe amateur, nous sommes tous unique, alors n'hésitez plus !
                         </p>
                     </div>
                 </div>
@@ -69,7 +71,7 @@
                 </div>
 
                 <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> {{ 'registration.submit'|trans }}</button>
-                <p class="btn-inline"><a href="#registration_address" class="btn btn-default"><i class="fa fa-plus-square"></i> {{ "Add my coordinates"|trans }}</a></p>
+                <p class="btn-inline"><a href="#registration_address" class="btn btn-default"><i class="fa fa-plus-square"></i> Ajouter mes coordonnées</a></p>
             </div>
         </section>
 
@@ -80,9 +82,11 @@
                         {% image '@InckUserBundle/Resources/public/images/atlas@2x.png' %}
                             <img itemprop="image" class="img-responsive img-inline" src="{{ asset_url }}" alt="Atlas"/>
                         {% endimage %}
-                        <h2>{{ "Coordinates"|trans }}</h2>
+                        <h2>Coordonnées</h2>
                         <p class="description"  itemprop="description">
-                            {{ "We need your coordinates if you would like to get payed for your articles. Of course, all of our authors can be rewarded for their talent if their article is bought by a big site you will be remunerated at an honest price based on your article's quality. These things are yours, free expression and culture."|trans }}
+                            Vos coordonnées nous sont obligatoire si vous voulez être rémunéré par vos articles.
+                            En effet, tous nos auteurs peuvent se voir récompensés pour leur talent en étant publiés sur de grands sites de presse rémunérant à prix honnêtes des articles de qualités.
+                            Ceux-ci sont les votres, l'expression libre et culturelle.
                         </p>
                     </div>
                 </div>
@@ -104,7 +108,7 @@
                 </div>
 
                 <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> {{ 'registration.submit'|trans }}</button>
-                <p class="btn-inline"><a href="#registration_websites" class="btn btn-default"><i class="fa fa-plus-square"></i> {{ "Add my social networks"|trans }}</a></p>
+                <p class="btn-inline"><a href="#registration_websites" class="btn btn-default"><i class="fa fa-plus-square"></i> Ajouter mes réseaux sociaux</a></p>
             </div>
         </section>
 
@@ -115,9 +119,10 @@
                         {% image '@InckUserBundle/Resources/public/images/Facebook@2x.png' %}
                             <img itemprop="image" class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
                         {% endimage %}
-                        <h2>{{ "Social networks"|trans }}</h2>
+                        <h2>Réseaux sociaux</h2>
                         <p class="description"  itemprop="description">
-                            {{ "Social networks are a good way to become known and to promote your articles. They will be highlighted on your user card with every article that you share with the community."|trans }}
+                            Les réseaux sociaux sont un bon moyen pour vous faire connaitre et pour promouvoir vos articles.
+                            Ils seront mis en avant sur votre carte utilisateur pour chaque article que vous partagerez avec la communauté.
                         </p>
                     </div>
                 </div>
