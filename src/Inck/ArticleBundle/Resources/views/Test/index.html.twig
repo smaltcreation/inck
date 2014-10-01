@@ -1,0 +1,12 @@
+<h1>
+    {{ user.username }}
+    <small>
+        {{ articles|length }} articles publiés
+    </small>
+</h1>
+
+{% for article in articles %}
+    <p>
+        {{ article.title }}
+    </p>
+{% endfor %}
