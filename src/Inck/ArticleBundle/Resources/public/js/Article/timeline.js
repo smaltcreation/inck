@@ -53,7 +53,7 @@ $(document).ready(function(){
             if(query.term == '') return;
             $.ajax({
                 url: Routing.generate('inck_user_user_autocomplete', {
-                    username: query.term
+                    input: query.term
                 }),
                 dataType: 'json'
             }).done(function(data){
