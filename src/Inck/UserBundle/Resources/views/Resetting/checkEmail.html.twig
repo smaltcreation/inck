@@ -1,13 +1,13 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% block title %}Mot de passe oublié{% endblock %}
+{% block title %}{{ "Forgot your password"|trans }}{% endblock %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Réinitialiser mon mot de passe</h1>
-            <p>Vérification de l'adresse email</p>
+            <h1>{{ "Reset my password"|trans }}</h1>
+            <p>{{ "Checking email address"|trans }}</p>
         </div>
     </div>
 {% endblock %}
