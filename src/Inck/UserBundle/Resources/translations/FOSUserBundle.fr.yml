@@ -24,6 +24,12 @@ security:
         password: "Mot de passe"
         remember_me: Se souvenir de moi
         submit: Connexion
+        connect: Me connecter à Inck
+        write: Écrire et diffuser devient à la portée de tous !
+        read: Lire, voter et partager !
+        read_discription: Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager. N'hésitez plus et laissez-vous porter par les flots de l'expression libre et culturelle !
+        article_list: Liste des articles
+        forgot_password: Mot de passe oublié
 
 # Profile
 profile:

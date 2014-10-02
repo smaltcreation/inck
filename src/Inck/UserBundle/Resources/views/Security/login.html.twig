@@ -1,7 +1,7 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block title %}Se connecter{% endblock %}
+{% block title %}{{ 'security.login.connect'|trans }}{% endblock %}
 {% block description %}<meta name="description" content="Connectez-vous à Inck et partagez-nous vos articles les plus somptueux ! Écrire un article, modérer, voter, c'est contribuer à l'expression libre et culturelle.">{% endblock %}
 
 {% block stylesheets %}
@@ -16,8 +16,8 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Me connecter à Inck</h1>
-            <p>Écrire et diffuser devient à la portée de tous !</p>
+            <h1>{{ 'security.login.connect'|trans }}</h1>
+            <p>{{ 'security.login.write'|trans }}</p>
             <p>
                 <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" role="button"<i class="fa fa-rocket"></i> En savoir plus</a>
                 <a href="./connect/facebook" class="btn btn-facebook btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connexion avec facebook"><i class="fa fa-facebook"></i> Facebook</a>
@@ -73,7 +73,7 @@
                             <div class="col-md-12 form-group">
                                 <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                                 <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-                                <a itemprop="url" href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">Mot de passe oublié</a>
+                                <a itemprop="url" href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">{{ 'security.login.forgot_password'|trans }}</a>
                             </div>
                         </div>
                         <div class="row">
@@ -89,9 +89,9 @@
                         <img itemprop="image" class="img-circle img-responsive logo" src="{{ asset_url }}" alt="Logo de Inck">
                     {% endimage %}
 
-                    <h3>Lire, voter et partager !</h3>
-                    <p itemprop="description" class="description">Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager. N'hésitez plus et laissez-vous porter par les flots de l'expression libre et culturelle !</p>
-                    <p><a itemprop="url" class="btn btn-default" role="button" href="{{ path('home') }}"><i class="fa fa-home"></i> Liste des articles</a></p>
+                    <h3>{{ 'security.login.read'|trans }}</h3>
+                    <p itemprop="description" class="description">{{ 'security.login.read_discription'|trans }}</p>
+                    <p><a itemprop="url" class="btn btn-default" role="button" href="{{ path('home') }}"><i class="fa fa-home"></i>{{ 'security.login.article_list'|trans }}</a></p>
                 </div>
             </div>
         </form>
