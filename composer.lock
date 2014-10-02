@@ -257,12 +257,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/bootstrap.git",
-                "reference": "09948b04f780173eb0b9ec522d53554f3f408055"
+                "reference": "9c6cfef04cb74587cd610f7dca8c4352d77bfc32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/bootstrap/zipball/09948b04f780173eb0b9ec522d53554f3f408055",
-                "reference": "09948b04f780173eb0b9ec522d53554f3f408055",
+                "url": "https://api.github.com/repos/components/bootstrap/zipball/9c6cfef04cb74587cd610f7dca8c4352d77bfc32",
+                "reference": "9c6cfef04cb74587cd610f7dca8c4352d77bfc32",
                 "shasum": ""
             },
             "require": {
@@ -306,7 +306,7 @@
                 "bootstrap",
                 "css"
             ],
-            "time": "2014-09-03 07:11:25"
+            "time": "2014-07-02 12:39:50"
         },
         {
             "name": "components/font-awesome",
@@ -1617,12 +1617,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "1e4689ecd688d0129ee33ecb83e3d030e94e9cc8"
+                "reference": "96e4542c751e074ac018ff9e8915a444f16bd92f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/1e4689ecd688d0129ee33ecb83e3d030e94e9cc8",
-                "reference": "1e4689ecd688d0129ee33ecb83e3d030e94e9cc8",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/96e4542c751e074ac018ff9e8915a444f16bd92f",
+                "reference": "96e4542c751e074ac018ff9e8915a444f16bd92f",
                 "shasum": ""
             },
             "require": {
@@ -1676,7 +1676,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-09-29 09:31:06"
+            "time": "2014-09-29 09:47:47"
         },
         {
             "name": "guzzle/common",
@@ -2659,7 +2659,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {

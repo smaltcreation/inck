@@ -7,6 +7,9 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FilterGroupResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
@@ -104,10 +107,10 @@ class GroupController extends BaseController
     {
         /** @var $user User */
         $user = $this->container->get('security.context')->getToken()->getUser();
-        $group = $this->findGroupBy('name', $groupName);
-
-        if(!$user->hasRole('ROLE_GROUP_'.$group->getId().'_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_SUPER_ADMIN'))
+        if(!$user && !$user->hasRole('ROLE_SUPER_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_SUPER_ADMIN'))
             throw new AccessDeniedException("Vous n'avez pas le droit d'éditer ce groupe");
+
+        $group = $this->findGroupBy('name', $groupName);
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
@@ -171,5 +174,24 @@ class GroupController extends BaseController
             throw new AccessDeniedException("Vous n'avez pas le droit de supprimer ce groupe");
 
         parent::deleteAction($request, $groupName);
+    }
+
+    /**
+     * @Route("/group/{id}/user/add", name="inck_user_group_user_add")
+     * @Secure(roles="ROLE_USER")
+     * @param Request $request
+     */
+    public function addUserAction(Request $request)
+    {
+        $group = $this->findGroupBy('name', $groupName);
+        if(!$group)
+            throw new NotFoundHttpException('Le groupe est inexistant');
+
+        /** @var $user User */
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if(!$user && !$user->hasRole('ROLE_SUPER_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_SUPER_ADMIN'))
+            throw new AccessDeniedException("Vous n'avez pas le droit d'accèder à cette page");
+
+        return array();
     }
 }
