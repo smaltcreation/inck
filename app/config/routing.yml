@@ -1,3 +1,8 @@
+inck_stat:
+    resource: "@InckStatBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 inck_bid:
     resource: "@InckBidBundle/Resources/config/routing.yml"
     prefix:   /
