@@ -13,7 +13,7 @@ body {
     padding-bottom:700px;   /* Height of the footer element */
 }
 
-footer {
+footer#footer {
     width:100%;
     height: 650px;
     background: url("../images/footer_background.png");
@@ -27,7 +27,7 @@ footer {
     height: 200px;
 }
 
-footer #footer-parteners {
+footer#footer #footer-parteners {
     position: absolute;
     bottom: 0;
     width: 100%;

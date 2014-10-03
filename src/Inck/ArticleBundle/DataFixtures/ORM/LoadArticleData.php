@@ -39,7 +39,7 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
 
         for($i = 1; $i <= self::MAX; $i++)
         {
-            $this->titles[$i] = 'Article '.$i;
+            $this->titles[$i] = 'Je suis l\'article '.$i;
         }
     }
 
@@ -54,7 +54,7 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
         {
             $article = new Article();
             $article->setTitle($title);
-            $article->setSummary("Résumé de l'article...");
+            $article->setSummary("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eros turpis, aliquam tristique dui vel, convallis auctor nisl. Praesent et tellus elit. Aenean vitae erat at eros varius malesuada id quis ex. Donec molestie purus quis ligula ultrices, et hendrerit elit aliquam.");
 
             // État
             $article->setPublished(boolval(rand(0, 1)));

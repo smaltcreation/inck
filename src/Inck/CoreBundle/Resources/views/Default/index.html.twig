@@ -27,17 +27,6 @@
                         Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !</span>
                         <span class="visible-xs visible-sm hidden-md hidden-lg">Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !</span>
                     </p>
-                    <p>
-                        <span class="block">
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> Écrire un article</a>
-                                <a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a>
-                            {% else %}
-                                <a itemprop="url" class="btn btn-success" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                                <a itemprop="url" class="btn btn-default" href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"></i> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
-                            {% endif %}
-                        </span>
-                    </p>
                 </div>
             </div>
         </div>

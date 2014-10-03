@@ -5,13 +5,14 @@
     <ul class="nav nav-tabs" role="tablist">
         <li class="active"><a href="#profile" role="tab" data-toggle="tab">Profil</a></li>
         <li><a href="#articles" role="tab" data-toggle="tab">Articles acquis</a></li>
+        <li><a href="#invoices" role="tab" data-toggle="tab">Factures</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="profile">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <p>Vos crédits vous permettent d'acquérir les droits d'articles afin que vous puissez les diffuser librement</p>
@@ -23,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title"><i class="fa fa-group fa-fw"></i> Informations du groupe</h4>
@@ -48,9 +49,11 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="panel-footer text-right">
-                            <a href="{{ path('fos_user_group_edit', {'groupName': group.getName()} ) }}" class="btn btn-default"><i class="fa fa-edit"></i> Editer le groupe</a>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-right"><a href="{{ path('fos_user_group_edit', {'groupName': group.getName()} ) }}" class="btn btn-default"><i class="fa fa-edit"></i> Editer le groupe</a></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,12 +94,24 @@
                     </div>
                 </div>
                 <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa fa-star fa-fw"></i> Article suceptibles de vous plaire</h4>
+                        </div>
+                        <div class="panel-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <h4 class="panel-title"><i class="fa fa-exclamation-triangle fa-fw"></i> Zone de danger</h4>
                         </div>
                         <div class="panel-body">
-                            <p class="text-right">
+                            <p>
                                 <a href="{{ path('fos_user_group_delete', {'groupName': group.getName()} ) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Supprimer le groupe</a>
                             </p>
                         </div>
@@ -134,6 +149,10 @@
                     </table>
                 {% endif %}
             </div>
+        </div>
+
+        <div class="tab-pane" id="invoices">
+
         </div>
     </div>
 </div>

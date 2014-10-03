@@ -5,63 +5,33 @@
     {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
 {% endif %}
 
-<div class="well">
-    {#<a class="visible-xs visible-sm hidden-md hidden-lg" href="{{ articleUrl }}">#}
-        {#{% if article.imageName %}#}
-            {#<img src="{{ vich_uploader_asset(article, 'article_image') }}" alt="Image de l'article : {{ article.title }}">#}
-        {#{% else %}#}
-            {#{% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}#}
-            {#<img src="{{ asset_url }}" alt="Image par défaut"/>#}
-            {#{% endimage %}#}
-        {#{% endif %}#}
-    {#</a>#}
-    {% if currentRoute == 'inck_article_article_show'%}
-        <h3>Résumé de l'article</h3>
-    {% else %}
-        <h3 itemprop="name">
-            <a href="{{ articleUrl }}">{{ article.title }}</a>
-        </h3>
-    {% endif %}
-    <p class="about">
-        Rédigé par
-        <a itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a>
-        &ndash;publié le
-        <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
-        <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-default btn-circle btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" target="blank" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
-    </p>
-    <p class="categories tags">
-        {#<span class="label label-info">{{ article.type }}</span>#}
-        {% for category in article.categories %}
-            <a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-primary btn-xs category">
-                {{ category.name }}
-            </a>
-        {% endfor %}
-        {% for tag in article.tags %}
-            <a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs">
-                {{ tag.name }}
-            </a>
-        {% endfor %}
-    </p>
-    <p itemprop="description about">{{ article.summary }}</p>
-    {% if currentRoute != 'inck_article_article_show'%}
-        <p>
-            <a itemprop="url" href="{{ articleUrl }}" class="btn btn-success" role="button">
-                <i class="fa fa-book"></i> Lire d'avantage
-            </a>
-        </p>
-    {% endif %}
-</div>
-
-<div class="hidden-xs hidden-sm visible-md visible-lg preview text-center">
-    <a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn-tooltip" data-toggle="tooltip" data-placement="right" title="Aperçu" data-target="modal">
+<div class="thumbnail">
+    <a href="{{ articleUrl }}">
         {% if article.imageName %}
-            <img itemprop="image" class="img-circle" src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
+            <img itemprop="image" src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
         {% else %}
             {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
-                <img class="img-circle" src="{{ asset_url }}" alt="Image par défaut"/>
+                <img src="{{ asset_url|apply_filter('article_thumb') }}" alt="Image par défaut"/>
             {% endimage %}
         {% endif %}
     </a>
+    <div class="caption">
+        <span class="pull-right">{{ render(controller('InckArticleBundle:Article:buttonWatchLater', { 'article': article })) }}</span>
+        <h3 itemprop="name"><a href="{{ articleUrl }}">{{ article.title }}</a></h3>
+        <p class="about">
+            Rédigé par <a itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash;publié le <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
+            <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-link btn-xs btn-tooltip btn-circle" data-toggle="tooltip" data-placement="top" target="blank" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
+        </p>
+        <p itemprop="description">{{ article.summary }}</p>
+        <p class="categories tags">
+            {% for category in article.categories %}
+                <a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-primary btn-xs category">{{ category.name }}</a>
+            {% endfor %}
+            {% for tag in article.tags %}
+                <a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs">{{ tag.name }}</a>
+            {% endfor %}
+        </p>
+    </div>
 </div>
 
 <meta itemprop="keywords" content="{% for tag in article.tags %}{{ tag.name }}{% if loop.last == false %},{% endif %}{% endfor %}"/>

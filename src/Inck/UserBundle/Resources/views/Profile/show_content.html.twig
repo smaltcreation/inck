@@ -203,14 +203,11 @@
             <div class="articles">
                 {% for article in user.articlesWatchLater %}
                     <div class="row">
-                        <div class="col-xs-8 col-md-9">
+                        <div class="col-sm-8">
                             <article id="article-{{ article.id }}" class="article">
                                 <a class="btn btn-default btn-circle btn-tooltip btn-unwatch-later pull-right" data-id="{{ article.id }}" data-toggle="tooltip" data-container="body" data-placement="left" title="Retirer de la liste à regarder plus tard"><i class="fa fa-times"></i></a>
-                                <div class="summary hidden-xs hidden-sm visible-md visible-lg">
+                                <div class="summary">
                                     {% include "InckArticleBundle:Article:summary.html.twig" %}
-                                </div>
-                                <div class="summary visible-xs visible-sm hidden-md hidden-lg">
-                                    {% include "InckArticleBundle:Article:thumbnail.html.twig" %}
                                 </div>
                             </article>
                         </div>

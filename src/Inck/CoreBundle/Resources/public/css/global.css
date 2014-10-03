@@ -59,7 +59,7 @@
     background: #62868d url("../images/noisy-texture-100x100-o5-d10-c-62868d-t0.png");
     color: #dfdfdf;
     font-family: Gravity, "Helvetica Neue", Helvetica,Arial, sans-serif;
-    padding-top: 120px;
+    padding-top: 80px;
     padding-bottom: 60px;
     margin-bottom: 80px;
 }
@@ -79,8 +79,9 @@
 
 @media screen and (max-width: 768px) {
     .jumbotron {
-        padding-top: 80px;
+        padding-top: 60px;
         padding-bottom: 20px;
+        margin-bottom: 40px;
     }
 }
 

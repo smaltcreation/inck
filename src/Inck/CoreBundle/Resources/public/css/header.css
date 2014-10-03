@@ -32,10 +32,15 @@
     height: 60px;
     -webkit-transform: translateX(-50%) rotate(45deg);
     transform: translateX(-50%) rotate(45deg);
-}
-
-#wrapper header .jumbotron::after {
     bottom: -30px;
     z-index: 10;
     background: inherit;
+}
+
+@media screen and (max-width: 768px) {
+    #wrapper header .jumbotron::after {
+        width: 30px;
+        height: 30px;
+        bottom: -15px;
+    }
 }

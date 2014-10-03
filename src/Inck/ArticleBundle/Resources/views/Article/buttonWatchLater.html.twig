@@ -1,5 +1,5 @@
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    <a class="btn btn-link btn-xs btn-watch-later btn-tooltip{% if watchLater %} watch-later{% endif %}" data-id="{{ id }}" data-toggle="tooltip" data-placement="right" data-container="body" title="{% if app.user %}Regarder plus tard{% endif %}">
+    <a class="btn btn-link btn-xs btn-watch-later btn-tooltip{% if watchLater %} watch-later{% endif %}" data-id="{{ id }}" data-toggle="tooltip" data-placement="bottom" data-container="body" title="{% if app.user %}Regarder plus tard{% endif %}">
         {% if watchLater %}
             <i class="fa fa-check"></i> <span class="btn-text">Noté pour plus tard</span>
         {% else %}

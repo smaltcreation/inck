@@ -40,7 +40,7 @@ class GroupController extends BaseController
         $user = $this->container->get('security.context')->getToken()->getUser();
 
         if($user->hasGroup($group->getName()))
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:show.html.'.$this->getEngine(), array('group' => $group));
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:show.html.twig', array('group' => $group));
         else
             throw new AccessDeniedException("Vous n'avez pas le droit d'accèder à ce groupe");
     }
@@ -94,7 +94,7 @@ class GroupController extends BaseController
             }
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:new.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:new.html.twig', array(
             'form' => $form->createview(),
         ));
     }
@@ -151,7 +151,7 @@ class GroupController extends BaseController
             }
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:edit.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:edit.html.twig', array(
             'form'      => $form->createview(),
             'group_name'  => $group->getName(),
         ));
@@ -177,11 +177,12 @@ class GroupController extends BaseController
     }
 
     /**
-     * @Route("/group/{id}/user/add", name="inck_user_group_user_add")
+     * @Route("/group/{groupName}/users", name="inck_user_group_users")
+     * @Template()
      * @Secure(roles="ROLE_USER")
      * @param Request $request
      */
-    public function addUserAction(Request $request)
+    public function usersAction(Request $request, $groupName)
     {
         $group = $this->findGroupBy('name', $groupName);
         if(!$group)
@@ -191,6 +192,13 @@ class GroupController extends BaseController
         $user = $this->container->get('security.context')->getToken()->getUser();
         if(!$user && !$user->hasRole('ROLE_SUPER_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_SUPER_ADMIN'))
             throw new AccessDeniedException("Vous n'avez pas le droit d'accèder à cette page");
+
+        $users = array($user);
+
+        return array(
+            'group' => $group,
+            'users' => $users,
+        );
 
         return array();
     }
