@@ -104,3 +104,18 @@ article .article-summary .article-image-preview img:hover  {
     font-style: italic;
     color: #62868d;
 }
+
+#slidebox{
+    width:300px;
+    position:fixed;
+    bottom:40px;
+    right:-300px;
+    z-index: 100;
+}
+
+a.close-slidebox{
+    position:absolute;
+    cursor:pointer;
+    top:10px;
+    right:10px;
+}

@@ -13,54 +13,178 @@
 .btn-facebook {
     color: #fff;
     background-color: #3b5998;
-    border-color: #364680;
+    border-color: #384884;
 }
-
-.btn-facebook:hover {
+.btn-facebook.voted,
+.btn-facebook:hover,
+.btn-facebook:focus,
+.btn-facebook:active,
+.btn-facebook.active,
+.open > .dropdown-toggle.btn-facebook {
     color: #fff;
-    background-color: #4269af;
+    background-color: #3f69ac;
     border-color: #3b5998;
+}
+.btn-facebook:active,
+.btn-facebook.active,
+.open > .dropdown-toggle.btn-subscribe {
+    background-image: none;
+}
+.btn-facebook.disabled,
+.btn-facebook[disabled],
+fieldset[disabled] .btn-subscribe,
+.btn-facebook.disabled:hover,
+.btn-facebook[disabled]:hover,
+fieldset[disabled] .btn-subscribe:hover,
+.btn-facebook.disabled:focus,
+.btn-facebook[disabled]:focus,
+fieldset[disabled] .btn-subscribe:focus,
+.btn-facebook.disabled:active,
+.btn-facebook[disabled]:active,
+fieldset[disabled] .btn-subscribe:active,
+.btn-facebook.disabled.active,
+.btn-facebook[disabled].active,
+fieldset[disabled] .btn-facebook.active {
+    background-color: #3b5998;
+    border-color: #384884;
+}
+.btn-facebook .badge {
+    color: #3b5998;
+    background-color: #fff;
 }
 
 .btn-twitter {
     color: #fff;
     background-color: #56a3d9;
-    border-color: #5499cd;
+    border-color: #568ec5;
 }
-
-.btn-twitter:hover {
+.btn-twitter.voted,
+.btn-twitter:hover,
+.btn-twitter:focus,
+.btn-twitter:active,
+.btn-twitter.active,
+.open > .dropdown-toggle.btn-twitter {
     color: #fff;
-    background-color: #5eb7f1;
+    background-color: #57b6ed;
     border-color: #56a3d9;
+}
+.btn-twitter:active,
+.btn-twitter.active,
+.open > .dropdown-toggle.btn-twitter {
+    background-image: none;
+}
+.btn-twitter.disabled,
+.btn-twitter[disabled],
+fieldset[disabled] .btn-twitter,
+.btn-twitter.disabled:hover,
+.btn-twitter[disabled]:hover,
+fieldset[disabled] .btn-twitter:hover,
+.btn-twitter.disabled:focus,
+.btn-twitter[disabled]:focus,
+fieldset[disabled] .btn-twitter:focus,
+.btn-twitter.disabled:active,
+.btn-twitter[disabled]:active,
+fieldset[disabled] .btn-twitter:active,
+.btn-twitter.disabled.active,
+.btn-twitter[disabled].active,
+fieldset[disabled] .btn-twitter.active {
+    background-color: #56a3d9;
+    border-color: #568ec5;
+}
+.btn-twitter .badge {
+    color: #56a3d9;
+    background-color: #fff;
 }
 
 .btn-google {
     color: #fff;
     background-color: #dd4b39;
-    border-color: #ce4836;
+    border-color: #c94735;
 }
-
-.btn-google:hover {
+.btn-google.voted,
+.btn-google:hover,
+.btn-google:focus,
+.btn-google:active,
+.btn-google.active,
+.open > .dropdown-toggle.btn-google {
     color: #fff;
-    background-color: #f5513f;
+    background-color: #f14f3d;
     border-color: #dd4b39;
+}
+.btn-google:active,
+.btn-google.active,
+.open > .dropdown-toggle.btn-subscribe {
+    background-image: none;
+}
+.btn-google.disabled,
+.btn-google[disabled],
+fieldset[disabled] .btn-subscribe,
+.btn-google.disabled:hover,
+.btn-google[disabled]:hover,
+fieldset[disabled] .btn-subscribe:hover,
+.btn-google.disabled:focus,
+.btn-google[disabled]:focus,
+fieldset[disabled] .btn-subscribe:focus,
+.btn-google.disabled:active,
+.btn-google[disabled]:active,
+fieldset[disabled] .btn-subscribe:active,
+.btn-google.disabled.active,
+.btn-google[disabled].active,
+fieldset[disabled] .btn-google.active {
+    background-color: #dd4b39;
+    border-color: #c94735;
+}
+.btn-google .badge {
+    color: #dd4b39;
+    background-color: #fff;
 }
 
 .btn-linkedin {
     color: #fff;
-    background-color: #4875B4;
-    border-color: #3f6097;
+    background-color: #4875b4;
+    border-color: #4068a0;
 }
-
-.btn-linkedin:hover {
+.btn-linkedin.voted,
+.btn-linkedin:hover,
+.btn-linkedin:focus,
+.btn-linkedin:active,
+.btn-linkedin.active,
+.open > .dropdown-toggle.btn-linkedin {
     color: #fff;
-    background-color: #4a85c6;
-    border-color: #4875B4;
+    background-color: #4b86c8;
+    border-color: #4875b4;
+}
+.btn-linkedin:active,
+.btn-linkedin.active,
+.open > .dropdown-toggle.btn-subscribe {
+    background-image: none;
+}
+.btn-linkedin.disabled,
+.btn-linkedin[disabled],
+fieldset[disabled] .btn-subscribe,
+.btn-linkedin.disabled:hover,
+.btn-linkedin[disabled]:hover,
+fieldset[disabled] .btn-subscribe:hover,
+.btn-linkedin.disabled:focus,
+.btn-linkedin[disabled]:focus,
+fieldset[disabled] .btn-subscribe:focus,
+.btn-linkedin.disabled:active,
+.btn-linkedin[disabled]:active,
+fieldset[disabled] .btn-subscribe:active,
+.btn-linkedin.disabled.active,
+.btn-linkedin[disabled].active,
+fieldset[disabled] .btn-linkedin.active {
+    background-color: #4875b4;
+    border-color: #4068a0;
+}
+.btn-linkedin .badge {
+    color: #4875b4;
+    background-color: #fff;
 }
 
 .btn-subscribe {
     color: #fff;
-    background-color: #93648D;
+    background-color: #93648d;
     border-color: #80577b;
 }
 .btn-subscribe.voted,
@@ -93,7 +217,7 @@ fieldset[disabled] .btn-subscribe:active,
 .btn-subscribe.disabled.active,
 .btn-subscribe[disabled].active,
 fieldset[disabled] .btn-subscribe.active {
-    background-color: #93648D;
+    background-color: #93648d;
     border-color: #80577b;
 }
 .btn-subscribe .badge {
@@ -184,5 +308,48 @@ fieldset[disabled] .btn-inverse.active {
 }
 .btn-inverse .badge {
     color: #333333;
+    background-color: #fff;
+}
+
+.btn-category {
+    color: #fff;
+    background-color: #ffb0a8;
+    border-color: #ec8a80;
+}
+.btn-category.voted,
+.btn-category:hover,
+.btn-category:focus,
+.btn-category:active,
+.btn-category.active,
+.open > .dropdown-toggle.btn-category {
+    color: #fff;
+    background-color: #eb9f97;
+    border-color: #d87f75;
+}
+.btn-category:active,
+.btn-category.active,
+.open > .dropdown-toggle.btn-category {
+    background-image: none;
+}
+.btn-category.disabled,
+.btn-category[disabled],
+fieldset[disabled] .btn-category,
+.btn-category.disabled:hover,
+.btn-category[disabled]:hover,
+fieldset[disabled] .btn-category:hover,
+.btn-category.disabled:focus,
+.btn-category[disabled]:focus,
+fieldset[disabled] .btn-category:focus,
+.btn-category.disabled:active,
+.btn-category[disabled]:active,
+fieldset[disabled] .btn-category:active,
+.btn-category.disabled.active,
+.btn-category[disabled].active,
+fieldset[disabled] .btn-category.active {
+    background-color: #ffb0a8;
+    border-color: #d8766d;
+}
+.btn-category .badge {
+    color: #ffb0a8;
     background-color: #fff;
 }
