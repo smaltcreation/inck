@@ -42,11 +42,8 @@ class ClientManager
     public function addConnection(ConnectionInterface $conn)
     {
         $this->clients[$conn->resourceId] = new Client($conn);
-        $this->logger->debug(sprintf(
-            'added connection = %d, session = %s',
-            $conn->resourceId,
-            print_r($conn->Session->all(), true)
-        ));
+        $this->logger->info('added connection #'.$conn->resourceId);
+        $this->logTotalConnections();
     }
 
     /**
@@ -55,7 +52,8 @@ class ClientManager
     public function removeConnection(ConnectionInterface $conn)
     {
         $this->clients->remove($conn->resourceId);
-        $this->logger->debug('removed connection : '.$conn->resourceId);
+        $this->logger->info('removed connection #'.$conn->resourceId);
+        $this->logTotalConnections();
     }
 
     /**
@@ -64,8 +62,13 @@ class ClientManager
     public function closeConnection(ConnectionInterface $conn)
     {
         $conn->close();
-        $this->logger->debug('closed connection : '.$conn->resourceId);
+        $this->logger->info('closed connection #'.$conn->resourceId);
 
         $this->removeConnection($conn);
+    }
+
+    private function logTotalConnections()
+    {
+        $this->logger->info('total connections = '.count($this->clients));
     }
 }

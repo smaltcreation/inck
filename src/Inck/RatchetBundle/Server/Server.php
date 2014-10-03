@@ -5,6 +5,7 @@ namespace Inck\RatchetBundle\Server;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Server implements MessageComponentInterface
 {
@@ -19,13 +20,20 @@ class Server implements MessageComponentInterface
     private $logger;
 
     /**
+     * @var EventDispatcherInterface $eventDispatcher
+     */
+    private $eventDispatcher;
+
+    /**
      * @param ClientManager $clientManager
      * @param Logger $logger
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(ClientManager $clientManager, Logger $logger)
+    public function __construct(ClientManager $clientManager, Logger $logger, EventDispatcherInterface $eventDispatcher)
     {
         $this->clientManager    = $clientManager;
         $this->logger           = $logger;
+        $this->eventDispatcher  = $eventDispatcher;
     }
 
     /**
@@ -35,7 +43,6 @@ class Server implements MessageComponentInterface
      */
     function onOpen(ConnectionInterface $conn)
     {
-        $this->logger->debug($conn->Session->get('user'));
         $this->clientManager->addConnection($conn);
     }
 

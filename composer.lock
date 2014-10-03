@@ -257,12 +257,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/bootstrap.git",
-                "reference": "9c6cfef04cb74587cd610f7dca8c4352d77bfc32"
+                "reference": "09948b04f780173eb0b9ec522d53554f3f408055"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/bootstrap/zipball/9c6cfef04cb74587cd610f7dca8c4352d77bfc32",
-                "reference": "9c6cfef04cb74587cd610f7dca8c4352d77bfc32",
+                "url": "https://api.github.com/repos/components/bootstrap/zipball/09948b04f780173eb0b9ec522d53554f3f408055",
+                "reference": "09948b04f780173eb0b9ec522d53554f3f408055",
                 "shasum": ""
             },
             "require": {
@@ -306,7 +306,7 @@
                 "bootstrap",
                 "css"
             ],
-            "time": "2014-07-02 12:39:50"
+            "time": "2014-09-03 07:11:25"
         },
         {
             "name": "components/font-awesome",
@@ -1617,12 +1617,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "96e4542c751e074ac018ff9e8915a444f16bd92f"
+                "reference": "c6ee27dc39ca854c549cf2f9707d766f871a2a32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/96e4542c751e074ac018ff9e8915a444f16bd92f",
-                "reference": "96e4542c751e074ac018ff9e8915a444f16bd92f",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/c6ee27dc39ca854c549cf2f9707d766f871a2a32",
+                "reference": "c6ee27dc39ca854c549cf2f9707d766f871a2a32",
                 "shasum": ""
             },
             "require": {
@@ -1676,7 +1676,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-09-29 09:47:47"
+            "time": "2014-10-03 20:44:58"
         },
         {
             "name": "guzzle/common",
@@ -4112,9 +4112,7 @@
             "time": "2014-09-22 14:56:14"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "knplabs/knp-menu": 20,
@@ -4134,7 +4132,5 @@
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

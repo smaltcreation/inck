@@ -26,6 +26,8 @@ parameters:
     upload.article_image.uri_prefix:            /article/image
     upload.article_image.upload_destination:    %kernel.root_dir%/../web/article/image
 
+    session_handler: session.handler.memcache
+
     inck_ratchet.server_host: inck.dev
     inck_ratchet.server_port: 8080
     inck_ratchet.server_name: main

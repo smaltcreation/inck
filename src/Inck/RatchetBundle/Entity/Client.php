@@ -12,20 +12,13 @@ class Client
      */
     private $connection;
 
-    /**
-     * @var UserInterface
-     */
-    private $user;
-
 
     /**
      * @param ConnectionInterface $connection
-     * @param UserInterface $user
      */
-    public function __construct(ConnectionInterface $connection, UserInterface $user = null)
+    public function __construct(ConnectionInterface $connection)
     {
-        $this->connection   = $connection;
-        $this->user         = $user;
+        $this->connection = $connection;
     }
 
     /**
@@ -37,13 +30,11 @@ class Client
     }
 
     /**
-     * @param ConnectionInterface $connection
-     * @return Client
+     * @return int
      */
-    public function setConnection($connection)
+    public function getId()
     {
-        $this->connection = $connection;
-        return $this;
+        return $this->connection->resourceId;
     }
 
     /**
@@ -51,16 +42,6 @@ class Client
      */
     public function getUser()
     {
-        return $this->user;
-    }
-
-    /**
-     * @param UserInterface $user
-     * @return Client
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-        return $this;
+        return $this->connection->Session->get('user');
     }
 }

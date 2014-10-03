@@ -4,6 +4,7 @@ namespace Inck\RatchetBundle\Command;
 
 use Ratchet\App;
 use Ratchet\Session\SessionProvider;
+use SessionHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,13 +26,18 @@ class StartServerCommand extends ContainerAwareCommand
 
         $output->writeln(sprintf('Starting Ratchet server on port %d...', $port));
 
-        $session = new SessionProvider(
+        /** @var SessionHandlerInterface $sessionHandler */
+        $sessionHandler = $this->getContainer()->get(
+            $this->getContainer()->getParameter('session_handler')
+        );
+
+        $sessionProvider = new SessionProvider(
             $this->getContainer()->get('inck_ratchet.server.server_service'),
-            $this->getContainer()->get('session.handler.memcache')
+            $sessionHandler
         );
 
         $server = new App($host, $port, $host);
-        $server->route('/'.$name, $session);
+        $server->route('/'.$name, $sessionProvider);
 
         $output->writeln('Server started !');
         $server->run();
