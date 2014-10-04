@@ -16,7 +16,7 @@
         {% endif %}
     </a>
     <div class="caption">
-        <span class="pull-right">{{ render(controller('InckArticleBundle:Article:buttonWatchLater', { 'article': article })) }}</span>
+        <p class="text-right"><span>{{ render(controller('InckArticleBundle:Article:buttonWatchLater', { 'article': article })) }}</span></p>
         <h3 itemprop="name"><a href="{{ articleUrl }}">{{ article.title }}</a></h3>
         <p class="about">
             Rédigé par <a class="btn btn-primary btn-xs" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash; publié le <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
