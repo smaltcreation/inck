@@ -79,7 +79,7 @@
                                     <div class="article-about">
                                         <p class="text-right">
                                             Rédigé par
-                                            <a itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a>
+                                            <a class="btn btn-xs btn-primary" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a>
                                             &ndash; publié le
                                             <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
                                             <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-link btn-xs btn-tooltip btn-circle" data-toggle="tooltip" data-placement="top" target="blank" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>

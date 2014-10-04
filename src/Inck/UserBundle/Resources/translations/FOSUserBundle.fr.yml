@@ -29,7 +29,9 @@ security:
         read: Lire, voter et partager !
         read_discription: Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager. N'hésitez plus et laissez-vous porter par les flots de l'expression libre et culturelle !
         article_list: Liste des articles
+        more: En savoir plus
         forgot_password: Mot de passe oublié
+        social_network: Accèder à toutes les fonctionnalités de Inck via les réseaux sociaux.
 
 # Profile
 profile:

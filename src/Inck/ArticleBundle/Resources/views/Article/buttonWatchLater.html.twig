@@ -7,7 +7,7 @@
         {% endif %}
     </a>
 {% else %}
-    <a href="{{ path('fos_user_security_login') }}" class="btn btn-link btn-xs btn-watch-later btn-tooltip" data-id="{{ id }}" data-toggle="tooltip" data-placement="right" data-container="body" title="{% if not app.user %}Connectez-vous pour vous ajouter cet article à regarder plus tard{% endif %}">
+    <a href="{{ path('fos_user_security_login') }}" class="btn btn-link btn-xs btn-watch-later btn-tooltip" data-id="{{ id }}" data-toggle="tooltip" data-placement="bottom" data-container="body" title="{% if not app.user %}Connectez-vous pour vous ajouter cet article à regarder plus tard{% endif %}">
         <i class="fa fa-clock-o"></i> <span class="btn-text">À regarder plus tard</span>
     </a>
 {% endif %}

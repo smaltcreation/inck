@@ -18,11 +18,6 @@
         <div class="container">
             <h1>{{ 'security.login.connect'|trans }}</h1>
             <p>{{ 'security.login.write'|trans }}</p>
-            <p>
-                <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" role="button"<i class="fa fa-rocket"></i> En savoir plus</a>
-                <a href="./connect/facebook" class="btn btn-facebook btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connexion avec facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                <a href="./connect/google" class="btn btn-google btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connexion avec google"><i class="fa fa-google"></i> Google</a>
-            </p>
         </div>
     </div>
 {% endblock %}
@@ -45,16 +40,25 @@
             </div>
         </div>
     </div>
-    <div class="container login">
+    <div class="container login" itemscope itemtype="http://schema.org/Webpage">
         {% if error %}
             <div class="alert alert-danger" role="alert">{{ error|trans }}</div>
         {% endif %}
 
-        <form action="{{ path("fos_user_security_check") }}" method="post">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-            <div class="row" itemscope itemtype="http://schema.org/Webpage">
-                <div class="col-sm-6">
-                    <div class="well">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p><a href="{{ path('facebook_login') }}" class="btn btn-facebook btn-tooltip btn-block" data-toggle="tooltip" data-placement="top" data-container="body" title="Connexion avec facebook"><i class="fa fa-facebook"></i> Facebook</a></p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p><a href="{{ path('google_login') }}" class="btn btn-google btn-tooltip btn-block" data-toggle="tooltip" data-placement="top" data-container="body" title="Connexion avec google"><i class="fa fa-google"></i> Google</a></p>
+                        </div>
+                    </div>
+                    <p><em>{{ 'security.login.social_network'|trans }}</em></p>
+                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <label for="username">{{ 'security.login.username'|trans }}</label>
@@ -82,18 +86,21 @@
                                 <a href="{{ path('fos_user_registration_register') }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> {{ 'layout.register'|trans }}</a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-sm-5 col-sm-offset-1">
-                    {% image '@InckUserBundle/Resources/public/images/inck-logo.png' %}
-                        <img itemprop="image" class="img-circle img-responsive logo" src="{{ asset_url }}" alt="Logo de Inck">
-                    {% endimage %}
-
-                    <h3>{{ 'security.login.read'|trans }}</h3>
-                    <p itemprop="description" class="description">{{ 'security.login.read_discription'|trans }}</p>
-                    <p><a itemprop="url" class="btn btn-default" role="button" href="{{ path('home') }}"><i class="fa fa-home"></i>{{ 'security.login.article_list'|trans }}</a></p>
+                    </form>
                 </div>
             </div>
-        </form>
+            <div class="col-sm-5 col-sm-offset-1">
+                {% image '@InckUserBundle/Resources/public/images/inck-logo.png' %}
+                <img itemprop="image" class="img-circle img-responsive logo" src="{{ asset_url }}" alt="Logo de Inck">
+                {% endimage %}
+
+                <h3>{{ 'security.login.read'|trans }}</h3>
+                <p itemprop="description" class="description">{{ 'security.login.read_discription'|trans }}</p>
+                <p>
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#myModal" role="button"><i class="fa fa-rocket"></i> {{ 'security.login.more'|trans }}</a>
+                    <a itemprop="url" class="btn btn-default" role="button" href="{{ path('home') }}"><i class="fa fa-home"></i> {{ 'security.login.article_list'|trans }}</a>
+                </p>
+            </div>
+        </div>
     </div>
 {% endblock content %}
