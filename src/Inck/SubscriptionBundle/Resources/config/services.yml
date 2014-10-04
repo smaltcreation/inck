@@ -4,3 +4,6 @@ services:
         arguments: [@security.context, @doctrine.orm.entity_manager, %inck_subscription.aliases%]
         tags:
             - { name: twig.extension }
+    inck_subscription.rpc.subscription_manager:
+        class: Inck\SubscriptionBundle\RPC\SubscriptionManager
+        arguments: [@doctrine.orm.entity_manager, %inck_subscription.aliases%]

@@ -32,6 +32,9 @@ parameters:
     inck_ratchet.server_port: 8080
     inck_ratchet.server_name: main
 
+    inck_ratchet.rpc:
+        subscription:   inck_subscription.rpc.subscription_manager
+
     inck_subscription.aliases:
         user_class:     Inck\UserBundle\Entity\UserSubscription
         category_class: Inck\ArticleBundle\Entity\CategorySubscription

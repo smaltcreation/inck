@@ -20,20 +20,20 @@ class Server implements MessageComponentInterface
     private $logger;
 
     /**
-     * @var EventDispatcherInterface $eventDispatcher
+     * @var array $parameters
      */
-    private $eventDispatcher;
+    private $parameters;
 
     /**
      * @param ClientManager $clientManager
      * @param Logger $logger
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param array $parameters
      */
-    public function __construct(ClientManager $clientManager, Logger $logger, EventDispatcherInterface $eventDispatcher)
+    public function __construct(ClientManager $clientManager, Logger $logger, array $parameters)
     {
         $this->clientManager    = $clientManager;
         $this->logger           = $logger;
-        $this->eventDispatcher  = $eventDispatcher;
+        $this->parameters       = $parameters;
     }
 
     /**
@@ -89,5 +89,7 @@ class Server implements MessageComponentInterface
            $msg,
            $from->resourceId
         ));
+
+        $this->logger->debug(print_r($this->parameters, true));
     }
 }
