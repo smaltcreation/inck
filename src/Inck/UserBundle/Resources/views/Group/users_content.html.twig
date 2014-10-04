@@ -1,0 +1,99 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="inck_user_group_users">
+    <div class="add-users">
+        <div class="row">
+            <div class="col-sm-4">
+                <section class="filters">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa fa-filter fa-fw"></i> Ajouter de nouveaux membres</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>Rechercher des utilisateurs en tapant leur nom, prénom ou nom d'utilisateur</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-sm-8">
+                <section class="user-selected">
+                    {% if users is defined and users %}
+                        {% for user in users %}
+                            <div id="user-{{ user.id }}">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div>
+                                            <img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-thumbnail img-responsive" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Informations relatives</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <p>
+                                                        <i class="fa fa-circle fa-fw"></i> {{ user.username }}
+                                                        {% if user.firstname or user.lastname %}
+                                                            <br><i class="fa fa-user  fa-fw"></i>
+                                                            {% if user.firstname %}{{ user.firstname }}{% endif %}
+                                                            {% if user.lastname %}{{ user.lastname }}{% endif %}
+                                                        {% endif %}
+                                                        {% if user.school %}<br><i class="fa fa-graduation-cap fa-fw"></i> {{ user.school }}{% endif %}
+                                                        {% if user.occupation %}<br><i class="fa fa-briefcase fa-fw"></i> {{ user.occupation }}{% endif %}
+                                                        {% if user.birthday %}<br><i class="fa fa-calendar fa-fw"></i> {{ user.birthday|date('d/m/Y') }}{% endif %}
+                                                        {% if user.city %}<br><i class="fa fa-building fa-fw"></i> {{ user.city }}{% endif %}
+                                                        {% if user.country %}<br><i class="fa fa-globe fa-fw"></i> {{ user.country }}{% endif %}
+                                                    </p>
+                                                    <p>
+                                                        {% if user.twitter %}<a class="btn btn-twitter btn-xs" href="{{ user.twitter }}"><i class="fa fa-twitter fa-fw"></i></a>{% endif %}
+                                                        {% if user.facebook %}<a class="btn btn-facebook btn-xs" href="{{ user.facebook }}"><i class="fa fa-facebook fa-fw"></i></a>{% endif %}
+                                                        {% if user.googlePlus %}<a class="btn btn-google btn-xs" href="{{ user.googlePlus }}"><i class="fa fa-google-plus fa-fw"></i></a>{% endif %}
+                                                        {% if user.linkedIn %}<a class="btn btn-linkedin btn-xs" href="{{ user.linkedIn }}"><i class="fa fa-linkedin fa-fw"></i></a>{% endif %}
+                                                    </p>
+                                                    <form role="form">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputEmail1">Rôle de l'utilisateur</label>
+                                                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                                </div>
+                                                                <div class="text-right">
+                                                                    <button type="submit" class="btn btn-success"><i class="fa fa-plus-square"></i> Ajouter cet utilisateur</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="all-users">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><i class="fa fa-users fa-fw"></i> Tous les utilisateurs du groupe</h4>
+                    </div>
+                    <div class="panel-body">
+                        {% if members is defined and members %}
+                            {% for member in members %}
+
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
