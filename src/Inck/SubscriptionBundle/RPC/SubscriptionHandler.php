@@ -4,7 +4,7 @@ namespace Inck\SubscriptionBundle\RPC;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-class SubscriptionManager
+class SubscriptionHandler
 {
     /**
      * @var ObjectManager $em

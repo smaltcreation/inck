@@ -20,20 +20,19 @@ class Server implements MessageComponentInterface
     private $logger;
 
     /**
-     * @var array $parameters
+     * @var array
      */
-    private $parameters;
+    private $rpcHandlers;
 
     /**
      * @param ClientManager $clientManager
      * @param Logger $logger
-     * @param array $parameters
      */
-    public function __construct(ClientManager $clientManager, Logger $logger, array $parameters)
+    public function __construct(ClientManager $clientManager, Logger $logger)
     {
         $this->clientManager    = $clientManager;
         $this->logger           = $logger;
-        $this->parameters       = $parameters;
+        $this->rpcHandlers      = array();
     }
 
     /**
@@ -80,6 +79,7 @@ class Server implements MessageComponentInterface
      * Triggered when a client sends data through the socket
      * @param  \Ratchet\ConnectionInterface $from The socket/connection that sent the message to your application
      * @param  string $msg The message received
+     * @return bool
      * @throws \Exception
      */
     function onMessage(ConnectionInterface $from, $msg)
@@ -90,6 +90,55 @@ class Server implements MessageComponentInterface
            $from->resourceId
         ));
 
-        $this->logger->debug(print_r($this->parameters, true));
+        $msg = json_decode($msg, true);
+
+        if (!isset($msg['method']) || !isset($msg['parameters'])) {
+            $this->logger->error('The received message is invalid');
+            return false;
+        }
+
+        list($alias, $method) = explode('.', $msg['method']);
+
+        if(($handler = $this->getRPCHandler($alias)) === null) {
+            $this->logger->error(sprintf(
+                'Alias "%s" invalid',
+                $alias
+            ));
+
+            return false;
+        }
+
+        if(!method_exists($handler, $method)) {
+            $this->logger->error(sprintf(
+                'Method "%s" invalid',
+                $method
+            ));
+            return false;
+        }
+
+        return $handler->$method($msg['parameters']);
+    }
+
+    /**
+     * @param mixed $rpcHandler
+     * @param string $alias
+     */
+    public function addRPCHandler($rpcHandler, $alias)
+    {
+        $this->logger->debug('handler '.$alias.' added');
+        $this->rpcHandlers[$alias] = $rpcHandler;
+    }
+
+    /**
+     * @param string $alias
+     * @return mixed
+     */
+    public function getRPCHandler($alias)
+    {
+        if (array_key_exists($alias, $this->rpcHandlers)) {
+            return $this->rpcHandlers[$alias];
+        }
+
+        return null;
     }
 }

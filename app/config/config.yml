@@ -221,6 +221,7 @@ hwi_oauth:
           client_secret: "%google_app_secret%"
           scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
 
+# Memcache Configuration
 services:
     session.memcache:
         class: Memcache
@@ -230,3 +231,9 @@ services:
     session.handler.memcache:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcacheSessionHandler
         arguments: [ @session.memcache, { prefix: %session_memcache_prefix%, expiretime: %session_memcache_expire% } ]
+
+# InckRatchetBundle Configuration
+inck_ratchet:
+    server_host: "%inck_ratchet.server_host%"
+    server_port: "%inck_ratchet.server_port%"
+    server_name: "%inck_ratchet.server_name%"
