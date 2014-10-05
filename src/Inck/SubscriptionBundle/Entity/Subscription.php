@@ -61,7 +61,7 @@ abstract class Subscription
      * Set createdAt
      *
      * @param DateTime $createdAt
-     * @return Subscription
+     * @return $this
      */
     public function setCreatedAt($createdAt)
     {
@@ -84,7 +84,7 @@ abstract class Subscription
      * Set subscriber
      *
      * @param UserInterface $subscriber
-     * @return Subscription
+     * @return $this
      */
     public function setSubscriber(UserInterface $subscriber = null)
     {
@@ -105,10 +105,13 @@ abstract class Subscription
 
     /**
      * @param DateTime $readAt
+     * @return $this
      */
     public function setReadAt($readAt)
     {
         $this->readAt = $readAt;
+
+        return $this;
     }
 
     /**

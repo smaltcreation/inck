@@ -84,39 +84,43 @@ class Server implements MessageComponentInterface
      */
     function onMessage(ConnectionInterface $from, $msg)
     {
-        $this->logger->debug(sprintf(
-           'received %s from %d',
-           $msg,
-           $from->resourceId
-        ));
-
-        $msg = json_decode($msg, true);
-
-        if (!isset($msg['method']) || !isset($msg['parameters'])) {
-            $this->logger->error('The received message is invalid');
-            return false;
-        }
-
-        list($alias, $method) = explode('.', $msg['method']);
-
-        if(($handler = $this->getRPCHandler($alias)) === null) {
-            $this->logger->error(sprintf(
-                'Alias "%s" invalid',
-                $alias
+        try {
+            $this->logger->debug(sprintf(
+                'received %s from %d',
+                $msg,
+                $from->resourceId
             ));
 
+            $msg = json_decode($msg, true);
+
+            if (!isset($msg['method']) || !isset($msg['parameters'])) {
+                throw new \Exception('The received message is invalid');
+            }
+
+            list($alias, $method) = explode('.', $msg['method']);
+
+            if (($handler = $this->getRPCHandler($alias)) === null) {
+                throw new \Exception(sprintf(
+                    'Alias "%s" invalid',
+                    $alias
+                ));
+            }
+
+            if (!method_exists($handler, $method)) {
+                throw new \Exception(sprintf(
+                    'Method "%s" invalid',
+                    $method
+                ));
+            }
+
+            return $handler->$method(
+                $this->clientManager->getClientByConnection($from),
+                $msg['parameters']
+            );
+        } catch(\Exception $e) {
+            $this->logger->error($e->getMessage());
             return false;
         }
-
-        if(!method_exists($handler, $method)) {
-            $this->logger->error(sprintf(
-                'Method "%s" invalid',
-                $method
-            ));
-            return false;
-        }
-
-        return $handler->$method($msg['parameters']);
     }
 
     /**
@@ -125,8 +129,12 @@ class Server implements MessageComponentInterface
      */
     public function addRPCHandler($rpcHandler, $alias)
     {
-        $this->logger->debug('handler '.$alias.' added');
         $this->rpcHandlers[$alias] = $rpcHandler;
+
+        $this->logger->debug(sprintf(
+            'handler "%s" added',
+            $alias
+        ));
     }
 
     /**

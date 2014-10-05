@@ -14,6 +14,7 @@ interface SubscriptionInterface
 
     /**
      * @param DateTime $createdAt
+     * @return $this
      */
     public function setCreatedAt($createdAt);
 
@@ -24,6 +25,7 @@ interface SubscriptionInterface
 
     /**
      * @param UserInterface $subscriber
+     * @return $this
      */
     public function setSubscriber(UserInterface $subscriber);
 
@@ -34,6 +36,7 @@ interface SubscriptionInterface
 
     /**
      * @param DateTime $readAt
+     * @return $this
      */
     public function setReadAt($readAt);
 
@@ -44,6 +47,7 @@ interface SubscriptionInterface
 
     /**
      * @param mixed $entity
+     * @return $this
      */
     public function setTo($entity);
 

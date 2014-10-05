@@ -32,9 +32,12 @@ class UserSubscription extends Subscription implements SubscriptionInterface
 
     /**
      * @param UserInterface $entity
+     * @return $this
      */
     public function setTo($entity)
     {
         $this->to = $entity;
+
+        return $this;
     }
 }

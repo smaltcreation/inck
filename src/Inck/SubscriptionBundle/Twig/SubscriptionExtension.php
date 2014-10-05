@@ -93,6 +93,8 @@ class SubscriptionExtension extends \Twig_Extension
 
     private function aliasToClass($alias)
     {
-        return $this->parameters[$alias.'_class'];
+        return isset($this->parameters[$alias.'_subscription_class'])
+            ? $this->parameters[$alias.'_subscription_class']
+            : null;
     }
 }

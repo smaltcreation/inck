@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Inck\RatchetBundle\Entity\Client;
 use Monolog\Logger;
 use Ratchet\ConnectionInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ClientManager
 {
@@ -70,5 +71,33 @@ class ClientManager
     private function logTotalConnections()
     {
         $this->logger->info('total connections = '.count($this->clients));
+    }
+
+    /**
+     * @param ConnectionInterface $conn
+     * @return Client|null
+     */
+    public function getClientByConnection(ConnectionInterface $conn)
+    {
+        return isset($this->clients[$conn->resourceId])
+            ? $this->clients[$conn->resourceId]
+            : null;
+    }
+
+    /**
+     * @param UserInterface $user
+     * @return Client|null
+     */
+    public function getClientByUser($user)
+    {
+        /** @var Client $client */
+        foreach($this->clients as $client)
+        {
+            if($client->getUser() === $user) {
+                return $client;
+            }
+        }
+
+        return null;
     }
 }
