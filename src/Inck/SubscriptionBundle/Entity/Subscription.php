@@ -28,13 +28,6 @@ abstract class Subscription
     protected $createdAt;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="readAt", type="datetime", nullable=true)
-     */
-    protected $readAt;
-
-    /**
      * @var UserInterface
      *
      * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
@@ -101,24 +94,5 @@ abstract class Subscription
     public function getSubscriber()
     {
         return $this->subscriber;
-    }
-
-    /**
-     * @param DateTime $readAt
-     * @return $this
-     */
-    public function setReadAt($readAt)
-    {
-        $this->readAt = $readAt;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getReadAt()
-    {
-        return $this->readAt;
     }
 }

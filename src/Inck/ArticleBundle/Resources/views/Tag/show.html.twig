@@ -8,7 +8,6 @@
     {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/article/tag/show.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
-        'bundles/inckarticle/css/Article/score.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -21,7 +20,7 @@
                 <div class="col-md-12">
                     <h1>{{ tag.name }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
                     <p>
-                        {#{{ subscribe_button('inck_notif.tag', tag.id) }}#}
+                        {{ subscribe_button('tag', tag) }}
                     </p>
                 </div>
             </div>
@@ -38,7 +37,6 @@
 
     {% javascripts filter='?uglifyjs2' output='js/compiled/article/tag/show.js'
         'bundles/inckarticle/js/Article/timeline.js'
-        'bundles/inckarticle/js/Article/score.js'
         'bundles/incksubscription/js/Subscription/new.js'
         'bundles/inckarticle/js/Article/watchLater.js'
         'bundles/inckarticle/js/Article/summary.js'

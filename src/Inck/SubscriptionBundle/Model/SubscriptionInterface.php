@@ -35,17 +35,6 @@ interface SubscriptionInterface
     public function getSubscriber();
 
     /**
-     * @param DateTime $readAt
-     * @return $this
-     */
-    public function setReadAt($readAt);
-
-    /**
-     * @return DateTime
-     */
-    public function getReadAt();
-
-    /**
      * @param mixed $entity
      * @return $this
      */
