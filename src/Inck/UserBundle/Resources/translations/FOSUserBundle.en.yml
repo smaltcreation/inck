@@ -25,7 +25,7 @@ security:
         article_list: List articles
         more: More about Inck
         forgot_password: Forgot your password
-        social_network: Login to the functionality of Icnk via social networks..
+        social_network: Login via Inck or social networks
 
 # Profile
 profile:

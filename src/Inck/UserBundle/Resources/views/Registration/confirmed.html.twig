@@ -7,7 +7,7 @@
         'bundles/inckuser/css/Registration/confirmed.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
-        'bundles/inckarticle/css/Article/social.css'
+        'bundles/inckarticle/css/Article/score.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -58,8 +58,8 @@
 {% block javascripts %}
     {{ parent() }}
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/social.js'
-            'bundles/inckarticle/js/Article/social.js'
+        {% javascripts filter='?uglifyjs2' output='js/compiled/user/registration/confirmed.js'
+            'bundles/inckarticle/js/Article/score.js'
         %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}

@@ -31,7 +31,7 @@ security:
         article_list: Liste des articles
         more: En savoir plus
         forgot_password: Mot de passe oublié
-        social_network: Accèder à toutes les fonctionnalités de Inck via les réseaux sociaux.
+        social_network: Me connecter via Inck ou les réseaux sociaux
 
 # Profile
 profile:

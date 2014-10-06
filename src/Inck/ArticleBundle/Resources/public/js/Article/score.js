@@ -11,7 +11,7 @@ $(document).ready(function(){
 
     function saveVote(clickedButton, up){
         var articleId           = getArticleId(clickedButton),
-            group               = clickedButton.closest('.btn-group'),
+            group               = clickedButton.closest('.group-vote'),
             buttons             = group.find('button'),
             otherButton         = buttons.not(clickedButton),
             clickedIconClass    = getIconClass(clickedButton),
@@ -85,12 +85,15 @@ $(document).ready(function(){
     }
 
     function updateScore(clickedButton, up, oldVote){
-        var score           = clickedButton.closest('.social').find('.score:first'),
+        var score           = clickedButton.closest('.article').find('.score:first'),
+            votes           = clickedButton.closest('.article').find('.votes:first'),
             progress        = score.find('.progress:first'),
             noProgress      = score.find('.no-progress:first'),
             scoreTotal      = parseInt(progress.attr('data-score-total')),
             progressUp      = progress.find('.score-up'),
+            btnUp           = votes.find('.vote-up'),
             scoreUp         = parseInt(progressUp.attr('data-score-up')),
+            btnDown           = votes.find('.vote-down'),
             progressDown    = progress.find('.score-down'),
             scoreDown       = parseInt(progressDown.attr('data-score-down')),
             value           = (clickedButton.hasClass('voted')) ? 1 : -1;
@@ -109,18 +112,17 @@ $(document).ready(function(){
         else scoreDown += value;
 
         if(scoreTotal == 0){
-            progress.addClass('hidden');
-            noProgress.removeClass('hidden').show('slow');
+            progressUp.css('width', "0%");
         } else {
             progressUp.css('width', parseInt(scoreUp / scoreTotal * 100) + "%");
             progressDown.css('width', parseInt(scoreDown / scoreTotal * 100) + "%");
 
-            progressUp.find('span:first').text(scoreUp);
-            progressDown.find('span:first').text(scoreDown);
-
             noProgress.addClass('hidden');
             progress.removeClass('hidden').show('slow');
         }
+
+        btnUp.find('span:first').text(scoreUp);
+        btnDown.find('span:first').text(scoreDown);
 
         progress.attr('data-score-total', scoreTotal);
         progressUp.attr('data-score-up', scoreUp);

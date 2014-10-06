@@ -200,7 +200,7 @@ class ArticleController extends Controller
      * @param Article $article
      * @return array
      */
-    public function socialAction(Article $article)
+    public function scoreAction(Article $article)
     {
         $em = $this->getDoctrine()->getManager();
 

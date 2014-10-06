@@ -24,13 +24,13 @@ $(document).ready(function(){
     }
 
     // Affix
-    var social = $('#article-social');
+    var score = $('#article-score');
     setAffix();
 
     function setAffix(){
         var offset = null;
 
-        social
+        score
             .affix({
                 offset: {
                     top: function(){
@@ -43,10 +43,10 @@ $(document).ready(function(){
             })
             .on('affix.bs.affix', function(){
                 if(offset === null){
-                    offset = social.offset().left;
+                    offset = score.offset().left;
                 }
             }).on('affixed.bs.affix affixed-top.bs.affix affixed-bottom.bs.affix', function(){
-                social.offset({
+                score.offset({
                     left: offset
                 });
             })
@@ -56,7 +56,7 @@ $(document).ready(function(){
     // Resize
     function windowResized(){
         $(window).off('.affix');
-        social
+        score
             .removeData('bs.affix')
             .removeClass('affix affix-top affix-bottom')
             .removeAttr('style');

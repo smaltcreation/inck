@@ -1,0 +1,16 @@
+article .votes .btn-vote{
+    color: #888;
+}
+
+article .votes button.voted{
+    color: #57a3e8;
+}
+
+article .score .progress {
+    height: 8px;
+    transition: width 1s linear;
+    margin-bottom: 5px;
+    border-radius: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}

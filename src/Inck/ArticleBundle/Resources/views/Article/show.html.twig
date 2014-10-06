@@ -9,7 +9,7 @@
     {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/article/article/show.css'
         'bundles/inckarticle/css/Article/show.css'
         'bundles/inckarticle/css/Article/summary.css'
-        'bundles/inckarticle/css/Article/social.css'
+        'bundles/inckarticle/css/Article/score.css'
         'bundles/inckuser/css/Profile/card.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
@@ -83,12 +83,11 @@
                                             &ndash; publié le
                                             <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
                                             <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-link btn-xs btn-tooltip btn-circle" data-toggle="tooltip" data-placement="top" target="blank" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
-                                            <br>
-                                            {{ render(controller('InckArticleBundle:Article:buttonWatchLater', { 'article': article })) }}
                                         </p>
                                     </div>
                                 </div>
                             </div>
+                            {{ render(controller('InckArticleBundle:Article:score', { article: article })) }}
                         </div>
                         <div class="article-content">
                             <section itemprop="articleBody text">
@@ -127,10 +126,8 @@
         <div id="slidebox">
             <div class="panel panel-default">
                 <a class="close-slidebox"><i class="fa fa-times"></i></a>
-                <div class="panel-heading">
-                    <h4>Venez nous suivre</h4>
-                </div>
-                <div class="panel-body">
+                <div class="panel-body text-center">
+                    <h4>Venez nous suivre<br><small>sur les réseaux sociaux</small></h4>
                     <a href="#" class="btn btn-facebook btn-sm"><i class="fa fa-facebook fa-fw"></i> Facebook</a>
                     <a href="#" class="btn btn-twitter btn-sm"><i class="fa fa-twitter fa-fw"></i> Twitter</a>
                     <a href="#" class="btn btn-google btn-sm"><i class="fa fa-google-plus fa-fw"></i> Google+</a>
@@ -146,7 +143,7 @@
 
     {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/show.js'
         'bundles/inckarticle/js/Article/show.js'
-        'bundles/inckarticle/js/Article/social.js'
+        'bundles/inckarticle/js/Article/score.js'
         'bundles/incksubscription/js/Subscription/new.js'
         'bundles/inckarticle/js/Article/disqus.js'
         'bundles/inckarticle/js/Article/affix.js'

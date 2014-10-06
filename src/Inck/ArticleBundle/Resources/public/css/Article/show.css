@@ -1,3 +1,7 @@
+article .callout {
+    margin-bottom: 0;
+}
+
 article .category, article .tag {
     margin-right: 3px;
     margin-bottom: 3px;

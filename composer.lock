@@ -257,12 +257,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/bootstrap.git",
-                "reference": "09948b04f780173eb0b9ec522d53554f3f408055"
+                "reference": "9c6cfef04cb74587cd610f7dca8c4352d77bfc32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/bootstrap/zipball/09948b04f780173eb0b9ec522d53554f3f408055",
-                "reference": "09948b04f780173eb0b9ec522d53554f3f408055",
+                "url": "https://api.github.com/repos/components/bootstrap/zipball/9c6cfef04cb74587cd610f7dca8c4352d77bfc32",
+                "reference": "9c6cfef04cb74587cd610f7dca8c4352d77bfc32",
                 "shasum": ""
             },
             "require": {
@@ -306,7 +306,7 @@
                 "bootstrap",
                 "css"
             ],
-            "time": "2014-09-03 07:11:25"
+            "time": "2014-07-02 12:39:50"
         },
         {
             "name": "components/font-awesome",
@@ -1126,16 +1126,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.4.5",
+            "version": "v2.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "c0d3cdbdfbf873871167050ab077e49b1ad02ab0"
+                "reference": "bebacf79d8d4dae9168f0f9bc6811e6c2cb6a4d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/c0d3cdbdfbf873871167050ab077e49b1ad02ab0",
-                "reference": "c0d3cdbdfbf873871167050ab077e49b1ad02ab0",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/bebacf79d8d4dae9168f0f9bc6811e6c2cb6a4d9",
+                "reference": "bebacf79d8d4dae9168f0f9bc6811e6c2cb6a4d9",
                 "shasum": ""
             },
             "require": {
@@ -1195,7 +1195,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-09-22 21:58:51"
+            "time": "2014-10-06 13:22:50"
         },
         {
             "name": "egeloen/ckeditor-bundle",
@@ -2496,20 +2496,26 @@
         },
         {
             "name": "knplabs/knp-components",
-            "version": "1.2.5",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/knp-components.git",
-                "reference": "8803fdaa18bd24bd158143e3d9099f4b243a31dd"
+                "reference": "756c44523db9cf125381cba2cb08160fd184fb24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/8803fdaa18bd24bd158143e3d9099f4b243a31dd",
-                "reference": "8803fdaa18bd24bd158143e3d9099f4b243a31dd",
+                "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/756c44523db9cf125381cba2cb08160fd184fb24",
+                "reference": "756c44523db9cf125381cba2cb08160fd184fb24",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "doctrine/mongodb-odm": "~1.0@beta",
+                "doctrine/orm": "~2.4",
+                "phpunit/phpunit": "~4.2",
+                "symfony/event-dispatcher": "~2.5"
             },
             "suggest": {
                 "doctrine/common": "to allow usage pagination with Doctrine ArrayCollection",
@@ -2527,7 +2533,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Knp\\Component": "src/"
+                    "Knp\\Component": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2553,7 +2559,7 @@
                 "pager",
                 "paginator"
             ],
-            "time": "2014-01-09 16:23:31"
+            "time": "2014-10-06 09:25:27"
         },
         {
             "name": "knplabs/knp-menu",
