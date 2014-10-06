@@ -79,7 +79,6 @@ class Server implements MessageComponentInterface
      * Triggered when a client sends data through the socket
      * @param  \Ratchet\ConnectionInterface $from The socket/connection that sent the message to your application
      * @param  string $msg The message received
-     * @return bool
      * @throws \Exception
      */
     function onMessage(ConnectionInterface $from, $msg)
@@ -113,13 +112,12 @@ class Server implements MessageComponentInterface
                 ));
             }
 
-            return $handler->$method(
+            $handler->$method(
                 $this->clientManager->getClientByConnection($from),
                 $msg['parameters']
             );
         } catch(\Exception $e) {
             $this->logger->error($e->getMessage());
-            return false;
         }
     }
 

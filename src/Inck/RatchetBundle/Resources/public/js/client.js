@@ -5,14 +5,13 @@ window.server.call = function(method, parameters){
         parameters = null;
     }
 
-    message = JSON.stringify({
+    window.server.connection.send(JSON.stringify({
         method: method,
         parameters: parameters
-    });
-    window.server.connection.send(message);
+    }));
 };
 
 window.server.connection.onmessage = function(message){
     var data = JSON.parse(message.data);
-    $(document).trigger('inck.' + data.method, data.options);
+    $(document).trigger(data.method, data.parameters);
 };

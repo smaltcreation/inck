@@ -3,7 +3,7 @@ $(document).ready(function(){
         subscribe($(this));
     });
 
-    $(document).bind('inck.subscription.saved', function(e, data){
+    $(document).bind('subscription.saved', function(e, data){
         subscriptionSaved(data.id);
     });
 });

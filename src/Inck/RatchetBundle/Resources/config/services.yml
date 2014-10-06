@@ -1,7 +1,7 @@
 services:
     inck_ratchet.server.client_manager_service:
         class: Inck\RatchetBundle\Server\ClientManager
-        arguments: [@doctrine.orm.entity_manager, @logger]
+        arguments: [@logger]
         tags:
             - { name: monolog.logger, channel: inck_ratchet }
     inck_ratchet.server.server_service:

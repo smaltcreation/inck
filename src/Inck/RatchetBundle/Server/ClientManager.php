@@ -2,7 +2,6 @@
 
 namespace Inck\RatchetBundle\Server;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Inck\RatchetBundle\Entity\Client;
 use Monolog\Logger;
@@ -11,11 +10,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ClientManager
 {
-    /**
-     * @var ObjectManager $em
-     */
-    private $em;
-
     /**
      * @var Logger $logger
      */
@@ -27,12 +21,10 @@ class ClientManager
     private $clients;
 
     /**
-     * @param ObjectManager $em
      * @param Logger $logger
      */
-    public function __construct(ObjectManager $em, Logger $logger)
+    public function __construct(Logger $logger)
     {
-        $this->em       = $em;
         $this->logger   = $logger;
         $this->clients  = new ArrayCollection();
     }
