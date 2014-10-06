@@ -9,7 +9,6 @@
         'bundles/inckuser/css/Profile/preview.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
-        'bundles/inckarticle/css/Article/score.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -21,7 +20,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>{{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h1>
-                    {{ subscribe_button('user', user) }}
+                    {% if user != app.user %}
+                        {{ subscribe_button('user', user) }}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -46,7 +47,6 @@
     {{ parent() }}
     {% javascripts filter='?uglifyjs2' output='js/compiled/user/profile/preview.js'
         'bundles/inckarticle/js/Article/timeline.js'
-        'bundles/inckarticle/js/Article/score.js'
         'bundles/incksubscription/js/Subscription/new.js'
         'bundles/inckarticle/js/Article/watchLater.js'
         'bundles/inckarticle/js/Article/summary.js'

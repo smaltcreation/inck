@@ -1,9 +1,8 @@
 <?php
 
-namespace Inck\UserBundle\Entity;
+namespace Inck\SubscriptionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Inck\SubscriptionBundle\Entity\Subscription;
 use Inck\SubscriptionBundle\Model\SubscriptionInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 

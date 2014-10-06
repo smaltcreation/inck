@@ -44,4 +44,21 @@ class Client
     {
         return $this->connection->Session->get('user');
     }
+
+    /**
+     * @param Message $message
+     */
+    public function send(Message $message)
+    {
+        $this->connection->send($message);
+    }
+
+    /**
+     * @param string $method
+     * @param array $parameters
+     */
+    public function sendMessage($method, $parameters = array())
+    {
+        $this->send(new Message($method, $parameters));
+    }
 }

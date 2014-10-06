@@ -33,11 +33,11 @@ parameters:
     inck_ratchet.server_name: main
 
     inck_subscription.aliases:
-        user_subscription_class:      Inck\UserBundle\Entity\UserSubscription
+        user_subscription_class:      Inck\SubscriptionBundle\Entity\UserSubscription
+        category_subscription_class:  Inck\SubscriptionBundle\Entity\CategorySubscription
+        tag_subscription_class:       Inck\SubscriptionBundle\Entity\TagSubscription
         user_class:                   Inck\UserBundle\Entity\User
-        category_subscription_class:  Inck\ArticleBundle\Entity\CategorySubscription
         category_class:               Inck\ArticleBundle\Entity\Category
-        tag_subscription_class:       Inck\ArticleBundle\Entity\TagSubscription
         tag_class:                    Inck\ArticleBundle\Entity\Tag
 
     session_memcache_host: 127.0.0.1

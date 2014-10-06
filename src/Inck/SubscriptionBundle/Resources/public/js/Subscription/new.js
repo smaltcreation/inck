@@ -3,9 +3,15 @@ $(document).ready(function(){
         subscribe($(this));
     });
 
-    $(document).bind('subscription.saved', function(e, data){
-        subscriptionSaved(data.id);
-    });
+    $(document)
+        .bind('subscription.saved', function(e, data){
+            subscriptionSaved(data.id);
+        })
+        .bind('subscription.error', function(e, data){
+            subscriptionError(data.id);
+            alert(data.message);
+        })
+    ;
 });
 
 function subscribe(button){
@@ -62,7 +68,7 @@ function subscriptionSaved(id){
     }
 }
 
-function subscriptionError(button){
-    resetButtonState(button, button);
-    $('#subscription-error').remove();
+function subscriptionError(id){
+    var button = $('#' + id);
+    resetButtonState(button);
 }

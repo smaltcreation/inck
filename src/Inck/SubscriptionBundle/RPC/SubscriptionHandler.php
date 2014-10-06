@@ -109,20 +109,15 @@ class SubscriptionHandler
 
             $this->em->flush();
 
-            $client->getConnection()->send(json_encode(array(
-                'method'        => 'subscription.saved',
-                'parameters'    => array(
-                    'id' => $parameters['id'],
-                ),
-            )));
+            $client->sendMessage('subscription.saved', [
+                'id' => $parameters['id'],
+            ]);
         } catch(\Exception $e) {
-            $client->getConnection()->send(json_encode(array(
-                'method'        => 'subscription.error',
-                'parameters'    => array(
-                    'code'          => $e->getCode(),
-                    'message'       => $e->getMessage(),
-                ),
-            )));
+            $client->sendMessage('subscription.error', [
+                'id'        => $parameters['id'],
+                'code'      => $e->getCode(),
+                'message'   => $e->getMessage(),
+            ]);
         }
     }
 
