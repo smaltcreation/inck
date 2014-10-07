@@ -1,11 +1,11 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% block title %}Nouveau mot de passe{% endblock %}
+{% block title %}{{ 'security.login.forgot_password'|trans }}{% endblock %}
 
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Nouveau mot de passe</h1>
-            <p><a href="{{ path('fos_user_security_login') }}" class="btn btn-danger"><i class="fa fa-times"></i> Annuler</a></p>
+            <h1>{{ 'resetting.password.new_password'|trans }}</h1>
+            <p><a href="{{ path('fos_user_security_login') }}" class="btn btn-danger"><i class="fa fa-times"></i> {{ 'resetting.cancel'|trans }}</a></p>
         </div>
     </div>
 {% endblock %}

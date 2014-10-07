@@ -14,7 +14,7 @@
 
     </style>
 </head>
-{% block subject %}Inck - Réinitialisation du mot de passe{% endblock %}
+{% block subject %}Inck - {{ 'resetting.password.password_resetting'|trans }}{% endblock %}
 
 {% block body_html %}
     <body yahoo>
@@ -46,7 +46,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="h1" style="color: #ffffff; font-size: 24px; line-height: 38px; text-align: center;">
-                                                    Réinitialisation du mot de passe
+                                                    {{ 'resetting.password.password_resetting'|trans }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -65,12 +65,12 @@
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td class="h2" style="padding-top: 30px; color: #153643; font-family: Arial, sans-serif; font-size: 24px;">
-                                        Bonjour {{ user.username }}!<br><br>
+                                        {{ 'greatings.hello'|trans }} {{ user.username }}!<br><br>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="bodycopy" style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                                        Vous pouvez réinitialiser votre mot de passe en cliquant sur le lien suivant:
+                                        {{ 'resetting.password.password_link'|trans }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -88,13 +88,13 @@
                     </tr>
                     <tr>
                         <td class="innerpadding bodycopy"  style="padding-top: 20px; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                            Si vous n'avez pas demandé à changer de mot de passe ou que vous n'êtes pas le propriétaire du compte, merci de ne pas tenir compte de cet e-mail.
+                            {{ 'resetting.password.not_asked'|trans }}
                         </td>
                     </tr>
                     <tr>
                         <td class="innerpadding bodycopy"  style="padding-top: 20px; padding-bottom: 40px; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;border-bottom: solid #556f76 1px;">
-                            Nous vous souhaitons une excellente journée.<br>
-                            L'équipe de Inck.
+                            {{ 'greating.great_day'|trans }}<br>
+                            {{ 'greating.team'|trans }}
                         </td>
                     </tr>
 
@@ -110,7 +110,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding-bottom: 30px; padding-top:2px; color: #153643; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px;">
-                                                    Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et le divertissement, vous êtes le moteur contribuant à la diversité des pensées et au partage de la connaissance. Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !
+                                                    {{ 'recap.in_email'|trans }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -126,7 +126,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding-bottom: 30px; padding-top: 2px; color: #153643; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px;">
-                                                    Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager.
+                                                    {{ 'recap.inck_recap'|trans }}
                                             </tr>
                                         </table>
                                     </td>
@@ -140,7 +140,7 @@
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td align="center" class="footercopy"  style="color: #ffffff; font-family: sans-serif; font-size: 14px; padding-top: 10px;">
-                                        &reg; Inck - Une production Smalt Création<br/>
+                                        &reg; Inck - {{ 'product.inck'|trans }}<br/>
                                     </td>
                                 </tr>
                                 <tr>

@@ -88,6 +88,15 @@ resetting:
 
             Cordialement,
             L'équipe.
+    password:
+            reset_password: Réinitialiser mon mot de passe
+            password_resetting: Réinitialisation du mot de passe
+            verify_email: Vérification de l'adresse email
+            password_link: "Vous pouvez réinitialiser votre mot de passe en cliquant sur le lien suivant:"
+            not_asked: Si vous n'avez pas demandé à changer de mot de passe ou que vous n'êtes pas le propriétaire du compte, merci de ne pas tenir compte de cet e-mail.
+            new_password: Nouveau mot de passe
+
+    cancel: Annuler
 
 # Global strings
 layout:
@@ -119,3 +128,17 @@ form:
     website: "Site web"
     type: "Type"
     private: "Visibilité"
+
+
+greatings:
+    hello: Bonjour
+    great_day: Nous vous souhaitons une excellente journée.
+    team: L'équipe de Inck.
+
+recap:
+    in_email: Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et le divertissement, vous êtes le moteur contribuant à la diversité des pensées et au partage de la connaissance. Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !
+    inck_recap: Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager.
+
+product:
+    inck: Une production Smalt Création
+

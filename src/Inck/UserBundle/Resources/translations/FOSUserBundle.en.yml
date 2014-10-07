@@ -82,6 +82,15 @@ resetting:
 
             Regards,
             the Team.
+    password:
+        reset_password: Reset my password
+        password_resetting: Reset password
+        verify_email: Email address verification
+        password_link: "You can reset you password by clicking on the following link:"
+        not_asked: If you did not ask to change your email and you are not the owner of this account please ignore this email.
+        new_password: New password.
+
+    cancel: cancel
 
 # Global strings
 layout:
@@ -100,3 +109,28 @@ form:
     password_confirmation: "Verification:"
     new_password: "New password:"
     new_password_confirmation: "Verification:"
+    firstname: "Firstname"
+    lastname: "Last name"
+    school: "School"
+    birthday: "Birthday"
+    address: "Address"
+    zipcode: "Zipcode"
+    city: "City"
+    country: "Country"
+    occupation: "Occupation"
+    biography: "Biography"
+    website: "Website"
+    type: "Type"
+    private: "Visibility"
+
+greatings:
+    hello: hello
+    great_day: Have a great day.
+    team: Inck team.
+
+recap:
+    in_email: Ranging from computer science to poetry through geopolitics and entertainment, you are the engine contributing to the diversity of thought and the sharing of knowledge. Read, train, write, teach, entertain. Here everything is possible.
+    inck_recap: Inck is a site that regroups articles of all categories written by its community. Here you can read vote and share your opinionated content free of all restrictions and concern, read quality text and you will be surprised by what the world can share.
+
+product:
+    inck: a Smalt Creation production
