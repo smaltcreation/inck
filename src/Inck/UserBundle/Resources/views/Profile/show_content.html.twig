@@ -2,17 +2,20 @@
 
 <div class="fos_user_user_show">
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="active"><a href="#profile" role="tab" data-toggle="tab">Profil</a></li>
-        <li><a href="#articles" role="tab" data-toggle="tab">Mes articles</a></li>
-        <li><a href="#watchLater" role="tab" data-toggle="tab">Articles à regarder plus tard</a></li>
-    </ul>
-
+    <div class="tabs">
+        <nav>
+            <ul class="nav" role="tablist">
+                <li class="active"><a href="#profile" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i><span> Profil</span></a></li>
+                <li><a href="#articles" role="tab" data-toggle="tab"><i class="fa fa-fw fa-book"></i><span> Mes articles</span></a></li>
+                <li><a href="#watch-later" role="tab" data-toggle="tab"><i class="fa fa-fw fa-clock-o"></i><span> Articles à regarder plus tard</span></a></li>
+            </ul>
+        </nav>
+    </div>
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="profile">
             <div class="row">
-                <div class="col-sm-3 hidden-xs visible-sm">
+                <div class="col-sm-3 hidden-xs visible-sm visible-md visible-lg">
                     <p><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-thumbnail avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></p>
                     <p class="text-center"><a href="https://fr.gravatar.com/" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><i class="fa fa-file-image-o"></i> Changer mon avatar</a></p>
                 </div>
@@ -73,8 +76,13 @@
 
         <div class="tab-pane" id="articles">
             <div class="row">
+                <div class="col-md-6 text text-center">
+                    <h4>Pourquoi écrire un article ?</h4>
+                    <p>Écrire des articles, c'est contribuer à la diversité des cultures et au partage de l'expression de manière libre et naturelle.<br></p>
+                    <p><a class="btn btn-default" href="{{ path('inck_article_article_new') }}"><i class="fa fa-rocket"></i> Écrire un nouvel article</a></p>
+                </div>
                 {% if articlesAsDraft is defined %}
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="panel panel-warning">
                             <div class="panel-heading">Mes brouillons<span class="badge pull-right">{{ articlesAsDraft|length }}</span></div>
                             {% if articlesAsDraft|length > 0 %}
@@ -83,7 +91,6 @@
                                         <tr>
                                             <th></th>
                                             <th>Titre</th>
-                                            <th>Mis à jour le</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -92,7 +99,6 @@
                                         <tr>
                                             <td><span class="label label-warning btn-tooltip" data-toggle="tooltip" data-placement="left" data-container="body" title="Brouillon"><i class="fa fa-file-text-o"></i></span></td>
                                             <td><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
-                                            <td>{{ article.updatedAt|date('d/m/Y à H:i') }}</td>
                                             <td>
                                                 <div class="pull-right btn-group">
                                                     <a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a>
@@ -113,6 +119,8 @@
                         </div>
                     </div>
                 {% endif %}
+            </div>
+            <div class="row">
                 {% if articlesPosted is defined %}
                     <div class="col-md-6">
                         <div class="panel panel-info">
@@ -181,7 +189,7 @@
                                     {% for article in articlesPublished %}
                                         <tr>
                                             <td><span class="label label-success btn-tooltip" data-toggle="tooltip" data-container="body" data-placement="left" title="Publié"><i class="fa fa-check"></i></span></td>
-                                            <td><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
+                                            <td class="title"><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
                                             <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="right" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
                                         </tr>
@@ -199,23 +207,47 @@
             </div>
         </div>
 
-        <div class="tab-pane" id="watchLater">
+        <div class="tab-pane" id="watch-later">
+            <div class="text-center">
+                <h3>Liste des articles à regarder plus tard</h3>
+                <p>
+                    Ici, vous pouvez gérer les articles sur lesquels vous avez cliquez sur le bouton <span class="btn btn-link"><i class="fa fa-clock-o"></i> à regarder plus tard</span><br>
+                    Si vous voulez retirer un article, il suffit de cliquer sur la <span class="btn btn-default btn-xs"><i class="fa fa-times"></i></span> en haut à droite de l'article.
+                </p>
+            </div>
             <div class="articles">
-                {% for article in user.articlesWatchLater %}
-                    <div class="row">
-                        <div class="col-sm-8">
+                <div class="row">
+                    {% for article in user.articlesWatchLater %}
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-article">
                             <article id="article-{{ article.id }}" class="article">
-                                <a class="btn btn-default btn-circle btn-tooltip btn-unwatch-later pull-right" data-id="{{ article.id }}" data-toggle="tooltip" data-container="body" data-placement="left" title="Retirer de la liste à regarder plus tard"><i class="fa fa-times"></i></a>
+                                <a class="btn btn-default btn-circle btn-tooltip btn-unwatch-later pull-right btn-xs" data-id="{{ article.id }}" data-toggle="tooltip" data-container="body" data-placement="top" title="Retirer de la liste"><i class="fa fa-times"></i></a>
                                 <div class="summary">
-                                    {% include "InckArticleBundle:Article:summary.html.twig" %}
+                                    {% set currentRoute = app.request.attributes.get('_route') %}
+                                    {% if currentRoute == 'inck_article_article_show' %}
+                                        {% set articleUrl = '#content' %}
+                                    {% else %}
+                                        {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
+                                    {% endif %}
+
+                                    <div class="thumbnail">
+                                        <a href="{{ articleUrl }}">
+                                            {% if article.imageName %}
+                                                <img src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
+                                            {% else %}
+                                                {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+                                                <img src="{{ asset_url|apply_filter('article_thumb') }}" alt="Image par défaut"/>
+                                                {% endimage %}
+                                            {% endif %}
+                                        </a>
+                                        <div class="caption">
+                                            <h4><a class="btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ article.title }}" href="{{ articleUrl }}">{{ article.title }}</a></h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </article>
                         </div>
-                        <div class="col-xs-4 col-md-3">
-                            <p>TODO: articles similaires</p>
-                        </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

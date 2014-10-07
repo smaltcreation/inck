@@ -3,7 +3,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/core/default/index.css'
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/core/user/profile/show.css'
+        'bundles/inckuser/css/Profile/show.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
         'bundles/inckarticle/css/Article/score.css'
@@ -15,12 +16,7 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Mon profil</h1>
-            <p>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</p>
-            <p>
-                <a class="btn btn-success" href="{{ path('home') }}"><i class="fa fa-home"></i> Accueil</a>
-                <a class="btn btn-default" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
-            </p>
+            <h1>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</h1>
         </div>
     </div>
 {% endblock %}

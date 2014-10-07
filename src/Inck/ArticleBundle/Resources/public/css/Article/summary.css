@@ -1,8 +1,3 @@
-article .summary .well {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 100px;
-}
-
 article .summary h3 {
     margin-top: 0;
 
@@ -73,10 +68,4 @@ article .summary .text-inline {
         height: 50px;
         width: 50px;
     }
-}
-
-article .btn-unwatch-later {
-    right: 0;
-    position: absolute;
-    margin-top: -5px;
 }

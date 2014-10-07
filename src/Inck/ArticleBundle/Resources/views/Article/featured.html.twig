@@ -16,7 +16,7 @@
             </div>
 
             <div class="description">
-                <h5><a href="{{ articleUrl }}">{{ article.title }}</a></h5>
+                <h5><a class="btn-tooltip" data-toggle="tooltip" data-placement="bottom" data-container="body" title="{{ article.title }}" href="{{ articleUrl }}">{{ article.title|slice(0, 27) }}{% if article.title|length > 27 %}...{% endif %}</a></h5>
                 <p>{{ article.summary|slice(0, 100) }}{% if article.summary|length > 100 %}...{% endif %}</p>
             </div>
         </article>

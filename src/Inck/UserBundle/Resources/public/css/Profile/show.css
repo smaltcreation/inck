@@ -1,0 +1,38 @@
+#articles .text {
+    margin-bottom: 50px;
+}
+
+#watch-later .articles {
+    margin-top: 50px;
+}
+#watch-later .thumbnail {
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: #fafafa;
+}
+
+#watch-later .thumbnail:hover {
+    border-color: #333;
+}
+
+#watch-later article h4 a {
+    color: #404040;
+    text-decoration: none;
+    transition: color ease 0.3s;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+#watch-later article h4 a:hover {
+    color: #57a3e8;
+    outline: 0;
+}
+
+#watch-later article .btn-unwatch-later {
+    position: absolute;
+    right: 15px;
+}

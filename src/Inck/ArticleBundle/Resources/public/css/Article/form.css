@@ -13,20 +13,3 @@
 .single-upload-preview {
     padding-top: 33px !important;
 }
-
-article.new .well {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 100px;
-}
-
-@media screen and (max-width: 992px) {
-    article.new .well .well {
-        padding: 50px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    article.new .well .well {
-        padding: 25px;
-    }
-}
