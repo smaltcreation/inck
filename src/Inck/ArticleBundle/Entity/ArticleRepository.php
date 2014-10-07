@@ -265,7 +265,7 @@ class ArticleRepository extends EntityRepository
             $paginator = new Paginator($qb);
 
             $totalArticles = count($paginator);
-            $totalPages = ceil($totalArticles / self::ARTICLES_PER_PAGE);
+            $totalPages = (int) ceil($totalArticles / self::ARTICLES_PER_PAGE);
 
             $paginator
                 ->getQuery()

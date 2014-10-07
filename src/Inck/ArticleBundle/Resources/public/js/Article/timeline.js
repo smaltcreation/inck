@@ -110,6 +110,7 @@ $(document).ready(function(){
                         tags: tagsInput.val(),
                         authors: authorsInput.val(),
                         order: orderInput.val(),
+                        type: $("#inck_articlebundle_articlefilter_type").val(),
                         search: $("#inck_articlebundle_articlefilter_search").val()
                     }
                 },
@@ -170,9 +171,7 @@ $(document).ready(function(){
         }
     }
 
-    var reset = $("#inck_articlebundle_articlefilter_actions_cancel");
-
-    reset.click(function(e){
+    resetButton.click(function(e){
         e.preventDefault();
 
         form.find(".select2-offscreen").val(null).select2("data", null);
@@ -213,6 +212,7 @@ $(document).ready(function(){
                     tags: tagsInput.val(),
                     authors: authorsInput.val(),
                     order: orderInput.val(),
+                    type: $("#inck_articlebundle_articlefilter_type").val(),
                     search: $("#inck_articlebundle_articlefilter_search").val()
                 }
             },

@@ -49,6 +49,7 @@ class ArticleFilterType extends AbstractType
                 ],
             ])
             ->add('search', 'hidden')
+            ->add('type', 'hidden')
             ->add('actions', 'form_actions', [
                 'buttons' => [
                     'filter'    => [

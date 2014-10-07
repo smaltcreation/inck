@@ -238,7 +238,12 @@ class ArticleController extends Controller
     public function timelineAction($filters)
     {
         $form = $this->createForm(new ArticleFilterType(), array(
-            'search' => isset($filters['search']) ? $filters['search'] : null,
+            'search'    => isset($filters['search'])
+                ? $filters['search']
+                : null,
+            'type'      => isset($filters['type'])
+                ? $filters['type']
+                : null,
         ));
 
         $em = $this->getDoctrine()->getManager();
@@ -318,14 +323,28 @@ class ArticleController extends Controller
         $keys = array_keys($filters);
         foreach($keys as $key)
         {
-            if(!in_array($key, array('categories', 'tags', 'authors', 'order', 'search')))
+            if(!in_array($key, array('categories', 'tags', 'authors', 'order', 'type', 'search')))
             {
                 unset($filters[$key]);
             }
         }
 
-        // Ajout du type
-        $filters['type'] = 'published';
+        // Gestion du type
+        if(!isset($filters['type'])) {
+            $filters['type'] = 'published';
+        }
+
+        else if($this->getUser())
+        {
+            if(!in_array($filters['type'], array('published', 'in_moderation'))) {
+                $filters['type'] = 'published';
+            }
+        }
+
+        else if($filters['type'] !== 'published')
+        {
+            $filters['type'] = 'published';
+        }
 
         // Récupération des articles
         list($articles, $totalArticles, $totalPages) = $em

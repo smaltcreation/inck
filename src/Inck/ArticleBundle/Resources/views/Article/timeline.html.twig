@@ -47,7 +47,7 @@
     {% include 'InckArticleBundle:Article:filter.html.twig' with { 'articles': articles, 'totalArticles': totalArticles, 'totalPages': totalPages } %}
     <div class="row">
         <div class="col-sm-8">
-            {% set hidden = (totalPages == 1) ? 'hidden' : '' %}
+            {% set hidden = (totalPages <= 1) ? 'hidden' : '' %}
             <button id="timeline-next-page" class="btn btn-inverse btn-lg btn-block {{ hidden }}">
                 <i class="fa fa-plus"></i>
                 Afficher plus d'articles
