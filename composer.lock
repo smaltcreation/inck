@@ -257,12 +257,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/bootstrap.git",
-                "reference": "9c6cfef04cb74587cd610f7dca8c4352d77bfc32"
+                "reference": "09948b04f780173eb0b9ec522d53554f3f408055"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/bootstrap/zipball/9c6cfef04cb74587cd610f7dca8c4352d77bfc32",
-                "reference": "9c6cfef04cb74587cd610f7dca8c4352d77bfc32",
+                "url": "https://api.github.com/repos/components/bootstrap/zipball/09948b04f780173eb0b9ec522d53554f3f408055",
+                "reference": "09948b04f780173eb0b9ec522d53554f3f408055",
                 "shasum": ""
             },
             "require": {
@@ -306,7 +306,7 @@
                 "bootstrap",
                 "css"
             ],
-            "time": "2014-07-02 12:39:50"
+            "time": "2014-09-03 07:11:25"
         },
         {
             "name": "components/font-awesome",
@@ -3964,12 +3964,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "85e4c62ea848e0b61b5c9fdf939ffb2b348626df"
+                "reference": "9be7888b3b482b5cd9942732b9f5c6731414c2ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/85e4c62ea848e0b61b5c9fdf939ffb2b348626df",
-                "reference": "85e4c62ea848e0b61b5c9fdf939ffb2b348626df",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/9be7888b3b482b5cd9942732b9f5c6731414c2ef",
+                "reference": "9be7888b3b482b5cd9942732b9f5c6731414c2ef",
                 "shasum": ""
             },
             "require": {
@@ -4025,7 +4025,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2014-09-15 11:52:56"
+            "time": "2014-10-08 08:39:02"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

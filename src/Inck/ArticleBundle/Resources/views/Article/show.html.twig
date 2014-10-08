@@ -16,6 +16,13 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block navbar %}
+    <div class="article-progress">
+        <span id="article-progress-bar"></span>
+    </div>
+    {{ parent() }}
+{% endblock %}
+
 {% block content %}
     <!-- Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
