@@ -1,0 +1,4 @@
+services:
+#    inck_notification.example:
+#        class: Inck\NotificationBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

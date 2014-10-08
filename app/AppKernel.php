@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new Inck\BidBundle\InckBidBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Inck\StatBundle\InckStatBundle(),
+            new Inck\NotificationBundle\InckNotificationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

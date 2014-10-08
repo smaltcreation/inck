@@ -179,26 +179,6 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="subscriptions")
-     */
-    private $subscribers;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="subscribers")
-     * @ORM\JoinTable(
-     *      name="subscriptions",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="subscription_user_id", referencedColumnName="id")}
-     * )
-     */
-    private $subscriptions;
-
-
-    /**
-     * @var ArrayCollection
-     *
      * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Article")
      * @ORM\JoinTable(
      *      name="user_articleWatchLater",
@@ -822,35 +802,5 @@ class User extends BaseUser
     public function getGoogleAccessToken()
     {
         return $this->google_access_token;
-    }
-
-    /**
-     * Add groups
-     *
-     * @param \Inck\UserBundle\Entity\Group $groups
-     * @return User
-     */
-
-    /**
-     * Add subscribers
-     *
-     * @param \Inck\UserBundle\Entity\User $subscribers
-     * @return User
-     */
-    public function addSubscriber(\Inck\UserBundle\Entity\User $subscribers)
-    {
-        $this->subscribers[] = $subscribers;
-
-        return $this;
-    }
-
-    /**
-     * Remove subscribers
-     *
-     * @param \Inck\UserBundle\Entity\User $subscribers
-     */
-    public function removeSubscriber(\Inck\UserBundle\Entity\User $subscribers)
-    {
-        $this->subscribers->removeElement($subscribers);
     }
 }
