@@ -1,7 +1,7 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block title %}M'enregistrer à Inck{% endblock %}
+{% block title %}{{ 'inck.signup'|trans }}{% endblock %}
 {% block description %}<meta name="description" content="Enregistrez-vous et profitez de toutes les fonctionalités de Inck. Écrire un article, modérer, voter, c'est contribuer à l'expression libre et culturelle.">{% endblock %}
 
 {% block stylesheets %}
@@ -16,9 +16,9 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>M'enregistrer sur Inck</h1>
+            <h1>{{ 'inck.signup'|trans }}</h1>
             <p itemscope itemtype="http://schema.org/Webpage">
-                <a href="{{ path('home') }}" class="btn btn-default" itemprop="url"><i class="fa fa-home"></i> Retourner à l'accueil</a>
+                <a href="{{ path('home') }}" class="btn btn-default" itemprop="url"><i class="fa fa-home"></i> {{ 'inck.home'|trans }}</a>
                 <a href="{{ path('facebook_login') }}" class="btn btn-facebook btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connexion avec facebook"><i class="fa fa-facebook"></i> Facebook</a>
                 <a href="{{ path('google_login') }}" class="btn btn-google btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connexion avec google"><i class="fa fa-google"></i> Google</a>
             </p>

@@ -1,12 +1,12 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% block title %}Vérification de l'adresse email{% endblock %}
+{% block title %}{{ 'resetting.password.verify_email'|trans }}{% endblock %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Vérification de l'adresse email</h1>
+            <h1>{{ 'resetting.password.verify_email'|trans }}</h1>
         </div>
     </div>
 {% endblock %}

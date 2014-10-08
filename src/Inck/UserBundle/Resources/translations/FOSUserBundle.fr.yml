@@ -67,6 +67,35 @@ registration:
             Cordialement,
             L'équipe.
 
+    register:
+        register: M'enregistrer
+        closed: Inscriptions fermées au public
+        return: Retourner au login
+        inscription_closed: Nous sommes désolé, les inscriptions sont fermées au public. Ceci est un choix de l'administrateur du site.<br> Si vous voulez un compte, merci de contacter l'administrateur.
+        go_to: Accéder à mon profil
+        go_to_recap: Vous y trouverez toutes les informations vous concernant ainsi que vos statistiques. Vous pourrez y consulter vos articles, vos brouillons et votre fil d'actualité.
+        my_profile: Mon profil
+        want_to_share: Envie de partager vos idées ?
+        want_to_share_recap: Lorsque vous partagez sur Inck en écrivant un article, vous contribuez au développement de l'expression libre et culturelle. Lire, s'instruire, partager, ici tout est possible !
+        write_article: Écrire un article
+        press: Presse, entreprise?
+        press_recap: Avec Inck, vous pouvez publier et acquérir les droits des articles écrits par les membres de la communauté sur votre site ou journal via un système de vente aux enchères.
+        my_buisness: Mon entreprise
+        last_article: Dernier article publié
+        email_verification: Vérification de l'adresse e-mail
+        confirmed: Confirmation d'activation
+
+    content:
+        complete: Compléter mon compte
+        complete_recap: Votre profil nous intéresse ! En effet, nous aimons connaître nos utilisateurs afin de cibler au mieux ce qu'il peut leur plaire. De plus, lorsqu'un article est posté, il est toujours agréable d'en connaître un petit peu sur l'auteur. Que vous soyez un grand poète, un développeur hors-pair ou un philosophe amateur, nous sommes tous unique, alors n'hésitez plus !
+        add_coordinates: Ajouter mes coordonnées
+        coordinates: Coordonnées
+        coordinates_recap: Vos coordonnées nous sont obligatoire si vous voulez être rémunéré par vos articles.En effet, tous nos auteurs peuvent se voir récompensés pour leur talent en étant publiés sur de grands sites de presse rémunérant à prix honnêtes des articles de qualités.Ceux-ci sont les votres, l'expression libre et culturelle.
+        add_networks: Ajouter mes réseaux sociaux
+        social_networks: Réseaux sociaux
+        social_networks_recap: Les réseaux sociaux sont un bon moyen pour vous faire connaitre et pour promouvoir vos articles. Ils seront mis en avant sur votre carte utilisateur pour chaque article que vous partagerez avec la communauté.
+
+
 # Password resetting
 resetting:
     password_already_requested: Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.
@@ -142,3 +171,9 @@ recap:
 product:
     inck: Une production Smalt Création
 
+validate:
+    email_link: Pour valider votre compte utilisateur, merci de vous rendre sur
+
+inck:
+    home: Retourner à l'accueil
+    signup: M'enregistrer sur Inck

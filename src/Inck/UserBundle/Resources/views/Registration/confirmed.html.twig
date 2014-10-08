@@ -1,5 +1,5 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% block title %}Confirmation d'activation{% endblock %}
+{% block title %}{{ 'registration.register.confirmed'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -31,24 +31,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h3>Accéder à mon profil</h3>
-                <p>Vous y trouverez toutes les informations vous concernant ainsi que vos statistiques. Vous pourrez y consulter vos articles, vos brouillons et votre fil d'actualité.</p>
-                <p><a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> Mon profil</a></p>
+                <h3>{{ 'registration.register.go_to'|trans }}</h3>
+                <p>{{ 'registration.register.go_to_recap'|trans }}</p>
+                <p><a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> {{ 'registration.register.my_profile'|trans }}</a></p>
             </div>
             <div class="col-md-4">
-                <h3>Envie de partager vos idées ?</h3>
-                <p>Lorsque vous partagez sur Inck en écrivant un article, vous contribuez au développement de l'expression libre et culturelle. Lire, s'instruire, partager, ici tout est possible !</p>
-                <p><a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> Écrire un article</a></p>
+                <h3>{{ 'registration.register.want_to_share'|trans }}</h3>
+                <p>{{ 'registration.register.want_to_share_recap'|trans }}</p>
+                <p><a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> {{ 'registration.register.write_article'|trans }}</a></p>
             </div>
              <div class="col-md-4">
-                <h3>Presse, entreprise?</h3>
-                <p>Avec Inck, vous pouvez publier et acquérir les droits des articles écrits par les membres de la communauté sur votre site ou journal via un système de vente aux enchères.</p>
-                <p><a class="btn btn-primary" href="{{ path('fos_user_change_password') }}"><i class="fa fa-university"></i> Mon entreprise</a></p>
+                <h3>{{ 'registration.register.press'|trans }}</h3>
+                <p>{{ 'registration.register.press_recap'|trans }}</p>
+                <p><a class="btn btn-primary" href="{{ path('fos_user_change_password') }}"><i class="fa fa-university"></i> {{ 'registration.register.my_buisness'|trans }}</a></p>
             </div>
         </div>
 
         <div class="last-article" itemscope itemtype ="http://schema.org/Article">
-            <h3>Dernier article publié</h3>
+            <h3>{{ 'registration.register.last_article'|trans }}</h3>
             <br>
             {{ render(controller('InckArticleBundle:Article:last')) }}
         </div>

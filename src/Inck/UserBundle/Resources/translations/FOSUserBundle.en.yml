@@ -61,6 +61,34 @@ registration:
             Regards,
             the Team.
 
+    register:
+        register: Register
+        closed: Inscription closed to the public
+        return: Return to login
+        inscription_closed: We are sorry, the inscription is closed to the public. This is a decision made my the administrator of the site. <br> If you would like to make an account please contact the administrator.
+        go_to: Go to my profile
+        go_to_recap: You will find all the information conserning you along with you statistics. You can view your articles, your drafts and newsfeed.
+        my_profile: My profile
+        want_to_share: Want to share your ideas ?
+        want_to_share_recap: When you share on Inck by writing an article, you are contributing to the development of free expression and culture. Read, train, share here everything is possible !
+        write_article: Write an article
+        press: Business, press?
+        press_recap: With Inck, you can publish and obtain the rights to the articles written for the members of the community on your site or newspaper via an auction sales system.
+        my_buisness: My buisness
+        last_article: Last article published
+        email_verification: email address verification
+        confirmed: Confirm activation
+
+    content:
+        complete: Complete my account
+        complete_recap: We are interested in your profile ! Of course, we would like to know our user so that we can better target the things that you like. Even more then that when an article is published, it's always good to know a little about the author. If you're a poet, an outstanding developer or even an amateur philosopher, we are all unique, so don't hesitate to poste !
+        add_coordinates: Add my coordinates
+        coordinates: Coordinates
+        coordinates_recap: We need your coordinates if you would like to get payed for your articles. Of course, all of our authors can be rewarded for their talent if their article is bought by a big site you will be remunerated at an honest price based on your article's quality. These things are yours, free expression and culture.
+        add_networks: Add your social networks
+        social_networks: Social networks
+        social_networks_recap: Social networks are a good way to make yourself known and to promote your articles. They will be highlighted on your user card with every article that you share with the community.
+
 # Password resetting
 resetting:
     password_already_requested: The password for this user has already been requested within the last 24 hours.
@@ -134,3 +162,10 @@ recap:
 
 product:
     inck: a Smalt Creation production
+
+validate:
+    email_link: To validate you user account, please click on the following link
+
+inck:
+    home: Back to home
+    signup: Sign up to Inck
