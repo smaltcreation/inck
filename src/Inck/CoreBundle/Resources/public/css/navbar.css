@@ -66,7 +66,7 @@
     display: block;
     float: left;
     height: 100%;
-    border-right: 1px solid #c6d0da;
+    border-left: 1px solid #c6d0da;
     text-align: center;
 }
 
@@ -83,10 +83,9 @@
     user-select: none;
 }
 
-.gn-menu-main > li:last-child {
-    float: right;
-    border-right: none;
-    border-left: 1px solid #c6d0da;
+.gn-menu-main > li:first-child {
+    float: left;
+    border-left: none;
 }
 
 .gn-menu-main > li > a {
