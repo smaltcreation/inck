@@ -11,11 +11,9 @@
                         {% image '@InckUserBundle/Resources/public/images/drop@2x.png' %}
                             <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Encre"/>
                         {% endimage %}
-                        <h2>Compléter mon compte</h2>
+                        <h2>{{ 'registration.content.complete'|trans }}</h2>
                         <p class="description">
-                            Votre profil nous intéresse ! En effet, nous aimons connaître nos utilisateurs afin de cibler au mieux ce qu'il peut leur plaire.
-                            De plus, lorsque vous postez un article, il est toujours agréable d'en connaître un petit peu sur l'auteur.
-                            Que vous soyez un grand poète, un développeur hors-pair ou un philosophe amateur, nous sommes tous unique, alors n'hésitez plus !
+                            {{ 'profile.pages.edit_profile'|trans }}
                         </p>
                     </div>
                 </div>
@@ -46,7 +44,7 @@
                 </div>
 
                 <button class="btn btn-success" type="submit"><i class="fa fa-refresh"></i> {{ 'profile.edit.submit'|trans }}</button>
-                <p class="btn-inline"><a href="#registration_address" class="btn btn-default"><i class="fa fa-plus-square"></i> Ajouter mes coordonnées</a></p>
+                <p class="btn-inline"><a href="#registration_address" class="btn btn-default"><i class="fa fa-plus-square"></i> {{ 'registration.content.add_coordinates'|trans }}</a></p>
             </div>
         </section>
 
@@ -57,11 +55,9 @@
                         {% image '@InckUserBundle/Resources/public/images/Map-drop@2x.png' %}
                             <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
                         {% endimage %}
-                        <h2>Coordonnées</h2>
+                        <h2>{{ 'registration.content.coordinates'|trans }}</h2>
                         <p class="description">
-                            Vos coordonnées nous sont obligatoire si vous voulez être rémunéré par vos articles.
-                            En effet, tous nos auteurs peuvent se voir récompensés pour leur talent en étant publiés sur de grands sites de presse rémunérant à prix honnêtes des articles de qualités.
-                            Ceux-ci sont les votres, l'expression libre et culturelle.
+                            {{ 'profile.pages.coordinates_recap'|trans }}
                         </p>
                     </div>
                 </div>
@@ -83,7 +79,7 @@
                 </div>
 
                 <button class="btn btn-success" type="submit"><i class="fa fa-refresh"></i> {{ 'profile.edit.submit'|trans }}</button>
-                <p class="btn-inline"><a href="#registration_websites" class="btn btn-default"><i class="fa fa-plus-square"></i> Ajouter mes réseaux sociaux</a></p>
+                <p class="btn-inline"><a href="#registration_websites" class="btn btn-default"><i class="fa fa-plus-square"></i> {{ 'registration.content.add_networks'|trans }}</a></p>
             </div>
         </section>
 
@@ -94,10 +90,9 @@
                         {% image '@InckUserBundle/Resources/public/images/Facebook@2x.png' %}
                             <img itemprop="image" class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
                         {% endimage %}
-                        <h2>Réseaux sociaux</h2>
+                        <h2>{{ 'registration.content.social_networks'|trans }}</h2>
                         <p class="description"  itemprop="description">
-                            Les réseaux sociaux sont un bon moyen pour vous faire connaitre et pour promouvoir vos articles.
-                            Ils seront mis en avant sur votre carte utilisateur pour chaque article que vous partagerez avec la communauté.
+                            {{ 'registration.content.social_networks_recap'|trans }}
                         </p>
                     </div>
                 </div>

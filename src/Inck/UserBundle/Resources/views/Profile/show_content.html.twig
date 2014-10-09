@@ -5,9 +5,9 @@
     <div class="tabs">
         <nav>
             <ul class="nav" role="tablist">
-                <li class="active"><a href="#profile" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i><span> Profil</span></a></li>
-                <li><a href="#articles" role="tab" data-toggle="tab"><i class="fa fa-fw fa-book"></i><span> Mes articles</span></a></li>
-                <li><a href="#watch-later" role="tab" data-toggle="tab"><i class="fa fa-fw fa-clock-o"></i><span> Articles à regarder plus tard</span></a></li>
+                <li class="active"><a href="#profile" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i><span> {{ 'profile.page.profile'|trans }}</span></a></li>
+                <li><a href="#articles" role="tab" data-toggle="tab"><i class="fa fa-fw fa-book"></i><span> {{ 'profile.page.articles'|trans }}</span></a></li>
+                <li><a href="#watch-later" role="tab" data-toggle="tab"><i class="fa fa-fw fa-clock-o"></i><span> {{ 'profile.page.read_later_articles'|trans }}</span></a></li>
             </ul>
         </nav>
     </div>
@@ -17,18 +17,18 @@
             <div class="row">
                 <div class="col-sm-3 hidden-xs visible-sm visible-md visible-lg">
                     <p><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-thumbnail avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></p>
-                    <p class="text-center"><a href="https://fr.gravatar.com/" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><i class="fa fa-file-image-o"></i> Changer mon avatar</a></p>
+                    <p class="text-center"><a href="https://fr.gravatar.com/" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><i class="fa fa-file-image-o"></i> {{ 'profile.page.avatar'|trans }}</a></p>
                 </div>
                 <div class="col-sm-9">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <p class="pull-right visible-xs hidden-sm hidden-md hidden-lg btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Changer mon avatar avec Gravatar"><a href="https://fr.gravatar.com/"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 60, 'g', 'mm', true) }}"/></a></p>
-                            <h3 class="panel-title">Profil de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h3>
+                            <h3 class="panel-title">{{ 'profile.page.profile_of'|trans }} {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h4>Informations</h4>
+                                    <h4>{{ 'profile.page.info'|trans }}</h4>
                                     <p>
                                         <i class="fa fa-circle fa-fw"></i> {{ user.username }}<br>
                                         <i class="fa fa-envelope fa-fw"></i> {{ user.email }}
@@ -65,8 +65,8 @@
                         </div>
                         <div class="panel-footer">
                             <p>
-                                <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> Éditer mon profil</a>
-                                <a href="{{ path('fos_user_change_password') }}" class="btn btn-default"><i class="fa fa-lock"></i> Modifier mon mot de passe</a>
+                                <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> {{ 'profile.page.edit_profile'|trans }}</a>
+                                <a href="{{ path('fos_user_change_password') }}" class="btn btn-default"><i class="fa fa-lock"></i> {{ 'profile.page.change_password'|trans }}</a>
                             </p>
                         </div>
                     </div>
@@ -77,20 +77,20 @@
         <div class="tab-pane" id="articles">
             <div class="row">
                 <div class="col-md-6 text text-center">
-                    <h4>Pourquoi écrire un article ?</h4>
-                    <p>Écrire des articles, c'est contribuer à la diversité des cultures et au partage de l'expression de manière libre et naturelle.<br></p>
-                    <p><a class="btn btn-default" href="{{ path('inck_article_article_new') }}"><i class="fa fa-rocket"></i> Écrire un nouvel article</a></p>
+                    <h4>{{ 'profile.page.why_write'|trans }}</h4>
+                    <p>{{ 'profile.page.why_write_recap'|trans }}<br></p>
+                    <p><a class="btn btn-default" href="{{ path('inck_article_article_new') }}"><i class="fa fa-rocket"></i> {{ 'profile.page.new_article'|trans }}</a></p>
                 </div>
                 {% if articlesAsDraft is defined %}
                     <div class="col-md-6">
                         <div class="panel panel-warning">
-                            <div class="panel-heading">Mes brouillons<span class="badge pull-right">{{ articlesAsDraft|length }}</span></div>
+                            <div class="panel-heading">{{ 'profile.page.drafts'|trans }}<span class="badge pull-right">{{ articlesAsDraft|length }}</span></div>
                             {% if articlesAsDraft|length > 0 %}
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>Titre</th>
+                                            <th>{{ 'profile.page.title'|trans }}</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -113,7 +113,7 @@
                                 </table>
                             {% else %}
                                 <div class="panel-body">
-                                    Vous n'avez pas d'articles en tant que brouillon
+                                    {{ 'profile.page.in_draft'|trans }}
                                 </div>
                             {% endif %}
                         </div>
@@ -124,14 +124,14 @@
                 {% if articlesPosted is defined %}
                     <div class="col-md-6">
                         <div class="panel panel-info">
-                            <div class="panel-heading">Mes articles envoyés<span class="badge pull-right">{{ articlesPosted|length }}</span></div>
+                            <div class="panel-heading">{{ 'profile.page.sent_articles'|trans }}<span class="badge pull-right">{{ articlesPosted|length }}</span></div>
                             {% if articlesPosted|length > 0 %}
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>Titre</th>
-                                            <th>Posté le</th>
+                                            <th>{{ 'profile.page.title'|trans }}</th>
+                                            <th>{{ 'profile.page.posted_the'|trans }}</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -165,7 +165,7 @@
                                 </table>
                             {% else %}
                                 <div class="panel-body">
-                                    Vous n'avez posté aucun article
+                                    {{ 'profile.page.no_article'|trans }}
                                 </div>
                             {% endif %}
                         </div>
@@ -174,14 +174,14 @@
                 {% if articlesPublished is defined %}
                     <div class="col-md-6">
                         <div class="panel panel-success">
-                            <div class="panel-heading">Mes articles publiés<span class="badge pull-right">{{ articlesPublished|length }}</span></div>
+                            <div class="panel-heading">{{ 'profile.page.published_articles'|trans }}<span class="badge pull-right">{{ articlesPublished|length }}</span></div>
                             {% if articlesPublished|length > 0 %}
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Titre</th>
-                                        <th>Publié le</th>
+                                        <th>{{ 'profile.page.title'|trans }}</th>
+                                        <th>{{ 'profile.page.posted_the'|trans }}</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -198,7 +198,7 @@
                                 </table>
                             {% else %}
                                 <div class="panel-body">
-                                    Vous n'avez pas d'articles publiés
+                                    {{ 'profile.page.no_article'|trans }}
                                 </div>
                             {% endif %}
                         </div>
@@ -209,10 +209,10 @@
 
         <div class="tab-pane" id="watch-later">
             <div class="text-center">
-                <h3>Liste des articles à regarder plus tard</h3>
+                <h3>{{ 'profile.page.list_watch_later'|trans }} </h3>
                 <p>
-                    Ici, vous pouvez gérer les articles sur lesquels vous avez cliquez sur le bouton <span class="btn btn-link"><i class="fa fa-clock-o"></i> à regarder plus tard</span><br>
-                    Si vous voulez retirer un article, il suffit de cliquer sur la <span class="btn btn-default btn-xs"><i class="fa fa-times"></i></span> en haut à droite de l'article.
+                    {{ 'profile.page.manage_articles'|trans }} <span class="btn btn-link"><i class="fa fa-clock-o"></i> {{ 'profile.page.watch_later'|trans }}</span><br>
+                    {{ 'profile.page.remove_article'|trans }} <span class="btn btn-default btn-xs"><i class="fa fa-times"></i></span> {{ 'profile.page.top_right'|trans }}
                 </p>
             </div>
             <div class="articles">

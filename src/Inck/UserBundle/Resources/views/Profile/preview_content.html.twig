@@ -37,7 +37,7 @@
             {% if user.linkedIn %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-linkedin fa-fw"></i> <strong><a href="' ~ user.linkedIn ~ '">Linkedin</a></strong>' %}{% endif %}
 
             <button type="button" class="btn btn-default btn-popover btn-sm" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
-                <i class="fa fa-info-circle"></i> Voir plus d'informations
+                <i class="fa fa-info-circle"></i> {{ 'profile.pages.more_info'|trans }}
             </button>
         </p>
     </div>

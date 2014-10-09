@@ -42,6 +42,35 @@ profile:
         submit: Mettre à jour
     flash:
         updated: Le profil a été mis à jour
+    pages:
+        more_info: Voir plus d'informations
+        edit_profile: Editer mon profile
+        return_profile: Retourner à mon profil
+        complete_recap: Votre profil nous intéresse ! En effet, nous aimons connaître nos utilisateurs afin de cibler au mieux ce qu'il peut leur plaire. De plus, lorsqu'un article est posté, il est toujours agréable d'en connaître un petit peu sur l'auteur. Que vous soyez un grand poète, un développeur hors-pair ou un philosophe amateur, nous sommes tous unique, alors n'hésitez plus !
+        coordinates_recap: Vos coordonnées nous sont obligatoire si vous voulez être rémunéré par vos articles.En effet, tous nos auteurs peuvent se voir récompensés pour leur talent en étant publiés sur de grands sites de presse rémunérant à prix honnêtes des articles de qualités.Ceux-ci sont les votres, l'expression libre et culturelle.
+        profile: Profil
+        articles: Mes articles
+        read_later_articles: Articles à regarder plus tard
+        avatar: Changer mon avatar
+        profile_of: Profil de
+        info: Informations
+        edit_profile: Éditer mon profil
+        change_password: Modifier mon mot de passe
+        why_write: Pourquoi écrire un article ?
+        why_write_recap: Écrire des articles, c'est contribuer à la diversité des cultures et au partage de l'expression de manière libre et naturelle.
+        new_article: Écrire un nouvel article
+        drafts: Mes brouillons
+        title: Titre
+        in_draft: Vous n'avez pas d'articles en tant que brouillon
+        sent_articles: Mes articles envoyés
+        posted_the: Posté le
+        no_article: Vous n'avez posté aucun article
+        published_articles: Mes articles publiés
+        list_watch_later: Liste des articles à regarder plus tard
+        manage_articles: Ici, vous pouvez gérer les articles sur lesquels vous avez cliquez sur le bouton
+        watch_later: à regarder plus tard
+        remove_article: Si vous voulez retirer un article, il suffit de cliquer sur la
+        top_right: en haut à droite de l'article.
 
 # Password change
 change_password:

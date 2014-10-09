@@ -36,6 +36,35 @@ profile:
         submit: Update
     flash:
         updated: The profile has been updated
+    pages:
+        more_info: See more information
+        edit_profile: Edit your profile
+        return_profile: Return to My Profile
+        complete_recap: We are interested in your profile ! Of course, we would like to know our user so that we can better target the things that you like. Even more then that when an article is published, it's always good to know a little about the author. If you're a poet, an outstanding developer or even an amateur philosopher, we are all unique, so don't hesitate to poste !
+        coordinates_recap: We need your coordinates if you would like to get payed for your articles. Of course, all of our authors can be rewarded for their talent if their article is bought by a big site you will be remunerated at an honest price based on your article's quality. These things are yours, free expression and culture.
+        profile: Profile
+        articles: My articles
+        read_later_articles: Articles to read later
+        avatar: Change my avatar
+        profile_of: Profile of
+        info: Information
+        edit_profile: Edit my profile
+        change_password: Change my password
+        why_write: Why write an article
+        why_write_recap: Writing articles are contributing to the diversity of cultures and sharing and thoughts freely and naturally.
+        new_article: Write a new article
+        drafts: My drafts
+        title: Title
+        in_draft: You don't have any articles in draft
+        sent_articles: My sent articles
+        posted_the: Posted the
+        no_article: You haven't posted any articles
+        published_articles: My published articles
+        list_watch_later: List of articles to watch later
+        manage_articles: Here, you can manage the items on which you click
+        watch_later: Watch later
+        remove_article: If you would like to remove an article, just click on the
+        top_right: on the top right of the article
 
 # Password change
 change_password:
