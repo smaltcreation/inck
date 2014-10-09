@@ -10,6 +10,19 @@ group:
         updated: Le groupe a été mis à jour
         created: Le groupe a été créé
         deleted: Le groupe a été supprimé
+    pages:
+        edit_a_group: Editer un groupe
+        edit_the_group: Editer la groupe
+        complete_info: Compléter mes informations
+        info_recap: Avoir un profil complet nous aide à cerner et à distribuer des offres avantageuse pour ceux qui rémunère nos auteurs.
+        coordinates_recap: En renseignant vos coordonnés, nous pouvons vérifier puis certifier votre compte. Vous vous appelez Le Monde, Google ou bien Twitter ? Laissez-nous dire à nos utilisateurs que vous êtes les vrais.
+        group_list: Liste des groupes
+        create_group: Créer un nouveau groupe
+        no_group: Il n'éxiste aucun groupe pour le moment.
+        group_purpose: A quoi sert un groupe ?
+        group_recap: A group permits you to buy the right to action your articles. In fact, this system permits us to pay our authors while helping the press in its goal to provide a free and cultural content. Anyone can create a group where an unlimited number of people can be added. <br> You a big business ? A major player in the press ? Our a little blogger looking for quality content ? Don't hesitate!
+        manage_users: Gérer les utilisateurs
+        participate_auction: Participer aux enchères
 
 # Security
 "Bad credentials": Nom d'utilisateur ou mot de passe incorrect
@@ -42,7 +55,7 @@ profile:
         submit: Mettre à jour
     flash:
         updated: Le profil a été mis à jour
-    pages:
+    page:
         more_info: Voir plus d'informations
         edit_profile: Editer mon profile
         return_profile: Retourner à mon profil

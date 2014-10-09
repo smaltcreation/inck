@@ -10,6 +10,19 @@ group:
         updated: The group has been updated
         created: The group has been created
         deleted: The group has been deleted
+    pages:
+        edit_a_group: edit a group
+        edit_the_group: Edit the group
+        complete_info: Complete my information
+        info_recap: Having a complete profile will help us to identify and distribute helpful information for the people that will pay the authors.
+        coordinates_recap: By giving your coordinates, we can verify then certify your account. You can call the world, Google or Twitter ? Let us tell our user that you are the real you.
+        group_list: List of groups
+        create_group: Create a new group
+        no_group: There is no existing group for the moment
+        group_purpose: what is the purpose of a group ?
+        group_recap: Un groupe permet d'acheter les droits de diffusion d'articles aux enchères. En effet, ce système permet de rémunérer nos auteurs tout en aidant la presse dans son but de proposer un contenu libre et culturel. Tout le monde peut créer un groupe où un nombre illimité d'utilisateur peut être ajouté.<br> Vous êtes une grande entreprise ? Un acteur majeur de la presse ? Ou bien un petit blogueur recherchant un contenu de qualité ? N'hésitez plus !
+        manage_users: Manage Users
+        participate_auction: Participate in the auction
 
 # Security
 security:
@@ -36,7 +49,7 @@ profile:
         submit: Update
     flash:
         updated: The profile has been updated
-    pages:
+    page:
         more_info: See more information
         edit_profile: Edit your profile
         return_profile: Return to My Profile
