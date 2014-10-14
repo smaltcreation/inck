@@ -313,8 +313,8 @@ fieldset[disabled] .btn-inverse.active {
 
 .btn-category {
     color: #fff;
-    background-color: #ffb0a8;
-    border-color: #ec8a80;
+    background-color: #ffb46b;
+    border-color: #FFA54C;
 }
 .btn-category.voted,
 .btn-category:hover,
@@ -323,8 +323,8 @@ fieldset[disabled] .btn-inverse.active {
 .btn-category.active,
 .open > .dropdown-toggle.btn-category {
     color: #fff;
-    background-color: #eb9f97;
-    border-color: #d87f75;
+    background-color: #FFA54C;
+    border-color: #E98625;
 }
 .btn-category:active,
 .btn-category.active,
@@ -346,10 +346,10 @@ fieldset[disabled] .btn-category:active,
 .btn-category.disabled.active,
 .btn-category[disabled].active,
 fieldset[disabled] .btn-category.active {
-    background-color: #ffb0a8;
-    border-color: #d8766d;
+    background-color: #ffb46b;
+    border-color: #FFA54C;
 }
 .btn-category .badge {
-    color: #ffb0a8;
+    color: #ffb46b;
     background-color: #fff;
 }
