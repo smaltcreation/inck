@@ -3,12 +3,13 @@
 namespace Inck\NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Inck\NotificationBundle\Model\NotificationInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Notification
  */
-class Notification
+class Notification implements NotificationInterface
 {
     /**
      * @var integer
@@ -131,7 +132,7 @@ class Notification
      * @param UserInterface $to
      * @return $this
      */
-    public function setTo($to)
+    public function setTo(UserInterface $to)
     {
         $this->to = $to;
 
