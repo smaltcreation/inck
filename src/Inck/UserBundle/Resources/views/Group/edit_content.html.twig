@@ -5,9 +5,9 @@
 
     <section>
         <div class="well">
-            <h2>Compléter mes informations</h2>
+            <h2>{{ 'group.pages.complete_info'|trans }}</h2>
             <p class="description">
-                Avoir un profil complet nous aide à cerner et à distribuer des offres avantageuse pour ceux qui rémunère nos auteurs.
+                {{ 'group.pages.info_recap'|trans }}
             </p>
             <div class="row">
                 <div class="col-sm-6">
@@ -42,10 +42,9 @@
                     {% image '@InckUserBundle/Resources/public/images/Map-drop@2x.png' %}
                         <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
                     {% endimage %}
-                    <h2>Coordonnées</h2>
+                    <h2>{{ 'registration.content.coordinates'|trans }}</h2>
                     <p class="description">
-                        En renseignant vos coordonnés, nous pouvons vérifier puis certifier votre compte.
-                        Vous vous appelez Le Monde, Google ou bien Twitter ? Laissez-nous dire à nos utilisateurs que vous êtes les vrais.
+                        {{ 'group.pages.coordinates_recap'|trans }}
                     </p>
                 </div>
             </div>

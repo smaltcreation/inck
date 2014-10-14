@@ -1,5 +1,5 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% block title %}Créer un nouveau groupe{% endblock %}
+{% block title %}{{ 'group.pages.create_group'|trans }}{% endblock %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block stylesheets %}
@@ -14,7 +14,7 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Créer un nouveau groupe</h1>
+            <h1>{{ 'group.pages.create_group'|trans }}</h1>
         </div>
     </div>
 {% endblock %}

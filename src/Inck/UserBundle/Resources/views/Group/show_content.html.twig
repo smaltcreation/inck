@@ -3,9 +3,9 @@
 <div class="fos_user_group_show">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li class="active"><a href="#profile" role="tab" data-toggle="tab">Profil</a></li>
-        <li><a href="#articles" role="tab" data-toggle="tab">Articles acquis</a></li>
-        <li><a href="#invoices" role="tab" data-toggle="tab">Factures</a></li>
+        <li class="active"><a href="#profile" role="tab" data-toggle="tab">{{ 'group.pages.profile'|trans }}</a></li>
+        <li><a href="#articles" role="tab" data-toggle="tab">{{ 'group.pages.articles_acquired'|trans }}</a></li>
+        <li><a href="#invoices" role="tab" data-toggle="tab">{{ 'group.pages.bill'|trans }}</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -15,19 +15,20 @@
                 <div class="col-sm-5">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <p>Vos crédits vous permettent d'acquérir les droits d'articles afin que vous puissez les diffuser librement</p>
-                            <h2 class="credits"><span class="credits-number">{{ group.credit }}</span> Crédits</h2>
+                            <p>{{ 'group.pages.credit_recap'|trans }}
+                            </p>
+                            <h2 class="credits"><span class="credits-number">{{ group.credit }}</span> {{ 'group.pages.credit'|trans }}</h2>
                         </div>
                         <div class="panel-footer text-right">
-                            <a class="btn btn-default btn-xs"><i class="fa fa-info-circle"></i> Plus d'informations</a>
-                            <a class="btn btn-success"><i class="fa fa-money"></i> Acheter des crédits</a>
+                            <a class="btn btn-default btn-xs"><i class="fa fa-info-circle"></i> {{ 'group.pages.more_info'|trans }}</a>
+                            <a class="btn btn-success"><i class="fa fa-money"></i> {{ 'group.pages.buy_credit'|trans }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-7">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title"><i class="fa fa-group fa-fw"></i> Informations du groupe</h4>
+                            <h4 class="panel-title"><i class="fa fa-group fa-fw"></i> {{ 'group.pages.group_info'|trans }}</h4>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -44,14 +45,14 @@
                                     <p>
                                         {% if group.type %}{{ group.type == 0 ? 'Default - Particulier' : 'Société' }}<br>{% endif %}
                                         {% if group.website %}{{ group.website }}<br>{% endif %}
-                                        {% if group.createdAt %}Groupe créé le {{ group.createdAt|date('d/m/Y') }}<br>{% endif %}
-                                        {% if group.private %}Visibilité : {{ group.private == 0 ? 'Publique' : 'Privée'}}{% endif %}
+                                        {% if group.createdAt %}{{ 'group.pages.group_created'|trans }} {{ group.createdAt|date('d/m/Y') }}<br>{% endif %}
+                                        {% if group.private %}{{ 'group.pages.visibility'|trans }} : {{ group.private == 0 ? 'Publique' : 'Privée'}}{% endif %}
                                     </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p class="text-right"><a href="{{ path('fos_user_group_edit', {'groupName': group.getName()} ) }}" class="btn btn-default"><i class="fa fa-edit"></i> Editer le groupe</a></p>
+                                    <p class="text-right"><a href="{{ path('fos_user_group_edit', {'groupName': group.getName()} ) }}" class="btn btn-default"><i class="fa fa-edit"></i> {{ 'group.pages.edit_group'|trans }}</a></p>
                                 </div>
                             </div>
                         </div>
@@ -62,10 +63,10 @@
                 <div class="col-sm-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title"><i class="fa fa-legal fa-fw"></i> Dernières enchères</h4>
+                            <h4 class="panel-title"><i class="fa fa-legal fa-fw"></i> {{ 'group.pages.last_auction'|trans }}</h4>
                         </div>
                         <div class="panel-body">
-                            <p>Ici, vous pouvez retracer l'historique de vos enchères.</p>
+                            <p>{{ 'group.pages.auction_history'|trans }}</p>
                         </div>
 
                         <!-- Table -->
@@ -76,7 +77,7 @@
                                         <th>#</th>
                                         <th>Article</th>
                                         <th>Date</th>
-                                        <th>Valeur</th>
+                                        <th>{{ 'group.pages.value'|trans }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +86,7 @@
                                             <td>{{ bid.product.id }}</td>
                                             <td>{{ bid.product.title|slice(0, 50) }}{% if bid.product.title > 50%}...{% endif %}</td>
                                             <td>{{ bid.createdAt }}</td>
-                                            <td>{{ bid.value }} crédit{% if bid.value > 1 %}s{% endif %}</td>
+                                            <td>{{ bid.value }}{{ 'group.pages.credit'|trans }} {% if bid.value > 1 %}s{% endif %}</td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
@@ -96,7 +97,7 @@
                 <div class="col-sm-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title"><i class="fa fa-star fa-fw"></i> Article suceptibles de vous plaire</h4>
+                            <h4 class="panel-title"><i class="fa fa-star fa-fw"></i> {{ 'group.pages.articles_enjoy'|trans }} </h4>
                         </div>
                         <div class="panel-body">
 
@@ -112,7 +113,7 @@
                         </div>
                         <div class="panel-body">
                             <p>
-                                <a href="{{ path('fos_user_group_delete', {'groupName': group.getName()} ) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Supprimer le groupe</a>
+                                <a href="{{ path('fos_user_group_delete', {'groupName': group.getName()} ) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> {{ 'group.pages.delete_group'|trans }}</a>
                             </p>
                         </div>
                     </div>
@@ -122,9 +123,9 @@
 
         <div class="tab-pane" id="articles">
             <div class="panel panel-default">
-                <div class="panel-heading"><h4 class="panel-title">Gestions des articles du groupe</h4></div>
+                <div class="panel-heading"><h4 class="panel-title">{{ 'group.pages.article_management'|trans }}</h4></div>
                 <div class="panel-body">
-                    <p>Ici, vous pouvez gérer tous les articles acquis par le groupe.</p>
+                    <p>{{ 'group.pages.article_management_recap'|trans }}</p>
                 </div>
 
                 <!-- Table -->
@@ -134,7 +135,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Article</th>
-                                <th>Statut</th>
+                                <th>{{ 'group.pages.status'|trans }}</th>
                             </tr>
                         </thead>
                         <tbody>

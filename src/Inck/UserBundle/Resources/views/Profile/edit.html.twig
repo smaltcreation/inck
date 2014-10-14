@@ -1,6 +1,6 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
-{% block title %}{{ 'profile.pages.edit_profile'|trans }}{% endblock %}
+{% block title %}{{ 'profile.page.edit_profile'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -14,10 +14,10 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>{{ 'profile.pages.edit_profile'|trans }}</h1>
+            <h1>{{ 'profile.page.edit_profile'|trans }}</h1>
             <p>
-                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default"><i class="fa fa-user"></i> {{ 'profile.pages.return_profile'|trans }}</a>
-                <button class="btn btn-success" type="submit" form="fos_user_profile_edit"><i class="fa fa-refresh"></i> {{ 'profile.edit.submit'|trans }}</button>
+                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default"><i class="fa fa-user"></i> {{ 'profile.page.return_profile'|trans }}</a>
+                <button class="btn btn-success" type="submit"><i class="fa fa-refresh"></i> {{ 'profile.edit.submit'|trans }}</button>
             </p>
         </div>
     </div>
@@ -25,6 +25,6 @@
 
 {% block content %}
     <div class="container">
-        {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+            {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
     </div>
 {% endblock content %}

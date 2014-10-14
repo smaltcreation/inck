@@ -23,6 +23,32 @@ group:
         group_recap: Un groupe permet d'acheter les droits de diffusion d'articles aux enchères. En effet, ce système permet de rémunérer nos auteurs tout en aidant la presse dans son but de proposer un contenu libre et culturel. Tout le monde peut créer un groupe où un nombre illimité d'utilisateur peut être ajouté.<br> Vous êtes une grande entreprise ? Un acteur majeur de la presse ? Ou bien un petit blogueur recherchant un contenu de qualité ? N'hésitez plus !
         manage_users: Manage Users
         participate_auction: Participate in the auction
+        profile: Profile
+        articles_acquired: Aquired articles
+        bill: Bills
+        credit_recap: Your credits permit you to aquire the rights of articles so that you will be able to distribute freely
+        credit: Credit
+        more_info: More information
+        buy_credit: Buy credits
+        group_info: Group information
+        edit_group: Edit the group
+        last_auction: Last auction
+        group_created: Group created the
+        visibility: Visibility
+        auction_history: Here, you can view all of your auction history.
+        value: Value
+        articles_enjoy: Article you might enjoy
+        delete_group: Delete the group
+        article_management: Management of articles in the group
+        article_management_recap: Here, you can manage all the articles acquired by the group.
+        status: Status
+        members_of: Members of
+        return_main_page: Return to the main page
+        add_new_members: Add new members
+        search_users: Search for users by typing there first name, last name or username
+        related_info: related information
+        add_user: Add this user
+        all_group_users: All the users in the group
 
 # Security
 security:
@@ -64,7 +90,7 @@ profile:
         edit_profile: Edit my profile
         change_password: Change my password
         why_write: Why write an article
-        why_write_recap: Writing articles are contributing to the diversity of cultures and sharing and thoughts freely and naturally.
+        why_write_recap: By writing an articles you are contributing to the diversity of cultures and sharing of thoughts freely and naturally.
         new_article: Write a new article
         drafts: My drafts
         title: Title
@@ -74,7 +100,7 @@ profile:
         no_article: You haven't posted any articles
         published_articles: My published articles
         list_watch_later: List of articles to watch later
-        manage_articles: Here, you can manage the items on which you click
+        manage_articles: Here, you can manage the items on which you clicked
         watch_later: Watch later
         remove_article: If you would like to remove an article, just click on the
         top_right: on the top right of the article

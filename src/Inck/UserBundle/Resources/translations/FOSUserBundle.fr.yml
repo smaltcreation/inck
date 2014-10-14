@@ -84,6 +84,33 @@ profile:
         watch_later: à regarder plus tard
         remove_article: Si vous voulez retirer un article, il suffit de cliquer sur la
         top_right: en haut à droite de l'article.
+        profile: Profil
+        articles_acquired: Articles acquis
+        bill: Factures
+        credit_recap: Vos crédits vous permettent d'acquérir les droits d'articles afin que vous puissez les diffuser librement
+        credit: Crédits
+        more_info: Plus d'informations
+        buy_credit: Acheter des crédits
+        group_info: Informations du groupe
+        edit_group: Editer le groupe
+        last_auction: Dernières enchères
+        group_created: Groupe créé le
+        visibility: Visibilité
+        auction_history: Ici, vous pouvez retracer l'historique de vos enchères.
+        value: Valeur
+        articles_enjoy: Article susceptibles de vous plaire
+        delete_group: Supprimer le groupe
+        article_management: Gestions des articles du groupe
+        article_management_recap: Ici, vous pouvez gérer tous les articles acquis par le groupe.
+        status: Statut
+        members_of: Membres de
+        return_main_page: Retourner à la page principale
+        add_new_members: Ajouter de nouveaux membres
+        search_users: Rechercher des utilisateurs en tapant leur nom, prénom ou nom d'utilisateur
+        related_info: Informations relatives
+        add_user: Ajouter cet utilisateur
+        all_group_users: Tous les utilisateurs du groupe
+
 
 # Password change
 change_password:

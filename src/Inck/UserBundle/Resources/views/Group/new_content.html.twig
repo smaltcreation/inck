@@ -10,12 +10,9 @@
                     {% image '@InckUserBundle/Resources/public/images/bag@2x.png' %}
                         <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Sac"/>
                     {% endimage %}
-                    <h2>A quoi sert un groupe ?</h2>
+                    <h2>{{ 'group.pages.group_purpose'|trans }}</h2>
                     <p class="description">
-                        Un groupe permet d'acheter les droits de diffusion d'articles aux enchères.
-                        En effet, ce système permet de rémunérer nos auteurs tout en aidant la presse dans son but de proposer un contenu libre et culturel.
-                        Tout le monde peut créer un groupe où un nombre illimité d'utilisateur peut être ajouté.<br>
-                        Vous êtes une grande entreprise ? Un acteur majeur de la presse ? Ou bien un petit blogueur recherchant un contenu de qualité ? N'hésitez plus !
+                        {{ 'group.pages.group_recap'|trans }}
                     </p>
                 </div>
             </div>
@@ -54,8 +51,7 @@
                     {% endimage %}
                     <h2>Coordonnées</h2>
                     <p class="description">
-                        En renseignant vos coordonnés, nous pouvons vérifier puis certifier votre compte.
-                        Vous vous appelez Le Monde, Google ou bien Twitter ? Laissez-nous dire à nos utilisateurs que vous êtes les vrais.
+                        {{ 'group.pages.coordinates_recap'|trans }}
                     </p>
                 </div>
             </div>

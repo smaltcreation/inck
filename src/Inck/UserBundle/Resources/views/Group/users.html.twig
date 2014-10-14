@@ -1,11 +1,11 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% block title %}Membres de {{ group.getName() }}{% endblock %}
+{% block title %}{{ 'group.pages.members_of'|trans }} {{ group.getName() }}{% endblock %}
 
 {% block header %}
     <div class="jumbotron">
         <div class="container">
             <h1>Gérer les utilisateurs de {{ group.getName() }}</h1>
-            <p><a href="{{ path('fos_user_group_show', {'groupName': group.getName()}) }}" class="btn btn-default"><i class="fa fa-fast-backward"></i> Retourner à la page principale</a></p>
+            <p><a href="{{ path('fos_user_group_show', {'groupName': group.getName()}) }}" class="btn btn-default"><i class="fa fa-fast-backward"></i> {{ 'group.pages.return_main_page'|trans }}</a></p>
         </div>
     </div>
 {% endblock %}

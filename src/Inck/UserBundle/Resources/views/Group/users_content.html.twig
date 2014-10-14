@@ -7,10 +7,10 @@
                 <section class="filters">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title"><i class="fa fa-filter fa-fw"></i> Ajouter de nouveaux membres</h4>
+                            <h4 class="panel-title"><i class="fa fa-filter fa-fw"></i> {{ 'group.pages.add_new_members'|trans }}</h4>
                         </div>
                         <div class="panel-body">
-                            <p>Rechercher des utilisateurs en tapant leur nom, prénom ou nom d'utilisateur</p>
+                            <p> {{ 'group.pages.search_users'|trans }} </p>
                         </div>
                     </div>
                 </section>
@@ -30,7 +30,7 @@
                                         <div>
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
-                                                    <h3 class="panel-title">Informations relatives</h3>
+                                                    <h3 class="panel-title">{{ 'group.pages.related_info'|trans }}</h3>
                                                 </div>
                                                 <div class="panel-body">
                                                     <p>
@@ -60,7 +60,7 @@
                                                                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                                                                 </div>
                                                                 <div class="text-right">
-                                                                    <button type="submit" class="btn btn-success"><i class="fa fa-plus-square"></i> Ajouter cet utilisateur</button>
+                                                                    <button type="submit" class="btn btn-success"><i class="fa fa-plus-square"></i> {{ 'group.pages.add_user'|trans }}</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -83,7 +83,7 @@
             <section class="all-users">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 class="panel-title"><i class="fa fa-users fa-fw"></i> Tous les utilisateurs du groupe</h4>
+                        <h4 class="panel-title"><i class="fa fa-users fa-fw"></i>{{ 'group.pages.all_group_users'|trans }}</h4>
                     </div>
                     <div class="panel-body">
                         {% if members is defined and members %}

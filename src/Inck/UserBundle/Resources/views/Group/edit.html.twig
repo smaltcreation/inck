@@ -1,5 +1,5 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% block title %}Editer un groupe{% endblock %}
+{% block title %}{{ 'group.pages.edit_a_group'|trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -13,7 +13,7 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Editer le groupe : {{ group_name }}</h1>
+            <h1>{{ 'group.pages.edit_the_group'|trans }} : {{ group_name }}</h1>
         </div>
     </div>
 {% endblock %}

@@ -1,12 +1,12 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% block title %}Liste des groupes{% endblock %}
+{% block title %}{{ 'group.pages.group_list'|trans }}{% endblock %}
 
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Liste des groupes</h1>
+            <h1>{{ 'group.pages.group_list'|trans }}</h1>
             <p>
-                <a href="{{ path('fos_user_group_new') }}" class="btn btn-success"><i class="fa fa-plus"></i> Créer un nouveau groupe</a>
+                <a href="{{ path('fos_user_group_new') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ 'group.pages.create_group'|trans }}</a>
             </p>
         </div>
     </div>
