@@ -1,9 +1,5 @@
 .registration section, .profile section {
-    margin-bottom: 100px;
-}
-
-.registration .well, .profile .well {
-    padding: 100px;
+    margin-bottom: 20px;
 }
 
 .registration .btn-inline, .profile .btn-inline {
@@ -17,25 +13,22 @@
     margin-bottom: 15px;
     width: 100px;
     height: 100px;
+    opacity: 0.8;
 }
 
 .registration .description, .profile .description {
     text-align: justify;
-    font-size: 16px;
+    font-size: 11px;
 }
 
 .registration h2, .profile h2 {
     margin-top: 0;
 }
 
-@media screen and (max-width: 992px) {
-    .registration .well, .profile .well {
-        padding: 50px;
-    }
+.input-append.date.datepicker {
+    padding: 0;
 }
 
-@media screen and (max-width: 768px) {
-    .registration .well, .profile .well {
-        padding: 25px;
-    }
+.first-section {
+    margin-bottom: 60px;
 }

@@ -4,118 +4,115 @@
     <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" id="fos_user_profile_edit" class="fos_user_profile_edit">
         {{ form_errors(form) }}
 
-        <section id="registration_more">
-            <div class="well">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {% image '@InckUserBundle/Resources/public/images/drop@2x.png' %}
-                            <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Encre"/>
-                        {% endimage %}
-                        <h2>{{ 'registration.content.complete'|trans }}</h2>
-                        <p class="description">
-                            {{ 'profile.pages.edit_profile'|trans }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        {{ form_row(form.lastname) }}
-                    </div>
-                    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-md-6">
+                <section id="registration_more">
+                    <div class="well well-lg">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {% image '@InckUserBundle/Resources/public/images/drop@2x.png' %}
+                                <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Encre"/>
+                                {% endimage %}
+                                <h2>{{ 'registration.content.complete'|trans }}</h2>
+                                <p class="description">
+                                    {{ 'registration.content.complete_recap'|trans }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form_row(form.lastname) }}
+                            </div>
+                            <div class="col-sm-6">
 
-                        {{ form_row(form.firstname) }}
+                                {{ form_row(form.firstname) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form_row(form.school) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_row(form.occupation) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                {{ form_row(form.birthday) }}
+                            </div>
+                            <div class="col-sm-8">
+                                {{ form_row(form.biography) }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        {{ form_row(form.school) }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form_row(form.occupation) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        {{ form_row(form.birthday) }}
-                    </div>
-                    <div class="col-sm-8">
-                        {{ form_row(form.biography) }}
-                    </div>
-                </div>
-
-                <button class="btn btn-success" type="submit"><i class="fa fa-refresh"></i> {{ 'profile.edit.submit'|trans }}</button>
-                <p class="btn-inline"><a href="#registration_address" class="btn btn-default"><i class="fa fa-plus-square"></i> {{ 'registration.content.add_coordinates'|trans }}</a></p>
+                </section>
             </div>
-        </section>
-
-        <section id="registration_address">
-            <div class="well">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {% image '@InckUserBundle/Resources/public/images/Map-drop@2x.png' %}
-                            <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
-                        {% endimage %}
-                        <h2>{{ 'registration.content.coordinates'|trans }}</h2>
-                        <p class="description">
-                            {{ 'profile.pages.coordinates_recap'|trans }}
-                        </p>
+            <div class="col-md-6">
+                <section id="registration_address">
+                    <div class="well well-lg">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {% image '@InckUserBundle/Resources/public/images/atlas@2x.png' %}
+                                <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Atlas"/>
+                                {% endimage %}
+                                <h2>{{ 'registration.content.coordinates'|trans }}</h2>
+                                <p class="description">
+                                    {{ 'registration.content.coordinates_recap'|trans }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form_row(form.address) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_row(form.city) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form_row(form.zipcode) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_row(form.country) }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        {{ form_row(form.address) }}
+                </section>
+                <section id="registration_websites">
+                    <div class="well well-lg">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {% image '@InckUserBundle/Resources/public/images/Facebook@2x.png' %}
+                                <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
+                                {% endimage %}
+                                <h2>{{ 'registration.content.social_networks'|trans }}</h2>
+                                <p class="description">
+                                    {{ 'registration.content.social_networks_recap'|trans }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form_row(form.facebook) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_row(form.twitter) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form_row(form.googlePlus) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_row(form.linkedIn) }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        {{ form_row(form.city) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        {{ form_row(form.zipcode) }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form_row(form.country) }}
-                    </div>
-                </div>
-
-                <button class="btn btn-success" type="submit"><i class="fa fa-refresh"></i> {{ 'profile.edit.submit'|trans }}</button>
-                <p class="btn-inline"><a href="#registration_websites" class="btn btn-default"><i class="fa fa-plus-square"></i> {{ 'registration.content.add_networks'|trans }}</a></p>
+                </section>
             </div>
-        </section>
+        </div>
 
-        <section id="registration_websites">
-            <div class="well">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {% image '@InckUserBundle/Resources/public/images/Facebook@2x.png' %}
-                            <img itemprop="image" class="img-responsive img-inline" src="{{ asset_url }}" alt="Carte"/>
-                        {% endimage %}
-                        <h2>{{ 'registration.content.social_networks'|trans }}</h2>
-                        <p class="description"  itemprop="description">
-                            {{ 'registration.content.social_networks_recap'|trans }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        {{ form_row(form.facebook) }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form_row(form.twitter) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        {{ form_row(form.googlePlus) }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form_row(form.linkedIn) }}
-                    </div>
-                </div>
-
-                <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> {{ 'registration.submit'|trans }}</button>
-            </div>
-        </section>
         <div class="hidden">
             {{ form_rest(form) }}
         </div>

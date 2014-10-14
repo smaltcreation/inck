@@ -19,7 +19,7 @@
             <nav class="gn-menu-wrapper">
                 <div class="gn-scroller">
                     <ul class="gn-menu">
-                        <li class="gn-search-item">
+                        <li class="gn-search-item visible-xs hidden-sm hidden-md hidden-lg">
                             <form action="{{ path('inck_article_article_search') }}" method="get">
                                 <input placeholder="Recherche" type="search" class="gn-search" name="q">
                             </form>
@@ -35,6 +35,7 @@
             </nav>
         </li>
         <li><a class="{% if currentRoute == 'home' %}active{% endif %}" href={{ path('home') }}><i class="fa fa-home"></i> Inck</a></li>
+
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <li class="pull-right">
                 <a  title="{{ app.user.username }}" class="{% if currentRoute == 'fos_user_profile_show' %}active{% endif %}" href="{{ path('fos_user_profile_show') }}">
