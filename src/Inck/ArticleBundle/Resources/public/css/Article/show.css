@@ -41,6 +41,15 @@ article .img-inline {
     color: #ffffff;
 }
 
+.article-similar{
+    height: 3000px;
+    overflow-y: hidden;
+}
+
+.article-similar .articles article {
+    overflow-y: hidden;
+}
+
 article .article-similar .article-image-preview {
     width: 100px;
     position: relative;

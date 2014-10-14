@@ -538,7 +538,7 @@ class ArticleController extends Controller
             ->findByFilters(array(
                 'type'  => 'published',
                 'not'   => $article->getId(),
-            ), false, 5);
+            ), false, 25);
 
         return array(
             'articles' => $articles,
