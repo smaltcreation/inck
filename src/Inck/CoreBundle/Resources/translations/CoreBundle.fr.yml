@@ -1,0 +1,17 @@
+view:
+    layout:
+        write_article: Écrire un article
+        modify_article: Modérer les articles
+        catagories: Catégories
+        press: Presses
+        social_networks: Rejoignez-nous sur les réseaux sociaux
+        social_networks_recap: Suivez-nous et soyez au courant des nouveaux articles partout où vous soyez. Un like, un tweet, ce sont les nouvelles voies pour porter l'information encore plus loin que possible !
+
+default:
+    about:
+      about: À propos
+      about_inck: À propos de Inck
+      
+contact:
+    index:
+        contact: Nous contacter

@@ -1,12 +1,14 @@
 {% extends 'InckCoreBundle::layout.html.twig' %}
-{% block title %}Nous contacter{% endblock %}
+{% trans_default_domain 'CoreBundle' %}
+
+{% block title %}{{ 'contact.index.contact'|trans }}{% endblock %}
 
 {% block header %}
     <div class="jumbotron">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Nous contacter</h1>
+                    <h1>{{ 'contact.index.contact'|trans }}</h1>
                 </div>
             </div>
         </div>

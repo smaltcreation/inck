@@ -1,4 +1,5 @@
 {% extends '::base.html.twig' %}
+{% trans_default_domain 'CoreBundle' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -25,11 +26,11 @@
                             </form>
                             <a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>Rechercher</span></a>
                         </li>
-                        <li><a class="{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil fa-lg fa-fw"></i>Écrire un article</a></li>
-                        <li><a class="{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}"><i class="fa fa-thumbs-up fa-lg fa-fw"></i>Modérer les articles</a></li>
-                        <li><a class="{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{{ path('inck_article_category_list') }}"><i class="fa fa-tags fa-lg fa-fw"></i>Catégories</a></li>
-                        <li><a class="{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{{ path('inck_core_default_about') }}"><i class="fa fa-info fa-lg fa-fw"></i>À Propos</a></li>
-                        <li><a class="{% if currentRoute == 'inck_bid_registration_register' %} active{% endif %}" href="{#{ path('inck_bid_registration_register') }#}"><i class="fa fa-institution fa-lg fa-fw"></i>Presses</a></li>
+                        <li><a class="{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil fa-lg fa-fw"></i>{{ 'view.layout.write_article'|trans }}</a></li>
+                        <li><a class="{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}"><i class="fa fa-thumbs-up fa-lg fa-fw"></i>{{ 'view.layout.modify_article'|trans }}</a></li>
+                        <li><a class="{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{{ path('inck_article_category_list') }}"><i class="fa fa-tags fa-lg fa-fw"></i>{{ 'view.layout.catagories'|trans }}</a></li>
+                        <li><a class="{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{{ path('inck_core_default_about') }}"><i class="fa fa-info fa-lg fa-fw"></i>{{ 'default.about.about'|trans }}</a></li>
+                        <li><a class="{% if currentRoute == 'inck_bid_registration_register' %} active{% endif %}" href="{#{ path('inck_bid_registration_register') }#}"><i class="fa fa-institution fa-lg fa-fw"></i>{{ 'view.layout.press'|trans }}</a></li>
                     </ul>
                 </div>
             </nav>
@@ -69,8 +70,8 @@
 {% block footer %}
     <section id="footer-links">
         <div class="container text-center">
-            <h2>Rejoignez-nous sur les réseaux sociaux</h2>
-            <p>Suivez-nous et soyez au courant des nouveaux articles partout où vous soyez. Un like, un tweet, ce sont les nouvelles voies pour porter l'information encore plus loin que possible !</p>
+            <h2>{{ 'view.layout.social_networks'|trans }}</h2>
+            <p>{{ 'view.layout.social_networks_recap'|trans }}</p>
             <div>
                 <a href="#" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
                 <a href="#" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>

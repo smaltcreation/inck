@@ -1,11 +1,12 @@
 {% extends 'InckCoreBundle::layout.html.twig' %}
+{% trans_default_domain 'CoreBundle' %}
 
-{% block title %}À propos{% endblock %}
+{% block title %}{{ 'default.about.about'|trans }}{% endblock %}
 
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-           <h1>À propos de Inck</h1>
+           <h1> {{ 'default.about.about_inck'|trans }}</h1>
         </div>
     </div>
 {% endblock %}
