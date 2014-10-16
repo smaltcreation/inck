@@ -157,6 +157,7 @@ class Article
      */
     private $votes;
 
+
     /**
      * @ORM\OneToOne(targetEntity="Inck\StatBundle\Entity\ArticleStat")
      * @ORM\JoinColumn(name="id", referencedColumnName="id")
