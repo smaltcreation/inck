@@ -24,7 +24,7 @@
                             <form action="{{ path('inck_article_article_search') }}" method="get">
                                 <input placeholder="Recherche" type="search" class="gn-search" name="q">
                             </form>
-                            <a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>Rechercher</span></a>
+                            <a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>{{ 'view.layout.search'|trans }}</span></a>
                         </li>
                         <li><a class="{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil fa-lg fa-fw"></i>{{ 'view.layout.write_article'|trans }}</a></li>
                         <li><a class="{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}"><i class="fa fa-thumbs-up fa-lg fa-fw"></i>{{ 'view.layout.modify_article'|trans }}</a></li>

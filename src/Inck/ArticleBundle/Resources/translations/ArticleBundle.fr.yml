@@ -1,0 +1,28 @@
+vote:
+    error:
+        error_accured: Une erreur s'est produite
+        close: Fermée
+
+test:
+    index:
+        published_articles: articles publiés
+
+tag:
+    list_content:
+        most_popular: Nos tags les plus poulaires
+
+
+category:
+    list:
+      catagories: Catégories
+      total: au total
+
+category:
+    list_content:
+        most_popular: Nos catégories les plus poulaires
+        we_select: Nous sélectionnons les catégories les plus populaires pour vous. En effet, nous trions celles-ci en fonction du nombre d'articles publiés.
+        the_popular: La catégorie la plus populaire étant en ce moment
+        with: avec
+        sent_article: articles envoyés.
+        feedback: Bien entendu, nous aimons avoir l'avis de notre communauté et si vous ne trouvez pas une catégorie, pourquoi ne pas nous la suggérer ?
+        contact_us: Nous contacter

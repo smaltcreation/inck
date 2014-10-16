@@ -1,7 +1,8 @@
+{% trans_default_domain 'ArticleBundle' %}
 <h1>
     {{ user.username }}
     <small>
-        {{ articles|length }} articles publiés
+        {{ articles|length }} {{ 'test.index.published_articles'|trans }}
     </small>
 </h1>
 

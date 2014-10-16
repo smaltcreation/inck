@@ -1,3 +1,4 @@
+{% trans_default_domain 'ArticleBundle' %}
 
 {% set article = lastPublishedArticles[categories.0.id].0 %}
 <div class="row">
@@ -23,13 +24,13 @@
             {% image '@InckArticleBundle/Resources/public/images/category/Ticket@2x.png' %}
             <img class="img-responsive img-inline" src="{{ asset_url }}" alt="Categorie"/>
             {% endimage %}
-            <h2>Nos catégories les plus poulaires</h2>
+            <h2>{{ 'category.list_content.most_popular'|trans }}</h2>
             <p class="description">
-                Nous sélectionnons les catégories les plus populaires pour vous. En effet, nous trions celles-ci en fonction du nombre d'articles publiés.
-                La catégorie la plus populaire étant en ce moment <a href="{{ path('inck_article_category_show', { 'id': categories.0.id, 'slug': categories.0.slug }) }}">{{ categories.0.name }}</a> avec {{ categories.0.articles|length }} articles envoyés.
-                Bien entendu, nous aimons avoir l'avis de notre communauté et si vous ne trouvez pas une catégorie, pourquoi ne pas nous la suggérer ?
+                {{ 'category.list_content.we_select'|trans }}
+                {{ 'category.list_content.the_popular'|trans }} <a href="{{ path('inck_article_category_show', { 'id': categories.0.id, 'slug': categories.0.slug }) }}">{{ categories.0.name }}</a> {{ 'category.list_content.with'|trans }} {{ categories.0.articles|length }} {{ 'category.list_content.sent_article'|trans }}
+                {{ 'category.list_content.feeedback'|trans }}
             </p>
-            <p><a href="{{ path('inck_core_contact') }}" class="btn btn-default"><i class="fa fa-send"></i> Nous contacter</a></p>
+            <p><a href="{{ path('inck_core_contact') }}" class="btn btn-default"><i class="fa fa-send"></i> {{ 'category.list_content.contact_us'|trans }}</a></p>
         </div>
     </div>
 </div>

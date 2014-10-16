@@ -1,5 +1,5 @@
 {% if tags %}
-    <h2>Nos tags les plus poulaires</h2>
+    <h2>{{ 'tag.list_content.most_popular'|trans }}</h2>
     {% for tag in tags %}
         <span class="tag">
             <a class="btn btn-default btn-sm" href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}">{{ tag.name }}</a>
