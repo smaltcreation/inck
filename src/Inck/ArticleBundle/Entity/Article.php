@@ -159,7 +159,7 @@ class Article
 
     /**
      * @ORM\OneToOne(targetEntity="Inck\StatBundle\Entity\ArticleStat")
-     * @ORM\JoinColumn(name="articleStat_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
     private $articleStat;
 
