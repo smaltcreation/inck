@@ -1,1 +1,26 @@
-Stats {{ name }}!
+<h3>
+    Stats for article #<em>{{ idarticle }}</em> auteur : {{ author }}.
+</h3>
+<table>
+    {% for result in results %}
+    <tr>
+        <td>{{ result.0 ? '<strong>Up</strong>':'<strong>Down</strong>' }}</td>
+        <!-- <td>{{ result.0 }}</td> -->
+        <td>on</td>
+        <td>{{ result.1|date("d/m/Y H:i:s") }}</td>
+        <td>out of </td>
+        <td>{{ result.2 }}</td>
+    </tr>
+
+
+
+<!--        <script language="javascript">
+            var dataVote = [];
+            dataVote.push({{ result.0 }});
+        </script> -->
+    {% endfor %}
+</table>
+
+
+</body>
+</html>

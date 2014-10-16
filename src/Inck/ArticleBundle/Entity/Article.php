@@ -152,9 +152,16 @@ class Article
     /**
      * @ORM\OneToMany(targetEntity="Inck\ArticleBundle\Entity\Vote", mappedBy="article", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
+     *
+     * @ORM\OrderBy({"submittedOn" = "ASC"})
      */
     private $votes;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Inck\StatBundle\Entity\ArticleStat")
+     * @ORM\JoinColumn(name="articleStat_id", referencedColumnName="id")
+     */
+    private $articleStat;
 
     /**
      * Constructor
@@ -174,7 +181,7 @@ class Article
         $this->createdAt = new DateTime();
     }
 
-    /**
+   /**
      * Get id
      *
      * @return integer 
@@ -681,5 +688,28 @@ class Article
         }
 
         return 'En validation';
+    }
+
+    /**
+     * Set articleStat
+     *
+     * @param \Inck\StatBundle\Entity\ArticleStat $articleStat
+     * @return Article
+     */
+    public function setArticleStat(\Inck\StatBundle\Entity\ArticleStat $articleStat = null)
+    {
+        $this->articleStat = $articleStat;
+
+        return $this;
+    }
+
+    /**
+     * Get articleStat
+     *
+     * @return \Inck\StatBundle\Entity\ArticleStat 
+     */
+    public function getArticleStat()
+    {
+        return $this->articleStat;
     }
 }

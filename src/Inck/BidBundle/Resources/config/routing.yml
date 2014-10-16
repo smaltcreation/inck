@@ -1,3 +1,3 @@
 inck_bid_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: InckBidBundle:Default:index }
+    path:     /hello/{idarticle}
+    defaults: { _controller: InckStatBundle:Default:index }

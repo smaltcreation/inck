@@ -99,4 +99,19 @@ class UserRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    /** Get Id/Username/Birthday of all enabled Users
+     * @return array
+     */
+    public function getAge()
+    {
+        $query = $this
+            ->createQueryBuilder('u')
+            ->select('u.id', 'u.username', 'u.birthday')
+            ->where('u.enabled = 1')
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
 }
