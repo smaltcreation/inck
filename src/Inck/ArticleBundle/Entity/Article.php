@@ -5,6 +5,7 @@ namespace Inck\ArticleBundle\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Inck\StatBundle\Entity\ArticleStat;
 use Inck\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -159,7 +160,7 @@ class Article
 
 
     /**
-     * @ORM\OneToOne(targetEntity="Inck\StatBundle\Entity\ArticleStat")
+     * @ORM\OneToOne(targetEntity="Inck\StatBundle\Entity\ArticleStat", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $articleStat;
@@ -172,6 +173,7 @@ class Article
         $this->categories   = new ArrayCollection();
         $this->tags         = new ArrayCollection();
         $this->votes        = new ArrayCollection();
+        $this->articleStat  = new ArticleStat();
     }
 
     /**
