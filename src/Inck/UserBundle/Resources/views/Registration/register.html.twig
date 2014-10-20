@@ -29,3 +29,12 @@
         {% include "FOSUserBundle:Registration:register_content.html.twig" %}
     </div>
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?uglifyjs2' output='js/compiled/user/registration/register.js'
+        'bundles/inckuser/js/Registration/register.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
