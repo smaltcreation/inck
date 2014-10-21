@@ -23,24 +23,20 @@ $(function() {
             $(this).trigger('resizeEnd');
         }, 500);
     });
-
-    function similarArticles() {
-        var articleContent = $('body').find('.article-content');
-
-        var cumulatedHeight = articleContent.height() + $('.article-summary').height();
-
-        $('.article-similar').css("height", (cumulatedHeight+170));
-        $(".article-preview").each(function(){
-            if (($(this).offset().top) > ($('#last').offset().top))
-            {
-                $(this).hide();
-            }
-        });
-    }
-
-    document.onload(similarArticles());
-
-
-
-
 });
+
+document.onload(similarArticles());
+
+function similarArticles() {
+    var articleContent = $('body').find('.article-content');
+
+    var cumulatedHeight = articleContent.height() + $('.article-summary').height();
+
+    $('.article-similar').css("height", (cumulatedHeight+170));
+    $(".article-preview").each(function(){
+        if (($(this).offset().top) > ($('#last').offset().top))
+        {
+            $(this).hide();
+        }
+    });
+}

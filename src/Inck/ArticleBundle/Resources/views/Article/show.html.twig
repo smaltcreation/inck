@@ -1,4 +1,4 @@
-{% trans_default_domain 'ArticleBundle' %}
+{% extends 'InckArticleBundle::layout.html.twig' %}
 {% block xmlns %}xmlns:og="http://ogp.me/ns#"{% endblock %}
 
 {% block title %}{{ article.title }}{% endblock %}
@@ -41,7 +41,6 @@
                         {% endimage %}
                     {% endif %}
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
                 </div>
@@ -56,6 +55,7 @@
                         <div class="article-title">
                             <h1 itemprop="name">{{ article.title }}</h1>
                         </div>
+                        <p class="about">Rédigé par <a class="btn btn-link btn-xs" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash; publié le <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time></p>
                     </div>
                 </div>
             </header>
@@ -64,42 +64,28 @@
                     <p>
                         {% for category in article.categories %}<a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-category btn-xs category">{{ category.name }}</a>{% endfor %}
                         {% for tag in article.tags %}<a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs tag">{{ tag.name }}</a>{% endfor %}
+                        <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-default btn-circle btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" target="blank" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
                     </p>
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        <div class="article-summary">
-                            <div class="callout callout-left">
-                                <div class="article-image-preview">
+                        <div class="article-content">
+                            <section itemprop="articleBody text">
+                                <div class="thumbnail">
                                     <a data-toggle="modal" data-target="#imageModal">
                                         {% if article.imageName %}
-                                            <img itemprop="image" class="img-inline img-circle" src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
+                                            <img itemprop="image" src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
                                         {% else %}
                                             {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
-                                                <img itemprop="image" class="img-inline img-circle" src="{{ asset_url|apply_filter('article_thumb') }}" alt="Image par défaut"/>
+                                            <img src="{{ asset_url|apply_filter('article_thumb') }}" alt="Image par défaut"/>
                                             {% endimage %}
                                         {% endif %}
                                     </a>
-                                </div>
-                                <div class="description">
-                                    <p itemprop="description">{{ article.summary }}</p>
-                                    <div class="article-about">
-                                        <p class="text-right">
-                                            {{ 'article.pdf.writen_by'|trans }}
-                                            <a class="btn btn-xs btn-primary" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a>
-                                            &ndash; publié le
-                                            <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
-                                            <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-link btn-xs btn-tooltip btn-circle" data-toggle="tooltip" data-placement="top" target="blank" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
-                                        </p>
+                                    {{ render(controller('InckArticleBundle:Article:score', { article: article })) }}
+                                    <div class="caption">
+                                        <p itemprop="description"><strong>{{ article.summary }}</strong></p>
+                                        {{ article.content|raw }}
                                     </div>
-                                </div>
-                            </div>
-                            {{ render(controller('InckArticleBundle:Article:score', { article: article })) }}
-                        </div>
-                        <div class="article-content">
-                            <section itemprop="articleBody text">
-                                <div class="well">
-                                    {{ article.content|raw }}
                                 </div>
                             </section>
                         </div>
@@ -123,7 +109,7 @@
                     <div class="col-md-12">
                         <div id="comments" class="article-comments">
                             <section>
-                                <div id="disqus_thread"></div>
+                                <div id="disqus_thread" class="well"></div>
                             </section>
                         </div>
                     </div>
@@ -134,7 +120,7 @@
             <div class="panel panel-default">
                 <a class="close-slidebox"><i class="fa fa-times"></i></a>
                 <div class="panel-body text-center">
-                    <h4>Venez nous suivre<br><small>{{ 'article.show.social_networks'|trans }}</small></h4>
+                    <h4>Venez nous suivre<br><small>sur les réseaux sociaux</small></h4>
                     <a href="#" class="btn btn-facebook btn-sm"><i class="fa fa-facebook fa-fw"></i> Facebook</a>
                     <a href="#" class="btn btn-twitter btn-sm"><i class="fa fa-twitter fa-fw"></i> Twitter</a>
                     <a href="#" class="btn btn-google btn-sm"><i class="fa fa-google-plus fa-fw"></i> Google+</a>
@@ -160,5 +146,5 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    <noscript>{{ 'article.show.activate_js'|trans }} <a href="http://disqus.com/?ref_noscript">{{ 'article.show.comments'|trans }}</a></noscript>
+    <noscript>Merci d'activer JavaScript pour voir <a href="http://disqus.com/?ref_noscript">les commentaires propulsés par Disqus.</a></noscript>
 {% endblock %}
