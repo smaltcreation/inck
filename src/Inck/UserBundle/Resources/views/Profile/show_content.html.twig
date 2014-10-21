@@ -222,13 +222,7 @@
                             <article id="article-{{ article.id }}" class="article">
                                 <a class="btn btn-default btn-circle btn-tooltip btn-unwatch-later pull-right btn-xs" data-id="{{ article.id }}" data-toggle="tooltip" data-container="body" data-placement="top" title="Retirer de la liste"><i class="fa fa-times"></i></a>
                                 <div class="summary">
-                                    {% set currentRoute = app.request.attributes.get('_route') %}
-                                    {% if currentRoute == 'inck_article_article_show' %}
-                                        {% set articleUrl = '#content' %}
-                                    {% else %}
-                                        {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
-                                    {% endif %}
-
+                                    {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
                                     <div class="thumbnail">
                                         <a href="{{ articleUrl }}">
                                             {% if article.imageName %}
