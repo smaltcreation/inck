@@ -158,10 +158,9 @@ class Article
      */
     private $votes;
 
-
     /**
      * @ORM\OneToOne(targetEntity="Inck\StatBundle\Entity\ArticleStat", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="stat_id", referencedColumnName="id")
      */
     private $articleStat;
 
