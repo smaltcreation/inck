@@ -28,7 +28,7 @@
             <p class="description">
                 {{ 'category.list_content.we_select'|trans }}
                 {{ 'category.list_content.the_popular'|trans }} <a href="{{ path('inck_article_category_show', { 'id': categories.0.id, 'slug': categories.0.slug }) }}">{{ categories.0.name }}</a> {{ 'category.list_content.with'|trans }} {{ categories.0.articles|length }} {{ 'category.list_content.sent_article'|trans }}
-                {{ 'category.list_content.feeedback'|trans }}
+                {{ 'category.list_content.feedback'|trans }}
             </p>
             <p><a href="{{ path('inck_core_contact') }}" class="btn btn-default"><i class="fa fa-send"></i> {{ 'category.list_content.contact_us'|trans }}</a></p>
         </div>

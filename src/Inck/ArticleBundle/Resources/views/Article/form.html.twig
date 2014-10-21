@@ -1,10 +1,12 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 
+{% trans_default_domain 'ArticleBundle' %}
+
 {% block title %}
     {% if action == 'add' %}
-        Écrire un article
+        {{ 'article.form.write_article'|trans }}
     {% else %}
-        Éditer mon article
+        {{ 'article.form.edit_article'|trans }}
     {% endif %}
 {% endblock %}
 {% block description %}
@@ -27,8 +29,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Écrire un article</h1>
-                    <p>Un bon article n'est pas forcément long ou en rapport avec un sujet d'actualité. Laissez-vous simplement porter par l'envie d'écrire ce que bon vous semble intéressant à partager.</p>
+                    <h1>{{ 'article.form.write_article'|trans }}</h1>
+                    <p>{{ 'article.form.write_article_recap'|trans }}</p>
                 </div>
             </div>
         </div>

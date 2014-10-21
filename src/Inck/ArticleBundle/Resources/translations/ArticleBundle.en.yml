@@ -24,3 +24,37 @@ category:
         sent_article: sent article.
         feedback: Naturally, we would like to have the feedback of our community and if you don't find a category, why not suggest it to us?
         contact_us: Contact us
+
+article:
+    button:
+        note: Note for later
+        watch: Watch later
+
+    error:
+        occurred: An error occurred
+        close: Close
+
+    form:
+        write_article: Write an article
+        edit_article: Edit my article
+        write_article_recap: A good article doesn't have to be long or about something that is happening in the world right now. Just let your self be taken away by your love of writing and write about what you think would be interesting to share.
+
+    moderate:
+            moderate_articles: moderate articles
+            moderate_articles_recap: Article moderation, is when you ask the community to place liberty and quality first. You are the motor of contribution and development of Inck.
+
+    pdf:
+        writen_by: Writen by
+        published: published the
+
+    search:
+        for_article: Search for an article
+
+    show:
+        social_networks: on the social networks
+        activate_js: Please activate JavaScript tu see
+        comments: comments powered by Disqus.
+
+    timemine:
+            filter: Filter the articles
+            more_articles: Show more articles

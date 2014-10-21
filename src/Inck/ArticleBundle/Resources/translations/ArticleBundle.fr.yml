@@ -26,3 +26,38 @@ category:
         sent_article: articles envoyés.
         feedback: Bien entendu, nous aimons avoir l'avis de notre communauté et si vous ne trouvez pas une catégorie, pourquoi ne pas nous la suggérer ?
         contact_us: Nous contacter
+
+article:
+    button:
+        note: Noté pour plus tard
+        watch: À regarder plus tard
+
+    error:
+        occurred: Une erreur s'est produite
+        close: Fermer
+
+    form:
+        write_article: Écrire un article
+        edit_article: Éditer mon article
+        write_article_recap: Un bon article n'est pas forcément long ou en rapport avec un sujet d'actualité. Laissez-vous simplement porter par l'envie d'écrire ce que bon vous semble intéressant à partager.
+
+    moderate:
+        moderate_articles: Modérer les articles
+        moderate_articles_recap: Modérer un article, c'est faire appel à la communauté pour mettre en avant un contenu libre et de qualité. Vous êtes donc le moteur contribuant au développement de Inck.
+
+    pdf:
+        writen_by: Rédigé par
+        published: publié le
+
+    search:
+        for_article: Rechercher un article
+
+
+    show:
+        social_networks: sur les réseaux sociaux
+        activate_js: Merci d'activer JavaScript pour voir
+        comments: les commentaires propulsés par Disqus.
+
+    timemine:
+        filter: Filtrer les articles
+        more_articles: Afficher plus d'articles

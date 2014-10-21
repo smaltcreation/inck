@@ -1,6 +1,7 @@
+{% trans_default_domain 'ArticleBundle' %}
 <div id="timeline" class="container">
     <p>
-        <button class="btn btn-inverse toggle-filter"><i class="fa fa-filter"></i> Filtrer les articles</button>
+        <button class="btn btn-inverse toggle-filter"><i class="fa fa-filter"></i> {{ 'article.timeline.filter'|trans }}</button>
         <span id="articles-total" class="label label-primary">
             <span>{{ totalArticles }}</span> résultat{% if totalArticles|length > 1 %}s{% endif %}
         </span>
@@ -50,7 +51,7 @@
             {% set hidden = (totalPages <= 1) ? 'hidden' : '' %}
             <button id="timeline-next-page" class="btn btn-inverse btn-lg btn-block {{ hidden }}">
                 <i class="fa fa-plus"></i>
-                Afficher plus d'articles
+                {{ 'article.timeline.more_articles'|trans }}
             </button>
         </div>
     </div>

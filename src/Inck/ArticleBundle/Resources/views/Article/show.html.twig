@@ -1,4 +1,4 @@
-{% extends 'InckArticleBundle::layout.html.twig' %}
+{% trans_default_domain 'ArticleBundle' %}
 {% block xmlns %}xmlns:og="http://ogp.me/ns#"{% endblock %}
 
 {% block title %}{{ article.title }}{% endblock %}
@@ -85,7 +85,7 @@
                                     <p itemprop="description">{{ article.summary }}</p>
                                     <div class="article-about">
                                         <p class="text-right">
-                                            Rédigé par
+                                            {{ 'article.pdf.writen_by'|trans }}
                                             <a class="btn btn-xs btn-primary" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a>
                                             &ndash; publié le
                                             <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
@@ -134,7 +134,7 @@
             <div class="panel panel-default">
                 <a class="close-slidebox"><i class="fa fa-times"></i></a>
                 <div class="panel-body text-center">
-                    <h4>Venez nous suivre<br><small>sur les réseaux sociaux</small></h4>
+                    <h4>Venez nous suivre<br><small>{{ 'article.show.social_networks'|trans }}</small></h4>
                     <a href="#" class="btn btn-facebook btn-sm"><i class="fa fa-facebook fa-fw"></i> Facebook</a>
                     <a href="#" class="btn btn-twitter btn-sm"><i class="fa fa-twitter fa-fw"></i> Twitter</a>
                     <a href="#" class="btn btn-google btn-sm"><i class="fa fa-google-plus fa-fw"></i> Google+</a>
@@ -160,5 +160,5 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    <noscript>Merci d'activer JavaScript pour voir <a href="http://disqus.com/?ref_noscript">les commentaires propulsés par Disqus.</a></noscript>
+    <noscript>{{ 'article.show.activate_js'|trans }} <a href="http://disqus.com/?ref_noscript">{{ 'article.show.comments'|trans }}</a></noscript>
 {% endblock %}

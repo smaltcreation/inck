@@ -1,6 +1,7 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
+{% trans_default_domain 'ArticleBundle' %}
 
-{% block title %}Rechercher un article{% endblock %}
+{% block title %}{{ 'article.search.for_article'|trans }}{% endblock %}
 {% block description %}<meta name="description" content="Rechercher facilement un article dans l'imposante base de donnée de Inck. Vous y trouverez des ressources intéressantes et de qualité.">{% endblock %}
 
 {% block stylesheets %}
@@ -19,7 +20,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Rechercher un article</h1>
+                    <h1>{{ 'article.search.for_article'|trans }}</h1>
                     <p>"{{ search }}"</p>
                 </div>
             </div>

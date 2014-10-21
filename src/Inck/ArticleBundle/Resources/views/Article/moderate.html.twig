@@ -1,6 +1,7 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
+{% trans_default_domain 'ArticleBundle' %}
 
-{% block title %}Modérer les articles{% endblock %}
+{% block title %}{{ 'article.moderate.moderate_articles'|trans }}{% endblock %}
 {% block description %}<meta name="description" content="Modérer un article, c'est faire appel à la communauté pour mettre en avant un contenu libre et de qualité. Vous êtes donc le moteur contribuant au développement de Inck">{% endblock %}
 
 {% block stylesheets %}
@@ -16,8 +17,8 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>Modérer les articles</h1>
-            <p>Modérer un article, c'est faire appel à la communauté pour mettre en avant un contenu libre et de qualité. Vous êtes donc le moteur contribuant au développement de Inck</p>
+            <h1>{{ 'article.moderate.moderate_articles'|trans }}</h1>
+            <p>{{ 'article.moderate.moderate_articles_recap'|trans }}</p>
         </div>
     </div>
 {% endblock %}
