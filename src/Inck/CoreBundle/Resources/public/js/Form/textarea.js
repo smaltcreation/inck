@@ -8,17 +8,7 @@ function textarea_max_length(badge){
             title: 'Caractères restants'
         });
 
-        var parent = input.closest('div.form-group');
-        if(parent.hasClass('has-error')){
-            var help = parent.find('ul.help-block:first');
-            var top = badge.position().top - 5;
-
-            badge.css({
-                bottom: 'auto',
-                top: top - help.outerHeight()
-            });
-        }
-
+        input.add(badge).wrapAll('<div class="textarea-max-length-container"></div>');
         textarea_max_length_update_value(input, badge);
     });
 
