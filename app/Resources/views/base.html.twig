@@ -21,6 +21,15 @@
             {% if form is defined %}
                 {{ afe_form_stylesheet(form) }}
             {% endif %}
+
+            {% if app.user is not null and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/base/notification.css'
+                    'bundles/incknotification/css/ns-default.css'
+                    'bundles/incknotification/css/ns-style-other.css'
+                %}
+                    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+                {% endstylesheets %}
+            {% endif %}
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
@@ -44,7 +53,7 @@
                 'bundles/inckcore/js/global.js'
                 'bundles/inckcore/js/Form/textarea.js'
             %}
-            <script src="{{ asset_url }}"></script>
+                <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
 
             {% include 'AvocodeFormExtensionsBundle::javascripts.html.twig' %}
@@ -60,10 +69,13 @@
                     };
                 </script>
 
-                {% javascripts filter='?uglifyjs2' output='js/compiled/base/notif.js'
+                {% javascripts filter='?uglifyjs2' output='js/compiled/base/notification.js'
                     'bundles/inckratchet/js/client.js'
+                    'components/modernizr/modernizr.js'
+                    'bundles/incknotification/js/notificationFx.js'
+                    'bundles/incknotification/js/test.js'
                 %}
-                <script src="{{ asset_url }}"></script>
+                    <script src="{{ asset_url }}"></script>
                 {% endjavascripts %}
             {% endif %}
         {% endblock %}

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "21c4d603f8e065ec54a1fd92b1a03489",
+    "hash": "497599a0e5d5ca93ec54550ff64f99e8",
     "packages": [
         {
             "name": "afarkas/html5shiv",
@@ -477,6 +477,75 @@
             ],
             "description": "jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library. Whether you're building highly interactive web applications or you just need to add a date picker to a form control, jQuery UI is the perfect choice.",
             "time": "2014-10-17 06:40:12"
+        },
+        {
+            "name": "components/modernizr",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/modernizr.git",
+                "reference": "4115686a0f488b370b169e5a702d5028e7650bd3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/modernizr/zipball/4115686a0f488b370b169e5a702d5028e7650bd3",
+                "reference": "4115686a0f488b370b169e5a702d5028e7650bd3",
+                "shasum": ""
+            },
+            "require": {
+                "robloach/component-installer": "*"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "modernizr.js"
+                    ],
+                    "shim": {
+                        "exports": "window.Modernizr"
+                    }
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Modernizr",
+                    "homepage": "http://modernizr.com"
+                },
+                {
+                    "name": "Faruk Ates"
+                },
+                {
+                    "name": "Paul Irish"
+                },
+                {
+                    "name": "Alex Sexton"
+                },
+                {
+                    "name": "Ryan Seddon"
+                },
+                {
+                    "name": "Alexander Farkas"
+                },
+                {
+                    "name": "Ben Alman"
+                },
+                {
+                    "name": "Stu Cox"
+                }
+            ],
+            "description": "Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user's browser.",
+            "homepage": "http://modernizr.com",
+            "keywords": [
+                "CSS3",
+                "HTML5",
+                "browser",
+                "feature detection"
+            ],
+            "time": "2014-10-08 13:59:52"
         },
         {
             "name": "doctrine/annotations",
@@ -4101,7 +4170,8 @@
         "friendsofsymfony/jsrouting-bundle": 20,
         "elao/web-profiler-extra-bundle": 20,
         "ensepar/html2pdf-bundle": 20,
-        "hwi/oauth-bundle": 20
+        "hwi/oauth-bundle": 20,
+        "components/modernizr": 20
     },
     "prefer-stable": false,
     "platform": {
