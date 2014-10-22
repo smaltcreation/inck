@@ -31,7 +31,7 @@ class ArticleType extends AbstractType
                 ],
             ])
             ->add('content', 'ckeditor', [
-                'label'     => 'Contenu',
+                'label'     => false,
             ])
             ->add('categories', 'afe_select2_entity', [
                 'label'     => 'Catégories',

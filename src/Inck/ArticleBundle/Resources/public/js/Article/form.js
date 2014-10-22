@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    var toggleFilters = $('.toggle-filter');
+    toggleFilters.click(function(){
+        $('#filters').stop().slideToggle('slow');
+    });
     // Gestion des tags
     var input = $("#inck_articlebundle_article_tags");
 

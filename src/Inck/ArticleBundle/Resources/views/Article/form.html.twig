@@ -40,28 +40,30 @@
 {% block content %}
     <div class="container">
         <article class="new">
-            <form {{ form_enctype(form) }} method="POST" novalidate="novalidate" data-article-id="{{ articleId }}">
+            <p>
+                <button class="btn btn-tooltip btn-inverse toggle-article-header" data-placement="right" data-toggle="tooltip" data-container="body" title="Réduire les informations annexes"></i> Réduire</button>
+            </p>
+            <form {{ form_enctype(form) }} method="POST" novalidate="novalidate" data-article-id="{{ articleId }}" id="inck-article-article-form">
                 {{ form_errors(form) }}
-                <section id="article-new-header">
+                <div id="article-header">
                     <div class="row">
                         <div class="col-sm-6">
-                            {{ form_row(form.title) }}
-                            {{ form_row(form.summary) }}
+                            <div class="alert alert-default">
+                                {{ form_row(form.title) }}
+                                {{ form_row(form.summary) }}
+                            </div>
+                            <div class="alert alert-default">
+                                {{ form_row(form.categories) }}
+                                {{ form_row(form.tags) }}
+                            </div>
                         </div>
                         <div class="col-sm-6">
-                            {{ form_row(form.imageFile) }}
+                            <div class="alert alert-default">
+                                {{ form_row(form.imageFile) }}
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            {{ form_row(form.categories) }}
-                        </div>
-                        <div class="col-sm-6">
-                            {{ form_row(form.tags) }}
-                        </div>
-                    </div>
-                </section>
-
+                </div>
                 <section id="article-new-content">
                     <div class="row">
                         <div class="col-md-12">
