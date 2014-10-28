@@ -38,7 +38,7 @@
         <div id="wrapper">
             <nav id="navbar">{% block navbar %}{% endblock %}</nav>
             <header id="header">{% block header %}{% endblock %}</header>
-            <section id="messages">{% include('base/messages.html.twig') %}</section>
+            {% if app.request.attributes.get('_route') != 'inck_article_article_show' %}{% include('base/messages.html.twig') %}{% endif %}
             <section id="content">{% block content %}{% endblock %}</section>
             <footer id="footer">{% block footer %}{% endblock %}</footer>
         </div>

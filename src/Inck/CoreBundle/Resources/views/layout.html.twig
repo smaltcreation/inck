@@ -20,13 +20,20 @@
             <nav class="gn-menu-wrapper">
                 <div class="gn-scroller">
                     <ul class="gn-menu">
-                        <li class="gn-search-item">
-                            <form action="{{ path('inck_article_article_search') }}" method="get">
-                                <input placeholder="Recherche" type="search" class="gn-search" name="q">
-                            </form>
-                            <a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>{{ 'view.layout.search'|trans }}</span></a>
-                        </li>
-                        <li><a class="{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil fa-lg fa-fw"></i>{{ 'view.layout.write_article'|trans }}</a></li>
+                        {#<li class="gn-search-item">#}
+                            {#<form action="{{ path('inck_article_article_search') }}" method="get">#}
+                                {#<input placeholder="Recherche" type="search" class="gn-search" name="q">#}
+                            {#</form>#}
+                            {#<a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>{{ 'view.layout.search'|trans }}</span></a>#}
+                        {#</li>#}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg fos_user_security_logout"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-lg fa-fw"></i><span> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span></a></li>
+                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg second-child fos_user_profile_show"><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user fa-lg fa-fw"></i><span>{{ app.user.username }}</span></a></li>
+                        {% else %}
+                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg fos_user_security_login"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in fa-lg fa-fw"></i><span> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</span></a></li>
+                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg second-child fos_user_registration_register"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o fa-lg fa-fw"></i><span> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</span></a></li>
+                        {% endif %}
+                        <li class="first-child"><a class="{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil fa-lg fa-fw"></i>{{ 'view.layout.write_article'|trans }}</a></li>
                         <li><a class="{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}"><i class="fa fa-thumbs-up fa-lg fa-fw"></i>{{ 'view.layout.modify_article'|trans }}</a></li>
                         <li><a class="{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{{ path('inck_article_category_list') }}"><i class="fa fa-tags fa-lg fa-fw"></i>{{ 'view.layout.catagories'|trans }}</a></li>
                         <li><a class="{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{{ path('inck_core_default_about') }}"><i class="fa fa-info fa-lg fa-fw"></i>{{ 'default.about.about'|trans }}</a></li>
@@ -35,35 +42,44 @@
                 </div>
             </nav>
         </li>
-        <li><a class="{% if currentRoute == 'home' %}active{% endif %}" href={{ path('home') }}><i class="fa fa-home"></i> Inck</a></li>
-
+        <li class="brand"><a class="{% if currentRoute == 'home' %}active{% endif %}" href={{ path('home') }}><i class="fa fa-home"></i> Inck</a></li>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <li class="pull-right">
-                <a  title="{{ app.user.username }}" class="{% if currentRoute == 'fos_user_profile_show' %}active{% endif %}" href="{{ path('fos_user_profile_show') }}">
-                    <i class="fa fa-user"></i>
-                    <span class="hidden-xs-500 visible-sm-inline"> {{ app.user.username }}</span>
+            <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_security_logout">
+                <a href="{{ path('fos_user_security_logout') }}">
+                    <i class="fa fa-sign-out"></i>
+                    <span> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
                 </a>
             </li>
-            <li class="pull-right">
-                <a title="{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}" href="{{ path('fos_user_security_logout') }}">
-                    <i class="fa fa-sign-out"></i>
-                    <span class="hidden-xs-500 visible-sm-inline"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
+            <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_profile_show">
+                <a class="{% if currentRoute == 'fos_user_profile_show' %}active{% endif %}" href="{{ path('fos_user_profile_show') }}">
+                    <img class="navbar-avatar img-circle" alt="Avatar de {{ app.user.lastName and app.user.firstName ? app.user.firstName ~ ' ' ~ app.user.lastName : app.user.username }}" src="{{ gravatar(app.user.email, 35, 'g', 'mm', true) }}"/>
+                    <span>{{ app.user.username }}</span>
                 </a>
             </li>
         {% else %}
-            <li class="pull-right">
-                <a class="{% if currentRoute == 'fos_user_registration_register' %}active{% endif %}" title="{{ 'layout.register'|trans({}, 'FOSUserBundle') }}" href="{{ path('fos_user_registration_register') }}">
-                    <i class="fa fa-pencil-square-o"></i>
-                    <span class="hidden-xs-500 visible-sm-inline"> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</span>
+            <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_security_login">
+                <a class="{% if currentRoute == 'fos_user_security_login' %}active{% endif %}" href="{{ path('fos_user_security_login') }}">
+                    <i class="fa fa-sign-in"></i>
+                    <span> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</span>
                 </a>
             </li>
-            <li class="pull-right">
-                <a class="{% if currentRoute == 'fos_user_security_login' %}active{% endif %}" title="{{ 'layout.login'|trans({}, 'FOSUserBundle') }}" href="{{ path('fos_user_security_login') }}">
-                    <i class="fa fa-sign-in"></i>
-                    <span class="hidden-xs-500 visible-sm-inline"> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</span>
+            <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_registration_register">
+                <a class="{% if currentRoute == 'fos_user_registration_register' %}active{% endif %}" href="{{ path('fos_user_registration_register') }}">
+                    <i class="fa fa-pencil-square-o"></i>
+                    <span> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</span>
                 </a>
             </li>
         {% endif %}
+        <li class="search pull-right">
+            <form class="navbar-form" action="{{ path('inck_article_article_search') }}" method="get">
+                <div class="input-group">
+                    <input class="form-control" placeholder="{{ 'view.layout.search'|trans }}" type="search" name="q">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search fa-fw"></i></button>
+                    </span>
+                </div>
+            </form>
+        </li>
     </ul>
 {% endblock %}
 

@@ -136,6 +136,10 @@
     box-shadow: inset 0 1px #c6d0da
 }
 
+.gn-menu li.first-child {
+    box-shadow: none;
+}
+
 .gn-submenu li {
     overflow: hidden;
     height: 0;
@@ -298,22 +302,71 @@ input.gn-search:focus {
 }
 
 /* Additional */
-.visible-sm-inline {
-    display: inline !important;
+#gn-menu .brand {
+    border-right: 1px solid #c6d0da;
 }
 
-@media screen and (max-width: 768px) {
-    .gn-menu-main>li {
-        font-size: 10px;
-    }
+.navbar-avatar {
+    margin-right: 5px;
+    border: 1px solid #20525C;
 }
 
-@media screen and (max-width: 500px) {
-    .hidden-xs-500 {
-        display: none !important;
-    }
+.gn-menu li.authenticated {
+    border-bottom: 1px solid #c6d0da;
+}
 
-    .gn-menu-main>li.pull-right i {
-        font-size: 20px;
-    }
+#gn-menu li.fos_user_security_login a,
+.gn-menu li.authenticated.fos_user_security_login a {
+    color: #ffffff;
+    background-color: #77ad83;
+}
+
+#gn-menu li.fos_user_security_login a:hover,
+.gn-menu li.authenticated.fos_user_security_login a:hover {
+    color: #ffffff;
+    background-color: #699972;
+}
+
+#gn-menu li.brand a,
+#gn-menu li.fos_user_security_logout a,
+.gn-menu li.authenticated.fos_user_security_logout a,
+#gn-menu li.fos_user_registration_register a,
+#gn-menu li.fos_user_profile_show a,
+.gn-menu li.authenticated.fos_user_registration_register a,
+.gn-menu li.authenticated.fos_user_profile_show a {
+    color: #ffffff;
+    background-color: #25444d;
+}
+
+#gn-menu li.brand a:hover,
+#gn-menu li.fos_user_security_logout a:hover,
+.gn-menu li.authenticated.fos_user_security_logout a:hover,
+#gn-menu li.fos_user_registration_register a:hover,
+#gn-menu li.fos_user_profile_show a:hover,
+.gn-menu li.authenticated.fos_user_registration_register a:hover,
+.gn-menu li.authenticated.fos_user_profile_show a:hover {
+    color: #ffffff;
+    background-color: #1f3743;
+}
+
+#gn-menu li.search {
+    border-left: none;
+}
+
+#gn-menu li.search form {
+    float: right;
+    display: inline;
+    line-height: 0;
+    margin: 12px 0 14px 0;
+    width: auto;
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-shadow: none;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+#gn-menu li.search form .input-group{
+    width: 200px;
 }

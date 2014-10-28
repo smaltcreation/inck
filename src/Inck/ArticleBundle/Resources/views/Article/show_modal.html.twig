@@ -7,7 +7,16 @@
             <p>{{ article.summary }}</p>
         </div>
         <div class="modal-body">
-            <p>{{ article.content|raw }}</p>
+            <p>
+                {% if article.imageName %}
+                    <img class="img-responsive" src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
+                {% else %}
+                    {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+                        <img class="img-responsive" src="{{ asset_url|apply_filter('article_thumb') }}" alt="Image par défaut"/>
+                    {% endimage %}
+                {% endif %}
+                {{ article.content|raw }}
+            </p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> {{ 'article.error.close'|trans }}</button>
