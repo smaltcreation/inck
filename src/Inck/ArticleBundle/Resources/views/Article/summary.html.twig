@@ -1,3 +1,4 @@
+{% trans_default_domain 'ArticleBundle' %}
 {% set currentRoute = app.request.attributes.get('_route') %}
 {% if currentRoute == 'inck_article_article_show' %}
     {% set articleUrl = '#content' %}
@@ -19,7 +20,7 @@
     <div class="caption">
         <h3 itemprop="name"><a href="{{ articleUrl }}">{{ article.title }}</a></h3>
         <p class="about">
-            Rédigé par <a class="btn btn-primary btn-xs" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash; publié le <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
+            {{ 'article.show.writen_by'|trans }} <a class="btn btn-primary btn-xs" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash; {{ 'article.show.published_the'|trans }} <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
             <a href="{{ path('inck_article_article_pdf', { 'id': article.id }) }}" class="btn btn-link btn-xs btn-tooltip btn-circle" data-toggle="tooltip" data-placement="top" target="blank" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
         </p>
         <p itemprop="description">{{ article.summary }}</p>

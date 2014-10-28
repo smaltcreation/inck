@@ -2,7 +2,7 @@
 {% trans_default_domain 'ArticleBundle' %}
 
 {% block title %}{{ 'category.list.catagories'|trans }}{% endblock %}
-{% block description %}<meta name="description" content="Trouver une categorie ou un tag n'a jamais été plus simple.">{% endblock %}
+{% block description %}<meta name="description" content={{ 'category.list.description'|trans }}>{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}

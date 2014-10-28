@@ -16,6 +16,7 @@ category:
     list:
       catagories: Catégories
       total: au total
+      description: Trouver une categorie ou un tag n'a jamais été plus simple.
 
     list_content:
         most_popular: Nos catégories les plus poulaires
@@ -53,10 +54,15 @@ article:
 
 
     show:
+        follow_us: Venez nous suivre
         social_networks: sur les réseaux sociaux
         activate_js: Merci d'activer JavaScript pour voir
         comments: les commentaires propulsés par Disqus.
+        writen_by: Rédigé par
+        published_the: publié le
+        statistics:
 
-    timemine:
+    timeline:
         filter: Filtrer les articles
         more_articles: Afficher plus d'articles
+        results: résultat

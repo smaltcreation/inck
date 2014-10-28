@@ -3,7 +3,7 @@
     <p>
         <button class="btn btn-inverse toggle-filter"><i class="fa fa-filter"></i> {{ 'article.timeline.filter'|trans }}</button>
         <span id="articles-total" class="label label-primary">
-            <span>{{ totalArticles }}</span> résultat{% if totalArticles|length > 1 %}s{% endif %}
+            <span>{{ totalArticles }}</span> {{ 'article.timeline.results'|trans }}{% if totalArticles|length > 1 %}s{% endif %}
         </span>
     </p>
     <div id="filters">

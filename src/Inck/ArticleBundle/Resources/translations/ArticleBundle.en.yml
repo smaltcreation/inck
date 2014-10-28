@@ -15,6 +15,7 @@ category:
     list:
       catagories: Categories
       total: in total
+      description: Finding an article or a tag has never been this simple
 
     list_content:
         most_popular: Our most popular category
@@ -51,10 +52,15 @@ article:
         for_article: Search for an article
 
     show:
+        follow_us: Come follow us
         social_networks: on the social networks
         activate_js: Please activate JavaScript tu see
         comments: comments powered by Disqus.
+        writen_by: Writen by
+        published_the: published the
+        statistics: Statistics
 
-    timemine:
+    timeline:
             filter: Filter the articles
             more_articles: Show more articles
+            results: results
