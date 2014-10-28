@@ -1,7 +1,7 @@
 {% extends 'InckCoreBundle::layout.html.twig' %}
 {% trans_default_domain 'CoreBundle' %}
 
-{% block title %}L'opinon libre{% endblock %}
+{% block title %}{{ 'default.index.opinion'|trans }}{% endblock %}
 {% block description %}<meta name="description" content="Inck est un lieu sans préjugés où nous aimons partager ce que nous pensons. Envoyez tous vos articles et faites vous récompenser pour leur qualité !">{% endblock %}
 
 {% block stylesheets %}
@@ -21,12 +21,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12"  itemscope itemtype="http://schema.org/Website" >
-                    <h1>L'expression libre et culturelle</h1>
+                    <h1>{{ 'default.index.free_expression'|trans }}</h1>
                     <p>
-                        <span itemprop="description" class="hidden-xs hidden-sm visible-md visible-lg">Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et le divertissement,
-                        vous êtes le moteur contribuant à la diversité des pensées et au partage de la connaissance.
-                        Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !</span>
-                        <span class="visible-xs visible-sm hidden-md hidden-lg">Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !</span>
+                        <span itemprop="description" class="hidden-xs hidden-sm visible-md visible-lg">{{ 'default.index.free_expression_recap'|trans }}</span>
+                        <span class="visible-xs visible-sm hidden-md hidden-lg">{{ 'default.index.read'|trans }}</span>
                     </p>
                 </div>
             </div>

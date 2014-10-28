@@ -12,6 +12,12 @@ default:
     about:
       about: À propos
       about_inck: À propos de Inck
+
+    index:
+        free_expression: L'expression libre et culturelle
+        free_expression_recap: Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et le divertissement, vous êtes le moteur contribuant à la diversité des pensées et au partage de la connaissance. Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !
+        read: Lire, s'instruire, écrire, enseigner, divertir. Ici tout est possible !
+        opinion: L'opinion libre
       
 contact:
     index:
