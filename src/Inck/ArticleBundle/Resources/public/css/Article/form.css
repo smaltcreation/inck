@@ -24,7 +24,9 @@
 
 .cke_chrome {
     border: 1px solid #444 !important;
-}
+    box-shadow: none!important;
+    -webkit-box-shadow: none !important;
+    }
 
 .cke_button {
     background-color: #FFF !important;
