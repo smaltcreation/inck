@@ -68,14 +68,13 @@ class ArticleType extends AbstractType
                         'type'      => 'submit',
                         'options'   => [
                             'label' => 'Enregistrer comme brouillon',
-                            'attr'  => ['class' => 'btn-primary'],
+                            'attr'  => ['class' => 'btn-default'],
                         ]
                     ],
                     'cancel'      => [
                         'type'      => 'reset',
                         'options'   => [
                             'label' => 'Annuler',
-                            'attr'  => ['class' => 'btn-danger'],
                         ]
                     ],
                 ]

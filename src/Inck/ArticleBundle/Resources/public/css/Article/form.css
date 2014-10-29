@@ -13,3 +13,37 @@
 .single-upload-preview {
     padding-top: 33px !important;
 }
+
+.cke_top {
+    background: #F9F9F9 !important;
+}
+
+.cke_bottom {
+    background: #F9F9F9 !important;
+}
+
+.cke_chrome {
+    border: 1px solid #444 !important;
+}
+
+.cke_button {
+    background-color: #FFF !important;
+    border-color: #CCC !important;
+}
+
+.cke_toolgroup {
+    border-color: #CCC !important;
+}
+
+.cke_toolbar_separator {
+    visibility: hidden;
+}
+
+.cke_combo_button {
+    background: #FFF !important;
+    border-color: #CCC !important;
+}
+
+#inck_articlebundle_article_imageFile_preview {
+    border-style: solid !important;
+}
