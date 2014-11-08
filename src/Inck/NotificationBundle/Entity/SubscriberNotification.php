@@ -14,12 +14,27 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class SubscriberNotification extends Notification implements NotificationInterface
 {
+    const VIEW_NAME = 'InckNotificationBundle::subscriber.html.twig';
+
     /**
      * @var UserInterface
      *
      * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
      */
-    protected $subscriber;
+    private $subscriber;
+
+
+    /**
+     * @param UserInterface $subscriber
+     * @param UserInterface $user
+     */
+    public function __construct($subscriber, $user)
+    {
+        parent::__construct();
+
+        $this->subscriber   = $subscriber;
+        $this->to           = $user;
+    }
 
     /**
      * @return UserInterface
@@ -38,5 +53,13 @@ class SubscriberNotification extends Notification implements NotificationInterfa
         $this->subscriber = $subscriber;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewName()
+    {
+        return self::VIEW_NAME;
     }
 }

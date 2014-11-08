@@ -82,13 +82,26 @@ class ClientManager
      */
     public function getClientByUser($user)
     {
+        $this->logger->debug(sprintf(
+            'looking for client %s, %d clients connected',
+            $user->getUsername(),
+            count($this->clients)
+        ));
+
         /** @var Client $client */
         foreach($this->clients as $client)
         {
-            if($client->getUser() === $user) {
+            if($client->getUser()->getUsername() === $user->getUsername()) {
+                $this->logger->debug(sprintf(
+                    'client found, id = %d',
+                    $client->getId()
+                ));
+
                 return $client;
             }
         }
+
+        $this->logger->debug('client not found');
 
         return null;
     }

@@ -3,10 +3,13 @@
 namespace Inck\SubscriptionBundle\Twig;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Inck\SubscriptionBundle\Traits\SubscriptionTrait;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class SubscriptionExtension extends \Twig_Extension
 {
+    use SubscriptionTrait;
+
     /**
      * @var SecurityContext $securityContext
      */
@@ -16,11 +19,6 @@ class SubscriptionExtension extends \Twig_Extension
      * @var ObjectManager $em
      */
     private $em;
-
-    /**
-     * @var array
-     */
-    private $parameters;
 
     /**
      * @var \Twig_Environment $environment
@@ -47,11 +45,19 @@ class SubscriptionExtension extends \Twig_Extension
         $this->environment = $environment;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return "subscribe";
     }
 
+    /**
+     * Returns a list of functions to add to the existing list.
+     *
+     * @return array An array of functions
+     */
     public function getFunctions()
     {
         return array(
@@ -73,7 +79,7 @@ class SubscriptionExtension extends \Twig_Extension
         if($this->securityContext->isGranted('ROLE_USER'))
         {
             $user   = $this->securityContext->getToken()->getUser();
-            $class  = $this->aliasToClass($alias);
+            $class  = $this->aliasToClass($alias, true);
 
             $subscribed = $this
                 ->em
@@ -89,12 +95,5 @@ class SubscriptionExtension extends \Twig_Extension
             'alias'         => $alias,
             'id'            => $entity->getId(),
         ));
-    }
-
-    private function aliasToClass($alias)
-    {
-        return isset($this->parameters[$alias.'_subscription_class'])
-            ? $this->parameters[$alias.'_subscription_class']
-            : null;
     }
 }

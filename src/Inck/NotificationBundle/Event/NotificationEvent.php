@@ -12,6 +12,9 @@ class NotificationEvent extends Event
      */
     protected $notification;
 
+    /**
+     * @param NotificationInterface $notification
+     */
     public function __construct(NotificationInterface $notification)
     {
         $this->notification = $notification;

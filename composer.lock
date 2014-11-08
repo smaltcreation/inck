@@ -253,20 +253,20 @@
         },
         {
             "name": "components/bootstrap",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/bootstrap.git",
-                "reference": "09948b04f780173eb0b9ec522d53554f3f408055"
+                "reference": "220ece7325593e23de39d94816dccbc0d4ec12f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/bootstrap/zipball/09948b04f780173eb0b9ec522d53554f3f408055",
-                "reference": "09948b04f780173eb0b9ec522d53554f3f408055",
+                "url": "https://api.github.com/repos/components/bootstrap/zipball/220ece7325593e23de39d94816dccbc0d4ec12f8",
+                "reference": "220ece7325593e23de39d94816dccbc0d4ec12f8",
                 "shasum": ""
             },
             "require": {
-                "components/jquery": ">=1.9"
+                "components/jquery": ">=1.9.1"
             },
             "suggest": {
                 "components/bootstrap-default": "Provide a theme for Bootstrap as components/bootstrap only provides the CSS as file assets"
@@ -293,20 +293,30 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
             "authors": [
                 {
-                    "name": "Twitter, Inc"
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
                 }
             ],
-            "description": "Sleek, intuitive, and powerful front-end framework for faster and easier web development.",
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
             "homepage": "http://getbootstrap.com",
             "keywords": [
-                "bootstrap",
-                "css"
+                "css",
+                "framework",
+                "front-end",
+                "less",
+                "mobile-first",
+                "responsive",
+                "web"
             ],
-            "time": "2014-09-03 07:11:25"
+            "time": "2014-10-30 07:22:10"
         },
         {
             "name": "components/font-awesome",
@@ -1270,16 +1280,16 @@
         },
         {
             "name": "egeloen/ckeditor-bundle",
-            "version": "2.5.0",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egeloen/IvoryCKEditorBundle.git",
-                "reference": "a3f595101e571788af94aded9417a90ccbf66496"
+                "reference": "702109e94cbda9deebbcc9604aa8654cf71f08ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/a3f595101e571788af94aded9417a90ccbf66496",
-                "reference": "a3f595101e571788af94aded9417a90ccbf66496",
+                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/702109e94cbda9deebbcc9604aa8654cf71f08ee",
+                "reference": "702109e94cbda9deebbcc9604aa8654cf71f08ee",
                 "shasum": ""
             },
             "require": {
@@ -1321,20 +1331,20 @@
             "keywords": [
                 "CKEditor"
             ],
-            "time": "2014-08-29 16:31:01"
+            "time": "2014-11-08 10:48:36"
         },
         {
             "name": "egeloen/json-builder",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egeloen/ivory-json-builder.git",
-                "reference": "0395f06db7bbb3c240667ab5f3152151051fb567"
+                "reference": "6209142ed808e9899473e9b6091b8a4f4d8de794"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/0395f06db7bbb3c240667ab5f3152151051fb567",
-                "reference": "0395f06db7bbb3c240667ab5f3152151051fb567",
+                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/6209142ed808e9899473e9b6091b8a4f4d8de794",
+                "reference": "6209142ed808e9899473e9b6091b8a4f4d8de794",
                 "shasum": ""
             },
             "require": {
@@ -1354,7 +1364,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Ivory\\JsonBuilder\\": ""
+                    "Ivory\\JsonBuilder\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1373,21 +1383,20 @@
                 "builder",
                 "json"
             ],
-            "time": "2014-08-12 00:30:56"
+            "time": "2014-11-08 10:51:34"
         },
         {
             "name": "elao/web-profiler-extra-bundle",
             "version": "dev-master",
-            "target-dir": "Elao/WebProfilerExtraBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Elao/WebProfilerExtraBundle.git",
-                "reference": "82061e8b00060db91bd6b76e405184f417f56c09"
+                "reference": "082755c2af114ead713259ec7472782917605aaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Elao/WebProfilerExtraBundle/zipball/82061e8b00060db91bd6b76e405184f417f56c09",
-                "reference": "82061e8b00060db91bd6b76e405184f417f56c09",
+                "url": "https://api.github.com/repos/Elao/WebProfilerExtraBundle/zipball/082755c2af114ead713259ec7472782917605aaf",
+                "reference": "082755c2af114ead713259ec7472782917605aaf",
                 "shasum": ""
             },
             "require": {
@@ -1402,8 +1411,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Elao\\WebProfilerExtraBundle": "."
+                "psr-4": {
+                    "Elao\\WebProfilerExtraBundle\\": "."
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1428,7 +1437,7 @@
                 "extra",
                 "profiler"
             ],
-            "time": "2013-11-06 19:40:03"
+            "time": "2014-11-06 09:36:21"
         },
         {
             "name": "ensepar/html2pdf",
@@ -1486,12 +1495,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OwlyCode/EnseparHtml2pdfBundle.git",
-                "reference": "25666fa8349b55acb2f958f45eb96fd74f9f058b"
+                "reference": "75fab39edd5efc775bd20c64f01baf7aad3dc820"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OwlyCode/EnseparHtml2pdfBundle/zipball/25666fa8349b55acb2f958f45eb96fd74f9f058b",
-                "reference": "25666fa8349b55acb2f958f45eb96fd74f9f058b",
+                "url": "https://api.github.com/repos/OwlyCode/EnseparHtml2pdfBundle/zipball/75fab39edd5efc775bd20c64f01baf7aad3dc820",
+                "reference": "75fab39edd5efc775bd20c64f01baf7aad3dc820",
                 "shasum": ""
             },
             "require": {
@@ -1525,7 +1534,7 @@
                 "html2pdf",
                 "pdf"
             ],
-            "time": "2014-10-25 18:03:13"
+            "time": "2014-10-25 18:17:08"
         },
         {
             "name": "ensepar/tcpdf",
@@ -1635,12 +1644,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "e5e352e248698ed1e107bb7cce56ee23b44ccac1"
+                "reference": "ffe9d6b180e8f3b887040b4625d625fb6c79271a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/e5e352e248698ed1e107bb7cce56ee23b44ccac1",
-                "reference": "e5e352e248698ed1e107bb7cce56ee23b44ccac1",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/ffe9d6b180e8f3b887040b4625d625fb6c79271a",
+                "reference": "ffe9d6b180e8f3b887040b4625d625fb6c79271a",
                 "shasum": ""
             },
             "require": {
@@ -1682,7 +1691,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2014-09-05 15:07:52"
+            "time": "2014-10-31 16:21:24"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2163,16 +2172,16 @@
         },
         {
             "name": "ivaynberg/select2",
-            "version": "3.5.1",
+            "version": "3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ivaynberg/select2.git",
-                "reference": "8cc9d48d5881a5760178b5cd615c5174fbd98672"
+                "reference": "6633cda9061d9fc65075dd140c63f9a6adbcbd72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ivaynberg/select2/zipball/8cc9d48d5881a5760178b5cd615c5174fbd98672",
-                "reference": "8cc9d48d5881a5760178b5cd615c5174fbd98672",
+                "url": "https://api.github.com/repos/ivaynberg/select2/zipball/6633cda9061d9fc65075dd140c63f9a6adbcbd72",
+                "reference": "6633cda9061d9fc65075dd140c63f9a6adbcbd72",
                 "shasum": ""
             },
             "require": {
@@ -2202,7 +2211,7 @@
             ],
             "description": "Select2 is a jQuery based replacement for select boxes.",
             "homepage": "http://ivaynberg.github.io/select2/",
-            "time": "2014-07-22 22:59:02"
+            "time": "2014-11-01 18:43:44"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -2683,7 +2692,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -3332,17 +3341,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.7",
+            "version": "v3.0.8",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "3d7b900225882063cf179ce1d41bb8b1450a5a17"
+                "reference": "bc5e96bb4faf6bee7121085951d11b89488952f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/3d7b900225882063cf179ce1d41bb8b1450a5a17",
-                "reference": "3d7b900225882063cf179ce1d41bb8b1450a5a17",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/bc5e96bb4faf6bee7121085951d11b89488952f5",
+                "reference": "bc5e96bb4faf6bee7121085951d11b89488952f5",
                 "shasum": ""
             },
             "require": {
@@ -3381,7 +3390,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-10-01 06:52:36"
+            "time": "2014-11-03 21:16:34"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -3991,12 +4000,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "acfd72ab514ea2f0547a8ba84c0370d882542161"
+                "reference": "282c3b481bc0c12c34d90ab2a96ea390dbea1dcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/acfd72ab514ea2f0547a8ba84c0370d882542161",
-                "reference": "acfd72ab514ea2f0547a8ba84c0370d882542161",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/282c3b481bc0c12c34d90ab2a96ea390dbea1dcb",
+                "reference": "282c3b481bc0c12c34d90ab2a96ea390dbea1dcb",
                 "shasum": ""
             },
             "require": {
@@ -4054,7 +4063,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2014-10-27 15:30:02"
+            "time": "2014-11-07 16:49:27"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

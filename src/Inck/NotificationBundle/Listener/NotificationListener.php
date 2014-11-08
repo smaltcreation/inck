@@ -2,11 +2,75 @@
 
 namespace Inck\NotificationBundle\Listener;
 
+use DateTime;
+use Doctrine\Common\Persistence\ObjectManager;
 use Inck\NotificationBundle\Event\NotificationEvent;
+use Inck\RatchetBundle\Server\ClientManager;
+use Symfony\Bundle\TwigBundle\TwigEngine;
 
 class NotificationListener
 {
-    public function onSentNotification(NotificationEvent $event)
+    /**
+     * @var ObjectManager
+     */
+    private $em;
+
+    /**
+     * @var TwigEngine
+     */
+    private $templating;
+
+    /**
+     * @var ClientManager
+     */
+    private $clientManager;
+
+
+    /**
+     * @param ObjectManager $em
+     * @param TwigEngine $templating
+     * @param ClientManager $clientManager
+     */
+    public function __construct(ObjectManager $em, TwigEngine $templating, ClientManager $clientManager)
+    {
+        $this->em               = $em;
+        $this->templating       = $templating;
+        $this->clientManager    = $clientManager;
+    }
+
+    /**
+     * @param NotificationEvent $event
+     */
+    public function onNotificationCreated(NotificationEvent $event)
+    {
+        $notification = $event->getNotification();
+
+        // Envoi
+        $client = $this->clientManager->getClientByUser($notification->getTo());
+
+        if($client) {
+            $client->sendMessage('notification.received', array(
+                'html' => $this->templating->render(
+                    $notification->getViewName(),
+                    array(
+                        'notification' => $notification,
+                        'test' => $notification->getSubscriber()->getEmail(),
+                    )
+                ),
+            ));
+
+            $notification->setSentAt(new DateTime());
+        }
+
+        // Enregistrement
+        $this->em->persist($notification);
+        $this->em->flush();
+    }
+
+    /**
+     * @param NotificationEvent $event
+     */
+    public function onNotificationDisplayed(NotificationEvent $event)
     {
 
     }

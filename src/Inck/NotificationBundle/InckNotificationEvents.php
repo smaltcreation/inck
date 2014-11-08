@@ -7,15 +7,10 @@ final class InckNotificationsEvents
     /**
      * @var string
      */
-    const NOTIFICATION_SENT = 'notification.sent';
+    const NOTIFICATION_CREATED = 'notification.created';
 
     /**
      * @var string
      */
-    const NOTIFICATION_RECEIVED = 'notification.received';
-
-    /**
-     * @var string
-     */
-    const NOTIFICATION_READ = 'notification.read';
+    const NOTIFICATION_DISPLAYED = 'notification.displayed';
 }

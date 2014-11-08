@@ -18,6 +18,11 @@ class StartServerCommand extends ContainerAwareCommand
             ->setDescription('Start the Ratchet server');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|null|void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $host = $this->getContainer()->getParameter('inck_ratchet.server_host');

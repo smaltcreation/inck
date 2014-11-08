@@ -1,0 +1,15 @@
+<div class="ns-thumb">
+    <img src="{{ gravatar(notification.subscriber.email, 64, 'g', 'mm', true) }}">
+</div>
+<div class="ns-content">
+    <p>
+        <a href="#">
+            {{
+                notification.subscriber.lastName and notification.subscriber.firstName
+                    ? notification.subscriber.firstName ~ ' ' ~ notification.subscriber.lastName
+                    : notification.subscriber.username
+            }}
+        </a>
+        s'est abonné à vous. ({{ test }})
+    </p>
+</div>

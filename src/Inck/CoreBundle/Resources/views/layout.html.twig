@@ -27,22 +27,72 @@
                             {#<a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>{{ 'view.layout.search'|trans }}</span></a>#}
                         {#</li>#}
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg fos_user_security_logout"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-lg fa-fw"></i><span> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span></a></li>
-                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg second-child fos_user_profile_show"><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user fa-lg fa-fw"></i><span>{{ app.user.username }}</span></a></li>
+                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg fos_user_security_logout">
+                                <a href="{{ path('fos_user_security_logout') }}">
+                                    <i class="fa fa-sign-out fa-lg fa-fw"></i>
+                                    <span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
+                                </a>
+                            </li>
+                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg second-child fos_user_profile_show">
+                                <a href="{{ path('fos_user_profile_show') }}">
+                                    <i class="fa fa-user fa-lg fa-fw"></i>
+                                    <span>{{ app.user.username }}</span>
+                                </a>
+                            </li>
                         {% else %}
-                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg fos_user_security_login"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in fa-lg fa-fw"></i><span> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</span></a></li>
-                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg second-child fos_user_registration_register"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o fa-lg fa-fw"></i><span> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</span></a></li>
+                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg fos_user_security_login">
+                                <a href="{{ path('fos_user_security_login') }}">
+                                    <i class="fa fa-sign-in fa-lg fa-fw"></i>
+                                    <span>{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</span>
+                                </a>
+                            </li>
+                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg second-child fos_user_registration_register">
+                                <a href="{{ path('fos_user_registration_register') }}">
+                                    <i class="fa fa-pencil-square-o fa-lg fa-fw"></i>
+                                    <span> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</span>
+                                </a>
+                            </li>
                         {% endif %}
-                        <li class="first-child"><a class="{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil fa-lg fa-fw"></i>{{ 'view.layout.write_article'|trans }}</a></li>
-                        <li><a class="{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}"><i class="fa fa-thumbs-up fa-lg fa-fw"></i>{{ 'view.layout.modify_article'|trans }}</a></li>
-                        <li><a class="{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{{ path('inck_article_category_list') }}"><i class="fa fa-tags fa-lg fa-fw"></i>{{ 'view.layout.catagories'|trans }}</a></li>
-                        <li><a class="{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{{ path('inck_core_default_about') }}"><i class="fa fa-info fa-lg fa-fw"></i>{{ 'default.about.about'|trans }}</a></li>
-                        <li><a class="{% if currentRoute == 'inck_bid_registration_register' %} active{% endif %}" href="{#{ path('inck_bid_registration_register') }#}"><i class="fa fa-institution fa-lg fa-fw"></i>{{ 'view.layout.press'|trans }}</a></li>
+                        <li class="first-child">
+                            <a class="{% if currentRoute == 'inck_article_article_new' %} active{% endif %}" href="{{ path('inck_article_article_new') }}">
+                                <i class="fa fa-pencil fa-lg fa-fw"></i>
+                                {{ 'view.layout.write_article'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}">
+                                <i class="fa fa-thumbs-up fa-lg fa-fw"></i>
+                                {{ 'view.layout.modify_article'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{{ path('inck_article_category_list') }}">
+                                <i class="fa fa-tags fa-lg fa-fw"></i>
+                                {{ 'view.layout.catagories'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{{ path('inck_core_default_about') }}">
+                                <i class="fa fa-info fa-lg fa-fw"></i>
+                                {{ 'default.about.about'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="{% if currentRoute == 'inck_bid_registration_register' %} active{% endif %}" href="{#{ path('inck_bid_registration_register') }#}">
+                                <i class="fa fa-institution fa-lg fa-fw"></i>
+                                {{ 'view.layout.press'|trans }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </li>
-        <li class="brand"><a class="{% if currentRoute == 'home' %}active{% endif %}" href={{ path('home') }}><i class="fa fa-home"></i> Inck</a></li>
+        <li class="brand">
+            <a class="{% if currentRoute == 'home' %}active{% endif %}" href={{ path('home') }}>
+                <i class="fa fa-home"></i>
+                Inck
+            </a>
+        </li>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_security_logout">
                 <a href="{{ path('fos_user_security_logout') }}">
@@ -95,6 +145,7 @@
             </div>
         </div>
     </section>
+
     <section id="footer-parteners" class="ss-style-triangles">
         <div id="carousel-parteners" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -155,6 +206,7 @@
                 <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
         </div>
+    </section>
 {% endblock %}
 
 {% block javascripts %}

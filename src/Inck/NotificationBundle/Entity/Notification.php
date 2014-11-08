@@ -2,14 +2,14 @@
 
 namespace Inck\NotificationBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Inck\NotificationBundle\Model\NotificationInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Notification
  */
-class Notification implements NotificationInterface
+class Notification
 {
     /**
      * @var integer
@@ -30,16 +30,16 @@ class Notification implements NotificationInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="receivedAt", type="datetime")
+     * @ORM\Column(name="sentAt", type="datetime", nullable=true)
      */
-    protected $receivedAt;
+    protected $sentAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="readAt", type="datetime")
+     * @ORM\Column(name="displayedAt", type="datetime", nullable=true)
      */
-    protected $readAt;
+    protected $displayedAt;
 
     /**
      * @var UserInterface
@@ -48,6 +48,11 @@ class Notification implements NotificationInterface
      */
     protected $to;
 
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
 
     /**
      * Get id
@@ -83,49 +88,49 @@ class Notification implements NotificationInterface
     }
 
     /**
-     * Set receivedAt
+     * Set sentAt
      *
-     * @param \DateTime $receivedAt
+     * @param \DateTime $sentAt
      * @return Notification
      */
-    public function setReceivedAt($receivedAt)
+    public function setSentAt($sentAt)
     {
-        $this->receivedAt = $receivedAt;
+        $this->sentAt = $sentAt;
 
         return $this;
     }
 
     /**
-     * Get receivedAt
+     * Get sentAt
      *
      * @return \DateTime 
      */
-    public function getReceivedAt()
+    public function getSentAt()
     {
-        return $this->receivedAt;
+        return $this->sentAt;
     }
 
     /**
-     * Set readAt
+     * Set displayedAt
      *
-     * @param \DateTime $readAt
+     * @param \DateTime $displayedAt
      * @return Notification
      */
-    public function setReadAt($readAt)
+    public function setDisplayedAt($displayedAt)
     {
-        $this->readAt = $readAt;
+        $this->displayedAt = $displayedAt;
 
         return $this;
     }
 
     /**
-     * Get readAt
+     * Get displayedAt
      *
      * @return \DateTime 
      */
-    public function getReadAt()
+    public function getDisplayedAt()
     {
-        return $this->readAt;
+        return $this->displayedAt;
     }
 
     /**

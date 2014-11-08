@@ -4,6 +4,7 @@ namespace Inck\UserBundle\EventListener;
 
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -33,15 +34,21 @@ class LoginListener implements EventSubscriberInterface
     private $logger;
 
     /**
+     * @var UserManagerInterface
+     */
+    private $userManager;
+
+    /**
      * @param Session $session
      * @param SecurityContext $securityContext
      * @param Logger $logger
      */
-    public function __construct(Session $session, SecurityContext $securityContext, Logger $logger)
+    public function __construct(Session $session, SecurityContext $securityContext, Logger $logger, UserManagerInterface $userManager)
     {
         $this->session          = $session;
         $this->securityContext  = $securityContext;
         $this->logger           = $logger;
+        $this->userManager      = $userManager;
     }
 
     /**
@@ -76,6 +83,7 @@ class LoginListener implements EventSubscriberInterface
      */
     private function setSession(UserInterface $user)
     {
+        $user = $this->userManager->findUserByUsername($user->getUsername());
         $this->session->set('user', $user);
     }
 }

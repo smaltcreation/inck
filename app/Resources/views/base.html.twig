@@ -36,11 +36,25 @@
     </head>
     <body>
         <div id="wrapper">
-            <nav id="navbar">{% block navbar %}{% endblock %}</nav>
-            <header id="header">{% block header %}{% endblock %}</header>
-            {% if app.request.attributes.get('_route') != 'inck_article_article_show' %}{% include('base/messages.html.twig') %}{% endif %}
-            <section id="content">{% block content %}{% endblock %}</section>
-            <footer id="footer">{% block footer %}{% endblock %}</footer>
+            <nav id="navbar">
+                {% block navbar %}{% endblock %}
+            </nav>
+
+            <header id="header">
+                {% block header %}{% endblock %}
+            </header>
+
+            {% if app.request.attributes.get('_route') != 'inck_article_article_show' %}
+                {% include('base/messages.html.twig') %}
+            {% endif %}
+
+            <section id="content">
+                {% block content %}{% endblock %}
+            </section>
+
+            <footer id="footer">
+                {% block footer %}{% endblock %}
+            </footer>
         </div>
 
         {% block javascripts %}
@@ -73,7 +87,7 @@
                     'bundles/inckratchet/js/client.js'
                     'components/modernizr/modernizr.js'
                     'bundles/incknotification/js/notificationFx.js'
-                    'bundles/incknotification/js/test.js'
+                    'bundles/incknotification/js/subscriber.js'
                 %}
                     <script src="{{ asset_url }}"></script>
                 {% endjavascripts %}

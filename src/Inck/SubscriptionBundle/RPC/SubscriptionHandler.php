@@ -3,29 +3,41 @@
 namespace Inck\SubscriptionBundle\RPC;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Inck\ArticleBundle\Entity\Category;
+use Inck\ArticleBundle\Entity\Tag;
+use Inck\NotificationBundle\Entity\SubscriberNotification;
+use Inck\NotificationBundle\Event\NotificationEvent;
+use Inck\NotificationBundle\InckNotificationsEvents;
 use Inck\RatchetBundle\Entity\Client;
 use Inck\SubscriptionBundle\Model\SubscriptionInterface;
+use Inck\SubscriptionBundle\Traits\SubscriptionTrait;
+use Inck\UserBundle\Entity\User;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class SubscriptionHandler
 {
+    use SubscriptionTrait;
+
     /**
      * @var ObjectManager $em
      */
     private $em;
 
     /**
-     * @var array
+     * @var EventDispatcherInterface
      */
-    private $parameters;
+    private $dispatcher;
 
     /**
      * @param ObjectManager $em
+     * @param EventDispatcherInterface $dispatcher
      * @param array $parameters
      */
-    public function __construct(ObjectManager $em, $parameters)
+    public function __construct(ObjectManager $em, EventDispatcherInterface $dispatcher, array $parameters)
     {
         $this->em           = $em;
+        $this->dispatcher   = $dispatcher;
         $this->parameters   = $parameters;
     }
 
@@ -74,6 +86,7 @@ class SubscriptionHandler
             }
 
             // Récupération de l'entité
+            /** @var User|Category|Tag $entity */
             $entity = $this
                 ->em
                 ->getRepository($class)
@@ -86,17 +99,22 @@ class SubscriptionHandler
                 ));
             }
 
+            // Recherche de l'abonnement
             $subscription = $this
                 ->em
                 ->getRepository($subscriptionClass)
                 ->findOneBy(array(
-                    'subscriber' => $user,
-                    'to' => $entity,
+                    'subscriber'    => $user,
+                    'to'            => $entity,
                 ));
 
+            // Suppression de l'abonnement
             if ($subscription) {
                 $this->em->remove($subscription);
-            } else {
+            }
+
+            // Création de l'abonnement
+            else {
                 /** @var SubscriptionInterface $subscription */
                 $subscription = new $subscriptionClass();
 
@@ -105,8 +123,21 @@ class SubscriptionHandler
                     ->setTo($entity);
 
                 $this->em->persist($subscription);
+
+                // Création d'une notification
+                if ($parameters['entityAlias'] === 'user') {
+                    $this->dispatcher->dispatch(
+                        // TODO: use class InckNotificationsEvents
+                        //InckNotificationsEvents::NOTIFICATION_CREATED,
+                        'notification.created',
+                        new NotificationEvent(
+                            new SubscriberNotification($user, $entity)
+                        )
+                    );
+                }
             }
 
+            // Enregistrement
             $this->em->flush();
 
             $client->sendMessage('subscription.saved', [
@@ -119,23 +150,5 @@ class SubscriptionHandler
                 'message'   => $e->getMessage(),
             ]);
         }
-    }
-
-    /**
-     * @param string $alias
-     * @param bool $subscription
-     * @return null
-     */
-    private function aliasToClass($alias, $subscription = false)
-    {
-        $key = sprintf(
-            '%s%s_class',
-            $alias,
-            ($subscription) ? '_subscription' : ''
-        );
-
-        return isset($this->parameters[$key])
-            ? $this->parameters[$key]
-            : null;
     }
 }

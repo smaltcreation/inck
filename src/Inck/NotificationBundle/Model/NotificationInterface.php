@@ -24,6 +24,28 @@ interface NotificationInterface
     public function getCreatedAt();
 
     /**
+     * @param DateTime $sentAt
+     * @return $this
+     */
+    public function setSentAt($sentAt);
+
+    /**
+     * @return DateTime
+     */
+    public function getSentAt();
+
+    /**
+     * @param DateTime $displayedAt
+     * @return $this
+     */
+    public function setDisplayedAt($displayedAt);
+
+    /**
+     * @return DateTime
+     */
+    public function getDisplayedAt();
+
+    /**
      * @param UserInterface $to
      * @return $this
      */
@@ -33,4 +55,9 @@ interface NotificationInterface
      * @return UserInterface
      */
     public function getTo();
+
+    /**
+     * @return string
+     */
+    public function getViewName();
 }
