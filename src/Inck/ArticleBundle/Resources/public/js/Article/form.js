@@ -2,6 +2,16 @@ $(document).ready(function(){
     var toggleArticleHeader = $('.toggle-article-header');
     toggleArticleHeader.click(function(){
         $('#article-header').stop().slideToggle('slow');
+        var icon = toggleArticleHeader.find('i:first');
+
+        if(icon.hasClass('fa-chevron-up')) {
+            icon.removeClass('fa-chevron-up');
+            icon.addClass('fa-chevron-down');
+        }
+        else {
+            icon.removeClass('fa-chevron-down');
+            icon.addClass('fa-chevron-up');
+        }
     });
     // Gestion des tags
     var input = $("#inck_articlebundle_article_tags");

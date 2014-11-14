@@ -21,7 +21,6 @@ class DefaultController extends Controller
      * @Route("/about", name="inck_core_default_about")
      * @Template()
      */
-
     public function aboutAction()
     {
         return array();

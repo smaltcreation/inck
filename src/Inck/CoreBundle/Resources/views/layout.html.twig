@@ -7,6 +7,7 @@
         'bundles/inckcore/css/navbar.css'
         'bundles/inckcore/css/footer.css'
         'bundles/inckcore/css/header.css'
+        'bundles/inckcore/css/search.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -20,12 +21,6 @@
             <nav class="gn-menu-wrapper">
                 <div class="gn-scroller">
                     <ul class="gn-menu">
-                        {#<li class="gn-search-item">#}
-                            {#<form action="{{ path('inck_article_article_search') }}" method="get">#}
-                                {#<input placeholder="Recherche" type="search" class="gn-search" name="q">#}
-                            {#</form>#}
-                            {#<a class="gn-icon gn-icon-search{% if currentRoute == 'inck_core_search_list' %} active{% endif %}"><span>{{ 'view.layout.search'|trans }}</span></a>#}
-                        {#</li>#}
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <li class="authenticated visible-xs visible-sm hidden-md hidden-lg fos_user_security_logout">
                                 <a href="{{ path('fos_user_security_logout') }}">
@@ -120,6 +115,11 @@
                 </a>
             </li>
         {% endif %}
+
+        {#<li class="pull-right">#}
+            {#{% include 'InckCoreBundle::search.html.twig' %}#}
+        {#</li>#}
+
         <li class="search pull-right">
             <form class="navbar-form" action="{{ path('inck_article_article_search') }}" method="get">
                 <div class="input-group">
@@ -216,6 +216,7 @@
         'bundles/inckcore/js/modernizr.custom.js'
         'bundles/inckcore/js/layout/lib/gnmenu.js'
         'bundles/inckcore/js/layout/menu.js'
+        'bundles/inckcore/js/layout/search.js'
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

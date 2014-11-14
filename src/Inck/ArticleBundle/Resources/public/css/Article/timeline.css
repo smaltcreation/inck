@@ -5,3 +5,28 @@
 article {
     margin-bottom: 40px;
 }
+
+article aside img.gravatar {
+    margin-bottom: 10px;
+}
+
+article aside h4 {
+    margin-top: 0;
+}
+
+article aside h4 a {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #555;
+    transition: color ease 0.3s;
+}
+
+article aside h4 a:hover {
+    text-decoration: none;
+    color: #57a3e8;
+    outline: 0;
+}
+
+article aside .biography p {
+    color: #888;
+}

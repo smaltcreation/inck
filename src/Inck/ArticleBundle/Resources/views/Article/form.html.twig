@@ -41,7 +41,10 @@
     <div class="container">
         <article class="new">
             <p>
-                <button class="btn btn-tooltip btn-inverse toggle-article-header" data-placement="right" data-toggle="tooltip" data-container="body" title="Réduire les informations annexes"></i>En-tête de l'article</button>
+                <button class="btn btn-tooltip btn-inverse toggle-article-header" data-placement="right" data-toggle="tooltip" data-container="body" title="Réduire les informations annexes">
+                    <i class="fa fa-fw fa-chevron-up"></i>
+                    En-tête de l'article
+                </button>
             </p>
             <form {{ form_enctype(form) }} method="POST" novalidate="novalidate" data-article-id="{{ articleId }}" id="inck-article-article-form">
                 {{ form_errors(form) }}
@@ -73,7 +76,17 @@
                 </section>
 
                 <section id="article-new-actions">
-                    {{ form_row(form.actions) }}
+                    <button class="btn btn-success" type="submit" name="inck_articlebundle_article[actions][publish]">
+                        <i class="fa fa-fw fa-send"></i>
+                        Publier l'article
+                    </button>
+                    <button class="btn btn-default" type="submit">
+                        <i class="fa fa-fw fa-file-text"></i>
+                        Enregistrer comme brouillon</button>
+                    <button class="btn btn-default pull-right" type="reset" name="inck_articlebundle_article[actions][draft]">
+                        <i class="fa fa-fw fa-trash"></i>
+                        Annuler
+                    </button>
                 </section>
 
                 <div class="hidden">

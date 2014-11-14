@@ -11,43 +11,74 @@
 
             <article itemscope itemtype="http://schema.org/Article" id="article-{{ article.id }}" class="article">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-9 col-md-8">
                         <div class="summary">
                             {% include "InckArticleBundle:Article:summary.html.twig" %}
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3 col-md-4">
                         <aside>
                             <div class="hidden-xs visible-sm visible-md visible-lg">
                                 {% set user = article.author %}
-                                <div class="media">
-                                    <a class="pull-left" href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">
-                                        <img class="media-object img-rounded img-thumbnail" src="{{ gravatar(user.email, 100, 'g', 'mm', true) }}" alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}">
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">{{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h4>
-                                        {% if user.biography %}
-                                            <p>{{ user.biography|slice(0, 197) }}{% if user.biography|length > 197 %}...{% endif %}</p>
-                                        {% else %}
-                                            {% set noBiography = "Cet utilisateur n'a pas encore complété son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie : Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell. Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix. Le langage B de Thompson étant trop limité pour les besoins du nouveau système, Ritchie est amené à créer sur les mêmes bases le langage C. Par la suite, avec l'aide de Brian Kernighan, il promeut le langage et rédige notamment le livre de référence The C Programming Language2,3. Il reçoit conjointement avec Ken Thompson le prix Turing de l'ACM en 1983 pour leur travail sur le système Unix." %}
-                                            <p>{{ noBiography|slice(0, 197) }}{% if noBiography|length > 197 %}...{% endif %}</p>
-                                        {% endif %}
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">
+                                            <img class="img-rounded img-thumbnail img-responsive gravatar" src="{{ gravatar(user.email, 200, 'g', 'mm', true) }}" alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h4>
+                                            <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">
+                                                <strong>{{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</strong>
+                                            </a>
+                                        </h4>
+                                        <div class="biography">
+                                            {% if user.biography %}
+                                                <p>{{ user.biography|slice(0, 197) }}{% if user.biography|length > 197 %}...{% endif %}</p>
+                                            {% else %}
+                                                {% set noBiography = "Cet utilisateur n'a pas encore complété son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie : Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell. Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix. Le langage B de Thompson étant trop limité pour les besoins du nouveau système, Ritchie est amené à créer sur les mêmes bases le langage C. Par la suite, avec l'aide de Brian Kernighan, il promeut le langage et rédige notamment le livre de référence The C Programming Language2,3. Il reçoit conjointement avec Ken Thompson le prix Turing de l'ACM en 1983 pour leur travail sur le système Unix." %}
+                                                <p>{{ noBiography|slice(0, 197) }}{% if noBiography|length > 197 %}...{% endif %}</p>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
+
+
+
+
+                                {#<div class="media">#}
+                                    {#<a class="pull-left" href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">#}
+                                        {#<img class="media-object img-rounded img-thumbnail" src="{{ gravatar(user.email, 100, 'g', 'mm', true) }}" alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}">#}
+                                    {#</a>#}
+                                    {#<div class="media-body">#}
+                                        {#<h4 class="media-heading">#}
+                                            {#<a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}"><strong>{{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</strong></a>#}
+                                        {#</h4>#}
+                                        {#{% if user.biography %}#}
+                                            {#<p>{{ user.biography|slice(0, 197) }}{% if user.biography|length > 197 %}...{% endif %}</p>#}
+                                        {#{% else %}#}
+                                            {#{% set noBiography = "Cet utilisateur n'a pas encore complété son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie : Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell. Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix. Le langage B de Thompson étant trop limité pour les besoins du nouveau système, Ritchie est amené à créer sur les mêmes bases le langage C. Par la suite, avec l'aide de Brian Kernighan, il promeut le langage et rédige notamment le livre de référence The C Programming Language2,3. Il reçoit conjointement avec Ken Thompson le prix Turing de l'ACM en 1983 pour leur travail sur le système Unix." %}#}
+                                            {#<p>{{ noBiography|slice(0, 197) }}{% if noBiography|length > 197 %}...{% endif %}</p>#}
+                                        {#{% endif %}#}
+                                    {#</div>#}
+                                {#</div>#}
+
                                 <hr>
+
                             </div>
                             <p class="text-right">
                                 {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id ~ '/' ~ article.slug ~ '/' ~ (article.publishedAt ? article.publishedAt|date('Y-m-d') : article.createdAt|date('Y-m-d')) %}
-                                <a class="btn btn-default btn-sm btn-tooltip" title="Partager sur Facebook" data-container="body" data-placement="top" href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                                <a class="btn btn-default btn-xs btn-tooltip" title="Partager sur Facebook" data-container="body" data-placement="top" href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                                     <i class="fa fa-facebook fa-fw"></i>
                                 </a>
-                                <a class="btn btn-sm btn-default btn-tooltip" title="Partager sur Google +" data-container="body" data-placement="top" href="https://plus.google.com/share?url={{ currentUrl }}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                                <a class="btn btn-xs btn-default btn-tooltip" title="Partager sur Google +" data-container="body" data-placement="top" href="https://plus.google.com/share?url={{ currentUrl }}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                                     <i class="fa fa-google-plus fa-fw"></i>
                                 </a>
-                                <a class="btn btn-sm btn-default btn-tooltip" title="Twitter cet article" data-container="body" data-placement="top" href="https://twitter.com/share?text={{ article.title|url_encode }}&amp;hashtags={% for category in article.categories %}{{ category.name }}{% if not loop.last %},{% endif %}{% endfor %}&amp;url={{ currentUrl }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                <a class="btn btn-xs btn-default btn-tooltip" title="Twitter cet article" data-container="body" data-placement="top" href="https://twitter.com/share?text={{ article.title|url_encode }}&amp;hashtags={% for category in article.categories %}{{ category.name }}{% if not loop.last %},{% endif %}{% endfor %}&amp;url={{ currentUrl }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                                     <i class="fa fa-twitter fa-fw"></i>
                                 </a>
-                                <a class="btn btn-sm btn-default btn-tooltip" title="Partager sur Linkedin" data-container="body" data-placement="top" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedIn-share', 'width=550,height=235');return false;">
+                                <a class="btn btn-xs btn-default btn-tooltip" title="Partager sur Linkedin" data-container="body" data-placement="top" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedIn-share', 'width=550,height=235');return false;">
                                     <i class="fa fa-linkedin fa-fw"></i>
                                 </a>
                             </p>

@@ -1,0 +1,116 @@
+{% extends "InckCoreBundle::layout.html.twig" %}
+{% block title %}Panel d'administration{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/core/admin/index.css'
+
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Panel d'administration de Inck</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>Gestion des articles</h4></div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Titre</th>
+                                <th>Posté le</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for article in postedArticles %}
+                                {% if article.asDraft %}
+                                    {% set status = 'warning' %}
+                                    {% set icon = 'file-text-o' %}
+                                    {% set tooltip = 'Brouillon' %}
+                                {% elseif article.published %}
+                                    {% set status = 'success' %}
+                                    {% set icon = 'check' %}
+                                    {% set tooltip = 'Publié' %}
+                                {% elseif article.approved == false and article.approved != null %}
+                                    {% set status = 'danger' %}
+                                    {% set icon = 'times' %}
+                                    {% set tooltip = 'Désapprouvé' %}
+                                {% else %}
+                                    {% set status = 'primary' %}
+                                    {% set icon = 'refresh fa-spin' %}
+                                    {% set tooltip = 'En attente' %}
+                                {% endif %}
+                                <tr>
+                                    <td><span class="label label-{{ status }} btn-tooltip" data-toggle="tooltip" data-placement="left" data-container="body" title="{{ tooltip }}"><i class="fa fa-{{ icon }}"></i></span></td>
+                                    <td><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
+                                    <td>{{ article.postedAt|date('d/m/Y à H:i') }}</td>
+                                    <td><a href="{{ path('inck_article_article_show_modal', {'id' : article.id }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="right" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="panel-footer">
+                        <a class="btn btn-default btn-xs"><i class="fa fa-fw fa-plus-square"></i> Voir tous les articles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>Gestion des utilisateur</h4></div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Email</th>
+                            <th>Nom d'utilisateur</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.email|slice(0, 39) }}{% if user.email|length > 39 %}...{% endif %}</td>
+                                <td><a href="{{ path('fos_user_profile_preview', {'username': user.username}) }}">{{ user.username|slice(0, 39) }}{% if user.username|length > 39 %}...{% endif %}</a></td>
+                                <td><a href="#" class="btn btn-danger btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="right" title="Désactiver {{ user.username }}" data-container="body"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="panel-footer">
+                        <a class="btn btn-default btn-xs"><i class="fa fa-fw fa-plus-square"></i> Voir tous les utilisateurs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?uglifyjs2' output='js/compiled/core/admin/index.js'
+        'bundles/inckcore/js/Admin/index.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

@@ -75,6 +75,7 @@ class ArticleType extends AbstractType
                         'type'      => 'reset',
                         'options'   => [
                             'label' => 'Annuler',
+                            'attr'  => ['class' => 'btn-default'],
                         ]
                     ],
                 ]
