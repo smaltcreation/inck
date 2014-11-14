@@ -2,8 +2,8 @@
 
 namespace Inck\RatchetBundle\Entity;
 
+use Inck\UserBundle\Entity\User;
 use Ratchet\ConnectionInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class Client
 {
@@ -38,7 +38,7 @@ class Client
     }
 
     /**
-     * @return UserInterface
+     * @return User
      */
     public function getUser()
     {

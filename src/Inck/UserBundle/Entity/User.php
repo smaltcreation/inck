@@ -221,6 +221,48 @@ class User extends BaseUser
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->password,
+            $this->salt,
+            $this->usernameCanonical,
+            $this->username,
+            $this->expired,
+            $this->locked,
+            $this->credentialsExpired,
+            $this->enabled,
+            $this->id,
+            $this->email,
+            $this->firstname,
+            $this->lastname,
+        ));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->password,
+            $this->salt,
+            $this->usernameCanonical,
+            $this->username,
+            $this->expired,
+            $this->locked,
+            $this->credentialsExpired,
+            $this->enabled,
+            $this->id,
+            $this->email,
+            $this->firstname,
+            $this->lastname,
+        ) = array_merge(unserialize($serialized), array_fill(0, 2, null));
+    }
+
+    /**
      * Get id
      *
      * @return integer 

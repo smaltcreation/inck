@@ -3,10 +3,10 @@
 namespace Inck\RatchetBundle\Server;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\UserInterface;
 use Inck\RatchetBundle\Entity\Client;
 use Monolog\Logger;
 use Ratchet\ConnectionInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ClientManager
 {
@@ -80,7 +80,7 @@ class ClientManager
      * @param UserInterface $user
      * @return Client|null
      */
-    public function getClientByUser($user)
+    public function getClientByUser(UserInterface $user)
     {
         $this->logger->debug(sprintf(
             'looking for client %s, %d clients connected',

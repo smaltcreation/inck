@@ -10,9 +10,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class UserController extends Controller
 {
     /**
-    * @Route("/profile/{username}/preview", name="fos_user_profile_preview")
-    * @Template("InckUserBundle:Profile:preview.html.twig")
-    */
+     * @Route("/profile/{username}/preview", name="fos_user_profile_preview")
+     * @Template("InckUserBundle:Profile:preview.html.twig")
+     * @param string $username
+     * @return array
+     */
     public function previewAction($username)
     {
         /* On récupère l'utilisateur en fonction de l'username unique */

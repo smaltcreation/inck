@@ -4,7 +4,7 @@ namespace Inck\NotificationBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Inck\UserBundle\Entity\User;
 
 /**
  * Notification
@@ -42,9 +42,9 @@ class Notification
     protected $displayedAt;
 
     /**
-     * @var UserInterface
+     * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
+     * @ORM\ManyToOne(targetEntity="Inck\UserBundle\Entity\User")
      */
     protected $to;
 
@@ -70,7 +70,7 @@ class Notification
      * @param \DateTime $createdAt
      * @return Notification
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -93,7 +93,7 @@ class Notification
      * @param \DateTime $sentAt
      * @return Notification
      */
-    public function setSentAt($sentAt)
+    public function setSentAt(DateTime $sentAt)
     {
         $this->sentAt = $sentAt;
 
@@ -116,7 +116,7 @@ class Notification
      * @param \DateTime $displayedAt
      * @return Notification
      */
-    public function setDisplayedAt($displayedAt)
+    public function setDisplayedAt(DateTime $displayedAt)
     {
         $this->displayedAt = $displayedAt;
 
@@ -134,10 +134,10 @@ class Notification
     }
 
     /**
-     * @param UserInterface $to
+     * @param User $to
      * @return $this
      */
-    public function setTo(UserInterface $to)
+    public function setTo(User $to)
     {
         $this->to = $to;
 
@@ -145,7 +145,7 @@ class Notification
     }
 
     /**
-     * @return UserInterface
+     * @return User
      */
     public function getTo()
     {

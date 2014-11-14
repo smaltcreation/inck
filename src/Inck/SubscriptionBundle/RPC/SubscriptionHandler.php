@@ -7,13 +7,11 @@ use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\Tag;
 use Inck\NotificationBundle\Entity\SubscriberNotification;
 use Inck\NotificationBundle\Event\NotificationEvent;
-use Inck\NotificationBundle\InckNotificationsEvents;
 use Inck\RatchetBundle\Entity\Client;
 use Inck\SubscriptionBundle\Model\SubscriptionInterface;
 use Inck\SubscriptionBundle\Traits\SubscriptionTrait;
 use Inck\UserBundle\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class SubscriptionHandler
 {
@@ -44,7 +42,6 @@ class SubscriptionHandler
     /**
      * @param Client $client
      * @param array $parameters
-     * @return bool
      */
     public function save(Client $client, array $parameters)
     {
@@ -71,7 +68,7 @@ class SubscriptionHandler
             }
 
             // Récupération de l'utilisateur
-            /** @var UserInterface $user */
+            /** @var User $user */
             $user = $this->em->merge($client->getUser());
 
             // Récupération de la classe

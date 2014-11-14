@@ -3,7 +3,8 @@ $(document).ready(function(){
     var notificationDisplayed = false;
 
     $(document).bind('notification.received', function(e, data){
-        notifications.push(data.html);
+        console.log(data);
+        notifications.push(data);
 
         if(!notificationDisplayed) {
             displaySubscriberNotification();
@@ -16,10 +17,10 @@ $(document).ready(function(){
         }
 
         notificationDisplayed = true;
-        var message = notifications.shift();
+        var data = notifications.shift();
 
         var notification = new NotificationFx({
-            message: message,
+            message: data.html,
             layout: 'other',
             ttl: 6000,
             effect: 'thumbslider',
@@ -31,5 +32,9 @@ $(document).ready(function(){
         });
 
         notification.show();
+        window.server.call('notification.displayed', {
+            id: data.id,
+            date: new Date()
+        });
     }
 });

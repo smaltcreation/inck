@@ -1,7 +1,7 @@
 services:
     inck_notification.rpc.notification_handler:
         class: Inck\NotificationBundle\RPC\NotificationHandler
-        arguments: [@doctrine.orm.entity_manager, %inck_subscription.aliases%, @event_dispatcher]
+        arguments: [@doctrine.orm.entity_manager, @event_dispatcher]
         tags:
             -  { name: inck_ratchet.rpc, alias: notification }
     inck_notification.listener.notification_listener:

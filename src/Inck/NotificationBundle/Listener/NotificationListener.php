@@ -4,6 +4,7 @@ namespace Inck\NotificationBundle\Listener;
 
 use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
+use Inck\NotificationBundle\Entity\SubscriberNotification;
 use Inck\NotificationBundle\Event\NotificationEvent;
 use Inck\RatchetBundle\Server\ClientManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
@@ -43,18 +44,23 @@ class NotificationListener
      */
     public function onNotificationCreated(NotificationEvent $event)
     {
+        /** @var SubscriberNotification $notification */
         $notification = $event->getNotification();
+
+        // Enregistrement
+        $this->em->persist($notification);
+        $this->em->flush();
 
         // Envoi
         $client = $this->clientManager->getClientByUser($notification->getTo());
 
         if($client) {
             $client->sendMessage('notification.received', array(
-                'html' => $this->templating->render(
+                'id'    => $notification->getId(),
+                'html'  => $this->templating->render(
                     $notification->getViewName(),
                     array(
                         'notification' => $notification,
-                        'test' => $notification->getSubscriber()->getEmail(),
                     )
                 ),
             ));
@@ -62,7 +68,7 @@ class NotificationListener
             $notification->setSentAt(new DateTime());
         }
 
-        // Enregistrement
+        // Mise à jour
         $this->em->persist($notification);
         $this->em->flush();
     }

@@ -61,12 +61,11 @@ class Server implements MessageComponentInterface
      * Exception is sent back down the stack, handled by the Server and bubbled back up the application through this method
      * @param  ConnectionInterface $conn
      * @param  \Exception $e
-     * @throws \Exception
      */
     function onError(ConnectionInterface $conn, \Exception $e)
     {
         $this->logger->error(sprintf(
-            '"%s" in file %s at line %d',
+            '"%s" in file %s on line %d',
             $e->getMessage(),
             $e->getFile(),
             $e->getLine()
@@ -79,7 +78,6 @@ class Server implements MessageComponentInterface
      * Triggered when a client sends data through the socket
      * @param  \Ratchet\ConnectionInterface $from The socket/connection that sent the message to your application
      * @param  string $msg The message received
-     * @throws \Exception
      */
     function onMessage(ConnectionInterface $from, $msg)
     {

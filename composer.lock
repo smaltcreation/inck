@@ -253,16 +253,16 @@
         },
         {
             "name": "components/bootstrap",
-            "version": "3.3.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/bootstrap.git",
-                "reference": "220ece7325593e23de39d94816dccbc0d4ec12f8"
+                "reference": "c571792e5f6f90541bf7e2ba9c6d64da1d71e06e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/bootstrap/zipball/220ece7325593e23de39d94816dccbc0d4ec12f8",
-                "reference": "220ece7325593e23de39d94816dccbc0d4ec12f8",
+                "url": "https://api.github.com/repos/components/bootstrap/zipball/c571792e5f6f90541bf7e2ba9c6d64da1d71e06e",
+                "reference": "c571792e5f6f90541bf7e2ba9c6d64da1d71e06e",
                 "shasum": ""
             },
             "require": {
@@ -316,7 +316,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-10-30 07:22:10"
+            "time": "2014-11-12 19:50:27"
         },
         {
             "name": "components/font-awesome",
@@ -1495,12 +1495,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OwlyCode/EnseparHtml2pdfBundle.git",
-                "reference": "75fab39edd5efc775bd20c64f01baf7aad3dc820"
+                "reference": "0dca1707aa3716f109e0d6e70a4a16372132d13d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OwlyCode/EnseparHtml2pdfBundle/zipball/75fab39edd5efc775bd20c64f01baf7aad3dc820",
-                "reference": "75fab39edd5efc775bd20c64f01baf7aad3dc820",
+                "url": "https://api.github.com/repos/OwlyCode/EnseparHtml2pdfBundle/zipball/0dca1707aa3716f109e0d6e70a4a16372132d13d",
+                "reference": "0dca1707aa3716f109e0d6e70a4a16372132d13d",
                 "shasum": ""
             },
             "require": {
@@ -1534,7 +1534,7 @@
                 "html2pdf",
                 "pdf"
             ],
-            "time": "2014-10-25 18:17:08"
+            "time": "2014-11-02 16:13:20"
         },
         {
             "name": "ensepar/tcpdf",
@@ -3394,17 +3394,17 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "9b22aaee517e80aad3238ea0328458b6f964066f"
+                "reference": "b829a8097a41ccbd7d35683b1750043b23d682f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/9b22aaee517e80aad3238ea0328458b6f964066f",
-                "reference": "9b22aaee517e80aad3238ea0328458b6f964066f",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/b829a8097a41ccbd7d35683b1750043b23d682f5",
+                "reference": "b829a8097a41ccbd7d35683b1750043b23d682f5",
                 "shasum": ""
             },
             "require": {
@@ -3445,7 +3445,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2014-09-02 07:11:30"
+            "time": "2014-11-10 14:50:31"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -4000,12 +4000,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "282c3b481bc0c12c34d90ab2a96ea390dbea1dcb"
+                "reference": "d2cc9442fbbcf60b465912cbfb26e16d42ea66ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/282c3b481bc0c12c34d90ab2a96ea390dbea1dcb",
-                "reference": "282c3b481bc0c12c34d90ab2a96ea390dbea1dcb",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/d2cc9442fbbcf60b465912cbfb26e16d42ea66ac",
+                "reference": "d2cc9442fbbcf60b465912cbfb26e16d42ea66ac",
                 "shasum": ""
             },
             "require": {
@@ -4063,7 +4063,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2014-11-07 16:49:27"
+            "time": "2014-11-14 12:30:08"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

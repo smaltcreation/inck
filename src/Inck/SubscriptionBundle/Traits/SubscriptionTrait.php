@@ -2,7 +2,6 @@
 
 namespace Inck\SubscriptionBundle\Traits;
 
-
 trait SubscriptionTrait
 {
     /**
@@ -13,7 +12,7 @@ trait SubscriptionTrait
     /**
      * @param string $alias
      * @param bool $subscription
-     * @return null
+     * @return null|string
      */
     private function aliasToClass($alias, $subscription = false)
     {

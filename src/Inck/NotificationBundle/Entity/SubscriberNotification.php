@@ -3,8 +3,8 @@
 namespace Inck\NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Inck\UserBundle\Entity\User;
 use Inck\NotificationBundle\Model\NotificationInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * SubscriberNotification
@@ -17,18 +17,18 @@ class SubscriberNotification extends Notification implements NotificationInterfa
     const VIEW_NAME = 'InckNotificationBundle::subscriber.html.twig';
 
     /**
-     * @var UserInterface
+     * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
+     * @ORM\ManyToOne(targetEntity="Inck\UserBundle\Entity\User")
      */
     private $subscriber;
 
 
     /**
-     * @param UserInterface $subscriber
-     * @param UserInterface $user
+     * @param User $subscriber
+     * @param User $user
      */
-    public function __construct($subscriber, $user)
+    public function __construct(User $subscriber, User $user)
     {
         parent::__construct();
 
@@ -37,7 +37,7 @@ class SubscriberNotification extends Notification implements NotificationInterfa
     }
 
     /**
-     * @return UserInterface
+     * @return User
      */
     public function getSubscriber()
     {
@@ -45,10 +45,10 @@ class SubscriberNotification extends Notification implements NotificationInterfa
     }
 
     /**
-     * @param UserInterface $subscriber
+     * @param User $subscriber
      * @return $this
      */
-    public function setSubscriber($subscriber)
+    public function setSubscriber(User $subscriber)
     {
         $this->subscriber = $subscriber;
 

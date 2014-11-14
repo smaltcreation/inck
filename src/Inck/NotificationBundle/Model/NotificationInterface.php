@@ -3,7 +3,7 @@
 namespace Inck\NotificationBundle\Model;
 
 use DateTime;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Inck\UserBundle\Entity\User;
 
 interface NotificationInterface
 {
@@ -16,7 +16,7 @@ interface NotificationInterface
      * @param DateTime $createdAt
      * @return $this
      */
-    public function setCreatedAt($createdAt);
+    public function setCreatedAt(DateTime $createdAt);
 
     /**
      * @return DateTime
@@ -27,7 +27,7 @@ interface NotificationInterface
      * @param DateTime $sentAt
      * @return $this
      */
-    public function setSentAt($sentAt);
+    public function setSentAt(DateTime $sentAt);
 
     /**
      * @return DateTime
@@ -38,7 +38,7 @@ interface NotificationInterface
      * @param DateTime $displayedAt
      * @return $this
      */
-    public function setDisplayedAt($displayedAt);
+    public function setDisplayedAt(DateTime $displayedAt);
 
     /**
      * @return DateTime
@@ -46,13 +46,13 @@ interface NotificationInterface
     public function getDisplayedAt();
 
     /**
-     * @param UserInterface $to
+     * @param User $to
      * @return $this
      */
-    public function setTo(UserInterface $to);
+    public function setTo(User $to);
 
     /**
-     * @return UserInterface
+     * @return User
      */
     public function getTo();
 
