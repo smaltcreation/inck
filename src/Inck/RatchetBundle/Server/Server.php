@@ -2,6 +2,9 @@
 
 namespace Inck\RatchetBundle\Server;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use Inck\NotificationBundle\Manager\NotificationManager;
+use Inck\NotificationBundle\Model\NotificationInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 use Symfony\Bridge\Monolog\Logger;
@@ -20,6 +23,11 @@ class Server implements MessageComponentInterface
     private $logger;
 
     /**
+     * @var ObjectManager
+     */
+    private $em;
+
+    /**
      * @var array
      */
     private $rpcHandlers;
@@ -27,12 +35,16 @@ class Server implements MessageComponentInterface
     /**
      * @param ClientManager $clientManager
      * @param Logger $logger
+     * @param ObjectManager $em
+     * @param NotificationManager $notificationManager
      */
-    public function __construct(ClientManager $clientManager, Logger $logger)
+    public function __construct(ClientManager $clientManager, Logger $logger, ObjectManager $em, NotificationManager $notificationManager)
     {
-        $this->clientManager    = $clientManager;
-        $this->logger           = $logger;
-        $this->rpcHandlers      = array();
+        $this->clientManager        = $clientManager;
+        $this->logger               = $logger;
+        $this->em                   = $em;
+        $this->notificationManager  = $notificationManager;
+        $this->rpcHandlers          = array();
     }
 
     /**
@@ -42,7 +54,15 @@ class Server implements MessageComponentInterface
      */
     function onOpen(ConnectionInterface $conn)
     {
-        $this->clientManager->addConnection($conn);
+        $client = $this->clientManager->addConnection($conn);
+
+        // Envoi des nouvelles notifications
+        $repository = $this->em->getRepository('InckNotificationBundle:SubscriberNotification');
+
+        /** @var NotificationInterface $notification */
+        foreach ($repository->getNew($client->getUser()) as $notification) {
+            $this->notificationManager->send($notification);
+        }
     }
 
     /**

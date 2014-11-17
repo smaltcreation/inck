@@ -17,7 +17,7 @@ class UserSubscription extends Subscription implements SubscriptionInterface
     /**
      * @var UserInterface
      *
-     * @ORM\OneToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
+     * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
      */
     private $to;
 

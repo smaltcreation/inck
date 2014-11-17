@@ -19,12 +19,12 @@ services:
             - { name: form.type, alias: inck_user_group }
     inck_user.type.users_selector:
         class: Inck\UserBundle\Form\Type\UsersSelectorType
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: form.type, alias: inck_userbundle_users_selector }
     inck_user.event_listener.login:
         class: Inck\UserBundle\EventListener\LoginListener
-        arguments: [@session, @security.context]
+        arguments: [@session]
         tags:
             - { name: kernel.event_subscriber }
     inck_user_provider:

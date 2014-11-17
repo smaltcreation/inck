@@ -10,7 +10,7 @@ use Inck\NotificationBundle\Model\NotificationInterface;
  * SubscriberNotification
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Inck\NotificationBundle\Entity\SubscriberNotificationRepository")
  */
 class SubscriberNotification extends Notification implements NotificationInterface
 {

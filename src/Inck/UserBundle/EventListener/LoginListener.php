@@ -25,18 +25,11 @@ class LoginListener implements EventSubscriberInterface
     private $session;
 
     /**
-     * @var SecurityContext
-     */
-    private $securityContext;
-
-    /**
      * @param Session $session
-     * @param SecurityContext $securityContext
      */
-    public function __construct(Session $session, SecurityContext $securityContext)
+    public function __construct(Session $session)
     {
-        $this->session          = $session;
-        $this->securityContext  = $securityContext;
+        $this->session = $session;
     }
 
     /**
@@ -55,7 +48,7 @@ class LoginListener implements EventSubscriberInterface
      */
     public function onImplicitLogin(UserEvent $event)
     {
-        $this->setSession($event->getUser());
+        $this->onLogin($event->getUser());
     }
 
     /**
@@ -64,13 +57,13 @@ class LoginListener implements EventSubscriberInterface
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
         $user = $event->getAuthenticationToken()->getUser();
-        $this->setSession($user);
+        $this->onLogin($user);
     }
 
     /**
      * @param UserInterface $user
      */
-    private function setSession(UserInterface $user)
+    private function onLogin(UserInterface $user)
     {
         $this->session->set('user', $user);
     }

@@ -364,12 +364,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/jquery.git",
-                "reference": "923b3973ed5b6e465a621d3032106fc6832a9a3c"
+                "reference": "950ba6f21f2b5fab0195a11728cc83c5b147c594"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/jquery/zipball/923b3973ed5b6e465a621d3032106fc6832a9a3c",
-                "reference": "923b3973ed5b6e465a621d3032106fc6832a9a3c",
+                "url": "https://api.github.com/repos/components/jquery/zipball/950ba6f21f2b5fab0195a11728cc83c5b147c594",
+                "reference": "950ba6f21f2b5fab0195a11728cc83c5b147c594",
                 "shasum": ""
             },
             "require": {
@@ -384,8 +384,7 @@
                     "files": [
                         "jquery.min.js",
                         "jquery-migrate.js",
-                        "jquery-migrate.min.js",
-                        "jquery.min.map"
+                        "jquery-migrate.min.js"
                     ]
                 }
             },
@@ -396,12 +395,13 @@
             "authors": [
                 {
                     "name": "John Resig",
-                    "email": "jeresig@gmail.com"
+                    "email": "jeresig@gmail.com",
+                    "homepage": "http://ejohn.org/"
                 }
             ],
             "description": "jQuery JavaScript Library",
             "homepage": "http://jquery.com",
-            "time": "2014-10-10 05:49:59"
+            "time": "2014-07-02 11:53:01"
         },
         {
             "name": "components/jqueryui",
@@ -494,16 +494,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/modernizr.git",
-                "reference": "4115686a0f488b370b169e5a702d5028e7650bd3"
+                "reference": "c1d1c0c87485ff695f28ab77ec92eb3b072c1591"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/modernizr/zipball/4115686a0f488b370b169e5a702d5028e7650bd3",
-                "reference": "4115686a0f488b370b169e5a702d5028e7650bd3",
+                "url": "https://api.github.com/repos/components/modernizr/zipball/c1d1c0c87485ff695f28ab77ec92eb3b072c1591",
+                "reference": "c1d1c0c87485ff695f28ab77ec92eb3b072c1591",
                 "shasum": ""
-            },
-            "require": {
-                "robloach/component-installer": "*"
             },
             "type": "component",
             "extra": {
@@ -555,7 +552,7 @@
                 "browser",
                 "feature detection"
             ],
-            "time": "2014-10-08 13:59:52"
+            "time": "2014-11-16 14:44:46"
         },
         {
             "name": "doctrine/annotations",
@@ -1965,12 +1962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "835ab5eb2f8bd783a11980e8cbab549ee01aa720"
+                "reference": "e97748b3333f03ada757b0fc8ececb1b33120b3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/835ab5eb2f8bd783a11980e8cbab549ee01aa720",
-                "reference": "835ab5eb2f8bd783a11980e8cbab549ee01aa720",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/e97748b3333f03ada757b0fc8ececb1b33120b3d",
+                "reference": "e97748b3333f03ada757b0fc8ececb1b33120b3d",
                 "shasum": ""
             },
             "require": {
@@ -1983,12 +1980,14 @@
             },
             "require-dev": {
                 "doctrine/orm": "~2.3",
+                "symfony/property-access": "~2.5",
                 "symfony/twig-bundle": "~2.1",
                 "symfony/validator": "~2.1"
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "to use Doctrine user provider",
                 "friendsofsymfony/user-bundle": "to connect FOSUB with this bundle",
+                "symfony/property-access": "to use FOSUB integration with this bundle",
                 "symfony/twig-bundle": "to use the Twig hwi_oauth_* functions"
             },
             "type": "symfony-bundle",
@@ -2069,7 +2068,7 @@
                 "yahoo",
                 "yandex"
             ],
-            "time": "2014-07-30 11:47:22"
+            "time": "2014-11-15 10:59:42"
         },
         {
             "name": "imagine/imagine",
@@ -2692,7 +2691,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
