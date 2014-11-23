@@ -30,4 +30,27 @@ class SubscriberNotificationRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param SubscriberNotification $notification
+     * @param \DateInterval $interval
+     * @return bool
+     */
+    public function isAlreadySent(SubscriberNotification $notification, \DateInterval $interval)
+    {
+        $qb = $this->createQueryBuilder('n');
+        $limit = new \DateTime();
+        $limit->sub($interval);
+
+        $qb
+            ->select('COUNT(n)')
+            ->where('n.subscriber = :subscriber')
+            ->setParameter('subscriber', $notification->getSubscriber())
+            ->andWhere('n.to = :to')
+            ->setParameter('to', $notification->getTo())
+            ->andWhere('n.createdAt >= :createdAt')
+            ->setParameter('createdAt', $limit->format('Y-m-d H:i:s'));
+
+        return ((int) $qb->getQuery()->getSingleScalarResult() !== 0);
+    }
 }

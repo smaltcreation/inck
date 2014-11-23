@@ -35,7 +35,15 @@ class NotificationListener
      */
     public function onNotificationCreated(NotificationEvent $event)
     {
+        $repository = $this->em->getRepository('InckNotificationBundle:SubscriberNotification');
+
         /** @var SubscriberNotification $notification */
+        $notification = $event->getNotification();
+
+        if ($repository->isAlreadySent($notification, new \DateInterval('P1D'))) {
+            return;
+        }
+
         $notification = $this->em->merge($event->getNotification());
 
         // Enregistrement
