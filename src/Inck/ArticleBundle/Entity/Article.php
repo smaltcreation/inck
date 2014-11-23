@@ -124,6 +124,7 @@ class Article
     private $author;
 
     /**
+     * @Assert\Image()
      * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
      *
      * @var File $imageFile
