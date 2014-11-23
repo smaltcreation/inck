@@ -4,15 +4,14 @@ namespace Inck\ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Inck\UserBundle\Entity\User;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Vote
+ * Report
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Inck\ArticleBundle\Entity\VoteRepository")
+ * @ORM\Entity(repositoryClass="Inck\ArticleBundle\Entity\ReportRepository")
  */
-class Vote
+class Report
 {
     /**
      * @var integer
@@ -24,32 +23,33 @@ class Vote
     private $id;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="up", type="boolean")
-     */
-    private $up;
-
-    /**
      * @var \DateTime
      *
-     * @Assert\DateTime()
-     * @ORM\Column(name="submittedOn", type="datetime")
+     * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $submittedOn;
+    private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Inck\ArticleBundle\Entity\Article", inversedBy="votes")
+     * @var Article
+     *
+     * @ORM\ManyToOne(targetEntity="Inck\ArticleBundle\Entity\Article", inversedBy="reports")
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
 
     /**
+     * @var User
+     *
      * @ORM\ManyToOne(targetEntity="Inck\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * Get id
@@ -62,56 +62,33 @@ class Vote
     }
 
     /**
-     * Set up
+     * Set createdAt
      *
-     * @param boolean $up
-     * @return Vote
+     * @param \DateTime $createdAt
+     * @return Report
      */
-    public function setUp($up)
+    public function setCreatedAt($createdAt)
     {
-        $this->up = $up;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get up
-     *
-     * @return boolean 
-     */
-    public function getUp()
-    {
-        return $this->up;
-    }
-
-    /**
-     * Set submittedOn
-     *
-     * @param \DateTime $submittedOn
-     * @return Vote
-     */
-    public function setSubmittedOn($submittedOn)
-    {
-        $this->submittedOn = $submittedOn;
-
-        return $this;
-    }
-
-    /**
-     * Get submittedOn
+     * Get createdAt
      *
      * @return \DateTime 
      */
-    public function getSubmittedOn()
+    public function getCreatedAt()
     {
-        return $this->submittedOn;
+        return $this->createdAt;
     }
 
     /**
      * Set article
      *
      * @param Article $article
-     * @return Vote
+     * @return $this
      */
     public function setArticle(Article $article)
     {
@@ -135,7 +112,7 @@ class Vote
      * Set user
      *
      * @param User $user
-     * @return Vote
+     * @return $this
      */
     public function setUser(User $user = null)
     {

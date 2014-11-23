@@ -10,9 +10,7 @@ article .score .progress {
     height: 5px;
     transition: width 1s linear;
     margin-bottom: 5px;
-    border-radius: 0;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-radius: 0 0 10px 10px;
 }
 
 article .score .progress-bar-info {

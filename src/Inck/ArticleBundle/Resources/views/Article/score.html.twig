@@ -14,12 +14,40 @@
             {% set votedUp = vote is not null and vote.up %}
             {% set votedDown = vote is not null and not vote.up %}
             <span class="group-vote">
-                <button class="btn btn-default btn-xs btn-vote vote-up {% if votedUp %}voted{% endif %}"><span class="btn-score-up-text">{{ score.up }}</span> {% if votedUp %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-thumbs-up"></i>{% endif %}</button>
-                <button class="btn btn-default btn-xs btn-vote vote-down {% if votedDown %}voted{% endif %}"><span class="btn-score-down-text">{{ score.down }}</span> {% if votedDown %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-thumbs-down"></i>{% endif %}</button>
+                <button class="btn btn-default btn-xs btn-vote vote-up {% if votedUp %}voted{% endif %}">
+                    <span class="btn-score-up-text">{{ score.up }}</span>
+                    {% if votedUp %}
+                        <i class="fa fa-check"></i>
+                    {% else %}
+                        <i class="fa fa-thumbs-up"></i>
+                    {% endif %}
+                </button>
+                <button class="btn btn-default btn-xs btn-vote vote-down {% if votedDown %}voted{% endif %}">
+                    <span class="btn-score-down-text">{{ score.down }}</span>
+                    {% if votedDown %}
+                        <i class="fa fa-check"></i>
+                    {% else %}
+                        <i class="fa fa-thumbs-down"></i>
+                    {% endif %}
+                </button>
             </span>
-            {% else %}
-            <a href="{{ path('fos_user_security_login') }}" class="btn btn-vote btn-default btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connectez-vous pour voter">{{ score.up }} <i class="fa fa-thumbs-up"></i></a>
-            <a href="{{ path('fos_user_security_login') }}" class="btn btn-vote btn-default btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connectez-vous pour voter">{{ score.down }} <i class="fa fa-thumbs-down"></i></a>
+            <button class="btn btn-link btn-xs btn-report btn-tooltip {% if reported %}reported{% endif %}" data-toggle="tooltip" data-placement="top" title="Signaler un abus">
+                <i class="fa fa-flag"></i>
+                <span class="total">{{ reports }}</span>
+            </button>
+        {% else %}
+            <a href="{{ path('fos_user_security_login') }}" class="btn btn-default btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connectez-vous pour voter">
+                {{ score.up }}
+                <i class="fa fa-thumbs-up"></i>
+            </a>
+            <a href="{{ path('fos_user_security_login') }}" class="btn btn-default btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connectez-vous pour voter">
+                {{ score.down }}
+                <i class="fa fa-thumbs-down"></i>
+            </a>
+            <a href="{{ path('fos_user_security_login') }}" class="btn btn-link btn-default btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connectez-vous pour signaler un abus">
+                <i class="fa fa-flag"></i>
+                {{ reports }}
+            </a>
         {% endif %}
         {{ render(controller('InckArticleBundle:Article:buttonWatchLater', { 'article': article })) }}
     </p>

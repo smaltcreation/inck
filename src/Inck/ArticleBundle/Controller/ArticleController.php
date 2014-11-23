@@ -7,6 +7,7 @@ use Exception;
 use HTML2PDF_exception;
 use Inck\ArticleBundle\Entity\Article;
 use Inck\ArticleBundle\Entity\Category;
+use Inck\ArticleBundle\Entity\ReportRepository;
 use Inck\ArticleBundle\Entity\Tag;
 use Inck\ArticleBundle\Entity\Vote;
 use Inck\ArticleBundle\Form\Type\ArticleFilterType;
@@ -210,22 +211,31 @@ class ArticleController extends Controller
             'total' => 0,
         );
 
-        /** @var $vote Vote|null */
         $vote = ($this->get('security.context')->isGranted('ROLE_USER'))
             ? $em->getRepository('InckArticleBundle:Vote')->getByArticleAndUser($article, $this->getUser())
             : null;
 
-        /** @var $v Vote */
         foreach($article->getVotes() as $v)
         {
             $score[($v->getUp()) ? 'up' : 'down']++;
             $score['total']++;
         }
 
+        // Signalements
+        /** @var ReportRepository $reportRepository */
+        $reportRepository = $em->getRepository('InckArticleBundle:Report');
+        $reports = $reportRepository->countByArticle($article);
+
+        $reported = ($user = $this->getUser())
+            ? ($reportRepository->getByArticleAndUser($article, $user) !== null)
+            : false;
+
         return array(
             'article'   => $article,
             'vote'      => $vote,
             'score'     => $score,
+            'reports'   => $reports,
+            'reported'  => $reported,
         );
     }
 

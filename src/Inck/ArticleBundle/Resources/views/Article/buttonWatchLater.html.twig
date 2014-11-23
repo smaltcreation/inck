@@ -1,13 +1,13 @@
 {% trans_default_domain 'ArticleBundle' %}
 
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    <a class="btn btn-link btn-xs btn-watch-later btn-tooltip{% if watchLater %} watch-later{% endif %}" data-id="{{ id }}" data-toggle="tooltip" data-placement="top" data-container="body" title="{% if app.user %}Regarder plus tard{% endif %}">
+    <button class="btn btn-link btn-xs btn-watch-later btn-tooltip{% if watchLater %} watch-later{% endif %}" data-id="{{ id }}" data-toggle="tooltip" data-placement="top" data-container="body" title="{% if app.user %}Regarder plus tard{% endif %}">
         {% if watchLater %}
             <i class="fa fa-check"></i> <span class="btn-text">{{ 'article.button.note'|trans }}</span>
         {% else %}
             <i class="fa fa-clock-o"></i> <span class="btn-text">{{ 'article.button.watch'|trans }}</span>
         {% endif %}
-    </a>
+    </button>
 {% else %}
     <a href="{{ path('fos_user_security_login') }}" class="btn btn-link btn-xs btn-watch-later btn-tooltip" data-id="{{ id }}" data-toggle="tooltip" data-placement="top" data-container="body" title="{% if not app.user %}Connectez-vous pour vous ajouter cet article à regarder plus tard{% endif %}">
         <i class="fa fa-clock-o"></i> <span class="btn-text">{{ 'article.button.watch'|trans }}</span>

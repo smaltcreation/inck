@@ -69,3 +69,8 @@ article .summary .text-inline {
         width: 50px;
     }
 }
+
+article .votes button.reported{
+    color: #f15645;
+}
+

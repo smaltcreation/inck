@@ -1,6 +1,6 @@
 {% trans_default_domain 'ArticleBundle' %}
-{% set currentRoute = app.request.attributes.get('_route') %}
-{% if currentRoute == 'inck_article_article_show' %}
+
+{% if app.request.attributes.get('_route') == 'inck_article_article_show' %}
     {% set articleUrl = '#content' %}
 {% else %}
     {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
