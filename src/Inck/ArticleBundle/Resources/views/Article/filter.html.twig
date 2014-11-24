@@ -6,7 +6,7 @@
             {% if currentRoute == 'inck_article_article_show' %}
                 {% set articleUrl = '#content' %}
             {% else %}
-                {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
+                {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug}) %}
             {% endif %}
 
             <article itemscope itemtype="http://schema.org/Article" id="article-{{ article.id }}" class="article">
@@ -55,7 +55,7 @@
                                 <a class="btn btn-xs btn-default btn-tooltip" title="Partager sur Google +" data-container="body" data-placement="top" href="https://plus.google.com/share?url={{ currentUrl }}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                                     <i class="fa fa-google-plus fa-fw"></i>
                                 </a>
-                                <a class="btn btn-xs btn-default btn-tooltip" title="Twitter cet article" data-container="body" data-placement="top" href="https://twitter.com/share?text={{ article.title|url_encode }}&amp;hashtags={% for category in article.categories %}{{ category.name }}{% if not loop.last %},{% endif %}{% endfor %}&amp;url={{ currentUrl }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                <a class="btn btn-xs btn-default btn-tooltip" title="Twitter cet article" data-container="body" data-placement="top" href="https://twitter.com/share?text={{ article.title|url_encode }}&amp;hashtags={% for category in article.categories %}{{ category.name|trans }}{% if not loop.last %},{% endif %}{% endfor %}&amp;url={{ currentUrl }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                                     <i class="fa fa-twitter fa-fw"></i>
                                 </a>
                                 <a class="btn btn-xs btn-default btn-tooltip" title="Partager sur Linkedin" data-container="body" data-placement="top" href="http://www.linkedin.com/shareArticle?mini=true&url={{ currentUrl }}&title={% if article.title|url_encode|length > 200 %}{{ article.title|url_encode|slice(0, 197) }}...{% else %}{{ article.title|url_encode }}{% endif %}&summary={% if article.summary|url_encode|length > 200 %}{{ article.summary|url_encode|slice(0, 197) }}...{% else %}{{ article.summary|url_encode }}{% endif %}&source=Inck" onclick="window.open(this.href, 'linkedIn-share', 'width=550,height=235');return false;">

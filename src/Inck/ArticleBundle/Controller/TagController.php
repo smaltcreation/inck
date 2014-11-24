@@ -40,13 +40,13 @@ class TagController extends Controller
      * @Route("/tag/{id}/{slug}", name="inck_article_tag_show", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($id, $slug)
     {
         try
         {
             $em = $this->getDoctrine()->getManager();
             /** @var Tag $tag */
-            $tag = $em->getRepository('InckArticleBundle:Tag')->find($id);
+            $tag = $em->getRepository('InckArticleBundle:Tag')->findOneBy(array('id' => $id, 'slug' => $slug));
             $articlesLength = $em->getRepository('InckArticleBundle:Article')->countByTag($tag->getId(), true);
 
             if(!$tag) {

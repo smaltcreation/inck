@@ -4,6 +4,17 @@ namespace Inck\ArticleBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Exception;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\SubmitButton;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use HTML2PDF_exception;
 use Inck\ArticleBundle\Entity\Article;
 use Inck\ArticleBundle\Entity\Category;
@@ -13,16 +24,7 @@ use Inck\ArticleBundle\Entity\Vote;
 use Inck\ArticleBundle\Form\Type\ArticleFilterType;
 use Inck\ArticleBundle\Form\Type\ArticleType;
 use Inck\UserBundle\Entity\User;
-use JMS\SecurityExtraBundle\Annotation\Secure;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\SubmitButton;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+
 
 /**
  * @Route("/article")
@@ -157,9 +159,9 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/{slug}/{updatedAt}", name="inck_article_article_show", requirements={"id" = "\d+"})
+     * @Route("/{id}/{slug}", name="inck_article_article_show", requirements={"id" = "\d+"})
      * @Template()
-     * @param Article $article
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @return array
      */
     public function showAction(Article $article)

@@ -1,7 +1,7 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 {% trans_default_domain 'ArticleBundle' %}
 
-{% block title %}{{ category.name }}{% endblock %}
+{% block title %}{{ category.name|trans }}{% endblock %}
 {% block description %}<meta name="description" content="{{ category.description|slice(0, 157) }}{% if category.description|length > 157 %}...{% endif %}">{% endblock %}
 
 {% block stylesheets %}
@@ -21,8 +21,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>{{ category.name }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
-                    <p>{{ category.description }}</p>
+                    <h1>{{ category.name|trans }} <span class="small">{{ articlesLength }} article{% if articlesLength > 1 %}s{% endif %}</span></h1>
+                    <p>{{ category.description|trans }}</p>
                     <p>
                         {{ subscribe_button('category', category) }}
                     </p>

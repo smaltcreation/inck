@@ -11,13 +11,55 @@ tag:
     list_content:
         most_popular: Nos tags les plus poulaires
 
+article:
+    button:
+        note: Noté pour plus tard
+        watch: À regarder plus tard
+    error:
+        occurred: Une erreur s'est produite
+        close: Fermer
+    form:
+        write_article: Écrire un article
+        edit_article: Éditer mon article
+        write_article_recap: Un bon article n'est pas forcément long ou en rapport avec un sujet d'actualité. Laissez-vous simplement porter par l'envie d'écrire ce que bon vous semble intéressant à partager.
+    moderate:
+        moderate_articles: Modérer les articles
+        moderate_articles_recap: Modérer un article, c'est faire appel à la communauté pour mettre en avant un contenu libre et de qualité. Vous êtes donc le moteur contribuant au développement de Inck.
+    pdf:
+        writen_by: Rédigé par
+        published: publié le
+    search:
+        for_article: Rechercher un article
+    show:
+        follow_us: Venez nous suivre
+        social_networks: sur les réseaux sociaux
+        activate_js: Merci d'activer JavaScript pour voir
+        comments: les commentaires propulsés par Disqus.
+        writen_by: Rédigé par
+        published_the: publié le
+        statistics:
+    timeline:
+        filter: Filtrer les articles
+        more_articles: Afficher plus d'articles
+        results: résultat
 
+politic: Politique
+literature: Littérature
+philosophy: Philosophie
+society: Société
+history: Histoire
+science: Science
+entertainment: Divertissement
+sport: Sport
+art: Art
+economy: Économie
+health: Santé
+technology: Technologie
 category:
     list:
-      catagories: Catégories
-      total: au total
-      description: Trouver une categorie ou un tag n'a jamais été plus simple.
-
+        catagories: Catégories
+        total: au total
+        description: Trouver une categorie ou un tag n'a jamais été plus simple.
     list_content:
         most_popular: Nos catégories les plus poulaires
         we_select: Nous sélectionnons les catégories les plus populaires pour vous. En effet, nous trions celles-ci en fonction du nombre d'articles publiés.
@@ -27,42 +69,17 @@ category:
         feedback: Bien entendu, nous aimons avoir l'avis de notre communauté et si vous ne trouvez pas une catégorie, pourquoi ne pas nous la suggérer ?
         contact_us: Nous contacter
 
-article:
-    button:
-        note: Noté pour plus tard
-        watch: À regarder plus tard
 
-    error:
-        occurred: Une erreur s'est produite
-        close: Fermer
-
-    form:
-        write_article: Écrire un article
-        edit_article: Éditer mon article
-        write_article_recap: Un bon article n'est pas forcément long ou en rapport avec un sujet d'actualité. Laissez-vous simplement porter par l'envie d'écrire ce que bon vous semble intéressant à partager.
-
-    moderate:
-        moderate_articles: Modérer les articles
-        moderate_articles_recap: Modérer un article, c'est faire appel à la communauté pour mettre en avant un contenu libre et de qualité. Vous êtes donc le moteur contribuant au développement de Inck.
-
-    pdf:
-        writen_by: Rédigé par
-        published: publié le
-
-    search:
-        for_article: Rechercher un article
-
-
-    show:
-        follow_us: Venez nous suivre
-        social_networks: sur les réseaux sociaux
-        activate_js: Merci d'activer JavaScript pour voir
-        comments: les commentaires propulsés par Disqus.
-        writen_by: Rédigé par
-        published_the: publié le
-        statistics:
-
-    timeline:
-        filter: Filtrer les articles
-        more_articles: Afficher plus d'articles
-        results: résultat
+    description:
+        politic: La politique en son sens plus large, celui de civilité ou Politikos, indique le cadre général d'une société organisée et développée.
+        literature: La littérature se définit comme un aspect particulier de la communication verbale qui met en jeu une exploitation des ressources de la langue pour multiplier les effets sur le destinataire, qu'il soit lecteur ou auditeur.
+        philosophy: La philosophie, du grec ancien, signifie littéralement « l'amour de la sagesse ». C'est une activité et une discipline existant depuis l'Antiquité en Occident et en Orient, se présentant comme un questionnement, une interprétation et une réflexion sur le monde et l'existence humaine.
+        society: La société (du latin socius) est un groupe d'individus unifiés par un réseau de relations, de traditions et d'institutions.
+        history: L’histoire est à la fois l’étude des faits, des événements du passé et, par synecdoque, leur ensemble. L'histoire est un récit, elle est la construction d'une image du passé.
+        science: D'après Michel Blay, la science est « la connaissance claire et certaine de quelque chose, fondée soit sur des principes évidents et des démonstrations, soit sur des raisonnements expérimentaux, ou encore sur l'analyse des sociétés et des faits humains. »
+        entertainment: Un divertissement est une activité qui permet aux Hommes d'occuper leur temps libre en s'amusant et de se détourner ainsi de leurs préoccupations.
+        sport: Le sport est un phénomène quasi universel dans le temps et dans l'espace humain.
+        art: L’art est une activité humaine, le produit de cette activité ou l'idée que l'on s'en fait s'adressant délibérément aux sens, aux émotions, aux intuitions et à l'intellect. On peut dire que l'art est le propre de l'homme, et que cette activité n'a pas de fonction clairement définie.
+        economy: L’économie est une activité humaine qui consiste en la production, la distribution, l'échange et la consommation de biens et de services.
+        health: La santé est un état de complet bien-être physique, mental et social, et ne consiste pas seulement en une absence de maladie ou d'infirmité.
+        technology: Le mot technologie désigne l'étude des outils et des techniques. Ce terme se réfère à tout ce qui peut être dit à plusieurs périodes historiques particulières, concernant l'état de l'art dans tous les domaines des savoir-faire pratiques et d'utilisation des outils.

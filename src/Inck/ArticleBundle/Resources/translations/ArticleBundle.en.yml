@@ -11,12 +11,55 @@ tag:
     list_content:
         most_popular: Our most popular tags
 
+article:
+    button:
+        note: Note for later
+        watch: Watch later
+    error:
+        occurred: An error occurred
+        close: Close
+    form:
+        write_article: Write an article
+        edit_article: Edit my article
+        write_article_recap: A good article doesn't have to be long or about something that is happening in the world right now. Just let your self be taken away by your love of writing and write about what you think would be interesting to share.
+    moderate:
+            moderate_articles: moderate articles
+            moderate_articles_recap: Article moderation, is when you ask the community to place liberty and quality first. You are the motor of contribution and development of Inck.
+    pdf:
+        writen_by: Writen by
+        published: published the
+    search:
+        for_article: Search for an article
+    show:
+        follow_us: Come follow us
+        social_networks: on the social networks
+        activate_js: Please activate JavaScript tu see
+        comments: comments powered by Disqus.
+        writen_by: Writen by
+        published_the: published the
+        statistics: Statistics
+    timeline:
+            filter: Filter the articles
+            more_articles: Show more articles
+            results: results
+
+politic: Politic
+literature: Literature
+philosophy: Philosophy
+society: Society
+history: History
+science: Science
+entertainment: Entertainment
+sport: Sport
+art: Art
+economy: Economy
+health: Health
+technology: Technology
 category:
     list:
       catagories: Categories
       total: in total
       description: Finding an article or a tag has never been this simple
-
     list_content:
         most_popular: Our most popular category
         we_select: We select the more popular categories for you. We chose them based on their number of articles published.
@@ -26,41 +69,16 @@ category:
         feedback: Naturally, we would like to have the feedback of our community and if you don't find a category, why not suggest it to us?
         contact_us: Contact us
 
-article:
-    button:
-        note: Note for later
-        watch: Watch later
-
-    error:
-        occurred: An error occurred
-        close: Close
-
-    form:
-        write_article: Write an article
-        edit_article: Edit my article
-        write_article_recap: A good article doesn't have to be long or about something that is happening in the world right now. Just let your self be taken away by your love of writing and write about what you think would be interesting to share.
-
-    moderate:
-            moderate_articles: moderate articles
-            moderate_articles_recap: Article moderation, is when you ask the community to place liberty and quality first. You are the motor of contribution and development of Inck.
-
-    pdf:
-        writen_by: Writen by
-        published: published the
-
-    search:
-        for_article: Search for an article
-
-    show:
-        follow_us: Come follow us
-        social_networks: on the social networks
-        activate_js: Please activate JavaScript tu see
-        comments: comments powered by Disqus.
-        writen_by: Writen by
-        published_the: published the
-        statistics: Statistics
-
-    timeline:
-            filter: Filter the articles
-            more_articles: Show more articles
-            results: results
+    description:
+        politic: La politique en son sens plus large, celui de civilité ou Politikos, indique le cadre général d'une société organisée et développée.
+        literature: La littérature se définit comme un aspect particulier de la communication verbale qui met en jeu une exploitation des ressources de la langue pour multiplier les effets sur le destinataire, qu'il soit lecteur ou auditeur.
+        philosophy: La philosophie, du grec ancien, signifie littéralement « l'amour de la sagesse ». C'est une activité et une discipline existant depuis l'Antiquité en Occident et en Orient, se présentant comme un questionnement, une interprétation et une réflexion sur le monde et l'existence humaine.
+        society: La société (du latin socius) est un groupe d'individus unifiés par un réseau de relations, de traditions et d'institutions.
+        history: L’histoire est à la fois l’étude des faits, des événements du passé et, par synecdoque, leur ensemble. L'histoire est un récit, elle est la construction d'une image du passé.
+        science: D'après Michel Blay, la science est « la connaissance claire et certaine de quelque chose, fondée soit sur des principes évidents et des démonstrations, soit sur des raisonnements expérimentaux, ou encore sur l'analyse des sociétés et des faits humains. »
+        entertainment: Un divertissement est une activité qui permet aux Hommes d'occuper leur temps libre en s'amusant et de se détourner ainsi de leurs préoccupations.
+        sport: Le sport est un phénomène quasi universel dans le temps et dans l'espace humain.
+        art: L’art est une activité humaine, le produit de cette activité ou l'idée que l'on s'en fait s'adressant délibérément aux sens, aux émotions, aux intuitions et à l'intellect. On peut dire que l'art est le propre de l'homme, et que cette activité n'a pas de fonction clairement définie.
+        economy: L’économie est une activité humaine qui consiste en la production, la distribution, l'échange et la consommation de biens et de services.
+        health: La santé est un état de complet bien-être physique, mental et social, et ne consiste pas seulement en une absence de maladie ou d'infirmité.
+        technology: Le mot technologie désigne l'étude des outils et des techniques. Ce terme se réfère à tout ce qui peut être dit à plusieurs périodes historiques particulières, concernant l'état de l'art dans tous les domaines des savoir-faire pratiques et d'utilisation des outils.

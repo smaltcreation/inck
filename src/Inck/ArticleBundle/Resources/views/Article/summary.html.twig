@@ -3,7 +3,7 @@
 {% if app.request.attributes.get('_route') == 'inck_article_article_show' %}
     {% set articleUrl = '#content' %}
 {% else %}
-    {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
+    {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug}) %}
 {% endif %}
 
 <div class="thumbnail">
@@ -26,7 +26,7 @@
         <p itemprop="description">{{ article.summary }}</p>
         <p class="categories tags">
             {% for category in article.categories %}
-                <a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-category btn-xs category">{{ category.name }}</a>
+                <a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-category btn-xs category">{{ category.name|trans }}</a>
             {% endfor %}
             {% for tag in article.tags %}
                 <a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs">{{ tag.name }}</a>

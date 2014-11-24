@@ -12,7 +12,7 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface
     /**
      * Nombre total de catégories
      */
-    const MAX = 50;
+    const MAX = 11;
 
     /**
      * Préfixe de la référence d'une catégories
@@ -26,16 +26,45 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface
     private $names;
 
     /**
+     * Descriptions des catégories
+     * @var array
+     */
+    private $descriptions;
+
+    /**
      * Génère les noms des catégories
      */
     private function initialize()
     {
-        $this->names = array();
-
-        for($i = 1; $i <= self::MAX; $i++)
-        {
-            $this->names[$i] = 'Catégorie '.$i;
-        }
+        $this->names = array(
+            'politic',
+            'literature',
+            'philosophy',
+            'society',
+            'history',
+            'science',
+            'entertainment',
+            'sport',
+            'art',
+            'economy',
+            'health',
+            'technology'
+        );
+        
+        $this->descriptions = array(
+            'category.description.politic',
+            'category.description.literature',
+            'category.description.philosophy',
+            'category.description.society',
+            'category.description.history',
+            'category.description.science',
+            'category.description.entertainment',
+            'category.description.sport',
+            'category.description.art',
+            'category.description.economy',
+            'category.description.health',
+            'category.description.technology'
+        );
     }
 
     /**
@@ -49,7 +78,7 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface
         {
             $category = new Category();
             $category->setName($name);
-            $category->setDescription('Description de la catégorie...');
+            $category->setDescription($this->descriptions[$key]);
 
             $manager->persist($category);
             $this->addReference(self::REFERENCE_PREFIX.$key, $category);

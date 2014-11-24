@@ -1,7 +1,7 @@
 <div class="articles" >
     {% for article in articles %}
         <article id="article-{{ article.id }}" class="well well-sm article-preview">
-            {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug, 'updatedAt': article.updatedAt|date('Y-m-d') }) %}
+            {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug}) %}
             <div class="article-image-preview">
                 <a href="{{ articleUrl }}">
                     {% if article.imageName %}

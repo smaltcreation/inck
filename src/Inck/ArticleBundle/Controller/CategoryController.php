@@ -14,17 +14,18 @@ class CategoryController extends Controller
      * @Route("/category/{id}/{slug}", name="inck_article_category_show", requirements={"id" = "\d+"})
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($id, $slug)
     {
         try
         {
             $em = $this->getDoctrine()->getManager();
-            $category = $em->getRepository('InckArticleBundle:Category')->find($id);
-            $articlesLength = $em->getRepository('InckArticleBundle:Article')->countByCategory($category->getId(), true);
+            $category = $em->getRepository('InckArticleBundle:Category')->findOneBy(array('id' => $id, 'slug' => $slug));
 
             if(!$category) {
                 throw new \Exception("Catégorie inexistante.");
             }
+
+            $articlesLength = $em->getRepository('InckArticleBundle:Article')->countByCategory($category->getId(), true);
 
             return array(
                 'category' => $category,

@@ -43,6 +43,7 @@ class ArticleType extends AbstractType
                     'maximumSelectionSize'  => 3,
                     'width'                 => 'container',
                 ],
+                'translation_domain' => 'ArticleBundle',
             ])
             ->add('tags', 'inck_articlebundle_tags_selector', [
                 'label' => 'Tags',
