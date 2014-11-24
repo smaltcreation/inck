@@ -1,6 +1,11 @@
 $(document).ready(function(){
     var notifications = [];
     var notificationDisplayed = false;
+    var loading = $('<div>')
+        .attr('id', 'notifications-loading')
+        .css('display', 'none');
+
+    $('body').append(loading);
 
     $(document).bind('notification.received', function(e, data){
         console.log(data);
@@ -19,22 +24,26 @@ $(document).ready(function(){
         notificationDisplayed = true;
         var data = notifications.shift();
 
-        var notification = new NotificationFx({
-            message: data.html,
-            layout: 'other',
-            ttl: 6000,
-            effect: 'thumbslider',
-            type: 'notice',
-            onClose: function(){
-                notificationDisplayed = false;
-                displaySubscriberNotification();
-            }
-        });
+        loading.append(data.html).waitForImages(function(){
+            loading.empty();
 
-        notification.show();
-        window.server.call('notification.displayed', {
-            id: data.id,
-            date: new Date()
+            var notification = new NotificationFx({
+                message: data.html,
+                layout: 'other',
+                ttl: 6000,
+                effect: 'thumbslider',
+                type: 'notice',
+                onClose: function(){
+                    notificationDisplayed = false;
+                    displaySubscriberNotification();
+                }
+            });
+
+            notification.show();
+            window.server.call('notification.displayed', {
+                id: data.id,
+                date: new Date()
+            });
         });
     }
 });
