@@ -57,21 +57,32 @@ class CategoryController extends Controller
             /** @var CategoryRepository $repository */
             $repository = $em->getRepository('InckArticleBundle:Category');
             $categories = $repository->getPopular();
-            $categoriesLength = $repository->countAll();
 
             $lastPublishedArticles = array();
-            /** @var ArticleRepository $repository */
-            $repository = $em->getRepository('InckArticleBundle:Article');
+            if($categories) {
+                $firstCategory = $categories[0];
+                $articlesLength = $em->getRepository('InckArticleBundle:Article')->countByCategory($firstCategory->getId(), true);
 
-            /** @var Category $category */
-            foreach($categories as $category) {
-                $lastPublishedArticles[$category->getId()] = $repository->getLastOfCategory($category->getId(), true);
+                /** @var ArticleRepository $repository */
+                $repository = $em->getRepository('InckArticleBundle:Article');
+
+                /** @var Category $category */
+                foreach($categories as $category) {
+                    $i = $category->getId();
+                    if($repository->getLastOfCategory($i, true)) {
+                        $lastPublishedArticles[$i] = $repository->getLastOfCategory($i, true)[0];
+                    }
+                    else {
+                        $lastPublishedArticles[$i] = false;
+                    }
+                }
             }
 
             return array(
                 'categories' => $categories,
-                'categoriesLength' => $categoriesLength,
-                'lastPublishedArticles' => $lastPublishedArticles
+                'categoriesLength' => count($categories),
+                'lastPublishedArticles' => $lastPublishedArticles,
+                'articlesLength' => $articlesLength
             );
         }
 

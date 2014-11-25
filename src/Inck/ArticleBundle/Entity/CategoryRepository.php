@@ -44,14 +44,15 @@ class CategoryRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')
             ->select('c')
+            ->leftJoin('c.articles', 'a')
             ->addSelect('COUNT(a) AS HIDDEN nArticles')
             ->where('a.published = :published')
             ->setParameter('published', true)
-            ->innerJoin('c.articles', 'a')
+            ->orWhere('a IS NULL')
             ->groupBy('c.id')
             ->orderBy("nArticles", 'DESC')
         ;
 
-        return $qb->setMaxResults(15)->getQuery()->getResult();
+        return $qb->getQuery()->getResult();
     }
 }
