@@ -9,6 +9,8 @@
     {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/article/article/moderate.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/score.css'
     %}
     <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -31,6 +33,7 @@
     {{ parent() }}
     {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/moderate.js'
         'bundles/inckarticle/js/Article/timeline.js'
+        'bundles/inckarticle/js/Article/score.js'
         'bundles/inckarticle/js/Article/watchLater.js'
         'bundles/inckarticle/js/Article/summary.js'
     %}

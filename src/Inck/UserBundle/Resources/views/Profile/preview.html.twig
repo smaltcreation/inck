@@ -37,7 +37,11 @@
                 {% include('InckUserBundle:Profile:preview_content.html.twig') %}
             </div>
         </section>
-        <hr>
+
+        <div class="container">
+            <hr>
+        </div>
+
         <section id="user-{{ user.id }}-articles" class="user-articles">
             {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': { 'author': user, 'type': 'published' } })) }}
         </section>
@@ -51,6 +55,7 @@
         'bundles/incksubscription/js/Subscription/new.js'
         'bundles/inckarticle/js/Article/watchLater.js'
         'bundles/inckarticle/js/Article/summary.js'
+        'bundles/inckarticle/js/Article/score.js'
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

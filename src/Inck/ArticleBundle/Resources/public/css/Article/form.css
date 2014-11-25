@@ -46,6 +46,13 @@
     border-color: #CCC !important;
 }
 
-#inck_articlebundle_article_imageFile_preview {
-    border-style: solid !important;
+.single-upload-preview {
+    border: none;
+}
+
+.inck_articlebundle_article_imageFile_preview_image img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
 }

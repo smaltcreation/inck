@@ -23,24 +23,24 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Modal -->
-    <div class="modal fade" id= "myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ 'security.login.more'|trans }}</h4>
-                </div>
-                <div class="modal-body">
-                    {% include('InckCoreBundle:Default:about_content.html.twig') %}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container login" itemscope itemtype="http://schema.org/Webpage">
+    {#<!-- Modal -->#}
+    {#<div class="modal fade" id= "myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+        {#<div class="modal-dialog">#}
+            {#<div class="modal-content">#}
+                {#<div class="modal-header">#}
+                    {#<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>#}
+                    {#<h4 class="modal-title" id="myModalLabel">{{ 'security.login.more'|trans }}</h4>#}
+                {#</div>#}
+                {#<div class="modal-body">#}
+                    {#{% include('InckCoreBundle:Default:about_content.html.twig') %}#}
+                {#</div>#}
+                {#<div class="modal-footer">#}
+                    {#<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+    <div class="container login">
         {% if error %}
             <div class="alert alert-danger" role="alert">{{ error|trans }}</div>
         {% endif %}
@@ -68,7 +68,7 @@
                                 <div class="col-md-12 form-group">
                                     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                                     <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-                                    <a itemprop="url" href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">{{ 'security.login.forgot_password'|trans }}</a>
+                                    <a href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">{{ 'security.login.forgot_password'|trans }}</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -99,14 +99,14 @@
             </div>
             <div class="col-sm-5 col-sm-offset-1">
                 {% image '@InckUserBundle/Resources/public/images/inck-logo.png' %}
-                    <img itemprop="image" class="img-responsive img-circle logo" src="{{ asset_url }}" alt="Logo de Inck">
+                    <img class="img-responsive img-circle logo" src="{{ asset_url }}" alt="Logo de Inck">
                 {% endimage %}
 
                 <h3>{{ 'security.login.read'|trans }}</h3>
-                <p itemprop="description" class="description">{{ 'security.login.read_discription'|trans }}</p>
+                <p class="description">{{ 'security.login.read_discription'|trans }}</p>
                 <p>
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#myModal" role="button"><i class="fa fa-rocket"></i> {{ 'security.login.more'|trans }}</a>
-                    <a itemprop="url" class="btn btn-default" role="button" href="{{ path('home') }}"><i class="fa fa-home"></i> {{ 'security.login.article_list'|trans }}</a>
+                    {#<a class="btn btn-primary" data-toggle="modal" data-target="#myModal" role="button"><i class="fa fa-rocket"></i> {{ 'security.login.more'|trans }}</a>#}
+                    <a class="btn btn-default" role="button" href="{{ path('home') }}"><i class="fa fa-home"></i> {{ 'security.login.article_list'|trans }}</a>
                 </p>
             </div>
         </div>

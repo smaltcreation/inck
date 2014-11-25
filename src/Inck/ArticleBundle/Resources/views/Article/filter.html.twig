@@ -39,8 +39,10 @@
                                             {% if user.biography %}
                                                 <p>{{ user.biography|slice(0, 197) }}{% if user.biography|length > 197 %}...{% endif %}</p>
                                             {% else %}
-                                                {% set noBiography = "Cet utilisateur n'a pas encore complété son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie : Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York et trouvé mort le 12 octobre 2011 à Berkeley Heights dans le New Jersey, est un des pionniers de l'informatique moderne, inventeur du langage C et codéveloppeur de Unix. Il est parfois désigné par dmr, son adresse électronique aux Laboratoires Bell. Au début des années 1970, programmeur aux Laboratoires Bell, il travaille avec Ken Thompson au développement d'Unix. Le langage B de Thompson étant trop limité pour les besoins du nouveau système, Ritchie est amené à créer sur les mêmes bases le langage C. Par la suite, avec l'aide de Brian Kernighan, il promeut le langage et rédige notamment le livre de référence The C Programming Language2,3. Il reçoit conjointement avec Ken Thompson le prix Turing de l'ACM en 1983 pour leur travail sur le système Unix." %}
-                                                <p>{{ noBiography|slice(0, 197) }}{% if noBiography|length > 197 %}...{% endif %}</p>
+                                                <p>
+                                                    <span class="no-biography">Cet utilisateur n'a pas encore compléter son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie :</span><br>
+                                                    Dennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York...
+                                                </p>
                                             {% endif %}
                                         </div>
                                     </div>

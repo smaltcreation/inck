@@ -21,16 +21,16 @@
                 <div class="gn-scroller">
                     <ul class="gn-menu">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg second-child fos_user_profile_show">
+                                <a href="{{ path('fos_user_profile_show') }}">
+                                    <img class="fa navbar-avatar img-circle" alt="Avatar de {{ app.user.lastName and app.user.firstName ? app.user.firstName ~ ' ' ~ app.user.lastName : app.user.username }}" src="{{ gravatar(app.user.email, 35, 'g', 'mm', true) }}"/>
+                                    <span>{{ app.user.username }}</span>
+                                </a>
+                            </li>
                             <li class="authenticated visible-xs visible-sm hidden-md hidden-lg fos_user_security_logout">
                                 <a href="{{ path('fos_user_security_logout') }}">
                                     <i class="fa fa-sign-out fa-lg fa-fw"></i>
                                     <span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
-                                </a>
-                            </li>
-                            <li class="authenticated visible-xs visible-sm hidden-md hidden-lg second-child fos_user_profile_show">
-                                <a href="{{ path('fos_user_profile_show') }}">
-                                    <i class="fa fa-user fa-lg fa-fw"></i>
-                                    <span>{{ app.user.username }}</span>
                                 </a>
                             </li>
                         {% else %}
@@ -101,16 +101,16 @@
                 </a>
             </li>
         {% else %}
-            <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_security_login">
-                <a class="{% if currentRoute == 'fos_user_security_login' %}active{% endif %}" href="{{ path('fos_user_security_login') }}">
-                    <i class="fa fa-sign-in"></i>
-                    <span> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</span>
-                </a>
-            </li>
             <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_registration_register">
                 <a class="{% if currentRoute == 'fos_user_registration_register' %}active{% endif %}" href="{{ path('fos_user_registration_register') }}">
                     <i class="fa fa-pencil-square-o"></i>
                     <span> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</span>
+                </a>
+            </li>
+            <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_security_login">
+                <a class="{% if currentRoute == 'fos_user_security_login' %}active{% endif %}" href="{{ path('fos_user_security_login') }}">
+                    <i class="fa fa-sign-in"></i>
+                    <span> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</span>
                 </a>
             </li>
         {% endif %}
