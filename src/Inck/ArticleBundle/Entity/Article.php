@@ -172,6 +172,14 @@ class Article
     private $votes;
 
     /**
+     * @var Report[]
+     *
+     * @ORM\OneToMany(targetEntity="Inck\ArticleBundle\Entity\Report", mappedBy="article", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $reports;
+
+    /**
      * @ORM\OneToOne(targetEntity="Inck\StatBundle\Entity\ArticleStat", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="stat_id", referencedColumnName="id")
      */
@@ -185,6 +193,7 @@ class Article
         $this->categories   = new ArrayCollection();
         $this->tags         = new ArrayCollection();
         $this->votes        = new ArrayCollection();
+        $this->reports      = new ArrayCollection();
         $this->articleStat  = new ArticleStat();
     }
 
@@ -547,6 +556,39 @@ class Article
    public function getVotes()
    {
        return $this->votes;
+   }
+
+   /**
+    * Add report
+    *
+    * @param Report $report
+    * @return Article
+    */
+   public function addReport(Report $report)
+   {
+       $this->reports[] = $report;
+
+       return $this;
+   }
+
+   /**
+    * Remove report
+    *
+    * @param Report $report
+    */
+   public function removeReport(Report $report)
+   {
+       $this->reports->removeElement($report);
+   }
+
+   /**
+    * Get reports
+    *
+    * @return ArrayCollection
+    */
+   public function getReports()
+   {
+       return $this->reports;
    }
 
    /**

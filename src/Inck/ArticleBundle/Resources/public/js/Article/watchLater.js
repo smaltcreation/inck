@@ -11,6 +11,7 @@ $(document).ready(function(){
 
     function watchLater(clickedButton){
         var id                  = getArticleId(clickedButton),
+            slug                = getArticleSlug(clickedButton)
             clickedIconClass    = getIconClass(clickedButton),
             icon                = getButtonIcon(clickedButton),
             text                = getButtonText(clickedButton);
@@ -20,7 +21,8 @@ $(document).ready(function(){
 
         $.ajax({
             url: Routing.generate('inck_article_article_watchLater', {
-                id: id
+                id: id,
+                slug: slug
             }),
             dataType: 'json'
         }).done(function(){
@@ -47,6 +49,11 @@ $(document).ready(function(){
     function getArticleId(button){
         return button
             .attr('data-id')
+    }
+
+    function getArticleSlug(button){
+        return button
+            .attr('data-slug')
     }
 
     function getIconClass(button){

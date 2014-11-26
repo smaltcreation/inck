@@ -20,6 +20,8 @@ class DraftController extends Controller
      * @Route("/draft/new", name="inck_article_draft_new", options={"expose"=true})
      * @Method("POST")
      * @Secure(roles="ROLE_USER")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function newDraftAction(Request $request)
     {
@@ -46,6 +48,7 @@ class DraftController extends Controller
         return new JsonResponse(array(
             'valid' => true,
             'id'    => $article->getId(),
+            'slug'  => $article->getSlug(),
         ));
     }
 
@@ -53,6 +56,9 @@ class DraftController extends Controller
      * @Route("/draft/edit/{id}", name="inck_article_draft_edit", options={"expose"=true})
      * @Method("POST")
      * @Secure(roles="ROLE_USER")
+     * @param Request $request
+     * @param Article $article
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function editDraftAction(Request $request, Article $article)
     {

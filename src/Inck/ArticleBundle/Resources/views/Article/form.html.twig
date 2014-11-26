@@ -46,7 +46,7 @@
                     En-tête de l'article
                 </button>
             </p>
-            <form {{ form_enctype(form) }} method="POST" novalidate="novalidate" data-article-id="{{ articleId }}" id="inck-article-article-form">
+            <form {{ form_enctype(form) }} method="POST" novalidate="novalidate" data-article-id="{{ articleId }}" data-article-slug="{{ articleSlug }}" id="inck-article-article-form">
                 {{ form_errors(form) }}
                 <div id="article-header">
                     <div class="row">

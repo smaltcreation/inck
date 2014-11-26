@@ -101,7 +101,8 @@ function changeType(form, result){
         form.attr({
             'data-article-id': result.id,
             'action': Routing.generate('inck_article_article_edit', {
-                id: result.id
+                id: result.id,
+                slug: result.slug
             })
         });
     }

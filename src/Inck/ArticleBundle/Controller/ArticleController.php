@@ -9,7 +9,6 @@ use Inck\ArticleBundle\Entity\Article;
 use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\ReportRepository;
 use Inck\ArticleBundle\Entity\Tag;
-use Inck\ArticleBundle\Entity\Vote;
 use Inck\ArticleBundle\Form\Type\ArticleFilterType;
 use Inck\ArticleBundle\Form\Type\ArticleType;
 use Inck\UserBundle\Entity\User;
@@ -49,7 +48,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @Route("/{id}/{slug}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Secure(roles="ROLE_USER")
      * @param Request $request
      * @param Article $article
@@ -70,6 +70,27 @@ class ArticleController extends Controller
             'article'   => $article,
             'action'    => 'edit',
         ));
+    }
+
+    /**
+     * @Route("/{id}/{slug}", name="inck_article_article_show", requirements={"id" = "\d+"})
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
+     * @Template()
+     * @param Article $article
+     * @return array
+     */
+    public function showAction(Article $article)
+    {
+        $user = $this->getUser();
+
+        if($article->getAsDraft() && $user !== $article->getAuthor() || !$user && !$article->getPublished())
+        {
+            throw $this->createNotFoundException("Article inexistant");
+        }
+
+        return array(
+            'article' => $article,
+        );
     }
 
     /**
@@ -145,40 +166,21 @@ class ArticleController extends Controller
             return $this->redirect($this->generateUrl('inck_article_article_show', array(
                 'id'        => $article->getId(),
                 'slug'      => $article->getSlug(),
-                'updatedAt' => $article->getUpdatedAt()->format('Y-m-d'),
             )));
         }
 
         // On retourne le formulaire pour la vue
         return array(
-            'form'      => $form->createView(),
-            'action'    => $action,
-            'articleId' => $article->getId(),
+            'form'          => $form->createView(),
+            'action'        => $action,
+            'articleId'     => $article->getId(),
+            'articleSlug'   => $article->getSlug(),
         );
     }
 
     /**
-     * @Route("/{id}/{slug}", name="inck_article_article_show", requirements={"id" = "\d+"})
-     * @Template()
+     * @Route("/{id}/{slug}/modal", name="inck_article_article_show_modal", requirements={"id" = "\d+"})
      * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
-     * @return array
-     */
-    public function showAction(Article $article)
-    {
-        $user = $this->getUser();
-
-        if($article->getAsDraft() && $user !== $article->getAuthor() || !$user && !$article->getPublished())
-        {
-            throw $this->createNotFoundException("Article inexistant");
-        }
-
-        return array(
-            'article' => $article,
-        );
-    }
-
-    /**
-     * @Route("/{id}/modal", name="inck_article_article_show_modal", requirements={"id" = "\d+"})
      * @Template("InckArticleBundle:Article:show_modal.html.twig")
      * @param Article $article
      * @return array
@@ -403,7 +405,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"})
+     * @Route("/{id}/{slug}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"})
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Secure(roles="ROLE_USER")
      * @param Article $article
      * @return RedirectResponse
@@ -433,7 +436,7 @@ class ArticleController extends Controller
      * @param Article $article
      * @return array
      */
-    public function buttonWatchLaterAction($article)
+    public function buttonWatchLaterAction(Article $article)
     {
         $watchLater = ($this->get('security.context')->isGranted('ROLE_USER'))
             ? $this->getUser()->getArticlesWatchLater()->contains($article)
@@ -442,11 +445,13 @@ class ArticleController extends Controller
         return array(
             'watchLater'    => $watchLater,
             'id'            => $article->getId(),
+            'slug'          => $article->getSlug(),
         );
     }
 
     /**
-     * @Route("/{id}/watch-later", name="inck_article_article_watchLater", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @Route("/{id}/{slug}/watch-later", name="inck_article_article_watchLater", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @param Article $article
      * @return JsonResponse
      */
@@ -489,7 +494,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/pdf", name="inck_article_article_pdf")
+     * @Route("/{id}/{slug}/pdf", name="inck_article_article_pdf")
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Template()
      * @param Article $article
      * @throws HTML2PDF_exception
