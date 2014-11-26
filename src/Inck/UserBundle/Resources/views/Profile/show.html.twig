@@ -8,6 +8,7 @@
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
         'bundles/inckarticle/css/Article/score.css'
+        'bundles/incksubscription/css/manager.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -24,6 +25,7 @@
 {% block content %}
     <div class="container">
         {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+        {% include 'InckSubscriptionBundle:Manager:modal.html.twig' %}
     </div>
 {% endblock content %}
 
@@ -32,6 +34,8 @@
     {% javascripts filter='?uglifyjs2' output='js/compiled/user/profile/show.js'
         'bundles/inckarticle/js/Article/watchLater.js'
         'bundles/inckarticle/js/Article/summary.js'
+        'bundles/incksubscription/js/Subscription/manager.js'
+        'bundles/incksubscription/js/Subscription/new.js'
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

@@ -8,9 +8,11 @@ use Inck\ArticleBundle\Entity\Tag;
 use Inck\NotificationBundle\Entity\SubscriberNotification;
 use Inck\NotificationBundle\Event\NotificationEvent;
 use Inck\RatchetBundle\Entity\Client;
+use Inck\SubscriptionBundle\Exception\InvalidRequestException;
 use Inck\SubscriptionBundle\Model\SubscriptionInterface;
 use Inck\SubscriptionBundle\Traits\SubscriptionTrait;
 use Inck\UserBundle\Entity\User;
+use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class SubscriptionHandler
@@ -28,14 +30,21 @@ class SubscriptionHandler
     private $dispatcher;
 
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
      * @param ObjectManager $em
      * @param EventDispatcherInterface $dispatcher
+     * @param Logger $logger
      * @param array $parameters
      */
-    public function __construct(ObjectManager $em, EventDispatcherInterface $dispatcher, array $parameters)
+    public function __construct(ObjectManager $em, EventDispatcherInterface $dispatcher, Logger $logger, array $parameters)
     {
         $this->em           = $em;
         $this->dispatcher   = $dispatcher;
+        $this->logger       = $logger;
         $this->parameters   = $parameters;
     }
 
@@ -60,7 +69,7 @@ class SubscriptionHandler
 
             foreach ($requiredParameters as $requiredParameter) {
                 if (!isset($parameters[$requiredParameter])) {
-                    throw new \Exception(sprintf(
+                    throw new InvalidRequestException($client, $parameters, sprintf(
                         'Parameter "%s" is required',
                         $requiredParameter
                     ));
@@ -76,7 +85,7 @@ class SubscriptionHandler
             $class = $this->aliasToClass($parameters['entityAlias']);
 
             if (!$subscriptionClass || !$class) {
-                throw new \Exception(sprintf(
+                throw new InvalidRequestException($client, $parameters, sprintf(
                     'Alias "%s" invalid',
                     $parameters['entityAlias']
                 ));
@@ -90,10 +99,15 @@ class SubscriptionHandler
                 ->find($parameters['entityId']);
 
             if (!$entity) {
-                throw new \Exception(sprintf(
+                throw new InvalidRequestException($client, $parameters, sprintf(
                     'Entity "%d" invalid',
                     $parameters['entityId']
                 ));
+            }
+
+            // Empêcher de s'abonner à soi-même
+            if ($parameters['entityAlias'] === 'user' && $entity === $user) {
+                throw new InvalidRequestException($client, $parameters, 'Invalid entity');
             }
 
             // Recherche de l'abonnement
@@ -140,11 +154,31 @@ class SubscriptionHandler
             $client->sendMessage('subscription.saved', [
                 'id' => $parameters['id'],
             ]);
-        } catch(\Exception $e) {
+        }
+
+        catch (InvalidRequestException $e) {
+            $this->logger->addWarning(sprintf(
+                'invalid request from user %d : %s',
+                $e->getClient()->getUser()->getId(),
+                $e->getMessage()
+            ), $e->getParameters());
+
             $client->sendMessage('subscription.error', [
-                'id'        => $parameters['id'],
-                'code'      => $e->getCode(),
-                'message'   => $e->getMessage(),
+                'id' => $parameters['id'],
+            ]);
+        }
+
+        catch (\Exception $e) {
+            $this->logger->addError(sprintf(
+                '"%s" in file "%s" on line %d (code %d)',
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine(),
+                $e->getCode()
+            ));
+
+            $client->sendMessage('subscription.error', [
+                'id' => $parameters['id'],
             ]);
         }
     }

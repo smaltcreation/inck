@@ -2,7 +2,7 @@
 
 <div class="fos_user_user_show">
     <!-- Nav tabs -->
-    <div class="tabs">
+    <div class="tabs custom">
         <nav>
             <ul class="nav" role="tablist">
                 <li class="active"><a href="#profile" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i><span> {{ 'profile.page.profile'|trans }}</span></a></li>
@@ -12,7 +12,7 @@
         </nav>
     </div>
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="tab-content custom">
         <div class="tab-pane active" id="profile">
             <div class="row">
                 <div class="col-sm-3 hidden-xs visible-sm visible-md visible-lg">
@@ -65,6 +65,10 @@
                         </div>
                         <div class="panel-footer">
                             <p>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#subscriptions-manager">
+                                    <i class="fa fa-bullhorn"></i>
+                                    Gérer mes abonnements
+                                </button>
                                 <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> {{ 'profile.page.edit_profile'|trans }}</a>
                                 <a href="{{ path('fos_user_change_password') }}" class="btn btn-default"><i class="fa fa-lock"></i> {{ 'profile.page.change_password'|trans }}</a>
                             </p>

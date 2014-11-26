@@ -6,6 +6,7 @@ services:
             - { name: twig.extension }
     inck_subscription.rpc.subscription_handler:
         class: Inck\SubscriptionBundle\RPC\SubscriptionHandler
-        arguments: [@doctrine.orm.entity_manager, @event_dispatcher, %inck_subscription.aliases%]
+        arguments: [@doctrine.orm.entity_manager, @event_dispatcher, @logger, %inck_subscription.aliases%]
         tags:
-            -  { name: inck_ratchet.rpc, alias: subscription }
+            - { name: inck_ratchet.rpc, alias: subscription }
+            - { name: monolog.logger, channel: inck_ratchet }

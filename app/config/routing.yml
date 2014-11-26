@@ -22,6 +22,11 @@ inck_article:
     type:     annotation
     prefix:   /
 
+inck_subscription:
+    resource: "@InckSubscriptionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

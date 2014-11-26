@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('.btn-subscribe').click(function(){
+    $('body').on('click', '.btn-subscribe', function(){
         subscribe($(this));
     });
 
@@ -8,10 +8,9 @@ $(document).ready(function(){
             subscriptionSaved(data.id);
         })
         .bind('subscription.error', function(e, data){
+            alert("Une erreur s'est produite.");
             subscriptionError(data.id);
-            alert(data.message);
-        })
-    ;
+        });
 });
 
 function subscribe(button){

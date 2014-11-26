@@ -1,0 +1,15 @@
+#subscriptions-manager .tab-content .tab-pane {
+    padding-top: 15px;
+}
+
+#subscriptions-manager .avatar {
+    width: 60px;
+}
+
+#subscriptions-manager .navigation {
+    text-align: center;
+}
+
+#subscriptions-manager ul.pagination {
+    margin: 0 0 10px;
+}

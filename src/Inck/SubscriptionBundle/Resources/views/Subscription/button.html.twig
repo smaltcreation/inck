@@ -1,7 +1,7 @@
 {% set data = 'id="subscribe-' ~ alias ~ '-' ~ id ~ '" data-entity-alias="' ~ alias ~ '" data-entity-id="' ~ id ~ '"' %}
 
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    <button class="btn btn-subscribe {% if subscribed %}subscribed{% endif %}" {{ data|raw }}>
+    <button class="btn btn-subscribe {% if subscribed %}subscribed{% endif %} {{ buttonClass }}" {{ data|raw }}>
         {% if subscribed %}
             <i class="fa fa-check"></i> <span class="btn-text">Vous êtes abonné</span>
         {% else %}

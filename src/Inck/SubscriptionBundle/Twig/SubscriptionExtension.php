@@ -70,9 +70,10 @@ class SubscriptionExtension extends \Twig_Extension
     /**
      * @param string $alias
      * @param mixed $entity
+     * @param string $buttonClass
      * @return string
      */
-    public function subscribeButton($alias, $entity)
+    public function subscribeButton($alias, $entity, $buttonClass = null)
     {
         $subscribed = false;
 
@@ -94,6 +95,7 @@ class SubscriptionExtension extends \Twig_Extension
             'subscribed'    => $subscribed,
             'alias'         => $alias,
             'id'            => $entity->getId(),
+            'buttonClass'   => $buttonClass,
         ));
     }
 }

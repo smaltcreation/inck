@@ -3,6 +3,7 @@
 namespace Inck\ArticleBundle\Controller;
 
 use Inck\ArticleBundle\Entity\ArticleRepository;
+use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

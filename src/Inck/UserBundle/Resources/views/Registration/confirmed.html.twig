@@ -8,6 +8,7 @@
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
         'bundles/inckarticle/css/Article/score.css'
+        'bundles/incksubscription/css/manager.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -23,11 +24,19 @@
                 {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
                 {% if targetUrl is not empty %}<p><a class="btn btn-default" href="{{ targetUrl }}"><i class="fa fa-backward"></i> {{ 'registration.back'|trans }}</a></p>{% endif %}
             {% endif %}
+            <p>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#subscriptions-manager">
+                    <i class="fa fa-bullhorn"></i>
+                    Gérer mes abonnements
+                </button>
+            </p>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
+    {% include 'InckSubscriptionBundle:Manager:modal.html.twig' %}
+
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -60,6 +69,11 @@
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         {% javascripts filter='?uglifyjs2' output='js/compiled/user/registration/confirmed.js'
             'bundles/inckarticle/js/Article/score.js'
+            'bundles/inckarticle/js/Article/watchLater.js'
+            'bundles/inckarticle/js/Article/summary.js'
+            'bundles/incksubscription/js/Subscription/manager.js'
+            'bundles/incksubscription/js/Subscription/new.js'
+            'bundles/inckuser/js/Registration/confirmed.js'
         %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}

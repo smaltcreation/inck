@@ -1,0 +1,39 @@
+{% trans_default_domain 'ArticleBundle' %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    {% for user in entities %}
+                        <tr>
+                            <td class="avatar">
+                                <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}" target="_blank">
+                                    <img class="img-rounded img-thumbnail img-responsive gravatar" src="{{ gravatar(user.email, 50, 'g', 'mm', true) }}" alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}">
+                                </a>
+                            </td>
+                            <td>
+                                <div>
+                                    {% if user != app.user %}
+                                        <span class="pull-right">
+                                            {{ subscribe_button('user', user, 'btn-xs') }}
+                                        </span>
+                                    {% endif %}
+                                    <h4>
+                                        <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}" target="_blank">
+                                            {{ user.username }}
+                                        </a>
+                                    </h4>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div class="navigation">
+                {{ knp_pagination_render(entities) }}
+            </div>
+        </div>
+    </div>
+</div>

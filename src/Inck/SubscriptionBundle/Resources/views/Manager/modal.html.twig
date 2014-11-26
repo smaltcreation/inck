@@ -1,0 +1,43 @@
+<div id="subscriptions-manager" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="subscriptions-manager-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 id="subscriptions-manager-label" class="modal-title">Gérer mes abonnements</h4>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#subscriptions-manager-categories" aria-controls="subscriptions-manager-categories" role="tab" data-toggle="tab">
+                                Catégories
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#subscriptions-manager-tags" aria-controls="subscriptions-manager-tags" role="tab" data-toggle="tab">
+                                Tags
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#subscriptions-manager-users" aria-controls="subscriptions-manager-users" role="tab" data-toggle="tab">
+                                Auteurs
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content manager-tab">
+                        <div role="tabpanel" class="tab-pane active" id="subscriptions-manager-categories" data-alias="categories"></div>
+                        <div role="tabpanel" class="tab-pane" id="subscriptions-manager-tags" data-alias="tags"></div>
+                        <div role="tabpanel" class="tab-pane" id="subscriptions-manager-users" data-alias="users"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
