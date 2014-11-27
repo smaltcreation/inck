@@ -149,7 +149,7 @@ class User extends BaseUser
      * @Assert\Length(max="255")
      * @Assert\Url()
      * @Assert\Regex(
-     *     pattern="/https?:\/\/(www\.)?linkedin\.com\/.+/",
+     *     pattern="/https?:\/\/(www\.)?([a-z]{2}\.)?linkedin\.com\/in\/.+/",
      *     match=true,
      *     message="Le nom de domaine doit être celui de Linkedin"
      * )
