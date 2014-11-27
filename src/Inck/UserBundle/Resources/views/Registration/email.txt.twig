@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block body_html %}
-    <body yahoo>
+    <body>
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td>
@@ -69,13 +69,13 @@
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td class="h2" style="padding-top: 30px; color: #153643; font-family: Arial, sans-serif; font-size: 24px;">
-                                        {{ 'greatings.hello'|trans }} {{ user.username }}!<br><br>
+                                        {{ 'greatings.hello'|trans }} {{ user.username }}<br><br>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="bodycopy" style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                                        {{ 'validate.email_link'|trans }} {{ confirmationUrl }}
-
+                                        {{ 'validate.email_link'|trans }}
+                                        <a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
                                     </td>
                                 </tr>
                                 <tr>
