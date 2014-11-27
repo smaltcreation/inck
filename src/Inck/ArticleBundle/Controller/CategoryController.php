@@ -59,7 +59,9 @@ class CategoryController extends Controller
             $repository = $em->getRepository('InckArticleBundle:Category');
             $categories = $repository->getPopular();
 
+            $articlesLength = 0;
             $lastPublishedArticles = array();
+
             if($categories) {
                 $firstCategory = $categories[0];
                 $articlesLength = $em->getRepository('InckArticleBundle:Article')->countByCategory($firstCategory->getId(), true);
