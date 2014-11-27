@@ -36,15 +36,16 @@ class RegistrationFormType extends BaseType
                 'attr' => array('placeholder' => 'Skywalker')
             ))
             ->add('birthday', 'afe_date_picker', array(
+                'format' => 'dd/mm/yyyy',
+                'formatSubmit' => 'dd/mm/yyyy',
                 'startView' => 2,
                 'minViewMode' => 0,
-                'startDate' => '01-01-1910',
-                'endDate' => 'now',
-                'formatSubmit' => 'dd/mm/yyyy',
+                'startDate' => '1910-01-01',
+                'endDate' => date('Y-m-d'),
                 'required'  => false,
                 'label' => 'form.birthday',
                 'translation_domain' => 'FOSUserBundle',
-                'attr' => array('placeholder' => '16/08/1984')
+                'attr' => array('placeholder' => '23/06/1912')
             ))
             ->add('occupation', 'text', array(
                 'required'  => false,

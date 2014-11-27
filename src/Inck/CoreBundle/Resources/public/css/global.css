@@ -1,19 +1,16 @@
 /* Fonts */
-@font-face
-{
+@font-face {
     font-family: Gravity;
     src: url(fonts/gravity/Gravity-Light.ttf);
 }
 
-@font-face
-{
+@font-face {
     font-family: Gravity;
     src: url(fonts/gravity/Gravity-Bold.ttf);
     font-weight: bold;
 }
 
-@font-face
-{
+@font-face {
     font-family: Gravity;
     src: url(fonts/gravity/Gravity-Light-Italic.ttf);
     font-style: italic;
@@ -216,4 +213,24 @@
     background-color: #fffffe;
     border-color: #444;
     color: #a19570;
+}
+
+/* Datepicker */
+.datepicker i {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 1.28571429em;
+    text-align: center;
+}
+
+.datepicker i.icon-arrow-left:before {
+    content: "\f053";
+}
+
+.datepicker i.icon-arrow-right:before {
+    content: "\f054";
 }
