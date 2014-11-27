@@ -1,3 +1,14 @@
+{% if not app.user %}
+    <div class="container" style="margin-top: 70px;">
+        <div class="alert alert-info alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <strong>Early Access Program.</strong> Vous êtes actuellement sur une version alpha de <strong>Inck</strong>.
+            Vous pouvez reporter les bugs sur notre dépôt <a href="https://github.com/SmaltCreation/Inck/issues/new" class="alert-link">GitHub</a>.
+            Merci de votre visite.
+        </div>
+    </div>
+{% endif %}
+
 {% for type, messages in app.session.flashbag.all() %}
     <section id="messages">
         <div class="container">
