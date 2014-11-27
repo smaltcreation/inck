@@ -44,6 +44,7 @@ group:
         status: Status
         members_of: Members of
         return_main_page: Return to the main page
+        return_profile: Retourner to profile
         add_new_members: Add new members
         search_users: Search for users by typing there first name, last name or username
         related_info: related information

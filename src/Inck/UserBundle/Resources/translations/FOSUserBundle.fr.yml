@@ -105,6 +105,7 @@ profile:
         status: Statut
         members_of: Membres de
         return_main_page: Retourner à la page principale
+        return_profile: Retourner au profil
         add_new_members: Ajouter de nouveaux membres
         search_users: Rechercher des utilisateurs en tapant leur nom, prénom ou nom d'utilisateur
         related_info: Informations relatives

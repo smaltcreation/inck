@@ -39,21 +39,21 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h3>{{ 'registration.register.go_to'|trans }}</h3>
                 <p>{{ 'registration.register.go_to_recap'|trans }}</p>
                 <p><a class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> {{ 'registration.register.my_profile'|trans }}</a></p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h3>{{ 'registration.register.want_to_share'|trans }}</h3>
                 <p>{{ 'registration.register.want_to_share_recap'|trans }}</p>
                 <p><a class="btn btn-success" href="{{ path('inck_article_article_new') }}"><i class="fa fa-pencil"></i> {{ 'registration.register.write_article'|trans }}</a></p>
             </div>
-             <div class="col-md-4">
-                <h3>{{ 'registration.register.press'|trans }}</h3>
-                <p>{{ 'registration.register.press_recap'|trans }}</p>
-                <p><a class="btn btn-primary" href="{{ path('fos_user_change_password') }}"><i class="fa fa-university"></i> {{ 'registration.register.my_buisness'|trans }}</a></p>
-            </div>
+             {#<div class="col-md-4">#}
+                {#<h3>{{ 'registration.register.press'|trans }}</h3>#}
+                {#<p>{{ 'registration.register.press_recap'|trans }}</p>#}
+                {#<p><a class="btn btn-primary" href="#"><i class="fa fa-university"></i> {{ 'registration.register.my_buisness'|trans }}</a></p>#}
+            {#</div>#}
         </div>
 
         <div class="last-article" itemscope itemtype ="http://schema.org/Article">
