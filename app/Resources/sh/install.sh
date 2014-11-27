@@ -10,7 +10,15 @@ git config core.fileMode false
 
 # Installation des paquets requis
 apt-get update
-apt-get install nodejs npm zlibc php-pear php5-memcache memcached
+# Installtion de NGINX/MYSQL/CURL
+apt-get install nginx mysql-server curl
+# Installation de PHP
+apt-get install php5-intl php-pear php5-memcache php5-curl php5-mysql
+# Installation de Composer
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+# Installation des dépendences
+apt-get install nodejs npm zlibc memcached
 
 npm install less@1.7.5 -g
 pecl install memcache
