@@ -91,12 +91,6 @@
     background-color: white;
 }
 
-.tab-content {
-    border: 1px solid #808080;
-    border-top: none;
-    border-radius: 0 0 5px 5px;
-}
-
 .tabs.custom {
     position: relative;
     overflow: hidden;

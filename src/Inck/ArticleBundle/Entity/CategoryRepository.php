@@ -3,6 +3,7 @@
 namespace Inck\ArticleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * CategoryRepository
@@ -44,11 +45,9 @@ class CategoryRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')
             ->select('c')
-            ->leftJoin('c.articles', 'a')
+            ->leftJoin('c.articles', 'a', Join::WITH, 'a.published = :published')
             ->addSelect('COUNT(a) AS HIDDEN nArticles')
-            ->where('a.published = :published')
             ->setParameter('published', true)
-            ->orWhere('a IS NULL')
             ->groupBy('c.id')
             ->orderBy("nArticles", 'DESC')
         ;

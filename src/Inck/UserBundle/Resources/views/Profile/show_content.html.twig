@@ -79,6 +79,15 @@
         </div>
 
         <div class="tab-pane" id="articles">
+
+            <!-- Modal -->
+            <div class="modal fade" id="article-preview" tabindex="-1" role="dialog" aria-labelledby="article-title" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content"></div>
+                </div>
+            </div>
+            <!-- /.modal -->
+
             <div class="row">
                 <div class="col-md-6 text text-center">
                     <h4>{{ 'profile.page.why_write'|trans }}</h4>
@@ -105,10 +114,18 @@
                                             <td><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>
                                                 <div class="pull-right btn-group">
-                                                    <a href="{{ path('inck_article_article_show_modal', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a>
-                                                    <a href="{{ path('inck_article_article_edit', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body"><i class="fa fa-edit"></i></a>
-                                                    <a href="{#{ path('inck_article_article_publish', { 'id': article.id, 'slug': article.slug }) }#}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body"><i class="fa fa-send"></i></a>
-                                                    <a href="{{ path('inck_article_article_delete', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-danger btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body"><i class="fa fa-times"></i></a>
+                                                    <a href="{{ path('inck_article_article_show_modal', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-primary btn-xs btn-tooltip btn-modal" data-placement="top" title="Aperçu" data-container="body" data-toggle="tootltip">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+                                                    <a href="{{ path('inck_article_article_edit', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a href="{#{ path('inck_article_article_publish', { 'id': article.id, 'slug': article.slug }) }#}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body">
+                                                        <i class="fa fa-send"></i>
+                                                    </a>
+                                                    <a href="{{ path('inck_article_article_delete', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-danger btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -162,7 +179,7 @@
                                             <td><span class="label label-{{ status }} btn-tooltip" data-toggle="tooltip" data-placement="left" data-container="body" title="{{ tooltip }}"><i class="fa fa-{{ icon }}"></i></span></td>
                                             <td><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>{{ article.postedAt|date('d/m/Y à H:i') }}</td>
-                                            <td><a href="{{ path('inck_article_article_show_modal', { 'id' : article.id, 'slug': article.slug }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="right" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                            <td><a href="{{ path('inck_article_article_show_modal', { 'id' : article.id, 'slug': article.slug }) }}" class="btn btn-primary btn-xs btn-tooltip btn-modal pull-right" data-placement="top" title="Aperçu" data-container="body" data-toggle="tooltip"><i class="fa fa-search"></i></a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -195,7 +212,7 @@
                                             <td><span class="label label-success btn-tooltip" data-toggle="tooltip" data-container="body" data-placement="left" title="Publié"><i class="fa fa-check"></i></span></td>
                                             <td class="title"><a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a></td>
                                             <td>{{ article.publishedAt|date('d/m/Y à H:i') }}</td>
-                                            <td><a href="{{ path('inck_article_article_show_modal', { 'id' : article.id, 'slug': article.slug }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="right" title="Aperçu" data-container="body" data-target="modal"><i class="fa fa-search"></i></a></td>
+                                            <td><a href="{{ path('inck_article_article_show_modal', { 'id' : article.id, 'slug': article.slug }) }}" class="btn btn-primary btn-xs btn-tooltip btn-modal pull-right" data-placement="top" title="Aperçu" data-container="body" data-toggle="tooltip"><i class="fa fa-search"></i></a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

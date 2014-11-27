@@ -9,7 +9,7 @@
                         <tr>
                             <td class="avatar">
                                 <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}" target="_blank">
-                                    <img class="img-rounded img-thumbnail img-responsive gravatar" src="{{ gravatar(user.email, 50, 'g', 'mm', true) }}" alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}">
+                                    <img class="img-circle img-responsive gravatar" src="{{ gravatar(user.email, 50, 'g', 'mm', true) }}" alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}">
                                 </a>
                             </td>
                             <td>

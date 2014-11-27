@@ -32,8 +32,8 @@
 {% block javascripts %}
     {{ parent() }}
     {% javascripts filter='?uglifyjs2' output='js/compiled/user/profile/show.js'
+        'bundles/inckuser/js/Profile/show.js'
         'bundles/inckarticle/js/Article/watchLater.js'
-        'bundles/inckarticle/js/Article/summary.js'
         'bundles/incksubscription/js/Subscription/manager.js'
         'bundles/incksubscription/js/Subscription/new.js'
     %}

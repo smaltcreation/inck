@@ -364,12 +364,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/jquery.git",
-                "reference": "950ba6f21f2b5fab0195a11728cc83c5b147c594"
+                "reference": "923b3973ed5b6e465a621d3032106fc6832a9a3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/jquery/zipball/950ba6f21f2b5fab0195a11728cc83c5b147c594",
-                "reference": "950ba6f21f2b5fab0195a11728cc83c5b147c594",
+                "url": "https://api.github.com/repos/components/jquery/zipball/923b3973ed5b6e465a621d3032106fc6832a9a3c",
+                "reference": "923b3973ed5b6e465a621d3032106fc6832a9a3c",
                 "shasum": ""
             },
             "require": {
@@ -384,7 +384,8 @@
                     "files": [
                         "jquery.min.js",
                         "jquery-migrate.js",
-                        "jquery-migrate.min.js"
+                        "jquery-migrate.min.js",
+                        "jquery.min.map"
                     ]
                 }
             },
@@ -395,13 +396,12 @@
             "authors": [
                 {
                     "name": "John Resig",
-                    "email": "jeresig@gmail.com",
-                    "homepage": "http://ejohn.org/"
+                    "email": "jeresig@gmail.com"
                 }
             ],
             "description": "jQuery JavaScript Library",
             "homepage": "http://jquery.com",
-            "time": "2014-07-02 11:53:01"
+            "time": "2014-10-10 05:49:59"
         },
         {
             "name": "components/jqueryui",
@@ -2689,7 +2689,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -3997,12 +3997,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "d2cc9442fbbcf60b465912cbfb26e16d42ea66ac"
+                "reference": "c8614963e63fb760087776efef8f2191dcf25186"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/d2cc9442fbbcf60b465912cbfb26e16d42ea66ac",
-                "reference": "d2cc9442fbbcf60b465912cbfb26e16d42ea66ac",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/c8614963e63fb760087776efef8f2191dcf25186",
+                "reference": "c8614963e63fb760087776efef8f2191dcf25186",
                 "shasum": ""
             },
             "require": {
@@ -4060,7 +4060,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2014-11-14 12:30:08"
+            "time": "2014-11-26 09:40:20"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

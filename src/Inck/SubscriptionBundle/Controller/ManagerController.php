@@ -76,7 +76,7 @@ class ManagerController extends Controller
                     'entity'    => 'InckUserBundle:User',
                     'view'      => 'users',
                     'orderBy'   => 'username',
-                    'limit'     => 2,
+                    'limit'     => 6,
                 ];
 
             default:
