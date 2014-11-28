@@ -17,7 +17,7 @@ class CategorySubscription extends Subscription implements SubscriptionInterface
     /**
      * @var Category
      *
-     * @ORM\OneToOne(targetEntity="Inck\ArticleBundle\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="Inck\ArticleBundle\Entity\Category")
      */
     private $to;
 

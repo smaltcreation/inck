@@ -17,7 +17,7 @@ class TagSubscription extends Subscription implements SubscriptionInterface
     /**
      * @var Tag
      *
-     * @ORM\OneToOne(targetEntity="Inck\ArticleBundle\Entity\Tag")
+     * @ORM\ManyToOne(targetEntity="Inck\ArticleBundle\Entity\Tag")
      */
     private $to;
 
