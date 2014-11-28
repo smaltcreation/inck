@@ -26,9 +26,13 @@ class ArticleType extends AbstractType
                 'label'         => 'Résumé',
                 'attr'          => [
                     'placeholder'   => 'Résumez le contenu de votre article',
-                    'rows'          => 6,
+                    'rows'          => 4,
                     'maxlength'     => 255,
                 ],
+            ])
+            ->add('language', 'afe_select2_language', [
+                'label'     => 'Langue',
+                'data'      => 'fr',
             ])
             ->add('content', 'ckeditor', [
                 'label'     => false,
