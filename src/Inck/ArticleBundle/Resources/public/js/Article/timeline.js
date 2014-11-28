@@ -66,11 +66,12 @@ $(document).ready(function(){
 
     // Order filter
     var orderInput = $("#inck_articlebundle_articlefilter_order");
-    orderInput.val('date');
 
     orderInput.select2({
         width: 'container'
     });
+
+    resetOrders();
 
     // Form
     var form = $('form[name="inck_articlebundle_articlefilter"]');
@@ -154,30 +155,40 @@ $(document).ready(function(){
 
     // Reset filters
     function resetCategories(){
+        categoriesInput.val(null).select2('data', null);
+
         if('category' in selectedFilters){
             categoriesInput.select2('data', [selectedFilters.category]);
         }
     }
 
     function resetTags(){
+        tagsInput.val(null).select2('data', null);
+
         if('tag' in selectedFilters){
             tagsInput.select2('data', [selectedFilters.tag]);
         }
     }
 
     function resetAuthors(){
+        authorsInput.val(null).select2('data', null);
+
         if('author' in selectedFilters){
             authorsInput.select2('data', [selectedFilters.author]);
         }
     }
 
+    function resetOrders(){
+        orderInput.val('date');
+    }
+
     resetButton.click(function(e){
         e.preventDefault();
 
-        form.find(".select2-offscreen").val(null).select2("data", null);
         resetCategories();
         resetTags();
         resetAuthors();
+        resetOrders();
 
         submitButtonClicked = false;
         form.submit();
@@ -191,8 +202,6 @@ $(document).ready(function(){
         $('#timeline-next-page').removeClass('hidden');
         nextPage = 2;
     }
-
-    $('#timeline-next-page').click(getNextPage);
 
     function getNextPage(){
         var button = $(this);
@@ -239,4 +248,8 @@ $(document).ready(function(){
 
         return true;
     }
+
+    $('#timeline-next-page').click(function(){
+        getNextPage();
+    });
 });
