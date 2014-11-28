@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8" />
     <title>Inck - {{ article.title }}</title>
     <style>
         .about {
@@ -29,14 +30,18 @@
         <div class="about">
             <p>
                 {{ 'article.pdf.writen_by'|trans }}
-                {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ path('fos_user_profile_preview', { 'username': article.author.username }) %}
-                <a href="{{ currentUrl }}">
+
+                <a href="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ path('fos_user_profile_preview', { 'username': article.author.username }) }}">
                     {{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}
                 </a>
+
+                –
+
                 {{ 'article.pdf.published'|trans }} {{ article.publishedAt|date('d/m/Y à H:i') }}
             </p>
             <hr>
         </div>
+
         <div id="article-content">
             {{ article.content|raw }}
         </div>

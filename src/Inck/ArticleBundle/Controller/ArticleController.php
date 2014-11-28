@@ -4,7 +4,6 @@ namespace Inck\ArticleBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Exception;
-use HTML2PDF_exception;
 use Inck\ArticleBundle\Entity\Article;
 use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\ReportRepository;
@@ -498,26 +497,26 @@ class ArticleController extends Controller
      * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Template()
      * @param Article $article
-     * @throws HTML2PDF_exception
-     * @return string
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function pdfAction(Article $article)
     {
-        $html2pdf = $this->get('html2pdf')->get();
+        $html = $this->renderView('InckArticleBundle:Article:pdf.html.twig', [
+            'article'   => $article,
+            'user'      => $this->getUser()
+        ]);
 
-        $html2pdf->setDefaultFont('arial');
-        $html2pdf->writeHTML($this->renderView(
-            'InckArticleBundle:Article:pdf.html.twig',
-            array(
-                'article'   => $article,
-                'user'      => $this->getUser()
-            )
-        ));
-
-        return $html2pdf->Output(sprintf(
-            "article-%d.pdf",
-            $article->getId()
-        ));
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            Response::HTTP_OK,
+            [
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => sprintf(
+                    'attachment; filename="%s.pdf"',
+                    $article->getSlug()
+                ),
+            ]
+        );
     }
 
     /**

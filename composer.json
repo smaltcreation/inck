@@ -37,7 +37,8 @@
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "elao/web-profiler-extra-bundle": "~2.3@dev",
         "avalanche123/imagine-bundle": "v2.1",
-        "ensepar/html2pdf-bundle": "dev-master",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
+        "knplabs/knp-snappy-bundle": "dev-master",
         "cboden/ratchet": "0.3.*",
         "hwi/oauth-bundle": "0.4.*@dev",
         "components/modernizr": "dev-master"

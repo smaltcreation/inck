@@ -238,3 +238,11 @@ inck_ratchet:
     server_host: "%inck_ratchet.server_host%"
     server_port: "%inck_ratchet.server_port%"
     server_name: "%inck_ratchet.server_name%"
+
+# KnpSnappyBundle Configuration
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "%kernel.root_dir%/../bin/wkhtmltopdf-amd64"
+    image:
+        enabled:    false
