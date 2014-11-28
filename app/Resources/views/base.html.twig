@@ -58,6 +58,8 @@
         </div>
 
         {% block javascripts %}
+            {{ nelmio_js_error_logger() }}
+
             {% javascripts filter='?uglifyjs2' output='js/compiled/base.js'
                 'components/jquery/jquery.min.js'
                 'components/jquery-ui/jquery-ui.min.js'
