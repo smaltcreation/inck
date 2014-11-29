@@ -138,9 +138,18 @@
             <h2>{{ 'view.layout.social_networks'|trans }}</h2>
             <p>{{ 'view.layout.social_networks_recap'|trans }}</p>
             <div>
-                <a href="https://www.facebook.com/smaltcreation" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                <a href="https://twitter.com/smaltcreation" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                <a href="https://plus.google.com/u/0/+Smaltcreation/posts" class="btn btn-google"><i class="fa fa-google-plus"></i> Google+</a>
+                <a href="{{ inck_social_facebook }}" class="btn btn-facebook">
+                    <i class="fa fa-facebook"></i>
+                    Facebook
+                </a>
+                <a href="{{ inck_social_twitter }}" class="btn btn-twitter">
+                    <i class="fa fa-twitter"></i>
+                    Twitter
+                </a>
+                <a href="{{ inck_social_google_plus }}" class="btn btn-google">
+                    <i class="fa fa-google-plus"></i>
+                    Google+
+                </a>
             </div>
         </div>
     </section>

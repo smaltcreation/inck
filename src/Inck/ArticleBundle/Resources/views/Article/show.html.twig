@@ -123,10 +123,25 @@
             <div class="panel panel-default">
                 <a class="close-slidebox"><i class="fa fa-times"></i></a>
                 <div class="panel-body text-center">
-                    <h4>{{ 'article.show.follow_us'|trans }}<br><small>{{ 'article.show.social_networks'|trans }}</small></h4>
-                    <a href="#" class="btn btn-facebook btn-sm"><i class="fa fa-facebook fa-fw"></i> Facebook</a>
-                    <a href="#" class="btn btn-twitter btn-sm"><i class="fa fa-twitter fa-fw"></i> Twitter</a>
-                    <a href="#" class="btn btn-google btn-sm"><i class="fa fa-google-plus fa-fw"></i> Google+</a>
+                    <h4>
+                        {{ 'article.show.follow_us'|trans }}
+                        <br>
+                        <small>
+                            {{ 'article.show.social_networks'|trans }}
+                        </small>
+                    </h4>
+                    <a href="{{ inck_social_facebook }}" class="btn btn-facebook btn-sm">
+                        <i class="fa fa-facebook"></i>
+                        Facebook
+                    </a>
+                    <a href="{{ inck_social_twitter }}" class="btn btn-twitter btn-sm">
+                        <i class="fa fa-twitter"></i>
+                        Twitter
+                    </a>
+                    <a href="{{ inck_social_google_plus }}" class="btn btn-google btn-sm">
+                        <i class="fa fa-google-plus"></i>
+                        Google+
+                    </a>
                 </div>
             </div>
         </div>
