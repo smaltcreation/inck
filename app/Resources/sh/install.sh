@@ -26,9 +26,7 @@ apt-get install nodejs npm zlibc memcached libxrender1 libxext6
 npm install less@1.7.5 -g
 pecl install memcache
 service nginx restart
-memcached -u memcached -d -m 30 -l 127.0.0.1 -p 11211
 
 # Creation de la DB, Installation des vendors
-
 php app/console doctrine:database:create 
 sh app/update
