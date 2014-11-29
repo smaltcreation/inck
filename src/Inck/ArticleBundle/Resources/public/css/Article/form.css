@@ -56,3 +56,7 @@
     max-width: 100%;
     height: auto;
 }
+
+span.glyphicon {
+    margin-right: 5px;
+}

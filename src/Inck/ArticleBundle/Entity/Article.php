@@ -53,7 +53,7 @@ class Article
      * @var string
      *
      * @Assert\Language()
-     * @ORM\Column(name="language", type="text", length=30)
+     * @ORM\Column(name="language", type="string", length=30)
      */
     private $language;
 

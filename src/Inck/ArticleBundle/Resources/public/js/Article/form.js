@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    // En-tête de l'article
     var toggleArticleHeader = $('.toggle-article-header');
     toggleArticleHeader.click(function(){
         $('#article-header').stop().slideToggle('slow');
@@ -13,6 +14,7 @@ $(document).ready(function(){
             icon.addClass('fa-chevron-up');
         }
     });
+
     // Gestion des tags
     var input = $("#inck_articlebundle_article_tags");
 
@@ -49,6 +51,36 @@ $(document).ready(function(){
         },
         createSearchChoice: function(term){
             return { id: term, text: term };
+        }
+    });
+
+    // Publier l'article
+    var confirmed = false;
+
+    $('#inck_articlebundle_article_actions_publish').click(function(e){
+        if (!confirmed) {
+            $('#article-modal').modal('show');
+            e.preventDefault();
+            confirmed = true;
+        }
+    });
+
+    $('#article-modal-publish').click(function(){
+        $('#inck_articlebundle_article_actions_publish').click();
+    });
+
+    $('#article-modal-draft').click(function(){
+        $('#inck_articlebundle_article_actions_draft').click();
+    });
+
+    // Reset
+    $('#inck_articlebundle_article_actions_cancel').click(function(){
+        $('.select2-container').select2('data', null);
+        $('.singleupload-buttonbar').find('.cancel:first').click();
+        $('#inck_articlebundle_article_language').val('fr').select2('val', 'fr');
+
+        for(var i in CKEDITOR.instances){
+            CKEDITOR.instances[i].setData('');
         }
     });
 });

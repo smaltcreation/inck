@@ -65,22 +65,31 @@ class ArticleType extends AbstractType
                     'publish'   => [
                         'type'      => 'submit',
                         'options'   => [
-                            'label' => 'Publier',
-                            'attr'  => ['class' => 'btn-success'],
+                            'label' => 'Publier l\'article',
+                            'attr'  => [
+                                'class' => 'btn-success',
+                                'icon'  => 'send',
+                            ],
                         ]
                     ],
                     'draft'      => [
                         'type'      => 'submit',
                         'options'   => [
                             'label' => 'Enregistrer comme brouillon',
-                            'attr'  => ['class' => 'btn-default'],
+                            'attr'  => [
+                                'class' => 'btn-default',
+                                'icon'  => 'file',
+                            ],
                         ]
                     ],
                     'cancel'      => [
                         'type'      => 'reset',
                         'options'   => [
                             'label' => 'Annuler',
-                            'attr'  => ['class' => 'btn-default'],
+                            'attr'  => [
+                                'class' => 'btn-default pull-right',
+                                'icon'  => 'trash',
+                            ],
                         ]
                     ],
                 ]
