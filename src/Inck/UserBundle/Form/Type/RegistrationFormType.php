@@ -36,7 +36,7 @@ class RegistrationFormType extends BaseType
                 'attr' => array('placeholder' => 'Skywalker')
             ))
             ->add('birthday', 'afe_date_picker', array(
-                'format' => 'dd/mm/yyyy',
+                'format' => 'dd/MM/yyyy',
                 'formatSubmit' => 'dd/mm/yyyy',
                 'startView' => 2,
                 'minViewMode' => 0,
