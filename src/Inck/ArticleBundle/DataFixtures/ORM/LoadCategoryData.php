@@ -12,7 +12,7 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface
     /**
      * Nombre total de catégories
      */
-    const MAX = 11;
+    const MAX = 12;
 
     /**
      * Préfixe de la référence d'une catégories
@@ -48,7 +48,8 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface
             'art',
             'economy',
             'health',
-            'technology'
+            'technology',
+            'geography'
         );
         
         $this->descriptions = array(
@@ -63,7 +64,8 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface
             'category.description.art',
             'category.description.economy',
             'category.description.health',
-            'category.description.technology'
+            'category.description.technology',
+            'category.description.geography'
         );
     }
 
