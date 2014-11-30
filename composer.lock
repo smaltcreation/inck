@@ -364,12 +364,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/jquery.git",
-                "reference": "950ba6f21f2b5fab0195a11728cc83c5b147c594"
+                "reference": "923b3973ed5b6e465a621d3032106fc6832a9a3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/jquery/zipball/950ba6f21f2b5fab0195a11728cc83c5b147c594",
-                "reference": "950ba6f21f2b5fab0195a11728cc83c5b147c594",
+                "url": "https://api.github.com/repos/components/jquery/zipball/923b3973ed5b6e465a621d3032106fc6832a9a3c",
+                "reference": "923b3973ed5b6e465a621d3032106fc6832a9a3c",
                 "shasum": ""
             },
             "require": {
@@ -384,7 +384,8 @@
                     "files": [
                         "jquery.min.js",
                         "jquery-migrate.js",
-                        "jquery-migrate.min.js"
+                        "jquery-migrate.min.js",
+                        "jquery.min.map"
                     ]
                 }
             },
@@ -395,13 +396,12 @@
             "authors": [
                 {
                     "name": "John Resig",
-                    "email": "jeresig@gmail.com",
-                    "homepage": "http://ejohn.org/"
+                    "email": "jeresig@gmail.com"
                 }
             ],
             "description": "jQuery JavaScript Library",
             "homepage": "http://jquery.com",
-            "time": "2014-07-02 11:53:01"
+            "time": "2014-10-10 05:49:59"
         },
         {
             "name": "components/jqueryui",
@@ -1580,12 +1580,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "ffe9d6b180e8f3b887040b4625d625fb6c79271a"
+                "reference": "253bcf348562ea73962265536c12ba0188075c28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/ffe9d6b180e8f3b887040b4625d625fb6c79271a",
-                "reference": "ffe9d6b180e8f3b887040b4625d625fb6c79271a",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/253bcf348562ea73962265536c12ba0188075c28",
+                "reference": "253bcf348562ea73962265536c12ba0188075c28",
                 "shasum": ""
             },
             "require": {
@@ -1627,7 +1627,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2014-10-31 16:21:24"
+            "time": "2014-11-30 11:01:30"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2668,7 +2668,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
