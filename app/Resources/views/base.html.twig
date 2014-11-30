@@ -22,8 +22,8 @@
                 {{ afe_form_stylesheet(form) }}
             {% endif %}
 
-            {% if app.user is not null and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/base/notification.css'
+            {% if app.user is not null and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                {% stylesheets filter='cssrewrite' output='css/compiled/base/notification.css'
                     'bundles/incknotification/css/ns-default.css'
                     'bundles/incknotification/css/ns-style-other.css'
                 %}
@@ -76,6 +76,8 @@
                 'js/bootstrap.js'
                 'bundles/fosjsrouting/js/router.js'
                 'js/fos_js_routes.js'
+                'bundles/inckcore/js/classie.js'
+                'components/modernizr/modernizr.js'
                 'bundles/inckcore/js/global.js'
                 'bundles/inckcore/js/Form/textarea.js'
             %}
@@ -87,18 +89,16 @@
                 {{ afe_form_javascript(form) }}
             {% endif %}
 
-            {% if app.user is not null and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% if app.user is not null and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <script type="text/javascript">
-                    window.server = {
-                        uri: 'ws://{{ inck_ratchet_server_host }}:{{ inck_ratchet_server_port }}/{{ inck_ratchet_server_name }}',
-                        connection: null
-                    };
+                    $(document).ready(function(){
+                        window.server = new InckRatchetServer('ws://{{ inck_ratchet_server_host }}:{{ inck_ratchet_server_port }}/{{ inck_ratchet_server_name }}');
+                    });
                 </script>
 
                 {% javascripts filter='?uglifyjs2' output='js/compiled/base/notification.js'
-                    'components/modernizr/modernizr.js'
-                    'js/jquery.waitforimages.min.js'
                     'bundles/inckratchet/js/client.js'
+                    'js/jquery.waitforimages.min.js'
                     'bundles/incknotification/js/notificationFx.js'
                     'bundles/incknotification/js/subscriber.js'
                 %}

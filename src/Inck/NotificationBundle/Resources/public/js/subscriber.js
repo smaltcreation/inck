@@ -7,8 +7,7 @@ $(document).ready(function(){
 
     $('body').append(loading);
 
-    $(document).bind('notification.received', function(e, data){
-        console.log(data);
+    $(window.server).bind('notification.received', function(e, data){
         notifications.push(data);
 
         if(!notificationDisplayed) {
@@ -34,15 +33,17 @@ $(document).ready(function(){
                 effect: 'thumbslider',
                 type: 'notice',
                 onClose: function(){
-                    notificationDisplayed = false;
-                    displaySubscriberNotification();
+                    setTimeout(function(){
+                        notificationDisplayed = false;
+                        displaySubscriberNotification();
+                    }, 1000);
                 }
             });
 
             notification.show();
             window.server.call('notification.displayed', {
                 id: data.id,
-                date: new Date()
+                date: new Date().toLocaleString()
             });
         });
     }

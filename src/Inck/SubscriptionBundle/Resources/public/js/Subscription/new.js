@@ -3,7 +3,7 @@ $(document).ready(function(){
         subscribe($(this));
     });
 
-    $(document)
+    $(window.server)
         .bind('subscription.saved', function(e, data){
             subscriptionSaved(data.id);
         })

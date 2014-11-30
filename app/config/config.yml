@@ -193,7 +193,7 @@ monolog:
             channels: [!inck_ratchet]
         soap:
             type: stream
-            path: %kernel.logs_dir%/%kernel.environment%.ratchet.log
+            path: %kernel.logs_dir%/ratchet.log
             channels: [inck_ratchet]
 
 # HWIOauthBundle Configuration

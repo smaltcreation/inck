@@ -220,8 +220,6 @@
 {% block javascripts %}
     {{ parent() }}
     {% javascripts filter='?uglifyjs2' output='js/compiled/core/layout.js'
-        'bundles/inckcore/js/classie.js'
-        'bundles/inckcore/js/modernizr.custom.js'
         'bundles/inckcore/js/layout/lib/gnmenu.js'
         'bundles/inckcore/js/layout/menu.js'
     %}
