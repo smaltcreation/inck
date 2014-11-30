@@ -1,0 +1,31 @@
+{% trans_default_domain 'ArticleBundle' %}
+
+{% if entities %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Catégorie</th>
+            <th>Description</th>
+            {#<th></th>#}
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in entities %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td><a href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-category btn-xs category">{{ category.name|trans|slice(0, 39) }}{% if category.name|trans|length > 39 %}...{% endif %}</a></td>
+                <td>{{ category.description|trans|slice(0, 39) }}{% if category.description|trans|length > 39 %}...{% endif %}</td>
+                {#<td><a href="{{ path('inck_article_category_edit', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-primary btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="right" title="Supprimer {{ category.name|trans }}" data-container="body"><i class="fa fa-edit"></i></a></td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        {{ knp_pagination_render(entities) }}
+    </div>
+{% else %}
+    <div class="panel-body">
+        <p>Aucun utilisateur enregistré.</p>
+    </div>
+{% endif %}

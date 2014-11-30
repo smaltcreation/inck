@@ -1,0 +1,29 @@
+{% if entities %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Nom d'utilisateur</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in entities %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email|slice(0, 39) }}{% if user.email|length > 39 %}...{% endif %}</td>
+                <td><a href="{{ path('fos_user_profile_preview', {'username': user.username}) }}">{{ user.username|slice(0, 39) }}{% if user.username|length > 39 %}...{% endif %}</a></td>
+                <td><a href="{{ path('inck_user_user_disable', {'id': user.id}) }}" class="btn btn-danger btn-xs btn-tooltip pull-right" data-toggle="tooltip" data-placement="right" title="Désactiver {{ user.username }}" data-container="body"><i class="fa fa-trash"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        {{ knp_pagination_render(entities) }}
+    </div>
+{% else %}
+    <div class="panel-body">
+        <p>Aucun utilisateur enregistré.</p>
+    </div>
+{% endif %}

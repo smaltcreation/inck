@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Inck\UserBundle\Entity\User;
 
 class UserController extends Controller
 {
@@ -73,5 +76,35 @@ class UserController extends Controller
         return new JsonResponse(array(
             'results'   => $results,
         ));
+    }
+
+    /**
+     * @Route("user/{id}/disable", name="inck_user_user_disable", requirements={"id" = "\d+"})
+     * @ParamConverter("user", options={"mapping": {"id": "id"}})
+     * @Secure(roles="ROLE_ADMIN")
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function disable(User $user)
+    {
+        try {
+            $em = $this->getDoctrine()->getManager();
+            $user->setEnabled(false);
+            $em->persist($user);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Utilisateur désactivé avec succès !'
+            );
+        }
+        catch(\Exception $e) {
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                $e
+            );
+        }
+
+        return $this->redirect($this->generateUrl('inck_core_admin_index'));
     }
 }

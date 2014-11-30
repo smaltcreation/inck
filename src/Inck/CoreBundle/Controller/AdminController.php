@@ -21,61 +21,79 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->container->get('doctrine')->getManager();
-        /** @var ArticleRepository $repository */
-        $repository = $em->getRepository('InckArticleBundle:Article');
+        return array();
+    }
 
-        $postedArticles = $repository->findByFilters(array(
-            'type'      => 'posted',
-        ), $page = false, $limit = 3);
+    /**
+     * @Route("/{alias}/{page}",
+     *     name="inck_core_admin_paginator",
+     *     requirements={
+     *         "alias" = "articles|categories|users",
+     *         "page" = "\d+"
+     *     },
+     *     options={"expose"=true}
+     * )
+     * @Secure(roles="ROLE_ADMIN")
+     * @param string $alias
+     * @param int $page
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function paginatorAction($alias, $page)
+    {
+        $paginator = $this->get('knp_paginator');
+        $options = $this->getOptions($alias);
 
-        /** @var UserRepository $repository */
-        $repository = $em->getRepository('InckUserBundle:User');
-        $users = $repository->findBy(array('enabled' => true), array('id' => 'desc'), 3);
-
-        return array(
-            'postedArticles' => $postedArticles,
-            'users' => $users
+        $entities = $paginator->paginate(
+            $this->getDoctrine()->getManager()->createQuery(sprintf(
+                'SELECT e FROM %s e ORDER BY e.%s ASC',
+                $options['entity'],
+                $options['orderBy']
+            )),
+            $page,
+            $options['limit']
         );
+
+        return $this->render(sprintf(
+            'InckCoreBundle:Admin:%s.html.twig',
+            $options['view']
+        ), [
+            'entities' => $entities,
+        ]);
     }
 
     /**
-     * @Route("/article", name="inck_core_admin_article")
-     * @Secure(roles="ROLE_ADMIN")
-     * @Template()
+     * @param string $alias
+     * @return array|null
      */
-    public function articleAction()
+    private function getOptions($alias)
     {
-        return array();
-    }
+        switch ($alias) {
+            case 'articles':
+                return [
+                    'entity'    => 'InckArticleBundle:Article',
+                    'view'      => 'articles',
+                    'orderBy'   => 'createdAt',
+                    'limit'     => 5,
+                ];
 
-    /**
-     * @Route("/category", name="inck_core_admin_category")
-     * @Secure(roles="ROLE_ADMIN")
-     * @Template()
-     */
-    public function categoryAction()
-    {
-        return array();
-    }
+            case 'categories':
+                return [
+                    'entity'    => 'InckArticleBundle:Category',
+                    'view'      => 'categories',
+                    'orderBy'   => 'name',
+                    'limit'     => 5,
+                ];
 
-    /**
-     * @Route("/badge", name="inck_core_admin_badge")
-     * @Secure(roles="ROLE_ADMIN")
-     * @Template()
-     */
-    public function badgeAction()
-    {
-        return array();
-    }
+            case 'users':
+                return [
+                    'entity'    => 'InckUserBundle:User',
+                    'view'      => 'users',
+                    'orderBy'   => 'username',
+                    'limit'     => 5,
+                ];
 
-    /**
-     * @Route("/user", name="inck_core_admin_user")
-     * @Secure(roles="ROLE_ADMIN")
-     * @Template()
-     */
-    public function userAction()
-    {
-        return array();
+            default:
+                return null;
+        }
     }
 }

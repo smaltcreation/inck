@@ -234,3 +234,8 @@
 .datepicker i.icon-arrow-right:before {
     content: "\f054";
 }
+
+/* Pagination */
+.panel .pagination {
+    margin: 0;
+}

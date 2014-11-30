@@ -4,6 +4,8 @@ namespace Inck\ArticleBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Exception;
+use DateTime;
+use DateTimeZone;
 use Inck\ArticleBundle\Entity\Article;
 use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\ReportRepository;
@@ -559,5 +561,42 @@ class ArticleController extends Controller
         return array(
             'articles' => $articles,
         );
+    }
+
+    /**
+     * @Route("/{id}/{slug}/publish", name="inck_article_article_publish", requirements={"id" = "\d+"})
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
+     * @Secure(roles="ROLE_ADMIN")
+     * @param Article $article
+     * @return RedirectResponse
+     */
+    public function publish(Article $article)
+    {
+        try {
+            if (!$this->get('security.context')->isGranted('ROLE_ADMIN') && !$article->getAsDraft())
+            {
+                throw $this->Exception("Cet article ne peut pas être publié.");
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $article->setApproved(true);
+            $article->setPublished(true);
+            $article->setPublishedAt(new \DateTime('now'));
+            $em->persist($article);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Article publié avec succès !'
+            );
+        }
+        catch(\Exception $e) {
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                $e
+            );
+        }
+
+        return $this->redirect($this->generateUrl('inck_core_admin_index'));
     }
 }
