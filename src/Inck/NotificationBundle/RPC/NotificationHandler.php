@@ -71,7 +71,7 @@ class NotificationHandler
         }
 
         // Enregistrement de la date
-        $notification->setDisplayedAt(DateTime::createFromFormat('d/m/Y h:i:s', $parameters['date']));
+        $notification->setDisplayedAt(DateTime::createFromFormat('d/m/Y H:i:s', $parameters['date']));
         $this->em->persist($notification);
         $this->em->flush();
     }
