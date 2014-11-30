@@ -37,7 +37,7 @@ article:
         comments: les commentaires propulsés par Disqus.
         writen_by: Rédigé par
         published_the: publié le
-        statistics:
+        statistics: Statistiques
     timeline:
         filter: Filtrer les articles
         more_articles: Afficher plus d'articles
