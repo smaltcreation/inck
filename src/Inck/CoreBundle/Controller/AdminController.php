@@ -45,7 +45,7 @@ class AdminController extends Controller
 
         $entities = $paginator->paginate(
             $this->getDoctrine()->getManager()->createQuery(sprintf(
-                'SELECT e FROM %s e ORDER BY e.%s ASC',
+                'SELECT e FROM %s e ORDER BY e.%s DESC',
                 $options['entity'],
                 $options['orderBy']
             )),
@@ -72,7 +72,7 @@ class AdminController extends Controller
                 return [
                     'entity'    => 'InckArticleBundle:Article',
                     'view'      => 'articles',
-                    'orderBy'   => 'createdAt',
+                    'orderBy'   => 'postedAt',
                     'limit'     => 5,
                 ];
 
@@ -80,7 +80,7 @@ class AdminController extends Controller
                 return [
                     'entity'    => 'InckArticleBundle:Category',
                     'view'      => 'categories',
-                    'orderBy'   => 'name',
+                    'orderBy'   => 'id',
                     'limit'     => 5,
                 ];
 
@@ -88,7 +88,7 @@ class AdminController extends Controller
                 return [
                     'entity'    => 'InckUserBundle:User',
                     'view'      => 'users',
-                    'orderBy'   => 'username',
+                    'orderBy'   => 'id',
                     'limit'     => 5,
                 ];
 
