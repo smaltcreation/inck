@@ -11,8 +11,13 @@ git config core.fileMode false
 # Installation des paquets requis
 apt-get -y update
 
-# Installtion de NGINX/MYSQL/CURL
-apt-get -y install nginx mysql-server curl
+# Installtion de Nginx/MySQL/cURL/acl
+apt-get -y install nginx mysql-server curl acl
+
+# Paramêtrage des permissions
+HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
 
 # Installation de PHP
 apt-get -y install php5-intl php-pear php5-memcache php5-curl php5-mysql php5-fpm
