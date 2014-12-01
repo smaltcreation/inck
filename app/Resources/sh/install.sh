@@ -25,6 +25,7 @@ apt-get -y install php5-intl php-pear php5-memcache php5-curl php5-mysql php5-fp
 # Installation de Composer
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
+composer install
 
 # Installation des dépendances
 apt-get -y install nodejs npm zlibc memcached libxrender1 libxext6
