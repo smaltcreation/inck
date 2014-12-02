@@ -20,7 +20,12 @@
                                     {% endif %}
                                 </a>
                                 <div class="caption">
-                                    <h3><a class="btn btn-primary" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}">{{ category.name|trans }}</a></h3>
+                                    <h3>
+                                        <a class="btn btn-primary" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}">
+                                            {{ category.name|trans }}
+                                            <span class="badge">{{ articlesLength[categories.0.id] }}</span>
+                                        </a>
+                                    </h3>
                                     <p>{{ category.description|trans }}</p>
                                 </div>
                             </div>
@@ -34,7 +39,7 @@
                                 <h2>{{ 'category.list_content.most_popular'|trans }}</h2>
                                 <p class="description">
                                     {{ 'category.list_content.we_select'|trans }}
-                                    {{ 'category.list_content.the_popular'|trans }} <a href="{{ path('inck_article_category_show', { 'id': categories.0.id, 'slug': categories.0.slug }) }}">{{ categories.0.name|trans }}</a> {{ 'category.list_content.with'|trans }} {{ articlesLength }} {{ 'category.list_content.published_article'|trans }}
+                                    {{ 'category.list_content.the_popular'|trans }} <a href="{{ path('inck_article_category_show', { 'id': categories.0.id, 'slug': categories.0.slug }) }}">{{ categories.0.name|trans }}</a> {{ 'category.list_content.with'|trans }} {{ articlesLength[categories.0.id] }} {{ 'category.list_content.published_article'|trans }}
                                     {{ 'category.list_content.feedback'|trans }}
                                 </p>
                                 <p><a href="{{ path('inck_core_contact') }}" class="btn btn-default"><i class="fa fa-send"></i> {{ 'category.list_content.contact_us'|trans }}</a></p>
@@ -58,7 +63,12 @@
                                 {% endif %}
                             </a>
                             <div class="caption">
-                                <h3><a class="btn btn-primary" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}">{{ category.name|trans }}</a></h3>
+                                <h3>
+                                    <a class="btn btn-primary" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}">
+                                        {{ category.name|trans }}
+                                        <span class="badge">{{ articlesLength[category.id] }}</span>
+                                    </a>
+                                </h3>
                                 <p>{{ category.description|trans|slice(0, 50) }}...</p>
                             </div>
                         </div>
