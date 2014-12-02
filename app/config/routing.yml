@@ -71,6 +71,12 @@ facebook_login:
 google_login:
     pattern: /login/check-google
 
+facebook_link:
+    pattern: /login/facebook
+
+google_link:
+    pattern: /login/google
+
 NelmioJsLoggerBundle:
     resource: "@NelmioJsLoggerBundle/Resources/config/routing.xml"
     prefix:   /nelmio-js-logger

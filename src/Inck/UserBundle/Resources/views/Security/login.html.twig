@@ -43,7 +43,8 @@
     <div class="container login">
         {% if error %}
             <div class="alert alert-danger" role="alert">
-                {{ error.messageKey|trans(error.messageData, 'security') }}
+                {#{{ error.messageKey|trans(error.messageData, 'security') }}#}
+                {{ error }}
             </div>
         {% endif %}
 
@@ -84,13 +85,13 @@
                     <div class="panel-footer">
                         <div class="row">
                             <div class="col-xs-6">
-                                <a href="{{ path('facebook_login') }}" class="btn btn-facebook btn-tooltip btn-sm btn-block" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connexion avec facebook">
+                                <a href="{{ path('facebook_link') }}" class="btn btn-facebook btn-tooltip btn-sm btn-block" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connexion avec facebook">
                                     <i class="fa fa-facebook"></i>
                                     Avec Facebook
                                 </a>
                             </div>
                             <div class="col-xs-6">
-                                <a href="{{ path('google_login') }}" class="btn btn-google btn-tooltip btn-sm btn-block" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connexion avec google">
+                                <a href="{{ path('google_link') }}" class="btn btn-google btn-tooltip btn-sm btn-block" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connexion avec google">
                                     <i class="fa fa-google"></i>
                                     Avec Google
                                 </a>
