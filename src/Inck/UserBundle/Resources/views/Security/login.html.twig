@@ -43,8 +43,7 @@
     <div class="container login">
         {% if error %}
             <div class="alert alert-danger" role="alert">
-                {#{{ error.messageKey|trans(error.messageData, 'security') }}#}
-                {{ error }}
+                {{ error.messageKey|trans(error.messageData, 'security') }}
             </div>
         {% endif %}
 
