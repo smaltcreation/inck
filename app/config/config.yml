@@ -163,8 +163,6 @@ avocode_form_extensions:
 # VichUploaderBundle Configuration
 vich_uploader:
     db_driver: orm
-    gaufrette: false
-    storage:   vich_uploader.storage.file_system
     mappings:
         article_image:
             uri_prefix:           %upload.article_image.uri_prefix%
