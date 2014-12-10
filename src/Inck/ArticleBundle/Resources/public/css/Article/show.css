@@ -136,3 +136,35 @@ a.close-slidebox{
     position: fixed;
     z-index: 1100;
 }
+
+.article-advertisement {
+    margin-bottom: 18px;
+}
+
+.adslot_1, .article-advertisement  {
+    display:inline-block;
+    width: 360px;
+    height: 300px;
+}
+
+@media screen and (max-width: 1185px) {
+    .article-advertisement, .adslot_1 {
+        display:inline-block;
+        width: 293px;
+        height: 293px;
+    }
+}
+
+@media screen and (max-width: 977px) {
+    .article-advertisement, .adslot_1 {
+        display:inline-block;
+        width: 220px;
+        height: 220px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .article-advertisement, .adslot_1 {
+        display: none;
+    }
+}
