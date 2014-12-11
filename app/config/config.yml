@@ -247,3 +247,7 @@ knp_snappy:
         binary:     "%kernel.root_dir%/../bin/wkhtmltopdf-amd64"
     image:
         enabled:    false
+
+# PrestaSitemapBundle
+presta_sitemap:
+    dumper_base_url: "%dumper_base_url%"

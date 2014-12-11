@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Nelmio\JsLoggerBundle\NelmioJsLoggerBundle(),
+            new Presta\SitemapBundle\PrestaSitemapBundle(),
             /* Our bundles */
             new Inck\UserBundle\InckUserBundle(),
             new Inck\CoreBundle\InckCoreBundle(),

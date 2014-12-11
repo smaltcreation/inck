@@ -141,10 +141,12 @@ a.close-slidebox{
     margin-bottom: 18px;
 }
 
-.adslot_1, .article-advertisement  {
-    display:inline-block;
-    width: 360px;
-    height: 300px;
+@media screen and (min-width: 1185px) {
+    .article-advertisement, .adslot_1 {
+        display:inline-block;
+        width: 360px;
+        height: 300px;
+    }
 }
 
 @media screen and (max-width: 1185px) {

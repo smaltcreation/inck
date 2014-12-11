@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ContactController extends Controller
 {
     /**
-     * @Route("/contact", name="inck_core_contact")
+     * @Route("/contact", name="inck_core_contact", options={"sitemap" = true})
      */
     public function indexAction()
     {

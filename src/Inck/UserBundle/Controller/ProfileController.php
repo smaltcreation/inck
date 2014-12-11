@@ -7,11 +7,13 @@ use FOS\UserBundle\Model\UserInterface;
 use Inck\ArticleBundle\Entity\ArticleRepository;
 use Inck\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProfileController extends BaseController
 {
     /**
+     * @Route("/profile", options={"sitemap" = true})
      * @Template()
      */
     public function showAction()

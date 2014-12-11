@@ -50,3 +50,5 @@ parameters:
     facebook_app_secret:  putYourFacebookSecretKey
     google_app_id: putYourGoogleAppId
     google_app_secret:  putYourGoogleSecretKey
+
+    dumper_base_url: http://inck.fr/

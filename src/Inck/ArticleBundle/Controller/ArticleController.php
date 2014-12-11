@@ -31,7 +31,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/new", name="inck_article_article_new")
+     * @Route("/new", name="inck_article_article_new", options={"sitemap" = true})
      * @Secure(roles="ROLE_USER")
      * @param Request $request
      * @return Response
@@ -373,7 +373,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/moderate", name="inck_article_article_moderate")
+     * @Route("/moderate", name="inck_article_article_moderate", options={"sitemap" = true})
      * @Secure(roles="ROLE_USER")
      * @Template()
      */
@@ -383,7 +383,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/search", name="inck_article_article_search")
+     * @Route("/search", name="inck_article_article_search", options={"sitemap" = true})
      * @Method("get")
      * @Template()
      * @param Request $request

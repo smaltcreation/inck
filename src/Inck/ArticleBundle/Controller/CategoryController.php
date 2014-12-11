@@ -46,7 +46,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/categories", name="inck_article_category_list")
+     * @Route("/categories", name="inck_article_category_list", options={"sitemap" = true})
      * @Template()
      */
     public function listAction()

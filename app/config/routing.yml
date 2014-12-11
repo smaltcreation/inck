@@ -80,3 +80,7 @@ google_link:
 NelmioJsLoggerBundle:
     resource: "@NelmioJsLoggerBundle/Resources/config/routing.xml"
     prefix:   /nelmio-js-logger
+
+PrestaSitemapBundle:
+    resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
+    prefix:   /
