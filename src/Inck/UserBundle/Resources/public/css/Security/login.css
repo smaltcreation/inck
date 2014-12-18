@@ -1,4 +1,29 @@
-.login .logo {
+body {
+    padding-top: 150px;
+}
+
+#content{
+    padding: 0;
+}
+
+footer#footer {
+    background: none;
+    height: 0;
+    display: none;
+}
+
+.login .panel {
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.alert {
+    max-width: 600px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+footer .logo {
     float: left;
     margin-top: 5px;
     margin-right: 20px;
@@ -7,13 +32,60 @@
     height: 100px;
 }
 
-.login .description {
+footer .description {
     text-align: justify;
     font-size: 16px;
     color: #696969;
 }
 
-.login h3 {
-    margin-top: 0;
+.login h4 {
     color: #696969;
+}
+
+.login div.facebook {
+    margin-bottom: 3px;
+}
+
+.login .btn-submit {
+    height: 47px;
+    color: #fff;
+    background-color: #77ad83;
+    border-color: #699972;
+}
+.login .btn-submit.voted,
+.login .btn-submit:hover,
+.login .btn-submit:focus,
+.login .btn-submit:active,
+.login .btn-submit.active,
+.open > .dropdown-toggle.login .btn-submit {
+    color: #fff;
+    background-color: #699972;
+    border-color: #598562;
+}
+.login .btn-submit:active,
+.login .btn-submit.active,
+.open > .dropdown-toggle.btn-subscribe {
+    background-image: none;
+}
+.login .btn-submit.disabled,
+.login .btn-submit[disabled],
+fieldset[disabled] .btn-subscribe,
+.login .btn-submit.disabled:hover,
+.login .btn-submit[disabled]:hover,
+fieldset[disabled] .btn-subscribe:hover,
+.login .btn-submit.disabled:focus,
+.login .btn-submit[disabled]:focus,
+fieldset[disabled] .btn-subscribe:focus,
+.login .btn-submit.disabled:active,
+.login .btn-submit[disabled]:active,
+fieldset[disabled] .btn-subscribe:active,
+.login .btn-submit.disabled.active,
+.login .btn-submit[disabled].active,
+fieldset[disabled] .login .btn-submit.active {
+    background-color: #77ad83;
+    border-color: #699972;
+}
+.login .btn-submit .badge {
+    color: #77ad83;
+    background-color: #fff;
 }

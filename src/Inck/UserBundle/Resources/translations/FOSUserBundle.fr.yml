@@ -43,7 +43,7 @@ security:
         read_discription: Inck est un site regroupant des articles de toutes catégories faits par la communauté. Ici vous pouvez lire, voter et partager un contenu d'opinion libre de toutes restrictions et de toute censure, apprendre de textes de qualité et être surpris par ce que le monde peut partager. N'hésitez plus et laissez-vous porter par les flots de l'expression libre et culturelle !
         article_list: Liste des articles
         more: En savoir plus
-        forgot_password: Mot de passe oublié
+        forgot_password: Mot de passe oublié ?
         social_network: Me connecter via Inck ou les réseaux sociaux
 
 # Profile
@@ -155,6 +155,7 @@ registration:
         last_article: Dernier article publié
         email_verification: Vérification de l'adresse e-mail
         confirmed: Confirmation d'activation
+        question: Pas encore inscrit ?
 
     content:
         complete: Compléter mon compte

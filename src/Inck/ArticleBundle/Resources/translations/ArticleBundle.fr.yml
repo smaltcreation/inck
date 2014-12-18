@@ -9,7 +9,7 @@ test:
 
 tag:
     list_content:
-        most_popular: Nos tags les plus poulaires
+        most_popular: Nos tags les plus populaires
 
 article:
     button:

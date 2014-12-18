@@ -8,19 +8,20 @@
     {{ parent() }}
     {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/user/security/login.css'
         'bundles/inckuser/css/Security/login.css'
+        'bundles/inckuser/css/Security/bigvideo.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
 {% endblock %}
 
-{% block header %}
-    <div class="jumbotron">
-        <div class="container">
-            <h1>{{ 'security.login.connect'|trans }}</h1>
-            <p>{{ 'security.login.write'|trans }}</p>
-        </div>
-    </div>
-{% endblock %}
+{#{% block header %}#}
+    {#<div class="jumbotron text-center">#}
+        {#<div class="container">#}
+            {#<h1>{{ 'security.login.connect'|trans }}</h1>#}
+            {#<p>{{ 'security.login.write'|trans }}</p>#}
+        {#</div>#}
+    {#</div>#}
+{#{% endblock %}#}
 
 {% block content %}
     {#<!-- Modal -->#}
@@ -48,69 +49,71 @@
         {% endif %}
 
         <div class="row">
-            <div class="col-sm-6">
-                <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default center-block">
                     <div class="panel-heading text-center">
                         <h4>{{ 'security.login.social_network'|trans }}</h4>
                     </div>
-                    <div class="panel-body">
-                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                        <div class="panel-body">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                             <div class="row">
-                                <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="username">{{ 'security.login.username'|trans }}</label>
-                                    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-                                </div>
-                                <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="password">{{ 'security.login.password'|trans }}</label>
-                                    <input class="form-control" type="password" id="password" name="_password" required="required" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 form-group">
-                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                                    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-                                    <a href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">{{ 'security.login.forgot_password'|trans }}</a>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-success" type="submit"><i class="fa fa-sign-in"></i> {{ 'security.login.submit'|trans }}</button>
-                                    <a href="{{ path('fos_user_registration_register') }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i> {{ 'layout.register'|trans }}</a>
+                                    <div class="form-group">
+                                        <label for="username">{{ 'security.login.username'|trans }}</label>
+                                        <a href="{{ path('fos_user_registration_register') }}" class="pull-right"><i class="fa fa-pencil-square-o"></i> {{ 'registration.register.question'|trans }}</a>
+                                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">{{ 'security.login.password'|trans }}</label>
+                                        <a href="{{ path('fos_user_resetting_request') }}" class="pull-right"><i class="fa fa-fw fa-lock"></i> {{ 'security.login.forgot_password'|trans }}</a>
+                                        <input class="form-control" type="password" id="password" name="_password" required="required" />
+                                    </div>
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                                    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="panel-footer">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <a href="{{ path('facebook_link') }}" class="btn btn-facebook btn-tooltip btn-sm btn-block" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connexion avec facebook">
-                                    <i class="fa fa-facebook"></i>
-                                    Avec Facebook
-                                </a>
-                            </div>
-                            <div class="col-xs-6">
-                                <a href="{{ path('google_link') }}" class="btn btn-google btn-tooltip btn-sm btn-block" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connexion avec google">
-                                    <i class="fa fa-google"></i>
-                                    Avec Google
-                                </a>
                             </div>
                         </div>
-                    </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-8">
+                                    <div class="submit">
+                                        <button class="btn btn-success btn-lg btn-block btn-submit" type="submit"><i class="fa fa-sign-in"></i> {{ 'security.login.submit'|trans }}</button>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4">
+                                    <div class="facebook">
+                                        <a href="{{ path('facebook_link') }}" class="btn btn-facebook btn-tooltip btn-xs btn-block" data-toggle="tooltip" data-placement="top" data-container="body" title="Connexion avec facebook">
+                                            <i class="fa fa-facebook"></i>
+                                            Avec Facebook
+                                        </a>
+                                    </div>
+                                    <div class="google">
+                                        <a href="{{ path('google_link') }}" class="btn btn-google btn-tooltip btn-xs btn-block" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connexion avec google">
+                                            <i class="fa fa-google"></i>
+                                            Avec Google
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="col-sm-5 col-sm-offset-1">
-                {% image '@InckUserBundle/Resources/public/images/inck-logo.png' %}
-                    <img class="img-responsive img-circle logo" src="{{ asset_url }}" alt="Logo de Inck">
-                {% endimage %}
-
-                <h3>{{ 'security.login.read'|trans }}</h3>
-                <p class="description">{{ 'security.login.read_discription'|trans }}</p>
-                <p>
-                    {#<a class="btn btn-primary" data-toggle="modal" data-target="#myModal" role="button"><i class="fa fa-rocket"></i> {{ 'security.login.more'|trans }}</a>#}
-                    <a class="btn btn-default" role="button" href="{{ path('home') }}"><i class="fa fa-home"></i> {{ 'security.login.article_list'|trans }}</a>
-                </p>
             </div>
         </div>
     </div>
 {% endblock content %}
+
+{% block footer %}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2' output='js/compiled/user/security/login.js'
+        'http://vjs.zencdn.net/4.10/video.js'
+        'bundles/inckuser/js/Security/bigvideo.js'
+        'bundles/inckuser/js/Security/login.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
