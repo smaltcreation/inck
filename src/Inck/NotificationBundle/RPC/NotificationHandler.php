@@ -58,8 +58,8 @@ class NotificationHandler
         }
 
         // Récupération de l'utilisateur
-        /** @var User $user */
-        $user = $this->em->merge($client->getUser());
+        $userRepository = $this->em->getRepository('InckUserBundle:User');
+        $user = $userRepository->find($client->getUser()->getId());
 
         // Récupération de la notification
         $repository = $this->em->getRepository('InckNotificationBundle:SubscriberNotification');
