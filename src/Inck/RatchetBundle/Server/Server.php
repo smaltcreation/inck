@@ -2,13 +2,12 @@
 
 namespace Inck\RatchetBundle\Server;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Inck\NotificationBundle\Entity\SubscriberNotificationRepository;
 use Inck\NotificationBundle\Manager\NotificationManager;
 use Inck\NotificationBundle\Model\NotificationInterface;
+use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Monolog\Logger;
 
 class Server implements MessageComponentInterface
@@ -24,12 +23,7 @@ class Server implements MessageComponentInterface
     private $logger;
 
     /**
-     * @var RegistryInterface
-     */
-    private $doctrine;
-
-    /**
-     * @var EntityManagerInterface
+     * @var EntityManager
      */
     private $em;
 
@@ -41,15 +35,15 @@ class Server implements MessageComponentInterface
     /**
      * @param ClientManager $clientManager
      * @param Logger $logger
-     * @param RegistryInterface $doctrine
+     * @param EntityManager $em
      * @param NotificationManager $notificationManager
+     * @internal param RegistryInterface $doctrine
      */
-    public function __construct(ClientManager $clientManager, Logger $logger, RegistryInterface $doctrine, NotificationManager $notificationManager)
+    public function __construct(ClientManager $clientManager, Logger $logger, EntityManager $em, NotificationManager $notificationManager)
     {
         $this->clientManager        = $clientManager;
         $this->logger               = $logger;
-        $this->doctrine             = $doctrine;
-        $this->em                   = $this->doctrine->getManager();
+        $this->em                   = $em;
         $this->notificationManager  = $notificationManager;
         $this->rpcHandlers          = array();
     }
@@ -61,16 +55,6 @@ class Server implements MessageComponentInterface
      */
     function onOpen(ConnectionInterface $conn)
     {
-        /** @var \Doctrine\DBAL\Connection $doctrineConnection */
-        $doctrineConnection = $this->doctrine->getConnection();
-
-        if (!$doctrineConnection->isConnected()) {
-            $this->logger->info('Database connection closed, reconnection attempt');
-            $doctrineConnection->connect();
-            $this->em = $this->doctrine->getManager();
-            $this->logger->info('Connection established');
-        }
-
         $client = $this->clientManager->addConnection($conn);
 
         // Envoi des nouvelles notifications

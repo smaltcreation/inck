@@ -2,15 +2,15 @@
 
 namespace Inck\NotificationBundle\Listener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Inck\NotificationBundle\Entity\SubscriberNotification;
 use Inck\NotificationBundle\Event\NotificationEvent;
 use Inck\NotificationBundle\Manager\NotificationManager;
+use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
 
 class NotificationListener
 {
     /**
-     * @var ObjectManager
+     * @var EntityManager
      */
     private $em;
 
@@ -21,10 +21,10 @@ class NotificationListener
 
 
     /**
-     * @param ObjectManager $em
+     * @param EntityManager $em
      * @param NotificationManager $notificationManager
      */
-    public function __construct(ObjectManager $em, NotificationManager $notificationManager)
+    public function __construct(EntityManager $em, NotificationManager $notificationManager)
     {
         $this->em = $em;
         $this->notificationManager = $notificationManager;

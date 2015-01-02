@@ -2,7 +2,7 @@
 
 namespace Inck\SubscriptionBundle\Twig;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
 use Inck\SubscriptionBundle\Traits\SubscriptionTrait;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -16,7 +16,7 @@ class SubscriptionExtension extends \Twig_Extension
     private $securityContext;
 
     /**
-     * @var ObjectManager $em
+     * @var EntityManager $em
      */
     private $em;
 
@@ -27,10 +27,10 @@ class SubscriptionExtension extends \Twig_Extension
 
     /**
      * @param SecurityContext $securityContext
-     * @param ObjectManager $em
+     * @param EntityManager $em
      * @param array $parameters
      */
-    public function __construct(SecurityContext $securityContext, ObjectManager $em, $parameters)
+    public function __construct(SecurityContext $securityContext, EntityManager $em, $parameters)
     {
         $this->securityContext  = $securityContext;
         $this->em               = $em;

@@ -2,16 +2,16 @@
 
 namespace Inck\NotificationBundle\RPC;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use DateTime;
+use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
 use Inck\RatchetBundle\Entity\Client;
 use Inck\RatchetBundle\Server\ClientManager;
 use Inck\UserBundle\Entity\User;
-use \DateTime;
 
 class NotificationHandler
 {
     /**
-     * @var ObjectManager $em
+     * @var EntityManager
      */
     private $em;
 
@@ -21,10 +21,10 @@ class NotificationHandler
     private $clientManager;
 
     /**
-     * @param ObjectManager $em
+     * @param EntityManager $em
      * @param ClientManager $clientManager
      */
-    public function __construct(ObjectManager $em, $clientManager)
+    public function __construct(EntityManager $em, $clientManager)
     {
         $this->em               = $em;
         $this->clientManager    = $clientManager;

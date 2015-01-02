@@ -2,11 +2,11 @@
 
 namespace Inck\SubscriptionBundle\RPC;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\Tag;
 use Inck\NotificationBundle\Entity\SubscriberNotification;
 use Inck\NotificationBundle\Event\NotificationEvent;
+use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
 use Inck\RatchetBundle\Entity\Client;
 use Inck\SubscriptionBundle\Exception\InvalidRequestException;
 use Inck\SubscriptionBundle\Model\SubscriptionInterface;
@@ -20,7 +20,7 @@ class SubscriptionHandler
     use SubscriptionTrait;
 
     /**
-     * @var ObjectManager $em
+     * @var EntityManager $em
      */
     private $em;
 
@@ -35,12 +35,12 @@ class SubscriptionHandler
     private $logger;
 
     /**
-     * @param ObjectManager $em
+     * @param EntityManager $em
      * @param EventDispatcherInterface $dispatcher
      * @param Logger $logger
      * @param array $parameters
      */
-    public function __construct(ObjectManager $em, EventDispatcherInterface $dispatcher, Logger $logger, array $parameters)
+    public function __construct(EntityManager $em, EventDispatcherInterface $dispatcher, Logger $logger, array $parameters)
     {
         $this->em           = $em;
         $this->dispatcher   = $dispatcher;

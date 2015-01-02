@@ -3,15 +3,15 @@
 namespace Inck\NotificationBundle\Manager;
 
 use DateTime;
-use Doctrine\Common\Persistence\ObjectManager;
 use Inck\NotificationBundle\Model\NotificationInterface;
+use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
 use Inck\RatchetBundle\Server\ClientManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 
 class NotificationManager
 {
     /**
-     * @var ObjectManager
+     * @var EntityManager
      */
     private $em;
 
@@ -27,11 +27,11 @@ class NotificationManager
 
 
     /**
-     * @param ObjectManager $em
+     * @param EntityManager $em
      * @param TwigEngine $templating
      * @param ClientManager $clientManager
      */
-    public function __construct(ObjectManager $em, TwigEngine $templating, ClientManager $clientManager)
+    public function __construct(EntityManager $em, TwigEngine $templating, ClientManager $clientManager)
     {
         $this->em               = $em;
         $this->templating       = $templating;

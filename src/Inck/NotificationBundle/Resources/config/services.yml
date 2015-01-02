@@ -1,14 +1,14 @@
 services:
     inck_notification.rpc.notification_handler:
         class: Inck\NotificationBundle\RPC\NotificationHandler
-        arguments: [@doctrine.orm.entity_manager, @event_dispatcher]
+        arguments: [@inck_ratchet.server.entity_manager, @event_dispatcher]
         tags:
             -  { name: inck_ratchet.rpc, alias: notification }
     inck_notification.listener.notification_listener:
         class: Inck\NotificationBundle\Listener\NotificationListener
-        arguments: [@doctrine.orm.entity_manager, @inck_notification.manager.notification_manager]
+        arguments: [@inck_ratchet.server.entity_manager, @inck_notification.manager.notification_manager]
         tags:
             - { name: kernel.event_listener, event: notification.created, method: onNotificationCreated }
     inck_notification.manager.notification_manager:
         class: Inck\NotificationBundle\Manager\NotificationManager
-        arguments: [@doctrine.orm.entity_manager, @templating, @inck_ratchet.server.client_manager_service]
+        arguments: [@inck_ratchet.server.entity_manager, @templating, @inck_ratchet.server.client_manager]

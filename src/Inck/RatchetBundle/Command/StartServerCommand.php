@@ -37,7 +37,7 @@ class StartServerCommand extends ContainerAwareCommand
         );
 
         $sessionProvider = new SessionProvider(
-            $this->getContainer()->get('inck_ratchet.server.server_service'),
+            $this->getContainer()->get('inck_ratchet.server.server'),
             $sessionHandler
         );
 
