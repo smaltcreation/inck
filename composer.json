@@ -33,7 +33,7 @@
         "egeloen/ckeditor-bundle": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "ivaynberg/select2": "3.5.*",
-        "vich/uploader-bundle": "dev-master",
+        "vich/uploader-bundle": "0.12.0",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "elao/web-profiler-extra-bundle": "~2.3@dev",
         "avalanche123/imagine-bundle": "v2.1",
