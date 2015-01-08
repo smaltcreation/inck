@@ -61,15 +61,21 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="username">{{ 'security.login.username'|trans }}</label>
-                                        <a href="{{ path('fos_user_registration_register') }}" class="pull-right"><i class="fa fa-pencil-square-o"></i> {{ 'registration.register.question'|trans }}</a>
-                                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                                        <a href="{{ path('fos_user_registration_register') }}" class="pull-right" tabindex="1">
+                                            <i class="fa fa-pencil-square-o"></i>
+                                            {{ 'registration.register.question'|trans }}
+                                        </a>
+                                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" tabindex="0"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="password">{{ 'security.login.password'|trans }}</label>
-                                        <a href="{{ path('fos_user_resetting_request') }}" class="pull-right"><i class="fa fa-fw fa-lock"></i> {{ 'security.login.forgot_password'|trans }}</a>
-                                        <input class="form-control" type="password" id="password" name="_password" required="required" />
+                                        <a href="{{ path('fos_user_resetting_request') }}" class="pull-right" tabindex="1">
+                                            <i class="fa fa-fw fa-lock"></i>
+                                            {{ 'security.login.forgot_password'|trans }}
+                                        </a>
+                                        <input class="form-control" type="password" id="password" name="_password" required="required" tabindex="0"/>
                                     </div>
-                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" tabindex="0"/>
                                     <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
                                 </div>
                             </div>
@@ -78,18 +84,21 @@
                             <div class="row">
                                 <div class="col-xs-6 col-sm-8">
                                     <div class="submit">
-                                        <button class="btn btn-success btn-lg btn-block btn-submit" type="submit"><i class="fa fa-sign-in"></i> {{ 'security.login.submit'|trans }}</button>
+                                        <button class="btn btn-success btn-lg btn-block btn-submit" type="submit" tabindex="0">
+                                            <i class="fa fa-sign-in"></i>
+                                            {{ 'security.login.submit'|trans }}
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-4">
                                     <div class="facebook">
-                                        <a href="{{ path('facebook_link') }}" class="btn btn-facebook btn-tooltip btn-xs btn-block" data-toggle="tooltip" data-placement="top" data-container="body" title="Connexion avec facebook">
+                                        <a href="{{ path('facebook_link') }}" class="btn btn-facebook btn-tooltip btn-xs btn-block" data-toggle="tooltip" data-placement="top" data-container="body" title="Connexion avec facebook"  tabindex="1">
                                             <i class="fa fa-facebook"></i>
                                             Avec Facebook
                                         </a>
                                     </div>
                                     <div class="google">
-                                        <a href="{{ path('google_link') }}" class="btn btn-google btn-tooltip btn-xs btn-block" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connexion avec google">
+                                        <a href="{{ path('google_link') }}" class="btn btn-google btn-tooltip btn-xs btn-block" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Connexion avec google"  tabindex="1">
                                             <i class="fa fa-google"></i>
                                             Avec Google
                                         </a>
@@ -110,7 +119,7 @@
     {{ parent() }}
 
     {% javascripts filter='?uglifyjs2' output='js/compiled/user/security/login.js'
-        'http://vjs.zencdn.net/4.10/video.js'
+        'bundles/inckuser/js/Security/video.js'
         'bundles/inckuser/js/Security/bigvideo.js'
         'bundles/inckuser/js/Security/login.js'
     %}

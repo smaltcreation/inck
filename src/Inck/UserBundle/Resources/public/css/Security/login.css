@@ -89,3 +89,7 @@ fieldset[disabled] .login .btn-submit.active {
     color: #77ad83;
     background-color: #fff;
 }
+
+#big-video-wrap {
+    display: none;
+}
