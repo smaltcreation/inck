@@ -11,8 +11,9 @@ class EntityManager extends EntityManagerDecorator
      */
     public function find($className, $id)
     {
-        $this->checkConnection();
-        return $this->wrapped->find($className, $id);
+        return $this->execute(function() use ($className, $id) {
+            return $this->wrapped->find($className, $id);
+        });
     }
 
     /**
@@ -20,8 +21,9 @@ class EntityManager extends EntityManagerDecorator
      */
     public function persist($object)
     {
-        $this->checkConnection();
-        $this->wrapped->persist($object);
+        $this->execute(function() use ($object) {
+            $this->wrapped->persist($object);
+        });
     }
 
     /**
@@ -29,8 +31,9 @@ class EntityManager extends EntityManagerDecorator
      */
     public function remove($object)
     {
-        $this->checkConnection();
-        $this->wrapped->remove($object);
+        $this->execute(function() use ($object) {
+            $this->wrapped->remove($object);
+        });
     }
 
     /**
@@ -38,8 +41,9 @@ class EntityManager extends EntityManagerDecorator
      */
     public function merge($object)
     {
-        $this->checkConnection();
-        return $this->wrapped->merge($object);
+        return $this->execute(function() use ($object) {
+            return $this->wrapped->merge($object);
+        });
     }
 
     /**
@@ -47,8 +51,9 @@ class EntityManager extends EntityManagerDecorator
      */
     public function clear($objectName = null)
     {
-        $this->checkConnection();
-        $this->wrapped->clear($objectName);
+        $this->execute(function() use ($objectName) {
+            $this->wrapped->clear($objectName);
+        });
     }
 
     /**
@@ -56,8 +61,9 @@ class EntityManager extends EntityManagerDecorator
      */
     public function detach($object)
     {
-        $this->checkConnection();
-        $this->wrapped->detach($object);
+        $this->execute(function() use ($object) {
+            $this->wrapped->detach($object);
+        });
     }
 
     /**
@@ -65,8 +71,9 @@ class EntityManager extends EntityManagerDecorator
      */
     public function refresh($object)
     {
-        $this->checkConnection();
-        $this->wrapped->refresh($object);
+        $this->execute(function() use ($object) {
+            $this->wrapped->refresh($object);
+        });
     }
 
     /**
@@ -74,8 +81,9 @@ class EntityManager extends EntityManagerDecorator
      */
     public function flush()
     {
-        $this->checkConnection();
-        $this->wrapped->flush();
+        $this->execute(function() {
+            $this->wrapped->flush();
+        });
     }
 
     /**
@@ -83,15 +91,36 @@ class EntityManager extends EntityManagerDecorator
      */
     public function getRepository($className)
     {
-        $this->checkConnection();
-        return $this->wrapped->getRepository($className);
+        return $this->execute(function() use ($className) {
+            return $this->wrapped->getRepository($className);
+        });
     }
 
-    private function checkConnection()
+    private function execute($callback)
     {
+        $result = null;
+
+        try {
+            $result = $callback();
+        } catch (\Exception $e) {
+            if ($this->reconnect()) {
+                $result = $callback();
+            } else {
+                throw $e;
+            }
+        }
+
+        return $result;
+    }
+
+    private function reconnect() {
         if ($this->wrapped->getConnection()->ping() === false) {
             $this->wrapped->getConnection()->close();
             $this->wrapped->getConnection()->connect();
+
+            return true;
         }
+
+        return false;
     }
 }
