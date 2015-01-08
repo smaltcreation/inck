@@ -7,9 +7,7 @@ services:
     inck_ratchet.server.entity_manager:
         class: Inck\RatchetBundle\Doctrine\ORM\EntityManager
         public: false
-        decorates: doctrine.orm.default_entity_manager
-        decoration_inner_name: inck_ratchet.server.entity_manager.inner
-        arguments: [@inck_ratchet.server.entity_manager.inner]
+        arguments: [@doctrine.orm.entity_manager]
     inck_ratchet.server.server:
         class: Inck\RatchetBundle\Server\Server
         arguments: [@inck_ratchet.server.client_manager, @logger, @inck_ratchet.server.entity_manager, @inck_notification.manager.notification_manager]
