@@ -138,8 +138,6 @@ class SubscriptionHandler
                 // Création d'une notification
                 if ($parameters['entityAlias'] === 'user') {
                     $this->dispatcher->dispatch(
-                        // TODO: use class InckNotificationsEvents
-                        //InckNotificationsEvents::NOTIFICATION_CREATED,
                         'notification.created',
                         new NotificationEvent(
                             new SubscriberNotification($user, $entity)

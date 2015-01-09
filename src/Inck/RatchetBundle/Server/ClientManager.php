@@ -5,28 +5,18 @@ namespace Inck\RatchetBundle\Server;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\UserInterface;
 use Inck\RatchetBundle\Entity\Client;
-use Monolog\Logger;
 use Ratchet\ConnectionInterface;
 
 class ClientManager
 {
     /**
-     * @var Logger $logger
-     */
-    private $logger;
-
-    /**
      * @var ArrayCollection
      */
     private $clients;
 
-    /**
-     * @param Logger $logger
-     */
-    public function __construct(Logger $logger)
+    public function __construct()
     {
-        $this->logger   = $logger;
-        $this->clients  = new ArrayCollection();
+        $this->clients = new ArrayCollection();
     }
 
     /**
@@ -36,8 +26,6 @@ class ClientManager
     public function addConnection(ConnectionInterface $conn)
     {
         $this->clients[$conn->resourceId] = new Client($conn);
-        $this->logger->info('added connection #'.$conn->resourceId);
-        $this->logTotalConnections();
 
         return $this->clients[$conn->resourceId];
     }
@@ -48,8 +36,6 @@ class ClientManager
     public function removeConnection(ConnectionInterface $conn)
     {
         $this->clients->remove($conn->resourceId);
-        $this->logger->info('removed connection #'.$conn->resourceId);
-        $this->logTotalConnections();
     }
 
     /**
@@ -58,14 +44,7 @@ class ClientManager
     public function closeConnection(ConnectionInterface $conn)
     {
         $conn->close();
-        $this->logger->info('closed connection #'.$conn->resourceId);
-
         $this->removeConnection($conn);
-    }
-
-    private function logTotalConnections()
-    {
-        $this->logger->info('total connections = '.count($this->clients));
     }
 
     /**

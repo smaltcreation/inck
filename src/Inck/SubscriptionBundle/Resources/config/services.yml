@@ -1,7 +1,7 @@
 services:
     inck_subscription.twig.subscription_extension:
         class: Inck\SubscriptionBundle\Twig\SubscriptionExtension
-        arguments: [@security.context, @inck_ratchet.server.entity_manager, %inck_subscription.aliases%]
+        arguments: [@security.context, @doctrine.orm.entity_manager, %inck_subscription.aliases%]
         tags:
             - { name: twig.extension }
     inck_subscription.rpc.subscription_handler:

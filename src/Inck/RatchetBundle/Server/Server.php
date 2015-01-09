@@ -86,7 +86,7 @@ class Server implements MessageComponentInterface
      */
     function onError(ConnectionInterface $conn, \Exception $e)
     {
-        $this->logger->error(sprintf(
+        $this->logger->addError(sprintf(
             '"%s" in file %s on line %d',
             $e->getMessage(),
             $e->getFile(),
@@ -104,12 +104,6 @@ class Server implements MessageComponentInterface
     function onMessage(ConnectionInterface $from, $msg)
     {
         try {
-            $this->logger->debug(sprintf(
-                'received %s from %d',
-                $msg,
-                $from->resourceId
-            ));
-
             $msg = json_decode($msg, true);
 
             if (!isset($msg['method']) || !isset($msg['parameters'])) {
@@ -137,7 +131,7 @@ class Server implements MessageComponentInterface
                 $msg['parameters']
             );
         } catch(\Exception $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->addError($e->getMessage());
         }
     }
 
@@ -149,7 +143,7 @@ class Server implements MessageComponentInterface
     {
         $this->rpcHandlers[$alias] = $rpcHandler;
 
-        $this->logger->debug(sprintf(
+        $this->logger->addInfo(sprintf(
             'handler "%s" added',
             $alias
         ));

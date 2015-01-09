@@ -98,29 +98,14 @@ class EntityManager extends EntityManagerDecorator
 
     private function execute($callback)
     {
-        $result = null;
-
-        try {
-            $result = $callback();
-        } catch (\Exception $e) {
-            if ($this->reconnect()) {
-                $result = $callback();
-            } else {
-                throw $e;
-            }
-        }
-
-        return $result;
+        $this->reconnect();
+        return $callback();
     }
 
     private function reconnect() {
         if ($this->wrapped->getConnection()->ping() === false) {
             $this->wrapped->getConnection()->close();
             $this->wrapped->getConnection()->connect();
-
-            return true;
         }
-
-        return false;
     }
 }

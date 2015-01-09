@@ -2,7 +2,7 @@
 
 namespace Inck\SubscriptionBundle\Twig;
 
-use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManager;
 use Inck\SubscriptionBundle\Traits\SubscriptionTrait;
 use Symfony\Component\Security\Core\SecurityContext;
 
