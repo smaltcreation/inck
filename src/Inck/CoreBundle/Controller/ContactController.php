@@ -28,7 +28,7 @@ class ContactController extends Controller
                 ->setContentType('text/html')
                 ->setSubject($data['subject'])
                 ->setFrom($data['email'])
-                ->setTo('spydey007@gmail.com');
+                ->setTo('contact@smaltcreation.com');
 
             $date = new \DateTime('now');
             $date->setTimezone(new \DateTimeZone('Europe/Paris'));
