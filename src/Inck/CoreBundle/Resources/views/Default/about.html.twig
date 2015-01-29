@@ -1,6 +1,15 @@
 {% extends 'InckCoreBundle::layout.html.twig' %}
 {% trans_default_domain 'CoreBundle' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/core/default/about.css'
+        'bundles/inckcore/css/Default/about.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
 {% block title %}{{ 'default.about.about'|trans }}{% endblock %}
 
 {% block header %}
@@ -12,7 +21,31 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        {% include('InckCoreBundle:Default:about_content.html.twig') %}
+    <div id="philosophy">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    {% include('InckCoreBundle:Default:about_philosophy.html.twig') %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="smalt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    {% include('InckCoreBundle:Default:about_smalt.html.twig') %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    {% include('InckCoreBundle:Default:about_contact.html.twig') %}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -1,0 +1,18 @@
+#smalt {
+    background-color: #dce4ee;
+    border-top: 1px solid #c8d0da;
+    border-bottom: 1px solid #c8d0da;
+    margin: 50px 0 50px 0;
+    padding: 50px 0 50px 0;
+}
+
+#smalt #team h2 {
+    margin-top: 0;
+}
+
+#contact .contact-form {
+    background: url("../../images/map-background.png");
+    background-position: center;
+    background-size: 700px;
+    background-repeat: no-repeat;
+}

@@ -20,7 +20,7 @@ class ContactType extends AbstractType
         $builder
 
             ->add('email', 'email', [
-                'label' => 'Mon email',
+                'label' => 'Email',
                 'constraints' => [
                     new NotBlank(),
                     new Email(),
@@ -35,9 +35,9 @@ class ContactType extends AbstractType
             ])
             ->add('content',
                 'textarea', [
-                'label' => 'Corps',
+                'label' => 'Contenu',
                 'constraints' => [
-                    new Length(array('min' => 20, 'max' => 500)),
+                    new Length(array('min' => 20, 'max' => 1000)),
                     new NotBlank(),
                 ],
                 'attr' => [

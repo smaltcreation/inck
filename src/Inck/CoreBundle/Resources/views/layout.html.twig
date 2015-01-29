@@ -65,12 +65,12 @@
                                 {{ 'view.layout.catagories'|trans }}
                             </a>
                         </li>
-                        {#<li>#}
-                            {#<a class="{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{{ path('inck_core_default_about') }}">#}
-                                {#<i class="fa fa-info fa-lg fa-fw"></i>#}
-                                {#{{ 'default.about.about'|trans }}#}
-                            {#</a>#}
-                        {#</li>#}
+                        <li>
+                            <a class="{% if currentRoute == 'inck_core_default_about' %} active{% endif %}" href="{{ path('inck_core_default_about') }}">
+                                <i class="fa fa-info fa-lg fa-fw"></i>
+                                {{ 'default.about.about'|trans }}
+                            </a>
+                        </li>
                         {#<li>#}
                             {#<a class="{% if currentRoute == 'inck_bid_registration_register' %} active{% endif %}" href="&#123;&#35;{ path('inck_bid_registration_register') }&#35;&#125;">#}
                                 {#<i class="fa fa-institution fa-lg fa-fw"></i>#}
