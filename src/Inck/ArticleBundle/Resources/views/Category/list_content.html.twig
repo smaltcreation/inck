@@ -54,7 +54,7 @@
                             <a href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}">
                                 {% if lastPublishedArticles[category.id] and lastPublishedArticles[category.id].imageName %}
                                     {% set article = lastPublishedArticles[category.id] %}
-                                    <img src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image du dernier article : {{ article.title }}">}
+                                    <img src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image du dernier article : {{ article.title }}">
 
                                 {% else %}
                                     {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
