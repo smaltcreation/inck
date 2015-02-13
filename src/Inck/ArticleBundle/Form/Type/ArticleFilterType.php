@@ -30,14 +30,14 @@ class ArticleFilterType extends AbstractType
                 'label'     => 'Tags',
                 'required'  => false,
                 'attr'      => [
-                    'placeholder'   => 'Filter par tags',
+                    'placeholder'   => 'Filtrer par tags',
                 ],
             ])
             ->add('authors', 'inck_userbundle_users_selector', [
                 'label'     => 'Auteurs',
                 'required'  => false,
                 'attr'      => [
-                    'placeholder'   => 'Filter par auteur',
+                    'placeholder'   => 'Filtrer par auteur',
                 ],
             ])
             ->add('order', 'choice', [
