@@ -581,6 +581,7 @@ class ArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $article->setApproved(true);
             $article->setPublished(true);
+            $article->setAsDraft(false);
             $article->setPublishedAt(new \DateTime('now'));
             $em->persist($article);
             $em->flush();
@@ -598,5 +599,45 @@ class ArticleController extends Controller
         }
 
         return $this->redirect($this->generateUrl('inck_core_admin_index'));
+    }
+
+    /**
+     * @Route("/{id}/{slug}/send", name="inck_article_article_send", requirements={"id" = "\d+"})
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
+     * @Secure(roles="ROLE_USER")
+     * @param Article $article
+     * @return RedirectResponse
+     */
+    public function send(Article $article)
+    {
+        try {
+            if(($this->getUser() !== $article->getAuthor() && !$this->get('security.context')->isGranted('ROLE_ADMIN')) || $article->getAsDraft() === false)
+            {
+                throw $this->createNotFoundException("Cet article ne peut pas être envoyé à la modération !");
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $article->setApproved(true);
+            $article->setAsDraft(false);
+            $article->setPostedAt(new \DateTime('now'));
+            $em->persist($article);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Article envoyé à la modération avec succès !'
+            );
+        }
+        catch(\Exception $e) {
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                $e
+            );
+        }
+
+        return $this->redirect($this->generateUrl('inck_article_article_show', array(
+            'id'        => $article->getId(),
+            'slug'      => $article->getSlug(),
+        )));
     }
 }

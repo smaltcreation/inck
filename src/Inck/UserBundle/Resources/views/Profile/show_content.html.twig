@@ -120,7 +120,7 @@
                                                     <a href="{{ path('inck_article_article_edit', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <a href="{#{ path('inck_article_article_publish', { 'id': article.id, 'slug': article.slug }) }#}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body">
+                                                    <a href="{{ path('inck_article_article_send', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body">
                                                         <i class="fa fa-send"></i>
                                                     </a>
                                                     <a href="{{ path('inck_article_article_delete', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-danger btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body">

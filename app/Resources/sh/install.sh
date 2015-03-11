@@ -21,7 +21,7 @@ setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
 chmod -R 777 web/article web/media
 
 # Installation de PHP
-apt-get -y install php5-intl php-pear php5-memcache php5-curl php5-mysql php5-fpm
+apt-get -y install php5-intl php-pear php5-memcache php5-curl php5-mysql php5-fpm php5-gd
 
 # Installation de Composer
 curl -sS https://getcomposer.org/installer | php
