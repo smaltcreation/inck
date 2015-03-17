@@ -6,4 +6,8 @@ $(document).ready(function(){
             remote: $(this).attr('href')
         });
     });
+
+    $('body').on('hidden.bs.modal', '#article-preview', function() {
+        $(this).removeData('bs.modal');
+    });
 });
