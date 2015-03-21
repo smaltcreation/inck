@@ -2,6 +2,7 @@
 
 namespace Inck\RatchetBundle\Server;
 
+use Inck\NotificationBundle\Entity\NotificationRepository;
 use Inck\NotificationBundle\Entity\SubscriberNotificationRepository;
 use Inck\NotificationBundle\Manager\NotificationManager;
 use Inck\NotificationBundle\Model\NotificationInterface;
@@ -58,10 +59,9 @@ class Server implements MessageComponentInterface
         $client = $this->clientManager->addConnection($conn);
 
         // Envoi des nouvelles notifications
-        /** @var SubscriberNotificationRepository $repository */
-        $repository = $this->em->getRepository('InckNotificationBundle:SubscriberNotification');
+	    /** @var NotificationRepository $repository */
+        $repository = $this->em->getRepository('InckNotificationBundle:Notification');
 
-        /** @var NotificationInterface $notification */
         foreach ($repository->getNew($client->getUser()) as $notification) {
             $this->notificationManager->send($notification);
         }

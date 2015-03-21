@@ -46,12 +46,7 @@ class NotificationManager
         if($client = $this->clientManager->getClientByUser($notification->getTo())) {
             $client->sendMessage('notification.received', array(
                 'id'    => $notification->getId(),
-                'html'  => $this->templating->render(
-                    $notification->getViewName(),
-                    array(
-                        'notification' => $notification,
-                    )
-                ),
+                'html'  => $this->render($notification),
             ));
 
             $notification->setSentAt(new DateTime());
@@ -60,5 +55,15 @@ class NotificationManager
             $this->em->persist($notification);
             $this->em->flush();
         }
+    }
+
+    public function render(NotificationInterface $notification)
+    {
+        return $this->templating->render(
+            $notification->getViewName(),
+            array(
+                'notification' => $notification,
+            )
+        );
     }
 }

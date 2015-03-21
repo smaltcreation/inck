@@ -3,13 +3,11 @@
 </div>
 <div class="ns-content">
     <p>
-        <a href="{{ path('fos_user_profile_preview', { 'username': notification.subscriber.username }) }}">
-            {{
-                notification.subscriber.lastName and notification.subscriber.firstName
-                    ? notification.subscriber.firstName ~ ' ' ~ notification.subscriber.lastName
-                    : notification.subscriber.username
-            }}
-        </a>
+        <a href="{{ path('fos_user_profile_preview', { 'username': notification.subscriber.username }) }}" class="notification-link">{{
+            notification.subscriber.lastName and notification.subscriber.firstName
+                ? notification.subscriber.firstName ~ ' ' ~ notification.subscriber.lastName
+                : notification.subscriber.username
+        }}</a>
         s'est abonné à vous.
     </p>
 </div>

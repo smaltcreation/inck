@@ -82,12 +82,18 @@
             </nav>
         </li>
         <li class="brand">
-            <a class="{% if currentRoute == 'home' %}active{% endif %}" href={{ path('home') }}>
+            <a class="{% if currentRoute == 'home' %}active{% endif %}" href="{{ path('home') }}">
                 <i class="fa fa-home"></i>
                 Inck
             </a>
         </li>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <li class="notifications-popover-container">
+                <a href="#" class="notifications-popover-toggle" title="Notifications">
+                    <i class="fa fa-bell"></i>
+                    Notifications
+                </a>
+            </li>
             <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_security_logout">
                 <a href="{{ path('fos_user_security_logout') }}">
                     <i class="fa fa-sign-out"></i>
@@ -225,6 +231,14 @@
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+
+    {% if app.user is not null and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% javascripts filter='?uglifyjs2' output='js/compiled/core/layout/notification.js'
+            'bundles/incknotification/js/manager.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
 {% endblock %}
 
 

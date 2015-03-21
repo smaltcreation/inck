@@ -44,7 +44,7 @@
     font-size: 13px;
 }
 
-.gn-menu-main a {
+.gn-menu-main a:not(.notification-link) {
     display: block;
     height: 100%;
     color: #A5C1C6;
@@ -52,12 +52,12 @@
     cursor: pointer;
 }
 
-.gn-menu-main a.active,
+.gn-menu-main a:not(.notification-link).active,
 .gn-menu li.gn-search-item.active,
-.gn-menu li.gn-search-item.active a,
-.no-touch .gn-menu-main a:hover,
+.gn-menu li.gn-search-item.active a:not(.notification-link),
+.no-touch .gn-menu-main a:not(.notification-link):hover,
 .no-touch .gn-menu li.gn-search-item:hover,
-.no-touch .gn-menu li.gn-search-item:hover a {
+.no-touch .gn-menu li.gn-search-item:hover a:not(.notification-link) {
     background: #A5C1C6;
     color: #20525C;
 }
@@ -88,7 +88,7 @@
     border-left: none;
 }
 
-.gn-menu-main > li > a {
+.gn-menu-main > li > a:not(.notification-link) {
     padding: 0 30px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -148,7 +148,7 @@
     transition: height 0.3s;
 }
 
-.gn-submenu li a {
+.gn-submenu li a:not(.notification-link) {
     color: #c1c9d1
 }
 
@@ -231,9 +231,8 @@ input.gn-search:focus {
     font-weight: normal;
     font-style: normal;
     font-variant: normal;
-    font-family: 'ecoicons';
+    font-family: 'ecoicons', serif;
     line-height: 1;
-    speak: none;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -369,4 +368,9 @@ input.gn-search:focus {
 
 #gn-menu li.search form .input-group{
     width: 150px;
+}
+
+/* Notifications */
+.notifications-popover-container .popover {
+    max-width: 100%;
 }

@@ -4,10 +4,19 @@ namespace Inck\NotificationBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\InheritanceType;
 use Inck\UserBundle\Entity\User;
 
 /**
  * Notification
+ *
+ * @Entity(repositoryClass="Inck\NotificationBundle\Entity\NotificationRepository")
+ * @InheritanceType("JOINED")
+ * @DiscriminatorColumn(name="type", type="string")
+ * @DiscriminatorMap({"subscriber" = "SubscriberNotification"})
  */
 class Notification
 {

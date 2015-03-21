@@ -3,8 +3,8 @@
 namespace Inck\RatchetBundle\Server;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use FOS\UserBundle\Model\UserInterface;
 use Inck\RatchetBundle\Entity\Client;
+use Inck\UserBundle\Entity\User;
 use Ratchet\ConnectionInterface;
 
 class ClientManager
@@ -59,10 +59,10 @@ class ClientManager
     }
 
     /**
-     * @param UserInterface $user
+     * @param User $user
      * @return Client|null
      */
-    public function getClientByUser(UserInterface $user)
+    public function getClientByUser(User $user)
     {
         /** @var Client $client */
         foreach($this->clients as $client)

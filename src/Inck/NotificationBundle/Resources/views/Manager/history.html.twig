@@ -1,0 +1,11 @@
+{% trans_default_domain 'ArticleBundle' %}
+
+{% if notifications|length %}
+    {% for notification in notifications %}
+        <div class="ns-box ns-box-relative ns-other ns-effect-thumbslider ns-type-notice">
+            {{ notification|raw }}
+        </div>
+    {% endfor %}
+{% else %}
+    Pas de notifications
+{% endif %}

@@ -1,16 +1,23 @@
 /* Common, default styles for the notification box */
 
 .ns-box {
-	position: fixed;
-    top: 60px;
 	background: rgba(42,45,50,0.85);
-	padding: 22px;
 	line-height: 1.4;
-	z-index: 2000;
-	pointer-events: none;
 	color: rgba(250,251,255,0.95);
 	font-size: 90%;
 	font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.ns-box:not(.ns-box-relative) {
+	position: fixed;
+	top: 60px;
+	z-index: 2000;
+	pointer-events: none;
+	padding: 22px;
+}
+
+.ns-box.ns-box-relative {
+	padding: 5px;
 }
 
 .ns-box.ns-show {

@@ -27,6 +27,11 @@ inck_subscription:
     type:     annotation
     prefix:   /
 
+inck_notification:
+    resource: "@InckNotificationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
