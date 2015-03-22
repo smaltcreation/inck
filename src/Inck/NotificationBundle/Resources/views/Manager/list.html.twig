@@ -1,0 +1,46 @@
+{% trans_default_domain 'ArticleBundle' %}
+{% set class = 'ns-box ns-box-relative ns-other ns-effect-thumbslider ns-type-notice' %}
+
+{% if notifications|length %}
+    {% if popover %}
+        {% for notification in notifications %}
+            <div class="{{ class }}">
+                {{ notification.html|raw }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Notification</th>
+                <th>Envoyée le</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for notification in notifications %}
+                    <tr>
+                        <td>
+                            <div class="{{ class }}">
+                                {{ notification.html|raw }}
+                            </div>
+                        </td>
+                        <td class="notification-date">
+                            {{ notification.sentAt|date('d/m/Y à H:i') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <div class="text-center">
+                            {{ knp_pagination_render(notifications) }}
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    {% endif %}
+{% else %}
+    Pas de notifications
+{% endif %}

@@ -1,0 +1,9 @@
+{% trans_default_domain 'ArticleBundle' %}
+
+{{ render(controller('InckNotificationBundle:Manager:list', { page: 1, popover: true })) }}
+
+<div class="text-center notifications-popover-more">
+    <a href="{{ path('inck_notification_manager_history') }}" class="btn btn-inverse btn-block notification-link">
+        Ouvrir l'historique
+    </a>
+</div>

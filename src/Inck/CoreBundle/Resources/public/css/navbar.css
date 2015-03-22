@@ -374,3 +374,7 @@ input.gn-search:focus {
 .notifications-popover-container .popover {
     max-width: 100%;
 }
+
+.notifications-popover-more {
+    margin-top: 10px;
+}

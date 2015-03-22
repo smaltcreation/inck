@@ -42,7 +42,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ InckCoreBundle, InckArticleBundle, InckUserBundle, FOSUserBundle, AvocodeFormExtensionsBundle ]
+    bundles:        [ InckCoreBundle, InckArticleBundle, InckUserBundle, InckNotificationBundle, FOSUserBundle, AvocodeFormExtensionsBundle ]
     #java: /usr/bin/java
     filters:
         less:

@@ -1,11 +1,31 @@
-{% trans_default_domain 'ArticleBundle' %}
+{% extends 'InckCoreBundle::layout.html.twig' %}
+{% trans_default_domain 'CoreBundle' %}
 
-{% if notifications|length %}
-    {% for notification in notifications %}
-        <div class="ns-box ns-box-relative ns-other ns-effect-thumbslider ns-type-notice">
-            {{ notification|raw }}
+{% block title %}Historique des notifications{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/notification/manager/history.css'
+        'bundles/incknotification/css/Manager/history.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Historique des notifications</h1>
         </div>
-    {% endfor %}
-{% else %}
-    Pas de notifications
-{% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                {{ render(controller('InckNotificationBundle:Manager:list', { page: page, popover: false })) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
