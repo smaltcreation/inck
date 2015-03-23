@@ -1,0 +1,7 @@
+{
+  "name": "inck-article-bundle",
+  "dependencies": {
+    "summernote": "0.6.*"
+  },
+  "private": true
+}

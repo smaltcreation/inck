@@ -34,7 +34,7 @@ class ArticleType extends AbstractType
                 'label'     => 'Langue',
                 'data'      => 'fr',
             ])
-            ->add('content', 'ckeditor', [
+            ->add('content', 'textarea', [
                 'label'     => false,
             ])
             ->add('categories', 'afe_select2_entity', [

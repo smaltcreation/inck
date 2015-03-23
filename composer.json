@@ -30,7 +30,6 @@
         "jms/security-extra-bundle": "dev-master",
         "avocode/form-extensions-bundle": "dev-master",
         "ornicar/gravatar-bundle" : "dev-master",
-        "egeloen/ckeditor-bundle": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "ivaynberg/select2": "3.5.*",
         "vich/uploader-bundle": "0.12.0",

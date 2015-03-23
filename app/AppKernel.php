@@ -26,7 +26,6 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new Avocode\FormExtensionsBundle\AvocodeFormExtensionsBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),

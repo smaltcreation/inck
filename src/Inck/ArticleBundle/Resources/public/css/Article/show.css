@@ -33,6 +33,11 @@ article .img-inline {
     height: 100px;
 }
 
+.article-content img,
+.article-content iframe {
+    max-width: 100%;
+}
+
 .jumbotron .btn-link {
     text-decoration: none;
     color: inherit;

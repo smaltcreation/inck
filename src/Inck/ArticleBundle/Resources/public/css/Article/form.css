@@ -1,3 +1,4 @@
+/* Image upload */
 .singleupload-buttonbar {
     margin-top: 0;
     margin-bottom: 0;
@@ -14,49 +15,27 @@
     padding-top: 33px !important;
 }
 
-.cke_top {
-    background: #F9F9F9 !important;
-}
-
-.cke_bottom {
-    background: #F9F9F9 !important;
-}
-
-.cke_chrome {
-    border: 1px solid #444 !important;
-    box-shadow: none!important;
-    -webkit-box-shadow: none !important;
-    }
-
-.cke_button {
-    background-color: #FFF !important;
-    border-color: #CCC !important;
-}
-
-.cke_toolgroup {
-    border-color: #CCC !important;
-}
-
-.cke_toolbar_separator {
-    visibility: hidden;
-}
-
-.cke_combo_button {
-    background: #FFF !important;
-    border-color: #CCC !important;
-}
-
 .single-upload-preview {
     border: none;
 }
 
+.inck_articlebundle_article_imageFile_preview_image {
+    text-align: center;
+}
+
 .inck_articlebundle_article_imageFile_preview_image img {
     display: block;
-    width: 100%;
+    margin: 0 auto;
     max-width: 100%;
     height: auto;
 }
 
 span.glyphicon {
     margin-right: 5px;
+}
+
+/* Summernote */
+.note-editable img,
+.note-editable iframe {
+    max-width: 100%;
 }

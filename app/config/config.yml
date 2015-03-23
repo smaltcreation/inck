@@ -256,6 +256,7 @@ presta_sitemap:
 sp_bower:
     bundles:
         InckCoreBundle: ~
+        InckArticleBundle: ~
     assetic:
             enabled: true
             filters:
