@@ -4,8 +4,8 @@
 git pull
 
 # Metre à jour les vendors
-composer self-update
-composer update
+sudo composer self-update
+sudo composer update
 
 # Supprimer le cache
 php app/console cache:clear --env=prod
@@ -20,6 +20,7 @@ fi
 
 # Mettre à jour les ressources
 rm -rf web/css/compiled web/js/compiled
+php app/console sp:bower:install
 php app/console fos:js-routing:dump
 
 if [ -z "$1" ]; then

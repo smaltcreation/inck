@@ -251,3 +251,15 @@ knp_snappy:
 # PrestaSitemapBundle
 presta_sitemap:
     dumper_base_url: "%dumper_base_url%"
+
+# SpBowerBundle
+sp_bower:
+    bundles:
+        InckCoreBundle: ~
+    assetic:
+            enabled: true
+            filters:
+                css:
+                    - cssrewrite
+                js:
+                    - ?uglifyjs

@@ -43,7 +43,8 @@
         "hwi/oauth-bundle": "0.4.*@dev",
         "components/modernizr": "dev-master",
         "nelmio/js-logger-bundle": "~1.2",
-        "presta/sitemap-bundle": "dev-master"
+        "presta/sitemap-bundle": "dev-master",
+        "sp/bower-bundle": "0.11.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

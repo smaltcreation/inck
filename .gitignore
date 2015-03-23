@@ -29,3 +29,6 @@ web/media
 
 # PhpStorm
 /.idea/
+
+# Bower CoreBundle
+src/Inck/CoreBundle/Resources/public/components

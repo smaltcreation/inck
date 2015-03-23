@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Nelmio\JsLoggerBundle\NelmioJsLoggerBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
+            new Sp\BowerBundle\SpBowerBundle(),
             /* Our bundles */
             new Inck\UserBundle\InckUserBundle(),
             new Inck\CoreBundle\InckCoreBundle(),
