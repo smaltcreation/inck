@@ -20,10 +20,10 @@
     <meta property="article:published"      content="{{ article.publishedAt|date('Y-m-d') }}" />
     <meta property="article:section"        content="{% for category in article.categories %}{{ category.name|trans|trans }}{% endfor %} " />
     {% if article.imageName %}
-        <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ vich_uploader_asset(article, 'article_image') }}" />
+        <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ vich_uploader_asset(article, 'article_image')|apply_filter('facebook') }}" />
     {% else %}
         {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
-            <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ asset_url }}" />
+            <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ asset_url|apply_filter('facebook') }}" />
         {% endimage %}
     {% endif %}
 {% endblock %}

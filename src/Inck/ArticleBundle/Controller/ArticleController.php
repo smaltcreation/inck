@@ -503,6 +503,7 @@ class ArticleController extends Controller
      */
     public function pdfAction(Article $article)
     {
+        $article->setContent(preg_replace('#<iframe.*?src="(.*?)".*?><\/iframe>#i', '<p><a href"$1">$1</a></p>', $article->getContent()));
         $html = $this->renderView('InckArticleBundle:Article:pdf.html.twig', [
             'article'   => $article,
             'user'      => $this->getUser()
