@@ -11,14 +11,16 @@ git config core.fileMode false
 # Installation des paquets requis
 sudo apt-get -y update
 
-# Installtion de Nginx/MySQL/cURL/acl
+# Installation de Nginx/MySQL/cURL/acl
 sudo apt-get -y install nginx mysql-server curl acl
+
+# Création du dossier de cache pour les thumbs des articles
+mkdir -p web/article web/media
 
 # Paramêtrage des permissions
 HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
-setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
-chmod -R 777 web/article web/media
+setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/article web/media
+setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/article web/media
 
 # Installation de PHP
 sudo apt-get -y install php5-intl php-pear php5-memcache php5-curl php5-mysql php5-fpm php5-gd
