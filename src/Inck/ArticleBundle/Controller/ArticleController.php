@@ -602,7 +602,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/{slug}/send", name="inck_article_article_send", requirements={"id" = "\d+"})
+     * @Route("/{id}/{slug}/send", name="inck_article_article_send", requirements={"id" = "\d+"}, options={"expose"=true}))
      * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Secure(roles="ROLE_USER")
      * @param Article $article
@@ -611,6 +611,7 @@ class ArticleController extends Controller
     public function send(Article $article)
     {
         try {
+
             if(($this->getUser() !== $article->getAuthor() && !$this->get('security.context')->isGranted('ROLE_ADMIN')) || $article->getAsDraft() === false)
             {
                 throw $this->createNotFoundException("Cet article ne peut pas être envoyé à la modération !");
@@ -623,21 +624,16 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                'Article envoyé à la modération avec succès !'
-            );
+            return new JsonResponse( array(
+                'success' => true,
+                200
+            ));
         }
         catch(\Exception $e) {
-            $this->get('session')->getFlashBag()->add(
-                'error',
-                $e
-            );
+            return new JsonResponse( array(
+                'success' => false,
+                'message' => $e->getMessage(),
+            ));
         }
-
-        return $this->redirect($this->generateUrl('inck_article_article_show', array(
-            'id'        => $article->getId(),
-            'slug'      => $article->getSlug(),
-        )));
     }
 }

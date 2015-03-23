@@ -7,6 +7,7 @@
         'bundles/inckcore/css/navbar.css'
         'bundles/inckcore/css/footer.css'
         'bundles/inckcore/css/header.css'
+        "@sweetalert_css"
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -166,10 +167,6 @@
             <ol class="carousel-indicators">
                 <li data-target="#carousel-parteners" data-slide-to="0" class="active"></li>
                 <li data-target="#carousel-parteners" data-slide-to="1"></li>
-                <!--<li data-target="#carousel-parteners" data-slide-to="2"></li>-->
-                <!--<li data-target="#carousel-parteners" data-slide-to="3"></li>-->
-                <!--<li data-target="#carousel-parteners" data-slide-to="4"></li>-->
-                <!--<li data-target="#carousel-parteners" data-slide-to="5"></li>-->
             </ol>
 
             <!-- Wrapper for slides -->
@@ -186,30 +183,6 @@
                         <p>Ecole informatique mondiale SUPINFO, leader en France qui forme des ingénieurs en informatique bac+5 et délivre un International Master of Science</p>
                     </div>
                 </div>
-            <!--<div class="item">
-                    <div class="carousel-caption">
-                        <h3>Partenaire 3</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>-->
-            <!--<div class="item">
-                    <div class="carousel-caption">
-                        <h3>Partenaire 4</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>-->
-            <!--<div class="item">
-                    <div class="carousel-caption">
-                        <h3>Partenaire 5</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>-->
-            <!--<div class="item">
-                    <div class="carousel-caption">
-                        <h3>Partenaire 6</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>-->
             </div>
 
             <!-- Controls -->
@@ -228,6 +201,7 @@
     {% javascripts filter='?uglifyjs2' output='js/compiled/core/layout.js'
         'bundles/inckcore/js/layout/lib/gnmenu.js'
         'bundles/inckcore/js/layout/menu.js'
+        "@sweetalert_js"
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

@@ -1,0 +1,7 @@
+{
+  "name": "inck-core-bundle",
+  "dependencies": {
+    "sweetalert": "latest"
+  },
+  "private": true
+}
