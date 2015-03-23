@@ -241,7 +241,7 @@
                     {% for article in user.articlesWatchLater %}
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-article">
                             <article id="article-{{ article.id }}" class="article">
-                                <a class="btn btn-default btn-circle btn-tooltip btn-unwatch-later pull-right btn-xs" data-id="{{ article.id }}" data-toggle="tooltip" data-container="body" data-placement="top" title="Retirer de la liste"><i class="fa fa-times"></i></a>
+                                <a class="btn btn-default btn-circle btn-tooltip btn-unwatch-later pull-right btn-xs" data-id="{{ article.id }}" data-slug="{{ article.slug }}" data-toggle="tooltip" data-container="body" data-placement="top" title="Retirer de la liste"><i class="fa fa-times"></i></a>
                                 <div class="summary">
                                     {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug}) %}
                                     <div class="thumbnail">
