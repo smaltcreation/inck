@@ -1,10 +1,32 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 {% trans_default_domain 'ArticleBundle' %}
 
+{% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id ~ '/' ~ article.slug %}
+
 {% block xmlns %}xmlns:og="http://ogp.me/ns#"{% endblock %}
 
 {% block title %}{{ article.title }}{% endblock %}
 {% block description %}<meta name="description" content="{{ article.summary|slice(0, 157) }}{% if article.summary|length > 157 %}...{% endif %}">{% endblock %}
+
+{% block meta %}
+    {{ parent() }}
+    <meta property="og:site_name"           content="Inck" />
+    <meta property="og:type"                content="article" />
+    <meta property="og:locale:alternate"    content="fr_FR" />
+    <meta property="og:url"                 content="{{ currentUrl }}" />
+    <meta property="og:title"               content="{{ article.title }}" />
+    <meta property="og:description"         content="{{ article.summary }}" />
+    <meta property="article:author"         content="{{ article.author.lastName and article.author.firstName ? article.author.firstName ~ ' ' ~ article.author.lastName : article.author.username }}" />
+    <meta property="article:published"      content="{{ article.publishedAt|date('Y-m-d') }}" />
+    <meta property="article:section"        content="{% for category in article.categories %}{{ category.name|trans|trans }}{% endfor %} " />
+    {% if article.imageName %}
+        <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ vich_uploader_asset(article, 'article_image') }}" />
+    {% else %}
+        {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+            <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ asset_url }}" />
+        {% endimage %}
+    {% endif %}
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -56,7 +78,7 @@
                                         <img itemprop="image" src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
                                     {% else %}
                                         {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
-                                        <img src="{{ asset_url|apply_filter('article_thumb') }}" alt="Image par défaut"/>
+                                            <img src="{{ asset_url|apply_filter('article_thumb') }}" alt="Image par défaut"/>
                                         {% endimage %}
                                     {% endif %}
                                     {{ render(controller('InckArticleBundle:Article:score', { article: article })) }}
@@ -67,7 +89,6 @@
                                         <div class="row">
                                             <div class="col-xs-9">
                                                 <p>
-                                                    {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id ~ '/' ~ article.slug %}
                                                     <a class="btn btn-facebook btn-sm btn-tooltip" title="Partager sur Facebook" data-container="body" data-placement="top" href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                                                         <i class="fa fa-facebook fa-fw"></i>
                                                     </a>

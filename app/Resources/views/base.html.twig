@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html {% block xmlns %}{% endblock %}>
     <head>
-        <meta charset="UTF-8" />
         <title>Inck - {% block title %}{% endblock %}</title>
-        {% block description %}{% endblock %}
+        {% block meta %}
+            {% block description %}{% endblock %}
+            <meta charset="UTF-8" />
+        {% endblock %}
 
         {% block stylesheets %}
             {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/base.css'
