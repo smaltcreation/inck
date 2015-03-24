@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ecd64acb90a4f436f8a8f22c7e9f662d",
+    "hash": "8cf9281e531fb4e32037243fb68271fd",
     "packages": [
         {
             "name": "afarkas/html5shiv",
@@ -2097,60 +2097,6 @@
             "description": "Select2 is a jQuery based replacement for select boxes.",
             "homepage": "http://ivaynberg.github.io/select2/",
             "time": "2014-11-01 18:43:44"
-        },
-        {
-            "name": "jasny/twig-extensions",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jasny/twig-extensions.git",
-                "reference": "90ccff043aa544105d19b59bd7273cf747a16a51"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jasny/twig-extensions/zipball/90ccff043aa544105d19b59bd7273cf747a16a51",
-                "reference": "90ccff043aa544105d19b59bd7273cf747a16a51",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "twig/twig": "1.*"
-            },
-            "suggest": {
-                "ext-intl": "Required for the use of the LocalDate Twig extension",
-                "ext-pcre": "Required for the use of the PCRE Twig extension"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Jasny\\Twig": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Arnold Daniels",
-                    "email": "arnold@jasny.net",
-                    "homepage": "http://www.jasny.net"
-                }
-            ],
-            "description": "A set of useful Twig filters",
-            "homepage": "http://github.com/jasny/twig-extensions#README",
-            "keywords": [
-                "PCRE",
-                "array",
-                "date",
-                "datetime",
-                "preg",
-                "regex",
-                "templating",
-                "text",
-                "time"
-            ],
-            "time": "2014-06-23 13:23:15"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -4411,8 +4357,7 @@
         "knplabs/knp-snappy-bundle": 20,
         "hwi/oauth-bundle": 20,
         "components/modernizr": 20,
-        "presta/sitemap-bundle": 20,
-        "jasny/twig-extensions": 20
+        "presta/sitemap-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -1,46 +1,37 @@
-/* Separator */
-*,
-*:after,
-*::before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-#wrapper header .jumbotron .container {
+#header {
+    width: 100%;
     overflow: hidden;
-    /* we don't want the pseudo-elements sticking out */
+    margin-bottom: 30px;
+    background-position: center;
 }
 
-#wrapper header .jumbotron .container svg {
-    display: block;
+.jumbotron {
+    color: #dfdfdf;
+    padding-top: 80px;
+    padding-bottom: 60px;
+    background: url("../images/jumbotron.png");
+    background-position: bottom;
+    -webkit-transition: .5s all ease-out;
+    -moz-transition: .5s all ease-out;
+    transition: .5s all ease-out;
+    margin-bottom: 0;
 }
 
-#wrapper header .jumbotron {
-    position: relative;
+.jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron h4 {
+    color: #f9f9f9;
 }
 
-#wrapper header .jumbotron::after {
-    position: absolute;
-    content: '';
-    pointer-events: none;
+.jumbotron h1 .small, .jumbotron h2 .small, .jumbotron h3 .small, .jumbotron h4 .small {
+    color: #dfdfdf;
 }
 
-#wrapper header .jumbotron::after {
-    left: 50%;
-    width: 60px;
-    height: 60px;
-    -webkit-transform: translateX(-50%) rotate(45deg);
-    transform: translateX(-50%) rotate(45deg);
-    bottom: -30px;
-    z-index: 10;
-    background: inherit;
+.jumbotron a {
+    color: #aba9a9;
+    -webkit-transition: .5s all ease-out;
+    -moz-transition: .5s all ease-out;
+    transition: .5s all ease-out;
 }
 
-@media screen and (max-width: 768px) {
-    #wrapper header .jumbotron::after {
-        width: 30px;
-        height: 30px;
-        bottom: -15px;
-    }
+.jumbotron a:hover {
+    color: #f9f9f9;
 }

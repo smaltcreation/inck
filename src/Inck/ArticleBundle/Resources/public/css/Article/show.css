@@ -38,6 +38,11 @@ article .img-inline {
     max-width: 100%;
 }
 
+.jumbotron {
+    background: rgba(0, 0, 0, 0.50);
+    margin-bottom: 30px;
+}
+
 .jumbotron .btn-link {
     text-decoration: none;
     color: inherit;
@@ -135,7 +140,7 @@ a.close-slidebox{
 }
 
 #article-progress-bar {
-    background: #A5C1C6;
+    background: #777777;
     width: 0;
     height: 5px;
     position: fixed;

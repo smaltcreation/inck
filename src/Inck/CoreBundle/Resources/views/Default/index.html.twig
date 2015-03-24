@@ -7,7 +7,6 @@
 {% block stylesheets %}
     {{ parent() }}
     {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/core/default/index.css'
-        'bundles/inckcore/css/Default/index.css'
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
         'bundles/inckarticle/css/Article/score.css'

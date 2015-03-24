@@ -5,10 +5,10 @@
         <div class="socials">
             {% if user.facebook or user.googlePlus or user.twitter or user.linkedin %}
                 <p>
-                    {% if user.facebook %}<a class="btn btn-facebook btn-xs btn-tooltip btn-circle" title="Page Facebook de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.facebook }}"><i class="fa fa-facebook fa-fw"></i></a>{% endif %}
-                    {% if user.googlePlus %}<a class="btn btn-google btn-xs btn-tooltip btn-circle" title="Page Google+ de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.googlePlus }}"><i class="fa fa-google-plus fa-fw"></i></a>{% endif %}
-                    {% if user.twitter %}<a class="btn btn-twitter btn-xs btn-tooltip btn-circle" title="Page Twitter de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.twitter }}"><i class="fa fa-twitter fa-fw"></i></a>{% endif %}
-                    {% if user.linkedin %}<a class="btn btn-linkedin btn-xs btn-tooltip btn-circle" title="Page Linkedin de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.linkedin }}"><i class="fa fa-linkedin fa-fw"></i></a>{% endif %}
+                    {% if user.facebook %}<a class="btn btn-default btn-xs btn-tooltip btn-circle" title="Page Facebook de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.facebook }}"><i class="fa fa-facebook fa-fw"></i></a>{% endif %}
+                    {% if user.googlePlus %}<a class="btn btn-default btn-xs btn-tooltip btn-circle" title="Page Google+ de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.googlePlus }}"><i class="fa fa-google-plus fa-fw"></i></a>{% endif %}
+                    {% if user.twitter %}<a class="btn btn-default btn-xs btn-tooltip btn-circle" title="Page Twitter de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.twitter }}"><i class="fa fa-twitter fa-fw"></i></a>{% endif %}
+                    {% if user.linkedin %}<a class="btn btn-default btn-xs btn-tooltip btn-circle" title="Page Linkedin de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.linkedin }}"><i class="fa fa-linkedin fa-fw"></i></a>{% endif %}
 
                 </p>
             {% endif %}
