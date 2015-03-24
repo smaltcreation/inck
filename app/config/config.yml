@@ -266,4 +266,4 @@ sp_bower:
                 css:
                     - cssrewrite
                 js:
-                    - ?uglifyjs
+                    - ?uglifyjs2
