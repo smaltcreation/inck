@@ -66,6 +66,7 @@
 }
 
 .gn-menu-main > li {
+    background: #333333;
     display: block;
     float: left;
     height: 100%;
@@ -367,10 +368,19 @@ input.gn-search:focus {
 }
 
 /* Notifications */
+li.notifications-popover-container {
+    border-left: none;
+    border-right: 1px solid #d3d3d3;
+}
+
 .notifications-popover-container .popover {
     max-width: 100%;
 }
 
 .notifications-popover-more {
     margin-top: 10px;
+}
+
+li.search {
+    background: inherit;
 }
