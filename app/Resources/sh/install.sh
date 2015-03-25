@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Lien symbolique vers nodejs
-if [ ! -f /usr/local/bin/node ]; then
-    sudo ln -s /usr/bin/nodejs /usr/local/bin/node
-fi
-
 # Configuration de git ("file mode changed")
 git config core.fileMode false
 
@@ -35,6 +30,11 @@ sudo apt-get -y install nodejs npm zlibc memcached libxrender1 libxext6
 sudo npm install less@1.7.5 -g
 sudo pecl install memcache
 sudo service nginx restart
+
+# Lien symbolique vers nodejs
+if [ ! -f /usr/local/bin/node ]; then
+    sudo ln -s /usr/bin/nodejs /usr/local/bin/node
+fi
 
 # Creation de la DB, Installation des vendors
 php app/console doctrine:database:create
