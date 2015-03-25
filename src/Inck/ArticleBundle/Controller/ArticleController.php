@@ -406,30 +406,28 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/{slug}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"})
+     * @Route("/{id}/{slug}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"}, options={"expose"=true})
      * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Secure(roles="ROLE_USER")
      * @param Article $article
-     * @return RedirectResponse
+     * @return JSONResponse
      */
     public function deleteAction(Article $article)
     {
-        // Si un utilisateur tente de supprimer l'article d'un autre utilisateur, ou un article publié
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN') && ($this->getUser() !== $article->getAuthor() || !$article->getAsDraft()))
-        {
-            throw $this->createNotFoundException("Article inexistant");
+        try {
+            if (!$this->get('security.context')->isGranted('ROLE_ADMIN') && ($this->getUser() !== $article->getAuthor() || !$article->getAsDraft())) {
+                throw $this->createNotFoundException("Article inexistant");
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($article);
+            $em->flush();
+
+            return new JsonResponse(array('message' => 'Votre article a été supprimé avec succès !'));
         }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($article);
-        $em->flush();
-
-        $this->get('session')->getFlashBag()->add(
-            'success',
-            'Article supprimé avec succès !'
-        );
-
-        return $this->redirect($this->generateUrl('fos_user_profile_show'));
+        catch(\Exception $e) {
+            return new JsonResponse(array('message' => $e->getMessage()), 400);
+        }
     }
 
     /**
@@ -607,12 +605,11 @@ class ArticleController extends Controller
      * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Secure(roles="ROLE_USER")
      * @param Article $article
-     * @return RedirectResponse
+     * @return JSONResponse
      */
     public function send(Article $article)
     {
         try {
-
             if(($this->getUser() !== $article->getAuthor() && !$this->get('security.context')->isGranted('ROLE_ADMIN')) || $article->getAsDraft() === false)
             {
                 throw $this->createNotFoundException("Cet article ne peut pas être envoyé à la modération !");
@@ -625,16 +622,10 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
-            return new JsonResponse( array(
-                'success' => true,
-                200
-            ));
+            return new JsonResponse(array('message' => 'Votre article a été envoyé à la modération avec succès !'));
         }
         catch(\Exception $e) {
-            return new JsonResponse( array(
-                'success' => false,
-                'message' => $e->getMessage(),
-            ));
+            return new JsonResponse(array('message' => $e->getMessage()), 400);
         }
     }
 }

@@ -123,7 +123,7 @@
                                                     <a data-article-id="{{ article.id }}" data-article-slug="{{ article.slug }}" class="btn btn-success btn-xs btn-tooltip btn-article-send" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body">
                                                         <i class="fa fa-send"></i>
                                                     </a>
-                                                    <a href="{{ path('inck_article_article_delete', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-danger btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body">
+                                                    <a data-article-id="{{ article.id }}" data-article-slug="{{ article.slug }}" class="btn btn-danger btn-xs btn-tooltip btn-article-delete" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body">
                                                         <i class="fa fa-times"></i>
                                                     </a>
                                                 </div>

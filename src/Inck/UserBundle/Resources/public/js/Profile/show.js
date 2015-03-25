@@ -19,19 +19,52 @@ $(document).ready(function(){
                         slug: btn.attr('data-article-slug')
                     }),
                     dataType: 'json'
-                }).done( function(data){
-                    if('success' in data && data.success == false) {
-                        swal("Erreur !", data.message, "error");
-                    }
-                    else {
-                        swal("Envoyé !", "Votre article a été envoyé à la modération avec succès !", "success");
-                        btn.closest('tr').hide(400, function() {
-                            $(this).remove();
-                        });
-                    }
-                });
+                }).done(function(data) {
+                    swal("Envoyé !", data.message, "success");
+                    btn.closest('tr').hide(400, function() {
+                        $(this).remove();
+                    })
+                }).fail(function(jqXHR) {
+                    var data = $.parseJSON(jqXHR.responseText);
+                    swal("Erreur !", data.message, "error");
+                })
             } else {
                 swal("Annulé", "Votre article n'a pas été envoyé !", "error");
+            }
+        });
+    });
+
+    $('.btn-article-delete').click(function() {
+        var btn = $(this);
+        swal({
+            title: "Êtes-vous sûr ?",
+            text: "Cet article sera supprimé définitevement, vous ne pourrez pas le récupérer !",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f15645",
+            confirmButtonText: "Oui, supprimer mon article !",
+            cancelButtonText: "Annuler",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function(isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: Routing.generate('inck_article_article_delete', {
+                        id: btn.attr('data-article-id'),
+                        slug: btn.attr('data-article-slug')
+                    }),
+                    dataType: 'json'
+                }).done(function(data) {
+                    swal("Supprimé !", data.message, "success");
+                    btn.closest('tr').hide(400, function() {
+                        $(this).remove();
+                    })
+                }).fail(function(jqXHR) {
+                    var data = $.parseJSON(jqXHR.responseText);
+                    swal("Erreur !", data.message, "error");
+                })
+            } else {
+                swal("Annulé", "Votre article n'a pas été supprimé !", "error");
             }
         });
     });
