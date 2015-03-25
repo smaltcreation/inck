@@ -41,7 +41,7 @@ article:
     timeline:
             filter: Filter the articles
             more_articles: Show more articles
-            results: results
+            results: result(s)
 
 politic: Politic
 literature: Literature
