@@ -9,7 +9,7 @@
     color: #dfdfdf;
     padding-top: 80px;
     padding-bottom: 60px;
-    background: url("../images/jumbotron.png");
+    background: rgba(31, 31, 31, 0.95) url("../images/jumbotron.png");
     background-position: bottom;
     -webkit-transition: .5s all ease-out;
     -moz-transition: .5s all ease-out;
@@ -26,12 +26,8 @@
 }
 
 .jumbotron a {
-    color: #aba9a9;
+    color: #ffffff;
     -webkit-transition: .5s all ease-out;
     -moz-transition: .5s all ease-out;
     transition: .5s all ease-out;
-}
-
-.jumbotron a:hover {
-    color: #f9f9f9;
 }

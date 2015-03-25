@@ -140,47 +140,59 @@
 {% endblock %}
 
 {% block footer %}
-    <section id="footer-links">
-        <div class="container text-center">
-            <h2>{{ 'view.layout.social_networks'|trans }}</h2>
-            <p>{{ 'view.layout.social_networks_recap'|trans }}</p>
-            <div>
-                <a href="{{ inck_social_facebook }}" class="btn btn-facebook">
-                    <i class="fa fa-facebook"></i>
-                    Facebook
-                </a>
-                <a href="{{ inck_social_twitter }}" class="btn btn-twitter">
-                    <i class="fa fa-twitter"></i>
-                    Twitter
-                </a>
-                <a href="{{ inck_social_google_plus }}" class="btn btn-google">
-                    <i class="fa fa-google-plus"></i>
-                    Google+
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="footer-parteners" class="ss-style-triangles">
+    <section id="footer-links" class="ss-style-triangles">
         <div id="carousel-parteners" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="#carousel-parteners" data-slide-to="0" class="active"></li>
                 <li data-target="#carousel-parteners" data-slide-to="1"></li>
+                <li data-target="#carousel-parteners" data-slide-to="2"></li>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="carousel-caption">
+                        <h3>{{ 'view.layout.social_networks'|trans }}</h3>
+                        <p>{{ 'view.layout.social_networks_recap'|trans }}</p>
+                        <p>
+                            <a href="{{ inck_social_facebook }}" class="btn btn-facebook">
+                                <i class="fa fa-facebook"></i>
+                                Facebook
+                            </a>
+                            <a href="{{ inck_social_twitter }}" class="btn btn-twitter">
+                                <i class="fa fa-twitter"></i>
+                                Twitter
+                            </a>
+                            <a href="{{ inck_social_google_plus }}" class="btn btn-google">
+                                <i class="fa fa-google-plus"></i>
+                                Google+
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="carousel-caption">
                         <h3><a href="http://www.smaltcreation.com/" style="text-decoration: none; color: inherit;">Smalt Création</a></h3>
-                        <p>Créateur de Inck, Nous sommes à l'écoute de nos clients pour vous fournir des produits toujours plus performants.</p>
+                        <p>Créateurs de Inck, Nous sommes à l'écoute de nos clients pour vous fournir des produits toujours plus performants.</p>
+                        <p>
+                            <a href="http://www.smaltcreation.com/" class="btn btn-inverse">
+                                <i class="fa fa-external-link"></i>
+                                En savoir plus
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <div class="item">
                     <div class="carousel-caption">
                         <h3><a href="http://www.supinfo.com/" style="text-decoration: none; color: inherit;">SUPINFO International University</a></h3>
                         <p>Ecole informatique mondiale SUPINFO, leader en France qui forme des ingénieurs en informatique bac+5 et délivre un International Master of Science</p>
+                        <p>
+                            <a href="http://www.supinfo.com/" class="btn btn-inverse">
+                                <i class="fa fa-external-link"></i>
+                                En savoir plus
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@
     display: none;
 }
 
-article {
+article:not(:last-child) {
     margin-bottom: 40px;
 }
 
