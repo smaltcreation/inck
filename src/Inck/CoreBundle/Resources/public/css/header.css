@@ -24,10 +24,3 @@
 .jumbotron h1 .small, .jumbotron h2 .small, .jumbotron h3 .small, .jumbotron h4 .small {
     color: #dfdfdf;
 }
-
-.jumbotron a {
-    color: #ffffff;
-    -webkit-transition: .5s all ease-out;
-    -moz-transition: .5s all ease-out;
-    transition: .5s all ease-out;
-}
