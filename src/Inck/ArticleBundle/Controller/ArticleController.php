@@ -62,7 +62,7 @@ class ArticleController extends Controller
         // ou tentative d'édition d'un article qui n'est pas un brouillon
         if($this->getUser() !== $article->getAuthor() || $article->getAsDraft() === false)
         {
-            throw $this->createNotFoundException("Article inexistant");
+            throw $this->createAccessDeniedException("Vous ne pouvez pas éditer cet article");
         }
 
         // Traitement

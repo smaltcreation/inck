@@ -3,6 +3,17 @@
 
 {% block title %}{{ status_code }} {{ status_text }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/twig/exception_error.css'
+        'bundles/inckarticle/css/Article/timeline.css'
+        'bundles/inckarticle/css/Article/summary.css'
+        'bundles/inckarticle/css/Article/score.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
 {% block navbar %}
     <ul id="gn-menu" class="gn-menu-main">
         <li class="gn-trigger">
@@ -63,3 +74,11 @@
         </div>
     </div>
 {% endblock %}
+
+{% block content %}
+    <div class="last-article container">
+        {% block last %}{% endblock %}
+        {{ render(controller('InckArticleBundle:Article:last')) }}
+    </div>
+{% endblock %}
+
