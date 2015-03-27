@@ -31,6 +31,7 @@ twig:
         resources:
             - ::form.html.twig
     globals:
+        prod_url:                 "%prod_url%"
         inck_ratchet_server_host: "%inck_ratchet.server_host%"
         inck_ratchet_server_port: "%inck_ratchet.server_port%"
         inck_ratchet_server_name: "%inck_ratchet.server_name%"
@@ -260,6 +261,7 @@ sp_bower:
     bundles:
         InckCoreBundle: ~
         InckArticleBundle: ~
+    allow_root: true
     assetic:
             enabled: true
             filters:

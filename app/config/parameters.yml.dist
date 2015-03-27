@@ -52,3 +52,4 @@ parameters:
     google_app_secret:  putYourGoogleSecretKey
 
     dumper_base_url: http://inck.fr/
+    prod_url: http://www.inck.fr
