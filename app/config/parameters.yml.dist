@@ -3,7 +3,7 @@ parameters:
     database_host:      127.0.0.1
     database_port:      ~
     database_name:      inck
-    database_user:      root
+    database_user:      inck
     database_password:  ~
 
     mailer_transport:   smtp
@@ -12,7 +12,7 @@ parameters:
     mailer_host:        smtp.inck.fr
     mailer_port:        587
     mailer_user:        notifications@inck.fr
-    mailer_password:    null
+    mailer_password:    ~
 
     locale: fr
     secret: ThisTokenIsNotSoSecretChangeIt
@@ -29,8 +29,8 @@ parameters:
 
     session_handler: session.handler.memcache
 
-    inck_ratchet.server_host: inck.dev
-    inck_ratchet.server_port: 8080
+    inck_ratchet.server_host: www.inck.dev
+    inck_ratchet.server_port: 85
     inck_ratchet.server_name: main
 
     inck_subscription.aliases:
@@ -51,5 +51,5 @@ parameters:
     google_app_id: putYourGoogleAppId
     google_app_secret:  putYourGoogleSecretKey
 
-    dumper_base_url: http://inck.fr/
+    dumper_base_url: http://www.inck.dev/
     prod_url: http://www.inck.fr
