@@ -137,7 +137,7 @@ class Article
      * @var File
      *
      * @Assert\Image(
-     *     maxSize = "64M",
+     *     maxSize = "10M",
      * )
      * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
      */
