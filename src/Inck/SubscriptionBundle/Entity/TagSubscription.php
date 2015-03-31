@@ -9,7 +9,7 @@ use Inck\SubscriptionBundle\Model\SubscriptionInterface;
 /**
  * TagSubscription
  *
- * @ORM\Table()
+ * @ORM\Table("tag_subscription")
  * @ORM\Entity()
  */
 class TagSubscription extends Subscription implements SubscriptionInterface

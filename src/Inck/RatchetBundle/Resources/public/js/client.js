@@ -33,7 +33,7 @@
         };
 
         this.connection.onerror = function(error) {
-            console.log(error);
+            console.error(error);
         };
     };
 

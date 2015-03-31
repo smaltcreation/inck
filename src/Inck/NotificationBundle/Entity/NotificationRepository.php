@@ -2,6 +2,7 @@
 
 namespace Inck\NotificationBundle\Entity;
 
+use DateInterval;
 use Doctrine\ORM\EntityRepository;
 use Inck\NotificationBundle\Model\NotificationInterface;
 use Inck\UserBundle\Entity\User;
@@ -48,4 +49,48 @@ class NotificationRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+	/**
+	 * @param NotificationInterface $notification
+	 * @param DateInterval $interval
+	 *
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public function isAlreadySent(NotificationInterface $notification, DateInterval $interval)
+	{
+		$limit = new \DateTime();
+		$limit->sub($interval);
+
+		$qb = $this
+			->getEntityManager()
+			->createQueryBuilder()
+			->select('COUNT(n)');
+
+		if ($notification instanceof SubscriberNotification) {
+			$qb
+				->from('InckNotificationBundle:SubscriberNotification', 'n')
+				->where('n.subscriber = :subscriber')
+				->setParameter('subscriber', $notification->getSubscriber());
+		}
+
+		else if ($notification instanceof ArticleNotification) {
+			$qb
+				->from('InckNotificationBundle:ArticleNotification', 'n')
+				->where('n.article = :article')
+				->setParameter('article', $notification->getArticle());
+		}
+
+		else {
+			throw new \Exception('Unsupported notification type');
+		}
+
+		$qb
+			->andWhere('n.to = :to')
+			->setParameter('to', $notification->getTo())
+			->andWhere('n.createdAt >= :createdAt')
+			->setParameter('createdAt', $limit->format('Y-m-d H:i:s'));
+
+		return ((int) $qb->getQuery()->getSingleScalarResult() !== 0);
+	}
 }

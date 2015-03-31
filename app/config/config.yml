@@ -19,7 +19,8 @@ framework:
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
-        handler_id:  "%session_handler%"
+        handler_id:     "%session_handler%"
+        cookie_domain:  "%cookie_domain%"
     fragments:       ~
     http_method_override: true
 
@@ -32,9 +33,9 @@ twig:
             - ::form.html.twig
     globals:
         prod_url:                 "%prod_url%"
-        inck_ratchet_server_host: "%inck_ratchet.server_host%"
-        inck_ratchet_server_port: "%inck_ratchet.server_port%"
-        inck_ratchet_server_name: "%inck_ratchet.server_name%"
+        inck_ratchet_server_protocol: "%inck_ratchet.server_protocol%"
+        inck_ratchet_server_host:     "%inck_ratchet.server_host%"
+        inck_ratchet_server_path:     "%inck_ratchet.server_path%"
         inck_social_facebook:     "https://www.facebook.com/smaltcreation"
         inck_social_twitter:      "https://twitter.com/smaltcreation"
         inck_social_google_plus:  "https://plus.google.com/u/0/+Smaltcreation/posts"
@@ -243,12 +244,6 @@ services:
     session.handler.memcache:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcacheSessionHandler
         arguments: [ @session.memcache, { prefix: %session_memcache_prefix%, expiretime: %session_memcache_expire% } ]
-
-# InckRatchetBundle Configuration
-inck_ratchet:
-    server_host: "%inck_ratchet.server_host%"
-    server_port: "%inck_ratchet.server_port%"
-    server_name: "%inck_ratchet.server_name%"
 
 # KnpSnappyBundle Configuration
 knp_snappy:

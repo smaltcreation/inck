@@ -3,17 +3,17 @@
 namespace Inck\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 use Inck\ArticleBundle\Entity\Article;
+use Serializable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="Inck\UserBundle\Entity\UserRepository")
- *
  */
-class User extends BaseUser
+class User extends BaseUser implements Serializable
 {
     /**
      * @ORM\Id
@@ -207,6 +207,13 @@ class User extends BaseUser
      * @ORM\Column(name="google_access_token", type="string", length=255, nullable=true)
      */
     private $google_access_token;
+
+	/**
+	 * @var ArrayCollection
+	 *
+	 * @ORM\OneToMany(targetEntity="Inck\SubscriptionBundle\Entity\Subscription", mappedBy="subscriber")
+	 */
+	private $subscriptions;
 
 
     public function __construct()

@@ -9,7 +9,7 @@ use Inck\SubscriptionBundle\Model\SubscriptionInterface;
 /**
  * CategorySubscription
  *
- * @ORM\Table()
+ * @ORM\Table("category_subscription")
  * @ORM\Entity()
  */
 class CategorySubscription extends Subscription implements SubscriptionInterface

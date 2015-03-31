@@ -13,10 +13,14 @@ use Inck\UserBundle\Entity\User;
 /**
  * Notification
  *
+ * @ORM\Table("notification")
  * @Entity(repositoryClass="Inck\NotificationBundle\Entity\NotificationRepository")
  * @InheritanceType("JOINED")
  * @DiscriminatorColumn(name="type", type="string")
- * @DiscriminatorMap({"subscriber" = "SubscriberNotification"})
+ * @DiscriminatorMap({
+ *     "subscriber" = "SubscriberNotification",
+ *     "article" = "ArticleNotification",
+ * })
  */
 class Notification
 {

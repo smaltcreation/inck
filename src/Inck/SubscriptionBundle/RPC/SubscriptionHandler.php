@@ -138,7 +138,7 @@ class SubscriptionHandler
                 // Création d'une notification
                 if ($parameters['entityAlias'] === 'user') {
                     $this->dispatcher->dispatch(
-                        'notification.created',
+	                    'notification.create',
                         new NotificationEvent(
                             new SubscriberNotification($user, $entity)
                         )

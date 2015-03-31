@@ -17,20 +17,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('inck_ratchet');
+	    $treeBuilder = new TreeBuilder();
+	    $rootNode = $treeBuilder->root('inck_ratchet');
 
-        $rootNode
-            ->children()
-                ->scalarNode('server_host')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('server_port')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('server_name')->isRequired()->cannotBeEmpty()->end()
-                ->variableNode('rpc')
-                    ->defaultNull()
-                ->end()
-            ->end()
-        ;
+	    // Here you should define the parameters that are allowed to
+	    // configure your bundle. See the documentation linked above for
+	    // more information on that topic.
 
-        return $treeBuilder;
+	    return $treeBuilder;
     }
 }

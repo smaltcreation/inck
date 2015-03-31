@@ -3,6 +3,7 @@
 namespace Inck\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Inck\ArticleBundle\Entity\Article;
 
 /**
  * UserRepository
@@ -12,17 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
-    /**
-     * countArticlesByPublication
-     *
-     * Compte les articles d'un auteur en fonction de certains types :
-     *
-     * PUBLICATION :
-     * var boolean $published
-     *
-     * CATEGORIES :
-     * var string array() $categories
-     */
+	/**
+	 * countArticlesByPublication
+	 *
+	 * Compte les articles d'un auteur en fonction de certains types :
+	 *
+	 * PUBLICATION :
+	 * var boolean $published
+	 *
+	 * CATEGORIES :
+	 * var string array() $categories
+	 *
+	 * @param bool $published
+	 * @param array $categories
+	 *
+	 * @return int
+	 */
     public function countArticles($published = null, $categories = null)
     {
         $qb = $this
@@ -40,10 +46,10 @@ class UserRepository extends EntityRepository
         if($categories !== null) {
             $qb->join('u.articles', 'a');
             $qb->join('a.categories', 'c');
+
             foreach($categories as $name) {
                 $qb->andWhere($qb->expr()->in('c.name', $name));
             }
-
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -114,4 +120,42 @@ class UserRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+	/**
+	 * @param Article $article
+	 *
+	 * @return User[]
+	 */
+	public function getUsersToNotifyByArticle(Article $article)
+	{
+		$query = $this
+			->getEntityManager()
+			->createQuery('
+				SELECT DISTINCT u
+				FROM InckUserBundle:User u
+				INNER JOIN u.subscriptions s
+				WHERE s.id IN (
+				    SELECT us.id
+				    FROM InckSubscriptionBundle:UserSubscription us
+				    WHERE us.to = :author
+				)
+				OR s.id IN (
+				    SELECT cs.id
+				    FROM InckSubscriptionBundle:CategorySubscription cs
+				    WHERE cs.to IN (:categories)
+				)
+				OR s.id IN (
+				    SELECT ts.id
+				    FROM InckSubscriptionBundle:TagSubscription ts
+				    WHERE ts.to IN (:tags)
+				)
+			')
+			->setParameters(array(
+				'author'        => $article->getAuthor(),
+				'categories'    => $article->getCategories()->toArray(),
+				'tags'          => $article->getTags()->toArray(),
+			));
+
+		return $query->getResult();
+	}
 }

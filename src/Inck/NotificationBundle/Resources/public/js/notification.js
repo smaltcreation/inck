@@ -1,6 +1,7 @@
-$(document).ready(function(){
+$(document).ready(function() {
     var notifications = [];
-    var notificationDisplayed = false;
+    var displayingNotification = false;
+
     var loading = $('<div>')
         .attr('id', 'notifications-loading')
         .css('display', 'none');
@@ -10,17 +11,17 @@ $(document).ready(function(){
     $(window.server).bind('notification.received', function(e, data){
         notifications.push(data);
 
-        if(!notificationDisplayed) {
-            displaySubscriberNotification();
+        if (!displayingNotification) {
+            displayNotification();
         }
     });
 
-    function displaySubscriberNotification(){
+    function displayNotification() {
         if (notifications.length == 0) {
             return false;
         }
 
-        notificationDisplayed = true;
+        displayingNotification = true;
         var data = notifications.shift();
 
         loading.append(data.html).waitForImages(function(){
@@ -32,10 +33,10 @@ $(document).ready(function(){
                 ttl: 6000,
                 effect: 'thumbslider',
                 type: 'notice',
-                onClose: function(){
+                onClose: function() {
                     setTimeout(function(){
-                        notificationDisplayed = false;
-                        displaySubscriberNotification();
+                        displayingNotification = false;
+                        displayNotification();
                     }, 1000);
                 }
             });

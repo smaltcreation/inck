@@ -2,10 +2,7 @@
 
 namespace Inck\RatchetBundle\Server;
 
-use Inck\NotificationBundle\Entity\NotificationRepository;
-use Inck\NotificationBundle\Entity\SubscriberNotificationRepository;
 use Inck\NotificationBundle\Manager\NotificationManager;
-use Inck\NotificationBundle\Model\NotificationInterface;
 use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
@@ -49,7 +46,7 @@ class Server implements MessageComponentInterface
         $this->rpcHandlers          = array();
     }
 
-    /**
+	/**
      * When a new connection is opened it will be passed to this method
      * @param  ConnectionInterface $conn The socket/connection that just connected to your application
      * @throws \Exception
@@ -59,7 +56,6 @@ class Server implements MessageComponentInterface
         $client = $this->clientManager->addConnection($conn);
 
         // Envoi des nouvelles notifications
-	    /** @var NotificationRepository $repository */
         $repository = $this->em->getRepository('InckNotificationBundle:Notification');
 
         foreach ($repository->getNew($client->getUser()) as $notification) {

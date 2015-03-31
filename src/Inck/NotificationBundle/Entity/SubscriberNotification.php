@@ -9,12 +9,12 @@ use Inck\NotificationBundle\Model\NotificationInterface;
 /**
  * SubscriberNotification
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Inck\NotificationBundle\Entity\SubscriberNotificationRepository")
+ * @ORM\Table("subscriber_notification")
+ * @ORM\Entity()
  */
 class SubscriberNotification extends Notification implements NotificationInterface
 {
-    const VIEW_NAME = 'InckNotificationBundle::subscriber.html.twig';
+    const VIEW_NAME = 'InckNotificationBundle:Notification:subscriber.html.twig';
 
     /**
      * @var User

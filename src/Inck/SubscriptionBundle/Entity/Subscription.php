@@ -4,12 +4,28 @@ namespace Inck\SubscriptionBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\Table;
+use Inck\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Subscription
+ *
+ * @Table("subscription")
+ * @Entity()
+ * @InheritanceType("JOINED")
+ * @DiscriminatorColumn(name="type", type="string")
+ * @DiscriminatorMap({
+ *     "user"       = "UserSubscription",
+ *     "category"   = "CategorySubscription",
+ *     "tag"        = "TagSubscription",
+ * })
  */
-abstract class Subscription
+class Subscription
 {
     /**
      * @var integer
@@ -28,9 +44,9 @@ abstract class Subscription
     protected $createdAt;
 
     /**
-     * @var UserInterface
+     * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
+     * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface", inversedBy="subscriptions")
      */
     protected $subscriber;
 

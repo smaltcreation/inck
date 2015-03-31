@@ -5,7 +5,6 @@ namespace Inck\NotificationBundle\RPC;
 use DateTime;
 use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
 use Inck\RatchetBundle\Entity\Client;
-use Inck\RatchetBundle\Server\ClientManager;
 use Inck\UserBundle\Entity\User;
 
 class NotificationHandler
@@ -16,18 +15,11 @@ class NotificationHandler
     private $em;
 
     /**
-     * @var ClientManager
-     */
-    private $clientManager;
-
-    /**
      * @param EntityManager $em
-     * @param ClientManager $clientManager
      */
-    public function __construct(EntityManager $em, $clientManager)
+    public function __construct(EntityManager $em)
     {
-        $this->em               = $em;
-        $this->clientManager    = $clientManager;
+        $this->em = $em;
     }
 
     /**
@@ -62,7 +54,7 @@ class NotificationHandler
         $user = $userRepository->find($client->getUser()->getId());
 
         // Récupération de la notification
-        $repository = $this->em->getRepository('InckNotificationBundle:SubscriberNotification');
+        $repository = $this->em->getRepository('InckNotificationBundle:Notification');
         $notification = $repository->find($parameters['id']);
 
         // Vérification de la notification

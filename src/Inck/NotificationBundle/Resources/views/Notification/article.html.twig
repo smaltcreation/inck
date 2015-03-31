@@ -1,0 +1,15 @@
+<div class="ns-thumb">
+    <img src="{{ gravatar(notification.article.author.email, 64, 'g', 'mm', true) }}">
+</div>
+<div class="ns-content">
+    <p>
+        <a href="{{ path('fos_user_profile_preview', { 'username': notification.article.author.username }) }}" class="notification-link">{{
+            notification.article.author.lastName and notification.article.author.firstName
+                ? notification.article.author.firstName ~ ' ' ~ notification.article.author.lastName
+                : notification.article.author.username
+        }}</a> a publié un <a href="{{ path('inck_article_article_show', {
+            'id': notification.article.id,
+            'slug': notification.article.slug
+        }) }}" class="notification-link">nouvel article</a>.
+    </p>
+</div>

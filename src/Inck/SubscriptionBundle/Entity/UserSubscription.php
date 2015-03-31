@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * UserSubscription
  *
- * @ORM\Table()
+ * @ORM\Table("user_subscription")
  * @ORM\Entity()
  */
 class UserSubscription extends Subscription implements SubscriptionInterface

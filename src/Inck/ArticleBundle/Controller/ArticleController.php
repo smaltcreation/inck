@@ -2,14 +2,14 @@
 
 namespace Inck\ArticleBundle\Controller;
 
+use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
 use Exception;
-use DateTime;
-use DateTimeZone;
 use Inck\ArticleBundle\Entity\Article;
 use Inck\ArticleBundle\Entity\Category;
 use Inck\ArticleBundle\Entity\ReportRepository;
 use Inck\ArticleBundle\Entity\Tag;
+use Inck\ArticleBundle\Event\ArticleEvent;
 use Inck\ArticleBundle\Form\Type\ArticleFilterType;
 use Inck\ArticleBundle\Form\Type\ArticleType;
 use Inck\UserBundle\Entity\User;
@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/article")
@@ -572,16 +573,17 @@ class ArticleController extends Controller
     public function publish(Article $article)
     {
         try {
-            if (!$this->get('security.context')->isGranted('ROLE_ADMIN') && !$article->getAsDraft())
-            {
-                throw $this->Exception("Cet article ne peut pas être publié.");
+            if ($article->getAsDraft()) {
+                throw $this->createAccessDeniedException('Cet article ne peut pas être publié.');
             }
 
             $em = $this->getDoctrine()->getManager();
+
             $article->setApproved(true);
             $article->setPublished(true);
             $article->setAsDraft(false);
             $article->setPublishedAt(new \DateTime('now'));
+
             $em->persist($article);
             $em->flush();
 
@@ -589,11 +591,15 @@ class ArticleController extends Controller
                 'success',
                 'Article publié avec succès !'
             );
-        }
-        catch(\Exception $e) {
+
+	        $this->get('event_dispatcher')->dispatch(
+		        'article.publish',
+		        new ArticleEvent($article)
+	        );
+        } catch(AccessDeniedException $e) {
             $this->get('session')->getFlashBag()->add(
-                'error',
-                $e
+                'danger',
+                $e->getMessage()
             );
         }
 

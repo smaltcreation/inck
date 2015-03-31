@@ -4,6 +4,7 @@ namespace Inck\RatchetBundle\Command;
 
 use Ratchet\App;
 use Ratchet\Session\SessionProvider;
+//use React\EventLoop\Factory;
 use SessionHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,9 +26,11 @@ class StartServerCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $host = $this->getContainer()->getParameter('inck_ratchet.server_host');
-        $port = $this->getContainer()->getParameter('inck_ratchet.server_port');
-        $name = $this->getContainer()->getParameter('inck_ratchet.server_name');
+        $host       = $this->getContainer()->getParameter('inck_ratchet.server_host');
+        $port       = $this->getContainer()->getParameter('inck_ratchet.server_port');
+        $address    = $this->getContainer()->getParameter('inck_ratchet.server_address');
+        $path       = $this->getContainer()->getParameter('inck_ratchet.server_path');
+	    $origin     = $this->getContainer()->getParameter('inck_ratchet.allowed_origin');
 
         $output->writeln(sprintf('Starting Ratchet server on port %d...', $port));
 
@@ -41,8 +44,8 @@ class StartServerCommand extends ContainerAwareCommand
             $sessionHandler
         );
 
-        $server = new App($host, $port, $host);
-        $server->route('/'.$name, $sessionProvider);
+        $server = new App($host, $port, $address);
+        $server->route('/'.$path, $sessionProvider, array($origin));
 
         $output->writeln('Server started !');
         $server->run();
