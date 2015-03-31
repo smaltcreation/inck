@@ -58,7 +58,7 @@
 
     <div class="article-container">
         <article id="article-{{ article.id }}" class="article" itemscope itemtype="http://schema.org/Article">
-            <header class="parallax-window" data-parallax="scroll" data-image-src="{{ img }}">
+            <header class="parallax-window" data-parallax="scroll" data-image-src="{{ img|apply_filter('article_parallax') }}">
                 <div class="jumbotron">
                     <div class="container">
                         <div class="article-title">
@@ -134,15 +134,17 @@
                         </section>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="comments" class="article-comments">
-                            <section>
-                                <div id="disqus_thread"></div>
-                            </section>
+                {% if article.published %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="comments" class="article-comments">
+                                <section>
+                                    <div id="disqus_thread"></div>
+                                </section>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </article>
         <div id="slidebox">
@@ -176,7 +178,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript">var disqus_shortname = 'inck{{ app.environment }}';</script>
+
+    {% if article.published %}
+        <script type="text/javascript">var disqus_shortname = 'inck{{ app.environment }}';</script>
+    {% endif %}
 
     {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/show.js'
         'bundles/inckarticle/js/Article/parallax.min.js'

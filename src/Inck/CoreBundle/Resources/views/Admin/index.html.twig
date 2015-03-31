@@ -2,6 +2,15 @@
 
 {% block title %}Panel d'administration{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/core/admin/index.css'
+        'bundles/inckarticle/css/Article/show_modal.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
 {% block header %}
     <div class="jumbotron">
         <div class="container">

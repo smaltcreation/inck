@@ -1,0 +1,4 @@
+.modal-body img,
+.modal-body iframe {
+    max-width: 100%;
+}

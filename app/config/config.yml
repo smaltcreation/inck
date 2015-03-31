@@ -178,13 +178,19 @@ avalanche_imagine:
     filters:
         article_thumb:
             type:    thumbnail
-            options: { size: [1000, 420], mode: outbound, quality: 100 }
+            options: { size: [740, 310], mode: outbound, quality: 65 }
+        article_modal:
+            type:    thumbnail
+            options: { size: [900, 375], mode: outbound, quality: 65 }
         article_featured:
             type:    thumbnail
-            options: { size: [100, 100], mode: outbound, quality: 100 }
+            options: { size: [100, 100], mode: outbound, quality: 50 }
         facebook:
               type:    thumbnail
               options: { size: [1200, 1200], mode: outbound, quality: 100 }
+        article_parallax:
+              type:    thumbnail
+              options: { size: [1920, 350], mode: outbound, quality: 40 }
 
 # Monolog Configuration
 monolog:
