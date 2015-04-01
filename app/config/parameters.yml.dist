@@ -35,7 +35,7 @@ parameters:
     inck_ratchet.server_address:  127.0.0.1
     inck_ratchet.server_path:     main
     inck_ratchet.allowed_origin:  www.inck.dev
-    inck_ratchet.cookie_domain:   .inck.dev
+    cookie_domain:                .inck.dev
 
     inck_subscription.aliases:
         user_subscription_class:      Inck\SubscriptionBundle\Entity\UserSubscription
