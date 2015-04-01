@@ -38,6 +38,28 @@ footer#footer #footer-links {
     background: #333333;
 }
 
+@media screen and (max-width: 640px) {
+    #content {
+        padding-bottom:450px;   /* Height of the footer element */
+    }
+
+    footer#footer {
+        height: 400px;
+    }
+    .carousel {
+        height: 327px;
+    }
+
+    .carousel .item{
+        height: 297px;
+    }
+
+    footer#footer #footer-links {
+        height: 327px;
+    }
+
+}
+
 /* Separator */
 *,
 *:after,
