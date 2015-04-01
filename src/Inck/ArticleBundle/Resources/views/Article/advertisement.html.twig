@@ -1,8 +1,10 @@
 <div class="article-advertisement">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- Inck -->
-    <ins class="adsbygoogle adslot_1" data-ad-client="ca-pub-7725791224081899" data-ad-slot="7333992762"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    {% if app.environment == 'prod' and app.request.schemeAndHttpHost == prod_url %}
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Inck -->
+        <ins class="adsbygoogle adslot_1" data-ad-client="ca-pub-7725791224081899" data-ad-slot="7333992762"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    {% endif %}
 </div>
