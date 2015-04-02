@@ -85,14 +85,14 @@
         <li class="brand">
             <a class="{% if currentRoute == 'home' %}active{% endif %}" href="{{ path('home') }}">
                 <i class="fa fa-home"></i>
-                Inck
+                <span class="hidden-xs visible-inline-sm visible-inline-md visible-inline-lg">Inck</span>
             </a>
         </li>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <li class="notifications-popover-container">
                 <a href="#" class="notifications-popover-toggle" title="Notifications">
                     <i class="fa fa-bell"></i>
-                    Notifications
+                    <span class="hidden-xs hidden-sm visible-inline-md visible-inline-lg">Notifications</span>
                 </a>
             </li>
             <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_security_logout">
