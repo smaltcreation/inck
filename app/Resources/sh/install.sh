@@ -26,9 +26,9 @@ sudo mv composer.phar /usr/local/bin/composer
 sudo composer install
 
 # Installation des dépendances
-sudo apt-get -y install nodejs npm zlibc memcached libxrender1 libxext6
+sudo apt-get -y install nodejs npm zlibc memcached libxrender1 libxext6 zeromq-devel
 sudo npm install less@1.7.5 -g
-sudo pecl install memcache
+sudo pecl install memcache zmq-beta
 sudo service nginx restart
 
 # Lien symbolique vers nodejs
