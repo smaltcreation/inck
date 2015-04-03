@@ -20,12 +20,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @InheritanceType("JOINED")
  * @DiscriminatorColumn(name="type", type="string")
  * @DiscriminatorMap({
- *     "user"       = "UserSubscription",
- *     "category"   = "CategorySubscription",
- *     "tag"        = "TagSubscription",
+ *     "user"           = "UserSubscription",
+ *     "category"       = "CategorySubscription",
+ *     "tag"            = "TagSubscription",
  * })
  */
-class Subscription
+abstract class Subscription
 {
     /**
      * @var integer

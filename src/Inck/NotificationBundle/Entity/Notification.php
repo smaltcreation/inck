@@ -22,7 +22,7 @@ use Inck\UserBundle\Entity\User;
  *     "article" = "ArticleNotification",
  * })
  */
-class Notification
+abstract class Notification
 {
     /**
      * @var integer
