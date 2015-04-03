@@ -39,6 +39,7 @@
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "knplabs/knp-snappy-bundle": "dev-master",
         "cboden/ratchet": "0.3.*",
+        "react/zmq": "0.3.*",
         "hwi/oauth-bundle": "0.4.*@dev",
         "components/modernizr": "dev-master",
         "nelmio/js-logger-bundle": "~1.2",

@@ -98,14 +98,16 @@
             {% if app.user is not null and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <script type="text/javascript">
                     $(document).ready(function(){
-                        window.server = new InckRatchetServer('{{ inck_ratchet_server_protocol }}://{{ inck_ratchet_server_host }}/{{ inck_ratchet_server_path }}');
+                        window.server = new InckRatchetServer(
+                            '{{ inck_ratchet_server_protocol }}://{{ inck_ratchet_server_host }}/{{ inck_ratchet_server_path }}'
+                        );
                     });
                 </script>
 
                 {% javascripts filter='?uglifyjs2' output='js/compiled/base/notification.js'
-                    'bundles/inckratchet/js/client.js'
                     'js/jquery.waitforimages.min.js'
                     'bundles/incknotification/js/notificationFx.js'
+                    'bundles/inckratchet/js/client.js'
                     'bundles/incknotification/js/notification.js'
                 %}
                     <script src="{{ asset_url }}"></script>

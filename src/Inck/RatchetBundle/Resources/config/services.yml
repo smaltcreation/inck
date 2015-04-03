@@ -1,12 +1,17 @@
 services:
-    inck_ratchet.server.client_manager:
+    ratchet.client_manager:
         class: Inck\RatchetBundle\Server\ClientManager
-    inck_ratchet.server.entity_manager:
+    ratchet.entity_manager:
         class: Inck\RatchetBundle\Doctrine\ORM\EntityManager
         public: false
         arguments: [@doctrine.orm.entity_manager]
-    inck_ratchet.server.server:
+    ratchet.server:
         class: Inck\RatchetBundle\Server\Server
-        arguments: [@inck_ratchet.server.client_manager, @logger, @inck_ratchet.server.entity_manager, @inck_notification.manager.notification_manager]
+        arguments: [@ratchet.client_manager, @logger, @ratchet.entity_manager, @notification.manager, @event_dispatcher]
+        tags:
+            - { name: monolog.logger, channel: inck_ratchet }
+    ratchet.message_sender:
+        class: Inck\RatchetBundle\Sender\MessageSender
+        arguments: [%inck_ratchet.server_address%, %inck_ratchet.zmq_port%]
         tags:
             - { name: monolog.logger, channel: inck_ratchet }

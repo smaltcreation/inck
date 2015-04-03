@@ -1,14 +1,14 @@
 services:
-    inck_notification.rpc.notification_handler:
+    notification.handler:
         class: Inck\NotificationBundle\RPC\NotificationHandler
-        arguments: [@inck_ratchet.server.entity_manager]
+        arguments: [@ratchet.entity_manager]
         tags:
             -  { name: inck_ratchet.rpc, alias: notification }
-    inck_notification.listener.notification_listener:
+    notification.listener:
         class: Inck\NotificationBundle\Listener\NotificationListener
-        arguments: [@inck_ratchet.server.entity_manager, @inck_notification.manager.notification_manager]
+        arguments: [@ratchet.entity_manager, @notification.manager]
         tags:
             - { name: kernel.event_listener, event: notification.create, method: onNotificationCreate }
-    inck_notification.manager.notification_manager:
+    notification.manager:
         class: Inck\NotificationBundle\Manager\NotificationManager
-        arguments: [@inck_ratchet.server.entity_manager, @templating, @inck_ratchet.server.client_manager]
+        arguments: [@ratchet.entity_manager, @templating, @ratchet.client_manager]

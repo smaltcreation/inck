@@ -26,11 +26,11 @@ class NotificationManager
     private $clientManager;
 
 
-    /**
-     * @param EntityManager $em
-     * @param TwigEngine $templating
-     * @param ClientManager $clientManager
-     */
+	/**
+	 * @param EntityManager $em
+	 * @param TwigEngine $templating
+	 * @param ClientManager $clientManager
+	 */
     public function __construct(EntityManager $em, TwigEngine $templating, ClientManager $clientManager)
     {
         $this->em               = $em;
@@ -43,7 +43,7 @@ class NotificationManager
      */
     public function send(NotificationInterface $notification)
     {
-        if($client = $this->clientManager->getClientByUser($notification->getTo())) {
+        if ($client = $this->clientManager->getClientByUser($notification->getTo())) {
             $client->sendMessage('notification.received', array(
                 'id'    => $notification->getId(),
                 'html'  => $this->render($notification),

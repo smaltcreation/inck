@@ -29,7 +29,10 @@
 
         this.connection.onmessage = function(message) {
             var data = JSON.parse(message.data);
-            $(self).trigger(data.method, data.parameters);
+
+            if ('method' in data && 'parameters' in data) {
+                $(self).trigger(data.method, data.parameters);
+            }
         };
 
         this.connection.onerror = function(error) {

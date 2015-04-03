@@ -27,7 +27,7 @@ class ManagerController extends Controller
     public function listAction($page, $popover)
     {
         $repository = $this->getDoctrine()->getRepository('InckNotificationBundle:Notification');
-        $manager = $this->get('inck_notification.manager.notification_manager');
+        $manager = $this->get('notification.manager');
         $paginator = $this->get('knp_paginator');
 
         $notifications = $paginator->paginate(

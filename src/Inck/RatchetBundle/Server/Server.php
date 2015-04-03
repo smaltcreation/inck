@@ -4,9 +4,11 @@ namespace Inck\RatchetBundle\Server;
 
 use Inck\NotificationBundle\Manager\NotificationManager;
 use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
+use Inck\RatchetBundle\Entity\ServerMessage;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Server implements MessageComponentInterface
 {
@@ -26,23 +28,29 @@ class Server implements MessageComponentInterface
     private $em;
 
     /**
+     * @var NotificationManager
+     */
+    private $dispatcher;
+
+    /**
      * @var array
      */
     private $rpcHandlers;
 
-    /**
-     * @param ClientManager $clientManager
-     * @param Logger $logger
-     * @param EntityManager $em
-     * @param NotificationManager $notificationManager
-     * @internal param RegistryInterface $doctrine
-     */
-    public function __construct(ClientManager $clientManager, Logger $logger, EntityManager $em, NotificationManager $notificationManager)
+	/**
+	 * @param ClientManager $clientManager
+	 * @param Logger $logger
+	 * @param EntityManager $em
+	 * @param NotificationManager $notificationManager
+	 * @param EventDispatcherInterface $dispatcher
+	 */
+    public function __construct(ClientManager $clientManager, Logger $logger, EntityManager $em, NotificationManager $notificationManager, EventDispatcherInterface $dispatcher)
     {
         $this->clientManager        = $clientManager;
         $this->logger               = $logger;
         $this->em                   = $em;
         $this->notificationManager  = $notificationManager;
+        $this->dispatcher           = $dispatcher;
         $this->rpcHandlers          = array();
     }
 
@@ -54,6 +62,10 @@ class Server implements MessageComponentInterface
     function onOpen(ConnectionInterface $conn)
     {
         $client = $this->clientManager->addConnection($conn);
+
+	    if (!$client->getUser()) {
+		    return;
+	    }
 
         // Envoi des nouvelles notifications
         $repository = $this->em->getRepository('InckNotificationBundle:Notification');
@@ -131,7 +143,23 @@ class Server implements MessageComponentInterface
         }
     }
 
-    /**
+	/**
+	 * @param string $msg
+	 */
+	public function onServerMessage($msg)
+	{
+		$message = unserialize($msg);
+
+		if ($message instanceof ServerMessage) {
+			$this->dispatcher->dispatch($message->getName(), $message->getEvent());
+		}
+
+		else {
+			$this->logger->addWarning('Invalid message received');
+		}
+	}
+
+	/**
      * @param mixed $rpcHandler
      * @param string $alias
      */
@@ -156,5 +184,5 @@ class Server implements MessageComponentInterface
         }
 
         return null;
-    }
+	}
 }

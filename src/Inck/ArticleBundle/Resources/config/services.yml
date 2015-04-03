@@ -6,6 +6,6 @@ services:
             - { name: form.type, alias: inck_articlebundle_tags_selector }
     inck_article.listener.article_listener:
         class: Inck\ArticleBundle\Listener\ArticleListener
-        arguments: [@inck_ratchet.server.entity_manager, @event_dispatcher, @session]
+        arguments: [@ratchet.entity_manager, @ratchet.message_sender]
         tags:
             - { name: kernel.event_listener, event: article.publish, method: onArticlePublish }

@@ -10,9 +10,10 @@ use Ratchet\ConnectionInterface;
 class ClientManager
 {
     /**
-     * @var ArrayCollection
+     * @var Client[]
      */
     private $clients;
+
 
     public function __construct()
     {
@@ -64,10 +65,8 @@ class ClientManager
      */
     public function getClientByUser(User $user)
     {
-        /** @var Client $client */
-        foreach($this->clients as $client)
-        {
-            if($client->getUser()->getUsername() === $user->getUsername()) {
+        foreach ($this->clients as $client) {
+            if ($client->getUser()->getId() === $user->getId()) {
                 return $client;
             }
         }

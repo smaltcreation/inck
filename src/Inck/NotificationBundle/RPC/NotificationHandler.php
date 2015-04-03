@@ -58,7 +58,7 @@ class NotificationHandler
         $notification = $repository->find($parameters['id']);
 
         // Vérification de la notification
-        if (!$notification || $notification->getTo() !== $user || $notification->getDisplayedAt() !== null) {
+        if (!$notification || $notification->getTo()->getId() !== $user->getId() || $notification->getDisplayedAt() !== null) {
             throw new \Exception('Invalid notification');
         }
 

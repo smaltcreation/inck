@@ -10,7 +10,7 @@ class RPCCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $serviceName = 'inck_ratchet.server.server';
+        $serviceName = 'ratchet.server';
 
         if (!$container->hasDefinition($serviceName)) {
             return;

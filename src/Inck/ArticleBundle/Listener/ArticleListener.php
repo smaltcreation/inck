@@ -6,7 +6,8 @@ use Inck\ArticleBundle\Event\ArticleEvent;
 use Inck\NotificationBundle\Entity\ArticleNotification;
 use Inck\NotificationBundle\Event\NotificationEvent;
 use Inck\RatchetBundle\Doctrine\ORM\EntityManager;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Inck\RatchetBundle\Entity\ServerMessage;
+use Inck\RatchetBundle\Sender\MessageSender;
 
 class ArticleListener
 {
@@ -15,20 +16,20 @@ class ArticleListener
      */
     private $em;
 
-	/**
-	 * @var EventDispatcherInterface
-	 */
-	private $dispatcher;
+    /**
+     * @var MessageSender
+     */
+    private $sender;
 
 
 	/**
 	 * @param EntityManager $em
-	 * @param EventDispatcherInterface $dispatcher
+	 * @param MessageSender $sender
 	 */
-    public function __construct(EntityManager $em, EventDispatcherInterface $dispatcher)
+    public function __construct(EntityManager $em, MessageSender $sender)
     {
-        $this->em           = $em;
-        $this->dispatcher   = $dispatcher;
+        $this->em = $em;
+        $this->sender = $sender;
     }
 
 	/**
@@ -45,12 +46,12 @@ class ArticleListener
 		}
 
 		foreach ($users as $user) {
-			$this->dispatcher->dispatch(
+			$this->sender->send(new ServerMessage(
 				'notification.create',
 				new NotificationEvent(
 					new ArticleNotification($article, $user)
 				)
-			);
+			));
 		}
 	}
 }

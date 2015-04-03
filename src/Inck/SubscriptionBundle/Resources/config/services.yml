@@ -1,12 +1,12 @@
 services:
-    inck_subscription.twig.subscription_extension:
+    subscription.twig_extension:
         class: Inck\SubscriptionBundle\Twig\SubscriptionExtension
         arguments: [@security.context, @doctrine.orm.entity_manager, %inck_subscription.aliases%]
         tags:
             - { name: twig.extension }
-    inck_subscription.rpc.subscription_handler:
+    subscription.handler:
         class: Inck\SubscriptionBundle\RPC\SubscriptionHandler
-        arguments: [@inck_ratchet.server.entity_manager, @event_dispatcher, @logger, %inck_subscription.aliases%]
+        arguments: [@ratchet.entity_manager, @event_dispatcher, @logger, %inck_subscription.aliases%]
         tags:
             - { name: inck_ratchet.rpc, alias: subscription }
             - { name: monolog.logger, channel: inck_ratchet }
