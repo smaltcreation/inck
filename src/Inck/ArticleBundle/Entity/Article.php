@@ -90,6 +90,13 @@ class Article
     /**
      * @var boolean
      *
+     * @ORM\Column(name="official", type="boolean")
+     */
+    private $official;
+
+    /**
+     * @var boolean
+     *
      * @ORM\Column(name="published", type="boolean")
      */
     private $published;
@@ -200,6 +207,7 @@ class Article
      */
     public function __construct()
     {
+        $this->official     = false;
         $this->categories   = new ArrayCollection();
         $this->tags         = new ArrayCollection();
         $this->votes        = new ArrayCollection();
@@ -358,6 +366,29 @@ class Article
     public function getPostedAt()
     {
         return $this->postedAt;
+    }
+
+    /**
+     * Set official
+     *
+     * @param boolean $official
+     * @return Article
+     */
+    public function setOfficial($official)
+    {
+        $this->official = $official;
+
+        return $this;
+    }
+
+    /**
+     * Get official
+     *
+     * @return boolean
+     */
+    public function getOfficial()
+    {
+        return $this->official;
     }
 
     /**

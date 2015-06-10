@@ -62,6 +62,9 @@
                             <div class="alert alert-default">
                                 {{ form_row(form.categories) }}
                                 {{ form_row(form.tags) }}
+                                {% if app.user and is_granted('ROLE_ADMIN') %}
+                                    {{ form_row(form.official) }}
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-sm-6">

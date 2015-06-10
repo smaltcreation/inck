@@ -74,6 +74,9 @@
                     <p>
                         {% for category in article.categories %}<a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-category btn-xs category">{{ category.name|trans|trans }}</a>{% endfor %}
                         {% for tag in article.tags %}<a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs tag">{{ tag.name }}</a>{% endfor %}
+                        {% if article.official %}
+                            <span class="label label-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Annonce officielle" data-container="body"><i class="fa fa-certificate"></i> Officiel</span>
+                        {% endif %}
                         <a href="{{ path('inck_article_article_pdf', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-default btn-circle btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
                     </p>
                 </div>

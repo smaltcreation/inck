@@ -18,7 +18,9 @@
     </a>
     {{ render(controller('InckArticleBundle:Article:score', { article: article })) }}
     <div class="caption">
-        <h3 itemprop="name"><a href="{{ articleUrl }}">{{ article.title }}</a></h3>
+        <h3 itemprop="name">
+            <a href="{{ articleUrl }}">{{ article.title }}</a>
+        </h3>
         <p class="about">
             {{ 'article.show.writen_by'|trans }} <a class="btn btn-primary btn-xs" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash; {{ 'article.show.published_the'|trans }} <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time>
             <a href="{{ path('inck_article_article_pdf', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-link btn-xs btn-tooltip btn-circle" data-toggle="tooltip" data-placement="top" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
@@ -31,6 +33,9 @@
             {% for tag in article.tags %}
                 <a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs">{{ tag.name }}</a>
             {% endfor %}
+            {% if article.official %}
+                <span class="label label-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Annonce officielle" data-container="body"><i class="fa fa-certificate"></i> Officiel</span>
+            {% endif %}
         </p>
     </div>
 </div>

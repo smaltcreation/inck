@@ -13,9 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Category
 {
-    const PERMISSION_DEFAULT = 'ROLE_USER';
-    const PERMISSION_ADMIN = 'ROLE_SUPER_ADMIN';
-
     /**
      * @var integer
      *
@@ -47,13 +44,6 @@ class Category
     private $slug;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(type="array")
-     */
-    private $permissions;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Inck\ArticleBundle\Entity\Article", mappedBy="categories"))
      */
     private $articles;
@@ -64,8 +54,6 @@ class Category
      */
     public function __construct()
     {
-        $this->permissions = array();
-        $this->addPermission(static::PERMISSION_DEFAULT);
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -222,97 +210,5 @@ class Category
     public function removeArticle(\Inck\ArticleBundle\Entity\Article $articles)
     {
         $this->articles->removeElement($articles);
-    }
-
-    /**
-     * Set permissions
-     *
-     * @param array $permissions
-     * @return Category
-     */
-    public function setPermissions($permissions)
-    {
-        $this->permissions = array();
-
-        foreach ($permissions as $permission) {
-            $this->addPermission($permission);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get permissions
-     *
-     * @return array 
-     */
-    public function getPermissions()
-    {
-        return $this->permissions;
-    }
-
-    /**
-     * Add permission
-     *
-     * @param string $permission
-     * @return Category
-     */
-    public function addPermission($permission)
-    {
-        $permission = strtoupper($permission);
-        if ($permission === static::PERMISSION_DEFAULT) {
-            return $this;
-        }
-
-        if (!in_array($permission, $this->permissions, true)) {
-            $this->permissions[] = $permission;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Check permission
-     *
-     * @param string $permission
-     * @return bool
-     */
-    public function hasPermission($permission)
-    {
-        return in_array(strtoupper($permission), $this->getPermissions(), true);
-    }
-
-    /**
-     * Remove permission
-     *
-     * @param string $permission
-     * @return Category
-     */
-    public function removePermission($permission)
-    {
-        if ($key = array_search(strtoupper($permission), $this->permissions, true) !== false) {
-            unset ($this->permissions[$key]);
-            $this->permissions = array_values($this->permissions);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set permission ROLE_ADMIN
-     *
-     * @param $boolean
-     * @return Category
-     */
-    public function setSuperAdmin($boolean)
-    {
-        if ($boolean === true) {
-            $this->addPermission(static::PERMISSION_ADMIN);
-        }
-        else {
-            $this->removePermission(static::PERMISSION_ADMIN);
-        }
-
-        return $this;
     }
 }

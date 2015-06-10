@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -126,6 +127,10 @@ class ArticleController extends Controller
 
         if($form->isValid())
         {
+            if ($article->getOfficial() && false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new BadRequestHttpException('On ne peut pas prétendre être admin quand on ne l\'est pas !');
+            }
+
             $article->setPublished(false);
             $article->setAuthor($this->getUser());
             $article->setUpdatedAt(new \DateTime());

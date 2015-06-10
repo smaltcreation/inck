@@ -60,6 +60,10 @@ class ArticleType extends AbstractType
                 'deleteable'    => 'imageName',
                 'required'      => false,
             ])
+            ->add('official', 'checkbox', [
+                'label' => 'Annonce officielle',
+                'required'  => false,
+            ])
             ->add('actions', 'form_actions', [
                 'buttons' => [
                     'publish'   => [
