@@ -51,8 +51,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/{slug}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"}, options={"expose"=true})
-     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
+     * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @ParamConverter("article", options={"mapping": {"id": "id"}})
      * @Secure(roles="ROLE_USER")
      * @param Request $request
      * @param Article $article
