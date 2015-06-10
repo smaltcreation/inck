@@ -1,0 +1,61 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div id="user-profile-watch-later" class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingWatchLater">
+        <h4 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseWatchLater" aria-expanded="false" aria-controls="collapseWatchLater">
+                <i class="fa fa-fw fa-clock-o"></i>
+                {{ 'profile.page.list_watch_later'|trans }}<span class="badge pull-right">{{ user.articlesWatchLater|length }}</span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseWatchLater" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingWatchLater">
+        <div class="panel-body">
+            <div class="articles">
+                {% if user.articlesWatchLater|length > 0 %}
+                    <p class="text-center">
+                        {{ 'profile.page.manage_articles'|trans }} <span class="btn btn-link"><i class="fa fa-clock-o"></i> {{ 'profile.page.watch_later'|trans }}</span><br>
+                        {{ 'profile.page.remove_article'|trans }} <span class="btn btn-default btn-xs"><i class="fa fa-times"></i></span> {{ 'profile.page.top_right'|trans }}
+                    </p>
+                    <div class="row">
+                        {% for article in user.articlesWatchLater %}
+                            <div class="col-xs-6 col-sm-6 col-lg-4 col-article">
+                                {# Set the variables#}
+                                {% set articleUrl = path('inck_article_article_show', { 'id': article.id, 'slug': article.slug}) %}
+                                {% if article.imageName %}
+                                    {% set img = vich_uploader_asset(article, 'article_image') %}
+                                {% else %}
+                                    {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+                                        {% set img =  asset_url %}
+                                    {% endimage %}
+                                {% endif %}
+
+                                {# Display watch-later articles - order by date DESC#}
+                                <article id="article-{{ article.id }}" class="article">
+                                    <a class="btn btn-default btn-circle btn-tooltip btn-unwatch-later pull-right btn-xs" data-id="{{ article.id }}" data-slug="{{ article.slug }}" data-toggle="tooltip" data-container="body" data-placement="top" title="Retirer de la liste">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                    <div class="summary">
+                                        <div class="thumbnail">
+                                            <a href="{{ articleUrl }}">
+                                                <img src="{{ img|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
+                                            </a>
+                                            <div class="caption">
+                                                <a class="btn-tooltip" data-toggle="tooltip" data-placement="bottom" data-container="body" title="{{ article.title }}" href="{{ articleUrl }}">
+                                                    {{ article.title }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>Vous n'avez aucun article à regarder pour l'instant.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+

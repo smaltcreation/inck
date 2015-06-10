@@ -6,7 +6,7 @@ $(document).ready(function(){
 
     content.on('click', '.btn-unwatch-later', function(){
         watchLater($(this));
-        $(this).closest( ".col-article").hide('slow');
+        $(this).closest( "article").slideUp('slow');
     });
 
     function watchLater(clickedButton){

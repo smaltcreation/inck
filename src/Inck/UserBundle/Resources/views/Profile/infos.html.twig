@@ -1,0 +1,64 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{# Setting variables#}
+{% set user = app.user %}
+{% set name = user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username %}
+
+<p class="infos">
+    {# General #}
+    <span class="label label-default"><i class="fa fa-circle"></i> {{ user.username }}</span>
+
+    <span class="label label-default"><i class="fa fa-envelope"></i> {{ user.email }}</span>
+
+    {% if user.firstname or user.lastname %}
+        <span class="label label-default"><i class="fa fa-user"></i> {% if user.firstname %}{{ user.firstname }}{% endif %} {% if user.lastname %}{{ user.lastname }}{% endif %}</span>
+    {% endif %}
+
+    {% if user.birthday %}
+        <span class="label label-default"><i class="fa fa-calendar"></i> {{ user.birthday|date('d/m/Y') }}</span>
+    {% endif %}
+
+    {% if user.city %}
+        <span class="label label-default"><i class="fa fa-building"></i> {{ user.city }}</span>
+    {% endif %}
+
+    {% if user.country %}
+        <span class="label label-default"><i class="fa fa-globe"></i> {{ user.country }}</span>
+    {% endif %}
+
+    {% if user.school %}
+        <span class="label label-default"><i class="fa fa-graduation-cap"></i> {{ user.school }}</span>
+    {% endif %}
+
+    {% if user.occupation %}
+        <span class="label label-default"><i class="fa fa-briefcase"></i> {{ user.occupation }}</span>
+    {% endif %}
+
+    <br>
+
+    {# Social networks #}
+    {% if user.twitter %}
+        <a href="{{ user.twitter }}" class="btn btn-twitter btn-xs">
+            <i class="fa fa-twitter"></i>
+            Twitter
+        </a>
+    {% endif %}
+    {% if user.facebook %}
+        <a href="{{ user.facebook }}" class="btn btn-facebook btn-xs">
+            <i class="fa fa-facebook"></i>
+            Facebook
+        </a>
+    {% endif %}
+    {% if user.googlePlus %}
+        <a href="{{ user.googlePlus }}" class="btn btn-google btn-xs">
+            <i class="fa fa-google-plus"></i>
+            Google+
+        </a>
+    {% endif %}
+    {% if user.linkedIn %}
+        <a href="{{ user.linkedIn }}" class="btn btn-linkedin btn-xs">
+            <i class="fa fa-linkedin"></i>
+            Linkedin
+        </a>
+    {% endif %}
+</p>

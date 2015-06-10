@@ -1,0 +1,27 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div id="user-profile-subscriptions" class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSubscriptions">
+        <h4 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSubscriptions" aria-expanded="false" aria-controls="collapseSubscriptions">
+                <i class="fa fa-fw fa-bullhorn"></i>
+                {{ 'profile.page.subscriptions'|trans }}
+            </a>
+        </h4>
+    </div>
+    <div id="collapseSubscriptions" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSubscriptions">
+
+        {# Modal Subscriptions #}
+        {% include 'InckSubscriptionBundle:Manager:modal.html.twig' %}
+
+        <div class="panel-body">
+            <p>
+                <button type="button" class="btn btn-inverse" data-toggle="modal" data-target="#subscriptions-manager">
+                    <i class="fa fa-bullhorn"></i>
+                    {{ 'profile.page.manage_subscriptions'|trans }}
+                </button>
+            </p>
+        </div>
+    </div>
+</div>
+

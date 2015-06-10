@@ -1,21 +1,38 @@
+.jumbotron .avatar {
+    height: 70px;
+}
+
+.jumbotron p {
+    margin-top: 25px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 767px) {
+    .jumbotron .avatar {
+        height: 30px;
+    }
+}
+
 #articles .text {
     margin-bottom: 50px;
 }
 
-#watch-later .articles {
-    margin-top: 50px;
+#user-profile-watch-later .panel-body p {
+    margin-bottom: 20px;
 }
-#watch-later .thumbnail {
+
+#user-profile-watch-later .thumbnail {
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
     background-color: #fafafa;
 }
 
-#watch-later .thumbnail:hover {
+#user-profile-watch-later .thumbnail:hover {
     border-color: #333;
 }
 
-#watch-later article h4 a {
+#user-profile-watch-later article a {
+    text-align: center;
     color: #404040;
     text-decoration: none;
     transition: color ease 0.3s;
@@ -24,15 +41,42 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 18px;
 }
 
-#watch-later article h4 a:hover {
+#user-profile-watch-later article h4 a:hover {
     color: #57a3e8;
     outline: 0;
 }
 
-#watch-later article .btn-unwatch-later {
+#user-profile-watch-later article .btn-unwatch-later {
     position: absolute;
     right: 15px;
+    width: 30px;
+    height: 30px;
+    z-index: 100;
+}
+
+/*.panel-collapse {*/
+    /*max-height: 600px;*/
+    /*overflow-y: scroll;*/
+/*}*/
+
+hr {
+    margin: 30px 0 30px 0;
+}
+
+#accordion .panel-default > .panel-heading {
+    background-color: #fff;
+}
+
+#accordion .panel-default > .panel-heading a  {
+    color: #404040;
+    text-decoration: none;
+    transition: color ease 0.3s;
+}
+
+#accordion .panel-default > .panel-heading a:hover  {
+    color: #57a3e8;
+    outline: 0;
 }

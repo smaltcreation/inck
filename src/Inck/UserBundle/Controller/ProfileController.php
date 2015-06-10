@@ -29,26 +29,14 @@ class ProfileController extends BaseController
         /** @var ArticleRepository $repository */
         $repository = $em->getRepository('InckArticleBundle:Article');
 
-        $articlesAsDraft = $repository->findByFilters(array(
-            'type'      => 'as_draft',
-            'author'    => $user,
-        ), false);
-
-        $articlesPublished = $repository->findByFilters(array(
-            'type'      => 'published',
-            'author'    => $user,
-        ), false);
-
-        $articlesPosted = $repository->findByFilters(array(
-            'type'      => 'posted',
-            'author'    => $user,
-        ), false);
+        $articles = $repository->findBy(
+            array('author'=> $user),
+            array('updatedAt' => 'DESC')
+        );
 
         return array(
-            'user'              => $user,
-            'articlesAsDraft'   => $articlesAsDraft,
-            'articlesPublished' => $articlesPublished,
-            'articlesPosted'    => $articlesPosted,
+            'user'      => $user,
+            'articles'  => $articles,
         );
     }
 }

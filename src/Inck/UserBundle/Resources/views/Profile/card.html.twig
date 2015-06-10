@@ -3,20 +3,41 @@
 <div class="user-card">
     <div class="well">
         <div class="socials">
-            {% if user.facebook or user.googlePlus or user.twitter or user.linkedin %}
-                <p>
-                    {% if user.facebook %}<a class="btn btn-default btn-xs btn-tooltip btn-circle" title="Page Facebook de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.facebook }}"><i class="fa fa-facebook fa-fw"></i></a>{% endif %}
-                    {% if user.googlePlus %}<a class="btn btn-default btn-xs btn-tooltip btn-circle" title="Page Google+ de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.googlePlus }}"><i class="fa fa-google-plus fa-fw"></i></a>{% endif %}
-                    {% if user.twitter %}<a class="btn btn-default btn-xs btn-tooltip btn-circle" title="Page Twitter de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.twitter }}"><i class="fa fa-twitter fa-fw"></i></a>{% endif %}
-                    {% if user.linkedin %}<a class="btn btn-default btn-xs btn-tooltip btn-circle" title="Page Linkedin de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" data-container="body" data-placement="top" href="{{ user.linkedin }}"><i class="fa fa-linkedin fa-fw"></i></a>{% endif %}
-
-                </p>
-            {% endif %}
+            <p>
+                {# Social networks #}
+                {% if user.twitter %}
+                    <a href="{{ user.twitter }}" class="btn btn-twitter btn-xs">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                {% endif %}
+                {% if user.facebook %}
+                    <a href="{{ user.facebook }}" class="btn btn-facebook btn-xs">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                {% endif %}
+                {% if user.googlePlus %}
+                    <a href="{{ user.googlePlus }}" class="btn btn-google btn-xs">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                {% endif %}
+                {% if user.linkedIn %}
+                    <a href="{{ user.linkedIn }}" class="btn btn-linkedin btn-xs">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                {% endif %}
+            </p>
         </div>
 
-        <p><a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}"><img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/></a></p>
+        <p>
+            <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">
+                <img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/>
+            </a>
+        </p>
 
-        <h2><a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">A propos de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</a></h2>
+        <h2>
+            <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">A propos de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}
+            </a>
+        </h2>
 
         <div class="biography">
             {% if user.biography %}

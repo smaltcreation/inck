@@ -1,4 +1,6 @@
 {% extends "InckUserBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block title %}Mon Profil{% endblock %}
 
 {% block stylesheets %}
@@ -15,18 +17,44 @@
     {% endstylesheets %}
 {% endblock %}
 
+{# Setting variables#}
+{% set name = user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username %}
+{% set gravatar = gravatar(user.email, 70, 'g', 'mm', true) %}
+
 {% block header %}
-    <div class="jumbotron">
+    <div class="jumbotron text-center">
         <div class="container">
-            <h1>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</h1>
+            <h1>
+                <img alt="Avatar de {{ name }}" class="img-circle avatar" src="{{ gravatar }}"/>
+                <span>{{ name }}</span>
+            </h1>
+            <p>
+                {% if user.biography %}
+                    {{ user.biography }}
+                {% else %}
+                    Oops ! Vous n'avez pas encore de biographie. Il serait idéal d'écrire un petit message sur vous-même sauf si vous n'êtes actuellement pas vous-même. <i class="fa fa-beer"></i>
+                {% endif %}
+            </p>
+            <p>
+                {# Actions #}
+                <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-inverse"><i class="fa fa-pencil-square-o"></i> {{ 'profile.page.edit_profile'|trans }}</a>
+                <a href="{{ path('fos_user_change_password') }}" class="btn btn-inverse"><i class="fa fa-lock"></i> {{ 'profile.page.change_password'|trans }}</a>
+            </p>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        {% include "FOSUserBundle:Profile:show_content.html.twig" %}
-        {% include 'InckSubscriptionBundle:Manager:modal.html.twig' %}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            {% include 'InckUserBundle:Profile:show_articles.html.twig' %}
+            {% include 'InckUserBundle:Profile:show_watchlater.html.twig' %}
+            {% include 'InckUserBundle:Profile:show_subscriptions.html.twig' %}
+        </div>
+        <hr>
+        <section id="user-profile-history" class="history">
+            <h2>{{ 'profile.page.personnal_history'|trans }}</h2>
+        </section>
     </div>
 {% endblock content %}
 

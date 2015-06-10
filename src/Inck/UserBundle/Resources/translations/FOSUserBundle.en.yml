@@ -50,6 +50,8 @@ group:
         related_info: related information
         add_user: Add this user
         all_group_users: All the users in the group
+        subscriptions: My subscriptions
+        manage_subscriptions : Manage my subscriptions
 
 # Security
 security:
@@ -105,6 +107,7 @@ profile:
         watch_later: Watch later
         remove_article: If you would like to remove an article, just click on the
         top_right: on the top right of the article
+        personnal_history: My personal history
 
 # Password change
 change_password:
