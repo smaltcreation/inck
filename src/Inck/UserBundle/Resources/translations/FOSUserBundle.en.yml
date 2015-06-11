@@ -243,3 +243,43 @@ validate:
 inck:
     home: Back to home
     signup: Sign up to Inck
+
+#Activity
+user:
+    activity:
+        visibility:
+          0: Hidden
+          1: Public
+          2: Private
+          3: My contacts
+        start:
+            title: New functionality: personal history !
+            content: You'll find all your action's history in there.
+        article:
+            new:
+                title: You've created a new article
+                content: You've created "%article%" at %date%.
+            publish:
+                title: You've published the article :
+                content: You've published "%article%" at %date%.
+            delete:
+                title: You've deleted the article :
+                content: You've deleted "%article%" at %date% permanently.
+        profile:
+            edit:
+                title: Your profil has been modified
+                content: It has been modified at %date%.
+        password:
+            change:
+                title: Your password has been changed
+                content: It has been changed with success at %date%.
+            resetting:
+                title: You've asked for a resetting password
+                content: Password as been modified with success at %date%.
+        subscription:
+            new:
+                title: You've subscribed to :
+                content: You've subscribed to %item% at %date%.
+        vote:
+            title: You've thumbed the article :
+            content: You've thumbed %author%'s article at %date% with

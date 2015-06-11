@@ -1,0 +1,22 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if activities|length > 0 %}
+    {% for activity in activities %}
+        {% set template = 'InckUserBundle:Activity:' ~ activity.type ~ '.html.twig' %}
+        {% include template %}
+    {% endfor %}
+{% else %}
+    <div class="media">
+        <div class="pull-left">
+            {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+            <img src="{{ asset_url|apply_filter('article_featured') }}" class="media-object" alt="Image par défaut"/>
+            {% endimage %}
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">
+                {{ 'user.activity.start.title'|trans }}
+            </h4>
+            {{ 'user.activity.start.content'|trans }}
+        </div>
+    </div>
+{% endif %}

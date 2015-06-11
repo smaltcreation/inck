@@ -4,6 +4,8 @@ namespace Inck\ArticleBundle\Controller;
 
 use Exception;
 use Inck\ArticleBundle\Entity\Vote;
+use Inck\UserBundle\Entity\Activity;
+use Inck\UserBundle\Entity\Activity\Vote\VoteActivity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -48,6 +50,10 @@ class VoteController extends Controller
                 $vote->setSubmittedOn(new \DateTime());
                 $vote->setUp($up);
                 $em->persist($vote);
+
+                // On enregistre une nouvelle activité de l'utilisateur
+                $activity = new VoteActivity($user, $vote);
+                $em->persist($activity);
             }
 
             // L'utilisateur change d'avis
@@ -56,6 +62,8 @@ class VoteController extends Controller
                 $vote->setSubmittedOn(new \DateTime());
                 $vote->setUp($up);
                 $em->persist($vote);
+
+                $activity = $this->getDoctrine()->getRepository('InckUserBundle:Activity\Vote\VoteActivity')->findBy(array('vote' => $vote));
             }
 
             // L'utilisateur annule son vote

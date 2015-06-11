@@ -215,6 +215,13 @@ class User extends BaseUser implements Serializable
 	 */
 	private $subscriptions;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Inck\UserBundle\Entity\Activity", mappedBy="user")
+     */
+    protected $activities;
+
 
     public function __construct()
     {
@@ -346,6 +353,16 @@ class User extends BaseUser implements Serializable
     public function getLastname()
     {
         return $this->lastname;
+    }
+
+    /**
+     * Get fullName
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->firstname && $this->lastname ? $this->firstname.' '.$this->lastname : $this->username;
     }
 
     /**

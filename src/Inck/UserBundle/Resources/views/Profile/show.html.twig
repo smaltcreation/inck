@@ -54,6 +54,7 @@
         <hr>
         <section id="user-profile-history" class="history">
             <h2>{{ 'profile.page.personnal_history'|trans }}</h2>
+            {{ render(controller('InckUserBundle:Activity:list', { 'user': user })) }}
         </section>
     </div>
 {% endblock content %}

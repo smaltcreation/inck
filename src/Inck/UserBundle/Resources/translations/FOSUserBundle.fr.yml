@@ -251,3 +251,43 @@ validate:
 inck:
     home: Retourner à l'accueil
     signup: M'enregistrer sur Inck
+
+#Activity
+user:
+    activity:
+        visibility:
+          0: Caché
+          1: Public
+          2: Privé
+          3: Mes contacts
+        start:
+            title: Nouvelle fonctionalité : l'historique personnel !
+            content: Vous trouverez ici tout l'historique de vos actions et leur visibilité.
+        article:
+            new:
+                title: Vous avez créer un nouvel article
+                content: Vous avez créer "%article%" le %date%.
+            publish:
+                title: Vous avez publié l'article :
+                content: Vous avez publié "%article%" le %date%.
+            delete:
+                title: Vous avez supprimé l'article :
+                content: Vous avez définitivement supprimé "%article%" le %date%.
+        profile:
+            edit:
+                title: Vous avez modifié votre profil
+                content: Vous avez édité votre profil le %date%.
+        password:
+            change:
+                title: Vous avez changé votre mot de passe
+                content: Votre mot de passe à correctement été modifié le %date%.
+            resetting:
+                title: Une demande de réinitialisation de mot de passe a été faite
+                content: Votre mot de passe à correctement été modifié le %date%.
+        subscription:
+            new:
+                title: Vous vous êtes abonné à :
+                content: Vous vous êtes abonné à %item% le %date%.
+        vote:
+            title: Vous avez voté pour l'article :
+            content: Vous avez voté pour l'article de %author% le %date% de façon

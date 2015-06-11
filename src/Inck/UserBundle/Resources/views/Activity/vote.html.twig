@@ -1,0 +1,47 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% set vote = activity.vote %}
+{% set article = vote.article %}
+
+<div class="media">
+    <div class="pull-left">
+        <a href="{{ path('inck_article_article_show', { 'id': article.id, 'slug': article.slug }) }}">
+            {% if article.imageName %}
+                <img src="{{ vich_uploader_asset(article, 'article_image')|apply_filter('article_featured') }}" class="media-object" alt="Image de l'article : {{ article.title }}">
+            {% else %}
+                {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+                <img src="{{ asset_url|apply_filter('article_featured') }}" class="media-object" alt="Image par défaut"/>
+                {% endimage %}
+            {% endif %}
+        </a>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            {% if activity.title is not null %}
+                {{ activity.title }}
+            {% else  %}
+                {{ 'user.activity.vote.title'|trans }}
+                <a class="" href="{{ path('inck_article_article_show', { 'id': article.id, 'slug': article.slug }) }}">{{ article.title }}</a>
+            {% endif %}
+        </h4>
+        <p>
+            {% if activity.content is not null %}
+                {{ activity.content }}
+            {% else  %}
+                {{ 'user.activity.vote.content'|trans({'%author%': article.author.getFullName, '%date%': vote.submittedOn|date('d/m/Y H:i')}) }}
+                {% if vote.up %}
+                    <i class="fa fa-thumbs-up"></i>
+                {% else %}
+                    <i class="fa fa-thumbs-down"></i>
+                {% endif %}
+            {% endif %}
+        </p>
+        <p>
+            <span class="label label-default">
+                <i class="fa fa-eye"></i>
+                {% set trans = 'user.activity.visibility.' ~ activity.visibility %}
+                {{ trans|trans }}
+            </span>
+        </p>
+    </div>
+</div>
