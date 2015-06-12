@@ -12,6 +12,8 @@ use Inck\ArticleBundle\Entity\Tag;
 use Inck\ArticleBundle\Event\ArticleEvent;
 use Inck\ArticleBundle\Form\Type\ArticleFilterType;
 use Inck\ArticleBundle\Form\Type\ArticleType;
+use Inck\UserBundle\Entity\Activity\Article\DeleteArticleActivity;
+use Inck\UserBundle\Entity\Activity\Article\PublishArticleActivity;
 use Inck\UserBundle\Entity\User;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -143,6 +145,10 @@ class ArticleController extends Controller
             {
                 $article->setPostedAt(new \DateTime());
                 $article->setAsDraft(false);
+
+                // On enregistre une nouvelle activité de l'utilisateur
+                $activity = new PublishArticleActivity($this->getUser(), $article);
+                $this->getDoctrine()->getManager()->persist($activity);
             }
 
             // On a cliqué sur le bouton "brouillon"
@@ -427,6 +433,11 @@ class ArticleController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($article);
+
+            // On enregistre une nouvelle activité de l'utilisateur
+            $activity = new DeleteArticleActivity($this->getUser(), $article->getTitle());
+            $em->persist($activity);
+
             $em->flush();
 
             return new JsonResponse(array('message' => 'Votre article a été supprimé avec succès !'));
@@ -631,6 +642,11 @@ class ArticleController extends Controller
             $article->setAsDraft(false);
             $article->setPostedAt(new \DateTime('now'));
             $em->persist($article);
+
+            // On enregistre une nouvelle activité de l'utilisateur
+            $activity = new PublishArticleActivity($this->getUser(), $article);
+            $em->persist($activity);
+
             $em->flush();
 
             return new JsonResponse(array('message' => 'Votre article a été envoyé à la modération avec succès !'));

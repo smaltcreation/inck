@@ -17,11 +17,13 @@ class DeleteArticleActivity extends Activity {
      */
     protected $type = 'article_delete';
 
-    /**
-     * @ORM\OneToOne(targetEntity="Inck\ArticleBundle\Entity\Article")
-     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
-    protected $article;
+    /***
+     * @var string
+     *
+     * @ORM\Column(name="article_title", type="string", length=255, nullable=true)
+     */
+    protected $articleTitle;
+    
 
     /**
      * @param User $user
@@ -29,37 +31,31 @@ class DeleteArticleActivity extends Activity {
      * @param null $title
      * @param null $content
      */
-    function __construct(User $user, Article $article, $title = null, $content = null)
+    function __construct(User $user, $articleTitle, $title = null, $content = null)
     {
         $this->title = $title;
         $this->content = $content;
         $this->createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->visibility = self::VISIBILITY_PRIVATE;
         $this->user = $user;
-        $this->article = $article;
+        $this->articleTitle = $articleTitle;
     }
 
     /**
-     * Set article
-     *
-     * @param \Inck\ArticleBundle\Entity\Article $article
-     *
-     * @return DeleteArticleActivity
+     * @return mixed
      */
-    public function setArticle(\Inck\ArticleBundle\Entity\Article $article = null)
+    public function getArticleTitle()
     {
-        $this->article = $article;
-
-        return $this;
+        return $this->articleTitle;
     }
 
     /**
-     * Get article
-     *
-     * @return \Inck\ArticleBundle\Entity\Article
+     * @param mixed $articleTitle
      */
-    public function getArticle()
+    public function setArticleTitle($articleTitle)
     {
-        return $this->article;
+        $this->articleTitle = $articleTitle;
     }
+
+
 }

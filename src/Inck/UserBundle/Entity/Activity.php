@@ -14,7 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorMap({
     * "default"             = "Inck\UserBundle\Entity\Activity",
     * "article_delete"      = "Inck\UserBundle\Entity\Activity\Article\DeleteArticleActivity",
-    * "article_new"         = "Inck\UserBundle\Entity\Activity\Article\NewArticleActivity",
     * "article_publish"     = "Inck\UserBundle\Entity\Activity\Article\PublishArticleActivity",
     * "password_change"     = "Inck\UserBundle\Entity\Activity\Password\ChangePasswordActivity",
     * "password_resetting"  = "Inck\UserBundle\Entity\Activity\Password\ResettingPasswordActivity",

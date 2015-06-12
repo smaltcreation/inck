@@ -1,0 +1,33 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="media">
+    <div class="pull-left">
+        <a href="{{ path('fos_user_profile_show') }}">
+            <img src="{{ gravatar(user.email, 100, 'g', 'mm', true) }}" class="media-object" alt="Avatar">
+        </a>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            {% if activity.title is not null %}
+                {{ activity.title }}
+            {% else  %}
+                {{ 'user.activity.profile.edit.title'|trans }}
+            {% endif %}
+        </h4>
+        <p>
+            {% if activity.content is not null %}
+                {{ activity.content }}
+            {% else  %}
+                {{ 'user.activity.profile.edit.content'|trans({'%date%': activity.createdAt|date('d/m/Y H:i')}) }}
+                <i class="fa fa-edit"></i>
+            {% endif %}
+        </p>
+        <p>
+            <span class="label label-default">
+                <i class="fa fa-eye"></i>
+                {% set trans = 'user.activity.visibility.' ~ activity.visibility %}
+                {{ trans|trans }}
+            </span>
+        </p>
+    </div>
+</div>

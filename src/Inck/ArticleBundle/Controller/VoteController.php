@@ -62,8 +62,6 @@ class VoteController extends Controller
                 $vote->setSubmittedOn(new \DateTime());
                 $vote->setUp($up);
                 $em->persist($vote);
-
-                $activity = $this->getDoctrine()->getRepository('InckUserBundle:Activity\Vote\VoteActivity')->findBy(array('vote' => $vote));
             }
 
             // L'utilisateur annule son vote
