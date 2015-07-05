@@ -431,11 +431,13 @@ class ArticleController extends Controller
                 throw $this->createNotFoundException("Article inexistant");
             }
 
+            $articleTitle = $article->getTitle();
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($article);
 
             // On enregistre une nouvelle activité de l'utilisateur
-            $activity = new DeleteArticleActivity($this->getUser(), $article->getTitle());
+            $activity = new DeleteArticleActivity($this->getUser(), $articleTitle);
             $em->persist($activity);
 
             $em->flush();

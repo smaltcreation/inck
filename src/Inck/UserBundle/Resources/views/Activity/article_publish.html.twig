@@ -32,11 +32,7 @@
             {% endif %}
         </p>
         <p>
-            <span class="label label-default">
-                <i class="fa fa-eye"></i>
-                {% set trans = 'user.activity.visibility.' ~ activity.visibility %}
-                {{ trans|trans }}
-            </span>
+            {% include "InckUserBundle:Activity:visibility.html.twig" %}
         </p>
     </div>
 </div>

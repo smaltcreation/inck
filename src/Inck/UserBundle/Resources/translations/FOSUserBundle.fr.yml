@@ -113,7 +113,7 @@ profile:
         all_group_users: Tous les utilisateurs du groupe
         subscriptions: Mes abonnements
         manage_subscriptions : Gérer mes abonnements
-        personnal_history: Mon historique personnel
+        personnal_history: Historique de mes vingt dernières activités
 
 # Password change
 change_password:
@@ -256,10 +256,15 @@ inck:
 user:
     activity:
         visibility:
-          0: Caché
-          1: Public
-          2: Privé
-          3: Mes contacts
+            0: Caché
+            1: Public
+            2: Privé
+            3: Mes contacts
+            tooltip:
+                0: N'est pas visible
+                1: Est visible par tout le monde
+                2: N'est visible que par vous
+                3: N'est visible que vos contacts
         start:
             title: Nouvelle fonctionalité : l'historique personnel !
             content: Vous trouverez ici tout l'historique de vos actions et leur visibilité.

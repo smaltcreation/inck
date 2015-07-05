@@ -22,6 +22,7 @@ class ActivityRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('a.user = :user')
             ->setParameter('visibility', Activity::VISIBILITY_HIDDEN)
             ->setParameter('user', $user)
+            ->setMaxResults(20)
             ->orderBy('a.createdAt', 'DESC')
             ->getQuery();
 

@@ -1,0 +1,8 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% set tooltip = 'user.activity.visibility.tooltip.' ~ activity.visibility %}
+<span class="label label-default btn-tooltip" data-toggle="tooltip" data-placement="right" data-container="body" title="{{ tooltip|trans }}">
+    <i class="fa fa-eye"></i>
+    {% set visibility = 'user.activity.visibility.' ~ activity.visibility %}
+    {{ visibility|trans }}
+</span>

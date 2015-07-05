@@ -17,7 +17,7 @@ class DeleteArticleActivity extends Activity {
      */
     protected $type = 'article_delete';
 
-    /***
+    /**
      * @var string
      *
      * @ORM\Column(name="article_title", type="string", length=255, nullable=true)

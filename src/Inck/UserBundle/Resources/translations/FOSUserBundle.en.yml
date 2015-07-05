@@ -107,7 +107,7 @@ profile:
         watch_later: Watch later
         remove_article: If you would like to remove an article, just click on the
         top_right: on the top right of the article
-        personnal_history: My personal history
+        personnal_history: History of my twenty last activities
 
 # Password change
 change_password:
@@ -248,10 +248,15 @@ inck:
 user:
     activity:
         visibility:
-          0: Hidden
-          1: Public
-          2: Private
-          3: My contacts
+            0: Hidden
+            1: Public
+            2: Private
+            3: My contacts
+            tooltip:
+                0: Is not visible
+                1: Is visible for everybody
+                2: Is visible just for you
+                3: Is visible just for your friends
         start:
             title: New functionality: personal history !
             content: You'll find all your action's history in there.
