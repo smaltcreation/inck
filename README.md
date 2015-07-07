@@ -7,7 +7,7 @@ Allant de l'informatique jusqu'à la poésie en passant par la géopolitique et 
 contribuant à la diversité des pensées et au partage de la connaissance. Lire, s'instruire, écrire, enseigner, divertir.
 Ici tout est possible !
 
-Si vous souhaitez contribué, n'hésitez pas à lire le wiki pour savoir comment démarrer.
+Si vous souhaitez contribuer, n'hésitez pas à lire le wiki pour savoir comment démarrer.
 
 #####Free and cultural expression.#####
 
