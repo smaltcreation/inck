@@ -43,7 +43,7 @@ class ArticleFilterType extends AbstractType
             ->add('order', 'choice', [
                 'label'         => 'Trier par',
                 'required'      => false,
-                'empty_value'   => false,
+                'placeholder'   => false,
                 'choices'       => [
                     'date'  => 'Date de publication',
                     'vote'  => 'Popularité',

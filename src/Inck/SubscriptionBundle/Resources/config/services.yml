@@ -1,7 +1,7 @@
 services:
     subscription.twig_extension:
         class: Inck\SubscriptionBundle\Twig\SubscriptionExtension
-        arguments: [@security.context, @doctrine.orm.entity_manager, %inck_subscription.aliases%]
+        arguments: [@security.authorization_checker, @security.token_storage, @doctrine.orm.entity_manager, %inck_subscription.aliases%]
         tags:
             - { name: twig.extension }
     subscription.handler:

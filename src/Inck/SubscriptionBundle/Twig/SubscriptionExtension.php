@@ -4,16 +4,22 @@ namespace Inck\SubscriptionBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
 use Inck\SubscriptionBundle\Traits\SubscriptionTrait;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class SubscriptionExtension extends \Twig_Extension
 {
     use SubscriptionTrait;
 
     /**
-     * @var SecurityContext $securityContext
+     * @var AuthorizationCheckerInterface $authorizationChecker
      */
-    private $securityContext;
+    private $authorizationChecker;
+
+    /**
+     * @var TokenStorageInterface $tokenStorage
+     */
+    private $tokenStorage;
 
     /**
      * @var EntityManager $em
@@ -26,15 +32,16 @@ class SubscriptionExtension extends \Twig_Extension
     private $environment;
 
     /**
-     * @param SecurityContext $securityContext
+     * @param AuthorizationCheckerInterface $authorizationChecker
      * @param EntityManager $em
      * @param array $parameters
      */
-    public function __construct(SecurityContext $securityContext, EntityManager $em, $parameters)
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, EntityManager $em, $parameters)
     {
-        $this->securityContext  = $securityContext;
-        $this->em               = $em;
-        $this->parameters       = $parameters;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->tokenStorage         = $tokenStorage;
+        $this->em                   = $em;
+        $this->parameters           = $parameters;
     }
 
     /**
@@ -77,9 +84,9 @@ class SubscriptionExtension extends \Twig_Extension
     {
         $subscribed = false;
 
-        if($this->securityContext->isGranted('ROLE_USER'))
+        if($this->authorizationChecker->isGranted('ROLE_USER'))
         {
-            $user   = $this->securityContext->getToken()->getUser();
+            $user   = $this->tokenStorage->getToken()->getUser();
             $class  = $this->aliasToClass($alias, true);
 
             $subscribed = $this
