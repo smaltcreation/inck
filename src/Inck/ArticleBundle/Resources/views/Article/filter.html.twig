@@ -30,14 +30,20 @@
                                     <div class="col-md-7">
                                         <h4>
                                             <strong>
+                                                {% if article.anonymous %}
+                                                    Anonymous
+                                                {% else %}
                                                 <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">
                                                     {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}
                                                 </a>
+                                                {% endif %}
                                             </strong>
                                         </h4>
                                         <div class="biography">
-                                            {% if user.biography %}
-                                                <p>{{ user.biography|slice(0, 197) }}{% if user.biography|length > 197 %}...{% endif %}</p>
+                                            {% if article.anonymous %}
+                                                Cet article a été publié anonymement, vous ne pouvez donc pas voir la biographie de l'auteur. Pour compenser cela, voici un cookie.
+                                            {% elseif user.biography %}
+                                                    <p>{{ user.biography|slice(0, 197) }}{% if user.biography|length > 197 %}...{% endif %}</p>
                                             {% else %}
                                                 <p>
                                                     <span class="no-biography">Cet utilisateur n'a pas encore complété son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie :</span><br>
@@ -49,6 +55,7 @@
                                 </div>
                                 <hr>
                             </div>
+                            {% if article.anonymous == false %}
                             <p class="text-right">
                                 {% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id ~ '/' ~ article.slug %}
                                 <a class="btn btn-default btn-xs btn-tooltip" title="Partager sur Facebook" data-container="body" data-placement="top" href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
@@ -64,6 +71,7 @@
                                     <i class="fa fa-linkedin fa-fw"></i>
                                 </a>
                             </p>
+                            {% endif %}
                         </aside>
                     </div>
                 </div>

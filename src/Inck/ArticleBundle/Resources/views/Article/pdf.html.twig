@@ -30,9 +30,13 @@
         <div class="about">
             <p>
                 {{ 'article.pdf.writen_by'|trans }}
+                {% if article.anonymous == false %}
                 <a href="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ path('fos_user_profile_preview', { 'username': article.author.username }) }}">
                     {{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}
                 </a>
+                {% else %}
+                    Anonymous
+                {% endif %}
                 –
                 {{ 'article.pdf.published'|trans }} {{ article.publishedAt|date('d/m/Y à H:i') }}
             </p>
@@ -46,9 +50,3 @@
 {% endblock %}
 </body>
 </html>
-
-
-
-
-
-

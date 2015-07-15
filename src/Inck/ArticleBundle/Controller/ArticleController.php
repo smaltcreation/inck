@@ -136,7 +136,6 @@ class ArticleController extends Controller
             $article->setPublished(false);
             $article->setAuthor($this->getUser());
             $article->setUpdatedAt(new \DateTime());
-
             // On a cliqué sur le bouton "publier"
             /** @var SubmitButton $publish */
             $publish = $form->get('actions')->get('publish');

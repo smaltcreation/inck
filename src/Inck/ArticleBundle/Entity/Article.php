@@ -201,10 +201,13 @@ class Article
      * @ORM\JoinColumn(name="stat_id", referencedColumnName="id")
      */
     private $articleStat;
-
     /**
-     * Constructor
+     * @var boolean anonymous
+     * @ORM\Column(type="boolean")
      */
+    private $anonymous = false;
+
+
     public function __construct()
     {
         $this->official     = false;
@@ -213,6 +216,7 @@ class Article
         $this->votes        = new ArrayCollection();
         $this->reports      = new ArrayCollection();
         $this->articleStat  = new ArticleStat();
+        $this->anonymous;
     }
 
     /**
@@ -828,5 +832,21 @@ class Article
     public function getArticleStat()
     {
         return $this->articleStat;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isAnonymous()
+    {
+        return $this->anonymous;
+    }
+
+    /**
+     * @param boolean $anonymous
+     */
+    public function setAnonymous($anonymous)
+    {
+        $this->anonymous = $anonymous;
     }
 }

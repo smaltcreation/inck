@@ -64,7 +64,11 @@
                         <div class="article-title">
                             <h1 itemprop="name">{{ article.title }}</h1>
                         </div>
-                        <p class="about">{{ 'article.show.writen_by'|trans }} <a class="btn-link" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash; {{ 'article.show.published_the'|trans }} <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time></p>
+                        {% if article.anonymous %}
+                            <p class="about"><b>Anonymous</b> &ndash; {{ 'article.show.published_the'|trans }} <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time></p>
+                        {% else %}
+                            <p class="about">{{ 'article.show.writen_by'|trans }} <a class="btn-link" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash; {{ 'article.show.published_the'|trans }} <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time></p>
+                        {% endif %}
                     </div>
                 </div>
             </header>

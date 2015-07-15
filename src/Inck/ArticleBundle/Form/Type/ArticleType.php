@@ -22,6 +22,10 @@ class ArticleType extends AbstractType
                     'placeholder'   => 'Ajoutez un titre clair et succinct',
                 ],
             ])
+            ->add('anonymous', 'checkbox',
+                array('label' => 'Publier Anonymement?',
+                    'required' => false,
+                ))
             ->add('summary', 'textarea', [
                 'label'         => 'Résumé',
                 'attr'          => [
