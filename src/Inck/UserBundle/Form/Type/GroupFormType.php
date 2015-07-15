@@ -13,7 +13,7 @@ namespace Inck\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\UserBundle\Form\Type\GroupFormType as BaseType;
 
 class GroupFormType extends BaseType
@@ -91,7 +91,7 @@ class GroupFormType extends BaseType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Inck\UserBundle\Entity\Group',

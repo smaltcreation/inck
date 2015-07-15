@@ -4,7 +4,7 @@ namespace Inck\ArticleBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleFilterType extends AbstractType
 {
@@ -16,12 +16,12 @@ class ArticleFilterType extends AbstractType
     {
         $builder
             ->add('categories', 'entity', [
-                'label'     => 'Catégories',
-                'class'     => 'InckArticleBundle:Category',
-                'property'  => 'name',
-                'multiple'  => 'multiple',
-                'required'  => false,
-                'attr'      => [
+                'label'         => 'Catégories',
+                'class'         => 'InckArticleBundle:Category',
+                'choice_label'  => 'name',
+                'multiple'      => 'multiple',
+                'required'      => false,
+                'attr'          => [
                     'placeholder'   => 'Filtrer par catégories',
                 ],
                 'translation_domain' => 'ArticleBundle',
@@ -77,9 +77,9 @@ class ArticleFilterType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'categories'    => array(),

@@ -5,7 +5,7 @@ namespace Inck\ArticleBundle\Form\Type;
 use Inck\ArticleBundle\Form\DataTransformer\TagsToNamesTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleType extends AbstractType
 {
@@ -42,11 +42,11 @@ class ArticleType extends AbstractType
                 'label'     => false,
             ])
             ->add('categories', 'afe_select2_entity', [
-                'label'     => 'Catégories',
-                'class'     => 'InckArticleBundle:Category',
-                'property'  => 'name',
-                'multiple'  => 'multiple',
-                'configs'      => [
+                'label'         => 'Catégories',
+                'class'         => 'InckArticleBundle:Category',
+                'choice_label'  => 'name',
+                'multiple'      => 'multiple',
+                'configs'       => [
                     'placeholder'           => 'Sélectionnez 1 à 3 catégories',
                     'maximumSelectionSize'  => 3,
                     'width'                 => 'container',
@@ -106,9 +106,9 @@ class ArticleType extends AbstractType
     }
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Inck\ArticleBundle\Entity\Article'
