@@ -37,7 +37,7 @@ class GroupController extends BaseController
     public function showAction($groupName)
     {
         $group = $this->findGroupBy('name', $groupName);
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
         if($user->hasGroup($group->getName()))
             return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:show.html.twig', array('group' => $group));
@@ -52,7 +52,7 @@ class GroupController extends BaseController
     public function newAction(Request $request)
     {
         /** @var $user User */
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
         /** @var $groupManager \FOS\UserBundle\Model\GroupManagerInterface */
         $groupManager = $this->container->get('fos_user.group_manager');
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
@@ -106,11 +106,11 @@ class GroupController extends BaseController
     public function editAction(Request $request, $groupName)
     {
         /** @var $user User */
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $group = $this->findGroupBy('name', $groupName);
+
         if(!$user && !$user->hasRole('ROLE_SUPER_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_SUPER_ADMIN'))
             throw new AccessDeniedException("Vous n'avez pas le droit d'éditer ce groupe");
-
-        $group = $this->findGroupBy('name', $groupName);
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
@@ -169,7 +169,7 @@ class GroupController extends BaseController
             throw new NotFoundHttpException('Le groupe est inexistant');
 
         /** @var $user User */
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
         if(!$user->hasRole('ROLE_SUPER_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_SUPER_ADMIN'))
             throw new AccessDeniedException("Vous n'avez pas le droit de supprimer ce groupe");
 
@@ -189,7 +189,7 @@ class GroupController extends BaseController
             throw new NotFoundHttpException('Le groupe est inexistant');
 
         /** @var $user User */
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
         if(!$user && !$user->hasRole('ROLE_SUPER_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_ADMIN') && !$user->hasRole('ROLE_GROUP_'.$group->getId().'_SUPER_ADMIN'))
             throw new AccessDeniedException("Vous n'avez pas le droit d'accèder à cette page");
 

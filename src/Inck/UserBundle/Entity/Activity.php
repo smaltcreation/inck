@@ -72,7 +72,7 @@ class Activity
     protected $visibility;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Inck\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Inck\UserBundle\Entity\User", inversedBy="activities")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     protected $user;

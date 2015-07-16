@@ -129,7 +129,7 @@ class ArticleController extends Controller
 
         if($form->isValid())
         {
-            if ($article->getOfficial() && false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            if ($article->getOfficial() && false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
                 throw new BadRequestHttpException('On ne peut pas prétendre être admin quand on ne l\'est pas !');
             }
 
@@ -226,7 +226,7 @@ class ArticleController extends Controller
             'total' => 0,
         );
 
-        $vote = ($this->get('security.context')->isGranted('ROLE_USER'))
+        $vote = ($this->get('security.authorization_checker')->isGranted('ROLE_USER'))
             ? $em->getRepository('InckArticleBundle:Vote')->getByArticleAndUser($article, $this->getUser())
             : null;
 
@@ -426,7 +426,7 @@ class ArticleController extends Controller
     public function deleteAction(Article $article)
     {
         try {
-            if (!$this->get('security.context')->isGranted('ROLE_ADMIN') && ($this->getUser() !== $article->getAuthor() || !$article->getAsDraft())) {
+            if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') && ($this->getUser() !== $article->getAuthor() || !$article->getAsDraft())) {
                 throw $this->createNotFoundException("Article inexistant");
             }
 
@@ -455,7 +455,7 @@ class ArticleController extends Controller
      */
     public function buttonWatchLaterAction(Article $article)
     {
-        $watchLater = ($this->get('security.context')->isGranted('ROLE_USER'))
+        $watchLater = ($this->get('security.authorization_checker')->isGranted('ROLE_USER'))
             ? $this->getUser()->getArticlesWatchLater()->contains($article)
             : false;
 
@@ -633,7 +633,7 @@ class ArticleController extends Controller
     public function send(Article $article)
     {
         try {
-            if(($this->getUser() !== $article->getAuthor() && !$this->get('security.context')->isGranted('ROLE_ADMIN')) || $article->getAsDraft() === false)
+            if(($this->getUser() !== $article->getAuthor() && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) || $article->getAsDraft() === false)
             {
                 throw $this->createNotFoundException("Cet article ne peut pas être envoyé à la modération !");
             }
