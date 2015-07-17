@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Inck\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -22,6 +23,7 @@ class UserController extends Controller
     {
         /* On récupère l'utilisateur en fonction de l'username unique */
         $em = $this->getDoctrine()->getManager();
+
         $repository = $em->getRepository('InckUserBundle:User');
         $user = $repository->findOneBy(array('username' => $username));
         if (!$user) {
@@ -30,15 +32,22 @@ class UserController extends Controller
 
         /* S'il existe, on récupère ses articles publiés */
         $repository = $em->getRepository('InckArticleBundle:Article');
-        $articles = $repository->findByFilters(array(
+        $articles = $repository->findByFilters(
+            array(
                 'type'      => 'published',
                 'author'    => $user,
-            ));
+            )
+        );
+
+        /* On compte le nombre de followers */
+        $repository = $em->getRepository('InckSubscriptionBundle:UserSubscription');
+        $nbFollowers = $repository->countByUser($user);
 
         /* On retourne la preview du profile de l'utilisateur */
         return array(
             'user' => $user,
             'articles' => $articles,
+            'nbFollowers' => $nbFollowers
         );
     }
 

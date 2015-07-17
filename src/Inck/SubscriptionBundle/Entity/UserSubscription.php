@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @ORM\Table("user_subscription")
  * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="\Inck\SubscriptionBundle\Entity\UserSubscriptionRepository")
  */
 class UserSubscription extends Subscription implements SubscriptionInterface
 {
