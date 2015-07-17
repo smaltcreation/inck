@@ -17,13 +17,11 @@ class VoteController extends Controller
      */
     public function save($id, $up)
     {
-        try
-        {
+        try {
             // Utilisateur
             $user = $this->getUser();
 
-            if(!$user)
-            {
+            if(!$user) {
                 throw new Exception("Vous devez être connecté pour voter.");
             }
 
@@ -32,8 +30,7 @@ class VoteController extends Controller
             // Récupération de l'article
             $article = $em->getRepository('InckArticleBundle:Article')->find($id);
 
-            if(!$article)
-            {
+            if(!$article) {
                 throw new Exception("Article inexistant.");
             }
 
@@ -41,9 +38,9 @@ class VoteController extends Controller
             /** @var $vote Vote|null */
             $vote = $em->getRepository('InckArticleBundle:Vote')->getByArticleAndUser($article, $user);
 
-            // Il s'agit d'un nouveau vote
-            if(!$vote)
-            {
+
+            if(!$vote) {
+                // Il s'agit d'un nouveau vote
                 $vote = new Vote();
                 $vote->setArticle($article);
                 $vote->setUser($user);
@@ -54,19 +51,14 @@ class VoteController extends Controller
                 // On enregistre une nouvelle activité de l'utilisateur
                 $activity = new VoteActivity($user, $vote);
                 $em->persist($activity);
-            }
-
-            // L'utilisateur change d'avis
-            else if($vote->getUp() != $up)
-            {
+            } else if($vote->getUp() != $up) {
+                // L'utilisateur change d'avis
                 $vote->setSubmittedOn(new \DateTime());
                 $vote->setUp($up);
                 $em->persist($vote);
             }
-
-            // L'utilisateur annule son vote
-            else
-            {
+            else {
+                // L'utilisateur annule son vote
                 $em->remove($vote);
             }
 
@@ -74,10 +66,7 @@ class VoteController extends Controller
             $em->flush();
 
             return new JsonResponse(null, 204);
-        }
-
-        catch(Exception $e)
-        {
+        } catch(Exception $e) {
             return new JsonResponse(array(
                 'modal'   => $this->renderView('InckArticleBundle:Vote:error.html.twig', array(
                     'message'   => $e->getMessage(),

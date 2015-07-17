@@ -39,4 +39,42 @@ class ProfileController extends BaseController
             'articles'  => $articles,
         );
     }
+
+    /**
+     * @Route("/profile//preview/{username}", name="fos_user_profile_preview", options={"sitemap" = true})
+     * @Template("InckUserBundle:Profile:preview.html.twig")
+     * @param string $username
+     * @return array
+     */
+    public function previewAction($username)
+    {
+        /* On récupère l'utilisateur en fonction de l'username unique */
+        $em = $this->getDoctrine()->getManager();
+
+        $repository = $em->getRepository('InckUserBundle:User');
+        $user = $repository->findOneBy(array('username' => $username));
+        if (!$user) {
+            throw $this->createNotFoundException('Utilisateur inexistant.');
+        }
+
+        /* S'il existe, on récupère ses articles publiés */
+        $repository = $em->getRepository('InckArticleBundle:Article');
+        $articles = $repository->findByFilters(
+            array(
+                'type'      => 'published',
+                'author'    => $user,
+            )
+        );
+
+        /* On compte le nombre de followers */
+        $repository = $em->getRepository('InckSubscriptionBundle:UserSubscription');
+        $nbFollowers = $repository->countByUser($user);
+
+        /* On retourne la preview du profile de l'utilisateur */
+        return array(
+            'user' => $user,
+            'articles' => $articles,
+            'nbFollowers' => $nbFollowers
+        );
+    }
 }

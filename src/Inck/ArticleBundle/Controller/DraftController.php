@@ -29,8 +29,7 @@ class DraftController extends Controller
         $form = $this->createForm(new ArticleType(), $article);
         $form->handleRequest($request);
 
-        if(!$form->isValid())
-        {
+        if(!$form->isValid()) {
             return new JsonResponse(array(
                 'valid' => false,
             ));
@@ -65,8 +64,7 @@ class DraftController extends Controller
         $form = $this->createForm(new ArticleType(), $article);
         $form->handleRequest($request);
 
-        if($form->isValid())
-        {
+        if($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();

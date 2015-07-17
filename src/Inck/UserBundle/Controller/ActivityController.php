@@ -2,13 +2,10 @@
 
 namespace Inck\UserBundle\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Inck\UserBundle\Entity\Activity;
 use Inck\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ActivityController extends Controller

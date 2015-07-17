@@ -22,8 +22,7 @@ class TagController extends Controller
         // Création du tableau utilisé par Select2
         $results = array();
 
-        foreach($tags as $tag)
-        {
+        foreach($tags as $tag) {
             $results[] = array(
                 'id'    => $tag[$mode],
                 'text'  => $tag['name'],
@@ -42,8 +41,7 @@ class TagController extends Controller
      */
     public function showAction($id, $slug)
     {
-        try
-        {
+        try {
             $em = $this->getDoctrine()->getManager();
             /** @var Tag $tag */
             $tag = $em->getRepository('InckArticleBundle:Tag')->findOneBy(array('id' => $id, 'slug' => $slug));
@@ -57,10 +55,7 @@ class TagController extends Controller
                 'tag' => $tag,
                 'articlesLength' => $articlesLength
             );
-        }
-
-        catch(\Exception $e)
-        {
+        } catch(\Exception $e) {
             $this->get('session')->getFlashBag()->add(
                 'danger',
                 $e->getMessage()

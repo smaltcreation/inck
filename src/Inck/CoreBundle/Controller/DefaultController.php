@@ -28,9 +28,8 @@ class DefaultController extends Controller
 
         $request = $this->get('request');
 
-        if ($request->getMethod() == 'POST')
-        {
-            $form->bind($request);
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest();
 
             $data = $form->getData();
 

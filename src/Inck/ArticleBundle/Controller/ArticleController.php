@@ -36,7 +36,55 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/{id}/{slug}/pdf", name="inck_article_article_pdf")
+     * @Route("/show/{id}/{slug}", name="inck_article_article_show", requirements={"id" = "\d+"})
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
+     * @Template()
+     * @param Article $article
+     * @return array
+     */
+    public function showAction(Article $article)
+    {
+        /**
+         * Exception
+         * Si l'article est en brouillon
+         * && que l'utilisateur actuel n'est pas l'auteur
+         * && qu'il n'est pas admin
+         */
+        if($article->getAsDraft() && $this->getUser() !== $article->getAuthor() && !$this->get('security.authorization_checker')->isGranted("ROLE_ADMIN")) {
+            throw $this->createNotFoundException("Article inexistant");
+        }
+
+        return array(
+            'article' => $article,
+        );
+    }
+
+    /**
+     * @Route("/showmodal/{id}/{slug}", name="inck_article_article_show_modal", requirements={"id" = "\d+"})
+     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
+     * @Template("InckArticleBundle:Article:show_modal.html.twig")
+     * @param Article $article
+     * @return array
+     */
+    public function showModalAction(Article $article)
+    {
+        /**
+         * Exception
+         * Si l'article est en brouillon
+         * && que l'utilisateur actuel n'est pas l'auteur
+         * && qu'il n'est pas admin
+         */
+        if($article->getAsDraft() && $this->getUser() !== $article->getAuthor() && !$this->get('security.authorization_checker')->isGranted("ROLE_ADMIN")) {
+            throw $this->createNotFoundException("Article inexistant");
+        }
+
+        return array(
+            'article' => $article,
+        );
+    }
+
+    /**
+     * @Route("/pdf/{id}/{slug}", name="inck_article_article_pdf")
      * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Template()
      * @param Article $article
@@ -271,7 +319,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/{slug}/watch-later", name="inck_article_article_watchLater", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @Route("/watch-later/{id}/{slug}", name="inck_article_article_watchLater", requirements={"id" = "\d+"}, options={"expose"=true})
      * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @param Article $article
      * @return JsonResponse
@@ -374,7 +422,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="inck_article_article_edit", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @Route("/edit/{id}", name="inck_article_article_edit", requirements={"id" = "\d+"}, options={"expose"=true})
      * @ParamConverter("article", options={"mapping": {"id": "id"}})
      * @Secure(roles="ROLE_USER")
      * @param Request $request
@@ -488,7 +536,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/{slug}/publish", name="inck_article_article_publish", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @Route("/publish/{id}/{slug}", name="inck_article_article_publish", requirements={"id" = "\d+"}, options={"expose"=true})
      * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Secure(roles="ROLE_USER")
      * @param Article $article
@@ -540,7 +588,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/{slug}/delete", name="inck_article_article_delete", requirements={"id" = "\d+"}, options={"expose"=true})
+     * @Route("/delete/{id}/{slug}", name="inck_article_article_delete", requirements={"id" = "\d+"}, options={"expose"=true})
      * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
      * @Secure(roles="ROLE_USER")
      * @param Article $article
@@ -577,50 +625,16 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/{slug}", name="inck_article_article_show", requirements={"id" = "\d+"})
-     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
-     * @Template()
-     * @param Article $article
+     * @Route("/{id}/{slug}", name="inck_article_article_showforward", requirements={"id" = "\d+"})
+     * @param $id
+     * @param $slug
      * @return array
      */
-    public function showAction(Article $article)
+    public function showForward($id, $slug)
     {
-        /**
-         * Exception
-         * Si l'article est en brouillon
-         * && que l'utilisateur actuel n'est pas l'auteur
-         * && qu'il n'est pas admin
-         */
-        if($article->getAsDraft() && $this->getUser() !== $article->getAuthor() && !$this->get('security.authorization_checker')->isGranted("ROLE_ADMIN")) {
-            throw $this->createNotFoundException("Article inexistant");
-        }
-
-        return array(
-            'article' => $article,
-        );
-    }
-
-    /**
-     * @Route("/{id}/{slug}/modal", name="inck_article_article_show_modal", requirements={"id" = "\d+"})
-     * @ParamConverter("article", options={"mapping": {"id": "id", "slug": "slug"}})
-     * @Template("InckArticleBundle:Article:show_modal.html.twig")
-     * @param Article $article
-     * @return array
-     */
-    public function showModalAction(Article $article)
-    {
-        /**
-         * Exception
-         * Si l'article est en brouillon
-         * && que l'utilisateur actuel n'est pas l'auteur
-         * && qu'il n'est pas admin
-         */
-        if($article->getAsDraft() && $this->getUser() !== $article->getAuthor() && !$this->get('security.authorization_checker')->isGranted("ROLE_ADMIN")) {
-            throw $this->createNotFoundException("Article inexistant");
-        }
-
-        return array(
-            'article' => $article,
-        );
+        return $this->redirect($this->generateUrl('inck_article_article_show', array(
+            'id'    => $id,
+            'slug'  => $slug,
+        )), 301);
     }
 }
