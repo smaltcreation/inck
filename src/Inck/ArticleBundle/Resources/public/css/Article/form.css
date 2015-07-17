@@ -12,30 +12,21 @@
 }
 
 .single-upload-preview {
-    padding-top: 33px !important;
-}
-
-.single-upload-preview {
     border: none;
+    padding: 0;
+    text-align: left;
 }
 
-.inck_articlebundle_article_imageFile_preview_image {
-    text-align: center;
+.single-upload-preview [class*="_preview_image"] {
+    text-align: left;
 }
 
 .inck_articlebundle_article_imageFile_preview_image img {
     display: block;
-    margin: 0 auto;
+    margin: 0;
     max-width: 100%;
-    height: auto;
 }
 
 span.glyphicon {
     margin-right: 5px;
-}
-
-/* Summernote */
-.note-editable img,
-.note-editable iframe {
-    max-width: 100%;
 }

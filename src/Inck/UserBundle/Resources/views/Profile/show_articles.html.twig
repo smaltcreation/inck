@@ -38,25 +38,20 @@
 
                         {# Setting variables #}
                         {% if article.asDraft %}
-                            {% set status = 'warning' %}
+                            {% set status = 'primary' %}
                             {% set icon = 'file-text-o' %}
                             {% set tooltip = 'Brouillon' %}
-                            {% set date = article.createdAt|date('d/m/Y à H:i') %}
+                            {% set date = article.updatedAt|date('d/m/Y à H:i') %}
                         {% elseif article.published %}
                             {% set status = 'success' %}
                             {% set icon = 'check' %}
                             {% set tooltip = 'Publié' %}
                             {% set date = article.publishedAt|date('d/m/Y à H:i') %}
-                        {% elseif article.approved == false and article.approved != null %}
+                        {% elseif article.locked %}
                             {% set status = 'danger' %}
                             {% set icon = 'times' %}
-                            {% set tooltip = 'Désapprouvé' %}
-                            {% set date = article.postedAt|date('d/m/Y à H:i') %}
-                        {% else %}
-                            {% set status = 'primary' %}
-                            {% set icon = 'refresh fa-spin' %}
-                            {% set tooltip = 'En attente' %}
-                            {% set date = article.postedAt|date('d/m/Y à H:i') %}
+                            {% set tooltip = 'Fermé' %}
+                            {% set date = article.published|date('d/m/Y à H:i') %}
                         {% endif %}
 
                         <tr>
@@ -76,12 +71,12 @@
                                     <a href="{{ path('inck_article_article_show_modal', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-primary btn-xs btn-tooltip btn-modal" data-placement="top" title="Aperçu" data-container="body" data-toggle="tootltip">
                                         <i class="fa fa-search"></i>
                                     </a>
+                                    <a href="{{ path('inck_article_article_edit', { 'id': article.id }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
 
                                     {% if article.asDraft %}
-                                        <a href="{{ path('inck_article_article_edit', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a data-article-id="{{ article.id }}" data-article-slug="{{ article.slug }}" class="btn btn-success btn-xs btn-tooltip btn-article-send" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body">
+                                        <a data-article-id="{{ article.id }}" data-article-slug="{{ article.slug }}" class="btn btn-success btn-xs btn-tooltip btn-article-publish" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body">
                                             <i class="fa fa-send"></i>
                                         </a>
                                         <a data-article-id="{{ article.id }}" data-article-slug="{{ article.slug }}" class="btn btn-danger btn-xs btn-tooltip btn-article-delete" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body">

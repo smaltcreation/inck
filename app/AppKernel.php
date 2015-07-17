@@ -42,7 +42,6 @@ class AppKernel extends Kernel
             new Inck\SubscriptionBundle\InckSubscriptionBundle(),
             new Inck\BidBundle\InckBidBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new Inck\StatBundle\InckStatBundle(),
             new Inck\NotificationBundle\InckNotificationBundle(),
         );
 

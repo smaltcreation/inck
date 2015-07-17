@@ -72,7 +72,7 @@ class AdminController extends Controller
                 return [
                     'entity'    => 'InckArticleBundle:Article',
                     'view'      => 'articles',
-                    'orderBy'   => 'postedAt',
+                    'orderBy'   => 'updatedAt',
                     'limit'     => 5,
                 ];
 

@@ -42,35 +42,42 @@
 {% block content %}
     <div class="container">
         <article class="new">
-            <p>
-                <button class="btn btn-tooltip btn-inverse toggle-article-header" data-placement="right" data-toggle="tooltip" data-container="body" title="Réduire les informations annexes">
-                    <i class="fa fa-fw fa-chevron-up"></i>
-                    En-tête de l'article
-                </button>
-            </p>
-
             <form {{ form_enctype(form) }} method="POST" novalidate="novalidate" data-article-id="{{ articleId }}" data-article-slug="{{ articleSlug }}" id="inck-article-article-form">
                 {{ form_errors(form) }}
-                <div id="article-header">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="alert alert-default">
-                                {{ form_row(form.title) }}
-                                {{ form_row(form.summary) }}
-                                {{ form_row(form.language) }}
-                                {{ form_row(form.anonymous) }}
-                            </div>
-                            <div class="alert alert-default">
-                                {{ form_row(form.categories) }}
-                                {{ form_row(form.tags) }}
-                                {% if app.user and is_granted('ROLE_ADMIN') %}
-                                    {{ form_row(form.official) }}
-                                {% endif %}
-                            </div>
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading">
+                            <h4 class="panel-title">
+                                <a class="btn-tooltip" role="button" data-toggle="collapse" data-parent="#accordion" href="#article-header" aria-expanded="true" aria-controls="article-header" data-placement="right" data-container="body" title="Informations annexes">
+                                    <i class="fa fa-caret-square-o-down"></i>
+                                    En-tête de l'article
+                                </a>
+                            </h4>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="alert alert-default">
-                                {{ form_row(form.imageFile) }}
+                        <div id="article-header" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8">
+                                        {{ form_row(form.title) }}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                {{ form_row(form.categories) }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ form_row(form.language) }}
+                                            </div>
+                                        </div>
+                                        {{ form_row(form.tags) }}
+                                        {{ form_row(form.summary) }}
+                                        {% if app.user and is_granted('ROLE_ADMIN') %}
+                                            {{ form_row(form.official) }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        {{ form_row(form.imageFile) }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -86,6 +93,7 @@
 
                 <section id="article-new-actions">
                     {{ form_row(form.actions) }}
+                    {{ form_row(form.anonymous) }}
                 </section>
 
                 <div class="hidden">
@@ -93,44 +101,6 @@
                 </div>
             </form>
         </article>
-    </div>
-
-    <div id="article-modal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title">Publier l'article</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        Vous êtes sur le point de publier l'article. Cette action est irréversible :
-                        une fois l'article publié, vous ne serez plus en mesure de le modifier.
-                    </p>
-                    <p>
-                        Si vous n'avez pas terminé de rédiger votre article, vous pouvez l'enregistrer dans vos brouillons :
-                        vous pourrez alors le retrouver dans votre profil et y apporter de nouvelles modifications.
-                    </p>
-                    <p>
-                        Êtes-vous vraiment sûr de vouloir publier cet article ?
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button id="article-modal-publish" class="btn btn-success" type="button">
-                        <i class="fa fa-fw fa-send"></i>
-                        Oui, publier l'article
-                    </button>
-
-                    <button id="article-modal-draft" class="btn btn-default" type="button">
-                        <i class="fa fa-fw fa-file-text"></i>
-                        Non, enregistrer comme brouillon
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 {% endblock %}
 

@@ -1,35 +1,24 @@
 $(document).ready(function(){
-    $('.btn-article-send').click(function() {
+    $('.btn-article-publish').click(function() {
         var btn = $(this);
         swal({
             title: "Êtes-vous sûr ?",
-            text: "Vous ne pourrez pas remodifier votre article, il sera envoyé à la modération !",
+            text: "Votre article va être publié.",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d3e397",
-            confirmButtonText: "Oui, envoyer mon article !",
+            confirmButtonText: "Oui, publier mon article !",
             cancelButtonText: "Annuler",
             closeOnConfirm: false,
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $.ajax({
-                    url: Routing.generate('inck_article_article_send', {
-                        id: btn.attr('data-article-id'),
-                        slug: btn.attr('data-article-slug')
-                    }),
-                    dataType: 'json'
-                }).done(function(data) {
-                    swal("Envoyé !", data.message, "success");
-                    btn.closest('tr').hide(400, function() {
-                        $(this).remove();
-                    })
-                }).fail(function(jqXHR) {
-                    var data = $.parseJSON(jqXHR.responseText);
-                    swal("Erreur !", data.message, "error");
+                location.href = Routing.generate('inck_article_article_publish', {
+                    id: btn.attr('data-article-id'),
+                    slug: btn.attr('data-article-slug')
                 })
             } else {
-                swal("Annulé", "Votre article n'a pas été envoyé !", "error");
+                swal("Annulé", "Votre article n'a pas été publié !", "error");
             }
         });
     });

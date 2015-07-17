@@ -1,19 +1,4 @@
 $(document).ready(function() {
-    // En-tête de l'article
-    $('.toggle-article-header').click(function(){
-        $('#article-header').stop().slideToggle('slow');
-        var icon = $(this).find('i:first');
-
-        if(icon.hasClass('fa-chevron-up')) {
-            icon.removeClass('fa-chevron-up');
-            icon.addClass('fa-chevron-down');
-        }
-        else {
-            icon.removeClass('fa-chevron-down');
-            icon.addClass('fa-chevron-up');
-        }
-    });
-
     // Champs du formulaire
     var fields = {
         tags: $('#inck_articlebundle_article_tags'),
@@ -69,22 +54,27 @@ $(document).ready(function() {
     });
 
     // Publier l'article
-    var confirmed = false;
+    $('#inck_articlebundle_article_actions_publish').click(function(e) {
+        console.log('toto');
+        e.preventDefault();
 
-    $('#inck_articlebundle_article_actions_publish').click(function(e){
-        if (!confirmed) {
-            $('#article-modal').modal('show');
-            e.preventDefault();
-            confirmed = true;
-        }
-    });
-
-    $('#article-modal-publish').click(function(){
-        $('#inck_articlebundle_article_actions_publish').click();
-    });
-
-    $('#article-modal-draft').click(function(){
-        $('#inck_articlebundle_article_actions_draft').click();
+        swal({
+            title: "Êtes-vous sûr ?",
+            text: "Votre article va être publié.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d3e397",
+            confirmButtonText: "Oui, publier mon article !",
+            cancelButtonText: "Annuler",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function(isConfirm) {
+            if (isConfirm) {
+                $('#inck-article-article-form').submit();
+            } else {
+                swal("Annulé", "Votre article n'a pas été publié !", "error");
+            }
+        });
     });
 
     // Reset

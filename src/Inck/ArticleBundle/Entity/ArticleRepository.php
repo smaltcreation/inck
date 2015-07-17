@@ -63,33 +63,6 @@ class ArticleRepository extends EntityRepository
                     $orderBy = 'publishedAt';
                     break;
 
-                case 'posted':
-                    $qb
-                        ->where(
-                            $qb
-                                ->expr()
-                                ->isNotNull('a.postedAt')
-                        );
-                    break;
-
-                case 'in_moderation':
-                    $qb
-                        ->where('a.published = :published')
-                        ->setParameter('published', false)
-                        ->andWhere('a.asDraft = :asDraft')
-                        ->setParameter('asDraft', false)
-                        ->andWhere('a.postedAt >= DATE_SUB(CURRENT_TIMESTAMP(), 1, \'DAY\')');
-                    break;
-
-                case 'in_validation':
-                    $qb
-                        ->where('a.approved IS :approved')
-                        ->setParameter('approved', null)
-                        ->andWhere('a.asDraft = :asDraft')
-                        ->setParameter('asDraft', false)
-                        ->andWhere('a.postedAt >= DATE_SUB(CURRENT_TIMESTAMP(), 2, \'DAY\')');
-                    break;
-
                 case 'disapproved':
                     $qb
                         ->where('a.approved = :approved')

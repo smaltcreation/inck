@@ -16,3 +16,26 @@ textarea + span.badge {
 textarea + span.badge:hover {
     opacity: 0.6;
 }
+
+.select2-container.form-control {
+    width: 100% !important;
+}
+
+/* Summernote */
+.note-editor {
+    border: 1px solid #dddddd !important;
+}
+
+.note-editor .note-toolbar {
+    background-color: inherit !important;
+    border-bottom: 1px solid #dddddd !important;
+}
+
+.note-editable img,
+.note-editable iframe {
+    max-width: 100%;
+}
+
+.note-editor .note-editable {
+    background-color: #fff;
+}

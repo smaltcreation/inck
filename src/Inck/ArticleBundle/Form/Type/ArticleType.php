@@ -22,15 +22,15 @@ class ArticleType extends AbstractType
                     'placeholder'   => 'Ajoutez un titre clair et succinct',
                 ],
             ])
-            ->add('anonymous', 'checkbox',
-                array('label' => 'Publier Anonymement?',
-                    'required' => false,
-                ))
+            ->add('anonymous', 'checkbox', [
+                'label'     => 'Publier anonymement',
+                'required'  => false,
+            ])
             ->add('summary', 'textarea', [
                 'label'         => 'Résumé',
                 'attr'          => [
                     'placeholder'   => 'Résumez le contenu de votre article',
-                    'rows'          => 4,
+                    'rows'          => 6,
                     'maxlength'     => 255,
                 ],
             ])
@@ -65,7 +65,7 @@ class ArticleType extends AbstractType
                 'required'      => false,
             ])
             ->add('official', 'checkbox', [
-                'label' => 'Annonce officielle',
+                'label'     => 'Annonce officielle',
                 'required'  => false,
             ])
             ->add('actions', 'form_actions', [
@@ -89,17 +89,7 @@ class ArticleType extends AbstractType
                                 'icon'  => 'file',
                             ],
                         ]
-                    ],
-                    'cancel'      => [
-                        'type'      => 'reset',
-                        'options'   => [
-                            'label' => 'Annuler',
-                            'attr'  => [
-                                'class' => 'btn-default pull-right',
-                                'icon'  => 'trash',
-                            ],
-                        ]
-                    ],
+                    ]
                 ]
             ])
         ;

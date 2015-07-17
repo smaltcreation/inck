@@ -37,8 +37,7 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
     {
         $this->titles = array();
 
-        for($i = 1; $i <= self::MAX; $i++)
-        {
+        for($i = 1; $i <= self::MAX; $i++) {
             $this->titles[$i] = 'Je suis l\'article '.$i;
         }
     }
@@ -50,8 +49,7 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
     {
         $this->initialize();
 
-        foreach($this->titles as $key => $title)
-        {
+        foreach($this->titles as $key => $title) {
             $article = new Article();
 
             $article
@@ -63,32 +61,21 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
             $article->setPublished(boolval(rand(0, 1)));
             $article->setCreatedAt(self::getRandomDate());
 
-            if($article->getPublished())
-            {
+            if($article->getPublished()) {
                 $article->setPublishedAt(self::getRandomDate());
                 $article->setAsDraft(false);
-            }
-
-            else
-            {
+            } else {
                 $article->setAsDraft(boolval(rand(0, 1)));
 
-                if($article->getAsDraft())
-                {
+                if($article->getAsDraft()) {
                     $article->setUpdatedAt(self::getRandomDate());
-                }
-
-                else
-                {
-                    $article->setPostedAt(self::getRandomDate());
                 }
             }
 
             // Contenu aléatoire
             $content = '';
             $words = rand(800, 2000);
-            for($i = 0; $i < $words; $i++)
-            {
+            for($i = 0; $i < $words; $i++) {
                 $word = range('a', 'z');
                 shuffle($word);
                 $word = substr(implode($word), 0, rand(1, 10));
@@ -106,13 +93,10 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
             $totalCategories = rand(1, 3);
             $categories = array();
 
-            for($i = 0; $i < $totalCategories; $i++)
-            {
-                do
-                {
+            for($i = 0; $i < $totalCategories; $i++) {
+                do {
                     $id = rand(1, LoadCategoryData::MAX);
-                }
-                while(in_array($id, $categories));
+                } while(in_array($id, $categories));
                 $categories[] = $id;
 
                 /** @var $category Category */
@@ -124,10 +108,8 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
             $totalTags = rand(1, 10);
             $tags = array();
 
-            for($i = 0; $i < $totalTags; $i++)
-            {
-                do
-                {
+            for($i = 0; $i < $totalTags; $i++) {
+                do {
                     $id = rand(1, LoadTagData::MAX);
                 }
                 while(in_array($id, $tags));

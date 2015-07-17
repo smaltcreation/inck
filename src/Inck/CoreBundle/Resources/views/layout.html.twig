@@ -55,12 +55,6 @@
                             </a>
                         </li>
                         <li>
-                            <a class="{% if currentRoute == 'inck_article_article_moderate' %} active{% endif %}" href="{{ path('inck_article_article_moderate') }}">
-                                <i class="fa fa-thumbs-up fa-lg fa-fw"></i>
-                                {{ 'view.layout.modify_article'|trans }}
-                            </a>
-                        </li>
-                        <li>
                             <a class="{% if currentRoute == 'inck_article_category_list' %} active{% endif %}" href="{{ path('inck_article_category_list') }}">
                                 <i class="fa fa-tags fa-lg fa-fw"></i>
                                 {{ 'view.layout.catagories'|trans }}
@@ -226,6 +220,3 @@
         {% endjavascripts %}
     {% endif %}
 {% endblock %}
-
-
-

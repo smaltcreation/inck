@@ -5,7 +5,6 @@ namespace Inck\ArticleBundle\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Inck\StatBundle\Entity\ArticleStat;
 use Inck\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -80,14 +79,6 @@ class Article
     protected $updatedAt;
 
     /**
-     * @var \DateTime
-     *
-     * @Assert\DateTime()
-     * @ORM\Column(name="postedAt", type="datetime", nullable=true)
-     */
-    private $postedAt;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="official", type="boolean")
@@ -110,14 +101,11 @@ class Article
     private $publishedAt;
 
     /**
-     * Lorsqu'un article est acheté, il est approuvé mais non publié
-     * Lorsqu'un article est refusé (désapprouvé) $approved = false
-     *
      * @var boolean
      *
-     * @ORM\Column(name="approved", type="boolean", nullable=true)
+     * @ORM\Column(name="locked", type="boolean", nullable=true)
      */
-    private $approved;
+    private $locked = false;
 
     /**
      * @var boolean
@@ -197,11 +185,6 @@ class Article
     private $reports;
 
     /**
-     * @ORM\OneToOne(targetEntity="Inck\StatBundle\Entity\ArticleStat", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="stat_id", referencedColumnName="id")
-     */
-    private $articleStat;
-    /**
      * @var boolean anonymous
      * @ORM\Column(type="boolean")
      */
@@ -215,7 +198,6 @@ class Article
         $this->tags         = new ArrayCollection();
         $this->votes        = new ArrayCollection();
         $this->reports      = new ArrayCollection();
-        $this->articleStat  = new ArticleStat();
         $this->anonymous;
     }
 
@@ -350,29 +332,6 @@ class Article
     }
 
     /**
-     * Set postedAt
-     *
-     * @param \DateTime $postedAt
-     * @return Article
-     */
-    public function setPostedAt($postedAt)
-    {
-        $this->postedAt = $postedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get postedAt
-     *
-     * @return \DateTime
-     */
-    public function getPostedAt()
-    {
-        return $this->postedAt;
-    }
-
-    /**
      * Set official
      *
      * @param boolean $official
@@ -405,6 +364,13 @@ class Article
     {
         $this->published = $published;
 
+        if($published) {
+            $this->setPublishedAt(new \DateTime());
+            $this->setAsDraft(false);
+        } else {
+            $this->setAsDraft(true);
+        }
+
         return $this;
     }
 
@@ -427,6 +393,7 @@ class Article
     public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
+        $this->setUpdatedAt($publishedAt);
 
         return $this;
     }
@@ -442,26 +409,29 @@ class Article
     }
 
     /**
-     * Set approved
+     * Set locked
      *
-     * @param boolean $approved
+     * @param boolean $locked
      * @return Article
      */
-    public function setApproved($approved)
+    public function setLocked($locked)
     {
-        $this->approved = $approved;
+        $this->locked = $locked;
+        if($locked) {
+            $this->setPublished(false);
+        }
 
         return $this;
     }
 
     /**
-     * Get approved
+     * Get locked
      *
      * @return boolean
      */
-    public function getApproved()
+    public function getLocked()
     {
-        return $this->approved;
+        return $this->locked;
     }
 
     /**
@@ -795,43 +765,12 @@ class Article
             return 'Publié';
         }
 
-        else if($this->approved === false)
+        else if($this->locked === true)
         {
-            return 'Désapprouvé';
+            return 'Fermé';
         }
 
-        $limitDate = new DateTime();
-        $limitDate->sub(new \DateInterval('P1D'));
-
-        if(!$this->published && !$this->asDraft && $this->postedAt >= $limitDate)
-        {
-            return 'En modération';
-        }
-
-        return 'En validation';
-    }
-
-    /**
-     * Set articleStat
-     *
-     * @param \Inck\StatBundle\Entity\ArticleStat $articleStat
-     * @return Article
-     */
-    public function setArticleStat(\Inck\StatBundle\Entity\ArticleStat $articleStat = null)
-    {
-        $this->articleStat = $articleStat;
-
-        return $this;
-    }
-
-    /**
-     * Get articleStat
-     *
-     * @return \Inck\StatBundle\Entity\ArticleStat
-     */
-    public function getArticleStat()
-    {
-        return $this->articleStat;
+        return 'Undifined';
     }
 
     /**
