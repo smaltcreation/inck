@@ -2,77 +2,51 @@
 
 <div class="user-card">
     <div class="well">
-        <div class="socials">
-            <p>
-                {# Social networks #}
-                {% if user.twitter %}
-                    <a href="{{ user.twitter }}" class="btn btn-twitter btn-xs">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                {% endif %}
-                {% if user.facebook %}
-                    <a href="{{ user.facebook }}" class="btn btn-facebook btn-xs">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                {% endif %}
-                {% if user.googlePlus %}
-                    <a href="{{ user.googlePlus }}" class="btn btn-google btn-xs">
-                        <i class="fa fa-google-plus"></i>
-                    </a>
-                {% endif %}
-                {% if user.linkedIn %}
-                    <a href="{{ user.linkedIn }}" class="btn btn-linkedin btn-xs">
-                        <i class="fa fa-linkedin"></i>
-                    </a>
-                {% endif %}
-            </p>
-        </div>
+        {% if user.twitter or user.facebook or user.googlePlus or user.linkedIn %}
+            <div class="socials">
+                <p>
+                    {# Social networks #}
+                    {% if user.twitter %}
+                        <a href="{{ user.twitter }}" class="btn btn-twitter btn-xs">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    {% endif %}
+                    {% if user.facebook %}
+                        <a href="{{ user.facebook }}" class="btn btn-facebook btn-xs">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    {% endif %}
+                    {% if user.googlePlus %}
+                        <a href="{{ user.googlePlus }}" class="btn btn-google btn-xs">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    {% endif %}
+                    {% if user.linkedIn %}
+                        <a href="{{ user.linkedIn }}" class="btn btn-linkedin btn-xs">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    {% endif %}
+                </p>
+            </div>
+        {% endif %}
 
         <p>
             <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">
-                <img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-circle avatar" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/>
+                <img alt="Avatar de {{ user.fullname }}" class="img-circle avatar" src="{{ gravatar(user.email, 250, true) }}"/>
             </a>
         </p>
 
         <h2>
-            <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">A propos de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}
+            <a href="{{ path('fos_user_profile_preview', { 'username': user.username }) }}">A propos de {{ user.fullname }}
             </a>
         </h2>
 
         <div class="biography">
             {% if user.biography %}
-                <p>{{ user.biography|slice(0, 297) }}{% if user.biography|length > 297 %}...{% endif %}</p>
+                <p>{{ user.biography}}</p>
             {% else %}
-                <p>
-                    <span class="no-biography">Cet utilisateur n'a pas encore complété son profil. Pour combler ce vide, voici un résumé de la biographie de Dennis Ritchie :</span><br>
-                    ennis MacAlistair Ritchie, né le 9 septembre 1941 à Bronxville dans l'État de New York...
-                </p>
+                <p>Oops ! {{ user.fullname }} n'a pas encore complété sa biographie. <i class="fa fa-meh-o"></i></p>
             {% endif %}
-        </div>
-
-        <div class="row">
-            <div class="col-md-7 col-lg-9">
-                <p>
-                    {% set popoverContent = '<i class="fa fa-circle fa-fw"></i> <strong>Utilisateur :</strong> ' ~ user.username %}
-                    {% if user.firstname or user.lastname %}
-                        {% set popoverContent = popoverContent ~ '<br><i class="fa fa-user fa-fw"></i> <strong>Nom : </strong>' %}
-                        {% if user.firstname %}{% set popoverContent = popoverContent ~ user.firstname %}{% endif %}
-                        {% if user.lastname %}{% set popoverContent = popoverContent ~ ' ' ~ user.lastname %}{% endif %}
-                    {% endif %}
-                    {% if user.school %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-graduation-cap fa-fw"></i><strong> École fréquentée :</strong> ' ~ user.school %}{% endif %}
-                    {% if user.occupation %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-briefcase fa-fw"></i> <strong>Activité/métier :</strong> ' ~ user.occupation %}{% endif %}
-                    {% if user.birthday %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-calendar fa-fw"></i> <strong>Date de naissance :</strong> ' ~ user.birthday|date('d/m/Y') %}{% endif %}
-                    {% if user.city %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-building fa-fw"></i> <strong>Ville :</strong> ' ~ user.city %}{% endif %}
-                    {% if user.country %}{% set popoverContent = popoverContent ~ '<br><i class="fa fa-globe fa-fw"></i> <strong>Pays :</strong> ' ~ user.country %}{% endif %}
-
-                    {% if user != app.user %}
-                        {{ subscribe_button('user', user) }}
-                    {% endif %}
-                    <button type="button" class="btn btn-default btn-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" data-title="Informations" data-animation=true data-content="{{ popoverContent }}">
-                        <i class="fa fa-info-circle"></i> {{ 'profile.page.more_info'|trans }}
-                    </button>
-                </p>
-            </div>
         </div>
     </div>
 </div>

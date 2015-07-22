@@ -1,12 +1,15 @@
 $(document).ready(function(){
-    // Toggle filters
-    var toggleFilters = $('.toggle-filter');
-    toggleFilters.click(function(){
-        $('#filters').stop().slideToggle('slow');
-    });
-
     // Selected filters
     selectedFilters = $.parseJSON(selectedFilters);
+
+    // Popularity filter
+    var popularityInput = $("#inck_articlebundle_articlefilter_popularity");
+
+    popularityInput.select2({
+        width: 'container'
+    });
+
+    resetPopularity();
 
     // Categories filter
     var categoriesInput = $("#inck_articlebundle_articlefilter_categories");
@@ -107,6 +110,7 @@ $(document).ready(function(){
                 url: Routing.generate('inck_article_article_filter'),
                 data: {
                     filters: {
+                        popularity: popularityInput.val(),
                         categories: categoriesInput.val(),
                         tags: tagsInput.val(),
                         authors: authorsInput.val(),
@@ -154,6 +158,15 @@ $(document).ready(function(){
     });
 
     // Reset filters
+    function resetPopularity(){
+        popularityInput.val(['hot']).select2('data', [{
+            id: 'hot',
+            text: 'Hot',
+            locked: false
+        }]);
+        console.log(popularityInput.select2('data'), popularityInput.val());
+    }
+
     function resetCategories(){
         categoriesInput.val(null).select2('data', null);
 
@@ -185,6 +198,7 @@ $(document).ready(function(){
     resetButton.click(function(e){
         e.preventDefault();
 
+        resetPopularity();
         resetCategories();
         resetTags();
         resetAuthors();

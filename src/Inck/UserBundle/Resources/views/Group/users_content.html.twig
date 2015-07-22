@@ -23,7 +23,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div>
-                                            <img alt="Avatar de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}" class="img-thumbnail img-responsive" src="{{ gravatar(user.email, 250, 'g', 'mm', true) }}"/>
+                                            <img alt="Avatar de {{ user.fullname }}" class="img-thumbnail img-responsive" src="{{ gravatar(user.email, 250, true) }}"/>
                                         </div>
                                     </div>
                                     <div class="col-xs-8">

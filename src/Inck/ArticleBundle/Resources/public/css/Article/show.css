@@ -1,3 +1,7 @@
+header#header {
+    display: none;
+}
+
 article .category, article .tag {
     margin-right: 3px;
     margin-bottom: 3px;
@@ -107,11 +111,6 @@ article .article-similar h5 a {
     color: #404040;
     text-decoration: none;
     transition: color ease 0.3s;
-    /*position: relative;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;*/
 }
 
 article .article-similar h5 a:hover {

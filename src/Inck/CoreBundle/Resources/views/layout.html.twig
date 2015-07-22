@@ -24,7 +24,7 @@
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <li class="authenticated visible-xs visible-sm hidden-md hidden-lg second-child fos_user_profile_show">
                                 <a href="{{ path('fos_user_profile_show') }}">
-                                    <img class="fa navbar-avatar img-circle" alt="Avatar de {{ app.user.lastName and app.user.firstName ? app.user.firstName ~ ' ' ~ app.user.lastName : app.user.username }}" src="{{ gravatar(app.user.email, 35, 'g', 'mm', true) }}"/>
+                                    <img class="fa navbar-avatar img-circle" alt="Avatar de {{ app.user.lastName and app.user.firstName ? app.user.firstName ~ ' ' ~ app.user.lastName : app.user.username }}" src="{{ gravatar(app.user.email, 35, true) }}"/>
                                     <span>{{ app.user.username }}</span>
                                 </a>
                             </li>
@@ -97,7 +97,7 @@
             </li>
             <li class="pull-right hidden-xs hidden-sm visible-md visible-lg fos_user_profile_show">
                 <a class="{% if currentRoute == 'fos_user_profile_show' %}active{% endif %}" href="{{ path('fos_user_profile_show') }}">
-                    <img class="navbar-avatar img-circle" alt="Avatar de {{ app.user.lastName and app.user.firstName ? app.user.firstName ~ ' ' ~ app.user.lastName : app.user.username }}" src="{{ gravatar(app.user.email, 35, 'g', 'mm', true) }}"/>
+                    <img class="navbar-avatar img-circle" alt="Avatar de {{ app.user.lastName and app.user.firstName ? app.user.firstName ~ ' ' ~ app.user.lastName : app.user.username }}" src="{{ gravatar(app.user.email, 35, true) }}"/>
                     <span>{{ app.user.username }}</span>
                 </a>
             </li>
@@ -179,12 +179,12 @@
                 </div>
                 <div class="item">
                     <div class="carousel-caption">
-                        <h3><a href="http://www.supinfo.com/" style="text-decoration: none; color: inherit;">SUPINFO International University</a></h3>
-                        <p>Ecole informatique mondiale SUPINFO, leader en France qui forme des ingénieurs en informatique bac+5 et délivre un International Master of Science</p>
+                        <h3><a href="http://www.supinfo.com/" style="text-decoration: none; color: inherit;">Devenez partenaire !</a></h3>
+                        <p>En devenant partenaire, vous aidez le développement de Inck et de l'expression libre et culturelle.</p>
                         <p>
-                            <a href="http://www.supinfo.com/" class="btn btn-inverse">
-                                <i class="fa fa-external-link"></i>
-                                En savoir plus
+                            <a href="{{ path('inck_core_default_about') ~ '#contact' }}" class="btn btn-inverse">
+                                <i class="fa fa-envelope"></i>
+                                Nous contacter
                             </a>
                         </p>
                     </div>

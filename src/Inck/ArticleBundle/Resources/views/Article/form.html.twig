@@ -45,11 +45,11 @@
             <form {{ form_enctype(form) }} method="POST" novalidate="novalidate" data-article-id="{{ articleId }}" data-article-slug="{{ articleSlug }}" id="inck-article-article-form">
                 {{ form_errors(form) }}
 
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="heading">
                             <h4 class="panel-title">
-                                <a class="btn-tooltip" role="button" data-toggle="collapse" data-parent="#accordion" href="#article-header" aria-expanded="true" aria-controls="article-header" data-placement="right" data-container="body" title="Informations annexes">
+                                <a class="btn-tooltip" role="button" data-toggle="collapse" data-parent=".accordion" href="#article-header" aria-expanded="true" aria-controls="article-header" data-placement="right" data-container="body" title="Informations annexes">
                                     <i class="fa fa-caret-square-o-down"></i>
                                     En-tête de l'article
                                 </a>

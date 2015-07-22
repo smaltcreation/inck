@@ -1,6 +1,8 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 
-{% block title %}Profil de {{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}{% endblock %}
+{% set gravatar = gravatar(user.email, 70, true) %}
+
+{% block title %}Profil de {{ user.fullname }}{% endblock %}
 {% block description %}{% if user.biography %}<meta name="description" content="{{ user.biography|slice(0, 157) }}{% if user.biography|length > 157 %}...{% endif %}">{% endif %}{% endblock %}
 
 {% block stylesheets %}
@@ -16,30 +18,92 @@
 {% endblock %}
 
 {% block header %}
-    <div class="jumbotron">
+    <div class="jumbotron text-center">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>{{ user.lastName and user.firstName ? user.firstName ~ ' ' ~ user.lastName : user.username }}</h1>
-                    {% if user != app.user %}
-                        {{ subscribe_button('user', user) }}
-                    {% endif %}
-                </div>
-            </div>
+            <h1>
+                <img alt="Avatar de {{ user.fullname }}" class="img-circle avatar" src="{{ gravatar }}"/>
+                <span>{{ user.fullname }}</span>
+                <small></small>
+            </h1>
+            <p>
+                {% if user.biography %}
+                    {{ user.biography }}
+                {% else %}
+                    Oops ! {{ user.fullname }} n'a pas encore complété sa biographie. <i class="fa fa-meh-o"></i>
+                {% endif %}
+            </p>
+            <p>
+                {% if user != app.user %}
+                    {{ subscribe_button('user', user) }}
+                {% endif %}
+                {# Social networks #}
+                {% if user.twitter %}
+                    <a href="{{ user.twitter }}" class="btn btn-inverse">
+                        <i class="fa fa-fw fa-twitter"></i>
+                    </a>
+                {% endif %}
+                {% if user.facebook %}
+                    <a href="{{ user.facebook }}" class="btn btn-inverse">
+                        <i class="fa fa-fw fa-facebook"></i>
+                    </a>
+                {% endif %}
+                {% if user.googlePlus %}
+                    <a href="{{ user.googlePlus }}" class="btn btn-inverse">
+                        <i class="fa fa-fw fa-google-plus"></i>
+                    </a>
+                {% endif %}
+                {% if user.linkedIn %}
+                    <a href="{{ user.linkedIn }}" class="btn btn-inverse">
+                        <i class="fa fa-fw fa-linkedin"></i>
+                    </a>
+                {% endif %}
+            </p>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
     <div class="profile preview">
-        <section>
-            <div class="container">
-                {% include('InckUserBundle:Profile:preview_content.html.twig') %}
-            </div>
-        </section>
 
         <div class="container">
-            <hr>
+            <div class="panel-group accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="user-subscriptions-heading">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent=".accordion" href="#user-subscriptions" aria-expanded="true" aria-controls="user-subscriptions">
+                                <i class="fa fa-bullhorn"></i>
+                                Abonnées et abonnements
+                            </a>
+                            <span class="label label-default pull-right">
+                                <span>{{ nbFollowers }} abonné(s)</span>
+                            </span>
+                        </h4>
+                    </div>
+                    <div id="user-subscriptions" class="panel-collapse collapse" role="tabpanel" aria-labelledby="user-subscriptions-heading">
+                        <div class="panel-body">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="user-bookshelfs-heading">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent=".accordion" href="#user-bookshelfs" aria-expanded="true" aria-controls="user-bookshelfs">
+                                <i class="fa fa-book"></i>
+                                Listes de lecture
+                            </a>
+                            {#<span class="label label-default pull-right">#}
+                                {#<span>{{ nbBookshelfs }}</span>#}
+                            {#</span>#}
+                        </h4>
+                    </div>
+                    <div id="user-bookshelfs" class="panel-collapse collapse" role="tabpanel" aria-labelledby="user-bookshelfs-heading">
+                        <div class="panel-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <section id="user-{{ user.id }}-articles" class="user-articles">

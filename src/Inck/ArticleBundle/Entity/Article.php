@@ -317,6 +317,7 @@ class Article
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+        $this->setUpdatedAt($createdAt);
 
         return $this;
     }
@@ -770,7 +771,7 @@ class Article
             return 'Fermé';
         }
 
-        return 'Undifined';
+        return 'Undefined';
     }
 
     /**

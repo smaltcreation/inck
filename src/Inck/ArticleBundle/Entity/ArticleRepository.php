@@ -3,9 +3,11 @@
 namespace Inck\ArticleBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Inck\UserBundle\Entity\User;
 use Inck\UserBundle\Entity\UserRepository;
+use Symfony\Component\Security\Acl\Exception\Exception;
 
 /**
  * ArticleRepository
@@ -16,16 +18,15 @@ use Inck\UserBundle\Entity\UserRepository;
 class ArticleRepository extends EntityRepository
 {
     const ARTICLES_PER_PAGE = 10;
+    const FRESH_INTERVAL = 5;
+    const TRENDING_INTERVAL = 10;
 
     /**
      * Récupère les articles en fonction des filtres
      *
      * as_draft         : brouillons
      * published        : publiés
-     * posted           : postés
-     * in_moderation    : en modération
-     * in_validation    : en validation (modérés mais non publiés ou approuvés/désapprouvés)
-     * disapproved      : désapprouvés
+     * locked           : fermés
      *
      * @param $filters
      * @param int|boolean $page
@@ -39,20 +40,16 @@ class ArticleRepository extends EntityRepository
         $this->checkFilters($filters);
 
         $qb = $this->createQueryBuilder('a');
-        $orderBy = 'postedAt';
+        $orderBy = 'updatedAt';
 
         // Type d'article : si on reçoit le filtre "type", on adapte la requête en fonction du type
-        if(isset($filters['type']))
-        {
-            switch($filters['type'])
-            {
+        if(isset($filters['type'])) {
+            switch($filters['type']) {
                 case 'as_draft':
                     $qb
                         ->where('a.asDraft = :asDraft')
                         ->setParameter('asDraft', true)
                         ->andWhere('a.postedAt IS NULL');
-
-                    $orderBy = 'createdAt';
                     break;
 
                 case 'published':
@@ -65,10 +62,8 @@ class ArticleRepository extends EntityRepository
 
                 case 'disapproved':
                     $qb
-                        ->where('a.approved = :approved')
-                        ->setParameter('approved', false);
-
-                    $orderBy = 'createdAt';
+                        ->where('a.locked = :locked')
+                        ->setParameter('locked', true);
                     break;
 
                 default:
@@ -99,8 +94,7 @@ class ArticleRepository extends EntityRepository
             ),
         );
 
-        foreach($conditions as $filter => $parameters)
-        {
+        foreach($conditions as $filter => $parameters) {
             /**
              * @var string $field
              * @var string $table
@@ -109,8 +103,7 @@ class ArticleRepository extends EntityRepository
             extract($parameters);
 
             // Si on reçoit le filtre "authors", "categories" ou "tags"
-            if(isset($filters[$filter]))
-            {
+            if(isset($filters[$filter])) {
                 $filterName = $field.'Filter';
                 $columnName = $alias.'Score';
 
@@ -146,16 +139,49 @@ class ArticleRepository extends EntityRepository
 
         // Filtre "not" (articles similaires) : ce filtre est principalement utilisé pour récupérer les articles similaires à un article,
         // et permet de ne pas retourner l'article dont on cherche les articles similaires
-        if(isset($filters['not']))
-        {
+        if(isset($filters['not'])) {
             $qb
                 ->andWhere('a.id != :not')
                 ->setParameter('not', $filters['not']);
         }
 
+        // Filtre "popularity" (hot - fresh - trending) : récupère les articles selon un interval de votes
+        if(isset($filters['popularity'])) {
+            $qb
+                ->leftJoin('a.votes', 'v', Join::WITH, 'v.up = :up')
+                ->setParameter('up', true)
+                ->addSelect('COUNT(v.id) AS nUpVotes');
+
+            foreach($filters['popularity'] as $popularity) {
+                switch($popularity) {
+                    case 'fresh':
+                        $qb
+                            ->orHaving('nUpVotes < :freshInterval')
+                            ->setParameter('freshInterval', self::FRESH_INTERVAL);
+                        break;
+
+                    case 'trending':
+                        $qb
+                            ->orHaving('nUpVotes BETWEEN :freshInterval AND :trendingInterval')
+                            ->setParameter('freshInterval', self::FRESH_INTERVAL)
+                            ->setParameter('trendingInterval', self::TRENDING_INTERVAL);
+                        break;
+
+                    case 'hot':
+                        $qb
+                            ->orHaving('nUpVotes > :trendingInterval')
+                            ->setParameter('trendingInterval', self::TRENDING_INTERVAL);
+                        break;
+
+                    default:
+                        throw new \Exception("Popularité (hot - trending - fresh) invalide !");
+                        break;
+                }
+            }
+        }
+
         // Ordre : tri des articles par nombre de votes positifs décroissant, et par nombre de votes négatifs croissant
-        if(isset($filters['order']) && $filters['order'] === 'vote')
-        {
+        if(isset($filters['order']) && $filters['order'] === 'vote') {
             /** @var VoteRepository $repository */
             $repository = $this
                 ->getEntityManager()
@@ -181,14 +207,12 @@ class ArticleRepository extends EntityRepository
 
         // Filtre "search" : on recherche le terme envoyé dans les champs "title", "summary" et "content" des articles
         // ainsi que dans les noms des catégories, des tags et des auteurs
-        if(isset($filters['search']))
-        {
+        if(isset($filters['search'])) {
             $orX = $qb->expr()->orX();
             $fields = array('title', 'summary', 'content');
 
             // Ajout de la condition "WHERE x LIKE 'y'" (par exemple "WHERE title LIKE '%test%'
-            foreach($fields as $field)
-            {
+            foreach($fields as $field) {
                 $orX->add(
                     $qb
                         ->expr()
@@ -212,12 +236,10 @@ class ArticleRepository extends EntityRepository
             );
 
             // Création des jointures pour tous les champs sur les catégories, les tags et les auteurs
-            foreach($fields as $field => $columnNames)
-            {
+            foreach($fields as $field => $columnNames) {
                 $qb->innerJoin("a.$field", $field);
 
-                foreach($columnNames as $columnName)
-                {
+                foreach($columnNames as $columnName) {
                     $orX->add(
                         $qb
                             ->expr()
@@ -233,8 +255,7 @@ class ArticleRepository extends EntityRepository
         }
 
         // Retourner les résultats d'une page
-        if($page !== false)
-        {
+        if($page !== false) {
             $paginator = new Paginator($qb);
 
             $totalArticles = count($paginator);
@@ -255,8 +276,7 @@ class ArticleRepository extends EntityRepository
         }
 
         // Retourner un certain nombre de résultats
-        if($limit !== false)
-        {
+        if($limit !== false) {
             $qb->setMaxResults($limit);
         }
 
@@ -347,21 +367,15 @@ class ArticleRepository extends EntityRepository
             'tag'       => 'tags',
         );
 
-        foreach($conversion as $from => $to)
-        {
-            if(isset($filters[$from]))
-            {
+        foreach($conversion as $from => $to) {
+            if(isset($filters[$from])) {
                 // On utilise seulement l'id de l'entité
                 /** @var Category|Tag|User $entity */
                 $entity = $filters[$from];
 
-                if(isset($filters[$to]))
-                {
+                if(isset($filters[$to])) {
                     $filters[$to][] = $entity->getId();
-                }
-
-                else
-                {
+                } else {
                     $filters[$to] = array($entity->getId());
                 }
 
@@ -373,10 +387,8 @@ class ArticleRepository extends EntityRepository
         // on la convertit en tableau
         $conversion = array_values($conversion);
 
-        foreach($conversion as $to)
-        {
-            if(isset($filters[$to]) && is_string($filters[$to]))
-            {
+        foreach($conversion as $to) {
+            if(isset($filters[$to]) && is_string($filters[$to])) {
                 $filters[$to] = explode(',', $filters[$to]);
             }
         }
@@ -389,8 +401,7 @@ class ArticleRepository extends EntityRepository
      */
     private function checkFilters(&$filters)
     {
-        if(!is_array($filters) || count($filters) === 0)
-        {
+        if(!is_array($filters) || count($filters) === 0) {
             throw new \Exception("Filtres invalides");
         }
 
@@ -404,24 +415,21 @@ class ArticleRepository extends EntityRepository
             'disapproved',
         );
 
-        foreach($filters as $filter => $data)
-        {
-            switch($filter)
-            {
+        foreach($filters as $filter => $data) {
+            switch($filter) {
                 // Si on reçoit un filtre par "type", on regarde si type reçu est valide
                 case 'type':
-                    if(!in_array($data, $validTypes))
-                    {
+                    if(!in_array($data, $validTypes)) {
                         throw new \Exception("Type $filter invalide");
                     }
                     break;
 
                 // Si on reçoit un filtre sur les auteurs, les catégories ou les tags, on a besoin d'un tableau
+                case 'popularity':
                 case 'authors':
                 case 'categories':
                 case 'tags':
-                    if(!is_array($data))
-                    {
+                    if(!is_array($data)) {
                         throw new \Exception("Filtre $filter invalide");
                     }
                     break;
@@ -429,16 +437,14 @@ class ArticleRepository extends EntityRepository
                 // Si on reçoit le filtre "search" ou "order", on a besoin d'une chaîne
                 case 'search':
                 case 'order':
-                    if(!is_string($data))
-                    {
+                    if(!is_string($data)) {
                         throw new \Exception("Filtre $filter invalide");
                     }
                     break;
 
                 // Si on reçoit le filtre "not", on a besoin d'un id
                 case 'not':
-                    if(!is_int($data))
-                    {
+                    if(!is_int($data)) {
                         throw new \Exception("Filtre $filter invalide");
                     }
                     break;
@@ -457,10 +463,8 @@ class ArticleRepository extends EntityRepository
      */
     private function formatResults(&$results)
     {
-        foreach($results as &$result)
-        {
-            if(is_array($result) && isset($result[0]))
-            {
+        foreach($results as &$result) {
+            if(is_array($result) && isset($result[0])) {
                 $result = $result[0];
             }
         }

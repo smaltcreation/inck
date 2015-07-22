@@ -14,7 +14,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
     /**
      * Nombre total d'utilisateurs
      */
-    const MAX = 5;
+    const MAX = 20;
 
     /**
      * Préfixe de la référence d'un utilisateur

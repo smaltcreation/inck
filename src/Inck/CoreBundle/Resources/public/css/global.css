@@ -52,17 +52,16 @@
 
 /* Bootstrap override */
 /* Accordion */
-#accordion .panel-default > .panel-heading {
+.accordion .panel-default > .panel-heading {
     background-color: #fff;
 }
 
-#accordion .panel-default > .panel-heading a  {
+.accordion .panel-default > .panel-heading a  {
     color: #404040;
     text-decoration: none;
-    transition: color ease 0.3s;
 }
 
-#accordion .panel-default > .panel-heading a:hover  {
+.accordion .panel-default > .panel-heading a:hover  {
     color: #57a3e8;
     outline: 0;
 }

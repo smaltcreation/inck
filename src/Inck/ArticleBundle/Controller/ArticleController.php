@@ -134,6 +134,7 @@ class ArticleController extends Controller
             ->getRepository('InckArticleBundle:Article')
             ->findByFilters(array(
                 'type' => 'published',
+                'popularity' => array('hot', 'trending'),
             ), false, 1);
 
         return array(
@@ -149,7 +150,7 @@ class ArticleController extends Controller
      * @throws Exception
      * @return array
      */
-    public function featuredAction(Article $article)
+    public function featuredAction(Article $article, $limit = 25)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -158,7 +159,7 @@ class ArticleController extends Controller
             ->findByFilters(array(
                 'type'  => 'published',
                 'not'   => $article->getId(),
-            ), false, 25);
+            ), false, $limit);
 
         return array(
             'articles' => $articles,
@@ -174,11 +175,14 @@ class ArticleController extends Controller
     public function timelineAction($filters)
     {
         $form = $this->createForm(new ArticleFilterType(), array(
-            'search'    => isset($filters['search'])
+            'search'        => isset($filters['search'])
                 ? $filters['search']
                 : null,
-            'type'      => isset($filters['type'])
+            'type'          => isset($filters['type'])
                 ? $filters['type']
+                : null,
+            'popularity'    => isset($filters['popularity'])
+                ? $filters['popularity']
                 : null,
         ));
 
@@ -249,7 +253,7 @@ class ArticleController extends Controller
         // Suppression des filtres qui auraient pu être ajoutés
         $keys = array_keys($filters);
         foreach($keys as $key) {
-            if(!in_array($key, array('categories', 'tags', 'authors', 'order', 'type', 'search'))) {
+            if(!in_array($key, array('categories', 'tags', 'authors', 'order', 'type', 'search', 'popularity'))) {
                 unset($filters[$key]);
             }
         }

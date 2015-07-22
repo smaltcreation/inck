@@ -156,7 +156,7 @@ fos_user:
 ornicar_gravatar:
     rating: g
     size: 80
-    default: mm
+    default: identicon
 
 # AvocodeFormExtensionsBundle Configuration
 avocode_form_extensions:

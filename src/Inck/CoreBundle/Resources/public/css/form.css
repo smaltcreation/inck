@@ -21,6 +21,11 @@ textarea + span.badge:hover {
     width: 100% !important;
 }
 
+/* Braincrafted */
+form span.glyphicon {
+    margin-right: 5px;
+}
+
 /* Summernote */
 .note-editor {
     border: 1px solid #dddddd !important;

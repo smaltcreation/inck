@@ -32,7 +32,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ render(controller('InckArticleBundle:Article:timeline', { filters: { 'type': 'published' } })) }}
+    {{ render(controller('InckArticleBundle:Article:timeline', { filters: { 'type': 'published', 'popularity': ['hot'] } })) }}
 {% endblock %}
 
 {% block javascripts %}

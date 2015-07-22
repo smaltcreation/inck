@@ -61,17 +61,6 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface, Depen
             $article->setPublished(boolval(rand(0, 1)));
             $article->setCreatedAt(self::getRandomDate());
 
-            if($article->getPublished()) {
-                $article->setPublishedAt(self::getRandomDate());
-                $article->setAsDraft(false);
-            } else {
-                $article->setAsDraft(boolval(rand(0, 1)));
-
-                if($article->getAsDraft()) {
-                    $article->setUpdatedAt(self::getRandomDate());
-                }
-            }
-
             // Contenu aléatoire
             $content = '';
             $words = rand(800, 2000);

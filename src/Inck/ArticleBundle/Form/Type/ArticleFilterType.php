@@ -49,6 +49,16 @@ class ArticleFilterType extends AbstractType
                     'vote'  => 'Popularité',
                 ],
             ])
+            ->add('popularity', 'afe_select2_choice', [
+                'label'         => 'Popularité',
+                'required'      => false,
+                'choices'       => [
+                    'hot'       => 'Hot',
+                    'trending'  => 'Trending',
+                    'fresh'     => 'Fresh',
+                ],
+                'multiple'      => true,
+            ])
             ->add('search', 'hidden')
             ->add('type', 'hidden')
             ->add('actions', 'form_actions', [
@@ -59,6 +69,7 @@ class ArticleFilterType extends AbstractType
                             'label' => 'Filtrer',
                             'attr'  => [
                                 'class' => 'btn-success',
+                                'icon'  => 'filter',
                             ],
                         ],
                     ],
@@ -68,6 +79,7 @@ class ArticleFilterType extends AbstractType
                             'label' => 'Annuler',
                             'attr'  => [
                                 'class' => 'btn-primary',
+                                'icon'  => 'refresh',
                             ],
                         ],
                     ],

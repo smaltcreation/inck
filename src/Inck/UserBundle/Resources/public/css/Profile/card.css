@@ -1,3 +1,7 @@
+.user-card .well {
+    min-height: 150px;
+}
+
 .user-card h2 {
     margin-top: 0;
     color: #404040;

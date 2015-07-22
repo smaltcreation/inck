@@ -1,7 +1,7 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 {% trans_default_domain 'ArticleBundle' %}
 
-{% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/' ~ article.id ~ '/' ~ article.slug %}
+{% set currentUrl = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ '/article/show/' ~ article.id ~ '/' ~ article.slug %}
 
 {% block xmlns %}xmlns:og="http://ogp.me/ns#"{% endblock %}
 

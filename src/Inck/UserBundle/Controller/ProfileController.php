@@ -41,7 +41,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/profile//preview/{username}", name="fos_user_profile_preview", options={"sitemap" = true})
+     * @Route("/profile/preview/{username}", name="fos_user_profile_preview", options={"sitemap" = true})
      * @Template("InckUserBundle:Profile:preview.html.twig")
      * @param string $username
      * @return array

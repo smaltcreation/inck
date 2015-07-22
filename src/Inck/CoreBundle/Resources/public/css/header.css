@@ -6,19 +6,9 @@
 }
 
 .jumbotron {
-    color: #dfdfdf;
-    padding-top: 80px;
+    padding-top: 95px;
     padding-bottom: 60px;
-    background: rgba(31, 31, 31, 0.95) url("../images/jumbotron.png");
-    background-position: bottom;
-    -webkit-transition: .5s all ease-out;
-    -moz-transition: .5s all ease-out;
-    transition: .5s all ease-out;
     margin-bottom: 0;
-}
-
-.jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron h4 {
-    color: #f9f9f9;
 }
 
 .jumbotron h1 .small, .jumbotron h2 .small, .jumbotron h3 .small, .jumbotron h4 .small {
