@@ -25,9 +25,8 @@ class ProfileController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        $em = $this->container->get('doctrine')->getManager();
         /** @var ArticleRepository $repository */
-        $repository = $em->getRepository('InckArticleBundle:Article');
+        $repository = $this->get('inck_article.repository.article_repository');
 
         $articles = $repository->findBy(
             array('author'=> $user),
@@ -58,7 +57,7 @@ class ProfileController extends BaseController
         }
 
         /* S'il existe, on récupère ses articles publiés */
-        $repository = $em->getRepository('InckArticleBundle:Article');
+        $repository = $this->get('inck_article.repository.article_repository');
         $articles = $repository->findByFilters(
             array(
                 'type'      => 'published',

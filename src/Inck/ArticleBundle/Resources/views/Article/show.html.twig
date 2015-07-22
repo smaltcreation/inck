@@ -47,41 +47,56 @@
     {{ parent() }}
 {% endblock %}
 
-{% block content %}
-    {% if article.imageName %}
-        {% set img = vich_uploader_asset(article, 'article_image') %}
-    {% else %}
-        {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
-            {% set img = asset_url %}
-        {% endimage %}
-    {% endif %}
+{% if article.imageName %}
+    {% set img = vich_uploader_asset(article, 'article_image') %}
+{% else %}
+    {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
+        {% set img = asset_url %}
+    {% endimage %}
+{% endif %}
 
+{% block header %}
+    <div class="article-show-banner" style="background: url('{{ img|apply_filter('article_banner') }}')">
+        <div class="jumbotron" itemscope itemtype="http://schema.org/Article">
+            <div class="container">
+                <div class="article-title">
+                    <h1 itemprop="name">{{ article.title }}</h1>
+                </div>
+                {% if article.anonymous %}
+                    <p class="about"><b>Anonymous</b> &ndash; {{ 'article.show.published_the'|trans }} <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time></p>
+                {% else %}
+                    <p class="about">{{ 'article.show.writen_by'|trans }} <a class="btn-link" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash; {{ 'article.show.published_the'|trans }} <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
     <div class="article-container">
         <article id="article-{{ article.id }}" class="article" itemscope itemtype="http://schema.org/Article">
-            <header class="parallax-window" data-parallax="scroll" data-image-src="{{ img|apply_filter('article_parallax') }}">
-                <div class="jumbotron">
-                    <div class="container">
-                        <div class="article-title">
-                            <h1 itemprop="name">{{ article.title }}</h1>
-                        </div>
-                        {% if article.anonymous %}
-                            <p class="about"><b>Anonymous</b> &ndash; {{ 'article.show.published_the'|trans }} <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time></p>
-                        {% else %}
-                            <p class="about">{{ 'article.show.writen_by'|trans }} <a class="btn-link" itemprop="author" href="{{ path('fos_user_profile_preview', { 'username': article.author.username }) }}">{{ article.author.lastname and article.author.firstname ? article.author.firstname ~ ' ' ~ article.author.lastname : article.author.username }}</a> &ndash; {{ 'article.show.published_the'|trans }} <time itemprop="datePublished" datetime="{{ article.publishedAt|date('Y-m-d') }}T{{ article.publishedAt|date('H:i') }}">{{ article.publishedAt|date('d/m/Y à H:i') }}</time></p>
-                        {% endif %}
-                    </div>
-                </div>
-            </header>
-            {% include('base/messages.html.twig') %}
             <div class="container">
                 <div class="article-categories article-tags">
                     <p>
-                        {% for category in article.categories %}<a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-category btn-xs category">{{ category.name|trans|trans }}</a>{% endfor %}
-                        {% for tag in article.tags %}<a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs tag">{{ tag.name }}</a>{% endfor %}
+                        {% for category in article.categories %}
+                            <a itemprop="genre" href="{{ path('inck_article_category_show', { 'id': category.id, 'slug': category.slug }) }}" class="btn btn-category btn-xs category">
+                                {{ category.name|trans|trans }}
+                            </a>
+                        {% endfor %}
+                        {% for tag in article.tags %}
+                            <a href="{{ path('inck_article_tag_show', { 'id': tag.id, 'slug': tag.slug }) }}" class="btn btn-default btn-xs tag">
+                            {{ tag.name }}
+                            </a>
+                        {% endfor %}
                         {% if article.official %}
-                            <span class="label label-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Annonce officielle" data-container="body"><i class="fa fa-certificate"></i> Officiel</span>
+                            <span class="label label-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Annonce officielle" data-container="body">
+                                <i class="fa fa-certificate"></i>
+                                Officiel
+                            </span>
                         {% endif %}
-                        <a href="{{ path('inck_article_article_pdf', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-default btn-circle btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" title="Télécharger en PDF" data-container="body"><i class="fa fa-file-pdf-o"></i></a>
+                        <a href="{{ path('inck_article_article_pdf', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-default btn-circle btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" title="Télécharger en PDF" data-container="body">
+                            <i class="fa fa-file-pdf-o"></i>
+                        </a>
                     </p>
                 </div>
                 <div class="row">
@@ -112,14 +127,6 @@
                                                     </a>
                                                 </p>
                                             </div>
-                                            {#<div class="col-xs-3">#}
-                                                {#<p class="text-right">#}
-                                                    {#<a class="btn btn-default btn-sm btn-tooltip" title="Voir les statisitiques détaillées de l'article" data-container="body" data-placement="top">#}
-                                                        {#<i class="fa fa-line-chart"></i>#}
-                                                        {#<span class="hidden-xs visible-md-inline visible-lg-inline"> {{ 'article.show.statistics'|trans }}</span>#}
-                                                    {#</a>#}
-                                                {#</p>#}
-                                            {#</div>#}
                                         </div>
                                     </div>
                                 </div>
@@ -191,7 +198,6 @@
     {% endif %}
 
     {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/show.js'
-        'bundles/inckarticle/js/Article/parallax.min.js'
         'bundles/inckarticle/js/Article/show.js'
         'bundles/inckarticle/js/Article/score.js'
         'bundles/incksubscription/js/Subscription/new.js'

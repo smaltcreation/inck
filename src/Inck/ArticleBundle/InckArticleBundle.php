@@ -24,7 +24,7 @@ class InckArticleBundle extends Bundle
                 //Get all published articles, tags and categories
                 $em = $this->container->get('doctrine')->getManager();
 
-                $repository = $em->getRepository('InckArticleBundle:Article');
+                $repository = $this->container->get('inck_article.repository.article_repository');
                 $articles = $repository->findByFilters(array(
                     'type' => 'published',
                 ), false, 1);

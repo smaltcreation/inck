@@ -51,6 +51,9 @@ parameters:
     session_memcache_prefix: inck
     session_memcache_expire: 3600
 
+    article_popularity_interval_fresh: 10
+    article_popularity_interval_trending: 20
+
     facebook_app_id:  putYourFacebookAppId
     facebook_app_secret:  putYourFacebookSecretKey
     google_app_id: putYourGoogleAppId

@@ -23,8 +23,7 @@ class TestController extends Controller
      */
     public function indexAction(User $user)
     {
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('InckArticleBundle:Article');
+        $repository = $this->get('inck_article.repository.article_repository');
 
         /** @var ArticleRepository $articles */
         $articles = $repository->findByFilters(array(

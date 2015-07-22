@@ -9,3 +9,12 @@ services:
         arguments: [@ratchet.entity_manager, @ratchet.message_sender]
         tags:
             - { name: kernel.event_listener, event: article.publish, method: onArticlePublish }
+    inck_article.repository.article_repository:
+        class:  Inck\ArticleBundle\Entity\ArticleRepository
+        factory_service: 'doctrine.orm.default_entity_manager'
+        factory_method:  'getRepository'
+        arguments:
+            - 'Inck\ArticleBundle\Entity\Article'
+        calls:
+             - [setFreshInterval, ['%article_popularity_interval_fresh%']]
+             - [setTrendingInterval, ['%article_popularity_interval_trending%']]

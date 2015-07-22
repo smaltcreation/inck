@@ -179,7 +179,7 @@ avalanche_imagine:
     filters:
         article_thumb:
             type:    thumbnail
-            options: { size: [740, 310], mode: outbound, quality: 65 }
+            options: { size: [740, 310], mode: outbound, quality: 90 }
         article_modal:
             type:    thumbnail
             options: { size: [900, 375], mode: outbound, quality: 65 }
@@ -189,7 +189,7 @@ avalanche_imagine:
         facebook:
               type:    thumbnail
               options: { size: [1200, 1200], mode: outbound, quality: 100 }
-        article_parallax:
+        article_banner:
               type:    thumbnail
               options: { size: [1920, 350], mode: outbound, quality: 40 }
 

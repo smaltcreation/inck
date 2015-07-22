@@ -28,7 +28,7 @@ class VoteController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             // Récupération de l'article
-            $article = $em->getRepository('InckArticleBundle:Article')->find($id);
+            $article = $this->get('inck_article.repository.article_repository')->find($id);
 
             if(!$article) {
                 throw new Exception("Article inexistant.");
@@ -37,7 +37,6 @@ class VoteController extends Controller
             // Récupération d'un vote existant
             /** @var $vote Vote|null */
             $vote = $em->getRepository('InckArticleBundle:Vote')->getByArticleAndUser($article, $user);
-
 
             if(!$vote) {
                 // Il s'agit d'un nouveau vote

@@ -45,7 +45,7 @@ class TagController extends Controller
             $em = $this->getDoctrine()->getManager();
             /** @var Tag $tag */
             $tag = $em->getRepository('InckArticleBundle:Tag')->findOneBy(array('id' => $id, 'slug' => $slug));
-            $articlesLength = $em->getRepository('InckArticleBundle:Article')->countByTag($tag->getId(), true);
+            $articlesLength = $this->get('inck_article.repository.article_repository')->countByTag($tag->getId(), true);
 
             if(!$tag) {
                 throw new \Exception("Tag inexistant.");

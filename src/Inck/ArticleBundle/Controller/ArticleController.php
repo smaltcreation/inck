@@ -130,8 +130,8 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $articles = $em
-            ->getRepository('InckArticleBundle:Article')
+        $articles = $this
+            ->get('inck_article.repository.article_repository')
             ->findByFilters(array(
                 'type' => 'published',
                 'popularity' => array('hot', 'trending'),
@@ -154,8 +154,8 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $articles = $em
-            ->getRepository('InckArticleBundle:Article')
+        $articles = $this
+            ->get('inck_article.repository.article_repository')
             ->findByFilters(array(
                 'type'  => 'published',
                 'not'   => $article->getId(),
@@ -187,8 +187,8 @@ class ArticleController extends Controller
         ));
 
         $em = $this->getDoctrine()->getManager();
-        list($articles, $totalArticles, $totalPages) = $em
-            ->getRepository('InckArticleBundle:Article')
+        list($articles, $totalArticles, $totalPages) = $this
+            ->get('inck_article.repository.article_repository')
             ->findByFilters($filters);
 
         // Filtres sélectionnés par défaut
@@ -270,8 +270,8 @@ class ArticleController extends Controller
         }
 
         // Récupération des articles
-        list($articles, $totalArticles, $totalPages) = $em
-            ->getRepository('InckArticleBundle:Article')
+        list($articles, $totalArticles, $totalPages) = $this
+            ->get('inck_article.repository.article_repository')
             ->findByFilters($filters, $page);
 
         return array(

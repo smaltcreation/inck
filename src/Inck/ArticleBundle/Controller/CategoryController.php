@@ -26,7 +26,7 @@ class CategoryController extends Controller
                 throw new \Exception("Catégorie inexistante.");
             }
 
-            $articlesLength = $em->getRepository('InckArticleBundle:Article')->countByCategory($category->getId(), true);
+            $articlesLength = $this->get('inck_article.repository.article_repository')->countByCategory($category->getId(), true);
 
             return array(
                 'category' => $category,
@@ -64,7 +64,7 @@ class CategoryController extends Controller
 
             if($categories) {
                 /** @var ArticleRepository $repository */
-                $repository = $em->getRepository('InckArticleBundle:Article');
+                $repository = $this->get('inck_article.repository.article_repository');
 
                 /** @var Category $category */
                 foreach($categories as $category) {

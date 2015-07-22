@@ -18,8 +18,9 @@ use Symfony\Component\Security\Acl\Exception\Exception;
 class ArticleRepository extends EntityRepository
 {
     const ARTICLES_PER_PAGE = 10;
-    const FRESH_INTERVAL = 5;
-    const TRENDING_INTERVAL = 10;
+
+    private $freshInterval;
+    private $trendingInterval;
 
     /**
      * Récupère les articles en fonction des filtres
@@ -36,6 +37,10 @@ class ArticleRepository extends EntityRepository
      */
     public function findByFilters($filters, $page = 1, $limit = false)
     {
+        if(!$this->freshInterval || !$this->trendingInterval) {
+            throw new Exception('%article_popularity_interval_fresh% or %article_popularity_interval_trending% are not defined ! You must set those variables in parameters.yml and use new "inck_article.repository.article_repository" service instead of basic $em->getRepository(\'Article\');');
+        }
+
         $this->convertFilters($filters);
         $this->checkFilters($filters);
 
@@ -157,20 +162,20 @@ class ArticleRepository extends EntityRepository
                     case 'fresh':
                         $qb
                             ->orHaving('nUpVotes < :freshInterval')
-                            ->setParameter('freshInterval', self::FRESH_INTERVAL);
+                            ->setParameter('freshInterval', $this->freshInterval);
                         break;
 
                     case 'trending':
                         $qb
                             ->orHaving('nUpVotes BETWEEN :freshInterval AND :trendingInterval')
-                            ->setParameter('freshInterval', self::FRESH_INTERVAL)
-                            ->setParameter('trendingInterval', self::TRENDING_INTERVAL);
+                            ->setParameter('freshInterval', $this->freshInterval)
+                            ->setParameter('trendingInterval', $this->trendingInterval);
                         break;
 
                     case 'hot':
                         $qb
                             ->orHaving('nUpVotes > :trendingInterval')
-                            ->setParameter('trendingInterval', self::TRENDING_INTERVAL);
+                            ->setParameter('trendingInterval', $this->trendingInterval);
                         break;
 
                     default:
@@ -468,5 +473,23 @@ class ArticleRepository extends EntityRepository
                 $result = $result[0];
             }
         }
+    }
+
+    /**
+     * @param int $interval
+     * @return bool
+     */
+    public function setFreshInterval($interval)
+    {
+        return $this->freshInterval = $interval;
+    }
+
+    /**
+     * @param int $interval
+     * @return bool
+     */
+    public function setTrendingInterval($interval)
+    {
+        return $this->trendingInterval = $interval;
     }
 }
