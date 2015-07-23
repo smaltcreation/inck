@@ -48,6 +48,9 @@ security:
 
 # Profile
 profile:
+    preview:
+        playlist: Liste de lecture
+        subscription: Abonnées et abonnements
     show:
         username: Nom d'utilisateur
         email: Adresse e-mail
@@ -153,7 +156,7 @@ registration:
         write_article: Écrire un article
         press: Presse, entreprise?
         press_recap: Avec Inck, vous pouvez publier et acquérir les droits des articles écrits par les membres de la communauté sur votre site ou journal via un système de vente aux enchères.
-        my_buisness: Mon entreprise
+        my_business: Mon entreprise
         last_article: Dernier article publié
         email_verification: Vérification de l'adresse e-mail
         confirmed: Confirmation d'activation

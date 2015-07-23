@@ -7,7 +7,7 @@
                 <h4 class="panel-title">
                     <a class="btn-tooltip" role="button" data-toggle="collapse" data-parent=".accordion" href="#form-filter" aria-expanded="true" aria-controls="form-filter" data-placement="right" data-container="body" title="Dérouler le menu">
                         <i class="fa fa-filter"></i>
-                        Filtrer les articles
+                        {{ 'filter.form.filterArticles'|trans }}
                     </a>
                     <span id="articles-total" class="label label-default pull-right">
                         <span>{{ totalArticles }}</span> {{ 'article.timeline.results'|trans }}{#% if totalArticles|length > 1 %}s{% endif %#}

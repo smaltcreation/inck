@@ -16,41 +16,40 @@ class ArticleFilterType extends AbstractType
     {
         $builder
             ->add('categories', 'entity', [
-                'label'         => 'Catégories',
+                'label'         => 'filter.form.categories',
                 'class'         => 'InckArticleBundle:Category',
                 'choice_label'  => 'name',
                 'multiple'      => 'multiple',
                 'required'      => false,
                 'attr'          => [
-                    'placeholder'   => 'Filtrer par catégories',
+                    'placeholder'   => 'filter.form.byCategories',
                 ],
-                'translation_domain' => 'ArticleBundle',
             ])
             ->add('tags', 'inck_articlebundle_tags_selector', [
-                'label'     => 'Tags',
+                'label'     => 'filter.form.tags',
                 'required'  => false,
                 'attr'      => [
-                    'placeholder'   => 'Filtrer par tags',
+                    'placeholder'   => 'filter.form.byTags',
                 ],
             ])
             ->add('authors', 'inck_userbundle_users_selector', [
-                'label'     => 'Auteurs',
+                'label'     => 'filter.form.author',
                 'required'  => false,
                 'attr'      => [
-                    'placeholder'   => 'Filtrer par auteur',
+                    'placeholder'   => 'filter.form.byAuthor',
                 ],
             ])
             ->add('order', 'choice', [
-                'label'         => 'Trier par',
+                'label'         => 'filter.form.sortBy',
                 'required'      => false,
                 'placeholder'   => false,
                 'choices'       => [
-                    'date'  => 'Date de publication',
-                    'vote'  => 'Popularité',
+                    'date'  => 'filter.form.publication_date',
+                    'vote'  => 'filter.form.popularity',
                 ],
             ])
             ->add('popularity', 'afe_select2_choice', [
-                'label'         => 'Popularité',
+                'label'         => 'filter.form.popularity',
                 'required'      => false,
                 'choices'       => [
                     'hot'       => 'Hot',
@@ -66,7 +65,7 @@ class ArticleFilterType extends AbstractType
                     'filter'    => [
                         'type'      => 'submit',
                         'options'   => [
-                            'label' => 'Filtrer',
+                            'label' => 'filter.form.filter',
                             'attr'  => [
                                 'class' => 'btn-success',
                                 'icon'  => 'filter',
@@ -76,7 +75,7 @@ class ArticleFilterType extends AbstractType
                     'cancel'    => [
                         'type'      => 'reset',
                         'options'   => [
-                            'label' => 'Annuler',
+                            'label' => 'filter.form.cancel',
                             'attr'  => [
                                 'class' => 'btn-primary',
                                 'icon'  => 'refresh',
@@ -96,6 +95,7 @@ class ArticleFilterType extends AbstractType
         $resolver->setDefaults([
             'categories'    => array(),
             'tags'          => array(),
+            'translation_domain' => 'ArticleBundle',
         ]);
     }
 

@@ -1,7 +1,7 @@
 {% extends 'InckArticleBundle::layout.html.twig' %}
 {% trans_default_domain 'ArticleBundle' %}
 
-{% block title %}{{ 'category.list.catagories'|trans }}{% endblock %}
+{% block title %}{{ 'category.list.categories'|trans }}{% endblock %}
 {% block description %}<meta name="description" content={{ 'category.list.description'|trans }}>{% endblock %}
 
 {% block stylesheets %}
@@ -16,7 +16,7 @@
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>{{ 'category.list.catagories'|trans }} <span class="small">{{ categoriesLength }} {{ 'category.list.total'|trans }} </span></h1>
+            <h1>{{ 'category.list.categories'|trans }} <span class="small">{{ categoriesLength }} {{ 'category.list.total'|trans }} </span></h1>
         </div>
     </div>
 {% endblock %}

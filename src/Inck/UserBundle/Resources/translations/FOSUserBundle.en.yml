@@ -11,7 +11,7 @@ group:
         created: The group has been created
         deleted: The group has been deleted
     pages:
-        edit_a_group: edit a group
+        edit_a_group: Edit a group
         edit_the_group: Edit the group
         complete_info: Complete my information
         info_recap: Having a complete profile will help us to identify and distribute helpful information for the people that will pay the authors.
@@ -44,7 +44,7 @@ group:
         status: Status
         members_of: Members of
         return_main_page: Return to the main page
-        return_profile: Retourner to profile
+        return_profile: Return to profile
         add_new_members: Add new members
         search_users: Search for users by typing there first name, last name or username
         related_info: related information
@@ -71,6 +71,9 @@ security:
 
 # Profile
 profile:
+    preview:
+        subscription: Subscribers and subscriptions
+        playlist: Playlist
     show:
         username: Username
         email: Email
@@ -147,7 +150,7 @@ registration:
         write_article: Write an article
         press: Business, press?
         press_recap: With Inck, you can publish and obtain the rights to the articles written for the members of the community on your site or newspaper via an auction sales system.
-        my_buisness: My buisness
+        my_business: My business
         last_article: Last article published
         email_verification: email address verification
         confirmed: Confirm activation
@@ -226,7 +229,7 @@ form:
     private: "Visibility"
 
 greatings:
-    hello: hello
+    hello: Hello
     great_day: Have a great day.
     team: Inck team.
 

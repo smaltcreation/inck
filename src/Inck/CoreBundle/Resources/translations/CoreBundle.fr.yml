@@ -2,7 +2,7 @@ view:
     layout:
         write_article: Écrire un article
         modify_article: Modérer les articles
-        catagories: Catégories
+        categories: Catégories
         press: Presses
         social_networks: Rejoignez-nous sur les réseaux sociaux
         social_networks_recap: Suivez-nous et soyez au courant des nouveaux articles partout où vous soyez. Un like, un tweet, ce sont les nouvelles voies pour porter l'information encore plus loin que possible !

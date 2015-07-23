@@ -58,7 +58,7 @@ technology: Technology
 geography: Geography
 category:
     list:
-      catagories: Categories
+      categories: Categories
       total: in total
       description: Finding an article or a tag has never been this simple
     list_content:
@@ -84,3 +84,19 @@ category:
         health: La santé est un état de complet bien-être physique, mental et social, et ne consiste pas seulement en une absence de maladie ou d'infirmité.
         technology: Le mot technologie désigne l'étude des outils et des techniques. Ce terme se réfère à tout ce qui peut être dit à plusieurs périodes historiques particulières, concernant l'état de l'art dans tous les domaines des savoir-faire pratiques et d'utilisation des outils.
         geography: La géographie moderne est une discipline englobante qui cherche avant tout à mieux comprendre notre planète et toutes ses complexités humaines et naturelles, non seulement où les objets sont, mais comment ils ont changé et viennent à l'être.
+
+filter:
+   form:
+       publication_date: Publication date
+       byCategories: Filter by categories
+       byTags: Filter by tags
+       byAuthor: Filter par author
+       byFilter: Filter
+       cancel: Cancel
+       popularity: Popularity
+       tags: Tags
+       author: Author
+       categories: Categories
+       filter: Filter
+       filterArticles: Filter articles
+       sortBy: Sort by

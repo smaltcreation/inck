@@ -58,7 +58,7 @@ technology: Technologie
 geography: Géographie
 category:
     list:
-        catagories: Catégories
+        categories: Catégories
         total: au total
         description: Trouver une categorie ou un tag n'a jamais été plus simple.
     list_content:
@@ -69,7 +69,6 @@ category:
         published_article: articles publiés.
         feedback: Bien entendu, nous aimons avoir l'avis de notre communauté et si vous ne trouvez pas une catégorie, pourquoi ne pas nous la suggérer ?
         contact_us: Nous contacter
-
 
     description:
         politic: La politique en son sens plus large, celui de civilité ou Politikos, indique le cadre général d'une société organisée et développée.
@@ -85,3 +84,18 @@ category:
         health: La santé est un état de complet bien-être physique, mental et social, et ne consiste pas seulement en une absence de maladie ou d'infirmité.
         technology: La technologie désigne l'étude des outils et des techniques. Ce terme se réfère à tout ce qui peut être dit à plusieurs périodes historiques particulières, concernant l'état de l'art dans tous les domaines des savoir-faire pratiques et d'utilisation des outils.
         geography: La géographie moderne est une discipline englobante qui cherche avant tout à mieux comprendre notre planète et toutes ses complexités humaines et naturelles, non seulement où les objets sont, mais comment ils ont changé et viennent à l'être.
+filter:
+    form:
+        byPublication_date: Date de publication
+        byCategories: Filtrer par catégories
+        byTags: Filtrer par tags
+        byAuthor: Filtrer par auteur
+        filter: Filtrer
+        cancel: Annuler
+        popularity: Popularité
+        tags: Tags
+        author: Author
+        categories: Catégories
+        filter: Filtrer
+        filterArticles: Filtrer des articles
+        sortBy: Trier par

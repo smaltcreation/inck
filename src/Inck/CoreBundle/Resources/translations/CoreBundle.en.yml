@@ -2,7 +2,7 @@ view:
     layout:
         write_article: Write an article
         modify_article: Modify articles
-        catagories: Catagories
+        categories: Categories
         press: Presse
         social_networks: Join us on our social networks
         social_networks_recap: Fallow is and be up to date on all the new articles where ever you are. One like, one tweet, these are the new voices to carry out information even further than before !

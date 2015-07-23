@@ -1,5 +1,7 @@
 {% extends "InckUserBundle::layout.html.twig" %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% set gravatar = gravatar(user.email, 70, true) %}
 
 {% block title %}Profil de {{ user.fullname }}{% endblock %}
@@ -72,7 +74,7 @@
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent=".accordion" href="#user-subscriptions" aria-expanded="true" aria-controls="user-subscriptions">
                                 <i class="fa fa-bullhorn"></i>
-                                Abonnées et abonnements
+                                {{ 'profile.preview.subscription'|trans }}
                             </a>
                             <span class="label label-default pull-right">
                                 <span>{{ nbFollowers }} abonné(s)</span>
@@ -90,7 +92,7 @@
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent=".accordion" href="#user-bookshelfs" aria-expanded="true" aria-controls="user-bookshelfs">
                                 <i class="fa fa-book"></i>
-                                Listes de lecture
+                                {{ 'profile.preview.playlist'|trans }}
                             </a>
                             {#<span class="label label-default pull-right">#}
                                 {#<span>{{ nbBookshelfs }}</span>#}
