@@ -10,7 +10,7 @@ view:
 
 default:
     about:
-      about: À propos
+      about: À propos & condtions
       about_inck: À propos de Inck
 
     index:

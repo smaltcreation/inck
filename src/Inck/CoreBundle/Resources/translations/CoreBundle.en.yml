@@ -10,7 +10,7 @@ view:
 
 default:
     about:
-        about: About
+        about: About & terms of use
         about_inck: About Inck
 
     index:
