@@ -170,6 +170,10 @@ class User extends BaseUser implements Serializable
     protected $groups;
 
     /**
+     * @ORM\OneToMany(targetEntity="\Inck\ArticleBundle\Entity\Bookshelf", mappedBy="user")
+     */
+    private $bookshelfs;
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Inck\ArticleBundle\Entity\Article", mappedBy="author")
@@ -232,6 +236,7 @@ class User extends BaseUser implements Serializable
         $this->subscriptions    = new ArrayCollection();
         $this->subscribers      = new ArrayCollection();
         $this->groups           = new ArrayCollection();
+        $this->bookshelfs       = new ArrayCollection();
     }
 
     /**
@@ -868,5 +873,21 @@ class User extends BaseUser implements Serializable
     public function getGoogleAccessToken()
     {
         return $this->google_access_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBookshelfs()
+    {
+        return $this->bookshelfs;
+    }
+
+    /**
+     * @param mixed $bookshelfs
+     */
+    public function setBookshelfs($bookshelfs)
+    {
+        $this->bookshelfs = $bookshelfs;
     }
 }

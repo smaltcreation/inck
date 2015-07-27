@@ -1,0 +1,116 @@
+{% extends 'InckArticleBundle::layout.html.twig' %}
+
+{% trans_default_domain 'ArticleBundle' %}
+
+{% block title %}
+    {% if action == 'add' %}
+        {{ 'article.form.add_booskshelf'|trans }}
+    {% else %}
+        {{ 'article.form.edit_article'|trans }}
+    {% endif %}
+{% endblock %}
+
+{% block description %}
+    {% if action == 'add' %}
+        <meta name="description" content="Partager un article en quelques cliques, il n'y a rien de plus simple !">
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/article/article/form.css'
+    '@summernote_css'
+    'bundles/inckarticle/css/Article/form.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{ 'article.form.add_booskshelf'|trans }}</h1>
+                    <p>{{ 'article.form.write_bookshelf'|trans }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <article class="new">
+            <p>
+                <button class="btn btn-tooltip btn-inverse toggle-article-header" data-placement="right" data-toggle="tooltip" data-container="body" title="Réduire les informations annexes">
+                    <i class="fa fa-fw fa-chevron-up"></i>
+                    Titre de votre étagère
+                </button>
+            </p>
+            <form {{ form_enctype(form) }} method="POST" novalidate="novalidate">
+                <div id="article-header">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="alert alert-default">
+                                {{ form_row(form.title) }}
+                                {{ form_row(form.share) }}
+                            </div>
+                            <div class="alert alert-default">
+                                {{ form_row(form.Description) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section id="bookshelf-new-actions">
+                    {{ form_row(form.actions) }}
+                </section>
+                <div class="hidden">
+                    {{ form_rest(form) }}
+                </div>
+            </form>
+        </article>
+    </div>
+    <div id="article-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">Enregistrer l'étagère</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Créer une étagère pour classer les articles que vous avez retenus
+                    </p>
+                    <p>
+                        Confirmation pour créer l'étagère
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button id="article-modal-publish" class="btn btn-success" type="button">
+                        <i class="fa fa-fw fa-send"></i>
+                        Oui, créer l'étagère
+                    </button>
+                    <button id="article-modal-draft" class="btn btn-default" type="button">
+                        <i class="fa fa-fw fa-file-text"></i>
+                        Non.
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2' output='js/compiled/article/article/form.js'
+    '@summernote_js'
+    'bundles/inckarticle/js/Article/form.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

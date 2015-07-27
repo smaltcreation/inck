@@ -1,0 +1,124 @@
+<ul class="list-group">
+    <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+        {% for bookshelf in user.getBookshelfs %}
+            <li class="list-group-item">
+                <div id="user-profile-bookshelf-article{{ loop.index}}" class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingBookshelf{{ loop.index}}">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="accordion1" href="#collapseBookshelf{{ loop.index}}" aria-expanded="true" aria-controls="collapseBookshelf"{{ loop.index}}>
+                                <i class="fa fa-fw fa-pencil-square-o"></i>
+                                {% if bookshelf.title != null %}
+                                    {{ bookshelf.title }}
+                                {% else %}
+                                    Sans Titre
+                                {% endif %}
+                                <span class="badge pull-right">{{ bookshelf.articles|length}} </span><br>
+                                <div style="margin-left: 30px;">
+                                    {% if bookshelf.description != null %}
+                                        {{ bookshelf.description }}
+                                    {% else %}
+                                        <i>Aucune</i>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseBookshelf{{ loop.index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBookshelf{{ loop.index}}">
+
+                        {# Modal for article preview #}
+                        <div class="modal fade" id="bookshelf-preview{{ loop.index}}" tabindex="-1" role="dialog" aria-labelledby="bookshelf-title{{ loop.index}}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content"></div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            {% if bookshelf.articles|length > 0 %}
+                                <table class="table">
+
+                                    {# Table header #}
+                                    <thead>
+                                    <tr>
+                                        <th>Type</th> {# Status #}
+                                        <th class="text-center">{{ 'profile.page.title'|trans }}</th> {# Title #}
+                                        <th class="text-center">Date</th> {# Date #}
+                                        <th class="text-right">Actions</th> {# Actions #}
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for article in bookshelf %}
+
+                                        {# Setting variables #}
+                                        {% if article.asDraft %}
+                                            {% set status = 'warning' %}
+                                            {% set icon = 'file-text-o' %}
+                                            {% set tooltip = 'Brouillon' %}
+                                            {% set date = article.createdAt|date('d/m/Y à H:i') %}
+                                        {% elseif article.published %}
+                                            {% set status = 'success' %}
+                                            {% set icon = 'check' %}
+                                            {% set tooltip = 'Publié' %}
+                                            {% set date = article.publishedAt|date('d/m/Y à H:i') %}
+                                        {% elseif article.approved == false and article.approved != null %}
+                                            {% set status = 'danger' %}
+                                            {% set icon = 'times' %}
+                                            {% set tooltip = 'Désapprouvé' %}
+                                            {% set date = article.postedAt|date('d/m/Y à H:i') %}
+                                        {% else %}
+                                            {% set status = 'primary' %}
+                                            {% set icon = 'refresh fa-spin' %}
+                                            {% set tooltip = 'En attente' %}
+                                            {% set date = article.postedAt|date('d/m/Y à H:i') %}
+                                        {% endif %}
+
+                                        <tr>
+                                            <td> {# Status #}
+                                                <span class="label label-{{ status }} btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ tooltip }}">
+                                <i class="fa fa-{{ icon }}"></i>
+                            </span>
+                                            </td>
+                                            <td class="text-center"> {# Title #}
+                                                <a href="{{ path('inck_article_article_show', {'id': article.id, 'slug': article.slug }) }}">{{ article.title|slice(0, 39) }}{% if article.title|length > 39 %}...{% endif %}</a>
+                                            </td>
+                                            <td class="text-center"> {# Date #}
+                                                {{ date }}
+                                            </td>
+                                            <td> {# Actions #}
+                                                <div class="pull-right btn-group">
+                                                    <a href="{{ path('inck_article_article_show_modal', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-primary btn-xs btn-tooltip btn-modal" data-placement="top" title="Aperçu" data-container="body" data-toggle="tootltip">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+
+                                                    {% if article.asDraft %}
+                                                        <a href="{{ path('inck_article_article_edit', { 'id': article.id, 'slug': article.slug }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a data-article-id="{{ article.id }}" data-article-slug="{{ article.slug }}" class="btn btn-success btn-xs btn-tooltip btn-article-send" data-toggle="tooltip" data-placement="top" title="Publier" data-container="body">
+                                                            <i class="fa fa-send"></i>
+                                                        </a>
+                                                        <a data-article-id="{{ article.id }}" data-article-slug="{{ article.slug }}" class="btn btn-danger btn-xs btn-tooltip btn-article-delete" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                Aucun
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <li class="list-group-item">
+             <a href="{{ path('article_bookshelf_bookshelfs_new') }}" ><b><span class="glyphicon glyphicon-plus-sign"></span> Nouvelle étagère</b></a>
+            </li>
+        </div>
+        </div>
+</ul>

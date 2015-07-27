@@ -117,7 +117,7 @@ profile:
         subscriptions: Mes abonnements
         manage_subscriptions : Gérer mes abonnements
         personnal_history: Historique de mes vingt dernières activités
-
+        list_bookshelf : Etagères
 # Password change
 change_password:
     submit: Modifier le mot de passe

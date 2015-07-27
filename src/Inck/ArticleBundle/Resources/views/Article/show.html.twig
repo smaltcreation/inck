@@ -134,7 +134,9 @@
                         </div>
                         <div id="last" class="article-author">
                             <section>
+                                {% if article.anonymous == false %}
                                 {% include 'InckUserBundle:Profile:card.html.twig' with { user: article.author } %}
+                                {% endif %}
                             </section>
                         </div>
                     </div>

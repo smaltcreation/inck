@@ -52,7 +52,7 @@ group:
         all_group_users: All the users in the group
         subscriptions: My subscriptions
         manage_subscriptions : Manage my subscriptions
-
+        list_list_bookshelf : Bookshelfs
 # Security
 security:
     login:
