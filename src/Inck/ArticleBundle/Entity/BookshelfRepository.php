@@ -1,6 +1,6 @@
 <?php
 
-namespace Inck\UserBundle\Entity;
+namespace Inck\ArticleBundle\Entity;
 
 /**
  * BookshelfRepository

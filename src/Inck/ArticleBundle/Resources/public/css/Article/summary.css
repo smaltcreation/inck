@@ -56,8 +56,8 @@ article .votes button.reported{
 }
 
 article img.gravatar {
-    min-width: 100px;
-    min-height: 100px;
+    min-width: 132px;
+    min-height: 132px;
 }
 
 @media screen and (max-width: 992px) {

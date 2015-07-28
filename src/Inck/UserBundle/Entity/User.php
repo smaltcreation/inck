@@ -173,6 +173,7 @@ class User extends BaseUser implements Serializable
      * @ORM\OneToMany(targetEntity="\Inck\ArticleBundle\Entity\Bookshelf", mappedBy="user")
      */
     private $bookshelfs;
+
     /**
      * @var ArrayCollection
      *

@@ -1,0 +1,17 @@
+{% extends 'InckArticleBundle::layout.html.twig' %}
+{% trans_default_domain 'ArticleBundle' %}
+
+{% block title %}{{ bookshelf.title }}{% endblock %}
+{% block description %}<meta name="description" content="{{ bookshelf.description|slice(0, 157) }}{% if bookshelf.description|length > 157 %}...{% endif %}">{% endblock %}
+
+{% block header %}
+        <div class="jumbotron">
+            <div class="container">
+                <h1>{{ bookshelf.title }}</h1>
+            </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

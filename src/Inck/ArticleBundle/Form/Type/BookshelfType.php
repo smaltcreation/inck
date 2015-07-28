@@ -26,7 +26,7 @@ class BookshelfType extends AbstractType
                 array('label' => 'Rendre votre étagère publique ?',
                     'required' => false,
                 ))
-            ->add('Description', 'textarea', [
+            ->add('description', 'textarea', [
                 'label'         => 'Déscription',
                 'attr'          => [
                     'placeholder'   => 'Déscription',
