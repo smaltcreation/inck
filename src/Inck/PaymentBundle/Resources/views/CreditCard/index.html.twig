@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="row">
+        {{ form_start(form, {'action': path('inck_payment_creditCard'), 'attr': {'id': 'form-add'}}) }}
+            {{ form_errors(form) }}
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.first_name, "Prénom") }}
+                    {{ form_widget(form.first_name, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.first_name) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.last_name, "Nom") }}
+                    {{ form_widget(form.last_name, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.last_name) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.card_number, "Numéro de carte") }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                        {{ form_widget(form.card_number, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_errors(form.card_number) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.card_type, "Type de carte") }}
+                    {{ form_widget(form.card_type, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.card_type) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.expire_month, "Mois d'expiration") }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        {{ form_widget(form.expire_month, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_errors(form.expire_month) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.expire_year, "Année d'expiration") }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        {{ form_widget(form.expire_year, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_errors(form.expire_year) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.cvv2, "Cryptogramme") }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        {{ form_widget(form.cvv2, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_errors(form.cvv2) }}
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>

@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new Nelmio\JsLoggerBundle\NelmioJsLoggerBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
             new Sp\BowerBundle\SpBowerBundle(),
+            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
             /* Our bundles */
             new Inck\UserBundle\InckUserBundle(),
             new Inck\CoreBundle\InckCoreBundle(),
@@ -43,6 +44,7 @@ class AppKernel extends Kernel
             new Inck\BidBundle\InckBidBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Inck\NotificationBundle\InckNotificationBundle(),
+            new Inck\PaymentBundle\InckPaymentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
