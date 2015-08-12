@@ -32,3 +32,4 @@ web/media
 
 # Bower CoreBundle
 src/Inck/CoreBundle/Resources/public/components
+src/Inck/ArticleBundle/Resources/public/components

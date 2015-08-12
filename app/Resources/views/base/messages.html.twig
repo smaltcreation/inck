@@ -3,7 +3,7 @@
         <div class="container">
             {% for message in messages %}
                 <div class="alert alert-{{ type }}" role="alert">
-                    {{ message }}
+                    {{ message|nl2br }}
                 </div>
             {% endfor %}
         </div>

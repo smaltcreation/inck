@@ -44,7 +44,8 @@
         "components/modernizr": "dev-master",
         "nelmio/js-logger-bundle": "~1.2",
         "presta/sitemap-bundle": "dev-master",
-        "sp/bower-bundle": "0.11.*"
+        "sp/bower-bundle": "0.11.*",
+        "sensio/buzz-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
