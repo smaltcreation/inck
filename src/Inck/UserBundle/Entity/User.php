@@ -170,11 +170,6 @@ class User extends BaseUser implements Serializable
     protected $groups;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Inck\ArticleBundle\Entity\Bookshelf", mappedBy="user")
-     */
-    private $bookshelfs;
-
-    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Inck\ArticleBundle\Entity\Article", mappedBy="author")
@@ -227,6 +222,11 @@ class User extends BaseUser implements Serializable
      */
     protected $activities;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Inck\UserBundle\Entity\Badge", mappedBy="users")
+     */
+    private $badges;
+
 
     public function __construct()
     {
@@ -237,7 +237,7 @@ class User extends BaseUser implements Serializable
         $this->subscriptions    = new ArrayCollection();
         $this->subscribers      = new ArrayCollection();
         $this->groups           = new ArrayCollection();
-        $this->bookshelfs       = new ArrayCollection();
+        $this->badges           = new ArrayCollection();
     }
 
     /**
@@ -877,18 +877,70 @@ class User extends BaseUser implements Serializable
     }
 
     /**
-     * @return mixed
+     * Add activity
+     *
+     * @param \Inck\UserBundle\Entity\Activity $activity
+     *
+     * @return User
      */
-    public function getBookshelfs()
+    public function addActivity(\Inck\UserBundle\Entity\Activity $activity)
     {
-        return $this->bookshelfs;
+        $this->activities[] = $activity;
+
+        return $this;
     }
 
     /**
-     * @param mixed $bookshelfs
+     * Remove activity
+     *
+     * @param \Inck\UserBundle\Entity\Activity $activity
      */
-    public function setBookshelfs($bookshelfs)
+    public function removeActivity(\Inck\UserBundle\Entity\Activity $activity)
     {
-        $this->bookshelfs = $bookshelfs;
+        $this->activities->removeElement($activity);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+    /**
+     * Add badge
+     *
+     * @param \Inck\UserBundle\Entity\Badge $badge
+     *
+     * @return User
+     */
+    public function addBadge(\Inck\UserBundle\Entity\Badge $badge)
+    {
+        $this->badges[] = $badge;
+
+        return $this;
+    }
+
+    /**
+     * Remove badge
+     *
+     * @param \Inck\UserBundle\Entity\Badge $badge
+     */
+    public function removeBadge(\Inck\UserBundle\Entity\Badge $badge)
+    {
+        $this->badges->removeElement($badge);
+    }
+
+    /**
+     * Get badges
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBadges()
+    {
+        return $this->badges;
     }
 }
