@@ -164,7 +164,6 @@ $(document).ready(function(){
             text: 'Hot',
             locked: false
         }]);
-        console.log(popularityInput.select2('data'), popularityInput.val());
     }
 
     function resetCategories(){
@@ -217,8 +216,7 @@ $(document).ready(function(){
         nextPage = 2;
     }
 
-    function getNextPage(){
-        var button = $(this);
+    function getNextPage(button){
         if (button.prop('disabled')) return false;
         button.prop('disabled', true);
 
@@ -258,12 +256,13 @@ $(document).ready(function(){
 
             icon.attr('class', 'fa fa-plus');
             button.prop('disabled', false);
+
         });
 
         return true;
     }
 
     $('#timeline-next-page').click(function(){
-        getNextPage();
+        getNextPage($(this));
     });
 });
