@@ -1,0 +1,49 @@
+{% extends "InckUserBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Badge{% endblock %}
+
+{% block content -%}
+    <div class="container">
+        <h1>Badge</h1>
+
+        <table class="record_properties">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ entity.color }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('badge') }}">
+                    Back to the list
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('badge_edit', { 'id': entity.id }) }}">
+                    Edit
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+    </div>
+{% endblock %}

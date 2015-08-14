@@ -1,0 +1,20 @@
+{% extends "InckUserBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Badge creation{% endblock %}
+
+{% block content -%}
+    <div class="container">
+        <h1>Badge creation</h1>
+
+        {{ form(form) }}
+
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('badge') }}">
+                    Back to the list
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
