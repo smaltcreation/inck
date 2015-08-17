@@ -170,6 +170,11 @@ class User extends BaseUser implements Serializable
     protected $groups;
 
     /**
+     * @ORM\OneToMany(targetEntity="\Inck\ArticleBundle\Entity\Bookshelf", mappedBy="user")
+     */
+    private $bookshelfs;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Inck\ArticleBundle\Entity\Article", mappedBy="author")
@@ -942,5 +947,21 @@ class User extends BaseUser implements Serializable
     public function getBadges()
     {
         return $this->badges;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBookshelfs()
+    {
+        return $this->bookshelfs;
+    }
+
+    /**
+     * @param mixed $bookshelfs
+     */
+    public function setBookshelfs($bookshelfs)
+    {
+        $this->bookshelfs = $bookshelfs;
     }
 }
