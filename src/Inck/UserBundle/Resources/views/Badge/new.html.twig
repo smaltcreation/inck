@@ -3,12 +3,19 @@
 
 {% block title %}Badge creation{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/user/badge/form.css'
+    'bundles/inckuser/css/Badge/badge.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
 {% block content -%}
-    <div class="container">
+    <div class="container ">
         <h1>Badge creation</h1>
-
         {{ form(form) }}
-
         <ul class="record_actions">
             <li>
                 <a href="{{ path('badge') }}">

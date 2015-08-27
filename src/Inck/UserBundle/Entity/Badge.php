@@ -3,12 +3,17 @@
 namespace Inck\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Badge
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Badge
 {
@@ -56,6 +61,80 @@ class Badge
      **/
     private $users;
 
+    /**
+     * @var File
+     *
+     * @Assert\Image(
+     *     maxSize = "10M",
+     * )
+     * @Vich\UploadableField(mapping="badge_image", fileNameProperty="imageName")
+     */
+    protected $imageFile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $imageName;
+
+    /**
+     * @var string
+     */
+    protected $previousImageName;
+
+    /**
+     * @param File|UploadedFile|null $image
+     */
+    public function setImageFile($image)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->updatedAt = new \DateTime();
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        $end = '/web/article/image';
+
+        return (substr((string) $this->imageFile, -strlen($end)) === $end)
+            ? null
+            : $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    public function savePreviousImageName()
+    {
+        $this->previousImageName = $this->imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreviousImageName()
+    {
+        return $this->previousImageName;
+    }
 
     /**
      * Constructor

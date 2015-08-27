@@ -42,10 +42,37 @@ class BadgeController extends Controller
      * @Route("/", name="badge_create")
      * @Method("POST")
      * @Template("InckUserBundle:Badge:new.html.twig")
+     * @param Request $badge
+     *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, Request $badge)
     {
+        /*
+        if(!$badge->getImageName()) {
+            $badge->setImageFile(null);
+        }*/
 
+        // Création du formulaire
+        //$form = $this->createForm(new ArticleType(), $badge);
+
+        // Suppression de l'image
+        $values = $request->request->get('inck_userbundle_badge');
+        $deleteImage = ($values['imageFile']['delete'] && $badge->getImageName());
+
+        if($deleteImage) {
+            $badge->savePreviousImageName();
+        }
+
+        // Suppression de l'image
+        if($deleteImage) {
+            unlink(sprintf(
+                "%s/%s",
+                $this->container->getParameter('upload.badge_image.upload_destination'),
+                $badge->getPreviousImageName()
+            ));
+
+            $badge->setImageName(null);
+        }
 
         $entity = new Badge();
         $form = $this->createCreateForm($entity);

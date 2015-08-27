@@ -27,6 +27,9 @@ parameters:
     upload.article_image.uri_prefix:            /article/image
     upload.article_image.upload_destination:    %kernel.root_dir%/../web/article/image
 
+    upload.badge_image.uri_prefix: /badge/image
+    upload.badge_image.upload_destination: '%kernel.root_dir%/../web/badge/image'
+
     session_handler:    session.handler.memcache
     cookie_domain:      .inck.dev
 

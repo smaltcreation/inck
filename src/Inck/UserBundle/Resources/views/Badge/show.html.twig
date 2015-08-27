@@ -29,6 +29,10 @@
                 <th>Createdat</th>
                 <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td><img id="badge-container" class="img-responsive" src="{{ vich_uploader_asset(entity, 'badge_image') }}"/></td>
+            </tr>
             </tbody>
         </table>
 

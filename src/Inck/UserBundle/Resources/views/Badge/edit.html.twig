@@ -3,6 +3,15 @@
 
 {% block title %}Badge edit{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/user/badge/form.css'
+        'bundles/inckuser/css/Badge/badge.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
 {% block content -%}
     <h1>Badge edit</h1>
 
@@ -17,3 +26,5 @@
     <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}
+
+
