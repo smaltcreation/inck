@@ -12,7 +12,54 @@
     <div id="collapseBookshelf" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBookshelf">
         <div class="panel-body">
             <div class="articles">
-                {% include 'InckArticleBundle:Bookshelf:add.html.twig' %}
+                {% if app.user.bookshelfs|length %}
+                <table class="table">
+                    {# Table header #}
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">Type</th> {# Status #}
+                        <th class="text-center">{{ 'profile.bookshelf.title'|trans }}</th> {# Title #}
+                        <th class="text-center col-md-2">{{ 'profile.bookshelf.number_article'|trans }}</th> {# Date #}
+                        <th class="text-right col-md-1">Actions</th> {# Actions #}
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for bookshelf in app.user.bookshelfs %}
+
+                            <tr>
+                                <td>
+                                    {% if bookshelf.share %}
+                                    <span class="label label-success btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'profile.bookshelf.public'|trans }}">
+                                        <i class="fa fa-globe"></i>
+                                    </span>
+                                    {% else %}
+                                        <span class="label label-warning btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'profile.bookshelf.private'|trans }}">
+                                        <i class="fa fa-lock"></i>
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ bookshelf.title }}</td>
+                                <td>{{ bookshelf.articles|length }}</td>
+                                <td>{#TODO: Ajouter des actions#}</td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+                {% else %}
+                    {{ 'profile.bookshelf.no_bookshelf'|trans }}
+                {% endif %}
+                <p>
+                    <a class="btn btn-inverse" role="button" href="{{ path('inck_article_bookshelf_new') }}">
+                        <i class="fa fa-plus"></i>
+                        {{ 'profile.bookshelf.create_bookshelf'|trans }}
+                    </a>
+                </p>
+                {#{% include 'InckArticleBundle:Bookshelf:add.html.twig' %}#}
             </div>
         </div>
     </div>

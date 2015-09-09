@@ -111,8 +111,14 @@ profile:
         remove_article: If you would like to remove an article, just click on the
         top_right: on the top right of the article
         personnal_history: History of my twenty last activities
+    bookshelf:
+        title: Title
+        number_article: Number of article
+        no_bookshlef: You haven't created any bookshelves yet
+        create_bookshelf: Create a new bookshelf
+        public: Public
+        private: Private
 
-# Password change
 change_password:
     submit: Change password
     flash:
