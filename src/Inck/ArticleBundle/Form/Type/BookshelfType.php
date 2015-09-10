@@ -21,9 +21,9 @@ class BookshelfType extends AbstractType
             ],
         ])
             ->add('description', 'textarea', [
-                'label'         => 'Déscription',
+                'label'         => 'Description',
                 'attr'          => [
-                    'placeholder'   => 'Déscription',
+                    'placeholder'   => 'Description',
                     'rows'          => 4,
                     'maxlength'     => 255,
                 ],])

@@ -107,12 +107,6 @@ $(document).ready(function(){
         $('#article-preview').modal({
             remote: $(this).attr('href')
         });
-    }).on('click', '.bookshelf-modal', function(e) {
-        e.preventDefault();
-
-        $('#bookshelf-preview').modal({
-            remote: $(this).attr('href')
-        });
     });
 
     $('body').on('hidden.bs.modal', '#article-preview', function() {

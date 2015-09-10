@@ -1,15 +1,36 @@
-{%  trans_default_domain 'ArticleBundle' %}
+{% extends 'InckArticleBundle::layout.html.twig' %}
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'bookshelf.modal.close'|trans }}</span></button>
-    <h4 class="modal-title" id="article-title">{{ bookshelf.title }}</h4>
-    <p>{{ bookshelf.description }}</p>
-</div>
-<div class="modal-body">
-    <p>
+{% trans_default_domain 'ArticleBundle' %}
 
-    </p>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> {{ 'bookshelf.modal.close'|trans }}</button>
-</div>
+{% block title %}
+    {{ 'bookshelf.show.title'|trans }}
+{% endblock %}
+
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>
+                {{ bookshelf.title }}
+
+                <sup>
+                    <small>
+                    {% if bookshelf.share %}
+                        <span class="label label-success">{{ "bookshelf.show.public"|trans }}</span>
+                    {% else %}
+                        <span class="label label-primary">{{ "bookshelf.show.private"|trans }}</span>
+                    {% endif %}
+                    </small>
+                </sup>
+            </h1>
+            <p>
+                {{ bookshelf.description }}
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+    </div>
+{% endblock %}

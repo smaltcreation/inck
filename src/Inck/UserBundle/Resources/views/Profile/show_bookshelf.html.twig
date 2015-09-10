@@ -12,11 +12,11 @@
     <div id="collapseBookshelf" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBookshelf">
 
         {# Modal for article preview #}
-        <div class="modal fade" id="bookshelf-preview" tabindex="-1" role="dialog" aria-labelledby="bookshelf-title" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content"></div>
-            </div>
-        </div>
+        {#<div class="modal fade" id="bookshelf-preview" tabindex="-1" role="dialog" aria-labelledby="bookshelf-title" aria-hidden="true">#}
+            {#<div class="modal-dialog modal-lg">#}
+                {#<div class="modal-content"></div>#}
+            {#</div>#}
+        {#</div>#}
 
         <div class="panel-body">
             <div class="articles">
@@ -52,7 +52,7 @@
                                 <td class="text-center">{{ bookshelf.articles|length }}</td>
                                 <td>
                                     <div class="pull-right btn-group">
-                                        <a href="{{ path('inck_article_bookshelf_show', { 'id': bookshelf.id }) }}" class="btn btn-primary btn-xs btn-tooltip bookshelf-modal" data-placement="top" title="Aperçu" data-container="body" data-toggle="tootltip">
+                                        <a href="{{ path('inck_article_bookshelf_show', { 'id': bookshelf.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-placement="top" title="Voir" data-container="body" data-toggle="tootltip">
                                             <i class="fa fa-search"></i>
                                         </a>
                                         <a href="{{ path('inck_article_bookshelf_edit', { 'id': bookshelf.id }) }}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
