@@ -103,3 +103,7 @@ filter:
         filter: Filtrer
         filterArticles: Filtrer des articles
         sortBy: Trier par
+
+bookshelf:
+    modal:
+        close: Fermer

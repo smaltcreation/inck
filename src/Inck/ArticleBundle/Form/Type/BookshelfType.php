@@ -2,10 +2,8 @@
 
 namespace Inck\ArticleBundle\Form\Type;
 
-use Inck\ArticleBundle\Form\DataTransformer\TagsToNamesTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class BookshelfType extends AbstractType
 {
@@ -22,10 +20,6 @@ class BookshelfType extends AbstractType
                 'placeholder'   => 'Nommez votre étagère',
             ],
         ])
-            ->add('share', 'checkbox',
-                array('label' => 'Rendre votre étagère publique ?',
-                    'required' => false,
-                ))
             ->add('description', 'textarea', [
                 'label'         => 'Déscription',
                 'attr'          => [
@@ -33,15 +27,19 @@ class BookshelfType extends AbstractType
                     'rows'          => 4,
                     'maxlength'     => 255,
                 ],])
+            ->add('share', 'checkbox',
+                array('label' => 'Rendre votre étagère publique ?',
+                    'required' => false,
+                ))
             ->add('actions', 'form_actions', [
                 'buttons' => [
                     'publish'   => [
                         'type'      => 'submit',
                         'options'   => [
-                            'label' => 'Publier l\'étagère',
+                            'label' => 'Ajouter la bibliothèque',
                             'attr'  => [
                                 'class' => 'btn-success',
-                                'icon'  => 'send',
+                                'icon'  => 'plus',
                             ],
                         ]
                     ],

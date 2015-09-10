@@ -21,7 +21,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class BookshelfController extends Controller
 {
     /**
-     * @Route("/show/{id}", name="inck_article_bookshelf_show", requirements={"id"})
+     * @Route("/{id}", name="inck_article_bookshelf_show", requirements={"id"})
      * @ParamConverter("bookshelf", options={"mapping": {"id": "id"}})
      * @Template()
      * @param Bookshelf $bookshelf
@@ -29,6 +29,12 @@ class BookshelfController extends Controller
      */
     public function showAction(Bookshelf $bookshelf)
     {
+        if (!$bookshelf->getShare()) {
+            if($this->getUser() !== $bookshelf->getUser()) {
+                throw $this->createAccessDeniedException("Vous n'avez pas le droit de supprimé cette bibliothèque !");
+            }
+        }
+
         return array(
             'bookshelf' => $bookshelf,
         );
@@ -50,7 +56,7 @@ class BookshelfController extends Controller
     }
 
     /**
-     * @Route("/edit/{id}", name="inck_article_bookshelf_edit")
+     * @Route("/{id}/edit", name="inck_article_bookshelf_edit")
      * @ParamConverter("bookshelf", options={"mapping": {"id": "id"}})
      * @Secure(roles="ROLE_USER")
      * @param Request $request
@@ -58,6 +64,10 @@ class BookshelfController extends Controller
      */
     public function editAction(Request $request, Bookshelf $bookshelf)
     {
+        if($bookshelf->getUser() != $this->getUser()){
+            throw $this->createAccessDeniedException('Vous n\'êtes pas le propriétaire de cette bibliothèque');
+        }
+
         return $this->forward('InckArticleBundle:Bookshelf:form', array(
             'request'   => $request,
             'bookshelf'   => $bookshelf,
@@ -87,9 +97,13 @@ class BookshelfController extends Controller
             $em->persist($bookshelf);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'L\'étagère a bien été enregistrée !');
+            if($action == "edit"){
+                $this->get('session')->getFlashBag()->add('success', 'La bibliothèque a bien été modifiée !');
+            }else{
+                $this->get('session')->getFlashBag()->add('success', 'La bibliothèque a bien été ajoutée !');
+            }
 
-            return $this->redirect($this->generateUrl('inck_article_bookshelf_show', array('id' => $bookshelf->getId())));
+            return $this->redirect($this->generateUrl('inck_user_profile_show'));
         }
         // On retourne le formulaire pour la vue
         return array(
@@ -100,7 +114,7 @@ class BookshelfController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}", name="inck_article_bookshelf_delete", requirements={"id" = "\d+"}, options={"expose"=true}, condition="request.isXmlHttpRequest()")
+     * @Route("/{id}", name="inck_article_bookshelf_delete", requirements={"id" = "\d+"}, options={"expose"=true}, condition="request.isXmlHttpRequest()")
      * @Method("DELETE")
      * @ParamConverter("bookshelf", options={"mapping": {"id": "id"}})
      * @Secure(roles="ROLE_USER")

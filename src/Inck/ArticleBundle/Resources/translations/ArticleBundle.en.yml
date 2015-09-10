@@ -104,3 +104,7 @@ filter:
        filter: Filter
        filterArticles: Filter articles
        sortBy: Sort by
+
+bookshelf:
+    modal:
+        close: Close
