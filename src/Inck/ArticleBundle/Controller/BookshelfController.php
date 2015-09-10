@@ -4,7 +4,9 @@ namespace Inck\ArticleBundle\Controller;
 
 use Inck\ArticleBundle\Entity\Bookshelf;
 use Inck\ArticleBundle\Form\Type\BookshelfType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -98,19 +100,25 @@ class BookshelfController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}", name="inck_article_bookshelf_delete")
+     * @Route("/delete/{id}", name="inck_article_bookshelf_delete", requirements={"id" = "\d+"}, options={"expose"=true}, condition="request.isXmlHttpRequest()")
+     * @Method("DELETE")
      * @ParamConverter("bookshelf", options={"mapping": {"id": "id"}})
      * @Secure(roles="ROLE_USER")
      */
     public function deleteAction(Bookshelf $bookshelf)
     {
-        // TODO : sécurité
+        try {
+            if ($this->getUser() !== $bookshelf->getUser()) {
+                throw $this->createAccessDeniedException("Vous n'avez pas le droit de supprimé cette bibliothèque !");
+            }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($bookshelf);
-        $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($bookshelf);
+            $em->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'L\'étagère a bien été supprimée !');
-        return $this->redirect($this->generateUrl('inck_user_profile_show'));
+            return new JsonResponse(array('message' => 'Article a été supprimé avec succès !'));
+        } catch(\Exception $e) {
+            return new JsonResponse(array('message' => $e->getMessage()), 400);
+        }
     }
 }

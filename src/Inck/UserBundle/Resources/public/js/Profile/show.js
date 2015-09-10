@@ -49,8 +49,12 @@ $(document).ready(function(){
                         $(this).remove();
                     })
                 }).fail(function(jqXHR) {
-                    var data = $.parseJSON(jqXHR.responseText);
-                    swal("Erreur !", data.message, "error");
+                    try{
+                        var data = JSON.parse(jqXHR.responseText);
+                        swal("Erreur !", data.message, "error");
+                    }catch(e){
+                        swal("Erreur !", "Une erreur est survenue lors de la suppression ! Merci de réessayer plus tard.", "error");
+                    }
                 })
             } else {
                 swal("Annulé", "Votre article n'a pas été supprimé !", "error");
@@ -73,6 +77,7 @@ $(document).ready(function(){
         }, function(isConfirm) {
             if (isConfirm) {
                 $.ajax({
+                    method: "DELETE",
                     url: Routing.generate('inck_article_bookshelf_delete', {
                         id: btn.attr('data-bookshelf-id')
                     }),
@@ -83,8 +88,12 @@ $(document).ready(function(){
                         $(this).remove();
                     })
                 }).fail(function(jqXHR) {
-                    var data = $.parseJSON(jqXHR.responseText);
-                    swal("Erreur !", data.message, "error");
+                    try{
+                        var data = JSON.parse(jqXHR.responseText);
+                        swal("Erreur !", data.message, "error");
+                    }catch(e){
+                        swal("Erreur !", "Une erreur est survenue lors de la suppression ! Merci de réessayer plus tard.", "error");
+                    }
                 })
             } else {
                 swal("Annulé", "L'étagère n'a pas été supprimé !", "error");
