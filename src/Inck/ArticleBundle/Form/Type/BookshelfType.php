@@ -36,10 +36,10 @@ class BookshelfType extends AbstractType
                     'publish'   => [
                         'type'      => 'submit',
                         'options'   => [
-                            'label' => 'Ajouter la bibliothèque',
+                            'label' => 'Valider',
                             'attr'  => [
                                 'class' => 'btn-success',
-                                'icon'  => 'plus',
+                                'icon'  => 'check',
                             ],
                         ]
                     ],

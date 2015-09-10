@@ -110,6 +110,10 @@ bookshelf:
         title: Bibliothèque
         public: Public
         private: Private
+        see_profile: Show %user% profile
+        edit: Edit the bookshelf
+        launch_bookshelf: Launch the bookshelf
+        no_articles: The bookshelf doesn't have any article yet !
     form:
         add:
             title: Create a bookshelf

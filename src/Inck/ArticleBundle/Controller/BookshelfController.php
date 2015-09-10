@@ -29,11 +29,6 @@ class BookshelfController extends Controller
      */
     public function showAction(Bookshelf $bookshelf)
     {
-        $em = $this->getDoctrine()->getManager();
-        $rep = $em->getRepository("InckArticleBundle:Article");
-        $article = $rep->find(1);
-        $bookshelf->addArticle($article);
-
         if (!$bookshelf->getShare()) {
             if($this->getUser() !== $bookshelf->getUser()) {
                 throw $this->createAccessDeniedException("Vous n'avez pas les droits d'accès cette bibliothèque !");
@@ -108,7 +103,7 @@ class BookshelfController extends Controller
                 $this->get('session')->getFlashBag()->add('success', 'La bibliothèque a bien été ajoutée !');
             }
 
-            return $this->redirect($this->generateUrl('inck_user_profile_show'));
+            return $this->redirect($this->generateUrl('inck_article_bookshelf_show', array('id' => $bookshelf->getId())));
         }
         // On retourne le formulaire pour la vue
         return array(

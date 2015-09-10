@@ -109,6 +109,10 @@ bookshelf:
         title: Bibliothèque
         public: Publique
         private: Privée
+        see_profile: Voir le profile de %user%
+        edit: Editer la bibliothèque
+        launch_bookshelf: Lancer la bibliothèque
+        no_articles: La bibliothèque ne contient pas d'articles !
     form:
         add:
             title: Créer une bibliothèque

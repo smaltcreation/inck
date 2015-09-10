@@ -15,8 +15,11 @@
     {% endstylesheets %}
 {% endblock %}
 
+{# Setting variables#}
+{% set gravatar = gravatar(bookshelf.user.email, 25, true) %}
+
 {% block header %}
-    <div class="jumbotron">
+    <div class="jumbotron text-center">
         <div class="container">
             <h1>
                 {{ bookshelf.title }}
@@ -31,8 +34,16 @@
                     </small>
                 </sup>
             </h1>
-            <p>
+            <h2>
                 {{ bookshelf.description }}
+            </h2>
+            <p>
+                {% if bookshelf.user == app.user %}
+                <a href="{{ path('inck_article_bookshelf_edit', {'id': bookshelf.id}) }}" class="btn btn-inverse"><i class="fa fa-pencil-square-o"></i> {{ 'bookshelf.show.edit'|trans }}</a>
+                {% else %}
+                <a href="{{ path('fos_user_profile_preview', {'username': bookshelf.user.username}) }}" class="btn btn-inverse"><i class="fa fa-user"></i> {{ 'bookshelf.show.see_profile'|trans({"%user%": bookshelf.user.fullname}) }}</a>
+                {% endif %}
+                <a href="#" class="btn btn-inverse"><i class="fa fa-play"></i> {{ 'bookshelf.show.launch_bookshelf'|trans }}</a>
             </p>
         </div>
     </div>
@@ -40,6 +51,9 @@
 
 {% block content %}
     <div id="timeline" class="container">
+        <div class="alert alert-info" role="alert">
+            {{ "bookshelf.show.no_articles"|trans }}
+        </div>
         {% include 'InckArticleBundle:Article:filter.html.twig' with { 'articles': bookshelf.articles, 'totalArticles': bookshelf.articles|length, 'totalPages': 1 } %}
     </div>
 {% endblock %}
