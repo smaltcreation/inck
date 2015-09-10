@@ -69,9 +69,28 @@
                         </ul>
                     </div>
                     <div class="panel-footer">
-                        <a href="{{ path('badge_edit_member', { 'id': entity.id }) }}" class="btn btn-primary">
-                            Ajouter des utilisateurs
-                        </a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmember">Ajouter des utilisateurs</button>
+
+                        <!-- Modal -->
+                        <div id="editmember" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Ajouter des membres</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ render(controller('InckUserBundle:Badge:memberedit', { 'id': entity.id })) }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

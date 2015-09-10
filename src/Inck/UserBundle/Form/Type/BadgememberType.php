@@ -19,6 +19,7 @@ class BadgememberType extends AbstractType
                 'class' => 'InckUserBundle:User',
                 'choice_label' => 'username',
                 'multiple' => 'true'))
+            ->add('submit', 'submit', array('label' => 'Mettre a jour'))
         ;
     }
     

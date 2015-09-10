@@ -95,7 +95,6 @@ class BadgeController extends Controller
      * Finds and displays a Badge entity.
      *
      * @Route("/{id}", name="badge_show")
-     * @Method("GET")
      * @Template()
      * @Secure(roles="ROLE_ADMIN")
      */
@@ -241,9 +240,6 @@ class BadgeController extends Controller
     }
 
     /**
-     *
-     * @Route("editmember/{id}", name="badge_edit_member")
-     * @Secure(roles="ROLE_ADMIN")
      * @Template("InckUserBundle:Badge:editmember.html.twig")
      */
     public function membereditAction($id)
@@ -256,27 +252,58 @@ class BadgeController extends Controller
             throw $this->createNotFoundException('Unable to find Badge entity.');
         }
 
-        $form = $this->createForm(new BadgememberType(), $entity);
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $editForm = $this->createEditmemberForm($entity);
 
-        $request = $this->container->get('request');
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+        );
+    }
 
+    /**
+     * Creates a form to edit a Badge entity.
+     *
+     * @param Badge $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditmemberForm(Badge $entity)
+    {
+        $form = $this->createForm(new BadgememberType(), $entity, array(
+            'action' => $this->generateUrl('badge_updatemem', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
 
-        if ($request->getMethod() == 'POST')
-        {
-            $form->handleRequest($request);
+        return $form;
+    }
+    /**
+     *
+     * @Route("mem/{id}", name="badge_updatemem")
+     * @Method("PUT")
+     * @Secure(roles="ROLE_ADMIN")
+     * @Template("InckUserBundle:Badge:editmember.html.twig")
+     */
+    public function updatememAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('InckUserBundle:Badge')->find($id);
 
-            if ($form->isValid())
-            {
-                $em = $this->container->get('doctrine')->getEntityManager();
-                $em->persist($entity);
-                $em->flush();
-                return $this->redirect($this->generateUrl('badge_show', array('id' => $id)));
-            }
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Badge entity.');
+        }
+
+        $editForm = $this->createEditmemberForm($entity);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('badge_show', array('id' => $id)));
         }
 
         return array(
-                'form' => $form->createView()
-            );
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+        );
     }
 }
