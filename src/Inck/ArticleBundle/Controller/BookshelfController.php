@@ -29,6 +29,11 @@ class BookshelfController extends Controller
      */
     public function showAction(Bookshelf $bookshelf)
     {
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository("InckArticleBundle:Article");
+        $article = $rep->find(1);
+        $bookshelf->addArticle($article);
+
         if (!$bookshelf->getShare()) {
             if($this->getUser() !== $bookshelf->getUser()) {
                 throw $this->createAccessDeniedException("Vous n'avez pas les droits d'accès cette bibliothèque !");

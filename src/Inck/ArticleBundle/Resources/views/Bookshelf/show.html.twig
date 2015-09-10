@@ -6,6 +6,15 @@
     {{ 'bookshelf.show.title'|trans }}
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/user/profile/preview.css'
+    'bundles/inckarticle/css/Article/score.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
 {% block header %}
     <div class="jumbotron">
         <div class="container">
@@ -30,7 +39,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-
+    <div id="timeline" class="container">
+        {% include 'InckArticleBundle:Article:filter.html.twig' with { 'articles': bookshelf.articles, 'totalArticles': bookshelf.articles|length, 'totalPages': 1 } %}
     </div>
 {% endblock %}
