@@ -87,24 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="user-bookshelfs-heading">
-                        <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent=".accordion" href="#user-bookshelfs" aria-expanded="true" aria-controls="user-bookshelfs">
-                                <i class="fa fa-book"></i>
-                                {{ 'profile.preview.playlist'|trans }}
-                            </a>
-                            {#<span class="label label-default pull-right">#}
-                                {#<span>{{ nbBookshelfs }}</span>#}
-                            {#</span>#}
-                        </h4>
-                    </div>
-                    <div id="user-bookshelfs" class="panel-collapse collapse" role="tabpanel" aria-labelledby="user-bookshelfs-heading">
-                        <div class="panel-body">
-
-                        </div>
-                    </div>
-                </div>
+                {% include 'InckUserBundle:Profile:show_bookshelf.html.twig' with {'bookshelfs': user.bookshelfs, 'bookshelfs_length': user.publicBookshelfs|length} %}
             </div>
         </div>
 

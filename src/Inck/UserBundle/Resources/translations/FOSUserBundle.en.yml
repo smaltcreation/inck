@@ -114,10 +114,12 @@ profile:
         bookshelves: Bookshelves
         title: Title
         number_article: Number of articles
-        no_bookshlef: You haven't created any bookshelves yet
+        no_bookshlef: You haven't created any bookshelves yet.
+        no_bookshelf_foreing: This user has no public bookshelves.
         create_bookshelf: Create a new bookshelf
         public: Public
         private: Private
+        badge: bookshelf
 
 change_password:
     submit: Change password

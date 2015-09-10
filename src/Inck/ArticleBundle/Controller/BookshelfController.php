@@ -21,6 +21,21 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class BookshelfController extends Controller
 {
     /**
+     * @Route("/new", name="inck_article_bookshelf_new")
+     * @Secure(roles="ROLE_USER")
+     * @param Request $request
+     * @return Response
+     */
+    public function addAction(Request $request)
+    {
+        return $this->forward('InckArticleBundle:Bookshelf:form', array(
+            'request'   => $request,
+            'bookshelf' => new Bookshelf(),
+            'action'    => 'add',
+        ));
+    }
+
+    /**
      * @Route("/{id}", name="inck_article_bookshelf_show", requirements={"id"})
      * @ParamConverter("bookshelf", options={"mapping": {"id": "id"}})
      * @Template()
@@ -38,21 +53,6 @@ class BookshelfController extends Controller
         return array(
             'bookshelf' => $bookshelf,
         );
-    }
-
-    /**
-     * @Route("/new", name="inck_article_bookshelf_new")
-     * @Secure(roles="ROLE_USER")
-     * @param Request $request
-     * @return Response
-     */
-    public function addAction(Request $request)
-    {
-        return $this->forward('InckArticleBundle:Bookshelf:form', array(
-            'request'   => $request,
-            'bookshelf' => new Bookshelf(),
-            'action'    => 'add',
-        ));
     }
 
     /**
