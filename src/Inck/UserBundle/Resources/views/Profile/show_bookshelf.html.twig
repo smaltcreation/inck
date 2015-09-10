@@ -50,13 +50,6 @@
                                         <a href="{{ path('inck_article_bookshelf_edit', { 'id': bookshelf.id }) }}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        {#<a data-bookshelf-id="{{ bookshelf.id }}" class="btn btn-warning btn-xs btn-tooltip btn-bookshelf-share" data-toggle="tooltip" data-placement="top" title="Partager" data-container="body">
-                                            {% if bookshelf.share %}
-                                            <i class="fa fa-unlock-alt"></i>
-                                            {% else %}
-                                            <i class="fa fa-unlock"></i>
-                                            {% endif %}
-                                        </a>#}
                                         <a data-bookshelf-id="{{ bookshelf.id }}" class="btn btn-danger btn-xs btn-tooltip btn-bookshelf-delete" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body">
                                             <i class="fa fa-times"></i>
                                         </a>
