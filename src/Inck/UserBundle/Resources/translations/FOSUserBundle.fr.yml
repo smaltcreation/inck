@@ -117,12 +117,12 @@ profile:
         subscriptions: Mes abonnements
         manage_subscriptions : Gérer mes abonnements
         personnal_history: Historique de mes vingt dernières activités
-        list_bookshelf : Etagères
     bookshelf:
+        bookshelves: Bibliothèques
         title: Titre
         number_article: Nombre d'articles
-        no_bookshelf: Vous n'avez pas encore créé d'étagère pour l'instante.
-        create_bookshelf: Créer une nouvelle étagère
+        no_bookshelf: Vous n'avez pas encore créé de bibliothèque pour l'instante.
+        create_bookshelf: Créer une nouvelle bibliothèque
         public: Publique
         private: Privée
 
