@@ -58,6 +58,40 @@ $(document).ready(function(){
         });
     });
 
+    $('.btn-bookshelf-delete').click(function() {
+        var btn = $(this);
+        swal({
+            title: "Êtes-vous sûr ?",
+            text: "Cette étagère sera supprimée définitevement, vous ne pourrez pas le récupérer !",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f15645",
+            confirmButtonText: "Supprimer cette étagère !",
+            cancelButtonText: "Annuler",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function(isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: Routing.generate('inck_article_bookshelf_delete', {
+                        id: btn.attr('data-bookshelf-id')
+                    }),
+                    dataType: 'json'
+                }).done(function(data) {
+                    swal("Supprimé !", data.message, "success");
+                    btn.closest('tr').hide(400, function() {
+                        $(this).remove();
+                    })
+                }).fail(function(jqXHR) {
+                    var data = $.parseJSON(jqXHR.responseText);
+                    swal("Erreur !", data.message, "error");
+                })
+            } else {
+                swal("Annulé", "L'étagère n'a pas été supprimé !", "error");
+            }
+        });
+    });
+
     $('#content').on('click', '.btn-modal', function(e) {
         e.preventDefault();
 
