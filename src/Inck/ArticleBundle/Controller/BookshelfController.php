@@ -41,19 +41,6 @@ class BookshelfController extends Controller
     }
 
     /**
-     * @Route("/{id}/modal", name="inck_article_bookshelf_show_modal", requirements={"id"})
-     * @ParamConverter("bookshelf", options={"mapping": {"id": "id"}})
-     * @Method("GET")
-     * @Template()
-     * @param Bookshelf $bookshelf
-     * @return array
-     */
-    public function showModalAction(Bookshelf $bookshelf)
-    {
-        return $this->showAction($bookshelf);
-    }
-
-    /**
      * @Route("/new", name="inck_article_bookshelf_new")
      * @Secure(roles="ROLE_USER")
      * @param Request $request
