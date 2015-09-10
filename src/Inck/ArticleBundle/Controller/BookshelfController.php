@@ -31,7 +31,7 @@ class BookshelfController extends Controller
     {
         if (!$bookshelf->getShare()) {
             if($this->getUser() !== $bookshelf->getUser()) {
-                throw $this->createAccessDeniedException("Vous n'avez pas le droit de supprimé cette bibliothèque !");
+                throw $this->createAccessDeniedException("Vous n'avez pas l'accès cette bibliothèque !");
             }
         }
 
