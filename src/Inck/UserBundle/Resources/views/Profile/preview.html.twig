@@ -27,6 +27,10 @@
                 <span>{{ user.fullname }}</span>
                 <small></small>
             </h1>
+            <div>{% for badge in badges %}
+                    <span class="label label-default" style="background-color: {{ badge.color }}; font-size: 12px;">
+                            <span style="color: {{ badge.colorText }}"><i class="fa fa-{{ badge.icone }} fa-fw"></i> | {{ badge.title }}</span></span>
+                {% endfor %}</div>
             <p>
                 {% if user.biography %}
                     {{ user.biography }}

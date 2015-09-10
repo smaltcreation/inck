@@ -1,5 +1,4 @@
 {% extends "InckUserBundle::layout.html.twig" %}
-{% trans_default_domain 'FOSUserBundle' %}
 
 {% block title %}Badge edit{% endblock %}
 
@@ -17,7 +16,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Edition de badge</h1>
+                    <h1>Membres d'un badge</h1>
                 </div>
             </div>
         </div>
@@ -27,7 +26,7 @@
 {% block content -%}
     <div class="container ">
 
-            {{ form(edit_form) }}
+            {{ form(form) }}
 
             <ul class="record_actions">
                 <li>
@@ -35,7 +34,6 @@
                         Retour à l'administration
                     </a>
                 </li>
-                <li>{{ form(delete_form) }}</li>
             </ul>
     </div>
 {% endblock %}
