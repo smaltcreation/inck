@@ -20,7 +20,7 @@
                         <th class="col-md-1">Type</th> {# Status #}
                         <th class="text-center">{{ 'profile.bookshelf.title'|trans }}</th> {# Title #}
                         <th class="text-center col-md-2">{{ 'profile.bookshelf.number_article'|trans }}</th> {# Date #}
-                        <th class="text-right col-md-1">Actions</th> {# Actions #}
+                        <th class="text-right col-md-2">Actions</th> {# Actions #}
                     </tr>
                     </thead>
 
@@ -35,14 +35,33 @@
                                         <i class="fa fa-globe"></i>
                                     </span>
                                     {% else %}
-                                        <span class="label label-warning btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'profile.bookshelf.private'|trans }}">
+                                        <span class="label label-primary btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'profile.bookshelf.private'|trans }}">
                                         <i class="fa fa-lock"></i>
                                     </span>
                                     {% endif %}
                                 </td>
-                                <td>{{ bookshelf.title }}</td>
-                                <td>{{ bookshelf.articles|length }}</td>
-                                <td>{#TODO: Ajouter des actions#}</td>
+                                <td class="text-center">{{ bookshelf.title }}</td>
+                                <td class="text-center">{{ bookshelf.articles|length }}</td>
+                                <td>
+                                    <div class="pull-right btn-group">
+                                        <a href="{{ path('inck_article_bookshelf_show', { 'id': bookshelf.id }) }}" class="btn btn-primary btn-xs btn-tooltip btn-modal" data-placement="top" title="Aperçu" data-container="body" data-toggle="tootltip">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                        <a href="{{ path('inck_article_bookshelf_edit', { 'id': bookshelf.id }) }}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        {#<a data-bookshelf-id="{{ bookshelf.id }}" class="btn btn-warning btn-xs btn-tooltip btn-bookshelf-share" data-toggle="tooltip" data-placement="top" title="Partager" data-container="body">
+                                            {% if bookshelf.share %}
+                                            <i class="fa fa-unlock-alt"></i>
+                                            {% else %}
+                                            <i class="fa fa-unlock"></i>
+                                            {% endif %}
+                                        </a>#}
+                                        <a data-bookshelf-id="{{ bookshelf.id }}" class="btn btn-danger btn-xs btn-tooltip btn-bookshelf-delete" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </td>
                             </tr>
 
                         {% endfor %}
@@ -59,7 +78,6 @@
                         {{ 'profile.bookshelf.create_bookshelf'|trans }}
                     </a>
                 </p>
-                {#{% include 'InckArticleBundle:Bookshelf:add.html.twig' %}#}
             </div>
         </div>
     </div>

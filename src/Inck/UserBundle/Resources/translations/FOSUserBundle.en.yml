@@ -113,7 +113,7 @@ profile:
         personnal_history: History of my twenty last activities
     bookshelf:
         title: Title
-        number_article: Number of article
+        number_article: Number of articles
         no_bookshlef: You haven't created any bookshelves yet
         create_bookshelf: Create a new bookshelf
         public: Public

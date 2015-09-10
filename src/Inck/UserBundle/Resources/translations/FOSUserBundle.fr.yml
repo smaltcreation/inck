@@ -120,7 +120,7 @@ profile:
         list_bookshelf : Etagères
     bookshelf:
         title: Titre
-        number_article: Nombre d'article
+        number_article: Nombre d'articles
         no_bookshelf: Vous n'avez pas encore créé d'étagère pour l'instante.
         create_bookshelf: Créer une nouvelle étagère
         public: Publique
