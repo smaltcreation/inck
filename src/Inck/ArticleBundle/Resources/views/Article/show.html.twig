@@ -190,6 +190,9 @@
             </div>
         </div>
     </div>
+    {% if is_granted('ROLE_USER') %}
+        {% include "InckArticleBundle:Bookshelf:add_modal.html.twig" with {'bookshelfs': app.user.bookshelfs} %}
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
@@ -206,6 +209,7 @@
         'bundles/inckarticle/js/Article/disqus.js'
         'bundles/inckarticle/js/Article/watchLater.js'
         'bundles/inckarticle/js/Article/summary.js'
+        'bundles/inckarticle/js/Bookshelf/modal.js'
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

@@ -966,6 +966,9 @@ class User extends BaseUser implements Serializable
         $this->bookshelfs = $bookshelfs;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getPublicBookshelfs(){
         $collection = new ArrayCollection();
 

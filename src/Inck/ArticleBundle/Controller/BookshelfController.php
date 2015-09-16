@@ -2,9 +2,11 @@
 
 namespace Inck\ArticleBundle\Controller;
 
+use Inck\ArticleBundle\Entity\Article;
 use Inck\ArticleBundle\Entity\Bookshelf;
 use Inck\ArticleBundle\Form\Type\BookshelfType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,6 +19,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * @Route("/bookshelf")
+ * @Security("has_role('ROLE_USER')")
  */
 class BookshelfController extends Controller
 {
@@ -128,6 +131,48 @@ class BookshelfController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($bookshelf);
+            $em->flush();
+
+            return new JsonResponse(array('message' => 'Article a été supprimé avec succès !'));
+        } catch(\Exception $e) {
+            return new JsonResponse(array('message' => $e->getMessage()), 400);
+        }
+    }
+
+    /**
+     * @Route("/{bookshelfId}/{articleId}", name="inck_article_bookshelf_article", options={"expose"=true}, condition="request.isXmlHttpRequest()")
+     * @Method("PUT")
+     */
+    public function addArticleAction(Bookshelf $bookshelf, Article $article)
+    {
+        try {
+            if ($this->getUser() !== $bookshelf->getUser()) {
+                throw $this->createAccessDeniedException("Vous n'avez pas le droit de modifier cette bibliothèque !");
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $bookshelf->addArticle($article);
+            $em->flush();
+
+            return new JsonResponse(array('message' => 'Article a été supprimé avec succès !'));
+        } catch(\Exception $e) {
+            return new JsonResponse(array('message' => $e->getMessage()), 400);
+        }
+    }
+
+    /**
+     * @Route("/{bookshelfId}/{articleId}", name="inck_article_bookshelf_article", options={"expose"=true}, condition="request.isXmlHttpRequest()")
+     * @Method("DELETE")
+     */
+    public function removeArticleAction(Bookshelf $bookshelf, Article $article)
+    {
+        try {
+            if ($this->getUser() !== $bookshelf->getUser()) {
+                throw $this->createAccessDeniedException("Vous n'avez pas le droit de modifier cette bibliothèque !");
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $bookshelf->removeArticle($article);
             $em->flush();
 
             return new JsonResponse(array('message' => 'Article a été supprimé avec succès !'));
