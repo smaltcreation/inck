@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookshelf-add">Bookshelf modal</button>
+<button type="button" class="btn btn-primary btn-modal-bookshelf" data-toggle="modal" data-target="#bookshelf-add" data-article-id="{{ article.id }}">Bookshelf modal</button>
 
 <div id="bookshelf-add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="bookshelfAdd">
     <div class="modal-dialog modal-sm">
@@ -12,32 +12,17 @@
             <div class="modal-body">
                 <form action="#" method="get" name="bookshelf">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="bookshelf-title" placeholder="Add to a bookshelf" autocomplete="off" list="bookshelfs-list" data-article-id="{{ article.id }}" >
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="bookshelf-title" placeholder="Add to a bookshelf" autocomplete="off" list="bookshelfs-list">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">Add</button>
+                            </span>
+                        </div>
                         <datalist id="bookshelfs-list">
-                            {% for bookshelf in bookshelfs %}
-                                {% if not bookshelf.hasArticle(article.id) %}
-                                    <option value="{{ bookshelf.title }}" data-bookshelf-id="{{ bookshelf.id }}"></option>
-                                {% endif %}
-                            {% endfor %}
                         </datalist>
                     </div>
-                    <table class="table table-condensed table-hover" id="bookshelf-current" data-article-id="{{ article.id }}">
-                        <tbody>
-                        {% for bookshelf in bookshelfs %}
-                            {% if bookshelf.hasArticle(article.id) %}
-                                <tr class="bookshelf-current-list" data-bookshelf-id="{{ bookshelf.id }}">
-                                    <td>
-                                        <i class="fa fa-book"></i>
-                                        {{ bookshelf.title }}
-                                        <a href="#" role="button" class="btn btn-default btn-xs pull-right btn-bookshelf-remove" data-toggle="tooltip" data-placement="right" title="Remove">
-                                            <span aria-hidden="true">&times;</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                    <ul class="list-unstyled" id="bookshelf-current">
+                    </ul>
                 </form>
             </div>
         </div>

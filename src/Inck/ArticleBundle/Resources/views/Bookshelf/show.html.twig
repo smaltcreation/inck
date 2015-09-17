@@ -51,9 +51,11 @@
 
 {% block content %}
     <div id="timeline" class="container">
-        <div class="alert alert-info" role="alert">
-            {{ "bookshelf.show.no_articles"|trans }}
-        </div>
+        {% if bookshelf.articles|length == 0 %}
+            <div class="alert alert-info" role="alert">
+                {{ "bookshelf.show.no_articles"|trans }}
+            </div>
+        {% endif %}
         {% include 'InckArticleBundle:Article:filter.html.twig' with { 'articles': bookshelf.articles, 'totalArticles': bookshelf.articles|length, 'totalPages': 1 } %}
     </div>
 {% endblock %}

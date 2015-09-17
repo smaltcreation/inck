@@ -121,6 +121,8 @@ class BookshelfController extends Controller
      * @Method("DELETE")
      * @ParamConverter("bookshelf", options={"mapping": {"id": "id"}})
      * @Secure(roles="ROLE_USER")
+     * @param Bookshelf $bookshelf
+     * @return JsonResponse
      */
     public function deleteAction(Bookshelf $bookshelf)
     {
@@ -140,8 +142,42 @@ class BookshelfController extends Controller
     }
 
     /**
-     * @Route("/{bookshelfId}/{articleId}", name="inck_article_bookshelf_article", options={"expose"=true}, condition="request.isXmlHttpRequest()")
+     * @Route("/json/{id}", name="inck_article_bookshelf_article_get", options={"expose"=true}, condition="request.isXmlHttpRequest()")
+     * @ParamConverter("article", class="InckArticleBundle:Article")
+     * @Method("GET")
+     * @return JsonResponse
+     */
+    public function getArticleAction(Article $article)
+    {
+        try {
+
+            $data = [
+                'message' => 'Aucune erreur n\'est survenue !',
+                "bookshelfs" => []
+            ];
+
+            foreach($this->getUser()->getBookshelfs() as $bookshelf){
+                array_push($data["bookshelfs"], [
+                    "id" => $bookshelf->getId(),
+                    "title" => $bookshelf->getTitle(),
+                    "hasArticle" => $bookshelf->hasArticle($article->getId())
+                ]);
+            }
+
+            return new JsonResponse($data);
+        } catch(\Exception $e) {
+            return new JsonResponse(array('message' => $e->getMessage()), 400);
+        }
+    }
+
+    /**
+     * @Route("/{bookshelf_id}/{article_id}", name="inck_article_bookshelf_article_add", options={"expose"=true}, condition="request.isXmlHttpRequest()")
+     * @ParamConverter("bookshelf", class="InckArticleBundle:Bookshelf", options={"id" = "bookshelf_id"})
+     * @ParamConverter("article", class="InckArticleBundle:Article", options={"id" = "article_id"})
      * @Method("PUT")
+     * @param Bookshelf $bookshelf
+     * @param Article $article
+     * @return JsonResponse
      */
     public function addArticleAction(Bookshelf $bookshelf, Article $article)
     {
@@ -154,15 +190,20 @@ class BookshelfController extends Controller
             $bookshelf->addArticle($article);
             $em->flush();
 
-            return new JsonResponse(array('message' => 'Article a été supprimé avec succès !'));
+            return new JsonResponse(array('message' => 'Article a été ajouté avec succès !'));
         } catch(\Exception $e) {
             return new JsonResponse(array('message' => $e->getMessage()), 400);
         }
     }
 
     /**
-     * @Route("/{bookshelfId}/{articleId}", name="inck_article_bookshelf_article", options={"expose"=true}, condition="request.isXmlHttpRequest()")
+     * @Route("/{bookshelf_id}/{article_id}", name="inck_article_bookshelf_article_remove", options={"expose"=true}, condition="request.isXmlHttpRequest()")
+     * @ParamConverter("bookshelf", class="InckArticleBundle:Bookshelf", options={"id" = "bookshelf_id"})
+     * @ParamConverter("article", class="InckArticleBundle:Article", options={"id" = "article_id"})
      * @Method("DELETE")
+     * @param Bookshelf $bookshelf
+     * @param Article $article
+     * @return JsonResponse
      */
     public function removeArticleAction(Bookshelf $bookshelf, Article $article)
     {

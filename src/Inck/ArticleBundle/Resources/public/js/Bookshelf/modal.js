@@ -1,127 +1,259 @@
 /**
  * Created by jitrixis on 14/09/2015.
  */
+$(".btn-modal-bookshelf").click(function (event) {
+    BookshelfController.get.exec(event);
+});
 $("form[name='bookshelf']").submit(function (event) {
     event.preventDefault();
-    add2bookshelf();
+    BookshelfController.add.exec(event);
 });
-$(".btn-bookshelf-remove").click(function (event) {
+$("#bookshelf-current").click(function (event) {
     event.preventDefault();
-    remove2bookshelf(event.currentTarget);
+    BookshelfController.remove.exec(event);
 });
 
+var BookshelfController = {
+    /**
+     * Manage get article infos
+     */
+    "get":{
+        /**
+         * Exec get action
+         * @param event
+         */
+        "exec": function(event){
+            var data = this.data(event.target);
+            if(data)
+                this.request(data);
+            else
+                BookshelfController.handle.error("Incorrect input");
+        },
+        /**
+         * Get data infos
+         * @param elem
+         * @returns {*}
+         */
+        "data": function (elem){
+            var data = {};
 
-function add2bookshelf(){
-    var data = a2bData();
-    if(!data){
-        a2bError(data, "Les données sont incorrects !");
-        return false;
-    }
-    $.ajax({
-        method: "PUT",
-        url: Routing.generate('inck_article_bookshelf_article', {
-            articleId: data.article,
-            bookshelfId: data.bookshelf
-        }),
-        dataType: 'json'
-    }).done(function() {
-        a2bSuccess(data);
-    }).fail(function(jqXHR) {
-        try{
-            var resp = JSON.parse(jqXHR.responseText);
-            a2bError(data, resp.message);
-        }catch(e){
-            a2bError(data, "Une erreur est survenue, réessayez plus tard !");
+            data['article'] = $(elem).data("article-id");
+
+            if(!data.article)
+                return false;
+            return data;
+        },
+        /**
+         * Launch AJAX Request
+         * @param data
+         * @returns {boolean}
+         */
+        "request": function (data){
+            var me = this;
+            $.ajax({
+                method: "GET",
+                url: Routing.generate('inck_article_bookshelf_article_get', {
+                    id: data.article
+                }),
+                dataType: 'json',
+                async: false
+            }).done(function(jqJSON) {
+                me.compound(data, jqJSON.bookshelfs);
+            }).fail(function(jqXHR) {
+                try{
+                    BookshelfController.handle.error(JSON.parse(jqXHR.responseText).message);
+                }catch(e){
+                    BookshelfController.handle.error("Une erreur est survenue, réessayez plus tard !");
+                }
+            });
+        },
+        /**
+         * Reload data from another handler
+         * @param data
+         */
+        "reload": function (data){
+            if(data.hasOwnProperty("article"))
+                this.request(data);
+        },
+        /**
+         * Compound modal
+         * @param data
+         * @param json
+         */
+        "compound": function (data, json){
+            BookshelfController.handle.components.add.input.set(data.article);
+            BookshelfController.handle.components.add.datalist.reset();
+            BookshelfController.handle.components.remove.ul.set(data.article);
+            BookshelfController.handle.components.remove.li.reset();
+            json.forEach(function (elem) {
+                if(elem.hasArticle){
+                    BookshelfController.handle.components.remove.li.set(elem.id, elem.title);
+                }else{
+                    BookshelfController.handle.components.add.datalist.set(elem.id, elem.title);
+                }
+            });
         }
-    })
-}
+    },
+    /**
+     * Manage add to bookshelf
+     */
+    "add":{
+        /**
+         * Exec an add action
+         */
+        "exec": function(event){
+            var data = this.data();
+            if(data)
+                this.request(data);
+            else
+                BookshelfController.handle.error("Incorrect input");
+        },
+        /**
+         * Get input data
+         * @returns {*}
+         */
+        "data": function (){
+            var data = {};
 
-function remove2bookshelf(child){
-    var data = r2bData(child);
-    if(!data){
-        r2bError(data, child, "Les données sont incorrects !");
-        return false;
-    }
-    $.ajax({
-        method: "DELETE",
-        url: Routing.generate('inck_article_bookshelf_article', {
-            articleId: data.article,
-            bookshelfId: data.bookshelf
-        }),
-        dataType: 'json'
-    }).done(function() {
-        r2bSuccess(data, child);
-    }).fail(function(jqXHR) {
-        try{
-            var resp = JSON.parse(jqXHR.responseText);
-            r2bError(data, child, resp.message);
-        }catch(e){
-            r2bError(data, child, "Une erreur est survenue, réessayez plus tard !");
+            data['article'] = $("#bookshelf-title").data("article-id");
+            data['bookshelf'] = $("#bookshelfs-list option[value='"+$("#bookshelf-title").val()+"']").data("bookshelf-id");
+
+            if(!data.article || !data.bookshelf)
+                return false;
+            return data;
+        },
+        /**
+         * Launch AJAX Request
+         * @param data
+         * @returns {boolean}
+         */
+        "request": function (data){
+            $.ajax({
+                method: "PUT",
+                url: Routing.generate('inck_article_bookshelf_article_add', {
+                    article_id: data.article,
+                    bookshelf_id: data.bookshelf
+                }),
+                dataType: 'json'
+            }).done(function(jqJSON) {
+                BookshelfController.get.reload(data);
+                BookshelfController.handle.success(jqJSON.message);
+                $("#bookshelf-title").val("");
+            }).fail(function(jqXHR) {
+                try{
+                    BookshelfController.handle.error(JSON.parse(jqXHR.responseText).message);
+                }catch(e){
+                    BookshelfController.handle.error("Une erreur est survenue, réessayez plus tard !");
+                }
+            });
         }
-    })
-}
+    },
+    /**
+     * Manage remove to bookshelf
+     */
+    "remove":{
+        /**
+         * Exec remove action
+         * @param event
+         */
+        "exec": function(event){
+            var data = this.data(event.target);
+            if(data)
+                this.request(data);
+            else
+                BookshelfController.handle.error("Incorrect input");
+        },
+        /**
+         * Get data infos
+         * @param elem
+         */
+        "data": function (elem){
+            var data = {};
 
-/**
- * Get add 2 bookshelf data from selectors
- * @returns {{article, bookshelf: (*|jQuery)}}
- */
-function a2bData(){
-    var data = {};
+            data['article'] = $(elem).closest("ul").data("article-id");
+            data['bookshelf'] = $(elem).data("bookshelf-id");
 
-    data['article'] = $("#bookshelf-title").data("article-id");
-    data['bookshelf'] = $("#bookshelfs-list option[value='"+$("#bookshelf-title").val()+"']").data("bookshelf-id");
-    data['bookshelfTitle'] = $("#bookshelf-title").val();
-
-    if(!data.article || !data.bookshelf){
-        return false;
+            if(!data.article || !data.bookshelf){
+                return false;
+            }
+            return data;
+        },
+        /**
+         * Launch AJAX Request
+         * @param data
+         * @returns {boolean}
+         */
+        "request": function (data){
+            $.ajax({
+                method: "DELETE",
+                url: Routing.generate('inck_article_bookshelf_article_remove', {
+                    article_id: data.article,
+                    bookshelf_id: data.bookshelf
+                }),
+                dataType: 'json',
+                async: false
+            }).done(function(jqJSON) {
+                BookshelfController.get.reload(data);
+                BookshelfController.handle.success(jqJSON.message);
+            }).fail(function(jqXHR) {
+                try{
+                    BookshelfController.handle.error(JSON.parse(jqXHR.responseText).message);
+                }catch(e){
+                    BookshelfController.handle.error("Une erreur est survenue, réessayez plus tard !");
+                }
+            });
+        }
+    },
+    /**
+     * Handle components and alerts
+     */
+    "handle":{
+        "success": function (message){
+            console.warn(message);
+        },
+        "error": function (message){
+            console.error(message);
+        },
+        "components": {
+            "add":{
+                "input": {
+                    "set":function (aid){
+                        $("#bookshelf-title").data("article-id", aid);
+                    },
+                    "reset":function (){
+                        $("#bookshelfs-list").data("article-id", "");
+                    }
+                },
+                "datalist":{
+                    "set":function (bid, bit){
+                        var html = $("<option></option>").attr("value", bit).data("bookshelf-id", bid);
+                        $("#bookshelfs-list").append(html);
+                    },
+                    "reset":function (){
+                        $("#bookshelfs-list").empty();
+                    }
+                }
+            },
+            "remove": {
+                "ul": {
+                    "set":function (aid){
+                        $("#bookshelf-current").data("article-id", aid);
+                    },
+                    "reset":function (){
+                        $("#bookshelf-current").data("article-id", "");
+                    }
+                },
+                "li": {
+                    "set":function (bid, bit){
+                        var html = $("<li></li>").addClass("bookshelf-current-list").data("bookshelf-id", bid).html(bit);
+                        $("#bookshelf-current").append(html);
+                    },
+                    "reset":function (){
+                        $("#bookshelf-current").empty();
+                    }
+                }
+            },
+            "alert":{}
+        }
     }
-    return data;
-}
-
-/**
- * Get remove to bookshelf data from seletors
- */
-function r2bData(child){
-    var data = {};
-
-    data['article'] = $(child).parent("table").data("article-id");
-    data['bookshelf'] = $(child).parent("tr").data("bookshelf-id");
-
-    if(!data.article || !data.bookshelf){
-        return false;
-    }
-    return data;
-}
-
-function a2bSuccess(data){
-    var html = '<tr class="bookshelf-current-list" data-bookshelf-id="'+data.bookshelf+'"><td>';
-    html += '<i class="fa fa-book"></i>'+data.bookshelfTitle;
-    html += '<a href="#" role="button" class="btn btn-default btn-xs pull-right btn-bookshelf-remove" data-toggle="tooltip" data-placement="right" title="Remove"><span aria-hidden="true">&times;</span></a>';
-    html += '</td></tr>';
-
-    $("#bookshelf-current tbody").append(html);
-
-    $('.bookshelf-current-list[data-bookshelf-id="'+data.bookshelf+'"] .btn-bookshelf-remove').click(function (event) {
-        event.preventDefault();
-        remove2bookshelf(event.currentTarget);
-    });
-
-    $("#bookshelf-title").val("");
-}
-
-function a2bError(data, message){
-    $("#bookshelf-error").remove();
-    $("#bookshelf-title").parent("div").addClass('has-error');
-    $("#bookshelf-title").parent("div").insertAfter('<span class="help-block" id="bookshelf-error"><ul class="list-unstyled"><li><span class="fa fa-ban"></span>'+message+'</li></ul></span>');
-    $("#bookshelf-title").val("");
-}
-
-function r2bSuccess(data, child){
-    $(child).parent("tr").hide(400, function() {
-        $(this).remove();
-    });
-}
-
-function r2bError(data, child, message){
-    //TODO: don't know what to do
-}
+};
