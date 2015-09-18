@@ -1,6 +1,6 @@
-<button type="button" class="btn btn-primary btn-modal-bookshelf" data-toggle="modal" data-target="#bookshelf-add" data-article-id="{{ article.id }}">Bookshelf modal</button>
+<button type="button" class="btn btn-primary btn-modal-bookshelf" data-article-id="{{ article.id }}">Bookshelf modal</button>
 
-<div id="bookshelf-add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="bookshelfAdd">
+<div id="bookshelf-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="bookshelfAdd">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,6 +20,10 @@
                         </div>
                         <datalist id="bookshelfs-list">
                         </datalist>
+                        <span id="helpBlock" class="help-block">
+                            <ul class="list-unstyled">
+                            </ul>
+                        </span>
                     </div>
                     <ul class="list-unstyled" id="bookshelf-current">
                     </ul>

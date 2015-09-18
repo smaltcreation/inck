@@ -59,7 +59,9 @@ var BookshelfController = {
                 async: false
             }).done(function(jqJSON) {
                 me.compound(data, jqJSON.bookshelfs);
+                $("#bookshelf-modal").modal('show');
             }).fail(function(jqXHR) {
+                me.flush();
                 try{
                     BookshelfController.handle.error(JSON.parse(jqXHR.responseText).message);
                 }catch(e){
@@ -92,6 +94,12 @@ var BookshelfController = {
                     BookshelfController.handle.components.add.datalist.set(elem.id, elem.title);
                 }
             });
+        },
+        "flush": function () {
+            BookshelfController.handle.components.add.input.reset();
+            BookshelfController.handle.components.add.datalist.reset();
+            BookshelfController.handle.components.remove.ul.reset();
+            BookshelfController.handle.components.remove.li.reset();
         }
     },
     /**
@@ -209,10 +217,12 @@ var BookshelfController = {
      */
     "handle":{
         "success": function (message){
-            console.warn(message);
+            this.components.alert.formGroup("success");
+            this.components.alert.li("success", "check", message);
         },
         "error": function (message){
-            console.error(message);
+            this.components.alert.formGroup("error");
+            this.components.alert.li("danger", "ban", message);
         },
         "components": {
             "add":{
@@ -253,7 +263,27 @@ var BookshelfController = {
                     }
                 }
             },
-            "alert":{}
+            "alert":{
+                "formGroup": function (state) {
+                    $("form[name='bookshelf'] .form-group").addClass('has-'+state).delay(3000).queue(function(n){$(this).removeClass('has-'+state);n();})
+                },
+                "li":function (state, icon, message){
+                    var html = $("<li></li>").addClass("text-"+state);
+                    var fa = $("<i></i>").addClass("fa").addClass("fa-"+icon);
+                    $(html).append(fa);
+                    $(html).append("&nbsp;"+message);
+                    $(html).css("opacity", 0);
+
+                    $(html)
+                        .appendTo("form[name='bookshelf'] .help-block ul")
+                        .animate({
+                            opacity: 1
+                        }, 400)
+                        .delay(3000).queue(function(){
+                            $(this).remove();
+                        });
+                }
+            }
         }
     }
 };
