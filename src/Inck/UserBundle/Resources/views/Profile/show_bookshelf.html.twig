@@ -3,16 +3,91 @@
 <div id="user-profile-bookshelf" class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingBookshelf">
         <h4 class="panel-title">
-            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseBookshelf" aria-expanded="false" aria-controls="collapseBookshelf">
-                <i class="fa fa-fw fa-bookmark"> </i>
-                {{ 'profile.page.list_bookshelf'|trans }}<span class="badge pull-right">{{ app.user.bookshelfs|length }}</span>
+            <a class="collapsed" data-toggle="collapse" data-parent=".accordion" href="#collapseBookshelf" aria-expanded="false" aria-controls="collapseBookshelf">
+                <i class="fa fa-fw fa-book"> </i>
+                {{ 'profile.bookshelf.bookshelves'|trans }}
+                {% if bookshelfs.owner == app.user %}
+                <span class="badge pull-right">{{ bookshelfs_length }}</span>
+                {% else %}
+                <span class="label label-default pull-right">
+                    <span>{{ bookshelfs_length }} {{ "profile.bookshelf.badge"|trans }}</span>
+                </span>
+                {% endif %}
             </a>
         </h4>
     </div>
     <div id="collapseBookshelf" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBookshelf">
+
         <div class="panel-body">
             <div class="articles">
-                {% include 'InckArticleBundle:Bookshelf:add.html.twig' %}
+                {% if bookshelfs_length %}
+                <table class="table">
+                    {# Table header #}
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">Type</th> {# Status #}
+                        <th class="text-center">{{ 'profile.bookshelf.title'|trans }}</th> {# Title #}
+                        <th class="text-center col-md-2">{{ 'profile.bookshelf.number_article'|trans }}</th> {# Date #}
+                        <th class="text-right col-md-2">Actions</th> {# Actions #}
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for bookshelf in bookshelfs %}
+                            {% if bookshelf.share or bookshelf.user == app.user %}
+                                <tr>
+                                    <td>
+                                        {% if bookshelf.share %}
+                                        <span class="label label-success btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'profile.bookshelf.public'|trans }}">
+                                            <i class="fa fa-globe"></i>
+                                        </span>
+                                        {% else %}
+                                            <span class="label label-primary btn-tooltip" data-toggle="tooltip" data-placement="top" data-container="body" title="{{ 'profile.bookshelf.private'|trans }}">
+                                            <i class="fa fa-lock"></i>
+                                        </span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">{{ bookshelf.title }}</td>
+                                    <td class="text-center">{{ bookshelf.articles|length }}</td>
+                                    <td>
+                                        <div class="pull-right btn-group">
+                                            <a href="{{ path('inck_article_bookshelf_show', { 'id': bookshelf.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-placement="top" title="Voir" data-container="body" data-toggle="tootltip">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            {% if bookshelf.user == app.user %}
+                                            <a href="{{ path('inck_article_bookshelf_edit', { 'id': bookshelf.id }) }}" class="btn btn-success btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a data-bookshelf-id="{{ bookshelf.id }}" class="btn btn-danger btn-xs btn-tooltip btn-bookshelf-delete" data-toggle="tooltip" data-placement="top" title="Supprimer" data-container="body">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+                {% else %}
+                    {% if bookshelfs.owner == app.user %}
+                        {{ 'profile.bookshelf.no_bookshelf'|trans }}
+                    {% else %}
+                        {{ 'profile.bookshelf.no_bookshelf_foreing'|trans }}
+                    {% endif %}
+                {% endif %}
+                {% if bookshelfs.owner == app.user %}
+                <p>
+                    <a class="btn btn-inverse" role="button" href="{{ path('inck_article_bookshelf_new') }}">
+                        <i class="fa fa-plus"></i>
+                        {{ 'profile.bookshelf.create_bookshelf'|trans }}
+                    </a>
+                </p>
+                {% endif %}
             </div>
         </div>
     </div>

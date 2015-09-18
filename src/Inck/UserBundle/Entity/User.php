@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Inck\ArticleBundle\Entity\Article;
+use Proxies\__CG__\Inck\ArticleBundle\Entity\Bookshelf;
 use Serializable;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -963,5 +964,19 @@ class User extends BaseUser implements Serializable
     public function setBookshelfs($bookshelfs)
     {
         $this->bookshelfs = $bookshelfs;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPublicBookshelfs(){
+        $collection = new ArrayCollection();
+
+        foreach($this->bookshelfs as $bookshelf){
+            if($bookshelf->getShare()){
+                $collection->add($bookshelf);
+            }
+        }
+        return $collection;
     }
 }

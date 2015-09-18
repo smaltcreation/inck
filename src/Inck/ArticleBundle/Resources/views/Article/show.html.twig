@@ -35,6 +35,7 @@
         'bundles/inckarticle/css/Article/summary.css'
         'bundles/inckarticle/css/Article/score.css'
         'bundles/inckuser/css/Profile/card.css'
+        'bundles/inckarticle/css/Bookshelf/modal.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -190,6 +191,9 @@
             </div>
         </div>
     </div>
+    {% if is_granted('ROLE_USER') %}
+        {% include "InckArticleBundle:Bookshelf:add_modal.html.twig"%}
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
@@ -206,6 +210,7 @@
         'bundles/inckarticle/js/Article/disqus.js'
         'bundles/inckarticle/js/Article/watchLater.js'
         'bundles/inckarticle/js/Article/summary.js'
+        'bundles/inckarticle/js/Bookshelf/modal.js'
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

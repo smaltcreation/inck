@@ -1,0 +1,37 @@
+li.bookshelf-current-list:first-child{
+    border-top-width: 2px;
+}
+
+li.bookshelf-current-list{
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+li.bookshelf-current-list:hover{
+    background-color: #f5f5f5;
+}
+
+li.bookshelf-current-list:before{
+    content: "\f02d";
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    padding-right: 5px;
+}
+
+li.bookshelf-current-list:hover:after{
+    content: 'REMOVE';
+    font-size: 10px;
+    float: right;
+    color: darkred;
+    font-weight: bold;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    line-height: 2;
+}

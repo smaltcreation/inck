@@ -1,76 +1,74 @@
-{%  trans_default_domain 'ArticleBundle' %}
+{% extends 'InckArticleBundle::layout.html.twig' %}
 
-{% block content %}
-    <div id="user-profile-subscriptions" class="panel panel-default">
-        <div class="panel-heading" role="tabe" id="deadingSubscriptions">
-            <h4 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent=".accordion" href="#collapseSubscriptions" aria-expanded="false" aria-controls="collapseSubscriptions">
-                    <i class="fa fa-fw fa-book"></i>
-                    {{ 'article.bookshelfl.bookshelfs'|trans }}<span class="badge pull-right">{{ app.user.bookshelfs|length }}</span>
-                </a>
-            </h4>
-        </div>
-        <div id="collapseSubscriptions" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSubscriptions">
-            {% for bookshelf in app.user.bookshelfs %}
-                <div class="panel-body">
-                    <div class="panel-group" id="accordion{{ bookshelf.id }}" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="pane-heading" role="tab" id="headingOne{{ bookshelf.id }}">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion{{ bookshelf.id }}" href="#collapseOne{{ bookshelf.id }}" aria-expanded="true" aria-controls="collapseOne">
-                                        {% if bookshelf.title != "" %}
-                                            <i class="fa fa-fw fa-bookmark"></i>
-                                            {{ bookshelf.title }}<span class="badge pull-right">{{ bookshelf.articles|length }}</span>
-                                        {% else %}
-                                            <i>Sans titre</i> {{ bookshelf.articles|length }}
-                                        {% endif %}
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne{{ bookshelf.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    {% for article in bookshelf.articles %}
-                                        <div class="col-xs-6 col-sm-6 col-lg-4 col-article">
-                                            {#set the variables#}
-                                            {% set articleUrl = path('inck_article_article_show', {'id':article.id, 'slug':article.slug}) %}
-                                            {% if article.imageName %}
-                                                {% set img = vich_uploader_asset(article, 'article_image') %}
-                                            {% else %}
-                                                {% image '@InckArticleBundle/Resources/public/images/article/default.jpg' %}
-                                                {% set img = asset_url %}
-                                                {% endimage %}
-                                            {% endif %}
-                                            {# Display watch-later articles - order by date DESC #}
-                                            <article id="article-{{ article.id }}" class="article">
-                                                <a class="btn btn-default btn-circle btn-tooltip btn-unwatch-later pull-right btn-xs" data-id="{{ article.id }}" data-slug="{{ article.slug }}" data-toggle="tooltip" data-container="body" data-placement="top" title="retirer de la list">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
-                                                <div class="summary">
-                                                    <div class="thumbnail">
-                                                        <a href="{{ articleUrl }}">
-                                                            <img src="{{ img|apply_filter('article_thumb') }}" alt="Image de l'article : {{ article.title }}">
-                                                        </a>
-                                                        <div class="caption">
-                                                            <a class="caption">
-                                                                <a class="btn-tooltip" data-toggle="tooltip" data-placement="bottom" data-container="body" title="{{ article.title }}" href="{{ articleUrl }}">
-                                                                    {{ article.title }}
-                                                                </a>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    {% else %}
-                                        <i>Aucun Article</i>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+{% trans_default_domain 'ArticleBundle' %}
+
+{% block title %}
+    {{ 'bookshelf.show.title'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter='cssrewrite, ?uglifycss' output='css/compiled/article/bookshelf/preview.css'
+    'bundles/inckarticle/css/Article/score.css'
+    'bundles/inckarticle/css/Bookshelf/modal.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{# Setting variables#}
+{% set gravatar = gravatar(bookshelf.user.email, 25, true) %}
+
+{% block header %}
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1>
+                {{ bookshelf.title }}
+
+                <sup>
+                    <small>
+                    {% if bookshelf.share %}
+                        <span class="label label-success">{{ "bookshelf.show.public"|trans }}</span>
+                    {% else %}
+                        <span class="label label-primary">{{ "bookshelf.show.private"|trans }}</span>
+                    {% endif %}
+                    </small>
+                </sup>
+            </h1>
+            <h2>
+                {{ bookshelf.description }}
+            </h2>
+            <p>
+                {% if bookshelf.user == app.user %}
+                <a href="{{ path('inck_article_bookshelf_edit', {'id': bookshelf.id}) }}" class="btn btn-inverse"><i class="fa fa-pencil-square-o"></i> {{ 'bookshelf.show.edit'|trans }}</a>
+                {% else %}
+                <a href="{{ path('fos_user_profile_preview', {'username': bookshelf.user.username}) }}" class="btn btn-inverse"><i class="fa fa-user"></i> {{ 'bookshelf.show.see_profile'|trans({"%user%": bookshelf.user.fullname}) }}</a>
+                {% endif %}
+                {#<a href="#" class="btn btn-inverse"><i class="fa fa-play"></i> {{ 'bookshelf.show.launch_bookshelf'|trans }}</a>#}
+            </p>
         </div>
     </div>
+{% endblock %}
 
+{% block content %}
+    <div id="timeline" class="container">
+        {% if bookshelf.articles|length == 0 %}
+            <div class="alert alert-info" role="alert">
+                {{ "bookshelf.show.no_articles"|trans }}
+            </div>
+        {% endif %}
+        {% include 'InckArticleBundle:Article:filter.html.twig' with { 'articles': bookshelf.articles, 'totalArticles': bookshelf.articles|length, 'totalPages': 1 } %}
+    </div>
+    {% if is_granted('ROLE_USER') %}
+        {% include "InckArticleBundle:Bookshelf:add_modal.html.twig"%}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?uglifyjs2' output='js/compiled/article/bookshelf/show.js'
+    'bundles/inckarticle/js/Bookshelf/modal.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

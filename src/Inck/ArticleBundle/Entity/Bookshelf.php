@@ -189,7 +189,7 @@ class Bookshelf
      * @param $id
      * @return bool
      */
-    public function containsArticlesId($id)
+    public function hasArticle($id)
     {
         foreach($this->getArticles() as $article)
         {
@@ -198,5 +198,6 @@ class Bookshelf
                 return true;
             }
         }
+        return false;
     }
 }

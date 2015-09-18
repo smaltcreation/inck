@@ -1,0 +1,32 @@
+<div id="bookshelf-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="bookshelfAdd">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="bookshelfAddLabel">Bookshelfs</h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="get" name="bookshelf">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="bookshelf-title" placeholder="Add to a bookshelf" autocomplete="off" list="bookshelfs-list">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">Add</button>
+                            </span>
+                        </div>
+                        <datalist id="bookshelfs-list">
+                        </datalist>
+                        <span id="helpBlock" class="help-block">
+                            <ul class="list-unstyled">
+                            </ul>
+                        </span>
+                    </div>
+                    <ul class="list-unstyled" id="bookshelf-current">
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

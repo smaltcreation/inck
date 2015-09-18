@@ -24,8 +24,6 @@ article:
         write_article: Write an article
         edit_article: Edit my article
         write_article_recap: A good article doesn't have to be long or about something that is happening in the world right now. Just let your self be taken away by your love of writing and write about what you think would be interesting to share.
-        write_bookshelf: To save your favorite articles, create a bookshelf
-        add_booskshelf: Create a bookshelf
     moderate:
             moderate_articles: moderate articles
             moderate_articles_recap: Article moderation, is when you ask the community to place liberty and quality first. You are the motor of contribution and development of Inck.
@@ -104,3 +102,22 @@ filter:
        filter: Filter
        filterArticles: Filter articles
        sortBy: Sort by
+
+bookshelf:
+    modal:
+        close: Close
+    show:
+        title: Bibliothèque
+        public: Public
+        private: Private
+        see_profile: Show %user% profile
+        edit: Edit the bookshelf
+        launch_bookshelf: Launch the bookshelf
+        no_articles: The bookshelf doesn't have any article yet !
+    form:
+        add:
+            title: Create a bookshelf
+            description: Create a bookshelf to classified articles you have seleted
+        edit:
+            title: Edit a bookshelf
+            description: Custom parameters of your bookshelf

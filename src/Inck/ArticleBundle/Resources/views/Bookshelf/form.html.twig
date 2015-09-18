@@ -4,23 +4,22 @@
 
 {% block title %}
     {% if action == 'add' %}
-        {{ 'article.form.add_booskshelf'|trans }}
+        {{ 'bookshelf.form.add.title'|trans }}
     {% else %}
-        {{ 'article.form.edit_article'|trans }}
-    {% endif %}
-{% endblock %}
-
-{% block description %}
-    {% if action == 'add' %}
-        <meta name="description" content="Partager un article en quelques cliques, il n'y a rien de plus simple !">
+        {{ 'bookshelf.form.edit.title'|trans }}
     {% endif %}
 {% endblock %}
 
 {% block header %}
     <div class="jumbotron">
         <div class="container">
-            <h1>{{ 'article.form.add_booskshelf'|trans }}</h1>
-            <p>{{ 'article.form.write_bookshelf'|trans }}</p>
+            {% if action == 'add' %}
+                <h1>{{ 'bookshelf.form.add.title'|trans }}</h1>
+                <p>{{ 'bookshelf.form.add.description'|trans }}</p>
+            {% else %}
+                <h1>{{ 'bookshelf.form.edit.title'|trans }}</h1>
+                <p>{{ 'bookshelf.form.edit.description'|trans }}</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -35,6 +35,9 @@
                 <i class="fa fa-flag"></i>
                 <span class="total">{{ reports }}</span>
             </button>
+            <button class="btn btn-link btn-xs btn-tooltip btn-modal-bookshelf" data-article-id="{{ article.id }}" onclick="BookshelfController.get.exec(this);" data-toggle="tooltip" data-placement="top" data-container="body" title="" data-original-title="Add to a Bookshelf">
+                <i class="fa fa-book"></i>
+            </button>
         {% else %}
             <a href="{{ path('fos_user_security_login') }}" class="btn btn-default btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Connectez-vous pour voter">
                 {{ score.up }}
