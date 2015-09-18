@@ -1,9 +1,6 @@
 /**
  * Created by jitrixis on 14/09/2015.
  */
-$(".btn-modal-bookshelf").click(function (event) {
-    BookshelfController.get.exec(event);
-});
 $("form[name='bookshelf']").submit(function (event) {
     event.preventDefault();
     BookshelfController.add.exec(event);
@@ -22,8 +19,8 @@ var BookshelfController = {
          * Exec get action
          * @param event
          */
-        "exec": function(event){
-            var data = this.data(event.currentTarget);
+        "exec": function(target){
+            var data = this.data(target);
             if(data)
                 this.request(data);
             else

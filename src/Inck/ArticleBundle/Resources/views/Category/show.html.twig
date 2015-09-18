@@ -11,6 +11,7 @@
         'bundles/inckarticle/css/Article/timeline.css'
         'bundles/inckarticle/css/Article/summary.css'
         'bundles/inckarticle/css/Article/score.css'
+        'bundles/inckarticle/css/Bookshelf/modal.css'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen">
     {% endstylesheets %}
@@ -34,6 +35,9 @@
 
 {% block content %}
     {{ render(controller('InckArticleBundle:Article:timeline', { 'filters': { 'type': 'published', 'category': category } })) }}
+    {% if is_granted('ROLE_USER') %}
+        {% include "InckArticleBundle:Bookshelf:add_modal.html.twig"%}
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
@@ -45,6 +49,7 @@
         'bundles/incksubscription/js/Subscription/new.js'
         'bundles/inckarticle/js/Article/watchLater.js'
         'bundles/inckarticle/js/Article/summary.js'
+        'bundles/inckarticle/js/Bookshelf/modal.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

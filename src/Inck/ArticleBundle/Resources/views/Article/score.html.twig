@@ -35,7 +35,7 @@
                 <i class="fa fa-flag"></i>
                 <span class="total">{{ reports }}</span>
             </button>
-            <button class="btn btn-link btn-xs btn-tooltip btn-modal-bookshelf" data-article-id="{{ article.id }}" data-toggle="tooltip" data-placement="top" data-container="body" title="" data-original-title="Add to a Bookshelf">
+            <button class="btn btn-link btn-xs btn-tooltip btn-modal-bookshelf" data-article-id="{{ article.id }}" onclick="BookshelfController.get.exec(this);" data-toggle="tooltip" data-placement="top" data-container="body" title="" data-original-title="Add to a Bookshelf">
                 <i class="fa fa-book"></i>
             </button>
         {% else %}
