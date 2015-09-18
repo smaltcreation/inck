@@ -23,7 +23,7 @@ var BookshelfController = {
          * @param event
          */
         "exec": function(event){
-            var data = this.data(event.target);
+            var data = this.data(event.currentTarget);
             if(data)
                 this.request(data);
             else
@@ -94,6 +94,7 @@ var BookshelfController = {
                     BookshelfController.handle.components.add.datalist.set(elem.id, elem.title);
                 }
             });
+            BookshelfController.handle.components.add.datalist.uniq();
         },
         "flush": function () {
             BookshelfController.handle.components.add.input.reset();
@@ -241,6 +242,23 @@ var BookshelfController = {
                     },
                     "reset":function (){
                         $("#bookshelfs-list").empty();
+                    },
+                    "uniq":function (){
+                        var list = [];
+                        $("#bookshelfs-list option").each(function(index, elem){
+                            list.push($(elem).attr("value"));
+                        });
+                        list = $.unique(list);
+                        for(var index in list) {
+                            if(list.hasOwnProperty(index)) {
+                                var selector = $("#bookshelfs-list option[value='" + list[index] + "']");
+                                if(selector.length > 1) {
+                                    selector.each(function (index, elem) {
+                                        $(elem).attr("value", $(elem).attr("value") + " (" + index + ")")
+                                    });
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -265,7 +283,7 @@ var BookshelfController = {
             },
             "alert":{
                 "formGroup": function (state) {
-                    $("form[name='bookshelf'] .form-group").addClass('has-'+state).delay(3000).queue(function(n){$(this).removeClass('has-'+state);n();})
+                    $("form[name='bookshelf'] .form-group").addClass('has-'+state).delay(2000).queue(function(n){$(this).removeClass('has-'+state);n();})
                 },
                 "li":function (state, icon, message){
                     var html = $("<li></li>").addClass("text-"+state);
@@ -279,7 +297,7 @@ var BookshelfController = {
                         .animate({
                             opacity: 1
                         }, 400)
-                        .delay(3000).queue(function(){
+                        .delay(2000).queue(function(){
                             $(this).remove();
                         });
                 }

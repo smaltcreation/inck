@@ -192,7 +192,7 @@
         </div>
     </div>
     {% if is_granted('ROLE_USER') %}
-        {% include "InckArticleBundle:Bookshelf:add_modal.html.twig" with {'bookshelfs': app.user.bookshelfs} %}
+        {% include "InckArticleBundle:Bookshelf:add_modal.html.twig"%}
     {% endif %}
 {% endblock %}
 
