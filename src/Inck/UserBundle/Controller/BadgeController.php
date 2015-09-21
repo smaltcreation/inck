@@ -39,9 +39,8 @@ class BadgeController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            dump($entity);
             $em = $this->getDoctrine()->getManager();
-            $activity = new ObtainBadgeActivity($this->getUser(), $entity, $entity->getTitle(), $entity->getDescription());
+            $activity = new ObtainBadgeActivity($this->getUser(), $entity);
             $em->persist($activity);
             $em->persist($entity);
             $em->flush();
@@ -201,7 +200,7 @@ class BadgeController extends Controller
     /**
      * Deletes a Badge entity.
      *
-     * @Route("/{id}", name="badge_delete")
+     * @Route("/delete/{id}", name="badge_delete")
      * @Method("DELETE")
      * @Secure(roles="ROLE_ADMIN")
      */
@@ -281,7 +280,7 @@ class BadgeController extends Controller
     }
     /**
      *
-     * @Route("mem/{id}", name="badge_updatemem")
+     * @Route("/mem/{id}", name="badge_updatemem")
      * @Method("PUT")
      * @Secure(roles="ROLE_ADMIN")
      * @Template("InckUserBundle:Badge:editmember.html.twig")

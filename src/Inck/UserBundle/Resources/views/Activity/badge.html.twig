@@ -1,13 +1,16 @@
+{% set badge = activity.badge %}
 
 <div class="media">
     <div class="pull-left">
+        <span class="label label-default" style="background-color: {{ badge.color }}; font-size: 12px;">
+            <span style="color: {{ badge.colorText }}"><i class="fa fa-{{ badge.icone }} fa-fw"></i> | {{ badge.title }}</span></span>
     </div>
     <div class="media-body">
         <h4 class="media-heading">
-            {{ activity.title }}
+            {{ badge.title }}
         </h4>
         <p>
-            {{ activity.content }}
+            {{ badge.description }}
         </p>
         <p>
             {% include "InckUserBundle:Activity:visibility.html.twig" %}
