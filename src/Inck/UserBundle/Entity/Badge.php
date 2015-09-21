@@ -6,14 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Badge
  *
  * @ORM\Table()
- * @ORM\Entity
- * @Vich\Uploadable
+ * @ORM\Entity(repositoryClass="Inck\UserBundle\Entity\BadgeRepository")
  */
 class Badge
 {
@@ -43,6 +41,13 @@ class Badge
     /**
      * @var string
      *
+     * @ORM\Column(name="colorText", type="string", length=7, nullable=true)
+     */
+    private $colorText;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -62,79 +67,18 @@ class Badge
     private $users;
 
     /**
-     * @var File
-     *
-     * @Assert\Image(
-     *     maxSize = "10M",
-     * )
-     * @Vich\UploadableField(mapping="badge_image", fileNameProperty="imageName")
-     */
-    protected $imageFile;
-
-    /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(name="icone", type="text", nullable=false)
      */
-    protected $imageName;
+    private $icone;
 
     /**
-     * @var string
+     * @var integer
+     *
+     * @ORM\Column(name="lvl", type="integer", options={"default" = 0})
      */
-    protected $previousImageName;
-
-    /**
-     * @param File|UploadedFile|null $image
-     */
-    public function setImageFile($image)
-    {
-        $this->imageFile = $image;
-
-        if ($image) {
-            $this->updatedAt = new \DateTime();
-        }
-    }
-
-    /**
-     * @return File
-     */
-    public function getImageFile()
-    {
-        $end = '/web/article/image';
-
-        return (substr((string) $this->imageFile, -strlen($end)) === $end)
-            ? null
-            : $this->imageFile;
-    }
-
-    /**
-     * @param string $imageName
-     */
-    public function setImageName($imageName)
-    {
-        $this->imageName = $imageName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageName()
-    {
-        return $this->imageName;
-    }
-
-    public function savePreviousImageName()
-    {
-        $this->previousImageName = $this->imageName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPreviousImageName()
-    {
-        return $this->previousImageName;
-    }
+    private $lvl;
 
     /**
      * Constructor
@@ -284,5 +228,77 @@ class Badge
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set icone
+     *
+     * @param string $icone
+     *
+     * @return Badge
+     */
+    public function setIcone($icone)
+    {
+        $this->icone = $icone;
+
+        return $this;
+    }
+
+    /**
+     * Get icone
+     *
+     * @return string
+     */
+    public function getIcone()
+    {
+        return $this->icone;
+    }
+
+    /**
+     * Set colorText
+     *
+     * @param string $colorText
+     *
+     * @return Badge
+     */
+    public function setColorText($colorText)
+    {
+        $this->colorText = $colorText;
+
+        return $this;
+    }
+
+    /**
+     * Get colorText
+     *
+     * @return string
+     */
+    public function getColorText()
+    {
+        return $this->colorText;
+    }
+
+    /**
+     * Set lvl
+     *
+     * @param integer $lvl
+     *
+     * @return Badge
+     */
+    public function setLvl($lvl)
+    {
+        $this->lvl = $lvl;
+
+        return $this;
+    }
+
+    /**
+     * Get lvl
+     *
+     * @return integer
+     */
+    public function getLvl()
+    {
+        return $this->lvl;
     }
 }

@@ -2,14 +2,17 @@
 
 namespace Inck\UserBundle\Controller;
 
+use Inck\UserBundle\Form\Type\BadgememberType;
 use Inck\UserBundle\Form\Type\BadgeType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Inck\UserBundle\Entity\Badge;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Inck\UserBundle\Entity\Activity\Badge\ObtainBadgeActivity;
 
 /**
  * Badge controller.
@@ -20,60 +23,17 @@ class BadgeController extends Controller
 {
 
     /**
-     * Lists all Badge entities.
-     *
-     * @Route("/", name="badge")
-     * @Method("GET")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('InckUserBundle:Badge')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
-    }
-    /**
      * Creates a new Badge entity.
      *
      * @Route("/", name="badge_create")
      * @Method("POST")
      * @Template("InckUserBundle:Badge:new.html.twig")
      * @param Request $badge
+     * @Secure(roles="ROLE_ADMIN")
      *
      */
     public function createAction(Request $request, Request $badge)
     {
-        /*
-        if(!$badge->getImageName()) {
-            $badge->setImageFile(null);
-        }*/
-
-        // Création du formulaire
-        //$form = $this->createForm(new ArticleType(), $badge);
-
-        // Suppression de l'image
-        $values = $request->request->get('inck_userbundle_badge');
-        $deleteImage = ($values['imageFile']['delete'] && $badge->getImageName());
-
-        if($deleteImage) {
-            $badge->savePreviousImageName();
-        }
-
-        // Suppression de l'image
-        if($deleteImage) {
-            unlink(sprintf(
-                "%s/%s",
-                $this->container->getParameter('upload.badge_image.upload_destination'),
-                $badge->getPreviousImageName()
-            ));
-
-            $badge->setImageName(null);
-        }
-
         $entity = new Badge();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -81,6 +41,8 @@ class BadgeController extends Controller
         if ($form->isValid()) {
             dump($entity);
             $em = $this->getDoctrine()->getManager();
+            $activity = new ObtainBadgeActivity($this->getUser(), $entity, $entity->getTitle(), $entity->getDescription());
+            $em->persist($activity);
             $em->persist($entity);
             $em->flush();
 
@@ -123,8 +85,6 @@ class BadgeController extends Controller
     public function newAction()
     {
 
-        $user = $this->getUser();
-
         $entity = new Badge();
         $form   = $this->createCreateForm($entity);
 
@@ -138,8 +98,8 @@ class BadgeController extends Controller
      * Finds and displays a Badge entity.
      *
      * @Route("/{id}", name="badge_show")
-     * @Method("GET")
      * @Template()
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function showAction($id)
     {
@@ -164,6 +124,7 @@ class BadgeController extends Controller
      *
      * @Route("/{id}/edit", name="badge_edit")
      * @Method("GET")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function editAction($id)
@@ -209,6 +170,7 @@ class BadgeController extends Controller
      *
      * @Route("/{id}", name="badge_update")
      * @Method("PUT")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template("InckUserBundle:Badge:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -241,6 +203,7 @@ class BadgeController extends Controller
      *
      * @Route("/{id}", name="badge_delete")
      * @Method("DELETE")
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -259,7 +222,7 @@ class BadgeController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('badge'));
+        return $this->redirect($this->generateUrl('inck_core_admin_index'));
     }
 
     /**
@@ -277,5 +240,73 @@ class BadgeController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /**
+     * @Template("InckUserBundle:Badge:editmember.html.twig")
+     */
+    public function membereditAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('InckUserBundle:Badge')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Badge entity.');
+        }
+
+        $editForm = $this->createEditmemberForm($entity);
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+        );
+    }
+
+    /**
+     * Creates a form to edit a Badge entity.
+     *
+     * @param Badge $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditmemberForm(Badge $entity)
+    {
+        $form = $this->createForm(new BadgememberType(), $entity, array(
+            'action' => $this->generateUrl('badge_updatemem', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
+        return $form;
+    }
+    /**
+     *
+     * @Route("mem/{id}", name="badge_updatemem")
+     * @Method("PUT")
+     * @Secure(roles="ROLE_ADMIN")
+     * @Template("InckUserBundle:Badge:editmember.html.twig")
+     */
+    public function updatememAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('InckUserBundle:Badge')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Badge entity.');
+        }
+
+        $editForm = $this->createEditmemberForm($entity);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('badge_show', array('id' => $id)));
+        }
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+        );
     }
 }

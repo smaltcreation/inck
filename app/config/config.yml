@@ -176,13 +176,6 @@ vich_uploader:
             inject_on_load:       true
             delete_on_remove:     true
             delete_on_update:     true
-        badge_image:
-            uri_prefix:           %upload.badge_image.uri_prefix%
-            upload_destination:   %upload.badge_image.upload_destination%
-            namer:                vich_uploader.namer_uniqid
-            inject_on_load:       true
-            delete_on_remove:     true
-            delete_on_update:     true
 
 # AvalancheImagineBundle Configuration
 avalanche_imagine:

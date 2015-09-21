@@ -12,16 +12,20 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block header %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Créateur de badges</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content -%}
     <div class="container ">
-        <h1>Badge creation</h1>
         {{ form(form) }}
-        <ul class="record_actions">
-            <li>
-                <a href="{{ path('badge') }}">
-                    Back to the list
-                </a>
-            </li>
-        </ul>
     </div>
 {% endblock %}

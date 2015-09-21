@@ -1,0 +1,40 @@
+{% if entities %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Icone</th>
+            <th>Description</th>
+            <th>Date de création</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for badge in entities %}
+            <tr>
+                <td><span class="label label-default" style="background-color: {{ badge.color }}; font-size: 12px;">
+                            <span style="color: {{ badge.colorText }}"><i class="fa fa-{{ badge.icone }} fa-fw"></i> | {{ badge.title }}</span></span></td>
+                <td>{{ badge.description }}</td>
+                <td>{{ badge.createdAt|date('d/m/y à H:i') }}</td>
+                <td class="text-right">
+                    <a href="{{ path('badge_show', { 'id': badge.id }) }}" class="btn btn-primary btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Voir" data-container="body">
+                        <i class="fa fa-search"></i>
+                    </a>
+                    <a href="{{ path('badge_edit', { 'id': badge.id }) }}" class="btn btn-warning btn-xs btn-tooltip" data-toggle="tooltip" data-placement="top" title="Éditer" data-container="body">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="{{ path('badge_delete', {'id': badge.id}) }}" class="btn btn-danger btn-xs btn-tooltip" data-toggle="tooltip" data-placement="right" title="Supprimer" data-container="body"><i class="fa fa-trash"></i></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        {{ knp_pagination_render(entities) }}
+        <div class="pull-right "><a href="{{ path('badge_new') }}" class="btn btn-default" ><i class="fa fa-plus"></i> Ajouter un Badge</a></div>
+    </div>
+{% else %}
+    <div class="panel-body">
+        <p>Aucun badge trouvé.</p>
+    </div>
+{% endif %}

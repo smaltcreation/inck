@@ -70,10 +70,14 @@ class ProfileController extends BaseController
         $nbFollowers = $repository->countByUser($user);
 
         /* On retourne la preview du profile de l'utilisateur */
+        $badges = $em->createQuery('SELECT b, u FROM
+            InckUserBundle:Badge b JOIN b.users u WHERE u.id = '.$user->getId().' ORDER BY b.lvl DESC')->setMaxResults('3')->getResult();
+
         return array(
             'user' => $user,
             'articles' => $articles,
-            'nbFollowers' => $nbFollowers
+            'nbFollowers' => $nbFollowers,
+            'badges' => $badges
         );
     }
 }

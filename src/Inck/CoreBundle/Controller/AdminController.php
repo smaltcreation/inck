@@ -28,7 +28,7 @@ class AdminController extends Controller
      * @Route("/{alias}/{page}",
      *     name="inck_core_admin_paginator",
      *     requirements={
-     *         "alias" = "articles|categories|users",
+     *         "alias" = "articles|categories|users|badges",
      *         "page" = "\d+"
      *     },
      *     options={"expose"=true}
@@ -88,6 +88,14 @@ class AdminController extends Controller
                 return [
                     'entity'    => 'InckUserBundle:User',
                     'view'      => 'users',
+                    'orderBy'   => 'id',
+                    'limit'     => 5,
+                ];
+
+            case 'badges':
+                return [
+                    'entity'    => 'InckUserBundle:Badge',
+                    'view'      => 'badges',
                     'orderBy'   => 'id',
                     'limit'     => 5,
                 ];
