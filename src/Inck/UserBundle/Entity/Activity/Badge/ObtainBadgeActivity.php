@@ -38,4 +38,28 @@ class ObtainBadgeActivity extends Activity {
         $this->user = $user;
         $this->badge = $badge;
     }
+
+    /**
+     * Set badge
+     *
+     * @param \Inck\UserBundle\Entity\Badge $badge
+     *
+     * @return ObtainBadgeActivity
+     */
+    public function setBadge(\Inck\UserBundle\Entity\Badge $badge = null)
+    {
+        $this->badge = $badge;
+
+        return $this;
+    }
+
+    /**
+     * Get badge
+     *
+     * @return \Inck\UserBundle\Entity\Badge
+     */
+    public function getBadge()
+    {
+        return $this->badge;
+    }
 }
