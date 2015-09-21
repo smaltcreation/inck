@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Inck\UserBundle\Entity\Badge;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Inck\UserBundle\Entity\Activity\Badge\ObtainBadgeActivity;
 
 /**
  * Badge controller.
@@ -40,6 +41,8 @@ class BadgeController extends Controller
         if ($form->isValid()) {
             dump($entity);
             $em = $this->getDoctrine()->getManager();
+            $activity = new ObtainBadgeActivity($this->getUser(), $entity, $entity->getTitle(), $entity->getDescription());
+            $em->persist($activity);
             $em->persist($entity);
             $em->flush();
 

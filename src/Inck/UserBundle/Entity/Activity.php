@@ -19,7 +19,8 @@ use Doctrine\ORM\Mapping as ORM;
     * "password_resetting"  = "Inck\UserBundle\Entity\Activity\Password\ResettingPasswordActivity",
     * "profile_edit"        = "Inck\UserBundle\Entity\Activity\Profile\EditProfileActivity",
     * "subscription_new"    = "Inck\UserBundle\Entity\Activity\Subscription\NewSubscriptionActivity",
-    * "vote"                = "Inck\UserBundle\Entity\Activity\Vote\VoteActivity"
+    * "vote"                = "Inck\UserBundle\Entity\Activity\Vote\VoteActivity",
+    * "badge"               = "Inck\UserBundle\Entity\Activity\Badge\ObtainBadgeActivity"
  * })
  */
 class Activity

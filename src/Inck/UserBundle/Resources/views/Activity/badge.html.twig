@@ -1,0 +1,16 @@
+
+<div class="media">
+    <div class="pull-left">
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            {{ activity.title }}
+        </h4>
+        <p>
+            {{ activity.content }}
+        </p>
+        <p>
+            {% include "InckUserBundle:Activity:visibility.html.twig" %}
+        </p>
+    </div>
+</div>

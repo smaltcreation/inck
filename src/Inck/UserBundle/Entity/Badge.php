@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Badge
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Inck\UserBundle\Entity\BadgeRepository")
  */
 class Badge
 {
