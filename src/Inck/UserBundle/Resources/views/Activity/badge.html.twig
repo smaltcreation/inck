@@ -2,12 +2,13 @@
 
 <div class="media">
     <div class="pull-left">
-        <span class="label label-default" style="background-color: {{ badge.color }}; font-size: 12px;">
-            <span style="color: {{ badge.colorText }}"><i class="fa fa-{{ badge.icone }} fa-fw"></i> | {{ badge.title }}</span></span>
+        <i class="fa fa-tag fa-3x"></i>
     </div>
     <div class="media-body">
         <h4 class="media-heading">
-            {{ badge.title }}
+            Vous avez obtenu un badge :
+            <span class="label label-default" style="background-color: {{ badge.color }}; font-size: 12px;">
+                <span style="color: {{ badge.colorText }}"><i class="fa fa-{{ badge.icone }} fa-fw"></i> | {{ badge.title }}</span></span>
         </h4>
         <p>
             {{ badge.description }}
